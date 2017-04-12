@@ -15,6 +15,14 @@ class ArgumentData:
 		self.name = ''
 		self.type = ''
 
+
+class ProcessData:
+	def __init__(self):
+		self.type = []	#if, for, while, process...
+		self.left = []
+		self.right = []
+
+
 class FunctionData:
 	def __init__(self):
 		self.name = ''
@@ -24,6 +32,7 @@ class FunctionData:
 		self.func_def = []
 		self.codes = []
 		self.line_num = 0
+		self.process = []
 
 	def set_name(self):
 		func_name = ''
@@ -57,36 +66,43 @@ class FunctionData:
 		str = ''
 		str_name = ''
 		str_type = ''
-		arg_data = ArgumentData()
+		level = 0
 
 		for index1 in range(0, len(self.func_def)):
 			str = self.func_def[index1]
 			str = remove_comment_line(str)
-			if str.find('(')!=-1:
-				str = str[str.find('('):-1]
-			if str.find(')')!=-1:
-				str = str[0:str.find(')')]
-			if str.find(',')!=-1:
-				str = str[0:str.find(',')]
-			if len(str)!=0:
-				str = str.split()
-				if len(str)>2:
-					str_type = str[0]
-					for index in range(1, len(str)-1):
-						str_type += " "
-						str_type += str[index]
-					str_name = str[len(str)-1]
-				elif len(str)>1:
-					str_type = str[0]
-					str_name = str[1]
-				else:
-					str_type = ''
-					str_name = str
-				arg_data.type = str_type
-				arg_data.name = str_name
-				self.argument_list.append(arg_data)
-
+			if str!='':
+				if str.find('(')!=-1:
+					level += 1
+					if level==1:
+						str = str[str.find('('):-1]
+				if str.find(')')!=-1:
+					level -= 1
+					if level==0:
+						str = str[0:str.find(')')]
+				if str.find(',')!=-1:
+					str = str[0:str.find(',')]
+				if len(str)!=0:
+					str = str.split()
+					if len(str)>2:
+						str_type = str[0]
+						for index in range(1, len(str)-1):
+							str_type += " "
+							str_type += str[index]
+						str_name = str[len(str)-1]
+					elif len(str)>1:
+						str_type = str[0]
+						str_name = str[1]
+					else:
+						str_type = ''
+						str_name = ''
+					arg_data = ArgumentData()
+					arg_data.type = str_type
+					arg_data.name = str_name
+					self.argument_list.append(arg_data)
 		self.argument_num = len(self.argument_list)
+		if self.argument_num==1 and self.argument_list[0].name=='':
+			self.argument_num = 0
 		return self.argument_num
 
 
@@ -144,13 +160,55 @@ def remove_comment_line(line):
 		line_out = str1
 		line_out = line_out.strip()
 	str1 = ''
-	if line_out.find('/*')!=-1 and line_out.find('*/')!=-1:
-		str1 = line_out[0:line_out.find('/*')]
-		str2 = line_out[line_out.find('*/')+2:-1]
-		line_out = str1 + str2
+	while line_out.find('/*')!=-1 or line_out.find('*/')!=-1:
+		if line_out.find('/*')!=-1:
+			if line_out.find('*/')!=-1:
+				str1 = line_out[0:line_out.find('/*')]
+				str2 = line_out[line_out.find('*/')+2:-1]
+				line_out = str1 + str2
+			else:
+				str1 = line_out[0:line_out.find('/*')]
+				line_out = str1
+		if line_out.find('*/')!=-1:
+			if line_out.find('/*')!=-1:
+				str1 = line_out[0:line_out.find('*/')]
+				str2 = line_out[line_out.find('/*')+2:-1]
+				line_out = str1 + str2
+			else:
+				str1 = line_out[line_out.find('*/')+2:-1]
+				line_out = str1
 		line_out = line_out.strip()
 	return line_out
 
+def remove_comment_codes(lines):
+	cnt = 0
+	skipping = 0
+	valid_lines = []
+	for line_org in lines :
+		line = line_org.strip()
+		if skipping == 0:
+			if line.find('#include')!=-1 \
+			or line.find('#define')!=-1 \
+			or line.find('//')== 0:
+				# skip current line
+				cnt = cnt
+			else:
+				# comment out (/* */) -> skip
+				if line.find('/*')== 0:	#start comment out
+					if line.find('*/')!= -1: #finish comment out at the same line
+						# skip current line
+						cnt = cnt
+					else: # skip till the end of comment out
+						skipping = 1
+				else:
+					if len(line)>0: # not NULL
+						# save line
+						valid_lines.append(line_org)
+						cnt += 1
+		else:
+			if line.find('*/')!= -1: # find the end of comment out
+					skipping = 0
+	return cnt, valid_lines
 
 def remove_undefined_codes(lines):
 	########## VARID PREPROCESSOR (only for #if) #################
@@ -258,37 +316,6 @@ def remove_undefined_codes(lines):
 	return cnt, valid_lines
 
 
-def remove_comment_codes(lines):
-	cnt = 0
-	skipping = 0
-	valid_lines = []
-	for line_org in lines :
-		line = line_org.strip()
-		if skipping == 0:
-			if line.find('#include')!=-1 \
-			or line.find('#define')!=-1 \
-			or line.find('//')== 0:
-				# skip current line
-				cnt = cnt
-			else:
-				# comment out (/* */) -> skip
-				if line.find('/*')== 0:	#start comment out
-					if line.find('*/')!= -1: #finish comment out at the same line
-						# skip current line
-						cnt = cnt
-					else: # skip till the end of comment out
-						skipping = 1
-				else:
-					if len(line)>0: # not NULL
-						# save line
-						valid_lines.append(line_org)
-						cnt += 1
-		else:
-			if line.find('*/')!= -1: # find the end of comment out
-					skipping = 0
-	return cnt, valid_lines
-
-
 def find_functions(valid_lines):
 	cnt = 0
 	func_list = FunctionList()
@@ -359,3 +386,134 @@ def find_functions(valid_lines):
 					del func_def_lines[:]
 
 	return func_list
+
+def analyze_function(FunctionData):
+	level = 0
+	valid_lines = []
+	line = ''
+	str1 = ''
+	str2 = ''
+	func_codes = []
+	sub_func_codes = []
+
+	print '-------------------------------------'
+	print FunctionData.name, 
+	print len(FunctionData.codes)
+
+	for index1 in range(0, len(FunctionData.codes)):
+		valid_lines.append( remove_comment_line(FunctionData.codes[index1]) )
+		line = valid_lines[index1]
+
+		if line.find('{')!=-1 or line.find('}')!=-1:
+			del sub_func_codes[:]
+			sub_func_codes = []
+			while line.find('{')!=-1 or line.find('}')!=-1:
+				if line.find('{')!=-1: #start Curly bracket
+					level += 1
+					# sub function
+					if level > 1:
+						str1 = 'SUBFUNCTION'
+						func_codes.append(str1)
+						# begin - {
+						if len(line)==1:
+							if line.find('{')==0:
+								#erase {
+								str2 = line.replace('{', '')
+						else: 
+							# copy begin - {
+							str1 = line[0:line.find('{')]
+							str1 = str1.strip()
+							if str1 != '':
+								if level > 2:
+									sub_func_codes.append(str1)
+								else:
+									func_codes.append(str1)
+
+							# erase copied part
+							str2  = line[line.find('{'):-1]
+						line = str2
+
+					# first Curly bracket
+					elif level == 1:
+						# { - end
+						if len(line)==1:
+							if line.find('{')==0:
+								str2 = line.replace('{', '')
+						else:
+							str1 = line[line.find('{')+1:-1]
+							str1 = str1.strip()
+							str2 = ''
+							# { - {
+							if str1.find('{')!=-1:
+								str1 = str1[0:line.find('{')]
+								str1 = str1.strip()
+								# erase copied part
+								str2 = str1[line.find('{')+1:-1]
+							if str1 != '':
+								func_codes.append(str1)
+						line = str2
+
+				if line.find('}')!=-1: #finish Curly bracket at the same line
+					level -= 1
+					# sub function
+					if level > 0:
+						# { - } 
+						str1 = line[line.find('{'):line.find('}')]
+						str1 = str1.strip()
+						if str1 != '':
+							sub_func_codes.append(str1)
+						# erase copied part
+						if line.find('}')==0:
+							str1 = line.replace('}', '')
+						else:
+							str1 = line[line.find('}')+1:-1]
+						str1 = str1.strip()
+						line = str1
+
+					# last Curly bracket
+					elif level == 0:
+						# begin - {
+						if line.find('}')==0:
+							str1 = line.replace('}', '')
+						else:
+							str1 = line[0,line.find('}')]
+						str1 = str1.strip()
+						if str1 != '':
+							func_codes.append(str1)
+						line = str1
+
+				else:
+					if level > 1:
+						# begin - end
+						str1 = line
+						str1 = str1.strip()
+						if str1 != '':
+							sub_func_codes.append(str1)
+						# erase copied part
+						line = ''
+
+		else:
+			if level > 1:
+				str1 = line
+				str1 = str1.strip()
+				if str1 != '':
+					sub_func_codes.append(str1)
+			else:
+				str1 = line
+				str1 = str1.strip()
+				if str1 != '':
+					func_codes.append(str1)
+
+
+
+	print '---------'
+	for code in func_codes:
+		print code
+
+
+
+
+	return
+
+def analyze_sub_function(lines):
+	return

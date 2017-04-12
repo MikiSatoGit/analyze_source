@@ -54,9 +54,12 @@ else:
 	print "Please specify [source file path]."
 	quit()
 
-str = filename1.rsplit('\\',1)
+if filename1.find('\\')!=-1:
+	str = filename1.rsplit('\\',1)
+elif filename1.find('/')!=-1:
+	str = filename1.rsplit('/',1)
 if len(str)>1:
-	outfile = str[0] +'analyze_' + str[1]
+	outfile = str[0] +'\\analyze_' + str[1]
 else:
 	outfile = 'analyze_' + str[0]
 
@@ -75,33 +78,45 @@ fout = open(outfile,'w')
 # analyze source code
 ##################################################
 cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
-for line in lines:
-	print_out(fout, line, 0)
-print_out(fout, "", 1)
+
+#for line in lines:
+#	print_out(fout, line, 0)
+#print_out(fout, "", 1)
+
 print_out(fout, "-------------", 1)
 print_out(fout, "Total lines: %d "  % cnt, 1)
 
 
 func_list = func_source_analyze.find_functions(lines)
-
+for index1 in range(0, func_list.func_num):
+	func_source_analyze.analyze_function(func_list.function_data[index1])
 
 print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
 for index1 in range(0, func_list.func_num):
 	print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
-	print_out(fout, "---Define : %s lines"  % len(func_list.function_data[index1].func_def), 1)
-	print_out(fout, "---Code : %s lines"  % func_list.function_data[index1].line_num, 1)
-	print_out(fout, "---Return type : %s "  % func_list.function_data[index1].return_type, 1)
-	print_out(fout, "---Argument : %s "  % func_list.function_data[index1].argument_num, 1)
+	#print_out(fout, "-Define : %s lines"  % len(func_list.function_data[index1].func_def), 1)
+	print_out(fout, "-Return type : %s "  % func_list.function_data[index1].return_type, 1)
+	print_out(fout, "-Argument : %s "  % func_list.function_data[index1].argument_num, 1)
+	for index2 in range(0, func_list.function_data[index1].argument_num):
+		print_out(fout, "     [%d] : %s "  %(index2, func_list.function_data[index1].argument_list[index2].type), 0),
+		print_out(fout, " %s "  %(func_list.function_data[index1].argument_list[index2].name), 1),
+	print_out(fout, "-Code : %s lines"  % func_list.function_data[index1].line_num, 1)
 
 	print func_list.function_data[index1].name,
-	print len(func_list.function_data[index1].func_def),
+	print func_list.function_data[index1].argument_num,
+	#for index2 in range(0, func_list.function_data[index1].argument_num):
+	#		print_out(fout, func_list.function_data[index1].argument_list[index2].type, 0),
+	#		print_out(fout, func_list.function_data[index1].argument_list[index2].name, 0)
 	print func_list.function_data[index1].line_num,
+	print len(func_list.function_data[index1].codes)
+
 	#if func_list.function_data[index1].name=='fn_bsm_trailer_check_minimum_pair':
 	#	for index2 in range(0, len(func_list.function_data[index1].func_def)):
 	#		print_out(fout, func_list.function_data[index1].func_def[index2], 0)
 	#	for index2 in range(0, len(func_list.function_data[index1].codes)):
 	#		print_out(fout, func_list.function_data[index1].codes[index2], 0)
-	print func_list.function_data[index1].argument_num
+	for index2 in range(0, len(func_list.function_data[index1].codes)):
+		print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 0)
 
 
 ##################################################
