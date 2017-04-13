@@ -1,0 +1,1149 @@
+VD fn_bsm_trailer_init_data(
+ 	S4 *ps4_a_peak_num_trailer,
+ 	S4 as4_a_peak_bin[PEAK_BUFFSIZE],			/* selected peak freq - bin (up) */
+ 	FL afl_a_peak_bin_intpl[PEAK_BUFFSIZE],	/*interpolated peak freq - bin (up) */
+ 	FL afl_a_peak_power[PEAK_BUFFSIZE],
+ 	S4 as4_a_peak_bin_trailer[TRAILER_BUFFSIZE],
+ 	FL afl_a_peak_bin_intpl_trailer[TRAILER_BUFFSIZE],
+ 	FL afl_a_peak_power_trailer[TRAILER_BUFFSIZE],
+ 	S4 *ps4_a_peak_num_music,
+ 	FL afl_a_peak_bins_intpl[PEAK_BUFFSIZE * 2],
+ 	FL afl_a_peak_powers[PEAK_BUFFSIZE * 2],
+ 	FL afl_a_peak_doa_bins_intpl[PEAK_BUFFSIZE * 2],
+ 	FL afl_a_peak_doa_powers[PEAK_BUFFSIZE * 2]
+ );
+ VD fn_bsm_trailer_init_thres(
+ 	FL afl_a_thres_trailer[NB_FFT_PT]
+ );
+ VD fn_bsm_trailer_estimate_doa(
+ 	S4 s4_a_flg_updn,
+ 	FL afl_a_Ryy[NB_FFT_PT][CORRE_SIZE_4CH],						/* [in] self correlation */
+ 	S4 s4_a_peak_num,
+ 	const S4 as4_a_peak_bin[TRAILER_BUFFSIZE],								/* [in] frequency of peak */
+ 	const FL afl_a_peak_bin_intpl[TRAILER_BUFFSIZE],						/* [in] interpolated frequency of peak */
+ 	const FL afl_a_peak_power[TRAILER_BUFFSIZE],							/* [in] afl_a_power of peak */
+ 	S4 *ps4_a_doa_peak_num,											/* [out] */
+ 	FL afl_a_peak_bins_intpl[TRAILER_BUFFSIZE * 2],					/* [out] peak frequency */
+ 	FL afl_a_peak_powers[TRAILER_BUFFSIZE * 2],						/* [out] peak afl_a_power */
+ 	FL afl_a_peak_doa_bins_intpl[TRAILER_BUFFSIZE * 2],				/* [out] peak doa bin */
+ 	FL afl_a_peak_doa_powers[TRAILER_BUFFSIZE * 2]						/* [out] peak doa afl_a_power */
+ 	,FL afl_a_doa_pow_ave[3]
+ 	,FL afl_a_doa_pow_dev[3]
+ );
+ VD fn_bsm_trailer_cal_doa(
+ 	S4 s4_a_updn_flg,										/*  [in] direction of beat-signal */
+ 	const FL afl_a_Ryy[NB_FFT_PT][CORRE_SIZE_4CH],				/*  [in] correlation matrix */
+ 	S4 s4_a_peak_bin,										/*  [in] frequency of peak */
+ 	FL fl_a_peak_bin_intpl,									/*  [in] interpolated frequency of peak */
+ 	S4 *ps4_a_doa_num,										/* [out] */
+ 	FL afl_a_selected_doa_bins_intpl[2],					/* [out] */
+ 	FL afl_a_selected_doa_powers[2],						/* [out] */
+ 	FL afl_a_selected_bins_intpl[2]							/* [out] */
+ );
+ VD fn_bsm_trailer_store_doa(
+ 	const FL afl_a_peak_power[TRAILER_BUFFSIZE],							/* [in] afl_a_power of peak */
+ 	const S4 as4_a_doa_num[TRAILER_BUFFSIZE],
+ 	FL afl_a_selected_doa_bins_intpl[TRAILER_BUFFSIZE][2],
+ 	FL afl_a_selected_doa_powers[TRAILER_BUFFSIZE][2],
+ 	FL afl_a_selected_bins_intpl[TRAILER_BUFFSIZE][2],
+ 	S4 *ps4_a_doa_peak_num,											/* [out] */
+ 	FL afl_a_peak_bins_intpl[TRAILER_BUFFSIZE * 2],					/* [out] peak frequency */
+ 	FL afl_a_peak_powers[TRAILER_BUFFSIZE * 2],						/* [out] peak afl_a_power */
+ 	FL afl_a_peak_doa_bins_intpl[TRAILER_BUFFSIZE * 2],				/* [out] peak doa bin */
+ 	FL afl_a_peak_doa_powers[TRAILER_BUFFSIZE * 2]					/* [out] peak doa afl_a_power */
+ );
+ VD fn_bsm_trailer_make_pair(
+ 	S4 s4_a_peak_num_up_music,											/* [in] */
+ 	const FL afl_a_peak_bins_intpl_up[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	FL afl_a_peak_powers_up[TRAILER_BUFFSIZE * 2],						/* [in] */
+ 	const FL afl_a_peak_doa_bins_intpl_up[TRAILER_BUFFSIZE * 2],				/* [in] */
+ 	const FL afl_a_peak_doa_powers_up[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	S4 s4_a_peak_num_dn_music,											/* [in] */
+ 	const FL afl_a_peak_bins_intpl_dn[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	FL afl_a_peak_powers_dn[TRAILER_BUFFSIZE * 2],						/* [in] */
+ 	const FL afl_a_peak_doa_bins_intpl_dn[TRAILER_BUFFSIZE * 2],				/* [in] */
+ 	const FL afl_a_peak_doa_powers_dn[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	S4*		   ps4_a_pair_num_trailer,									/* [out] number of prior object */
+ 	NORMAL_BSM ast_a_normal_trailer[TRAILER_BUFFSIZE]					/* [out] S4 values of NORMAL_BSM structure */
+ );
+ VD fn_bsm_trailer_make_pair_moving(
+ 	S4 s4_a_peak_num_up,												/* [in] */
+ 	const FL afl_a_peak_bins_intpl_up[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	const FL afl_a_peak_powers_up[TRAILER_BUFFSIZE * 2],						/* [in] */
+ 	const FL afl_a_peak_doa_bins_intpl_up[TRAILER_BUFFSIZE * 2],				/* [in] */
+ 	const FL afl_a_peak_doa_powers_up[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	S4 s4_a_peak_num_dn,												/* [in] */
+ 	const FL afl_a_peak_bins_intpl_dn[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	const FL afl_a_peak_powers_dn[TRAILER_BUFFSIZE * 2],						/* [in] */
+ 	const FL afl_a_peak_doa_bins_intpl_dn[TRAILER_BUFFSIZE * 2],				/* [in] */
+ 	const FL afl_a_peak_doa_powers_dn[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	S4 as4_a_used_peak_up[TRAILER_BUFFSIZE * 2],
+ 	S4 as4_a_used_peak_dn[TRAILER_BUFFSIZE * 2],
+ 	S4 as4_a_pair_index_up[TRAILER_BUFFSIZE * 2],
+ 	S4 as4_a_pair_index_dn[TRAILER_BUFFSIZE * 2],
+ 	S4 *ps4_a_pair_num,
+ 	NORMAL_BSM ast_a_normal_trailer[TRAILER_BUFFSIZE]
+ );
+ static VD fn_bsm_trailer_check_minimum_pair(
+ 	S4  s4_a_lp_peak_num_up,
+ 	S4  s4_a_lp_peak_num_dn,
+ 	FL  afl_a_compare[TRAILER_BUFFSIZE * 2][TRAILER_BUFFSIZE * 2],
+ 	S4  as4_a_used_peak_up[TRAILER_BUFFSIZE * 2],
+ 	S4  as4_a_used_peak_dn[TRAILER_BUFFSIZE * 2],
+ 	S4  as4_a_pair_index_up[TRAILER_BUFFSIZE * 2],
+ 	S4  as4_a_pair_index_dn[TRAILER_BUFFSIZE * 2],
+ 	FL* pfl_a_min_comp,
+ 	S4* ps4_a_found,
+ 	S4* ps4_a_pair_index_up,
+ 	S4* ps4_a_pair_index_dn,
+ 	S4* ps4_a_pair_num
+ );
+ VD fn_bsm_trailer_set_object(
+ 	const S4 *ps4_a_pair_num,
+ 	NORMAL_BSM ast_a_normal_trailer[TRAILER_BUFFSIZE]				/* [out] S4 values of NORMAL_BSM structure */
+ );
+ VD fn_check_ordinary_trailer_obj(
+ 	S4			*pair_num_ordinary,
+ 	NORMAL_BSM	ast_a_normal_ordinary[ORDINARY_BUFFSIZE],
+ 	S4			*pair_num_trailer,
+ 	NORMAL_BSM	ast_a_normal_trailer[TRAILER_BUFFSIZE],
+ 	FL			afl_t_thres_trailer[NB_FFT_PT]
+ );
+ VD fn_check_bf_doa_power(
+ 	S4* s4_a_doa_bf_peak_bin,			/* [out] */
+ 	FL* fl_a_doa_bf_peak_pow			/* [out] */
+ );
+ VD fn_bsm_seek_trailer_object(
+ 	S4*		ps4_a_pair_num_ordinary,
+ 	NORMAL_BSM ast_a_normalordinary[ORDINARY_BUFFSIZE],
+ 	S4*		ps4_a_pair_num_trailer,
+ 	NORMAL_BSM ast_a_normaltrailer[TRAILER_BUFFSIZE]
+ 	,FL afl_t_doa_pow_ave[2][3]
+ 	,FL afl_t_doa_pow_dev[2][3]
+ 	,S4* s4_a_doa_bf_peak_bin
+ 	,FL* fl_a_doa_bf_peak_pow
+ )
+ {
+ 	S4 s4_t_peak_num_trailer_up;
+ 	S4 as4_t_peak_bin_up[PEAK_BUFFSIZE];					/* selected peak freq - bin (up) */
+ 	FL afl_t_peak_bin_intpl_up[PEAK_BUFFSIZE];				/* interpolated peak freq-bin (up) */
+ 	FL afl_t_peak_power_up[PEAK_BUFFSIZE];
+     FL afl_t_thres_trailer[NB_FFT_PT];						/* [out] threashold for spectrum power（up) */
+ 	S4 s4_t_peak_num_trailer_dn;
+ 	S4 as4_t_peak_bin_dn[PEAK_BUFFSIZE];					/* selected peak freq - bin (down) */
+ 	FL afl_t_peak_bin_intpl_dn[PEAK_BUFFSIZE];				/* interpolated peak freq-bin (down) */
+ 	FL afl_t_peak_power_dn[PEAK_BUFFSIZE];
+ 	S4 as4_t_peak_bin_up_trailer[TRAILER_BUFFSIZE];			/* selected peak freq - bin (up) SIZE:TRAILER_BUFFSIZE */
+ 	FL afl_t_peak_bin_intpl_up_trailer[TRAILER_BUFFSIZE];	/* interpolated peak freq-bin (up) SIZE:TRAILER_BUFFSIZE */
+ 	FL afl_t_peak_power_up_trailer[TRAILER_BUFFSIZE];
+ 	S4 as4_t_peak_bin_dn_trailer[TRAILER_BUFFSIZE];			/* selected peak freq - bin (down) SIZE:TRAILER_BUFFSIZE */
+ 	FL afl_t_peak_bin_intpl_dn_trailer[TRAILER_BUFFSIZE];	/* interpolated peak freq-bin (down) SIZE:TRAILER_BUFFSIZE */
+ 	FL afl_t_peak_power_dn_trailer[TRAILER_BUFFSIZE];
+ 	S4 s4_t_peak_num_up_music;
+ 	FL afl_t_peak_bins_intpl_up[TRAILER_BUFFSIZE * 2];
+ 	FL afl_t_peak_powers_up[TRAILER_BUFFSIZE * 2];
+ 	FL afl_t_peak_doa_bins_intpl_up[TRAILER_BUFFSIZE * 2];
+ 	FL afl_t_peak_doa_powers_up[TRAILER_BUFFSIZE * 2];
+ 	S4 s4_t_peak_num_dn_music;
+ 	FL afl_t_peak_bins_intpl_dn[TRAILER_BUFFSIZE * 2];
+ 	FL afl_t_peak_powers_dn[TRAILER_BUFFSIZE * 2];
+ 	FL afl_t_peak_doa_bins_intpl_dn[TRAILER_BUFFSIZE * 2];
+ 	FL afl_t_peak_doa_powers_dn[TRAILER_BUFFSIZE * 2];
+ 	S4 s4_t_lp_peakbuff;
+ 	S4 s4_t_lp_i;
+ 	S4 s4_t_trailer_bin_range;
+ 	S4 s4_t_ordinary_trailer_num = 0;
+ 	fn_bsm_trailer_init_data(
+ 		&s4_t_peak_num_trailer_up,
+ 		as4_t_peak_bin_up,
+ 		afl_t_peak_bin_intpl_up,
+ 		afl_t_peak_power_up,
+ 		as4_t_peak_bin_up_trailer,
+ 		afl_t_peak_bin_intpl_up_trailer,
+ 		afl_t_peak_power_up_trailer,
+ 		&s4_t_peak_num_up_music,
+ 		afl_t_peak_bins_intpl_up,
+ 		afl_t_peak_powers_up,
+ 		afl_t_peak_doa_bins_intpl_up,
+ 		afl_t_peak_doa_powers_up
+ 	);
+ 	fn_bsm_trailer_init_data(
+ 		&s4_t_peak_num_trailer_dn,
+ 		as4_t_peak_bin_dn,
+ 		afl_t_peak_bin_intpl_dn,
+ 		afl_t_peak_power_dn,
+ 		as4_t_peak_bin_dn_trailer,
+ 		afl_t_peak_bin_intpl_dn_trailer,
+ 		afl_t_peak_power_dn_trailer,
+ 		&s4_t_peak_num_dn_music,
+ 		afl_t_peak_bins_intpl_dn,
+ 		afl_t_peak_powers_dn,
+ 		afl_t_peak_doa_bins_intpl_dn,
+ 		afl_t_peak_doa_powers_dn
+ 	);
+ 	fn_bsm_trailer_init_thres(
+ 		afl_t_thres_trailer
+ 	);
+ 	fn_set_freq_threshold(
+ 		(const FL *)afl_g_cvw_lfm_ftt_power[0],			/* [in] */
+ 		afl_t_thres_trailer								/* [out] */
+ 		,OBJECT_TYPE_TRAILER							/* [in] object type: trailer object */
+ 	);
+ 	afl_g_btt_atd_doa_pow_ave[0] = (FL)0;
+ 	afl_g_btt_atd_doa_pow_ave[1] = (FL)0;
+ 	for (s4_t_lp_peakbuff = (S4)0; s4_t_lp_peakbuff < TRAILER_RANGE; s4_t_lp_peakbuff++) {
+ 		if( s4_t_peak_num_trailer_up < PEAK_BUFFSIZE
+ 		&&  afl_g_cvw_lfm_ftt_power[0][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] > afl_t_thres_trailer[FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] 
+ 		){
+ 			as4_t_peak_bin_up[s4_t_peak_num_trailer_up] = FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff;								
+ 			afl_t_peak_bin_intpl_up[s4_t_peak_num_trailer_up] = (FL)(FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff);					
+ 			afl_t_peak_power_up[s4_t_peak_num_trailer_up] = afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];	
+ 			s4_t_peak_num_trailer_up++;																		
+ 		}
+ 		afl_g_btt_atd_doa_pow_ave[0] += afl_g_cvw_lfm_ftt_power[0][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
+ 	}
+ 	afl_g_btt_atd_doa_pow_ave[0] = afl_g_btt_atd_doa_pow_ave[0] / (FL)TRAILER_RANGE;
+ 	for (s4_t_lp_peakbuff = (S4)0; s4_t_lp_peakbuff < TRAILER_RANGE; s4_t_lp_peakbuff++) {
+ 		if( s4_t_peak_num_trailer_dn < PEAK_BUFFSIZE
+ 		 && afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] > afl_t_thres_trailer[FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff]
+ 		) {														
+ 			as4_t_peak_bin_dn[s4_t_peak_num_trailer_dn] = FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff;								
+ 			afl_t_peak_bin_intpl_dn[s4_t_peak_num_trailer_dn] = (FL)(FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff);					
+ 			afl_t_peak_power_dn[s4_t_peak_num_trailer_dn] = afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];	
+ 			s4_t_peak_num_trailer_dn++;																		
+ 		}
+ 		afl_g_btt_atd_doa_pow_ave[1] += afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
+ 	}
+ 	afl_g_btt_atd_doa_pow_ave[1] = afl_g_btt_atd_doa_pow_ave[1] / (FL)TRAILER_RANGE;
+ 	fn_sort_peak_by_power_trailer(
+ 		as4_t_peak_bin_up,					/* [in] */
+ 		afl_t_peak_bin_intpl_up,			/* [in] */
+ 		afl_t_peak_power_up,				/* [in] */
+ 		as4_t_peak_bin_up_trailer,			/* [out] */
+ 		afl_t_peak_bin_intpl_up_trailer,	/* [out] */
+ 		afl_t_peak_power_up_trailer			/* [out] */
+ 	);
+ 	fn_sort_peak_by_power_trailer(
+ 		as4_t_peak_bin_dn,					/* [in] */
+ 		afl_t_peak_bin_intpl_dn,			/* [in] */
+ 		afl_t_peak_power_dn,				/* [in] */
+ 		as4_t_peak_bin_dn_trailer,			/* [out] */
+ 		afl_t_peak_bin_intpl_dn_trailer,	/* [out] */
+ 		afl_t_peak_power_dn_trailer			/* [out] */
+ 	);
+ 	if (s4_t_peak_num_trailer_up > TRAILER_BUFFSIZE) {
+ 		s4_t_peak_num_trailer_up = TRAILER_BUFFSIZE;
+ 	}
+ 	if (s4_t_peak_num_trailer_dn > TRAILER_BUFFSIZE) {
+ 		s4_t_peak_num_trailer_dn = TRAILER_BUFFSIZE;
+ 	}
+ 	fn_bsm_trailer_estimate_doa(
+ 		0,
+ 		afl_g_cvw_lfm_ryy_matrix[0],
+ 		s4_t_peak_num_trailer_up,
+ 		(const S4 *)as4_t_peak_bin_up_trailer,
+ 		(const FL *)afl_t_peak_bin_intpl_up_trailer,
+ 		(const FL *)afl_t_peak_power_up_trailer,
+ 		&s4_t_peak_num_up_music,
+ 		afl_t_peak_bins_intpl_up,
+ 		afl_t_peak_powers_up,
+ 		afl_t_peak_doa_bins_intpl_up,
+ 		afl_t_peak_doa_powers_up
+ 		,afl_t_doa_pow_ave[0]
+ 		,afl_t_doa_pow_dev[0]
+ 	);
+ 	fn_bsm_trailer_estimate_doa(
+ 		1,
+ 		afl_g_cvw_lfm_ryy_matrix[1],
+ 		s4_t_peak_num_trailer_dn,
+ 		(const S4 *)as4_t_peak_bin_dn_trailer,
+ 		(const FL *)afl_t_peak_bin_intpl_dn_trailer,
+ 		(const FL *)afl_t_peak_power_dn_trailer,
+ 		&s4_t_peak_num_dn_music,
+ 		afl_t_peak_bins_intpl_dn,
+ 		afl_t_peak_powers_dn,
+ 		afl_t_peak_doa_bins_intpl_dn,
+ 		afl_t_peak_doa_powers_dn
+ 		,afl_t_doa_pow_ave[1]
+ 		,afl_t_doa_pow_dev[1]
+ 	);
+ 	fn_bsm_trailer_make_pair(
+ 		s4_t_peak_num_up_music,											/* [in] */
+ 		(const FL *)afl_t_peak_bins_intpl_up,							/* [in] */
+ 		afl_t_peak_powers_up,											/* [in] */
+ 		(const FL *)afl_t_peak_doa_bins_intpl_up,						/* [in] */
+ 		(const FL *)afl_t_peak_doa_powers_up,							/* [in] */
+ 		s4_t_peak_num_dn_music,											/* [in] */
+ 		(const FL *)afl_t_peak_bins_intpl_dn,							/* [in] */
+ 		afl_t_peak_powers_dn,											/* [in] */
+ 		(const FL *)afl_t_peak_doa_bins_intpl_dn,						/* [in] */
+ 		(const FL *)afl_t_peak_doa_powers_dn,							/* [in] */
+ 		ps4_a_pair_num_trailer,										/* [out] number of trailer object */
+ 		ast_a_normaltrailer											/* [out] S4 values of NORMAL_BSM structure */
+ 	);
+ 	fn_check_ordinary_trailer_obj(
+ 		ps4_a_pair_num_ordinary,
+ 		ast_a_normalordinary,
+ 		ps4_a_pair_num_trailer,
+ 		ast_a_normaltrailer,
+ 		afl_t_thres_trailer
+ 	);
+ 	fn_check_bf_doa_power(
+ 		s4_a_doa_bf_peak_bin,			/* [out] */
+ 		fl_a_doa_bf_peak_pow			/* [out] */
+ 	);
+ 	afl_g_btt_atd_doa_pow_ave[0] = *fl_a_doa_bf_peak_pow-afl_t_doa_pow_ave[0][1];
+ 	afl_g_btt_atd_doa_pow_ave[1] = *fl_a_doa_bf_peak_pow;
+ 	fn_bsm_trailer_set_object(
+ 		(const S4 *)ps4_a_pair_num_trailer,
+ 		ast_a_normaltrailer
+ 	);
+ }
+ VD fn_bsm_trailer_init_data(
+ 	S4 *ps4_a_peak_num_trailer,
+ 	S4 as4_a_peak_bin[PEAK_BUFFSIZE],			/* selected peak freq - bin (up) */
+ 	FL afl_a_peak_bin_intpl[PEAK_BUFFSIZE],	/*interpolated peak freq - bin (up) */
+ 	FL afl_a_peak_power[PEAK_BUFFSIZE],
+ 	S4 as4_a_peak_bin_trailer[TRAILER_BUFFSIZE],
+ 	FL afl_a_peak_bin_intpl_trailer[TRAILER_BUFFSIZE],
+ 	FL afl_a_peak_power_trailer[TRAILER_BUFFSIZE],
+ 	S4 *ps4_a_peak_num_music,
+ 	FL afl_a_peak_bins_intpl[TRAILER_BUFFSIZE * 2],
+ 	FL afl_a_peak_powers[TRAILER_BUFFSIZE * 2],
+ 	FL afl_a_peak_doa_bins_intpl[TRAILER_BUFFSIZE * 2],
+ 	FL afl_a_peak_doa_powers[TRAILER_BUFFSIZE * 2]
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	*ps4_a_peak_num_trailer = 0;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < PEAK_BUFFSIZE; s4_t_lp_i++) {
+ 		as4_a_peak_bin[s4_t_lp_i] = 0;
+ 		afl_a_peak_bin_intpl[s4_t_lp_i] = 0.0F;
+ 		afl_a_peak_power[s4_t_lp_i] = 0.0F;
+ 	}
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < TRAILER_BUFFSIZE; s4_t_lp_i++) {
+ 		as4_a_peak_bin_trailer[s4_t_lp_i] = (S4)0;
+ 		afl_a_peak_bin_intpl_trailer[s4_t_lp_i] = (FL)0.0F;
+ 		afl_a_peak_power_trailer[s4_t_lp_i] = (FL)0.0F;
+ 	}
+ 	*ps4_a_peak_num_music = 0;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < (TRAILER_BUFFSIZE * 2); s4_t_lp_i++) {
+ 		afl_a_peak_bins_intpl[s4_t_lp_i] = 0;
+ 		afl_a_peak_powers[s4_t_lp_i] = 0.0F;
+ 		afl_a_peak_doa_bins_intpl[s4_t_lp_i] = 0;
+ 		afl_a_peak_doa_powers[s4_t_lp_i] = 0.0F;
+ 	}
+ 	return;
+ }
+ VD fn_bsm_trailer_init_thres(
+ 	FL afl_a_thres[NB_FFT_PT]
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < NB_FFT_PT; s4_t_lp_i++) {
+ 		afl_a_thres[s4_t_lp_i] = 0.0F;
+ 	}
+ 	return;
+ }
+ VD fn_bsm_trailer_estimate_doa(
+ 	S4 s4_a_flg_updn,
+ 	FL afl_a_Ryy[NB_FFT_PT][CORRE_SIZE_4CH],						/* [in] self correlation */
+ 	S4 s4_a_peak_num,
+ 	const S4 as4_a_peak_bin[TRAILER_BUFFSIZE],								/* [in] frequency of peak */
+ 	const FL afl_a_peak_bin_intpl[TRAILER_BUFFSIZE],						/* [in] interpolated frequency of peak */
+ 	const FL afl_a_peak_power[TRAILER_BUFFSIZE],							/* [in] afl_a_power of peak */
+ 	S4 *ps4_a_doa_peak_num,											/* [out] */
+ 	FL afl_a_peak_bins_intpl[TRAILER_BUFFSIZE * 2],					/* [out] peak frequency */
+ 	FL afl_a_peak_powers[TRAILER_BUFFSIZE * 2],						/* [out] peak afl_a_power */
+ 	FL afl_a_peak_doa_bins_intpl[TRAILER_BUFFSIZE * 2],				/* [out] peak doa bin */
+ 	FL afl_a_peak_doa_powers[TRAILER_BUFFSIZE * 2]						/* [out] peak doa afl_a_power */
+ 	,FL afl_a_doa_pow_ave[3]
+ 	,FL afl_a_doa_pow_dev[3]
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	S4 s4_t_lp_k;
+ 	S4 s4_t_doa_calc_num;
+ 	S4 as4_t_doa_num[TRAILER_BUFFSIZE];
+ 	FL afl_t_selected_doa_bins_intpl[TRAILER_BUFFSIZE][2];
+ 	FL afl_t_selected_doa_powers[TRAILER_BUFFSIZE][2];
+ 	FL afl_t_selected_bins_intpl[TRAILER_BUFFSIZE][2];
+ 	FL afl_t_selected_doa_bins_intpl_copy[TRAILER_BUFFSIZE][2];	/* 該当FFTピークのMUSICピーク bin(補間値)コピー用変数 */
+ 	FL afl_t_selected_doa_powers_copy[TRAILER_BUFFSIZE][2];		/* 該当FFTピークのMUSICピーク方位におけるDBF電力値コピー用変数 */
+ 	FL afl_t_selected_bins_intpl_copy[TRAILER_BUFFSIZE];			/* 該当FFTピークのFFTピークbin(補間値)コピー用変数 */
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < TRAILER_BUFFSIZE; s4_t_lp_i++) {
+ 		as4_t_doa_num[s4_t_lp_i] = 0;
+ 		afl_t_selected_bins_intpl_copy[s4_t_lp_i] = (FL)0.0F;
+ 		for (s4_t_lp_k = 0; s4_t_lp_k < 2; s4_t_lp_k++) {
+ 			afl_t_selected_doa_bins_intpl[s4_t_lp_i][s4_t_lp_k] = 0.0F;
+ 			afl_t_selected_doa_powers[s4_t_lp_i][s4_t_lp_k] = 0.0F;
+ 			afl_t_selected_bins_intpl[s4_t_lp_i][s4_t_lp_k] = 0.0F;
+ 			afl_t_selected_doa_bins_intpl_copy[s4_t_lp_i][s4_t_lp_k] = (FL)0.0F;
+ 			afl_t_selected_doa_powers_copy[s4_t_lp_i][s4_t_lp_k] = (FL)0.0F;
+ 		}
+ 	}
+ 	s4_t_doa_calc_num = (S4)0;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < s4_a_peak_num; s4_t_lp_i++ ) {
+ 		if (s4_t_doa_calc_num < TRAILER_BUFFSIZE-1)
+ 		{
+ 			s4_t_doa_calc_num++;
+ 			fn_bsm_trailer_cal_doa(
+ 				s4_a_flg_updn,
+ 				(const FL (*)[10])afl_a_Ryy,
+ 				as4_a_peak_bin[s4_t_lp_i],
+ 				afl_a_peak_bin_intpl[s4_t_lp_i],
+ 				&as4_t_doa_num[s4_t_lp_i],
+ 				afl_t_selected_doa_bins_intpl[s4_t_lp_i],
+ 				afl_t_selected_doa_powers[s4_t_lp_i],
+ 				afl_t_selected_bins_intpl[s4_t_lp_i]
+ 			);
+ 		}
+ 	}
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < 3; s4_t_lp_i++ ) {
+ 		fn_bsm_cal_trailer_range_doa_ave(
+ 			s4_a_flg_updn,
+ 			(const FL (*)[10])afl_a_Ryy,
+ 			(260+s4_t_lp_i),
+ 			&afl_a_doa_pow_ave[s4_t_lp_i],
+ 			&afl_a_doa_pow_dev[s4_t_lp_i]
+ 		);
+ 	}
+ 	*ps4_a_doa_peak_num = 0;
+ 	fn_bsm_trailer_store_doa(
+ 		(const FL *)afl_a_peak_power,
+ 		(const S4 *)as4_t_doa_num,
+ 		afl_t_selected_doa_bins_intpl,
+ 		afl_t_selected_doa_powers,
+ 		afl_t_selected_bins_intpl,
+ 		ps4_a_doa_peak_num,
+ 		afl_a_peak_bins_intpl,					/* [out] peak frequency */
+ 		afl_a_peak_powers,						/* [out] peak afl_a_power */
+ 		afl_a_peak_doa_bins_intpl,				/* [out] peak doa bin */
+ 		afl_a_peak_doa_powers					/* [out] peak doa afl_a_power */
+ 	);
+ 	return;
+ }	
+ VD fn_bsm_trailer_cal_doa(
+ 	S4 s4_a_updn_flg,										/*  [in] direction of beat-signal */
+ 	const FL afl_a_Ryy[NB_FFT_PT][CORRE_SIZE_4CH],				/*  [in] correlation matrix */
+ 	S4 s4_a_peak_bin,										/*  [in] frequency of peak */
+ 	FL fl_a_peak_bin_intpl,									/*  [in] interpolated frequency of peak */
+ 	S4 *ps4_a_doa_num,										/* [out] */
+ 	FL afl_a_selected_doa_bins_intpl[2],					/* [out] */
+ 	FL afl_a_selected_doa_powers[2],						/* [out] */
+ 	FL afl_a_selected_bins_intpl[2]							/* [out] */
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	FL afl_t_spec[N_DOA];
+ 	S4 s4_t_wall_bin;
+ 	S4 as4_t_selected_doa_bins[2];
+ 	S4 s4_t_temp_wave_num = WAVE_NUMBER;
+ 	U1 u1_t_lp_doa_num;
+ 	S4 s4_t_tmp_doa_num = 0;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < N_DOA; s4_t_lp_i++ ) {
+ 		afl_t_spec[s4_t_lp_i] = 0;
+ 	}
+ 	for (u1_t_lp_doa_num = (U1)0; u1_t_lp_doa_num < (U1)2; u1_t_lp_doa_num++) {
+ 		as4_t_selected_doa_bins[u1_t_lp_doa_num] = (S4)0;
+ 	}
+ 	s4_t_temp_wave_num = s4_calc_spec_music_4ch_all(
+ 		afl_a_Ryy[s4_a_peak_bin],						/*  [in] */
+ 		afl_t_spec,										/*  [out] */
+ 		2,												/*  [in] */
+ 		s4_a_updn_flg									/*  [in] */
+ 	);
+ 	*ps4_a_doa_num = 0;
+ 	*ps4_a_doa_num = s4_search_peak_music(
+ 		(const FL *)afl_t_spec,							/*  [in] */
+ 		as4_t_selected_doa_bins,						/*  [out] [2] DOA of MUSIC peak */
+ 		afl_a_selected_doa_powers,						/*  [out] [2] afl_a_power of MUSIC peak */
+ 		s4_t_temp_wave_num								/*  [in]  $$$ 2013.11.1 s4_t_wave_num(1) -> s4_t_temp_wave_num(推定到来波数) */
+ 		,OBJECT_TYPE_TRAILER							/*  [in] object type: trailer object */
+ 	);
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < 2; s4_t_lp_i++) {
+ 		if (as4_t_selected_doa_bins[s4_t_lp_i] > 0) {
+ 			afl_a_selected_doa_powers[s4_t_lp_i] = fl_calc_spec_bf_4ch_fm_of_specified_doa(
+ 				afl_a_Ryy[s4_a_peak_bin],
+ 				s4_a_updn_flg,
+ 				s4_a_peak_bin,
+ 				as4_t_selected_doa_bins[s4_t_lp_i]
+ 			);
+ 		}
+ 	}
+ 	for(s4_t_lp_i=0; s4_t_lp_i<2; s4_t_lp_i++)
+ 	{
+ 		if(as4_t_selected_doa_bins[s4_t_lp_i]>0)
+ 		{
+ 			afl_a_selected_doa_bins_intpl[s4_t_lp_i] = fl_interpolate_music_peak(
+ 				(const FL *)afl_t_spec,
+ 				as4_t_selected_doa_bins[s4_t_lp_i],
+ 				(const FL *)FL_BSM_FLSH_YOMIKAE_TBL_FM
+ 			);
+ 			afl_a_selected_bins_intpl[s4_t_lp_i] = fl_a_peak_bin_intpl;
+ 		}
+ 		else
+ 		{
+ 			afl_a_selected_doa_bins_intpl[s4_t_lp_i] = 0.0F;
+ 			afl_a_selected_bins_intpl[s4_t_lp_i] = 0.0F;
+ 		}
+ 	}
+ 	return;
+ }
+ VD fn_bsm_cal_trailer_range_doa_ave(
+ 	S4 s4_a_updn_flg,										/*  [in] direction of beat-signal */
+ 	const FL afl_a_Ryy[NB_FFT_PT][CORRE_SIZE_4CH],			/*  [in] correlation matrix */
+ 	S4 s4_a_peak_bin,										/*  [in] frequency of peak */
+ 	FL *afl_t_doa_pow_ave,
+ 	FL *afl_t_doa_pow_dev
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	FL fl_t_tmp_doa_power = (FL)0;
+ 	FL fl_t_tmp_doa_power_ave = (FL)0;
+ 	FL fl_t_tmp_doa_power_dev = (FL)0;
+ 	FL fl_t_tmp_doa_power_sum1 = (FL)0;	
+ 	FL fl_t_tmp_doa_power_sum2 = (FL)0;
+ 	S4 s4_t_doa_range = (S4)((FL)(N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0] - (FL)CU1_DOA_BIN_LOWER_LIMIT_T + (FL)CU1_DOA_BIN_UPPER_LIMIT_T);//30;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < s4_t_doa_range; s4_t_lp_i++) {
+ 		fl_t_tmp_doa_power = fl_calc_spec_bf_4ch_fm_of_specified_doa(
+ 			afl_a_Ryy[s4_a_peak_bin],
+ 			s4_a_updn_flg,
+ 			s4_a_peak_bin,
+ 			(0 + s4_t_lp_i)
+ 		);
+ 		fl_t_tmp_doa_power_sum1 += fl_t_tmp_doa_power;
+ 		fl_t_tmp_doa_power_sum2 += fl_t_tmp_doa_power * fl_t_tmp_doa_power;
+ 	}
+ 	fl_t_tmp_doa_power_ave = fl_t_tmp_doa_power_sum1 / (FL)s4_t_doa_range;
+ 	fl_t_tmp_doa_power_dev = (fl_t_tmp_doa_power_sum2 / (FL)s4_t_doa_range) - (fl_t_tmp_doa_power_ave * fl_t_tmp_doa_power_ave);
+ 	*afl_t_doa_pow_ave = fl_t_tmp_doa_power_ave;
+ 	*afl_t_doa_pow_dev = fl_t_tmp_doa_power_dev;
+ 	return;
+ }
+ VD fn_bsm_trailer_store_doa(
+ 	const FL afl_a_peak_power[TRAILER_BUFFSIZE],							/* [in] afl_a_power of peak */
+ 	const S4 as4_a_doa_num[TRAILER_BUFFSIZE],
+ 	FL afl_a_selected_doa_bins_intpl[TRAILER_BUFFSIZE][2],
+ 	FL afl_a_selected_doa_powers[TRAILER_BUFFSIZE][2],
+ 	FL afl_a_selected_bins_intpl[TRAILER_BUFFSIZE][2],
+ 	S4 *ps4_a_doa_peak_num,											/* [out] */
+ 	FL afl_a_peak_bins_intpl[TRAILER_BUFFSIZE * 2],					/* [out] peak frequency */
+ 	FL afl_a_peak_powers[TRAILER_BUFFSIZE * 2],						/* [out] peak afl_a_power */
+ 	FL afl_a_peak_doa_bins_intpl[TRAILER_BUFFSIZE * 2],				/* [out] peak doa bin */
+ 	FL afl_a_peak_doa_powers[TRAILER_BUFFSIZE * 2]					/* [out] peak doa afl_a_power */
+ )
+ {
+ 	S4 s4_t_iRet;
+ 	S4 s4_t_lp_i;
+ 	S4 s4_t_lp_k;
+ 	s4_t_iRet = 0;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < TRAILER_BUFFSIZE; s4_t_lp_i++) {
+ 		for (s4_t_lp_k = 0; s4_t_lp_k < as4_a_doa_num[s4_t_lp_i]; s4_t_lp_k++) {
+ 			if( afl_a_selected_doa_bins_intpl[s4_t_lp_i][s4_t_lp_k] > 0 ) {
+ 				afl_a_peak_bins_intpl[s4_t_iRet]	 = afl_a_selected_bins_intpl[s4_t_lp_i][s4_t_lp_k];
+ 				afl_a_peak_powers[s4_t_iRet]		 = afl_a_peak_power[s4_t_lp_i];
+ 				afl_a_peak_doa_bins_intpl[s4_t_iRet] = afl_a_selected_doa_bins_intpl[s4_t_lp_i][s4_t_lp_k];
+ 				afl_a_peak_doa_powers[s4_t_iRet]	 = afl_a_selected_doa_powers[s4_t_lp_i][s4_t_lp_k];
+ 				s4_t_iRet++;
+ 			}
+ 		}
+ 	}
+ 	*ps4_a_doa_peak_num = s4_t_iRet;
+ }
+ VD fn_check_bf_doa_power(
+ 	S4* s4_a_doa_bf_peak_bin,			/* [out] */
+ 	FL* fl_a_doa_bf_peak_pow			/* [out] */
+ )
+ {
+ 	FL tmp_doa_spec_up[N_DOA];
+ 	S4 tmp_doa_peak_bin_up[1];
+ 	FL tmp_doa_peak_pow_up[1];
+ 	FL tmp_doa_spec_dn[N_DOA];
+ 	S4 tmp_doa_peak_bin_dn[1];
+ 	FL tmp_doa_peak_pow_dn[1];
+ 	U1 u1_t_lp_n_doa;
+ 	S4 s4_t_focus_bin;
+ 	S4 s4_t_focus_doa;
+ 	S4 s4_t_doa_range;
+ 	for (u1_t_lp_n_doa = (U1)0; u1_t_lp_n_doa < (U1)N_DOA; u1_t_lp_n_doa++) {
+ 		tmp_doa_spec_up[u1_t_lp_n_doa] = (FL)0.0F;
+ 	}
+ 	tmp_doa_peak_bin_up[0] = (S4)-1;
+ 	tmp_doa_peak_bin_dn[0] = (S4)-1;
+ 	tmp_doa_peak_pow_up[0] = (FL)0.0F;
+ 	tmp_doa_peak_pow_dn[0] = (FL)0.0F;
+ 	s4_t_focus_bin = BTT_DBF_FOCUS_BIN;	//2m
+ 	s4_t_doa_range = (S4)((FL)(N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0] + BTT_DBF_DOA_RANGE); //70
+ 	fn_calc_spec_bf_4ch_fm(
+ 		afl_g_cvw_lfm_ryy_matrix[0][s4_t_focus_bin],
+ 		tmp_doa_spec_up,
+ 		0,
+ 		s4_t_focus_bin
+ 	);
+ 	for (u1_t_lp_n_doa = (U1)s4_t_doa_range; u1_t_lp_n_doa < (U1)N_DOA; u1_t_lp_n_doa++) {
+ 		tmp_doa_spec_up[u1_t_lp_n_doa] = (FL)0.0F;
+ 	}
+ 	s4_search_peak_bf(
+ 		(const FL *)tmp_doa_spec_up,		/* [in] */
+ 		tmp_doa_peak_bin_up,				/* [out] */
+ 		tmp_doa_peak_pow_up,				/* [out] */
+ 		1									/* [in] */
+ 	);
+ 	if( tmp_doa_peak_bin_up[0] != (S4)-1 ){
+ 		*s4_a_doa_bf_peak_bin = tmp_doa_peak_bin_up[0];
+ 		*fl_a_doa_bf_peak_pow = tmp_doa_peak_pow_up[0];
+ 	}
+ }
+ VD fn_bsm_trailer_make_pair(
+ 	S4 s4_a_peak_num_up_music,											/* [in] */
+ 	const FL afl_a_peak_bins_intpl_up[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	FL afl_a_peak_powers_up[TRAILER_BUFFSIZE * 2],						/* [in] */
+ 	const FL afl_a_peak_doa_bins_intpl_up[TRAILER_BUFFSIZE * 2],				/* [in] */
+ 	const FL afl_a_peak_doa_powers_up[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	S4 s4_a_peak_num_dn_music,											/* [in] */
+ 	const FL afl_a_peak_bins_intpl_dn[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	FL afl_a_peak_powers_dn[TRAILER_BUFFSIZE * 2],						/* [in] */
+ 	const FL afl_a_peak_doa_bins_intpl_dn[TRAILER_BUFFSIZE * 2],				/* [in] */
+ 	const FL afl_a_peak_doa_powers_dn[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	S4*		   ps4_a_pair_num_trailer,									/* [out] number of prior object */
+ 	NORMAL_BSM ast_a_normal_trailer[TRAILER_BUFFSIZE]					/* [out] S4 values of NORMAL_BSM structure */
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	S4 as4_t_used_peak_up[TRAILER_BUFFSIZE * 2];
+ 	S4 as4_t_used_peak_dn[TRAILER_BUFFSIZE * 2];
+ 	S4 as4_t_pair_index_up[TRAILER_BUFFSIZE * 2];
+ 	S4 as4_t_pair_index_dn[TRAILER_BUFFSIZE * 2];
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < (TRAILER_BUFFSIZE * 2); s4_t_lp_i++) {
+ 		as4_t_used_peak_up[s4_t_lp_i] = 0;
+ 		as4_t_used_peak_dn[s4_t_lp_i] = 0;
+ 		as4_t_pair_index_up[s4_t_lp_i] = 0;
+ 		as4_t_pair_index_dn[s4_t_lp_i] = 0;
+ 	}
+ 	fn_bsm_trailer_make_pair_moving(
+ 		s4_a_peak_num_up_music,											/* [in] */
+ 		(const FL *)afl_a_peak_bins_intpl_up,										/* [in] */
+ 		afl_a_peak_powers_up,								/* [in] */
+ 		(const FL *)afl_a_peak_doa_bins_intpl_up,									/* [in] */
+ 		(const FL *)afl_a_peak_doa_powers_up,										/* [in] */
+ 		s4_a_peak_num_dn_music,											/* [in] */
+ 		(const FL *)afl_a_peak_bins_intpl_dn,										/* [in] */
+ 		afl_a_peak_powers_dn,											/* [in] */
+ 		(const FL *)afl_a_peak_doa_bins_intpl_dn,									/* [in] */
+ 		(const FL *)afl_a_peak_doa_powers_dn,										/* [in] */
+ 		as4_t_used_peak_up,												/* [out] */
+ 		as4_t_used_peak_dn,												/* [out] */
+ 		as4_t_pair_index_up,											/* [out] */
+ 		as4_t_pair_index_dn,											/* [out] */
+ 		ps4_a_pair_num_trailer,										/* [out] */
+ 		ast_a_normal_trailer											/* [out] */
+ 	);
+ 	return;
+ }
+ VD fn_bsm_trailer_make_pair_moving(
+ 	S4 s4_a_peak_num_up,												/* [in] */
+ 	const FL afl_a_peak_bins_intpl_up[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	const FL afl_a_peak_powers_up[TRAILER_BUFFSIZE * 2],						/* [in] */
+ 	const FL afl_a_peak_doa_bins_intpl_up[TRAILER_BUFFSIZE * 2],				/* [in] */
+ 	const FL afl_a_peak_doa_powers_up[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	S4 s4_a_peak_num_dn,												/* [in] */
+ 	const FL afl_a_peak_bins_intpl_dn[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	const FL afl_a_peak_powers_dn[TRAILER_BUFFSIZE * 2],						/* [in] */
+ 	const FL afl_a_peak_doa_bins_intpl_dn[TRAILER_BUFFSIZE * 2],				/* [in] */
+ 	const FL afl_a_peak_doa_powers_dn[TRAILER_BUFFSIZE * 2],					/* [in] */
+ 	S4 as4_a_used_peak_up[TRAILER_BUFFSIZE * 2],
+ 	S4 as4_a_used_peak_dn[TRAILER_BUFFSIZE * 2],
+ 	S4 as4_a_pair_index_up[TRAILER_BUFFSIZE * 2],
+ 	S4 as4_a_pair_index_dn[TRAILER_BUFFSIZE * 2],
+ 	S4 *ps4_a_pair_num,
+ 	NORMAL_BSM ast_a_normal_trailer[TRAILER_BUFFSIZE]
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	S4 s4_t_lp_k;
+ 	FL afl_t_compare[TRAILER_BUFFSIZE * 2][TRAILER_BUFFSIZE * 2];
+ 	S4 s4_t_tmp_doa_diff_up_down = DOA_DIFF_UP_DOWN;	/* $$$ 2013.08.07-3 */
+ 	FL fl_t_tmp_pow_diff_up_down;
+ 	U2 u2_t_tmp_freq_diff_up_down;
+ 	S4 s4_t_found;
+ 	FL fl_t_min_comp;
+ 	S4 as4_t_tmp_pair_index_up = 0;
+ 	S4 as4_t_tmp_pair_index_dn = 0;
+ 	S4 s4_t_pair_num;
+ 	S4 s4_t_tmp_pair_num;
+ 	fl_t_tmp_pow_diff_up_down = POW_DIFF_UP_DOWN_DOA;
+ 	u2_t_tmp_freq_diff_up_down = NB_FFT_PT;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < (TRAILER_BUFFSIZE * 2); s4_t_lp_i++) {
+ 		for (s4_t_lp_k = 0; s4_t_lp_k < (TRAILER_BUFFSIZE * 2); s4_t_lp_k++) {
+ 			afl_t_compare[s4_t_lp_i][s4_t_lp_k] = 1000.0;
+ 		}
+ 	}
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < s4_a_peak_num_up; s4_t_lp_i++) {
+ 		if (as4_a_used_peak_up[s4_t_lp_i] == 0) {								/* COND a1/c1 */
+ 			for (s4_t_lp_k = 0; s4_t_lp_k < s4_a_peak_num_dn; s4_t_lp_k++) {
+ 				if (as4_a_used_peak_dn[s4_t_lp_k] == 0) {						/* COND a2/c2 */
+ 					s4_t_tmp_doa_diff_up_down = (S4)CU1_DOA_DIFF_UP_DOWN_VERYNEAR;
+ 					fl_t_tmp_pow_diff_up_down = POW_DIFF_UP_DOWN_DOA;											/* PROC.4 */
+ 					u2_t_tmp_freq_diff_up_down = (U2)2;//3; //low relative speed //NB_FFT_PT;						/* PROC.5 */
+ 					if ((fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]) < fl_t_tmp_pow_diff_up_down)							/*  COND. c3 */
+ 					&&  ((S4)fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k])) < s4_t_tmp_doa_diff_up_down)		/*  COND. c4 */
+ 					&&  (afl_a_peak_bins_intpl_up[s4_t_lp_i] - afl_a_peak_bins_intpl_dn[s4_t_lp_k] < (FL)u2_t_tmp_freq_diff_up_down)) {								/*  COND. c5 */
+ 						afl_t_compare[s4_t_lp_i][s4_t_lp_k] = (0.5F * fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]))				/* DOA pow. 0.5F: weighting factor */
+ 															+ (1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k])))	/* DOA */
+ 															+ (0.5F * fl_abs(afl_a_peak_powers_up[s4_t_lp_i] - afl_a_peak_powers_dn[s4_t_lp_k]));						/* FREQ  0.5F: weighting factor */
+ 					}
+ 				}
+ 			}
+ 		}
+ 	}
+ 	s4_t_pair_num = *ps4_a_pair_num;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < s4_a_peak_num_up; s4_t_lp_i++) {
+ 		fl_t_min_comp = 1000.0;
+ 		s4_t_found = 0;
+ 		for (s4_t_lp_k = 0; s4_t_lp_k < s4_a_peak_num_dn; s4_t_lp_k++) {
+ 			fn_bsm_trailer_check_minimum_pair(
+ 				s4_t_lp_i,
+ 				s4_t_lp_k,
+ 				afl_t_compare,
+ 				as4_a_used_peak_up,
+ 				as4_a_used_peak_dn,
+ 				as4_a_pair_index_up,
+ 				as4_a_pair_index_dn,
+ 				&fl_t_min_comp,
+ 				&s4_t_found,
+ 				&as4_t_tmp_pair_index_up,
+ 				&as4_t_tmp_pair_index_dn,
+ 				&s4_t_pair_num
+ 			);
+ 		}
+ 		if (s4_t_found == 1)									/* COND. d4 */
+ 		{
+ 			as4_a_used_peak_up[as4_t_tmp_pair_index_up] = 1;
+ 			as4_a_used_peak_dn[as4_t_tmp_pair_index_dn] = 1;
+ 			as4_a_pair_index_up[s4_t_pair_num] = as4_t_tmp_pair_index_up;
+ 			as4_a_pair_index_dn[s4_t_pair_num] = as4_t_tmp_pair_index_dn;
+ 			s4_t_pair_num++;
+ 		}
+ 	}
+ 	s4_t_tmp_pair_num = *ps4_a_pair_num;
+ 	for (s4_t_lp_i = s4_t_tmp_pair_num; s4_t_lp_i < s4_t_pair_num; s4_t_lp_i++) {
+ 		if ((s4_t_lp_i) < TRAILER_BUFFSIZE) {	/* $$$ バッファあふれ防止(30 -> 15なのでちゃんと優先順位をつけたほうがよい) */
+ 			fn_set_normal_data(
+ 				&ast_a_normal_trailer[s4_t_lp_i],
+ 				afl_a_peak_bins_intpl_up[as4_a_pair_index_up[s4_t_lp_i]],		/*  peak freq-bin (up) */
+ 				afl_a_peak_bins_intpl_dn[as4_a_pair_index_dn[s4_t_lp_i]],		/*  peak freq-bin (down) */
+ 				afl_a_peak_doa_bins_intpl_up[as4_a_pair_index_up[s4_t_lp_i]],	/*  peak doa-bin (up) */
+ 				afl_a_peak_doa_bins_intpl_dn[as4_a_pair_index_dn[s4_t_lp_i]],	/*  peak doa-bin (down) */
+ 				afl_a_peak_powers_up[as4_a_pair_index_up[s4_t_lp_i]],			/*  peak freq-power (up) */
+ 				afl_a_peak_powers_dn[as4_a_pair_index_dn[s4_t_lp_i]],			/*  peak freq-power (down) */
+ 				afl_a_peak_doa_powers_up[as4_a_pair_index_up[s4_t_lp_i]],		/*  peak doa-power (up) */
+ 				afl_a_peak_doa_powers_dn[as4_a_pair_index_dn[s4_t_lp_i]],		/*  peak doa-power (down) */
+ 				0,																/*  停止物フラグ */
+ 				0																/*  片ピークフラグ */
+ 			);
+ 		}
+ 	}
+ 	*ps4_a_pair_num = s4_t_pair_num;
+ 	if (*ps4_a_pair_num > TRAILER_BUFFSIZE) {
+ 		*ps4_a_pair_num = TRAILER_BUFFSIZE;
+ 	}
+ 	return;
+ }
+ static VD fn_bsm_trailer_check_minimum_pair(S4  s4_a_lp_peak_num_up,
+ 											 S4  s4_a_lp_peak_num_dn,
+ 											 FL  afl_a_compare[TRAILER_BUFFSIZE * 2][TRAILER_BUFFSIZE * 2],
+ 											 S4  as4_a_used_peak_up[TRAILER_BUFFSIZE * 2],
+ 											 S4  as4_a_used_peak_dn[TRAILER_BUFFSIZE * 2],
+ 											 S4  as4_a_pair_index_up[TRAILER_BUFFSIZE * 2],
+ 											 S4  as4_a_pair_index_dn[TRAILER_BUFFSIZE * 2],
+ 											 FL* pfl_a_min_comp,
+ 											 S4* ps4_a_found,
+ 											 S4* ps4_a_pair_index_up,
+ 											 S4* ps4_a_pair_index_dn,
+ 											 S4* ps4_a_pair_num)
+ {
+ 	FL fl_t_min_comp_prev;									/* ペアマッチ評価値の比較対象値の保存変数 */
+ 	FL fl_t_min_comp_temp;									/* ペアマッチ評価値の仮保存変数 */
+ 	S4 s4_t_pair_num_tmp;									/* ペアマッチ数カウント用変数 */
+ 	S4 as4_t_pair_index_up[TRAILER_BUFFSIZE * 2];			/* ペアマッチインデックス並べ替え用バッファ(上り) */
+ 	S4 as4_t_pair_index_dn[TRAILER_BUFFSIZE * 2];			/* ペアマッチインデックス並べ替え用バッファ(下り) */
+ 	S4 s4_t_lp_pair_num;									/* ペア個数のループ変数 仕様書ではk,ii,jjが対象 3個の変数を統一している */
+ 	S4 s4_t_lp_num_ordi_2;									/* TRAILER_BUFFSIZE * 2のループ変数 */
+ 	for (s4_t_lp_num_ordi_2 = (S4)0; s4_t_lp_num_ordi_2 < ((S4)TRAILER_BUFFSIZE * (S4)2); s4_t_lp_num_ordi_2++) {
+ 		as4_t_pair_index_up[s4_t_lp_num_ordi_2] = (S4)0;
+ 		as4_t_pair_index_dn[s4_t_lp_num_ordi_2] = (S4)0;
+ 	}
+ 	if (afl_a_compare[s4_a_lp_peak_num_up][s4_a_lp_peak_num_dn] < *pfl_a_min_comp) {				/* COND. k1 */
+ 		if ((as4_a_used_peak_up[s4_a_lp_peak_num_up] == (S4)0)										/* COND. k2 */
+ 		&&  (as4_a_used_peak_dn[s4_a_lp_peak_num_dn] == (S4)0)) {									/* COND. k3 */
+ 			*pfl_a_min_comp = afl_a_compare[s4_a_lp_peak_num_up][s4_a_lp_peak_num_dn];
+ 			*ps4_a_found = (S4)1;
+ 			*ps4_a_pair_index_up = s4_a_lp_peak_num_up;
+ 			*ps4_a_pair_index_dn = s4_a_lp_peak_num_dn;
+ 		} else {
+ 			for (s4_t_lp_pair_num = (S4)0; s4_t_lp_pair_num < *ps4_a_pair_num; s4_t_lp_pair_num++) {
+ 				if (((!(as4_a_used_peak_up[s4_a_lp_peak_num_up] == (S4)0))						/* COND. !k2 */
+ 				&&   (as4_a_pair_index_up[s4_t_lp_pair_num] == s4_a_lp_peak_num_up))			/* COND. k6 */
+ 				||  ((!(as4_a_used_peak_dn[s4_a_lp_peak_num_dn] == (S4)0))						/* COND. !k3 */
+ 				&&   (as4_a_pair_index_dn[s4_t_lp_pair_num] == s4_a_lp_peak_num_dn))) {		/* COND. k7 */
+ 					fl_t_min_comp_temp = *pfl_a_min_comp;
+ 					*pfl_a_min_comp = afl_a_compare[s4_a_lp_peak_num_up][s4_a_lp_peak_num_dn];
+ 					fl_t_min_comp_prev = afl_a_compare[as4_a_pair_index_up[s4_t_lp_pair_num]][as4_a_pair_index_dn[s4_t_lp_pair_num]];
+ 					if (*pfl_a_min_comp < fl_t_min_comp_prev) {				/* COND. k8 */
+ 						as4_a_used_peak_up[as4_a_pair_index_up[s4_t_lp_pair_num]] = (S4)0;
+ 						as4_a_used_peak_dn[as4_a_pair_index_dn[s4_t_lp_pair_num]] = (S4)0;
+ 						as4_a_pair_index_up[s4_t_lp_pair_num] = (S4)-1;
+ 						as4_a_pair_index_dn[s4_t_lp_pair_num] = (S4)-1;
+ 						*ps4_a_found = (S4)1;
+ 						*ps4_a_pair_index_up = s4_a_lp_peak_num_up;
+ 						*ps4_a_pair_index_dn = s4_a_lp_peak_num_dn;
+ 					} else {
+ 						*pfl_a_min_comp = fl_t_min_comp_temp;
+ 					}
+ 				}
+ 			}
+ 		}
+ 		s4_t_pair_num_tmp = (S4)0;
+ 		for (s4_t_lp_pair_num = (S4)0; s4_t_lp_pair_num < *ps4_a_pair_num; s4_t_lp_pair_num++) {
+ 			if (as4_a_pair_index_up[s4_t_lp_pair_num] != (S4)-1) {					/* COND. k9 */
+ 				as4_t_pair_index_up[s4_t_pair_num_tmp] = as4_a_pair_index_up[s4_t_lp_pair_num];
+ 				as4_t_pair_index_dn[s4_t_pair_num_tmp] = as4_a_pair_index_dn[s4_t_lp_pair_num];
+ 				s4_t_pair_num_tmp++;
+ 			}
+ 		}
+ 		if (s4_t_pair_num_tmp > (S4)0) {					/* COND. k10 */
+ 			for (s4_t_lp_pair_num = (S4)0; s4_t_lp_pair_num < s4_t_pair_num_tmp; s4_t_lp_pair_num++) {
+ 				as4_a_pair_index_up[s4_t_lp_pair_num] = as4_t_pair_index_up[s4_t_lp_pair_num];
+ 				as4_a_pair_index_dn[s4_t_lp_pair_num] = as4_t_pair_index_dn[s4_t_lp_pair_num];
+ 			}
+ 		}
+ 		*ps4_a_pair_num = s4_t_pair_num_tmp;
+ 	}
+ 	return;
+ }
+ VD fn_bsm_trailer_set_object(
+ 	const S4 *ps4_a_pair_num,
+ 	NORMAL_BSM ast_a_normal_trailer[TRAILER_BUFFSIZE]				/* [out] S4 values of NORMAL_BSM structure */
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < *ps4_a_pair_num; s4_t_lp_i++) {
+ 		ast_a_normal_trailer[s4_t_lp_i].s4_flg_dc = OBJECT_TYPE_TRAILER;
+ 	}
+ 	return;
+ }
+ VD fn_check_ordinary_trailer_obj(
+ 	S4			*as4_pair_num_ordinary,
+ 	NORMAL_BSM	ast_a_normal_ordinary[ORDINARY_BUFFSIZE],
+ 	S4			*as4_pair_num_trailer,
+ 	NORMAL_BSM	ast_a_normal_trailer[TRAILER_BUFFSIZE],
+ 	FL			afl_t_thres_trailer[NB_FFT_PT]
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	S4 s4_t_lp_j;
+ 	S4 s4_trailer_bin;
+ 	FL fl_power_thres;
+ 	S4 s4_t_erase_ordinary_flag;
+ 	S4 s4_t_pair_num_trailer;
+ 	FL fl_t_doa_upper_limit;
+ 	NORMAL_BSM copy_tmp_normal_trailer[TRAILER_BUFFSIZE];
+ 	fn_init(copy_tmp_normal_trailer, TRAILER_BUFFSIZE);
+ 	copy_trailer_data(ast_a_normal_trailer, copy_tmp_normal_trailer, *as4_pair_num_trailer);
+ 	s4_t_pair_num_trailer = *as4_pair_num_trailer;
+ 	fl_t_doa_upper_limit = ((FL)(N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0]  - (FL)CU1_DOA_BIN_LOWER_LIMIT_T + (FL)CU1_DOA_BIN_UPPER_LIMIT_T );
+ 	for(s4_t_lp_i = 0; s4_t_lp_i < *as4_pair_num_ordinary; s4_t_lp_i++)
+ 	{
+ 		s4_trailer_bin = ast_a_normal_ordinary[s4_t_lp_i].s4_bin_up;
+ 		fl_power_thres = afl_t_thres_trailer[s4_trailer_bin];
+ 		if( ast_a_normal_ordinary[s4_t_lp_i].s4_bin_up < FREQ_BIN_UPPER_LIMIT_DN_T
+ 		 && ast_a_normal_ordinary[s4_t_lp_i].s4_bin_dn < FREQ_BIN_UPPER_LIMIT_DN_T //FREQ_BIN_UPPER_LIMIT_T
+ 		 && ast_a_normal_ordinary[s4_t_lp_i].fl_doa_up_interpolate < fl_t_doa_upper_limit
+ 		 && ast_a_normal_ordinary[s4_t_lp_i].fl_doa_dn_interpolate < fl_t_doa_upper_limit
+ 		 && ast_a_normal_ordinary[s4_t_lp_i].fl_power_up > fl_power_thres
+ 		 && ast_a_normal_ordinary[s4_t_lp_i].fl_power_dn > fl_power_thres
+ 		){
+ 			s4_t_erase_ordinary_flag = (S4)0;
+ 			for(s4_t_lp_j = 0; s4_t_lp_j < *as4_pair_num_trailer; s4_t_lp_j++)
+ 			{
+ 				if( ast_a_normal_ordinary[s4_t_lp_i].s4_bin_up == ast_a_normal_trailer[s4_t_lp_j].s4_bin_up
+ 				 && ast_a_normal_ordinary[s4_t_lp_i].s4_bin_dn == ast_a_normal_trailer[s4_t_lp_j].s4_bin_dn
+ 				 && ast_a_normal_ordinary[s4_t_lp_i].fl_power_up == ast_a_normal_trailer[s4_t_lp_j].fl_power_up
+ 				 && ast_a_normal_ordinary[s4_t_lp_i].fl_power_dn == ast_a_normal_trailer[s4_t_lp_j].fl_power_dn
+ 				){
+ 					s4_t_erase_ordinary_flag = (S4)1;
+ 				}
+ 			}
+ 			if( s4_t_erase_ordinary_flag == (S4)0)
+ 			{
+ 				copy_trailer_data(&ast_a_normal_ordinary[s4_t_lp_i], &copy_tmp_normal_trailer[s4_t_pair_num_trailer], (S4)1);
+ 				fn_init(&ast_a_normal_ordinary[s4_t_lp_i], 1);
+ 				s4_t_pair_num_trailer ++;
+ 			} else{
+ 				fn_init(&ast_a_normal_ordinary[s4_t_lp_i], 1);
+ 			}
+ 		}
+ 	}
+ 	if( s4_t_pair_num_trailer > TRAILER_BUFFSIZE )
+ 	{
+ 		s4_t_pair_num_trailer = TRAILER_BUFFSIZE;
+ 	}
+ 	*as4_pair_num_trailer = s4_t_pair_num_trailer;
+ 	fn_sort_trailer(copy_tmp_normal_trailer, ast_a_normal_trailer);
+ 	*as4_pair_num_ordinary = s4_trim_ordinary(ast_a_normal_ordinary);
+ 	return;
+ }
+ VD fn_sort_trailer(
+ 	NORMAL_BSM  ast_a_copy_normal_trailer[TRAILER_BUFFSIZE],
+ 	NORMAL_BSM  ast_a_normal_trailer[TRAILER_BUFFSIZE]
+ )
+ {
+ 	S4 s4_t_lp_i;
+ 	S4 s4_t_lp_j;
+ 	NORMAL_BSM ast_t_buf_normal[TRAILER_BUFFSIZE];
+ 	FL fl_a_range_1 = (FL)0;
+ 	FL fl_a_range_2 = (FL)0;
+ 	FL fl_a_power_sum_1 = (FL)0;
+ 	FL fl_a_power_sum_2 = (FL)0;
+ 	fn_init(ast_t_buf_normal, TRAILER_BUFFSIZE);
+ 	fn_move(ast_t_buf_normal, ast_a_copy_normal_trailer, TRAILER_BUFFSIZE);
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < TRAILER_BUFFSIZE; s4_t_lp_i++) {
+ 		for (s4_t_lp_j = 0; s4_t_lp_j < TRAILER_BUFFSIZE; s4_t_lp_j++) {
+ 			if (s4_t_lp_i < s4_t_lp_j) {
+ 				if (	/* 中身が入っているかどうかの確認用 */
+ 					(ast_a_copy_normal_trailer[s4_t_lp_i].fl_Ryobs != CFL_UNKNOWN_VALUE)
+ 				 && (ast_a_copy_normal_trailer[s4_t_lp_j].fl_Ryobs != CFL_UNKNOWN_VALUE)
+ 				) {
+ 					fl_a_range_1 = ast_a_copy_normal_trailer[s4_t_lp_i].fl_Ryobs;
+ 					fl_a_range_2 = ast_a_copy_normal_trailer[s4_t_lp_j].fl_Ryobs;
+ 					if (fl_a_range_1 < fl_a_range_2) {
+ 						ast_t_buf_normal[s4_t_lp_i] = ast_a_copy_normal_trailer[s4_t_lp_j];
+ 						ast_t_buf_normal[s4_t_lp_j] = ast_a_copy_normal_trailer[s4_t_lp_i];
+ 						ast_a_copy_normal_trailer[s4_t_lp_i] = ast_t_buf_normal[s4_t_lp_i];
+ 						ast_a_copy_normal_trailer[s4_t_lp_j] = ast_t_buf_normal[s4_t_lp_j];
+ 					}
+ 				}
+ 			}
+ 		}
+ 	}
+ 	for (s4_t_lp_i = 0; s4_t_lp_i < TRAILER_BUFFSIZE; s4_t_lp_i++) {
+ 		for (s4_t_lp_j = 0; s4_t_lp_j < TRAILER_BUFFSIZE; s4_t_lp_j++) {
+ 			if (s4_t_lp_i < s4_t_lp_j) {
+ 				if (	/* 中身が入っているかどうかの確認用 */
+ 					(ast_a_copy_normal_trailer[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE)
+ 				 && (ast_a_copy_normal_trailer[s4_t_lp_j].fl_Robs != CFL_UNKNOWN_VALUE)
+ 				) {
+ 					fl_a_power_sum_1 = ast_a_copy_normal_trailer[s4_t_lp_i].fl_power_up + ast_a_copy_normal_trailer[s4_t_lp_i].fl_power_dn;
+ 					fl_a_power_sum_2 = ast_a_copy_normal_trailer[s4_t_lp_j].fl_power_up + ast_a_copy_normal_trailer[s4_t_lp_j].fl_power_dn;
+ 					if (fl_a_power_sum_1 < fl_a_power_sum_2) {
+ 						ast_t_buf_normal[s4_t_lp_i] = ast_a_copy_normal_trailer[s4_t_lp_j];
+ 						ast_t_buf_normal[s4_t_lp_j] = ast_a_copy_normal_trailer[s4_t_lp_i];
+ 						ast_a_copy_normal_trailer[s4_t_lp_i] = ast_t_buf_normal[s4_t_lp_i];
+ 						ast_a_copy_normal_trailer[s4_t_lp_j] = ast_t_buf_normal[s4_t_lp_j];
+ 					}
+ 				}
+ 			}
+ 		}
+ 	}
+ 	copy_trailer_data(ast_a_copy_normal_trailer, ast_a_normal_trailer, TRAILER_BUFFSIZE);
+ 	return;
+ }
+ VD copy_trailer_data(
+ 	const NORMAL_BSM *normal_in,				/* [in] */
+ 	NORMAL_BSM *normal_out,						/* [out] */
+ 	S4 size										/* [in] */
+ )
+ {
+ 	S4 i;
+ 	for(i=0; i<size; i++)
+ 	{
+ 		*normal_out = *normal_in;
+ 		normal_in++;
+ 		normal_out++;
+ 	}
+ 	return;
+ } 
+-------------
+Total lines: 966 
+Total functions : 15 
+[Function Name] : fn_bsm_seek_trailer_object 
+-Define : 10 lines
+-Code : 176 lines
+-Return type : VD 
+-Argument : 4 
+     [0] : S4*   ps4_a_pair_num_ordinary 
+     [1] : NORMAL_BSM   ast_a_normalordinary[ORDINARY_BUFFSIZE] 
+     [2] : S4*   ps4_a_pair_num_trailer 
+     [3] : NORMAL_BSM   ast_a_normaltrailer[TRAILER_BUFFSIZE] 
+[Function Name] : fn_bsm_trailer_init_data 
+-Define : 14 lines
+-Code : 22 lines
+-Return type : VD 
+-Argument : 12 
+     [0] : S4   *ps4_a_peak_num_trailer 
+     [1] : S4   as4_a_peak_bin[PEAK_BUFFSIZE] 
+     [2] : FL   afl_a_peak_bin_intpl[PEAK_BUFFSIZE] 
+     [3] : FL   afl_a_peak_power[PEAK_BUFFSIZE] 
+     [4] : S4   as4_a_peak_bin_trailer[TRAILER_BUFFSIZE] 
+     [5] : FL   afl_a_peak_bin_intpl_trailer[TRAILER_BUFFSIZE] 
+     [6] : FL   afl_a_peak_power_trailer[TRAILER_BUFFSIZE] 
+     [7] : S4   *ps4_a_peak_num_music 
+     [8] : FL afl_a_peak_bins_intpl[TRAILER_BUFFSIZE *   2] 
+     [9] : FL afl_a_peak_powers[TRAILER_BUFFSIZE *   2] 
+     [10] : FL afl_a_peak_doa_bins_intpl[TRAILER_BUFFSIZE *   2] 
+     [11] : FL afl_a_peak_doa_powers[TRAILER_BUFFSIZE *   2] 
+[Function Name] : fn_bsm_trailer_init_thres 
+-Define : 3 lines
+-Code : 7 lines
+-Return type : VD 
+-Argument : 1 
+     [0] : FL   afl_a_thres[NB_FFT_PT] 
+[Function Name] : fn_bsm_trailer_estimate_doa 
+-Define : 15 lines
+-Code : 63 lines
+-Return type : VD 
+-Argument : 11 
+     [0] : S4   s4_a_flg_updn 
+     [1] : FL   afl_a_Ryy[NB_FFT_PT][CORRE_SIZE_4CH] 
+     [2] : S4   s4_a_peak_num 
+     [3] : const S4   as4_a_peak_bin[TRAILER_BUFFSIZE] 
+     [4] : const FL   afl_a_peak_bin_intpl[TRAILER_BUFFSIZE] 
+     [5] : const FL   afl_a_peak_power[TRAILER_BUFFSIZE] 
+     [6] : S4   *ps4_a_doa_peak_num 
+     [7] : FL afl_a_peak_bins_intpl[TRAILER_BUFFSIZE *   2] 
+     [8] : FL afl_a_peak_powers[TRAILER_BUFFSIZE *   2] 
+     [9] : FL afl_a_peak_doa_bins_intpl[TRAILER_BUFFSIZE *   2] 
+     [10] : FL afl_a_peak_doa_powers[TRAILER_BUFFSIZE *   2] 
+[Function Name] : fn_bsm_trailer_cal_doa 
+-Define : 10 lines
+-Code : 57 lines
+-Return type : VD 
+-Argument : 8 
+     [0] : S4   s4_a_updn_flg 
+     [1] : const FL   afl_a_Ryy[NB_FFT_PT][CORRE_SIZE_4CH] 
+     [2] : S4   s4_a_peak_bin 
+     [3] : FL   fl_a_peak_bin_intpl 
+     [4] : S4   *ps4_a_doa_num 
+     [5] : FL   afl_a_selected_doa_bins_intpl[2] 
+     [6] : FL   afl_a_selected_doa_powers[2] 
+     [7] : FL   afl_a_selected_bins_intpl[2] 
+[Function Name] : fn_bsm_cal_trailer_range_doa_ave 
+-Define : 7 lines
+-Code : 24 lines
+-Return type : VD 
+-Argument : 5 
+     [0] : S4   s4_a_updn_flg 
+     [1] : const FL   afl_a_Ryy[NB_FFT_PT][CORRE_SIZE_4CH] 
+     [2] : S4   s4_a_peak_bin 
+     [3] : FL   *afl_t_doa_pow_ave 
+     [4] : FL   *afl_t_doa_pow_dev 
+[Function Name] : fn_bsm_trailer_store_doa 
+-Define : 12 lines
+-Code : 18 lines
+-Return type : VD 
+-Argument : 10 
+     [0] : const FL   afl_a_peak_power[TRAILER_BUFFSIZE] 
+     [1] : const S4   as4_a_doa_num[TRAILER_BUFFSIZE] 
+     [2] : FL   afl_a_selected_doa_bins_intpl[TRAILER_BUFFSIZE][2] 
+     [3] : FL   afl_a_selected_doa_powers[TRAILER_BUFFSIZE][2] 
+     [4] : FL   afl_a_selected_bins_intpl[TRAILER_BUFFSIZE][2] 
+     [5] : S4   *ps4_a_doa_peak_num 
+     [6] : FL afl_a_peak_bins_intpl[TRAILER_BUFFSIZE *   2] 
+     [7] : FL afl_a_peak_powers[TRAILER_BUFFSIZE *   2] 
+     [8] : FL afl_a_peak_doa_bins_intpl[TRAILER_BUFFSIZE *   2] 
+     [9] : FL afl_a_peak_doa_powers[TRAILER_BUFFSIZE *   2] 
+[Function Name] : fn_check_bf_doa_power 
+-Define : 4 lines
+-Code : 40 lines
+-Return type : VD 
+-Argument : 2 
+     [0] : S4*   s4_a_doa_bf_peak_bin 
+     [1] : FL*   fl_a_doa_bf_peak_pow 
+[Function Name] : fn_bsm_trailer_make_pair 
+-Define : 14 lines
+-Code : 32 lines
+-Return type : VD 
+-Argument : 12 
+     [0] : S4   s4_a_peak_num_up_music 
+     [1] : const FL afl_a_peak_bins_intpl_up[TRAILER_BUFFSIZE *   2] 
+     [2] : FL afl_a_peak_powers_up[TRAILER_BUFFSIZE *   2] 
+     [3] : const FL afl_a_peak_doa_bins_intpl_up[TRAILER_BUFFSIZE *   2] 
+     [4] : const FL afl_a_peak_doa_powers_up[TRAILER_BUFFSIZE *   2] 
+     [5] : S4   s4_a_peak_num_dn_music 
+     [6] : const FL afl_a_peak_bins_intpl_dn[TRAILER_BUFFSIZE *   2] 
+     [7] : FL afl_a_peak_powers_dn[TRAILER_BUFFSIZE *   2] 
+     [8] : const FL afl_a_peak_doa_bins_intpl_dn[TRAILER_BUFFSIZE *   2] 
+     [9] : const FL afl_a_peak_doa_powers_dn[TRAILER_BUFFSIZE *   2] 
+     [10] : S4*   ps4_a_pair_num_trailer 
+     [11] : NORMAL_BSM   ast_a_normal_trailer[TRAILER_BUFFSIZE] 
+[Function Name] : fn_bsm_trailer_make_pair_moving 
+-Define : 18 lines
+-Code : 91 lines
+-Return type : VD 
+-Argument : 16 
+     [0] : S4   s4_a_peak_num_up 
+     [1] : const FL afl_a_peak_bins_intpl_up[TRAILER_BUFFSIZE *   2] 
+     [2] : const FL afl_a_peak_powers_up[TRAILER_BUFFSIZE *   2] 
+     [3] : const FL afl_a_peak_doa_bins_intpl_up[TRAILER_BUFFSIZE *   2] 
+     [4] : const FL afl_a_peak_doa_powers_up[TRAILER_BUFFSIZE *   2] 
+     [5] : S4   s4_a_peak_num_dn 
+     [6] : const FL afl_a_peak_bins_intpl_dn[TRAILER_BUFFSIZE *   2] 
+     [7] : const FL afl_a_peak_powers_dn[TRAILER_BUFFSIZE *   2] 
+     [8] : const FL afl_a_peak_doa_bins_intpl_dn[TRAILER_BUFFSIZE *   2] 
+     [9] : const FL afl_a_peak_doa_powers_dn[TRAILER_BUFFSIZE *   2] 
+     [10] : S4 as4_a_used_peak_up[TRAILER_BUFFSIZE *   2] 
+     [11] : S4 as4_a_used_peak_dn[TRAILER_BUFFSIZE *   2] 
+     [12] : S4 as4_a_pair_index_up[TRAILER_BUFFSIZE *   2] 
+     [13] : S4 as4_a_pair_index_dn[TRAILER_BUFFSIZE *   2] 
+     [14] : S4   *ps4_a_pair_num 
+     [15] : NORMAL_BSM   ast_a_normal_trailer[TRAILER_BUFFSIZE] 
+[Function Name] : fn_bsm_trailer_check_minimum_pair 
+-Define : 12 lines
+-Code : 60 lines
+-Return type : static VD 
+-Argument : 12 
+     [0] : (S4   s4_a_lp_peak_num_up 
+     [1] : S4   s4_a_lp_peak_num_dn 
+     [2] : FL afl_a_compare[TRAILER_BUFFSIZE * 2][TRAILER_BUFFSIZE *   2] 
+     [3] : S4 as4_a_used_peak_up[TRAILER_BUFFSIZE *   2] 
+     [4] : S4 as4_a_used_peak_dn[TRAILER_BUFFSIZE *   2] 
+     [5] : S4 as4_a_pair_index_up[TRAILER_BUFFSIZE *   2] 
+     [6] : S4 as4_a_pair_index_dn[TRAILER_BUFFSIZE *   2] 
+     [7] : FL*   pfl_a_min_comp 
+     [8] : S4*   ps4_a_found 
+     [9] : S4*   ps4_a_pair_index_up 
+     [10] : S4*   ps4_a_pair_index_dn 
+     [11] : S4*   ps4_a_pair_num 
+[Function Name] : fn_bsm_trailer_set_object 
+-Define : 4 lines
+-Code : 7 lines
+-Return type : VD 
+-Argument : 2 
+     [0] : const S4   *ps4_a_pair_num 
+     [1] : NORMAL_BSM   ast_a_normal_trailer[TRAILER_BUFFSIZE] 
+[Function Name] : fn_check_ordinary_trailer_obj 
+-Define : 7 lines
+-Code : 54 lines
+-Return type : VD 
+-Argument : 5 
+     [0] : S4   *as4_pair_num_ordinary 
+     [1] : NORMAL_BSM   ast_a_normal_ordinary[ORDINARY_BUFFSIZE] 
+     [2] : S4   *as4_pair_num_trailer 
+     [3] : NORMAL_BSM   ast_a_normal_trailer[TRAILER_BUFFSIZE] 
+     [4] : FL   afl_t_thres_trailer[NB_FFT_PT] 
+[Function Name] : fn_sort_trailer 
+-Define : 4 lines
+-Code : 51 lines
+-Return type : VD 
+-Argument : 2 
+     [0] : NORMAL_BSM   ast_a_copy_normal_trailer[TRAILER_BUFFSIZE] 
+     [1] : NORMAL_BSM   ast_a_normal_trailer[TRAILER_BUFFSIZE] 
+[Function Name] : copy_trailer_data 
+-Define : 5 lines
+-Code : 10 lines
+-Return type : VD 
+-Argument : 3 
+     [0] : const NORMAL_BSM   *normal_in 
+     [1] : NORMAL_BSM   *normal_out 
+     [2] : S4   size 

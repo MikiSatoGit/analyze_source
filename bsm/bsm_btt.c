@@ -337,10 +337,18 @@ VD init_btt_configuration_parameter_dummy(
 {
 
 	/*! @note (1) do nothing if BTT state is already INITIALIZED */
-	if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED )
-	{
+	if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) {
 		return;
 	}
+
+
+
+	if(miki=test)
+	{ miki = done; hogehoge{miki = next;} }
+
+
+
+
 	/* availability of sub function */
 	/*! @note (2) set ENABLE/DISABLE state of sub function */
 	st_g_btt_stat.ATD = BTT_RET_t.Func_Stat.ENABLE;

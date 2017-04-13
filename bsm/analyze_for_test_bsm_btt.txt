@@ -1,0 +1,38 @@
+-------------
+Total lines: 125 
+Total functions : 1 
+[Function Name] : init_btt_configuration_parameter_dummy 
+-Return type : VD 
+-Argument : 4 
+     [0] : BSM_STANDARD   *pst_a_bsm_alertarea_for_test 
+     [1] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
+     [2] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
+     [3] : BTT_HITCH_ANGLE   *pst_a_hitch_angle 
+-Code : 27 lines
+{
+if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED )
+{
+return;
+}
+if(miki=test)
+{
+ miki = done; hogehoge
+{
+miki = next;
+}
+}
+st_g_btt_stat.ATD = BTT_RET_t.Func_Stat.ENABLE;
+st_g_btt_stat.TLE = BTT_RET_t.Func_Stat.ENABLE;
+st_g_btt_stat.AAZ = BTT_RET_t.Func_Stat.ENABLE;	//_20161201_BUG_T
+st_g_btt_stat.TWE = BTT_RET_t.Func_Stat.ENABLE;
+st_g_btt_stat.TWE = BTT_RET_t.Func_Stat.DISABLE;
+st_g_btt_stat.TTM = BTT_RET_t.Func_Stat.DISABLE;
+pst_a_bsm_alertarea_for_test->Ymin = (FL) 1.0;
+pst_a_bsm_alertarea_for_test->Ymax = (FL) -7.0;
+pst_a_bsm_alertarea_for_test->Xmin = (FL) 0.5;
+pst_a_bsm_alertarea_for_test->Xmax = (FL) 3.8;
+pst_a_cluster_info->dummy = CFL_UNKNOWN_VALUE;
+pst_a_aux_trailer_info->dummy = CFL_UNKNOWN_VALUE;
+pst_a_hitch_angle->dummy = CFL_UNKNOWN_VALUE;
+return;
+}

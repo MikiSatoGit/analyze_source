@@ -10,6 +10,8 @@
 #	ARGUMENT:
 #	python analyze_source.py [source file path] 
 #
+#   NOTE:
+#     NG code : } xxxx {
 
 
 import sys
@@ -91,6 +93,14 @@ func_list = func_source_analyze.find_functions(lines)
 for index1 in range(0, func_list.func_num):
 	func_source_analyze.analyze_function(func_list.function_data[index1])
 
+
+
+
+
+
+
+
+
 print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
 for index1 in range(0, func_list.func_num):
 	print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
@@ -116,7 +126,7 @@ for index1 in range(0, func_list.func_num):
 	#	for index2 in range(0, len(func_list.function_data[index1].codes)):
 	#		print_out(fout, func_list.function_data[index1].codes[index2], 0)
 	for index2 in range(0, len(func_list.function_data[index1].codes)):
-		print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 0)
+		print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
 
 
 ##################################################

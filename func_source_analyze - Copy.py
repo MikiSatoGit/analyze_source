@@ -132,109 +132,8 @@ def set_func_def_lines(FunctionData, lines):
 
 
 def set_code_lines(FunctionData, lines):
-	code_list = []
-	code_tmp = ''
-	code_divided = ''
-	code_tmp2 = ''
-	code_divided2 = ''
-
 	for index in range(0,len(lines)):
-		code_tmp = ''
-		code_divided = ''
-		code_tmp = lines[index].strip()
-		# find { ========================================
-		if code_tmp.find('{')!=-1:
-			code_divided= code_tmp.split('{')
-			if len(code_divided)!=0:
-				# TOP ({)
-				if code_tmp.find('{') == 0:
-					code_list.append('{')
-
-				# MIDDLE ({)
-				code_tmp2 = ''
-				code_divided2 = ''
-				for index2 in range(0, len(code_divided)-1):
-					if code_divided[index2].strip() != '':
-						
-						# find } ========================================
-						if code_divided[index2].find('}')!=-1:
-							code_tmp2 = code_divided[index2].strip()
-							code_divided2= code_tmp2.split('}')
-							if len(code_divided2)!=0:
-								# TOP (})
-								if code_tmp2.find('}') == 0:
-									code_list.append('}')
-								else:
-									# MIDDLE (})
-									for index3 in range(0, len(code_divided2)-1):
-										if code_divided2[index3].strip() != '':
-											code_list.append(code_divided2[index3])
-										code_list.append('}')
-									# END (})
-									if code_divided2[-1].strip() != '':
-										code_list.append(code_divided2[-1].strip())
-							else:
-								code_list.append('}')
-							code_list.append('{')
-						# Not find } ========================================
-						else:
-							code_list.append(code_divided[index2])
-							code_list.append('{')
-
-				# END ({)
-				if code_divided[-1].strip() != '':
-					# find } ========================================
-					if code_divided[-1].find('}')!=-1:
-						code_tmp2 = code_divided[-1].strip()
-						code_divided2= code_tmp2.split('}')
-						if len(code_divided2)!=0:
-							# TOP (})
-							if code_tmp2.find('}') == 0:
-								code_list.append('}')
-							else:
-								# MIDDLE (})
-								for index3 in range(0, len(code_divided2)-1):
-									if code_divided2[index3].strip() != '':
-										code_list.append(code_divided2[index3])
-									code_list.append('}')
-								# END (})
-								if code_divided2[-1].strip() != '':
-									code_list.append(code_divided2[-1].strip())
-						else:
-							code_list.append('}')
-					# Not find } ========================================
-					else:
-						code_list.append(code_divided[-1].strip())
-			else:
-				code_list.append('{')
-		# Not find { ========================================
-		else:
-			# find } ========================================
-			code_tmp2 = ''
-			code_divided2 = ''
-			if code_tmp.find('}')!=-1:
-				code_tmp2 = code_tmp.strip()
-				code_divided2= code_tmp2.split('}')
-				if len(code_divided2)!=0:
-					# TOP (})
-					if code_tmp2.find('}') == 0:
-						code_list.append('}')
-					else:
-						# MIDDLE (})
-						for index3 in range(0, len(code_divided2)-1):
-							if code_divided2[index3].strip() != '':
-								code_list.append(code_divided2[index3])
-							code_list.append('}')
-						# END (})
-						if code_divided2[-1].strip() != '':
-							code_list.append(code_divided2[-1].strip())
-				else:
-					code_list.append('}')
-			# Not find } ========================================
-			else:
-				code_list.append(code_tmp)
-
-	FunctionData.codes = copy.deepcopy(code_list)
+		FunctionData.codes.append(lines[index])
 	return 
 
 
@@ -494,282 +393,7 @@ def find_functions(valid_lines):
 
 	return func_list
 
-
 def analyze_function(FunctionData):
-	level = 0
-	valid_lines = []
-	line = ''
-	code_save = ''
-	code_remain = ''
-	proc_codes = []
-	sub_proc_codes = []
-	proc_list = ProcessList()
-	line_cnt = 0
-
-	print '-------------------------------------'
-	print FunctionData.name, 
-	print len(FunctionData.codes)
-
-
-
-########## find start Curly bracket ({) ########## 
-##### main process (level 1) [proc_codes]
-# (1) { only	: remove {
-# (2) begin - {	: save [0:find({)-1] (should be N/A)
-# (3) { - }		: save [find({)+1:find(})-1]
-# (4) { - {		: save [find(1st{)+1:find(2nd{)-1] / remove 1st{ (beginning of sub process)
-# (5) { - end	: save [find({)+1:-1] / remove {
-
-##### sub process (level 2+) [sub_proc_codes]
-# (1) { only	: save {
-# (2) begin - {	: save [0:find({)-1] and { 
-# (3) { - }		: save { and  [find({)+1:find(})-1] and }
-# (4) { - {		: save 1st{ and [find(1st{)+1:find(2nd{)-1] and 2nd{
-# (5) { - end	: save { and [find({)+1:-1]
-
-
-########## find end Curly bracket (}) ########## 
-##### main process (level 0) [proc_codes]
-# (1) } only	: remove }
-# (2) begin - }	: save [0:find(})-1] / remove }
-# (3) } - {		: save [find({)+1:find(})-1] (should be N/A)
-# (4) } - }		: save [find(1st})+1:find(2nd})-1] / remove 1st{ (end of sub process)
-# (5) } - end	: save [find(})+1:-1] / remove } (should be N/A)
-
-##### sub process (level 1+) [proc_codes]
-# (1) } only	: save }
-# (2) begin - }	: save [0:find(})-1] and }
-# (3) } - {		: save } and [find({)+1:find(})-1] and {
-# (4) } - }		: save 1st} and [find(1st})+1:find(2nd})-1] and 2nd}
-# (5) } - end	: save } and [find(})+1:-1]
-
-
-
-
-	for index1 in range(0, len(FunctionData.codes)):
-		line_cnt += 1
-		valid_lines.append( remove_comment_line(FunctionData.codes[index1]) )
-		line = valid_lines[index1]
-		line = line.strip()
-		del proc_codes[:]
-		del sub_proc_codes[:]
-		if line.find('{')!=-1 or line.find('}')!=-1:
-			while line.find('{')!=-1 or line.find('}')!=-1:
-				code_save = ''
-				code_remain = ''
-########## find start Curly bracket ({) ########## 
-				if line.find('{')!=-1: 
-					level += 1
-##### main process (level 1) [proc_codes]
-					if level<2:
-# (1) { only	: remove {
-						if len(line)==1:
-							if line.find('{')==0:
-								code_save =''
-								code_remain = line.replace('{', '',1)
-								code_remain.strip()
-								line = code_remain
-						else:
-# (2) begin - {	: save [0:find({)-1] (should be N/A)
-							if line.find('{')>0:
-								code_save = line[0:line.find('{')-1]
-								code_save.strip()
-								proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line[line.find('{'):-1]
-								code_remain.strip()
-								line = code_remain
-
-# (3) { - }		: save [find({)+1:find(})-1] => main } (2)
-# (4) { - {		: save [find(1st{)+1:find(2nd{)-1] and 2nd{ / remove 1st{ (beginning of sub process)
-							if line.find('{') < line.rfind('{'):
-								code_save = line.replace('{','',1)
-								code_save.strip()
-								code_save = code_save[0:code_save.find('{')]
-								code_save.strip()
-								proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = code_save[code_save.find('{'):-1]
-								code_remain.strip()
-								line = code_remain
-# (5) { - end	: save [find({)+1:-1] / remove {
-							if line.find('{') < len(line)-1:
-								code_save = line[line.find('{')+1:-1]
-								code_save.strip()
-								proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = ''
-								line = code_remain
-
-##### sub process (level 2+) [sub_proc_codes]
-					else:
-# (1) { only	: save {
-						if len(line)==1:
-							if line.find('{')==0:
-								code_save ='{'
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line.replace('{', '',1)
-								code_remain.strip()
-								line = code_remain
-						else:
-# (2) begin - {	: save [0:find({)-1] and { 
-							if line.find('{')>0:
-								code_save = line[0:line.find('{')-1]
-								code_save.strip()
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line[line.find('{')+1:-1]
-								code_remain.strip()
-								line = code_remain
-# (3) { - }		: save { and  [find({)+1:find(})-1] and } => next sub } (2)
-# (4) { - {		: save 1st{ and [find(1st{)+1:find(2nd{)-1] and 2nd{
-							if line.find('{') < line.rfind('{'):
-								code_save ='{'
-								sub_proc_codes.append(copy.deepcopy(code_save))
-								code_save = line.replace('{','',1)
-								code_save.strip()
-								code_save = code_save[0:code_save.find('{')]
-								code_save.strip()
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = code_save[code_save.find('{'):-1]
-								code_remain.strip()
-								line = code_remain
-# (5) { - end	: save { and [find({)+1:-1]
-							if line.find('{')==line.rfind('{') and line.find('{') < len(line)-1:
-								code_save ='{'
-								sub_proc_codes.append(copy.deepcopy(code_save))
-								code_save = line[line.find('{')+1:-1]
-								code_save.strip()
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = ''
-								line = code_remain
-
-########## find end Curly bracket (}) ########## 
-				if line.find('}')!=-1:
-					level -= 1
-##### main process (level 0) [proc_codes]
-					if level<1:
-# (1) } only	: remove }
-						if len(line)==1:
-							if line.find('}')==0:
-								code_save =''
-								code_remain = line.replace('}', '',1)
-								code_remain.strip()
-								line = code_remain
-						else:
-# (2) begin - }	: save [0:find(})-1] / remove }
-							if line.find('}')>0:
-								code_save = line[0:line.find('}')-1]
-								code_save.strip()
-								proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line[line.find('}'):-1]
-								code_remain.strip()
-								line = code_remain
-
-# (3) } - {		: save [find({)+1:find(})-1] (should be N/A)
-							if line.find('}') < line.rfind('{'):
-								code_save = line[line.find('}')+1:line.find('{')-1]
-								code_save.strip()
-								proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line[line.find('{'):-1]
-								code_remain.strip()
-								line = code_remain
-# (4) } - }		: save [find(1st})+1:find(2nd})-1] / remove 1st{ (end of sub process) => save } (sub) and next main } (2)
-							if line.find('}') < line.rfind('}'):
-								level += 1
-								code_save ='}'
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line[line.find('}')+1:-1]
-								code_remain.strip()
-								line = code_remain
-# (5) } - end	: save [find(})+1:-1] / remove } (should be N/A)
-							if line.find('}') < len(line)-1:
-								code_save = line[line.find('}')+1:-1]
-								code_save.strip()
-								proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = ''
-								line = code_remain
-
-##### sub process (level 1+) [sub_proc_codes]
-					else:
-# (1) } only	: save }
-						if len(line)==1:
-							if line.find('}')==0:
-								code_save ='}'
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line.replace('}', '',1)
-								code_remain.strip()
-								line = code_remain
-						else:
-# (2) begin - }	: save [0:find(})-1] and }
-							if line.find('}')>0:
-								code_save = line[0:line.find('}')-1]
-								code_save.strip()
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line[line.find('}')+1:-1]
-								code_remain.strip()
-								line = code_remain
-# (3) } - {		: save } and [find({)+1:find(})-1] 
-							if line.find('}') < line.rfind('{'):
-								code_save = '}'
-								sub_proc_codes.append(copy.deepcopy(code_save))
-								code_save = line[line.find('}')+1:line.find('{')-1]
-								code_save.strip()
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = line[line.find('{'):-1]
-								code_remain.strip()
-								line = code_remain
-# (4) } - }		: save 1st} and [find(1st})+1:find(2nd})-1] and 2nd}
-							if line.find('}') < line.rfind('}'):
-								level += 1
-								code_save = '}'
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = code_save[code_save.find('}')+1:-1]
-								code_remain.strip()
-								line = code_remain
-# (5) } - end	: save } and [find(})+1:-1]
-							if line.find('}') < len(line)-1:
-								code_save = line[line.find('}')+1:-1]
-								code_save.strip()
-								sub_proc_codes.append(copy.deepcopy(code_save))
-
-								code_remain = ''
-								line = code_remain
-
-########## No Curly bracket ({,}) ########## 
-		else:
-			line = line.strip()
-			if line != '':
-##### sub process (level 2+) [sub_proc_codes]
-				if level>1:
-					sub_proc_codes.append(line)
-##### main process (level 1) [proc_codes]
-				else:
-					proc_codes.append(line)
-
-		if len(proc_codes)!=0:
-			for code in proc_codes:
-				print '(main) %s' %code
-
-#		if len(sub_proc_codes)!=0:
-#			for code in sub_proc_codes:
-#				print '(sub) %s' %code
-
-
-	return
-
-def analyze_function_old(FunctionData):
 	level = 0
 	valid_lines = []
 	line = ''
@@ -790,13 +414,11 @@ def analyze_function_old(FunctionData):
 			while line.find('{')!=-1 or line.find('}')!=-1:
 
 ########## find start Curly bracket ({)
-				print line,
-				print level
 				if line.find('{')!=-1: 
 					level += 1
 
 ##### main function
-					if level==1:
+					if level == 1:
 						if len(line)==1:
 # { only [MAIN]
 							if line.find('{')==0:
@@ -841,14 +463,13 @@ def analyze_function_old(FunctionData):
 								else:
 									proc_codes.append(str1)
 							# erase copied part
-							str2  = line[line.find('{'):-1]
+#							str2  = line[line.find('{'):-1]
+							str2  = line[line.find('{')+1:-1]
 						line = str2
 
 
 ########## find end Curly bracket (})
 				if line.find('}')!=-1: #finish Curly bracket at the same line
-					print line,
-					print level
 					level -= 1
 ##### sub function
 					if level > 0:
