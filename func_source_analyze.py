@@ -45,7 +45,7 @@ class FunctionData:
 		self.func_def = []
 		self.codes = []
 		self.line_num = 0
-		self.process_code_list = []
+		self.process_code_list = ProcessCodeList()
 
 	def set_name(self):
 		func_name = ''
@@ -131,6 +131,7 @@ class FunctionList:
 
 
 ############################################################################################
+debug_out = True
 
 def set_func_def_lines(FunctionData, lines):
 	for index in range(0,len(lines)):
@@ -503,6 +504,41 @@ def find_functions(valid_lines):
 
 
 def analyze_function(FunctionData):
+	##### For Debug #####
+	if debug_out:
+		print '-------------------------------------'
+		print FunctionData.name, 
+		print len(FunctionData.codes)
+
+
+	proc_list = ProcessCodeList()
+	proc_list = analyze_code(FunctionData.codes)
+	FunctionData.process_code_list = proc_list
+
+	##### For Debug #####
+	if debug_out:
+#		if len(proc_list.main_proc )!=0:
+#			for code in proc_list.main_proc:
+#				print '(main) %s' %code
+#		if len(proc_list.sub_proc)!=0:
+#			for code in proc_list.sub_proc:
+#				print '--------'
+#				for subcode in code:
+#					print '(sub) %s' % subcode
+
+		if len(FunctionData.process_code_list.main_proc)!=0:
+			for code in FunctionData.process_code_list.main_proc:
+				print '(main) %s' %code
+		if len(FunctionData.process_code_list.sub_proc)!=0:
+			for code in FunctionData.process_code_list.sub_proc:
+				print '--------'
+				for subcode in code:
+					print '(sub) %s' % subcode
+
+
+	return
+
+def analyze_code( function_codes):
 	level = 0
 	valid_lines = []
 	line = ''
@@ -515,12 +551,6 @@ def analyze_function(FunctionData):
 	sub_proc_flg = False
 	sub_proc_flg_prev = False
 	line_cnt = 0
-
-	print '-------------------------------------'
-	print FunctionData.name, 
-	print len(FunctionData.codes)
-
-
 
 ########## find start Curly bracket ({) ########## 
 ##### main process (level 1) [proc_codes]
@@ -537,7 +567,6 @@ def analyze_function(FunctionData):
 # (4) { - {		: save 1st{ and [find(1st{)+1:find(2nd{)-1] and 2nd{
 # (5) { - end	: save { and [find({)+1:-1]
 
-
 ########## find end Curly bracket (}) ########## 
 ##### main process (level 0) [proc_codes]
 # (1) } only	: remove }
@@ -553,12 +582,9 @@ def analyze_function(FunctionData):
 # (4) } - }		: save 1st} and [find(1st})+1:find(2nd})-1] and 2nd}
 # (5) } - end	: save } and [find(})+1:-1]
 
-
-
-
-	for index1 in range(0, len(FunctionData.codes)):
+	for index1 in range(0, len(function_codes)):
 		line_cnt += 1
-		valid_lines.append( remove_comment_line(FunctionData.codes[index1]) )
+		valid_lines.append( remove_comment_line(function_codes[index1]) )
 		line = valid_lines[index1]
 		line = line.strip()
 		del proc_codes[:]
@@ -789,15 +815,8 @@ def analyze_function(FunctionData):
 					proc_codes.append(line)
 
 
-
-
-
-
-
 ########## save sub process block ##########
 		if len(sub_proc_codes)!=0:
-			for code in sub_proc_codes:
-				print '(pre-sub) %s' % code
 			sub_proc_list.main.append( list(sub_proc_codes) )
 
 
@@ -808,247 +827,9 @@ def analyze_function(FunctionData):
 		if sub_proc_flg_prev==True and sub_proc_flg==False:
 			proc_list.sub_proc.append( list(sub_proc_list.main) )
 
-
-
-
-
-
-
-
 ########## save main process block ########## 
 		if len(proc_codes)!=0:
 			for code in proc_codes:
 				proc_list.main_proc.append( code )
 
-
-
-
-
-
-
-	if len(proc_codes)!=0:
-		for code in proc_codes:
-			print '(main) %s' %code
-
-
-
-	if len(proc_list.main_proc )!=0:
-		for code in proc_list.main_proc:
-			print '(main) %s' %code
-
-	if len(proc_list.sub_proc)!=0:
-		for code in proc_list.sub_proc:
-			print '--------'
-			for subcode in code:
-				print '(sub) %s' % subcode
-
-
-	return
-
-def analyze_function_old(FunctionData):
-	level = 0
-	valid_lines = []
-	line = ''
-	str1 = ''
-	str2 = ''
-	proc_codes = []
-	sub_proc_codes = []
-	proc_list = ProcessCodeList()
-
-	print '-------------------------------------'
-	print FunctionData.name, 
-	print len(FunctionData.codes)
-
-	for index1 in range(0, len(FunctionData.codes)):
-		valid_lines.append( remove_comment_line(FunctionData.codes[index1]) )
-		line = valid_lines[index1]
-		if line.find('{')!=-1 or line.find('}')!=-1:
-			while line.find('{')!=-1 or line.find('}')!=-1:
-
-########## find start Curly bracket ({)
-				print line,
-				print level
-				if line.find('{')!=-1: 
-					level += 1
-
-##### main function
-					if level==1:
-						if len(line)==1:
-# { only [MAIN]
-							if line.find('{')==0:
-								str1 =''
-								str2 = line.replace('{', '')
-						else:
-# { - end [MAIN]
-							str1 = line[line.find('{')+1:-1]
-							str1 = str1.strip()
-							str2 = ''
-# begin - { [MAIN]
-							if str1.find('{')!=-1:
-								str1 = str1[0:line.find('{')]
-								str1 = str1.strip()
-								# erase copied part
-								str2 = str1[line.find('{')+1:-1]
-							if str1 != '':
-								proc_codes.append(str1)
-						line = str2
-##### sub function
-					elif level > 1:
-						str1 = 'SUBFPROCESS(%s)' % level
-						proc_codes.append(str1)
-
-						if len(line)==1:
-							if line.find('{')==0:
-# { only [SUB]
-								if level > 2:
-									sub_proc_codes.append('{') # save { of sub-sub-function
-								#erase {
-								str2 = line.replace('{', '')
-
-						else: 
-							str1 = line[0:line.find('{')]
-							str1 = str1.strip()
-							if str1 != '':
-								if level > 2:
-# begin - { [SUBSUB]
-									sub_proc_codes.append(str1)
-									sub_proc_codes.append('{') # save { of sub-sub-function
-# begin - { [SUB]
-								else:
-									proc_codes.append(str1)
-							# erase copied part
-							str2  = line[line.find('{'):-1]
-						line = str2
-
-
-########## find end Curly bracket (})
-				if line.find('}')!=-1: #finish Curly bracket at the same line
-					print line,
-					print level
-					level -= 1
-##### sub function
-					if level > 0:
-						if len(line)==1:
-# } only [SUB]
-							if line.find('}')==0:
-								str1 = line.replace('}', '')
-							if level > 1:
-								sub_proc_codes.append('}') # save } of sub-sub-function
-						else:
-							str1 = line[line.find('}')+1:-1]
-							str1 = str1.strip()
-							str2 = ''
-							if str1 != '':
-								if level > 1:
-# } - end [SUBSUB]
-									sub_proc_codes.append('}') # save } of sub-sub-function
-									sub_proc_codes.append(str1)
-# } - end [SUB]
-								else:
-									sub_proc_codes.append(str1)
-
-##### save sub function (end of sub function)
-						if level == 1:
-							if len(sub_proc_codes)!=0:
-								for code in sub_proc_codes:
-									proc_list.sub_proc.append(copy.deepcopy(sub_proc_codes))
-								del sub_proc_codes[:]
-								sub_proc_codes = []
-#								for code in proc_list.sub_proc[-1]:
-#									print ' <SUB>   %s' % code
-
-						# erase copied part
-						if line.find('}')==0:
-							str1 = line.replace('}', '')
-						else:
-							str1 = line[line.find('}')+1:-1]
-						str1 = str1.strip()
-						line = str1
-
-##### main function
-					elif level == 0:
-						if len(line)==1:
-# } only [MAIN]
-							if line.find('}')==0:
-								str1 =''
-								str2 = line.replace('}', '')
-						else:
-# begin - } [MAIN]
-							str1 = line[0,line.find('}')]
-							str1 = str1.strip()
-							str2 = ''
-							if str1 != '':
-								proc_codes.append(str1)
-						line = str1
-
-########## No Curly bracket ({, })
-				else:
-					if level > 1:
-						# begin - end
-						str1 = line
-						str1 = str1.strip()
-						if str1 != '':
-							sub_proc_codes.append(str1)
-						# erase copied part
-						line = ''
-
-########## No Curly bracket ({, })
-		else:
-			if level > 1:
-				str1 = line
-				str1 = str1.strip()
-				if str1 != '':
-					sub_proc_codes.append(str1)
-			else:
-				str1 = line
-				str1 = str1.strip()
-				if str1 != '':
-					proc_codes.append(str1)
-
-
-
-
-	# save processes
-	if len(proc_codes)!=0:
-		proc_list.process = copy.deepcopy(proc_codes)
-	FunctionData.process_code_list = proc_list
-
-
-
-
-
-
-	print '---------'
-	print 'PROC:%d' % len(FunctionData.process_code_list.process)
-	print 'SUB PROC:%d' % len(FunctionData.process_code_list.sub_proc)
-	cnt = 0
-	sub_cnt = 0
-	for code in FunctionData.process_code_list.process:
-		cnt += 1
-		if code.find('SUBFPROCESS')!=-1:
-			sub_cnt += 1
-			print '(%d) %s %d' % (cnt, code, sub_cnt)
-#			print '  (sub %d) Line in SUB PROC:%d' % (sub_cnt, len(FunctionData.process_code_list.sub_proc[sub_cnt-1]))
-#			sub_cnt += 1
-#			print 'SUB PROC(%d)' % sub_cnt
-#			for subproc in FunctionData.process_code_list.sub_proc:
-#				sub_proc_cnt = 0
-#				for subcode in subproc:
-#					sub_proc_cnt += 1
-#					print '  SUB(%d) %s' % (sub_proc_cnt, subcode)
-		else:
-			print '(%d) %s' % (cnt, code)
-
-
-
-
-
-
-
-
-
-
-	return
-
-def analyze_sub_function(lines):
-	return
+	return proc_list
