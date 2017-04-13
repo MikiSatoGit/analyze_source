@@ -131,7 +131,7 @@ class FunctionList:
 
 
 ############################################################################################
-debug_out = True
+debug_out = False
 
 def set_func_def_lines(FunctionData, lines):
 	for index in range(0,len(lines)):
@@ -517,15 +517,6 @@ def analyze_function(FunctionData):
 
 	##### For Debug #####
 	if debug_out:
-#		if len(proc_list.main_proc )!=0:
-#			for code in proc_list.main_proc:
-#				print '(main) %s' %code
-#		if len(proc_list.sub_proc)!=0:
-#			for code in proc_list.sub_proc:
-#				print '--------'
-#				for subcode in code:
-#					print '(sub) %s' % subcode
-
 		if len(FunctionData.process_code_list.main_proc)!=0:
 			for code in FunctionData.process_code_list.main_proc:
 				print '(main) %s' %code

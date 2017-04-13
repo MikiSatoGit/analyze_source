@@ -117,6 +117,7 @@ for index1 in range(0, func_list.func_num):
 	#for index2 in range(0, len(func_list.function_data[index1].codes)):
 	#	print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
 
+	print_out(fout, "-Codes", 1)
 
 	for code in func_list.function_data[index1].process_code_list.main_proc:
 		print_out(fout, "(main) %s"  % code, 1)
@@ -129,7 +130,7 @@ for index1 in range(0, func_list.func_num):
 	##### For Debug #####
 	# ARGUMENT
 	print func_list.function_data[index1].name,
-	print func_list.function_data[index1].argument_num,
+	print func_list.function_data[index1].argument_num
 	#for index2 in range(0, func_list.function_data[index1].argument_num):
 	#		print_out(fout, func_list.function_data[index1].argument_list[index2].type, 0),
 	#		print_out(fout, func_list.function_data[index1].argument_list[index2].name, 0)
