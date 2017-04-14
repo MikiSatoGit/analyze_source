@@ -97,11 +97,12 @@ func_list = func_source_analyze.find_functions(lines)
 
 ###### call function (analyze_function) ######
 for index1 in range(0, func_list.func_num):
-	current_title = func_source_analyze.analyze_function(func_list.function_data[index1], "PROCESS")
+	current_title_org = func_source_analyze.analyze_function(func_list.function_data[index1], "PROCESS")
 
 ###### File output (Header) ######
 print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
 for index1 in range(0, func_list.func_num):
+	current_title = current_title_org
 	print '====== %s ======' % func_list.function_data[index1].name
 	# FUNCTION
 	print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)

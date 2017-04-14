@@ -858,10 +858,10 @@ def analyze_sub_process(proc_list, title):
 	current_title = title
 
 	for code in proc_list.main_proc:
-		tmp = title.replace('SUBPROCESS','',1)
+		tmp = title.replace('PROCESS','',1)
+		tmp = tmp.replace('SUB','',1)
 		if tmp.find('SUB')==-1:
-			print "[main] %s"  % (code.strip())
-
+			print "[PROCESS] %s"  % (code.strip())
 
 
 		if code.find('SUBPROCESS')!=-1:
@@ -878,6 +878,6 @@ def analyze_sub_process(proc_list, title):
 #			if debug_out:
 			if len(sub_proc_list.main_proc)!=0:
 				for code in sub_proc_list.main_proc:
-					print '[%smain(%d)] %s' % (title.replace('PROCESS','',1), sub_proc_id+1, code)
+					print '[%sPROCESS(%d)] %s' % (title.replace('PROCESS','',1), sub_proc_id+1, code)
 			print '--------'
 	return sub_proc_list, sub_proc_flag,current_title
