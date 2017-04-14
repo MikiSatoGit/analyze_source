@@ -10,6 +10,7 @@
 # coding: shift-JIS
 import copy
 import csv
+import numpy
 
 class ArgumentData:
 	def __init__(self):
@@ -35,6 +36,9 @@ class ProcessCodeList:
 		self.main_proc = []
 		self.sub_proc = []
 
+	def clear(self):
+		del self.main_proc[:]
+		del self.sub_proc[:]
 
 class FunctionData:
 	def __init__(self):
@@ -46,6 +50,16 @@ class FunctionData:
 		self.codes = []
 		self.line_num = 0
 		self.process_code_list = ProcessCodeList()
+
+	def clear(self):
+		self.name = ''
+		self.return_type = ''
+		del self.argument_list[:]
+		self.argument_num = 0
+		del self.func_def[:]
+		del self.codes[:]
+		self.line_num = 0
+		self.process_code_list.clear()
 
 	def set_name(self):
 		func_name = ''
@@ -132,7 +146,17 @@ class FunctionList:
 
 ############################################################################################
 debug_out = False
+########## VARID PREPROCESSOR (only for #if) #################
+valid_preprocessor_code = []
+valid_preprocessor_code.append('SIM_MODE')
+valid_preprocessor_code.append('TYPE_B')
+valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
+##############################################################
 
+
+
+
+############################################################################################
 def set_func_def_lines(FunctionData, lines):
 	for index in range(0,len(lines)):
 		FunctionData.func_def.append(lines[index])
@@ -327,10 +351,10 @@ def remove_comment_codes(lines):
 
 def remove_undefined_codes(lines):
 	########## VARID PREPROCESSOR (only for #if) #################
-	valid_preprocessor_code = []
-	valid_preprocessor_code.append('SIM_MODE')
-	valid_preprocessor_code.append('TYPE_B')
-	valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
+#	valid_preprocessor_code = []
+#	valid_preprocessor_code.append('SIM_MODE')
+#	valid_preprocessor_code.append('TYPE_B')
+#	valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
 	##############################################################
 
 	cnt = 0
@@ -503,33 +527,7 @@ def find_functions(valid_lines):
 	return func_list
 
 
-def analyze_function(FunctionData):
-	##### For Debug #####
-	if debug_out:
-		print '-------------------------------------'
-		print FunctionData.name, 
-		print len(FunctionData.codes)
-
-
-	proc_list = ProcessCodeList()
-	proc_list = analyze_code(FunctionData.codes)
-	FunctionData.process_code_list = proc_list
-
-	##### For Debug #####
-	if debug_out:
-		if len(FunctionData.process_code_list.main_proc)!=0:
-			for code in FunctionData.process_code_list.main_proc:
-				print '(main) %s' %code
-		if len(FunctionData.process_code_list.sub_proc)!=0:
-			for code in FunctionData.process_code_list.sub_proc:
-				print '--------'
-				for subcode in code:
-					print '(sub) %s' % subcode
-
-
-	return
-
-def analyze_code( function_codes):
+def analyze_code(function_codes, title):
 	level = 0
 	valid_lines = []
 	line = ''
@@ -542,7 +540,8 @@ def analyze_code( function_codes):
 	sub_proc_flg = False
 	sub_proc_flg_prev = False
 	line_cnt = 0
-
+	sub_proc_id = 0
+	current_title = title
 ########## find start Curly bracket ({) ########## 
 ##### main process (level 1) [proc_codes]
 # (1) { only	: remove {
@@ -812,8 +811,9 @@ def analyze_code( function_codes):
 
 
 		if sub_proc_flg_prev==False and sub_proc_flg==True:
-			str1 = 'SUBFPROCESS(%s)' % level
-			proc_codes.append(str1)
+			sub_proc_id += 1
+			current_title = 'SUB' + title
+			proc_codes.append(current_title + '(%s)' % sub_proc_id)
 
 		if sub_proc_flg_prev==True and sub_proc_flg==False:
 			proc_list.sub_proc.append( list(sub_proc_list.main) )
@@ -823,4 +823,61 @@ def analyze_code( function_codes):
 			for code in proc_codes:
 				proc_list.main_proc.append( code )
 
-	return proc_list
+	return proc_list, current_title
+
+
+def analyze_function(FunctionData, title):
+	##### For Debug #####
+	if debug_out:
+		print '-------------------------------------'
+		print FunctionData.name, 
+		print len(FunctionData.codes)
+
+
+	proc_list = ProcessCodeList()
+	proc_list,current_title = analyze_code(FunctionData.codes, title)
+	FunctionData.process_code_list = proc_list
+
+	##### For Debug #####
+	if debug_out:
+		if len(FunctionData.process_code_list.main_proc)!=0:
+			for code in FunctionData.process_code_list.main_proc:
+				print '(main) %s' %code
+		if len(FunctionData.process_code_list.sub_proc)!=0:
+			for code in FunctionData.process_code_list.sub_proc:
+				print '--------'
+				for subcode in code:
+					print '(sub) %s' % subcode[0]
+
+	return current_title
+
+def analyze_sub_process(proc_list, title):
+	sub_proc_flag = False
+	sub_proc_list_pre = []
+	sub_proc_list = ProcessCodeList()
+	current_title = title
+
+	for code in proc_list.main_proc:
+		tmp = title.replace('SUBPROCESS','',1)
+		if tmp.find('SUB')==-1:
+			print "[main] %s"  % (code.strip())
+
+
+
+		if code.find('SUBPROCESS')!=-1:
+			sub_proc_flag = True
+			sub_proc_id = int(code[code.find('(')+1 : code.find(')')])-1
+			print '--------'
+			del sub_proc_list_pre[:]
+			sub_proc_list.clear()
+			for subcode in proc_list.sub_proc[sub_proc_id]:
+				sub_proc_list_pre.append(subcode[0])
+			sub_proc_list,current_title = analyze_code(sub_proc_list_pre, title)
+
+			##### For Debug #####
+#			if debug_out:
+			if len(sub_proc_list.main_proc)!=0:
+				for code in sub_proc_list.main_proc:
+					print '[%smain(%d)] %s' % (title.replace('PROCESS','',1), sub_proc_id+1, code)
+			print '--------'
+	return sub_proc_list, sub_proc_flag,current_title

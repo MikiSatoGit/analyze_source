@@ -17,6 +17,7 @@
 import sys
 import csv
 import operator
+import copy
 import func_source_analyze
 
 def print_out(file, output_string, breakline):
@@ -79,8 +80,11 @@ fout = open(outfile,'w')
 ##################################################
 # analyze source code
 ##################################################
+
+###### call function (load_valid_source_code) ######
 cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
 
+####### output original code #######
 #for line in lines:
 #	print_out(fout, line, 0)
 #print_out(fout, "", 1)
@@ -88,26 +92,24 @@ cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
 print_out(fout, "-------------", 1)
 print_out(fout, "Total lines: %d "  % cnt, 1)
 
-
+###### call function (find_functions) ######
 func_list = func_source_analyze.find_functions(lines)
+
+###### call function (analyze_function) ######
 for index1 in range(0, func_list.func_num):
-	func_source_analyze.analyze_function(func_list.function_data[index1])
+	current_title = func_source_analyze.analyze_function(func_list.function_data[index1], "PROCESS")
 
-
-
-
-
-
-
-
-
+###### File output (Header) ######
 print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
 for index1 in range(0, func_list.func_num):
+	print '====== %s ======' % func_list.function_data[index1].name
 	# FUNCTION
 	print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
 	#print_out(fout, "-Code size : %s lines"  % len(func_list.function_data[index1].func_def), 1)
 	print_out(fout, "-Return type : %s "  % func_list.function_data[index1].return_type, 1)
 	print_out(fout, "-Argument : %s "  % func_list.function_data[index1].argument_num, 1)
+
+	# ARGUMENT
 	for index2 in range(0, func_list.function_data[index1].argument_num):
 		print_out(fout, "     [%d] : %s "  %(index2, func_list.function_data[index1].argument_list[index2].type), 0),
 		print_out(fout, " %s "  %(func_list.function_data[index1].argument_list[index2].name), 1),
@@ -117,14 +119,35 @@ for index1 in range(0, func_list.func_num):
 	#for index2 in range(0, len(func_list.function_data[index1].codes)):
 	#	print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
 
-	print_out(fout, "-Codes", 1)
+	print_out(fout, "-Codes (approx. %d line)" % func_list.function_data[index1].line_num, 1)
 
-	for code in func_list.function_data[index1].process_code_list.main_proc:
-		print_out(fout, "(main) %s"  % code, 1)
-	for code in func_list.function_data[index1].process_code_list.sub_proc:
-		print_out(fout, '--------',1)
-		for subcode in code:
-			print_out(fout, "    (sub) %s"  % subcode, 1)
+
+###### copy data ######
+	tmp_proc_list = func_source_analyze.ProcessCodeList()
+	tmp_proc_list = copy.deepcopy(func_list.function_data[index1].process_code_list)
+	sub_proc_list = func_source_analyze.ProcessCodeList()
+	sub_proc_flag = True
+###### call function (analyze_sub_process) ######
+	while sub_proc_flag == True:
+		sub_proc_list,sub_proc_flag,current_title = func_source_analyze.analyze_sub_process(tmp_proc_list,current_title)
+		###### copy data ######
+		tmp_proc_list.clear()
+		tmp_proc_list = copy.deepcopy(sub_proc_list)
+		sub_proc_list.clear()
+
+
+
+
+
+
+
+
+
+
+	#for code in func_list.function_data[index1].process_code_list.sub_proc:
+	#	print_out(fout, '--------',1)
+	#	for subcode in code:
+	#		print_out(fout, "    (sub) %s"  % subcode, 1)
 
 
 	##### For Debug #####
