@@ -89,7 +89,6 @@ cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
 #	print_out(fout, line, 0)
 #print_out(fout, "", 1)
 
-print_out(fout, "-------------", 1)
 print_out(fout, "Total lines: %d "  % cnt, 1)
 
 ###### call function (find_functions) ######
@@ -101,8 +100,12 @@ for index1 in range(0, func_list.func_num):
 
 ###### File output (Header) ######
 print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
+serial_proc_list = func_source_analyze.ProcessCodes()
+
 for index1 in range(0, func_list.func_num):
 	current_title = current_title_org
+	serial_proc_list.clear()
+	print_out(fout, "--------------------------", 1)
 	print '====== %s ======' % func_list.function_data[index1].name
 	# FUNCTION
 	print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
@@ -124,17 +127,27 @@ for index1 in range(0, func_list.func_num):
 
 
 ###### copy data ######
-	tmp_proc_list = func_source_analyze.ProcessCodeList()
+	tmp_proc_list = func_source_analyze.ProcessCodesList()
 	tmp_proc_list = copy.deepcopy(func_list.function_data[index1].process_code_list)
-	sub_proc_list = func_source_analyze.ProcessCodeList()
+	sub_proc_list = func_source_analyze.ProcessCodesList()
 	sub_proc_flag = True
 ###### call function (analyze_sub_process) ######
 	while sub_proc_flag == True:
-		sub_proc_list,sub_proc_flag,current_title = func_source_analyze.analyze_sub_process(tmp_proc_list,current_title)
+		sub_proc_list, sub_proc_flag, current_title, tmp_serial_proc_list = func_source_analyze.analyze_sub_process(tmp_proc_list,current_title)
+		serial_proc_list.append_list(tmp_serial_proc_list)
 		###### copy data ######
 		tmp_proc_list.clear()
 		tmp_proc_list = copy.deepcopy(sub_proc_list)
 		sub_proc_list.clear()
+	serial_proc_list.set_func_name(func_list.function_data[index1].name)
+
+
+	print_out(fout, "-Codes (%d process)" % serial_proc_list.get_size(), 1)
+	for index2 in range(0,serial_proc_list.get_size()):
+		tmp_title = serial_proc_list.title[index2]
+		tmp_process = serial_proc_list.main[index2]
+		print_out(fout, '[%s] ' % tmp_title, 0)
+		print_out(fout, '%s ' % tmp_process, 1)
 
 
 
@@ -142,32 +155,18 @@ for index1 in range(0, func_list.func_num):
 
 
 
-
-
-
-	#for code in func_list.function_data[index1].process_code_list.sub_proc:
-	#	print_out(fout, '--------',1)
-	#	for subcode in code:
-	#		print_out(fout, "    (sub) %s"  % subcode, 1)
 
 
 	##### For Debug #####
+	# CODE
+	print serial_proc_list.func_name,
+	print 'code:%d (include subprocess header)' % serial_proc_list.get_size()
 	# ARGUMENT
 	print func_list.function_data[index1].name,
 	print func_list.function_data[index1].argument_num
 	#for index2 in range(0, func_list.function_data[index1].argument_num):
 	#		print_out(fout, func_list.function_data[index1].argument_list[index2].type, 0),
 	#		print_out(fout, func_list.function_data[index1].argument_list[index2].name, 0)
-
-	# CODE
-	#print func_list.function_data[index1].line_num,
-	#print len(func_list.function_data[index1].codes)
-
-	#if func_list.function_data[index1].name=='fn_bsm_trailer_check_minimum_pair':
-	#	for index2 in range(0, len(func_list.function_data[index1].func_def)):
-	#		print_out(fout, func_list.function_data[index1].func_def[index2], 0)
-	#	for index2 in range(0, len(func_list.function_data[index1].codes)):
-	#		print_out(fout, func_list.function_data[index1].codes[index2], 0)
 
 
 
