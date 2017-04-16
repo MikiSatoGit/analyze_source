@@ -343,21 +343,32 @@ VD init_btt_configuration_parameter_dummy(
 	}
 
 
-	if(miki=test)
+	if(
+		miki==test
+	 && miki==debug
+	)
 	{
-		miki1_1=sub; miki1_2 = sub;
-		hogehoge1
+		miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1);
+		if(hogehoge1)
 		{
-			miki2 = subsub;
-			hogehoge2
+			miki2 = subsub(arg1,arg2);
+			for(hogehoge2)
 			{
-				miki3 = subsubsub;
-				hogehoge3
+				miki3 = (S1)subsubsub(arg1,arg2,arg3);
+				while(hogehoge3)
 				{
-					miki4 = subsubsubsub;
-					hogehoge4
+					miki4 = subsubsubsub((S1)arg1,(S2)arg2,(S3)arg3);
+					if(hogehoge4_1)
 					{
-						miki5 = subsubsubsubsub;
+						(S5)miki5_1 = subsubsubsubsub_1;
+					}
+					else if(hogehoge4_2)
+					{
+						(S5)miki5_2 = subsubsubsubsub_2;
+					}
+					else
+					{
+						(S5)miki5_3 = subsubsubsubsub_3;
 					}
 				}
 			}

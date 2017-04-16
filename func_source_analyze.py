@@ -20,7 +20,7 @@ class ArgumentData:
 class ProcessData:
 	def __init__(self):
 		self.title =[]
-		self.type = []	#subproc,equal,func, ...
+		self.type = []	#subproc,equal,proc,func,ctrl ...
 		self.left = []
 		self.right = []
 
@@ -974,6 +974,7 @@ def analyze_process_code(proc_codes):
 		tmp_title = proc_codes.title[index]
 		tmp_code = proc_codes.main[index]
 		proc_data.clear()
+# 
 		if tmp_code.find('SUBPROCESS')!=-1:
 			titel = tmp_code.strip()
 			proc_data.append_data(tmp_title, 'subproc', tmp_code.strip(), '')
@@ -981,7 +982,7 @@ def analyze_process_code(proc_codes):
 # find process code (hoge;)
 			while tmp_code.find(';')!=-1:
 				tmp_type = 'proc'
-				tmp_proc = tmp_code[0:tmp_code.find(';')]
+				tmp_proc = tmp_code[0:tmp_code.find(';')+1]
 				tmp_proc.strip()
 				tmp_left = ''
 				tmp_right = ''
@@ -993,15 +994,48 @@ def analyze_process_code(proc_codes):
 				else:
 					tmp_left = tmp_proc
 					tmp_right = ''
-					proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
+# find func call (hoge();)
+					if tmp_left.find('(')!=-1 \
+					 and tmp_left.find(')')!=-1 \
+					 and tmp_left.find('(')<tmp_left.find(')'):
+						proc_data.append_data(tmp_title,'func', tmp_left.strip(), tmp_right.strip())
+# find process(ctrl statement) (return, break, continue...;)
+					else:
+						proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
 				tmptmp_code = copy.deepcopy(tmp_code)
 				tmp_code = tmptmp_code[tmptmp_code.find(';',1)+1: ]
-# find func call (hoge();)
 # find condition
 			if len(tmp_code)!=0:
 				tmp_left = tmp_code
 				tmp_right = ''
 				proc_data.append_data(tmp_title, '???', tmp_left.strip(), tmp_right.strip())
+
+
+
+#	if 						condition
+#	if...else... 			condition
+#	for 					loop
+#	while :					loop
+#	switch(case, default) 	select
+
+#	return 					exit function
+#	break 					exit loop
+#	continue				stay in loop
+
+#	goto 					jump
+#	do...while 				loop
+
+
+
+
+
+
+
+
+
+
+
+
 
 #		if debug_out:
 #		proc_data.debug_print()

@@ -171,11 +171,10 @@ for index1 in range(0, func_list.func_num):
 
 	##### For Debug #####
 	# CODE
-	print serial_proc_codes.func_name,
+	print serial_proc_codes.func_name
 	print 'code:%d (include subprocess header)' % serial_proc_codes.get_size()
 	# ARGUMENT
-	print func_list.function_data[index1].name,
-	print func_list.function_data[index1].argument_num
+	print 'arguments:%d' % func_list.function_data[index1].argument_num
 	#for index2 in range(0, func_list.function_data[index1].argument_num):
 	#		print_out(fout, func_list.function_data[index1].argument_list[index2].type, 0),
 	#		print_out(fout, func_list.function_data[index1].argument_list[index2].name, 0)
