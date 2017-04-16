@@ -677,7 +677,6 @@ def analyze_function_codes(function_codes, title):
 		del proc_codes[:]
 		del sub_proc_codes[:]
 
-
 		if sub_proc_flg==True:
 			sub_proc_flg_prev = True
 		else:
@@ -905,6 +904,7 @@ def analyze_function_codes(function_codes, title):
 ########## save sub process block ##########
 		if len(sub_proc_codes)!=0:
 			sub_proc_list.main.append( list(sub_proc_codes) )
+			del sub_proc_codes[:]
 
 
 		if sub_proc_flg_prev==False and sub_proc_flg==True:
@@ -914,6 +914,8 @@ def analyze_function_codes(function_codes, title):
 
 		if sub_proc_flg_prev==True and sub_proc_flg==False:
 			proc_list.sub_proc.append( list(sub_proc_list.main) )
+			sub_proc_list.clear()
+
 
 ########## save main process block ########## 
 		if len(proc_codes)!=0:
@@ -930,7 +932,9 @@ def analyze_sub_process(proc_list, title):
 	serial_proc_codes = ProcessCodes()
 	current_title = title
 
+	cnt = 0
 	for code in proc_list.main_proc:
+		cnt += 1
 		tmp = title.replace('PROCESS','',1)
 		tmp = tmp.replace('SUB','',1)
 		if tmp.find('SUB')==-1:
@@ -943,10 +947,13 @@ def analyze_sub_process(proc_list, title):
 			sub_proc_id = int(code[code.find('(')+1 : code.find(')')])-1
 			if debug_out:
 				print '--------'
+
 			del sub_proc_list_pre[:]
 			sub_proc_list.clear()
+
 			for subcode in proc_list.sub_proc[sub_proc_id]:
 				sub_proc_list_pre.append(subcode[0])
+
 			sub_proc_list,current_title = analyze_function_codes(sub_proc_list_pre, title)
 
 			if len(sub_proc_list.main_proc)!=0:
@@ -963,7 +970,6 @@ def analyze_sub_process(proc_list, title):
 def analyze_process_code(proc_codes):
 	proc_data = ProcessData()
 
-#	print proc_codes.get_size()
 	for index in range(0,proc_codes.get_size()):
 		tmp_title = proc_codes.title[index]
 		tmp_code = proc_codes.main[index]

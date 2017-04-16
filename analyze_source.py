@@ -119,11 +119,10 @@ for index1 in range(0, func_list.func_num):
 		print_out(fout, " %s "  %(func_list.function_data[index1].argument_list[index2].name), 1),
 	
 	# CODE
-	#print_out(fout, "-Code size: %s lines"  % func_list.function_data[index1].line_num, 1)
+	#print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
 	#for index2 in range(0, len(func_list.function_data[index1].codes)):
 	#	print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
-
-	print_out(fout, "-Codes (approx. %d line)" % func_list.function_data[index1].line_num, 1)
+	#
 
 
 ###### copy data ######
@@ -131,9 +130,12 @@ for index1 in range(0, func_list.func_num):
 	tmp_proc_list = copy.deepcopy(func_list.function_data[index1].process_code_list)
 	sub_proc_list = func_source_analyze.ProcessCodesList()
 	sub_proc_flag = True
+
+
 ###### call function (analyze_sub_process) ######
 	while sub_proc_flag == True:
-		sub_proc_list, sub_proc_flag, current_title, tmp_serial_proc_codes = func_source_analyze.analyze_sub_process(tmp_proc_list,current_title)
+		sub_proc_list, sub_proc_flag, current_title, tmp_serial_proc_codes = \
+			func_source_analyze.analyze_sub_process(tmp_proc_list,current_title)
 		serial_proc_codes.append_list(tmp_serial_proc_codes)
 		###### copy data ######
 		tmp_proc_list.clear()
@@ -142,12 +144,22 @@ for index1 in range(0, func_list.func_num):
 	serial_proc_codes.set_func_name(func_list.function_data[index1].name)
 
 
-	print_out(fout, "-Codes (%d codes)" % serial_proc_codes.get_size(), 1)
+
+
+
+
+	# for debug
+	print_out(fout, "-Codes : %d lines" % serial_proc_codes.get_size(), 1)
 	for index2 in range(0,serial_proc_codes.get_size()):
 		tmp_title = serial_proc_codes.title[index2]
 		tmp_process = serial_proc_codes.main[index2]
 		print_out(fout, '[%s] ' % tmp_title, 0)
 		print_out(fout, '%s ' % tmp_process, 1)
+
+
+
+
+
 
 ###### call function (analyze_process_code) ######
 	func_source_analyze.analyze_process_code(serial_proc_codes)
