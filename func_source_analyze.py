@@ -1011,11 +1011,12 @@ def analyze_process_code(proc_codes):
 		tmp_title = proc_codes.title[index]
 		tmp_code = proc_codes.main[index]
 		proc_data.clear()
-# 
+########## skip sub process ##########
 		if tmp_code.find('SUBPROCESS')!=-1:
 			titel = tmp_code.strip()
 			proc_data.append_data(tmp_title, 'subproc', tmp_code.strip(), '')
-		else: 
+########## find process ##########
+		else:
 # find process code (hoge;)
 			while tmp_code.find(';')!=-1:
 				tmp_type = 'proc'
@@ -1041,24 +1042,22 @@ def analyze_process_code(proc_codes):
 						proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
 				tmptmp_code = copy.deepcopy(tmp_code)
 				tmp_code = tmptmp_code[tmptmp_code.find(';',1)+1: ]
-# find condition
+# could not find end of process(;) -> 
 			if len(tmp_code)!=0:
 				tmp_left = tmp_code
 				tmp_right = ''
 				proc_data.append_data(tmp_title, '???', tmp_left.strip(), tmp_right.strip())
 
 
-
+########## find condition ########## 
 #	if 						condition
 #	if...else... 			condition
 #	for 					loop
 #	while :					loop
 #	switch(case, default) 	select
-
 #	return 					exit function
 #	break 					exit loop
 #	continue				stay in loop
-
 #	goto 					jump
 #	do...while 				loop
 
@@ -1070,7 +1069,7 @@ def analyze_process_code(proc_codes):
 
 
 
-# save condition
+########## save data ########## 
 		proc_codes.proc_data_list.append( copy.deepcopy(proc_data) )
 
 #######################

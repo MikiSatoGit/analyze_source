@@ -382,6 +382,9 @@ VD init_btt_configuration_parameter_dummy(
 					miki4_2_3 = subsubsubsub_mode_default;
 					break;
 				}
+				{
+					miki4_3 = subsubsubsub_mode_default;
+				}
 
 			}
 		}
