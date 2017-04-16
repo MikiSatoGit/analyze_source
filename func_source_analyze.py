@@ -1047,6 +1047,12 @@ def analyze_process_code(proc_codes):
 				tmp_left = tmp_code
 				tmp_right = ''
 				proc_data.append_data(tmp_title, '???', tmp_left.strip(), tmp_right.strip())
+########## save data ########## 
+		proc_codes.proc_data_list.append( copy.deepcopy(proc_data) )
+
+
+
+
 
 
 ########## find condition ########## 
@@ -1069,8 +1075,6 @@ def analyze_process_code(proc_codes):
 
 
 
-########## save data ########## 
-		proc_codes.proc_data_list.append( copy.deepcopy(proc_data) )
 
 #######################
 #	if debug_out:
