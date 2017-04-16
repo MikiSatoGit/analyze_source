@@ -1006,10 +1006,9 @@ def analyze_process_code(proc_codes):
 #		if debug_out:
 #		proc_data.debug_print()
 		proc_codes.proc_data_list.append( copy.deepcopy(proc_data) )
-	proc_codes.debug_print_proc_data_list()
 
 #######################
 #	if debug_out:
-#	proc_codes.debug_print_proc_data_list()
+	proc_codes.debug_print_proc_data_list()
 
 	return
