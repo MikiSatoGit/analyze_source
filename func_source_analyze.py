@@ -1059,17 +1059,19 @@ def analyze_process_code(proc_codes):
 #	if 						condition
 #	if...else... 			condition
 #	for 					loop
-#	while :					loop
+#	while					loop
+#	do...while 				loop(N/A)
 #	switch(case, default) 	select
+
 #	return 					exit function
 #	break 					exit loop
-#	continue				stay in loop
+#	continue				skip remaining process in loop
 #	goto 					jump
-#	do...while 				loop
 
 
 
 
+########## analyze call function ########## 
 
 
 
