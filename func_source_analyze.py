@@ -17,29 +17,74 @@ class ArgumentData:
 		self.name = ''
 		self.type = ''
 
-
 class ProcessData:
 	def __init__(self):
-		self.type = []	#if, for, while, process...
+		self.title =[]
+		self.type = []	#subproc,equal,func, ...
 		self.left = []
 		self.right = []
+
+	def clear(self):
+		del self.title[:]
+		del self.type[:]
+		del self.left[:]
+		del self.right[:]
+
+	def append_data(self, title, type, left, right):
+		self.title.append(title)
+		self.type.append(type)
+		self.left.append(left)
+		self.right.append(right)
+
+	def get_size(self):
+		return len(self.left)
+
+	def debug_print(self):
+		if len(self.left)==0:
+			print 'NULL'
+		for index in range(0,len(self.left)):
+			print ' -> ',
+			print self.title[index],
+			print self.type[index],
+			print self.left[index],
+			print self.right[index]
+		return
+
+	def debug_print(self, index):
+		if index > len(self.left):
+			print '-> (no data)'
+		else:
+			print ' -> ',
+			print self.title[index],
+			print self.type[index],
+			print self.left[index],
+			print self.right[index]
+		return
 
 class ConditionData:
 	def __init__(self):
-		self.type = []	#if, for, while, process...
+		self.type = []	#if, for, while, ...
 		self.left = []
 		self.right = []
+
+	def clear(self):
+		del self.type
+		del self.left[:]
+		del self.right[:]
+
 
 class ProcessCodes:
 	def __init__(self):
 		self.main = []
 		self.title = []
 		self.func_name = ''
+		self.proc_data_list = []	# List of ProcessData
 
 	def clear(self):
 		del self.main[:]
 		del self.title[:]
 		self.func_name = ''
+		del self.proc_data_list[:]
 
 	def set_func_name(self, func_name):
 		self.func_name = func_name
@@ -52,9 +97,13 @@ class ProcessCodes:
 		for index in range(0,len(ProcessCodes.main)):
 			self.main.append(ProcessCodes.main[index])
 			self.title.append(ProcessCodes.title[index])
-
 	def get_size(self):
 		return len(self.main)
+
+	def debug_print_proc_data_list(self):
+		for index in range(0, len(self.proc_data_list)):
+			for index2 in range(0,self.proc_data_list[index].get_size()):
+				self.proc_data_list[index].debug_print(index2)
 
 class ProcessCodesList:
 	def __init__(self):
@@ -127,7 +176,7 @@ class FunctionData:
 				if str.find('(')!=-1:
 					level += 1
 					if level==1:
-						str = str[str.find('('):-1]
+						str = str[str.find('('): ]
 				if str.find(')')!=-1:
 					level -= 1
 					if level==0:
@@ -316,7 +365,7 @@ def remove_comment_line(line):
 		if line_out.find('/*')!=-1:
 			if line_out.find('*/')!=-1:
 				str1 = line_out[0:line_out.find('/*')]
-				str2 = line_out[line_out.find('*/')+2:-1]
+				str2 = line_out[line_out.find('*/')+2: ]
 				line_out = str1 + str2
 			else:
 				str1 = line_out[0:line_out.find('/*')]
@@ -324,10 +373,10 @@ def remove_comment_line(line):
 		if line_out.find('*/')!=-1:
 			if line_out.find('/*')!=-1:
 				str1 = line_out[0:line_out.find('*/')]
-				str2 = line_out[line_out.find('/*')+2:-1]
+				str2 = line_out[line_out.find('/*')+2: ]
 				line_out = str1 + str2
 			else:
-				str1 = line_out[line_out.find('*/')+2:-1]
+				str1 = line_out[line_out.find('*/')+2: ]
 				line_out = str1
 		line_out = line_out.strip()
 	return line_out
@@ -554,19 +603,15 @@ def find_functions(valid_lines):
 
 
 def analyze_function_list(FunctionData, title):
-	##### For Debug #####
-	if debug_out:
-		print '-------------------------------------'
-		print FunctionData.name, 
-		print len(FunctionData.codes)
-
-
 	proc_list = ProcessCodesList()
 	proc_list,current_title = analyze_function_codes(FunctionData.codes, title)
 	FunctionData.process_code_list = proc_list
 
 	##### For Debug #####
 	if debug_out:
+		print '-------------------------------------'
+		print FunctionData.name, 
+		print len(FunctionData.codes)
 		if len(FunctionData.process_code_list.main_proc)!=0:
 			for code in FunctionData.process_code_list.main_proc:
 				print '(main) %s' %code
@@ -600,14 +645,14 @@ def analyze_function_codes(function_codes, title):
 # (2) begin - {	: save [0:find({)-1] (should be N/A)
 # (3) { - }		: save [find({)+1:find(})-1]
 # (4) { - {		: save [find(1st{)+1:find(2nd{)-1] / remove 1st{ (beginning of sub process)
-# (5) { - end	: save [find({)+1:-1] / remove {
+# (5) { - end	: save [find({)+1: ] / remove {
 
 ##### sub process (level 2+) [sub_proc_codes]
 # (1) { only	: save {
 # (2) begin - {	: save [0:find({)-1] and { 
 # (3) { - }		: save { and  [find({)+1:find(})-1] and }
 # (4) { - {		: save 1st{ and [find(1st{)+1:find(2nd{)-1] and 2nd{
-# (5) { - end	: save { and [find({)+1:-1]
+# (5) { - end	: save { and [find({)+1: ]
 
 ########## find end Curly bracket (}) ########## 
 ##### main process (level 0) [proc_codes]
@@ -615,14 +660,14 @@ def analyze_function_codes(function_codes, title):
 # (2) begin - }	: save [0:find(})-1] / remove }
 # (3) } - {		: save [find({)+1:find(})-1] (should be N/A)
 # (4) } - }		: save [find(1st})+1:find(2nd})-1] / remove 1st{ (end of sub process)
-# (5) } - end	: save [find(})+1:-1] / remove } (should be N/A)
+# (5) } - end	: save [find(})+1: ] / remove } (should be N/A)
 
 ##### sub process (level 1+) [proc_codes]
 # (1) } only	: save }
 # (2) begin - }	: save [0:find(})-1] and }
 # (3) } - {		: save } and [find({)+1:find(})-1] and {
 # (4) } - }		: save 1st} and [find(1st})+1:find(2nd})-1] and 2nd}
-# (5) } - end	: save } and [find(})+1:-1]
+# (5) } - end	: save } and [find(})+1: ]
 
 	for index1 in range(0, len(function_codes)):
 		line_cnt += 1
@@ -665,7 +710,7 @@ def analyze_function_codes(function_codes, title):
 								code_save.strip()
 								proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = line[line.find('{'):-1]
+								code_remain = line[line.find('{'): ]
 								code_remain.strip()
 								line = code_remain
 
@@ -678,12 +723,12 @@ def analyze_function_codes(function_codes, title):
 								code_save.strip()
 								proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = code_save[code_save.find('{'):-1]
+								code_remain = code_save[code_save.find('{'): ]
 								code_remain.strip()
 								line = code_remain
-# (5) { - end	: save [find({)+1:-1] / remove {
+# (5) { - end	: save [find({)+1: ] / remove {
 							if line.find('{') < len(line)-1:
-								code_save = line[line.find('{')+1:-1]
+								code_save = line[line.find('{')+1: ]
 								code_save.strip()
 								proc_codes.append(copy.deepcopy(code_save))
 
@@ -708,7 +753,7 @@ def analyze_function_codes(function_codes, title):
 								code_save.strip()
 								sub_proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = line[line.find('{')+1:-1]
+								code_remain = line[line.find('{')+1: ]
 								code_remain.strip()
 								line = code_remain
 # (3) { - }		: save { and  [find({)+1:find(})-1] and } => next sub } (2)
@@ -722,14 +767,14 @@ def analyze_function_codes(function_codes, title):
 								code_save.strip()
 								sub_proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = code_save[code_save.find('{'):-1]
+								code_remain = code_save[code_save.find('{'): ]
 								code_remain.strip()
 								line = code_remain
-# (5) { - end	: save { and [find({)+1:-1]
+# (5) { - end	: save { and [find({)+1: ]
 							if line.find('{')==line.rfind('{') and line.find('{') < len(line)-1:
 								code_save ='{'
 								sub_proc_codes.append(copy.deepcopy(code_save))
-								code_save = line[line.find('{')+1:-1]
+								code_save = line[line.find('{')+1: ]
 								code_save.strip()
 								sub_proc_codes.append(copy.deepcopy(code_save))
 
@@ -758,7 +803,7 @@ def analyze_function_codes(function_codes, title):
 								code_save.strip()
 								proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = line[line.find('}'):-1]
+								code_remain = line[line.find('}'): ]
 								code_remain.strip()
 								line = code_remain
 
@@ -768,7 +813,7 @@ def analyze_function_codes(function_codes, title):
 								code_save.strip()
 								proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = line[line.find('{'):-1]
+								code_remain = line[line.find('{'): ]
 								code_remain.strip()
 								line = code_remain
 # (4) } - }		: save [find(1st})+1:find(2nd})-1] / remove 1st{ (end of sub process) => save } (sub) and next main } (2)
@@ -780,12 +825,12 @@ def analyze_function_codes(function_codes, title):
 								code_save ='}'
 								sub_proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = line[line.find('}')+1:-1]
+								code_remain = line[line.find('}')+1: ]
 								code_remain.strip()
 								line = code_remain
-# (5) } - end	: save [find(})+1:-1] / remove } (should be N/A)
+# (5) } - end	: save [find(})+1: ] / remove } (should be N/A)
 							if line.find('}') < len(line)-1:
-								code_save = line[line.find('}')+1:-1]
+								code_save = line[line.find('}')+1: ]
 								code_save.strip()
 								proc_codes.append(copy.deepcopy(code_save))
 
@@ -810,7 +855,7 @@ def analyze_function_codes(function_codes, title):
 								code_save.strip()
 								sub_proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = line[line.find('}')+1:-1]
+								code_remain = line[line.find('}')+1: ]
 								code_remain.strip()
 								line = code_remain
 # (3) } - {		: save } and [find({)+1:find(})-1] 
@@ -821,7 +866,7 @@ def analyze_function_codes(function_codes, title):
 								code_save.strip()
 								sub_proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = line[line.find('{'):-1]
+								code_remain = line[line.find('{'): ]
 								code_remain.strip()
 								line = code_remain
 # (4) } - }		: save 1st} and [find(1st})+1:find(2nd})-1] and 2nd}
@@ -833,12 +878,12 @@ def analyze_function_codes(function_codes, title):
 								code_save = '}'
 								sub_proc_codes.append(copy.deepcopy(code_save))
 
-								code_remain = code_save[code_save.find('}')+1:-1]
+								code_remain = code_save[code_save.find('}')+1: ]
 								code_remain.strip()
 								line = code_remain
-# (5) } - end	: save } and [find(})+1:-1]
+# (5) } - end	: save } and [find(})+1: ]
 							if line.find('}') < len(line)-1:
-								code_save = line[line.find('}')+1:-1]
+								code_save = line[line.find('}')+1: ]
 								code_save.strip()
 								sub_proc_codes.append(copy.deepcopy(code_save))
 
@@ -893,7 +938,6 @@ def analyze_sub_process(proc_list, title):
 				print "[PROCESS] %s"  % (code.strip())
 			serial_proc_codes.append_code(code,'MAINPROCESS')
 
-
 		if code.find('SUBPROCESS')!=-1:
 			sub_proc_flag = True
 			sub_proc_id = int(code[code.find('(')+1 : code.find(')')])-1
@@ -905,8 +949,6 @@ def analyze_sub_process(proc_list, title):
 				sub_proc_list_pre.append(subcode[0])
 			sub_proc_list,current_title = analyze_function_codes(sub_proc_list_pre, title)
 
-			##### For Debug #####
-#			if debug_out:
 			if len(sub_proc_list.main_proc)!=0:
 				for code in sub_proc_list.main_proc:
 					if debug_out:
@@ -919,4 +961,49 @@ def analyze_sub_process(proc_list, title):
 	return sub_proc_list, sub_proc_flag, current_title, serial_proc_codes
 
 def analyze_process_code(proc_codes):
+	proc_data = ProcessData()
+
+#	print proc_codes.get_size()
+	for index in range(0,proc_codes.get_size()):
+		tmp_title = proc_codes.title[index]
+		tmp_code = proc_codes.main[index]
+		proc_data.clear()
+		if tmp_code.find('SUBPROCESS')!=-1:
+			titel = tmp_code.strip()
+			proc_data.append_data(tmp_title, 'subproc', tmp_code.strip(), '')
+		else: 
+# find process code (hoge;)
+			while tmp_code.find(';')!=-1:
+				tmp_type = 'proc'
+				tmp_proc = tmp_code[0:tmp_code.find(';')]
+				tmp_proc.strip()
+				tmp_left = ''
+				tmp_right = ''
+# find equal process (hoge = A;)
+				if tmp_proc.find('=')!=-1:
+					tmp_left = tmp_proc[0:tmp_proc.find('=')]
+					tmp_right = tmp_proc[tmp_proc.find('=')+1: ]
+					proc_data.append_data(tmp_title, 'equal', tmp_left.strip(), tmp_right.strip())
+				else:
+					tmp_left = tmp_proc
+					tmp_right = ''
+					proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
+				tmptmp_code = copy.deepcopy(tmp_code)
+				tmp_code = tmptmp_code[tmptmp_code.find(';',1)+1: ]
+# find func call (hoge();)
+# find condition
+			if len(tmp_code)!=0:
+				tmp_left = tmp_code
+				tmp_right = ''
+				proc_data.append_data(tmp_title, '???', tmp_left.strip(), tmp_right.strip())
+
+#		if debug_out:
+#		proc_data.debug_print()
+		proc_codes.proc_data_list.append( copy.deepcopy(proc_data) )
+	proc_codes.debug_print_proc_data_list()
+
+#######################
+#	if debug_out:
+#	proc_codes.debug_print_proc_data_list()
+
 	return

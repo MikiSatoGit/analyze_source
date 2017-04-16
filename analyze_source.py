@@ -142,7 +142,7 @@ for index1 in range(0, func_list.func_num):
 	serial_proc_codes.set_func_name(func_list.function_data[index1].name)
 
 
-	print_out(fout, "-Codes (%d process)" % serial_proc_codes.get_size(), 1)
+	print_out(fout, "-Codes (%d codes)" % serial_proc_codes.get_size(), 1)
 	for index2 in range(0,serial_proc_codes.get_size()):
 		tmp_title = serial_proc_codes.title[index2]
 		tmp_process = serial_proc_codes.main[index2]

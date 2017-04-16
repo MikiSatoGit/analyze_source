@@ -345,7 +345,7 @@ VD init_btt_configuration_parameter_dummy(
 
 	if(miki=test)
 	{
-		miki1 = sub;
+		miki1_1=sub; miki1_2 = sub;
 		hogehoge1
 		{
 			miki2 = subsub;
