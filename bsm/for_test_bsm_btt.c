@@ -355,9 +355,9 @@ VD init_btt_configuration_parameter_dummy(
 			for(hogehoge2)
 			{
 				miki3 = (S1)subsubsub(arg1,arg2,arg3);
-				while(hogehoge3)
+				while(hogehoge3_1)
 				{
-					miki4 = subsubsubsub((S1)arg1,(S2)arg2,(S3)arg3);
+					miki4_1 = subsubsubsub((S1)arg1,(S2)arg2,(S3)arg3);
 					if(hogehoge4_1)
 					{
 						(S5)miki5_1 = subsubsubsubsub_1;
@@ -371,6 +371,18 @@ VD init_btt_configuration_parameter_dummy(
 						(S5)miki5_3 = subsubsubsubsub_3;
 					}
 				}
+				switch (hogehoge3_2){
+				case mode1:
+					miki4_2_1 = subsubsubsub_mode_1;
+					break;
+				case mode1:
+					miki4_2_2 = subsubsubsub_mode_2;
+					break;
+				default:
+					miki4_2_3 = subsubsubsub_mode_default;
+					break;
+				}
+
 			}
 		}
 	}

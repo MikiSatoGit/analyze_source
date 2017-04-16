@@ -61,6 +61,16 @@ class ProcessData:
 			print self.right[index]
 		return
 
+	def file_print_out(self, file, index):
+		if index > len(self.left):
+			print_out(file, '(no data)', 1)
+		else:
+			print_out(file, self.title[index], 0)
+			print_out(file, self.type[index], 0)
+			print_out(file, self.left[index], 0)
+			print_out(file, self.right[index], 1)
+		return
+
 class ConditionData:
 	def __init__(self):
 		self.type = []	#if, for, while, ...
@@ -97,6 +107,7 @@ class ProcessCodes:
 		for index in range(0,len(ProcessCodes.main)):
 			self.main.append(ProcessCodes.main[index])
 			self.title.append(ProcessCodes.title[index])
+
 	def get_size(self):
 		return len(self.main)
 
@@ -104,6 +115,14 @@ class ProcessCodes:
 		for index in range(0, len(self.proc_data_list)):
 			for index2 in range(0,self.proc_data_list[index].get_size()):
 				self.proc_data_list[index].debug_print(index2)
+
+	def file_print_proc_data_list(self, file):
+		cnt = 0;
+		for index in range(0, len(self.proc_data_list)):
+			for index2 in range(0,self.proc_data_list[index].get_size()):
+				cnt += 1;
+				self.proc_data_list[index].file_print_out(file, index2)
+		return cnt
 
 class ProcessCodesList:
 	def __init__(self):
@@ -172,6 +191,7 @@ class FunctionData:
 		for index1 in range(0, len(self.func_def)):
 			str = self.func_def[index1]
 			str = remove_comment_line(str)
+			str.strip()
 			if str!='':
 				if str.find('(')!=-1:
 					level += 1
@@ -197,10 +217,14 @@ class FunctionData:
 					else:
 						str_type = ''
 						str_name = ''
-					arg_data = ArgumentData()
-					arg_data.type = str_type
-					arg_data.name = str_name
-					self.argument_list.append(arg_data)
+
+					str_type.strip()
+					str_name.strip()
+					if len(str_type)!=0 or len(str_name)!=0:
+						arg_data = ArgumentData()
+						arg_data.type = str_type
+						arg_data.name = str_name
+						self.argument_list.append(arg_data)
 		self.argument_num = len(self.argument_list)
 		if self.argument_num==1 and self.argument_list[0].name=='':
 			self.argument_num = 0
@@ -227,7 +251,20 @@ valid_preprocessor_code.append('TYPE_B')
 valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
 ##############################################################
 
-
+def print_out(file, output_string, breakline):
+	if file == "":
+		if breakline == 0:
+			print output_string,
+		else:
+			print output_string
+	else:
+		if breakline == 0:
+			file.write(output_string)
+			file.write(" ")
+		else:
+			file.write(output_string)
+			file.write('\n')
+	return
 
 
 ############################################################################################
@@ -1033,16 +1070,11 @@ def analyze_process_code(proc_codes):
 
 
 
-
-
-
-
-#		if debug_out:
-#		proc_data.debug_print()
+# save condition
 		proc_codes.proc_data_list.append( copy.deepcopy(proc_data) )
 
 #######################
 #	if debug_out:
 	proc_codes.debug_print_proc_data_list()
 
-	return
+	return proc_codes

@@ -20,20 +20,7 @@ import operator
 import copy
 import func_source_analyze
 
-def print_out(file, output_string, breakline):
-	if file == "":
-		if breakline == 0:
-			print output_string,
-		else:
-			print output_string
-	else:
-		if breakline == 0:
-			file.write(output_string)
-			file.write(" ")
-		else:
-			file.write(output_string)
-			file.write('\n')
-	return
+
 
 ##################################################
 # open file
@@ -71,9 +58,9 @@ outfile = outfile[0:outfile.rfind('.')] + '.txt'
 fout = open(outfile,'w')
 
 #tmp_string = "<open source file: " + filename1 + ">"
-#print_out(fout, tmp_string, 1)
+#func_source_analyze.print_out(fout, tmp_string, 1)
 #tmp_string = "<open output file: " + outfile + ">"
-#print_out(fout, tmp_string, 1)
+#func_source_analyze.print_out(fout, tmp_string, 1)
 
 
 
@@ -86,10 +73,10 @@ cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
 
 ####### output original code #######
 #for line in lines:
-#	print_out(fout, line, 0)
-#print_out(fout, "", 1)
+#	func_source_analyze.print_out(fout, line, 0)
+#func_source_analyze.print_out(fout, "", 1)
 
-print_out(fout, "Total lines: %d "  % cnt, 1)
+func_source_analyze.print_out(fout, "Total lines: %d "  % cnt, 1)
 
 ###### call function (find_functions) ######
 func_list = func_source_analyze.find_functions(lines)
@@ -99,29 +86,29 @@ for index1 in range(0, func_list.func_num):
 	current_title_org = func_source_analyze.analyze_function_list(func_list.function_data[index1], "PROCESS")
 
 ###### File output (Header) ######
-print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
+func_source_analyze.print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
 serial_proc_codes = func_source_analyze.ProcessCodes()
 
 for index1 in range(0, func_list.func_num):
 	current_title = current_title_org
 	serial_proc_codes.clear()
-	print_out(fout, "--------------------------", 1)
+	func_source_analyze.print_out(fout, "--------------------------", 1)
 	print '====== %s ======' % func_list.function_data[index1].name
 	# FUNCTION
-	print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
-	#print_out(fout, "-Code size : %s lines"  % len(func_list.function_data[index1].func_def), 1)
-	print_out(fout, "-Return type : %s "  % func_list.function_data[index1].return_type, 1)
-	print_out(fout, "-Argument : %s "  % func_list.function_data[index1].argument_num, 1)
+	func_source_analyze.print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
+	#func_source_analyze.print_out(fout, "-Code size : %s lines"  % len(func_list.function_data[index1].func_def), 1)
+	func_source_analyze.print_out(fout, "-Return type : %s "  % func_list.function_data[index1].return_type, 1)
+	func_source_analyze.print_out(fout, "-Argument : %s "  % func_list.function_data[index1].argument_num, 1)
 
 	# ARGUMENT
 	for index2 in range(0, func_list.function_data[index1].argument_num):
-		print_out(fout, "     [%d] : %s "  %(index2, func_list.function_data[index1].argument_list[index2].type), 0),
-		print_out(fout, " %s "  %(func_list.function_data[index1].argument_list[index2].name), 1),
+		func_source_analyze.print_out(fout, "     [%d] : %s "  %(index2, func_list.function_data[index1].argument_list[index2].type), 0),
+		func_source_analyze.print_out(fout, " %s "  %(func_list.function_data[index1].argument_list[index2].name), 1),
 	
 	# CODE
-	#print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
+	#func_source_analyze.print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
 	#for index2 in range(0, len(func_list.function_data[index1].codes)):
-	#	print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
+	#	func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
 	#
 
 
@@ -149,12 +136,12 @@ for index1 in range(0, func_list.func_num):
 
 
 	# for debug
-	print_out(fout, "-Codes : %d lines" % serial_proc_codes.get_size(), 1)
-	for index2 in range(0,serial_proc_codes.get_size()):
-		tmp_title = serial_proc_codes.title[index2]
-		tmp_process = serial_proc_codes.main[index2]
-		print_out(fout, '[%s] ' % tmp_title, 0)
-		print_out(fout, '%s ' % tmp_process, 1)
+	#func_source_analyze.print_out(fout, "-Codes : %d lines" % serial_proc_codes.get_size(), 1)
+	#for index2 in range(0,serial_proc_codes.get_size()):
+	#	tmp_title = serial_proc_codes.title[index2]
+	#	tmp_process = serial_proc_codes.main[index2]
+	#	func_source_analyze.print_out(fout, '[%s] ' % tmp_title, 0)
+	#	func_source_analyze.print_out(fout, '%s ' % tmp_process, 1)
 
 
 
@@ -162,7 +149,11 @@ for index1 in range(0, func_list.func_num):
 
 
 ###### call function (analyze_process_code) ######
-	func_source_analyze.analyze_process_code(serial_proc_codes)
+
+	serial_proc_codes = func_source_analyze.analyze_process_code(serial_proc_codes)
+	func_source_analyze.print_out(fout, '----- Codes -----', 1)
+	total_lines = serial_proc_codes.file_print_proc_data_list(fout)
+	func_source_analyze.print_out(fout, "----------------- Total Codes : %d lines" % total_lines, 1)
 
 
 
@@ -176,8 +167,8 @@ for index1 in range(0, func_list.func_num):
 	# ARGUMENT
 	print 'arguments:%d' % func_list.function_data[index1].argument_num
 	#for index2 in range(0, func_list.function_data[index1].argument_num):
-	#		print_out(fout, func_list.function_data[index1].argument_list[index2].type, 0),
-	#		print_out(fout, func_list.function_data[index1].argument_list[index2].name, 0)
+	#		func_source_analyze.print_out(fout, func_list.function_data[index1].argument_list[index2].type, 0),
+	#		func_source_analyze.print_out(fout, func_list.function_data[index1].argument_list[index2].name, 0)
 
 
 
@@ -185,10 +176,10 @@ for index1 in range(0, func_list.func_num):
 # close file
 ##################################################
 #tmp_string = "<close correct file: " + filename1 + ">"
-#print_out(fout, tmp_string, 1)
+#func_source_analyze.print_out(fout, tmp_string, 1)
 sourcefile.close()
 
 #tmp_string = "<close output file: " + outfile + ">"
-#print_out(fout, tmp_string, 1)
+#func_source_analyze.print_out(fout, tmp_string, 1)
 if fout != "":
 	fout.close()
