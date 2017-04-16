@@ -3,16 +3,13 @@
 #	analyze_source.py
 #	Main class for analyzing C source
 #	Create on: 2017.04.10
-#	Author   : Miki Sato <miki_sato@denso-diam.com>
-#	Copyright (C) 2017
-#		DENSO International America Inc.
+#	Author   : Miki Sato <miki.sam.sato@gmail.com>
 #
 #	ARGUMENT:
 #	python analyze_source.py [source file path] 
 #
 #   NOTE:
-#     NG code : } xxxx {
-
+#
 
 import sys
 import csv
@@ -71,7 +68,7 @@ fout = open(outfile,'w')
 ###### call function (load_valid_source_code) ######
 cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
 
-####### output original code #######
+####### output CODE (ORIGINA) #######
 #for line in lines:
 #	func_source_analyze.print_out(fout, line, 0)
 #func_source_analyze.print_out(fout, "", 1)
@@ -109,7 +106,6 @@ for index1 in range(0, func_list.func_num):
 	#func_source_analyze.print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
 	#for index2 in range(0, len(func_list.function_data[index1].codes)):
 	#	func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
-	#
 
 
 ###### copy data ######
@@ -130,27 +126,9 @@ for index1 in range(0, func_list.func_num):
 		sub_proc_list.clear()
 	serial_proc_codes.set_func_name(func_list.function_data[index1].name)
 
-
-
-
-
-
-	# for debug
-	#func_source_analyze.print_out(fout, "-Codes : %d lines" % serial_proc_codes.get_size(), 1)
-	#for index2 in range(0,serial_proc_codes.get_size()):
-	#	tmp_title = serial_proc_codes.title[index2]
-	#	tmp_process = serial_proc_codes.main[index2]
-	#	func_source_analyze.print_out(fout, '[%s] ' % tmp_title, 0)
-	#	func_source_analyze.print_out(fout, '%s ' % tmp_process, 1)
-
-
-
-
-
-
 ###### call function (analyze_process_code) ######
-
 	serial_proc_codes = func_source_analyze.analyze_process_code(serial_proc_codes)
+	# CODE
 	func_source_analyze.print_out(fout, '----- Codes -----', 1)
 	total_lines = serial_proc_codes.file_print_proc_data_list(fout)
 	func_source_analyze.print_out(fout, "----------------- Total Codes : %d lines" % total_lines, 1)

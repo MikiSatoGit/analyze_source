@@ -2,9 +2,9 @@
 #	func_source_analyze.py
 #	Data and funtion class for analyzing C source code
 #	Create on: 2017.04.10
-#	Author   : Miki Sato <miki_sato@denso-diam.com>
-#	Copyright (C) 2017
-#		DENSO International America Inc.
+#	Author   : Miki Sato <miki.sam.sato@gmail.com>
+#
+#   NOTE:
 #
 
 # coding: shift-JIS
@@ -1070,6 +1070,7 @@ def analyze_process_code(proc_codes):
 
 
 
+########## analyze condition ########## 
 
 ########## analyze call function ########## 
 
