@@ -385,7 +385,11 @@ VD init_btt_configuration_parameter_dummy(
 				}														/* SUBSUBSUBSUBPROCESS(2) Å™ */
 
 				{														/* SUBSUBSUBSUBPROCESS(3) Å´ */
-					miki4_3 = subsubsubsub_mode_default;
+					miki4_3 = subsubsubsub_mode_default(
+						arg1,
+						arg2,
+						arg3
+					);
 				}														/* SUBSUBSUBSUBPROCESS(3) Å™ */
 
 			}															/* SUBSUBSUBPROCESS(1) Å™ */

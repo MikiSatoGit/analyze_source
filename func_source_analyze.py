@@ -1062,6 +1062,14 @@ def analyze_sub_process_code(proc_codes):
 					 and tmp_left.find(')')!=-1 \
 					 and tmp_left.find('(')<tmp_left.find(')'):
 						proc_data.append_data(tmp_title,'func', tmp_left.strip(), tmp_right.strip())
+
+NEED TO MODIFY for
+func(
+	arg1,
+	arg2
+);
+
+
 # find process(ctrl statement) (return, break, continue...;)
 					else:
 						proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())

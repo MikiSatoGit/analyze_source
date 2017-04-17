@@ -1,4 +1,4 @@
-Total lines: 168 
+Total lines: 172 
 Total functions : 1 
 --------------------------
 [Function Name] : init_btt_configuration_parameter_dummy 
@@ -62,5 +62,9 @@ Total functions : 1
 [51] SUBSUBSUBSUBPROCESS(2) ??? default: 
 [52] SUBSUBSUBSUBPROCESS(2) equal miki4_2_3 subsubsubsub_mode_default;
 [53] SUBSUBSUBSUBPROCESS(2) proc break; 
-[54] SUBSUBSUBSUBPROCESS(3) equal miki4_3 subsubsubsub_mode_default;
------------------ Total Codes : 54 lines
+[54] SUBSUBSUBSUBPROCESS(3) ??? miki4_3 = subsubsubsub_mode_default( 
+[55] SUBSUBSUBSUBPROCESS(3) ??? arg1, 
+[56] SUBSUBSUBSUBPROCESS(3) ??? arg2, 
+[57] SUBSUBSUBSUBPROCESS(3) ??? arg3 
+[58] SUBSUBSUBSUBPROCESS(3) proc ); 
+----------------- Total Codes : 58 lines
