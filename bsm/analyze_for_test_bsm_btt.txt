@@ -9,74 +9,88 @@ Total functions : 1
      [2] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [3] : BTT_HITCH_ANGLE   *pst_a_hitch_angle 
 ----- Codes -----
-[1] MAINPROCESS func miki0 = main( 
+[1] MAINPROCESS func<start> miki0 = main( 
 [2] MAINPROCESS func arg0_1, 
 [3] MAINPROCESS func arg0_2, 
 [4] MAINPROCESS func (S1)arg0_3 
-[5] MAINPROCESS func ); 
-[6] MAINPROCESS ??? if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) 
-[7] MAINPROCESS subproc SUBPROCESS(1) 
-[8] SUBPROCESS(1) proc return; 
-[9] MAINPROCESS ??? if( 
-[10] MAINPROCESS ??? miki==test 
-[11] MAINPROCESS ??? && miki==debug 
-[12] MAINPROCESS ??? ) 
-[13] MAINPROCESS subproc SUBPROCESS(2) 
-[14] SUBPROCESS(2) equal miki1_1 sub;
-[15] SUBPROCESS(2) func miki1_3( 
-[16] SUBPROCESS(2) func ); 
-[17] SUBPROCESS(2) func miki1_4((S1)arg1_1 
-[18] SUBPROCESS(2) func ); 
-[19] SUBPROCESS(2) ??? if(hogehoge1) 
-[20] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[21] MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
-[22] MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
-[23] MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
-[24] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
-[25] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
-[26] MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
-[27] MAINPROCESS equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
-[28] MAINPROCESS equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
-[29] MAINPROCESS equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
-[30] MAINPROCESS proc return; 
-[31] SUBSUBPROCESS(1) func miki2_1 = subsub_1( 
-[32] SUBSUBPROCESS(1) func (S1)arg2_1_1, 
-[33] SUBSUBPROCESS(1) func arg2_1_2 
-[34] SUBSUBPROCESS(1) func ); 
-[35] SUBSUBPROCESS(1) ??? miki2_2 
-[36] SUBSUBPROCESS(1) func = subsub_2( 
-[37] SUBSUBPROCESS(1) func (S1)arg2_2_1, 
-[38] SUBSUBPROCESS(1) func arg2_2_2 
-[39] SUBSUBPROCESS(1) func ); 
-[40] SUBSUBPROCESS(1) ??? for(hogehoge2) 
-[41] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[42] SUBSUBSUBPROCESS(1) func miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3 
-[43] SUBSUBSUBPROCESS(1) func ); 
-[44] SUBSUBSUBPROCESS(1) ??? while(hogehoge3_1) 
-[45] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[46] SUBSUBSUBPROCESS(1) ??? switch (hogehoge3_2) 
-[47] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(2) 
-[48] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(3) 
-[49] SUBSUBSUBSUBPROCESS(1) func miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3 
-[50] SUBSUBSUBSUBPROCESS(1) func ); 
-[51] SUBSUBSUBSUBPROCESS(1) ??? if(hogehoge4_1) 
-[52] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[53] SUBSUBSUBSUBPROCESS(1) ??? else if(hogehoge4_2) 
-[54] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(2) 
-[55] SUBSUBSUBSUBPROCESS(1) ??? else 
-[56] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(3) 
-[57] SUBSUBSUBSUBPROCESS(2) ??? case mode1: 
-[58] SUBSUBSUBSUBPROCESS(2) equal miki4_2_1 subsubsubsub_mode_1;
-[59] SUBSUBSUBSUBPROCESS(2) proc break; 
-[60] SUBSUBSUBSUBPROCESS(2) ??? case mode1: 
-[61] SUBSUBSUBSUBPROCESS(2) equal miki4_2_2 subsubsubsub_mode_2;
-[62] SUBSUBSUBSUBPROCESS(2) proc break; 
-[63] SUBSUBSUBSUBPROCESS(2) ??? default: 
-[64] SUBSUBSUBSUBPROCESS(2) equal miki4_2_3 subsubsubsub_mode_default;
-[65] SUBSUBSUBSUBPROCESS(2) proc break; 
-[66] SUBSUBSUBSUBPROCESS(3) func miki4_3 = subsubsubsub_mode_default( 
-[67] SUBSUBSUBSUBPROCESS(3) func (S1) arg4_3_1, 
-[68] SUBSUBSUBSUBPROCESS(3) func arg4_3_2, 
-[69] SUBSUBSUBSUBPROCESS(3) func arg4_3_3 
-[70] SUBSUBSUBSUBPROCESS(3) func ); 
------------------ Total Codes : 70 lines
+[5] MAINPROCESS func<end> ); 
+[6] MAINPROCESS if<start> if( 
+[7] MAINPROCESS ??? st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
+[8] MAINPROCESS ??? ) 
+[9] MAINPROCESS subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) proc return; 
+[11] MAINPROCESS if<start> if( 
+[12] MAINPROCESS ??? miki==test 
+[13] MAINPROCESS ??? && miki==debug 
+[14] MAINPROCESS ??? ) 
+[15] MAINPROCESS subproc SUBPROCESS(2) 
+[16] SUBPROCESS(2) equal miki1_1 sub;
+[17] SUBPROCESS(2) func<start> miki1_3( 
+[18] SUBPROCESS(2) func<end> ); 
+[19] SUBPROCESS(2) func<start> miki1_4((S1)arg1_1 
+[20] SUBPROCESS(2) func<end> ); 
+[21] SUBPROCESS(2) if<start> if( 
+[22] SUBPROCESS(2) ??? hogehoge 
+[23] SUBPROCESS(2) ??? ) 
+[24] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[25] MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[26] MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
+[27] MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
+[28] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
+[29] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
+[30] MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
+[31] MAINPROCESS equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
+[32] MAINPROCESS equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
+[33] MAINPROCESS equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
+[34] MAINPROCESS proc return; 
+[35] SUBSUBPROCESS(1) func<start> miki2_1 = subsub_1( 
+[36] SUBSUBPROCESS(1) func (S1)arg2_1_1, 
+[37] SUBSUBPROCESS(1) func arg2_1_2 
+[38] SUBSUBPROCESS(1) func<end> ); 
+[39] SUBSUBPROCESS(1) ??? miki2_2 
+[40] SUBSUBPROCESS(1) func<start> = subsub_2( 
+[41] SUBSUBPROCESS(1) func (S1)arg2_2_1, 
+[42] SUBSUBPROCESS(1) func arg2_2_2 
+[43] SUBSUBPROCESS(1) func<end> ); 
+[44] SUBSUBPROCESS(1) for<start> for( 
+[45] SUBSUBPROCESS(1) ??? hogehoge 
+[46] SUBSUBPROCESS(1) ??? ) 
+[47] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[48] SUBSUBSUBPROCESS(1) func<start> miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3 
+[49] SUBSUBSUBPROCESS(1) func<end> ); 
+[50] SUBSUBSUBPROCESS(1) while<start> while( 
+[51] SUBSUBSUBPROCESS(1) ??? hogehoge3_ 
+[52] SUBSUBSUBPROCESS(1) ??? ) 
+[53] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[54] SUBSUBSUBPROCESS(1) switch <start> switch ( 
+[55] SUBSUBSUBPROCESS(1) ??? hogehoge3_ 
+[56] SUBSUBSUBPROCESS(1) ??? ) 
+[57] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(2) 
+[58] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(3) 
+[59] SUBSUBSUBSUBPROCESS(1) func<start> miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3 
+[60] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[61] SUBSUBSUBSUBPROCESS(1) ??? if( 
+[62] SUBSUBSUBSUBPROCESS(1) ??? hogehoge4_ 
+[63] SUBSUBSUBSUBPROCESS(1) ??? ) 
+[64] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[65] SUBSUBSUBSUBPROCESS(1) ??? else if( 
+[66] SUBSUBSUBSUBPROCESS(1) ??? hogehoge4_ 
+[67] SUBSUBSUBSUBPROCESS(1) ??? ) 
+[68] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(2) 
+[69] SUBSUBSUBSUBPROCESS(1) ??? else 
+[70] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(3) 
+[71] SUBSUBSUBSUBPROCESS(2) ??? case mode1: 
+[72] SUBSUBSUBSUBPROCESS(2) equal miki4_2_1 subsubsubsub_mode_1;
+[73] SUBSUBSUBSUBPROCESS(2) proc break; 
+[74] SUBSUBSUBSUBPROCESS(2) ??? case mode1: 
+[75] SUBSUBSUBSUBPROCESS(2) equal miki4_2_2 subsubsubsub_mode_2;
+[76] SUBSUBSUBSUBPROCESS(2) proc break; 
+[77] SUBSUBSUBSUBPROCESS(2) ??? default: 
+[78] SUBSUBSUBSUBPROCESS(2) equal miki4_2_3 subsubsubsub_mode_default;
+[79] SUBSUBSUBSUBPROCESS(2) proc break; 
+[80] SUBSUBSUBSUBPROCESS(3) func<start> miki4_3 = subsubsubsub_mode_default( 
+[81] SUBSUBSUBSUBPROCESS(3) func (S1) arg4_3_1, 
+[82] SUBSUBSUBSUBPROCESS(3) func arg4_3_2, 
+[83] SUBSUBSUBSUBPROCESS(3) func arg4_3_3 
+[84] SUBSUBSUBSUBPROCESS(3) func<end> ); 
+----------------- Total Codes : 84 lines

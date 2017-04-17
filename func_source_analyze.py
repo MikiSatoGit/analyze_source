@@ -1042,13 +1042,13 @@ def analyze_sub_process(proc_list, title):
 
 	return sub_proc_list, sub_proc_flag, current_title, serial_proc_codes
 
+
 def analyze_process_code(proc_codes):
 
 ########## analyze sub process code ##########
 	proc_codes = analyze_sub_process_code(proc_codes)
 
 ########## analyze control statement ##########
-	ctrl_stat_list = []
 	ctrl_stat_list = analyze_control_statement(proc_codes)
 	ctrl_proc_num = 0
 	for ctrl in ctrl_stat_list:
@@ -1100,7 +1100,7 @@ def analyze_sub_process_code(proc_codes):
 					if tmp_left.rfind(')')!=-1:
 						tmp_bracket_to_end = tmp_left[tmp_left.rfind(')')+1:tmp_left.find(';')].strip()
 						if len(tmp_bracket_to_end)==0:
-							proc_data.append_data(tmp_title,'func', tmp_left.strip(), tmp_right.strip())
+							proc_data.append_data(tmp_title,'func<end>', tmp_left.strip(), tmp_right.strip())
 
 # check bracket level
 							# count ')' level
@@ -1158,6 +1158,7 @@ def analyze_sub_process_code(proc_codes):
 									if tmp_type_r.find('???')!=-1:
 										proc_codes.proc_data_list[index1_r].type[index2_r] = 'func'
 										if bracket_level==0:
+											proc_codes.proc_data_list[index1_r].type[index2_r] += '<start>'
 											bracket_search_flag=False
 											break
 									else:
@@ -1254,6 +1255,34 @@ def analyze_control_statement(proc_codes):
 									print '[%d][%d] Find (' % (index1_r, index2_r)
 								condition_start_index1 = index1_r
 								condition_start_index2 = index2_r
+# devide at ( and )
+								tmp_left_split = [ \
+									proc_codes.proc_data_list[index1_r].left[index2_r][0:proc_codes.proc_data_list[index1_r].left[index2_r].find('(')+1].strip(), \
+									proc_codes.proc_data_list[index1_r].left[index2_r][proc_codes.proc_data_list[index1_r].left[index2_r].find('(')+1:].strip() \
+								]
+								if tmp_left_split[1].rfind(')')!=-1 \
+								 and len(tmp_left_split[1][tmp_left_split[1].rfind(')')+1:].strip())==0:
+									tmp_left_split[-1] = tmp_left_split[-1][0:tmp_left_split[-1].find(')')-1].strip()
+									tmp_left_split.append(')')
+
+								tmp_left_split_num = 0
+								for tmp_div in tmp_left_split:
+									tmp_left_split_num += 1
+
+								if len(tmp_left_split[-1])!=0:
+									tmp_title_split = []
+									tmp_type_split = []
+									tmp_right_split = []
+									for i in range(0, tmp_left_split_num):
+										tmp_title_split.append(proc_codes.proc_data_list[index1_r].title[index2_r])
+										tmp_type_split.append(proc_codes.proc_data_list[index1_r].type[index2_r])
+										tmp_right_split.append(proc_codes.proc_data_list[index1_r].right[index2_r])
+
+									proc_codes.proc_data_list[index1_r].left[index2_r : index2_r+1] = tmp_left_split
+									proc_codes.proc_data_list[index1_r].title[index2_r : index2_r+1] = tmp_title_split
+									proc_codes.proc_data_list[index1_r].type[index2_r : index2_r+1] = tmp_type_split
+									proc_codes.proc_data_list[index1_r].right[index2_r : index2_r+1] = tmp_right_split
+
 # find 'else'
 				# Could not find Ctrl Stat
 				if sub_proc_flag==True and condition_start_index1==-1 and condition_end_index2==-1:
@@ -1300,6 +1329,21 @@ def analyze_control_statement(proc_codes):
 				ctrl_stat_list.append(tmp_ctrl)
 				if debug_out:
 					print '->ctrl stat %s / %d' %  (tmp_ctrl, ctrl_proc_num)
+
+
+
+
+
+	ctrl_stat_id = 0
+	for index in range(0, proc_codes.get_proc_data_size()):
+		for index2 in range(0,proc_codes.proc_data_list[index].get_size()):
+			if proc_codes.proc_data_list[index].type[index2].find('???')!=-1:
+				if proc_codes.proc_data_list[index].left[index2].find(ctrl_stat_list[ctrl_stat_id])!=-1:
+					proc_codes.proc_data_list[index].type[index2] = ctrl_stat_list[ctrl_stat_id]+'<start>'
+					ctrl_stat_id += 1
+
+
+
 
 	if debug_out:
 		ctrl_proc_num = 0
