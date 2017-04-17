@@ -335,6 +335,10 @@ VD init_btt_configuration_parameter_dummy(
 	BTT_HITCH_ANGLE *pst_a_hitch_angle				/*!< [out] (optional) Angle between subject vehicle and trailer */
 )
 {
+	miki0 = main(
+		arg1,
+		arg2,
+		(S1)arg3 );
 
 	/*! @note (1) do nothing if BTT state is already INITIALIZED */
 	if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED )
@@ -351,7 +355,15 @@ VD init_btt_configuration_parameter_dummy(
 		miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1);
 		if(hogehoge1)
 		{																/* SUBSUBPROCESS(1) « */
-			miki2 = subsub(arg1,arg2);
+			miki2_1 = subsub_1(
+				(S1)arg1,
+				arg2
+			);
+			miki2_2 
+			= subsub_2(
+				(S1)arg1,
+				arg2
+			);
 			for(hogehoge2)
 			{															/* SUBSUBSUBPROCESS(1) « */
 				miki3 = (S1)subsubsub(arg1,arg2,arg3);
@@ -386,7 +398,7 @@ VD init_btt_configuration_parameter_dummy(
 
 				{														/* SUBSUBSUBSUBPROCESS(3) « */
 					miki4_3 = subsubsubsub_mode_default(
-						arg1,
+						(S1) arg1,
 						arg2,
 						arg3
 					);

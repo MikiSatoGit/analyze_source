@@ -1058,16 +1058,93 @@ def analyze_sub_process_code(proc_codes):
 					tmp_left = tmp_proc
 					tmp_right = ''
 # find func call (hoge();)
-					if tmp_left.find('(')!=-1 \
-					 and tmp_left.find(')')!=-1 \
-					 and tmp_left.find('(')<tmp_left.find(')'):
-						proc_data.append_data(tmp_title,'func', tmp_left.strip(), tmp_right.strip())
+					if tmp_left.rfind(')')!=-1:
+						tmp_bracket_to_end = tmp_left[tmp_left.rfind(')')+1:tmp_left.find(';')].strip()
+						print 'bracket to end %s %d' % (tmp_left, len(tmp_bracket_to_end))
+						if len(tmp_bracket_to_end)==0:
+							proc_data.append_data(tmp_title,'func', tmp_left.strip(), tmp_right.strip())
 
-NEED TO MODIFY for
-func(
-	arg1,
-	arg2
-);
+# check bracket level
+							# count ')' level
+							bracket_level = 0
+							tmp_find_end = tmp_left
+							tmp_find_end.strip()
+							print '(end) %s' % tmp_find_end
+							while tmp_find_end.rfind(')')!=-1:
+								bracket_level += 1
+								print 'remove bracket(end) %s' % (tmp_find_end),
+								tmp_find_end = tmp_find_end[0:tmp_find_end.rfind(')')]
+								tmp_find_end.strip()
+								print ' -> %s' % (tmp_find_end)
+							# count '(' level
+							tmp_find_start = tmp_left
+							tmp_find_start.strip()
+							print '(start) %s' % tmp_find_start
+							while tmp_find_start.rfind('(')!=-1:
+								bracket_level -= 1
+								print 'remove bracket(start) %s' % (tmp_find_start),
+								tmp_find_start = tmp_find_start[0:tmp_find_start.rfind('(')]
+								tmp_find_start.strip()
+								print ' -> %s' % (tmp_find_start)
+							print 'bracket level = %d' % bracket_level
+
+#find start '('
+							print '->[%d/%d][/%d]' % ( index, proc_codes.get_size(), proc_codes.get_proc_data_size())
+							for index1_r in xrange(proc_codes.get_proc_data_size()-1,-1,-1):
+								if index1_r==-1:
+									break
+								print '-->[%d/%d][/%d]' % (index1_r,proc_codes.get_proc_data_size(), proc_codes.proc_data_list[index1_r].get_size())
+								for index2_r in xrange(proc_codes.proc_data_list[index1_r].get_size()-1,-1,-1):
+									print '-->[%d/%d][%d/%d]' % (index1_r,proc_codes.get_proc_data_size(), index2_r,  proc_codes.proc_data_list[index1_r].get_size())
+
+									if index2_r==-1:
+										break
+									tmp_title_r = proc_codes.proc_data_list[index1_r].title[index2_r]
+									tmp_type_r = proc_codes.proc_data_list[index1_r].type[index2_r]
+									tmp_left_r = proc_codes.proc_data_list[index1_r].left[index2_r]
+									tmp_right_r = proc_codes.proc_data_list[index1_r].right[index2_r]
+
+# check bracket level
+									# count ')' level
+									tmp_find_end = tmp_left
+									tmp_find_end.strip()
+									print '(end) %s' % tmp_find_end
+									while tmp_find_end.rfind(')')!=-1:
+										bracket_level += 1
+										print 'remove bracket(end) %s' % (tmp_find_end),
+										tmp_find_end = tmp_find_end[0:tmp_find_end.rfind(')')]
+										tmp_find_end.strip()
+										print ' -> %s' % (tmp_find_end)
+									# count '(' level
+									tmp_find_start = tmp_left
+									tmp_find_start.strip()
+									print '(start) %s' % tmp_find_start
+									while tmp_find_start.rfind('(')!=-1:
+										bracket_level -= 1
+										print 'remove bracket(start) %s' % (tmp_find_start),
+										tmp_find_start = tmp_find_start[0:tmp_find_start.rfind('(')]
+										tmp_find_start.strip()
+										print ' -> %s' % (tmp_find_start)
+									print 'bracket level = %d' % bracket_level
+										
+									print 'remove bracket %s -> %s' % (tmp_left_r, tmp_left_r[0:tmp_left.rfind(')')-1])
+#										bracket_level += 1
+
+#										bracket_level -= 1
+
+
+									print 'reverse function[%d][%d], %s, %s, %s, %s' % (index1_r,index1_r,tmp_title_r,tmp_type_r,tmp_left_r,tmp_right_r)
+									if tmp_type_r.find('???')!=-1:
+										proc_codes.proc_data_list[index1_r].type[index2_r] = 'func'
+									else:
+										print 'finish reverse function[%d][%d] %s' % (index1_r,index2_r,proc_codes.proc_data_list[index1_r].left[index2_r])
+										break
+
+#NEED TO MODIFY for
+#func(
+#	arg1,
+#	arg2
+#);
 
 
 # find process(ctrl statement) (return, break, continue...;)
