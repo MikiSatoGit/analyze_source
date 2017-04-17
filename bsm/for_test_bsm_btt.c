@@ -336,9 +336,9 @@ VD init_btt_configuration_parameter_dummy(
 )
 {
 	miki0 = main(
-		arg1,
-		arg2,
-		(S1)arg3 );
+		arg0_1,
+		arg0_2,
+		(S1)arg0_3 );
 
 	/*! @note (1) do nothing if BTT state is already INITIALIZED */
 	if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED )
@@ -352,24 +352,23 @@ VD init_btt_configuration_parameter_dummy(
 	 && miki==debug
 	)
 	{																	/* SUBPROCESS(2) Å´ */
-		miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1);
+		miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1_1);
 		if(hogehoge1)
 		{																/* SUBSUBPROCESS(1) Å´ */
 			miki2_1 = subsub_1(
-				(S1)arg1,
-				arg2
-			);
+				(S1)arg2_1_1,
+				arg2_1_2 );
 			miki2_2 
 			= subsub_2(
-				(S1)arg1,
-				arg2
+				(S1)arg2_2_1,
+				arg2_2_2
 			);
 			for(hogehoge2)
 			{															/* SUBSUBSUBPROCESS(1) Å´ */
-				miki3 = (S1)subsubsub(arg1,arg2,arg3);
+				miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3);
 				while(hogehoge3_1)
 				{														/* SUBSUBSUBSUBPROCESS(1) Å´ */
-					miki4_1 = subsubsubsub((S1)arg1,(S2)arg2,(S3)arg3);
+					miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3);
 					if(hogehoge4_1)
 					{
 						(S5)miki5_1 = subsubsubsubsub_1;
@@ -398,9 +397,9 @@ VD init_btt_configuration_parameter_dummy(
 
 				{														/* SUBSUBSUBSUBPROCESS(3) Å´ */
 					miki4_3 = subsubsubsub_mode_default(
-						(S1) arg1,
-						arg2,
-						arg3
+						(S1) arg4_3_1,
+						arg4_3_2,
+						arg4_3_3
 					);
 				}														/* SUBSUBSUBSUBPROCESS(3) Å™ */
 
