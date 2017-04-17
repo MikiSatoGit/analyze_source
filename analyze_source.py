@@ -141,7 +141,7 @@ for index1 in range(0, func_list.func_num):
 	##### For Debug #####
 	# CODE
 	print serial_proc_codes.func_name
-	print 'code:%d (include subprocess header)' % serial_proc_codes.get_size()
+	print 'code:%d (include subprocess header)' % total_lines
 	# ARGUMENT
 	print 'arguments:%d' % func_list.function_data[index1].argument_num
 	#for index2 in range(0, func_list.function_data[index1].argument_num):

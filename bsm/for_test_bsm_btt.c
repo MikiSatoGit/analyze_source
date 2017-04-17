@@ -338,25 +338,25 @@ VD init_btt_configuration_parameter_dummy(
 
 	/*! @note (1) do nothing if BTT state is already INITIALIZED */
 	if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED )
-	{
+	{																	/* SUBPROCESS(1) Å´ */
 		return;
-	}
+	}																	/* SUBPROCESS(1) Å™ */
 
 
 	if(
 		miki==test
 	 && miki==debug
 	)
-	{
+	{																	/* SUBPROCESS(2) Å´ */
 		miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1);
 		if(hogehoge1)
-		{
+		{																/* SUBSUBPROCESS(1) Å´ */
 			miki2 = subsub(arg1,arg2);
 			for(hogehoge2)
-			{
+			{															/* SUBSUBSUBPROCESS(1) Å´ */
 				miki3 = (S1)subsubsub(arg1,arg2,arg3);
 				while(hogehoge3_1)
-				{
+				{														/* SUBSUBSUBSUBPROCESS(1) Å´ */
 					miki4_1 = subsubsubsub((S1)arg1,(S2)arg2,(S3)arg3);
 					if(hogehoge4_1)
 					{
@@ -370,8 +370,9 @@ VD init_btt_configuration_parameter_dummy(
 					{
 						(S5)miki5_3 = subsubsubsubsub_3;
 					}
-				}
-				switch (hogehoge3_2){
+				}														/* SUBSUBSUBSUBPROCESS(1) Å™ */
+
+				switch (hogehoge3_2){									/* SUBSUBSUBSUBPROCESS(2) Å´ */
 				case mode1:
 					miki4_2_1 = subsubsubsub_mode_1;
 					break;
@@ -381,14 +382,15 @@ VD init_btt_configuration_parameter_dummy(
 				default:
 					miki4_2_3 = subsubsubsub_mode_default;
 					break;
-				}
-				{
-					miki4_3 = subsubsubsub_mode_default;
-				}
+				}														/* SUBSUBSUBSUBPROCESS(2) Å™ */
 
-			}
-		}
-	}
+				{														/* SUBSUBSUBSUBPROCESS(3) Å´ */
+					miki4_3 = subsubsubsub_mode_default;
+				}														/* SUBSUBSUBSUBPROCESS(3) Å™ */
+
+			}															/* SUBSUBSUBPROCESS(1) Å™ */
+		}																/* SUBSUBPROCESS(2) Å™ */
+	}																	/* SUBPROCESS(2) Å™ */
 
 
 

@@ -9,58 +9,58 @@ Total functions : 1
      [2] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [3] : BTT_HITCH_ANGLE   *pst_a_hitch_angle 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) proc return; 
-MAINPROCESS ??? if( 
-MAINPROCESS ??? miki==test 
-MAINPROCESS ??? && miki==debug 
-MAINPROCESS ??? ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal miki1_1 sub;
-SUBPROCESS(2) equal miki1_2 (S1)sub;
-SUBPROCESS(2) func miki1_3() ; 
-SUBPROCESS(2) func miki1_4((S1)arg1); 
-SUBPROCESS(2) ??? if(hogehoge1) 
-SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
-MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
-MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
-MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
-MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
-MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
-MAINPROCESS equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
-MAINPROCESS equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
-MAINPROCESS equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
-MAINPROCESS equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
-MAINPROCESS equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
-MAINPROCESS equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
-MAINPROCESS equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal miki2 subsub(arg1,arg2);
-SUBSUBPROCESS(1) ??? for(hogehoge2) 
-SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-SUBSUBSUBPROCESS(1) equal miki3 (S1)subsubsub(arg1,arg2,arg3);
-SUBSUBSUBPROCESS(1) ??? while(hogehoge3_1) 
-SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-SUBSUBSUBPROCESS(1) ??? switch (hogehoge3_2) 
-SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(2) 
-SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(3) 
-SUBSUBSUBSUBPROCESS(1) equal miki4_1 subsubsubsub((S1)arg1,(S2)arg2,(S3)arg3);
-SUBSUBSUBSUBPROCESS(1) ??? if(hogehoge4_1) 
-SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-SUBSUBSUBSUBPROCESS(1) ??? else if(hogehoge4_2) 
-SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(2) 
-SUBSUBSUBSUBPROCESS(1) ??? else 
-SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(3) 
-SUBSUBSUBSUBPROCESS(2) ??? case mode1: 
-SUBSUBSUBSUBPROCESS(2) equal miki4_2_1 subsubsubsub_mode_1;
-SUBSUBSUBSUBPROCESS(2) proc break; 
-SUBSUBSUBSUBPROCESS(2) ??? case mode1: 
-SUBSUBSUBSUBPROCESS(2) equal miki4_2_2 subsubsubsub_mode_2;
-SUBSUBSUBSUBPROCESS(2) proc break; 
-SUBSUBSUBSUBPROCESS(2) ??? default: 
-SUBSUBSUBSUBPROCESS(2) equal miki4_2_3 subsubsubsub_mode_default;
-SUBSUBSUBSUBPROCESS(2) proc break; 
-SUBSUBSUBSUBPROCESS(3) equal miki4_3 subsubsubsub_mode_default;
+[1] MAINPROCESS ??? if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) proc return; 
+[4] MAINPROCESS ??? if( 
+[5] MAINPROCESS ??? miki==test 
+[6] MAINPROCESS ??? && miki==debug 
+[7] MAINPROCESS ??? ) 
+[8] MAINPROCESS subproc SUBPROCESS(2) 
+[9] SUBPROCESS(2) equal miki1_1 sub;
+[10] SUBPROCESS(2) equal miki1_2 (S1)sub;
+[11] SUBPROCESS(2) func miki1_3() ; 
+[12] SUBPROCESS(2) func miki1_4((S1)arg1); 
+[13] SUBPROCESS(2) ??? if(hogehoge1) 
+[14] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[15] MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[16] MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
+[17] MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
+[18] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
+[19] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
+[20] MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
+[21] MAINPROCESS equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
+[22] MAINPROCESS equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
+[23] MAINPROCESS equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
+[24] MAINPROCESS equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
+[25] MAINPROCESS equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
+[26] MAINPROCESS equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
+[27] MAINPROCESS equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
+[28] MAINPROCESS proc return; 
+[29] SUBSUBPROCESS(1) equal miki2 subsub(arg1,arg2);
+[30] SUBSUBPROCESS(1) ??? for(hogehoge2) 
+[31] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[32] SUBSUBSUBPROCESS(1) equal miki3 (S1)subsubsub(arg1,arg2,arg3);
+[33] SUBSUBSUBPROCESS(1) ??? while(hogehoge3_1) 
+[34] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[35] SUBSUBSUBPROCESS(1) ??? switch (hogehoge3_2) 
+[36] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(2) 
+[37] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(3) 
+[38] SUBSUBSUBSUBPROCESS(1) equal miki4_1 subsubsubsub((S1)arg1,(S2)arg2,(S3)arg3);
+[39] SUBSUBSUBSUBPROCESS(1) ??? if(hogehoge4_1) 
+[40] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[41] SUBSUBSUBSUBPROCESS(1) ??? else if(hogehoge4_2) 
+[42] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(2) 
+[43] SUBSUBSUBSUBPROCESS(1) ??? else 
+[44] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(3) 
+[45] SUBSUBSUBSUBPROCESS(2) ??? case mode1: 
+[46] SUBSUBSUBSUBPROCESS(2) equal miki4_2_1 subsubsubsub_mode_1;
+[47] SUBSUBSUBSUBPROCESS(2) proc break; 
+[48] SUBSUBSUBSUBPROCESS(2) ??? case mode1: 
+[49] SUBSUBSUBSUBPROCESS(2) equal miki4_2_2 subsubsubsub_mode_2;
+[50] SUBSUBSUBSUBPROCESS(2) proc break; 
+[51] SUBSUBSUBSUBPROCESS(2) ??? default: 
+[52] SUBSUBSUBSUBPROCESS(2) equal miki4_2_3 subsubsubsub_mode_default;
+[53] SUBSUBSUBSUBPROCESS(2) proc break; 
+[54] SUBSUBSUBSUBPROCESS(3) equal miki4_3 subsubsubsub_mode_default;
 ----------------- Total Codes : 54 lines

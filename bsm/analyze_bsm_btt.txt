@@ -9,29 +9,29 @@ Total functions : 40
      [2] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [3] : BTT_HITCH_ANGLE   *pst_a_hitch_angle 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) proc return; 
-MAINPROCESS ??? if(miki=test) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal miki done;
-SUBPROCESS(2) ??? hogehoge 
-SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
-MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
-MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
-MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
-MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
-MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
-MAINPROCESS equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
-MAINPROCESS equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
-MAINPROCESS equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
-MAINPROCESS equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
-MAINPROCESS equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
-MAINPROCESS equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
-MAINPROCESS equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal miki next;
+[1] MAINPROCESS ??? if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) proc return; 
+[4] MAINPROCESS ??? if(miki=test) 
+[5] MAINPROCESS subproc SUBPROCESS(2) 
+[6] SUBPROCESS(2) equal miki done;
+[7] SUBPROCESS(2) ??? hogehoge 
+[8] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[9] MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[10] MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
+[11] MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
+[12] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
+[13] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
+[14] MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
+[15] MAINPROCESS equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
+[16] MAINPROCESS equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
+[17] MAINPROCESS equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
+[18] MAINPROCESS equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
+[19] MAINPROCESS equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
+[20] MAINPROCESS equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
+[21] MAINPROCESS equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
+[22] MAINPROCESS proc return; 
+[23] SUBSUBPROCESS(1) equal miki next;
 ----------------- Total Codes : 23 lines
 --------------------------
 [Function Name] : enter_btt_dummy 
@@ -55,41 +55,41 @@ SUBSUBPROCESS(1) equal miki next;
      [15] : S4   s4_a_target_size 
      [16] : BTT_STAT   *pst_a_btt_stat 
 ----- Codes -----
-MAINPROCESS ??? fn_btt_initialize( 
-MAINPROCESS ??? BTT_RET_t.CAN_Config.ENABLE, 
-MAINPROCESS ??? BTT_RET_t.Drv_SW.ON, 
-MAINPROCESS ??? BTT_RET_t.CAN_Config.ENABLE, 
-MAINPROCESS ??? u1_a_bsm_drv_cmd, 
-MAINPROCESS ??? st_g_bsm_alertarea_for_test 
-MAINPROCESS proc ); 
-MAINPROCESS ??? fn_btt_main( 
-MAINPROCESS ??? fl_a_self_v, 
-MAINPROCESS ??? s4_a_curve_r, 
-MAINPROCESS ??? s1_a_shift_flg, 
-MAINPROCESS ??? pst_a_object, 
-MAINPROCESS ??? s4_a_object_size, 
-MAINPROCESS ??? fl_a_doa_pow_ave, 
-MAINPROCESS ??? fl_a_doa_pow_dev, 
-MAINPROCESS ??? s4_a_doa_bf_peak_bin, 
-MAINPROCESS ??? fl_a_doa_bf_peak_pow, 
-MAINPROCESS ??? pst_a_btt_stat, 
-MAINPROCESS ??? pu1_alarm_flg, 
-MAINPROCESS ??? pst_a_cluster_info, 
-MAINPROCESS ??? pst_a_aux_trailer_info, 
-MAINPROCESS ??? pst_a_hitch_angle, 
-MAINPROCESS ??? pst_a_target, 
-MAINPROCESS ??? s4_a_target_size, 
-MAINPROCESS ??? &st_g_btt_result, 
-MAINPROCESS ??? &st_g_btt_alertarea 
-MAINPROCESS proc ); 
-MAINPROCESS ??? fn_btt_set_btt_final_state( 
-MAINPROCESS ??? BTT_RET_t.CAN_Config.ENABLE, 
-MAINPROCESS ??? u1_a_bsm_drv_cmd, 
-MAINPROCESS ??? st_g_btt_result 
-MAINPROCESS proc ); 
-MAINPROCESS equal au1_g_btt_drv_stat pst_a_btt_stat->BTT_drv;
-MAINPROCESS equal au1_g_btt_fin_stat st_g_btt_stat.BTT_final;
-MAINPROCESS proc return; 
+[1] MAINPROCESS ??? fn_btt_initialize( 
+[2] MAINPROCESS ??? BTT_RET_t.CAN_Config.ENABLE, 
+[3] MAINPROCESS ??? BTT_RET_t.Drv_SW.ON, 
+[4] MAINPROCESS ??? BTT_RET_t.CAN_Config.ENABLE, 
+[5] MAINPROCESS ??? u1_a_bsm_drv_cmd, 
+[6] MAINPROCESS ??? st_g_bsm_alertarea_for_test 
+[7] MAINPROCESS proc ); 
+[8] MAINPROCESS ??? fn_btt_main( 
+[9] MAINPROCESS ??? fl_a_self_v, 
+[10] MAINPROCESS ??? s4_a_curve_r, 
+[11] MAINPROCESS ??? s1_a_shift_flg, 
+[12] MAINPROCESS ??? pst_a_object, 
+[13] MAINPROCESS ??? s4_a_object_size, 
+[14] MAINPROCESS ??? fl_a_doa_pow_ave, 
+[15] MAINPROCESS ??? fl_a_doa_pow_dev, 
+[16] MAINPROCESS ??? s4_a_doa_bf_peak_bin, 
+[17] MAINPROCESS ??? fl_a_doa_bf_peak_pow, 
+[18] MAINPROCESS ??? pst_a_btt_stat, 
+[19] MAINPROCESS ??? pu1_alarm_flg, 
+[20] MAINPROCESS ??? pst_a_cluster_info, 
+[21] MAINPROCESS ??? pst_a_aux_trailer_info, 
+[22] MAINPROCESS ??? pst_a_hitch_angle, 
+[23] MAINPROCESS ??? pst_a_target, 
+[24] MAINPROCESS ??? s4_a_target_size, 
+[25] MAINPROCESS ??? &st_g_btt_result, 
+[26] MAINPROCESS ??? &st_g_btt_alertarea 
+[27] MAINPROCESS proc ); 
+[28] MAINPROCESS ??? fn_btt_set_btt_final_state( 
+[29] MAINPROCESS ??? BTT_RET_t.CAN_Config.ENABLE, 
+[30] MAINPROCESS ??? u1_a_bsm_drv_cmd, 
+[31] MAINPROCESS ??? st_g_btt_result 
+[32] MAINPROCESS proc ); 
+[33] MAINPROCESS equal au1_g_btt_drv_stat pst_a_btt_stat->BTT_drv;
+[34] MAINPROCESS equal au1_g_btt_fin_stat st_g_btt_stat.BTT_final;
+[35] MAINPROCESS proc return; 
 ----------------- Total Codes : 35 lines
 --------------------------
 [Function Name] : fn_btt_initialize 
@@ -101,46 +101,46 @@ MAINPROCESS proc return;
      [3] : U1   u1_a_btt_drv_cmd 
      [4] : BSM_STANDARD   st_a_bsm_alertarea 
 ----- Codes -----
-MAINPROCESS ??? if ((fl_g_v_self_bsm_for_base > BTT_ACTIVE_SPEED_TH)) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_TRUE;
-MAINPROCESS ??? if( st_g_btt_stat.BTT_RESET == BTT_TRUE 
-MAINPROCESS ??? && st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
-MAINPROCESS ??? && fl_g_v_self_bsm_for_base < (FL)0.5 ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) proc st_g_btt_stat.BTT_timer ++; 
-SUBPROCESS(2) ??? if(st_g_btt_stat.BTT_timer > (S4)150) 
-SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-MAINPROCESS ??? if(st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) proc return; 
-MAINPROCESS equal st_g_btt_alertarea.standard st_a_bsm_alertarea;
-MAINPROCESS equal st_g_btt_result.TFlag BTT_RET_t.TFlag.UNKNOWN;
-MAINPROCESS func fn_btt_set_trailer_length( BTT_TRAILER_SIZE_UNKNOWN ); 
-MAINPROCESS func fn_btt_set_trailer_width( BTT_TRAILER_SIZE_UNKNOWN ); 
-MAINPROCESS equal st_g_btt_alertarea.rear.VarY (FL) 0.0;
-MAINPROCESS equal st_g_btt_alertarea.rear.VarYmax BTT_REAR_RANGE_MAX;
-MAINPROCESS equal st_g_btt_alertarea.side.VarXin (FL) 0.0;
-MAINPROCESS equal st_g_btt_alertarea.side.VarXmax (FL) 0.0;
-MAINPROCESS equal st_g_btt_alertarea.side.VarXout (FL) 0.0;
-MAINPROCESS func fn_btt_ttm_activate(); 
-MAINPROCESS func fn_btt_atd_activate(); 
-MAINPROCESS func fn_btt_atd_initialize(); 
-MAINPROCESS ??? fn_btt_set_bsm_final_state( 
-MAINPROCESS ??? u1_a_bsm_configuration, 
-MAINPROCESS ??? u1_a_bsm_drv_cmd 
-MAINPROCESS proc ); 
-MAINPROCESS ??? fn_btt_set_btt_final_state( 
-MAINPROCESS ??? u1_a_btt_configuration, 
-MAINPROCESS ??? u1_a_btt_drv_cmd, 
-MAINPROCESS ??? st_g_btt_result 
-MAINPROCESS proc ); 
-MAINPROCESS ??? if( u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON ) 
-MAINPROCESS subproc SUBPROCESS(4) 
-SUBPROCESS(4) func fn_btt_aaz_activate(); 
-MAINPROCESS equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.INITIALIZED;
-MAINPROCESS proc return; 
-MAINPROCESS func fn_btt_aaz_activate(); 
+[1] MAINPROCESS ??? if ((fl_g_v_self_bsm_for_base > BTT_ACTIVE_SPEED_TH)) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_TRUE;
+[4] MAINPROCESS ??? if( st_g_btt_stat.BTT_RESET == BTT_TRUE 
+[5] MAINPROCESS ??? && st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
+[6] MAINPROCESS ??? && fl_g_v_self_bsm_for_base < (FL)0.5 ) 
+[7] MAINPROCESS subproc SUBPROCESS(2) 
+[8] SUBPROCESS(2) proc st_g_btt_stat.BTT_timer ++; 
+[9] SUBPROCESS(2) ??? if(st_g_btt_stat.BTT_timer > (S4)150) 
+[10] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[11] MAINPROCESS ??? if(st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) 
+[12] MAINPROCESS subproc SUBPROCESS(3) 
+[13] SUBPROCESS(3) proc return; 
+[14] MAINPROCESS equal st_g_btt_alertarea.standard st_a_bsm_alertarea;
+[15] MAINPROCESS equal st_g_btt_result.TFlag BTT_RET_t.TFlag.UNKNOWN;
+[16] MAINPROCESS func fn_btt_set_trailer_length( BTT_TRAILER_SIZE_UNKNOWN ); 
+[17] MAINPROCESS func fn_btt_set_trailer_width( BTT_TRAILER_SIZE_UNKNOWN ); 
+[18] MAINPROCESS equal st_g_btt_alertarea.rear.VarY (FL) 0.0;
+[19] MAINPROCESS equal st_g_btt_alertarea.rear.VarYmax BTT_REAR_RANGE_MAX;
+[20] MAINPROCESS equal st_g_btt_alertarea.side.VarXin (FL) 0.0;
+[21] MAINPROCESS equal st_g_btt_alertarea.side.VarXmax (FL) 0.0;
+[22] MAINPROCESS equal st_g_btt_alertarea.side.VarXout (FL) 0.0;
+[23] MAINPROCESS func fn_btt_ttm_activate(); 
+[24] MAINPROCESS func fn_btt_atd_activate(); 
+[25] MAINPROCESS func fn_btt_atd_initialize(); 
+[26] MAINPROCESS ??? fn_btt_set_bsm_final_state( 
+[27] MAINPROCESS ??? u1_a_bsm_configuration, 
+[28] MAINPROCESS ??? u1_a_bsm_drv_cmd 
+[29] MAINPROCESS proc ); 
+[30] MAINPROCESS ??? fn_btt_set_btt_final_state( 
+[31] MAINPROCESS ??? u1_a_btt_configuration, 
+[32] MAINPROCESS ??? u1_a_btt_drv_cmd, 
+[33] MAINPROCESS ??? st_g_btt_result 
+[34] MAINPROCESS proc ); 
+[35] MAINPROCESS ??? if( u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON ) 
+[36] MAINPROCESS subproc SUBPROCESS(4) 
+[37] SUBPROCESS(4) func fn_btt_aaz_activate(); 
+[38] MAINPROCESS equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.INITIALIZED;
+[39] MAINPROCESS proc return; 
+[40] MAINPROCESS func fn_btt_aaz_activate(); 
 ----------------- Total Codes : 40 lines
 --------------------------
 [Function Name] : fn_btt_set_bsm_final_state 
@@ -149,15 +149,15 @@ MAINPROCESS func fn_btt_aaz_activate();
      [0] : U1   u1_a_bsm_configuration 
      [1] : U1   u1_a_bsm_drv_cmd 
 ----- Codes -----
-MAINPROCESS equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.ON;
-MAINPROCESS ??? if( u1_a_bsm_configuration == BTT_RET_t.CAN_Config.DISABLE) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.DISABLE;
-MAINPROCESS ??? else if( u1_a_bsm_drv_cmd == BTT_RET_t.Drv_SW.OFF ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.OFF;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.OFF;
+[1] MAINPROCESS equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.ON;
+[2] MAINPROCESS ??? if( u1_a_bsm_configuration == BTT_RET_t.CAN_Config.DISABLE) 
+[3] MAINPROCESS subproc SUBPROCESS(1) 
+[4] SUBPROCESS(1) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.DISABLE;
+[5] MAINPROCESS ??? else if( u1_a_bsm_drv_cmd == BTT_RET_t.Drv_SW.OFF ) 
+[6] MAINPROCESS subproc SUBPROCESS(2) 
+[7] SUBPROCESS(2) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.OFF;
+[8] MAINPROCESS proc return; 
+[9] MAINPROCESS equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.OFF;
 ----------------- Total Codes : 9 lines
 --------------------------
 [Function Name] : fn_btt_set_btt_final_state 
@@ -167,37 +167,37 @@ MAINPROCESS equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.OFF;
      [1] : U1   u1_a_btt_drv_cmd 
      [2] : BTT_RESULT   st_a_btt_result 
 ----- Codes -----
-MAINPROCESS equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.ON;
-MAINPROCESS ??? if( st_g_btt_stat.BSM_final == BTT_RET_t.Final_stat.DISABLE || st_g_btt_stat.BSM_final == BTT_RET_t.Final_stat.OFF ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) ??? if( u1_a_btt_configuration == BTT_RET_t.CAN_Config.DISABLE) 
-SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(2) ??? else 
-SUBPROCESS(2) subproc SUBSUBPROCESS(2) 
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
-SUBSUBPROCESS(2) ??? if( u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.OFF ) 
-SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-SUBSUBPROCESS(2) ??? else if( u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON ) 
-SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(2) 
-SUBSUBPROCESS(2) ??? else 
-SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(3) 
-SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
-SUBSUBSUBPROCESS(2) ??? fn_btt_set_btt_drv_state( 
-SUBSUBSUBPROCESS(2) ??? st_g_btt_stat, 
-SUBSUBSUBPROCESS(2) ??? st_g_btt_result 
-SUBSUBSUBPROCESS(2) proc ); 
-SUBSUBSUBPROCESS(2) ??? if( st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.CONNECT ) 
-SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-SUBSUBSUBPROCESS(2) ??? else if( st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.OFFTEMP ) 
-SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(2) 
-SUBSUBSUBPROCESS(2) ??? else if( st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.NOTCONNECT ) 
-SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(3) 
-SUBSUBSUBPROCESS(2) ??? else 
-SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(4) 
+[1] MAINPROCESS equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.ON;
+[2] MAINPROCESS ??? if( st_g_btt_stat.BSM_final == BTT_RET_t.Final_stat.DISABLE || st_g_btt_stat.BSM_final == BTT_RET_t.Final_stat.OFF ) 
+[3] MAINPROCESS subproc SUBPROCESS(1) 
+[4] SUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
+[5] MAINPROCESS ??? else 
+[6] MAINPROCESS subproc SUBPROCESS(2) 
+[7] SUBPROCESS(2) ??? if( u1_a_btt_configuration == BTT_RET_t.CAN_Config.DISABLE) 
+[8] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[9] SUBPROCESS(2) ??? else 
+[10] SUBPROCESS(2) subproc SUBSUBPROCESS(2) 
+[11] MAINPROCESS proc return; 
+[12] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
+[13] SUBSUBPROCESS(2) ??? if( u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.OFF ) 
+[14] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[15] SUBSUBPROCESS(2) ??? else if( u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON ) 
+[16] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(2) 
+[17] SUBSUBPROCESS(2) ??? else 
+[18] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(3) 
+[19] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[20] SUBSUBSUBPROCESS(2) ??? fn_btt_set_btt_drv_state( 
+[21] SUBSUBSUBPROCESS(2) ??? st_g_btt_stat, 
+[22] SUBSUBSUBPROCESS(2) ??? st_g_btt_result 
+[23] SUBSUBSUBPROCESS(2) proc ); 
+[24] SUBSUBSUBPROCESS(2) ??? if( st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.CONNECT ) 
+[25] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[26] SUBSUBSUBPROCESS(2) ??? else if( st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.OFFTEMP ) 
+[27] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(2) 
+[28] SUBSUBSUBPROCESS(2) ??? else if( st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.NOTCONNECT ) 
+[29] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(3) 
+[30] SUBSUBSUBPROCESS(2) ??? else 
+[31] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(4) 
 ----------------- Total Codes : 31 lines
 --------------------------
 [Function Name] : fn_btt_set_btt_drv_state 
@@ -206,38 +206,38 @@ SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(4)
      [0] : BTT_STAT   st_a_btt_stat 
      [1] : BTT_RESULT   st_a_btt_result 
 ----- Codes -----
-MAINPROCESS ??? if( st_a_btt_stat.BTT_final == BTT_RET_t.Final_stat.DISABLE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.DISABLE;
-MAINPROCESS ??? else if( st_a_btt_stat.BTT_final == BTT_RET_t.Drv_Stat.OFF ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFF;
-MAINPROCESS ??? else if( st_a_btt_stat.BTT_final == BTT_RET_t.Final_stat.ON ) 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
-MAINPROCESS ??? else if( st_a_btt_stat.BTT_final == BTT_RET_t.Final_stat.OFFTEMP ) 
-MAINPROCESS subproc SUBPROCESS(4) 
-SUBPROCESS(4) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(5) 
-MAINPROCESS ??? if( st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.PENDING ) 
-MAINPROCESS subproc SUBPROCESS(6) 
-SUBPROCESS(6) ??? if( st_a_btt_stat.ATD == BTT_RET_t.Func_Stat.ACTIVE ) 
-SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(6) ??? else if( st_a_btt_stat.ATD == BTT_RET_t.Func_Stat.DEACTIVE ) 
-SUBPROCESS(6) subproc SUBSUBPROCESS(2) 
-SUBPROCESS(6) ??? else 
-SUBPROCESS(6) subproc SUBSUBPROCESS(3) 
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
-SUBSUBPROCESS(2) ??? if( st_a_btt_result.TFlag == BTT_RET_t.TFlag.CONNECT ) 
-SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-SUBSUBPROCESS(2) ??? else if( st_a_btt_result.TFlag == BTT_RET_t.TFlag.NOTCONNECT ) 
-SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(2) 
-SUBSUBPROCESS(2) ??? else if( st_a_btt_result.TFlag == BTT_RET_t.TFlag.UNKNOWN ) 
-SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(3) 
-SUBSUBPROCESS(2) ??? else 
-SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(4) 
+[1] MAINPROCESS ??? if( st_a_btt_stat.BTT_final == BTT_RET_t.Final_stat.DISABLE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.DISABLE;
+[4] MAINPROCESS ??? else if( st_a_btt_stat.BTT_final == BTT_RET_t.Drv_Stat.OFF ) 
+[5] MAINPROCESS subproc SUBPROCESS(2) 
+[6] SUBPROCESS(2) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFF;
+[7] MAINPROCESS ??? else if( st_a_btt_stat.BTT_final == BTT_RET_t.Final_stat.ON ) 
+[8] MAINPROCESS subproc SUBPROCESS(3) 
+[9] SUBPROCESS(3) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
+[10] MAINPROCESS ??? else if( st_a_btt_stat.BTT_final == BTT_RET_t.Final_stat.OFFTEMP ) 
+[11] MAINPROCESS subproc SUBPROCESS(4) 
+[12] SUBPROCESS(4) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[13] MAINPROCESS ??? else 
+[14] MAINPROCESS subproc SUBPROCESS(5) 
+[15] MAINPROCESS ??? if( st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.PENDING ) 
+[16] MAINPROCESS subproc SUBPROCESS(6) 
+[17] SUBPROCESS(6) ??? if( st_a_btt_stat.ATD == BTT_RET_t.Func_Stat.ACTIVE ) 
+[18] SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
+[19] SUBPROCESS(6) ??? else if( st_a_btt_stat.ATD == BTT_RET_t.Func_Stat.DEACTIVE ) 
+[20] SUBPROCESS(6) subproc SUBSUBPROCESS(2) 
+[21] SUBPROCESS(6) ??? else 
+[22] SUBPROCESS(6) subproc SUBSUBPROCESS(3) 
+[23] MAINPROCESS proc return; 
+[24] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
+[25] SUBSUBPROCESS(2) ??? if( st_a_btt_result.TFlag == BTT_RET_t.TFlag.CONNECT ) 
+[26] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[27] SUBSUBPROCESS(2) ??? else if( st_a_btt_result.TFlag == BTT_RET_t.TFlag.NOTCONNECT ) 
+[28] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(2) 
+[29] SUBSUBPROCESS(2) ??? else if( st_a_btt_result.TFlag == BTT_RET_t.TFlag.UNKNOWN ) 
+[30] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(3) 
+[31] SUBSUBPROCESS(2) ??? else 
+[32] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(4) 
 ----------------- Total Codes : 32 lines
 --------------------------
 [Function Name] : fn_btt_set_trailer_length 
@@ -245,18 +245,18 @@ SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(4)
 -Argument : 1 
      [0] : FL   length 
 ----- Codes -----
-MAINPROCESS equal st_g_btt_result.TLength length;
-MAINPROCESS ??? if( length == BTT_TRAILER_SIZE_UNKNOWN) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.UNKNOWN;
-MAINPROCESS ??? else if( length < BTT_TRAILER_LENGTH_MIN || length >= BTT_TRAILER_LENGTH_MAX ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.INVALID;
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.VALID;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.VALID;
+[1] MAINPROCESS equal st_g_btt_result.TLength length;
+[2] MAINPROCESS ??? if( length == BTT_TRAILER_SIZE_UNKNOWN) 
+[3] MAINPROCESS subproc SUBPROCESS(1) 
+[4] SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.UNKNOWN;
+[5] MAINPROCESS ??? else if( length < BTT_TRAILER_LENGTH_MIN || length >= BTT_TRAILER_LENGTH_MAX ) 
+[6] MAINPROCESS subproc SUBPROCESS(2) 
+[7] SUBPROCESS(2) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.INVALID;
+[8] MAINPROCESS ??? else 
+[9] MAINPROCESS subproc SUBPROCESS(3) 
+[10] SUBPROCESS(3) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.VALID;
+[11] MAINPROCESS proc return; 
+[12] MAINPROCESS equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.VALID;
 ----------------- Total Codes : 12 lines
 --------------------------
 [Function Name] : fn_btt_set_range_rear 
@@ -264,28 +264,28 @@ MAINPROCESS equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.VALID;
 -Argument : 1 
      [0] : FL   length 
 ----- Codes -----
-MAINPROCESS equal st_aaz_params.TLength_AAZ length;
-MAINPROCESS ??? if( st_aaz_params.TLength_AAZ == BTT_TRAILER_SIZE_UNKNOWN) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_UNKNOWN;
-MAINPROCESS ??? else if( st_aaz_params.TLength_AAZ < BTT_TRAILER_LENGTH_MIN || st_aaz_params.TLength_AAZ >= BTT_TRAILER_LENGTH_MAX ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal st_g_btt_alertarea.rear.VarY BTT_REAR_INVALID;
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) ??? if( st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_SHORT ) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(3) ??? else if( st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_MID ) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
-SUBPROCESS(3) ??? else if( st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_LONG ) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(3) 
-SUBPROCESS(3) ??? else 
-SUBPROCESS(3) subproc SUBSUBPROCESS(4) 
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_SHORT;
-SUBSUBPROCESS(2) equal st_g_btt_alertarea.rear.VarY BTT_REAR_MID;
-SUBSUBPROCESS(3) equal st_g_btt_alertarea.rear.VarY BTT_REAR_LONG;
-SUBSUBPROCESS(4) equal st_g_btt_alertarea.rear.VarY st_g_btt_alertarea.rear.VarYmax;
+[1] MAINPROCESS equal st_aaz_params.TLength_AAZ length;
+[2] MAINPROCESS ??? if( st_aaz_params.TLength_AAZ == BTT_TRAILER_SIZE_UNKNOWN) 
+[3] MAINPROCESS subproc SUBPROCESS(1) 
+[4] SUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_UNKNOWN;
+[5] MAINPROCESS ??? else if( st_aaz_params.TLength_AAZ < BTT_TRAILER_LENGTH_MIN || st_aaz_params.TLength_AAZ >= BTT_TRAILER_LENGTH_MAX ) 
+[6] MAINPROCESS subproc SUBPROCESS(2) 
+[7] SUBPROCESS(2) equal st_g_btt_alertarea.rear.VarY BTT_REAR_INVALID;
+[8] MAINPROCESS ??? else 
+[9] MAINPROCESS subproc SUBPROCESS(3) 
+[10] SUBPROCESS(3) ??? if( st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_SHORT ) 
+[11] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[12] SUBPROCESS(3) ??? else if( st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_MID ) 
+[13] SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
+[14] SUBPROCESS(3) ??? else if( st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_LONG ) 
+[15] SUBPROCESS(3) subproc SUBSUBPROCESS(3) 
+[16] SUBPROCESS(3) ??? else 
+[17] SUBPROCESS(3) subproc SUBSUBPROCESS(4) 
+[18] MAINPROCESS proc return; 
+[19] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_SHORT;
+[20] SUBSUBPROCESS(2) equal st_g_btt_alertarea.rear.VarY BTT_REAR_MID;
+[21] SUBSUBPROCESS(3) equal st_g_btt_alertarea.rear.VarY BTT_REAR_LONG;
+[22] SUBSUBPROCESS(4) equal st_g_btt_alertarea.rear.VarY st_g_btt_alertarea.rear.VarYmax;
 ----------------- Total Codes : 22 lines
 --------------------------
 [Function Name] : fn_btt_set_trailer_width 
@@ -293,18 +293,18 @@ SUBSUBPROCESS(4) equal st_g_btt_alertarea.rear.VarY st_g_btt_alertarea.rear.VarY
 -Argument : 1 
      [0] : FL   width 
 ----- Codes -----
-MAINPROCESS equal st_g_btt_result.TWidth width;
-MAINPROCESS ??? if( width == BTT_TRAILER_SIZE_UNKNOWN) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.UNKNOWN;
-MAINPROCESS ??? else if( width >= BTT_SIDE_RANGE_MAX ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.INVALID;
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.VALID;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.VALID;
+[1] MAINPROCESS equal st_g_btt_result.TWidth width;
+[2] MAINPROCESS ??? if( width == BTT_TRAILER_SIZE_UNKNOWN) 
+[3] MAINPROCESS subproc SUBPROCESS(1) 
+[4] SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.UNKNOWN;
+[5] MAINPROCESS ??? else if( width >= BTT_SIDE_RANGE_MAX ) 
+[6] MAINPROCESS subproc SUBPROCESS(2) 
+[7] SUBPROCESS(2) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.INVALID;
+[8] MAINPROCESS ??? else 
+[9] MAINPROCESS subproc SUBPROCESS(3) 
+[10] SUBPROCESS(3) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.VALID;
+[11] MAINPROCESS proc return; 
+[12] MAINPROCESS equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.VALID;
 ----------------- Total Codes : 12 lines
 --------------------------
 [Function Name] : fn_btt_set_range_side 
@@ -312,184 +312,184 @@ MAINPROCESS equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.VALID;
 -Argument : 1 
      [0] : FL   width 
 ----- Codes -----
-MAINPROCESS equal st_aaz_params.TWidth_AAZ width;
-MAINPROCESS ??? if( st_aaz_params.TWidth_AAZ == BTT_TRAILER_SIZE_UNKNOWN) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin BTT_SIDE_RANGE_UNKNOWN;
-SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout BTT_SIDE_RANGE_UNKNOWN;
-MAINPROCESS ??? else if( st_aaz_params.TWidth_AAZ >= (FL) BTT_SIDE_RANGE_MAX ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal st_g_btt_alertarea.side.VarXin BTT_SIDE_RANGE_INVALID;
-SUBPROCESS(2) equal st_g_btt_alertarea.side.VarXout BTT_SIDE_RANGE_INVALID;
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) ??? if( st_aaz_params.TWidth_AAZ <= BTT_SV_WIDTH ) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(3) ??? else 
-SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin st_aaz_params.TWidth_AAZ * (FL)0.25;
-SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout st_aaz_params.TWidth_AAZ * (FL)0.25;
-SUBSUBPROCESS(2) equal st_g_btt_alertarea.side.VarXin (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
-SUBSUBPROCESS(2) equal st_g_btt_alertarea.side.VarXout (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
+[1] MAINPROCESS equal st_aaz_params.TWidth_AAZ width;
+[2] MAINPROCESS ??? if( st_aaz_params.TWidth_AAZ == BTT_TRAILER_SIZE_UNKNOWN) 
+[3] MAINPROCESS subproc SUBPROCESS(1) 
+[4] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin BTT_SIDE_RANGE_UNKNOWN;
+[5] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout BTT_SIDE_RANGE_UNKNOWN;
+[6] MAINPROCESS ??? else if( st_aaz_params.TWidth_AAZ >= (FL) BTT_SIDE_RANGE_MAX ) 
+[7] MAINPROCESS subproc SUBPROCESS(2) 
+[8] SUBPROCESS(2) equal st_g_btt_alertarea.side.VarXin BTT_SIDE_RANGE_INVALID;
+[9] SUBPROCESS(2) equal st_g_btt_alertarea.side.VarXout BTT_SIDE_RANGE_INVALID;
+[10] MAINPROCESS ??? else 
+[11] MAINPROCESS subproc SUBPROCESS(3) 
+[12] SUBPROCESS(3) ??? if( st_aaz_params.TWidth_AAZ <= BTT_SV_WIDTH ) 
+[13] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[14] SUBPROCESS(3) ??? else 
+[15] SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
+[16] MAINPROCESS proc return; 
+[17] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin st_aaz_params.TWidth_AAZ * (FL)0.25;
+[18] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout st_aaz_params.TWidth_AAZ * (FL)0.25;
+[19] SUBSUBPROCESS(2) equal st_g_btt_alertarea.side.VarXin (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
+[20] SUBSUBPROCESS(2) equal st_g_btt_alertarea.side.VarXout (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
 ----------------- Total Codes : 20 lines
 --------------------------
 [Function Name] : fn_btt_atd_activate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.ATD == BTT_RET_t.Func_Stat.ENABLE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.ATD == BTT_RET_t.Func_Stat.ENABLE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_atd_initialize 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS equal st_atd_params.timer 0;
-MAINPROCESS equal st_g_btt_result.TFlag BTT_RET_t.TFlag.UNKNOWN;
-MAINPROCESS func fn_init(st_atd_params.trailer_object, TRAILER_BUFFSIZE); 
-MAINPROCESS equal st_atd_params.atd_counter[0] 0;
-MAINPROCESS equal st_atd_params.atd_counter[1] 0;
-MAINPROCESS ??? fn_init_btt( 
-MAINPROCESS ??? st_atd_params.trailer_object_total[BTT_OBJ_HISTORY_CYCLE][TRAILER_BUFFSIZE], 
-MAINPROCESS ??? st_atd_params.trailer_object_num_total[BTT_OBJ_HISTORY_CYCLE], 
-MAINPROCESS ??? TRAILER_BUFFSIZE, 
-MAINPROCESS ??? BTT_OBJ_HISTORY_CYCLE 
-MAINPROCESS proc ); 
-MAINPROCESS equal st_atd_params.trailer_object_num 0;
-MAINPROCESS proc return; 
+[1] MAINPROCESS equal st_atd_params.timer 0;
+[2] MAINPROCESS equal st_g_btt_result.TFlag BTT_RET_t.TFlag.UNKNOWN;
+[3] MAINPROCESS func fn_init(st_atd_params.trailer_object, TRAILER_BUFFSIZE); 
+[4] MAINPROCESS equal st_atd_params.atd_counter[0] 0;
+[5] MAINPROCESS equal st_atd_params.atd_counter[1] 0;
+[6] MAINPROCESS ??? fn_init_btt( 
+[7] MAINPROCESS ??? st_atd_params.trailer_object_total[BTT_OBJ_HISTORY_CYCLE][TRAILER_BUFFSIZE], 
+[8] MAINPROCESS ??? st_atd_params.trailer_object_num_total[BTT_OBJ_HISTORY_CYCLE], 
+[9] MAINPROCESS ??? TRAILER_BUFFSIZE, 
+[10] MAINPROCESS ??? BTT_OBJ_HISTORY_CYCLE 
+[11] MAINPROCESS proc ); 
+[12] MAINPROCESS equal st_atd_params.trailer_object_num 0;
+[13] MAINPROCESS proc return; 
 ----------------- Total Codes : 13 lines
 --------------------------
 [Function Name] : fn_btt_atd_deactivate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.ATD == BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.DEACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.DEACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.ATD == BTT_RET_t.Func_Stat.ACTIVE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.DEACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.DEACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_tle_activate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.TLE == BTT_RET_t.Func_Stat.ENABLE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.TLE == BTT_RET_t.Func_Stat.ENABLE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_tle_initialize 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS equal st_tle_params.timer 0;
-MAINPROCESS func fn_btt_set_trailer_length( BTT_TRAILER_SIZE_UNKNOWN ); 
-MAINPROCESS proc return; 
+[1] MAINPROCESS equal st_tle_params.timer 0;
+[2] MAINPROCESS func fn_btt_set_trailer_length( BTT_TRAILER_SIZE_UNKNOWN ); 
+[3] MAINPROCESS proc return; 
 ----------------- Total Codes : 3 lines
 --------------------------
 [Function Name] : fn_btt_tle_deactivate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.TLE == BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.DEACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.DEACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.TLE == BTT_RET_t.Func_Stat.ACTIVE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.DEACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.DEACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_twe_activate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.TWE == BTT_RET_t.Func_Stat.ENABLE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.TWE == BTT_RET_t.Func_Stat.ENABLE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_twe_initialize 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS equal st_twe_params.timer 0;
-MAINPROCESS func fn_btt_set_trailer_width( BTT_TRAILER_SIZE_UNKNOWN ); 
-MAINPROCESS equal st_twe_params.twe_cycle (S4)0;
-MAINPROCESS equal st_twe_params.twe_final (FL)0.0;
-MAINPROCESS proc return; 
+[1] MAINPROCESS equal st_twe_params.timer 0;
+[2] MAINPROCESS func fn_btt_set_trailer_width( BTT_TRAILER_SIZE_UNKNOWN ); 
+[3] MAINPROCESS equal st_twe_params.twe_cycle (S4)0;
+[4] MAINPROCESS equal st_twe_params.twe_final (FL)0.0;
+[5] MAINPROCESS proc return; 
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_twe_deactivate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.TWE == BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DEACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DEACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.TWE == BTT_RET_t.Func_Stat.ACTIVE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DEACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DEACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_ttm_activate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.TTM == BTT_RET_t.Func_Stat.ENABLE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.ACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.ACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.TTM == BTT_RET_t.Func_Stat.ENABLE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.ACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.ACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_ttm_deactivate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.TTM == BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DEACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DEACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.TTM == BTT_RET_t.Func_Stat.ACTIVE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DEACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DEACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_aaz_activate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.AAZ == BTT_RET_t.Func_Stat.ENABLE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ACTIVE;
-SUBPROCESS(1) equal st_aaz_params.VarY (FL) 0.0;
-SUBPROCESS(1) equal st_aaz_params.First BTT_RET_t.Bool.TRUE;
-SUBPROCESS(1) equal st_aaz_params.TLength_AAZ BTT_TRAILER_SIZE_UNKNOWN;
-SUBPROCESS(1) equal st_aaz_params.TLength_valid_count (S4) 0;
-SUBPROCESS(1) equal st_aaz_params.TLength_invalid_count (S4) 0;
-SUBPROCESS(1) equal st_aaz_params.TLength_unknown_count (S4) 0;
-SUBPROCESS(1) equal st_aaz_params.TWidth_AAZ BTT_TRAILER_SIZE_UNKNOWN;
-SUBPROCESS(1) equal st_aaz_params.TWidth_valid_count (S4) 0;
-SUBPROCESS(1) equal st_aaz_params.TWidth_invalid_count (S4) 0;
-SUBPROCESS(1) equal st_aaz_params.TWidth_unknown_count (S4) 0;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ACTIVE;
-MAINPROCESS equal st_aaz_params.VarY (FL) 0.0;
-MAINPROCESS equal st_aaz_params.First BTT_RET_t.Bool.TRUE;
-MAINPROCESS equal st_aaz_params.TLength_AAZ BTT_TRAILER_SIZE_UNKNOWN;
-MAINPROCESS equal st_aaz_params.TLength_valid_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TLength_invalid_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TLength_unknown_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TWidth_AAZ BTT_TRAILER_SIZE_UNKNOWN;
-MAINPROCESS equal st_aaz_params.TWidth_valid_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TWidth_invalid_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TWidth_unknown_count (S4) 0;
+[1] MAINPROCESS ??? if( st_g_btt_stat.AAZ == BTT_RET_t.Func_Stat.ENABLE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ACTIVE;
+[4] SUBPROCESS(1) equal st_aaz_params.VarY (FL) 0.0;
+[5] SUBPROCESS(1) equal st_aaz_params.First BTT_RET_t.Bool.TRUE;
+[6] SUBPROCESS(1) equal st_aaz_params.TLength_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[7] SUBPROCESS(1) equal st_aaz_params.TLength_valid_count (S4) 0;
+[8] SUBPROCESS(1) equal st_aaz_params.TLength_invalid_count (S4) 0;
+[9] SUBPROCESS(1) equal st_aaz_params.TLength_unknown_count (S4) 0;
+[10] SUBPROCESS(1) equal st_aaz_params.TWidth_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[11] SUBPROCESS(1) equal st_aaz_params.TWidth_valid_count (S4) 0;
+[12] SUBPROCESS(1) equal st_aaz_params.TWidth_invalid_count (S4) 0;
+[13] SUBPROCESS(1) equal st_aaz_params.TWidth_unknown_count (S4) 0;
+[14] MAINPROCESS proc return; 
+[15] MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ACTIVE;
+[16] MAINPROCESS equal st_aaz_params.VarY (FL) 0.0;
+[17] MAINPROCESS equal st_aaz_params.First BTT_RET_t.Bool.TRUE;
+[18] MAINPROCESS equal st_aaz_params.TLength_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[19] MAINPROCESS equal st_aaz_params.TLength_valid_count (S4) 0;
+[20] MAINPROCESS equal st_aaz_params.TLength_invalid_count (S4) 0;
+[21] MAINPROCESS equal st_aaz_params.TLength_unknown_count (S4) 0;
+[22] MAINPROCESS equal st_aaz_params.TWidth_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[23] MAINPROCESS equal st_aaz_params.TWidth_valid_count (S4) 0;
+[24] MAINPROCESS equal st_aaz_params.TWidth_invalid_count (S4) 0;
+[25] MAINPROCESS equal st_aaz_params.TWidth_unknown_count (S4) 0;
 ----------------- Total Codes : 25 lines
 --------------------------
 [Function Name] : fn_btt_aaz_initialize 
@@ -498,32 +498,32 @@ MAINPROCESS equal st_aaz_params.TWidth_unknown_count (S4) 0;
      [0] : FL   fl_a_trailer_length 
      [1] : FL   fl_a_trailer_width 
 ----- Codes -----
-MAINPROCESS ??? if( st_aaz_params.First == BTT_RET_t.Bool.FALSE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) proc return; 
-MAINPROCESS equal st_aaz_params.VarY BTT_REAR_RANGE_LONG;
-MAINPROCESS equal st_aaz_params.First BTT_RET_t.Bool.FALSE;
-MAINPROCESS equal st_aaz_params.TLength_AAZ fl_a_trailer_length;
-MAINPROCESS equal st_aaz_params.TLength_valid_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TLength_invalid_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TLength_unknown_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TWidth_AAZ fl_a_trailer_width;
-MAINPROCESS equal st_aaz_params.TWidth_valid_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TWidth_invalid_count (S4) 0;
-MAINPROCESS equal st_aaz_params.TWidth_unknown_count (S4) 0;
-MAINPROCESS proc return; 
-MAINPROCESS proc return; 
+[1] MAINPROCESS ??? if( st_aaz_params.First == BTT_RET_t.Bool.FALSE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) proc return; 
+[4] MAINPROCESS equal st_aaz_params.VarY BTT_REAR_RANGE_LONG;
+[5] MAINPROCESS equal st_aaz_params.First BTT_RET_t.Bool.FALSE;
+[6] MAINPROCESS equal st_aaz_params.TLength_AAZ fl_a_trailer_length;
+[7] MAINPROCESS equal st_aaz_params.TLength_valid_count (S4) 0;
+[8] MAINPROCESS equal st_aaz_params.TLength_invalid_count (S4) 0;
+[9] MAINPROCESS equal st_aaz_params.TLength_unknown_count (S4) 0;
+[10] MAINPROCESS equal st_aaz_params.TWidth_AAZ fl_a_trailer_width;
+[11] MAINPROCESS equal st_aaz_params.TWidth_valid_count (S4) 0;
+[12] MAINPROCESS equal st_aaz_params.TWidth_invalid_count (S4) 0;
+[13] MAINPROCESS equal st_aaz_params.TWidth_unknown_count (S4) 0;
+[14] MAINPROCESS proc return; 
+[15] MAINPROCESS proc return; 
 ----------------- Total Codes : 15 lines
 --------------------------
 [Function Name] : fn_btt_aaz_deactivate 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.AAZ == BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.DEACTIVE;
-MAINPROCESS proc return; 
-MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.DEACTIVE;
+[1] MAINPROCESS ??? if( st_g_btt_stat.AAZ == BTT_RET_t.Func_Stat.ACTIVE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.DEACTIVE;
+[4] MAINPROCESS proc return; 
+[5] MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.DEACTIVE;
 ----------------- Total Codes : 5 lines
 --------------------------
 [Function Name] : fn_btt_main 
@@ -548,56 +548,56 @@ MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.DEACTIVE;
      [16] : BTT_RESULT   *pst_a_btt_result 
      [17] : BTT_ALERTAREA*   pst_a_btt_alertarea 
 ----- Codes -----
-MAINPROCESS equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
-MAINPROCESS equal FL fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
-MAINPROCESS func fn_check_front_trailer_line(); 
-MAINPROCESS ??? fn_btt_sel_exclude_object( 
-MAINPROCESS ??? pst_a_object, 
-MAINPROCESS ??? &s4_a_object_size 
-MAINPROCESS proc ); 
-MAINPROCESS ??? fn_btt_shift_trailerobj( 
-MAINPROCESS ??? pst_a_object, 
-MAINPROCESS ??? s4_a_object_size 
-MAINPROCESS proc ); 
-MAINPROCESS ??? fn_btt_atd_main( 
-MAINPROCESS ??? fl_a_self_v, 
-MAINPROCESS ??? s4_a_curve_r, 
-MAINPROCESS ??? s1_a_shift_flg, 
-MAINPROCESS ??? pst_a_object, 
-MAINPROCESS ??? s4_a_object_size, 
-MAINPROCESS ??? fl_a_doa_pow_ave, 
-MAINPROCESS ??? fl_a_doa_pow_dev, 
-MAINPROCESS ??? s4_a_doa_bf_peak_bin, 
-MAINPROCESS ??? fl_a_doa_bf_peak_pow, 
-MAINPROCESS ??? pst_a_cluster_info, 
-MAINPROCESS ??? pst_a_aux_trailer_info, 
-MAINPROCESS ??? pst_a_btt_result 
-MAINPROCESS proc ); 
-MAINPROCESS equal au1_g_btt_atd_tflag pst_a_btt_result->TFlag;
-MAINPROCESS ??? if( pst_a_btt_stat->ATD == BTT_RET_t.Func_Stat.DEACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) ??? fn_btt_set_btt_drv_state( 
-SUBPROCESS(1) ??? *pst_a_btt_stat, 
-SUBPROCESS(1) ??? *pst_a_btt_result 
-SUBPROCESS(1) proc ); 
-SUBPROCESS(1) ??? if( pst_a_btt_stat->BTT_drv == BTT_RET_t.Drv_Stat.CONNECT ) 
-SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(1) ??? if( pst_a_btt_result->TFlag ==  BTT_RET_t.TFlag.CONNECT ) 
-SUBPROCESS(1) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) func fn_btt_tle_initialize(); 
-SUBPROCESS(2) func fn_btt_twe_initialize(); 
-MAINPROCESS ??? fn_btt_set_btt_drv_state( 
-MAINPROCESS ??? *pst_a_btt_stat, 
-MAINPROCESS ??? *pst_a_btt_result 
-MAINPROCESS proc ); 
-MAINPROCESS equal as4_g_btt_atd_timer[0] st_atd_params.timer;
-MAINPROCESS equal as4_g_btt_atd_timer[1] st_tle_params.timer;
-MAINPROCESS equal as4_g_btt_atd_timer[2] st_twe_params.timer;
-MAINPROCESS proc return; 
-MAINPROCESS func fn_btt_tle_initialize(); 
-MAINPROCESS func fn_btt_twe_initialize(); 
+[1] MAINPROCESS equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
+[2] MAINPROCESS equal FL fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
+[3] MAINPROCESS func fn_check_front_trailer_line(); 
+[4] MAINPROCESS ??? fn_btt_sel_exclude_object( 
+[5] MAINPROCESS ??? pst_a_object, 
+[6] MAINPROCESS ??? &s4_a_object_size 
+[7] MAINPROCESS proc ); 
+[8] MAINPROCESS ??? fn_btt_shift_trailerobj( 
+[9] MAINPROCESS ??? pst_a_object, 
+[10] MAINPROCESS ??? s4_a_object_size 
+[11] MAINPROCESS proc ); 
+[12] MAINPROCESS ??? fn_btt_atd_main( 
+[13] MAINPROCESS ??? fl_a_self_v, 
+[14] MAINPROCESS ??? s4_a_curve_r, 
+[15] MAINPROCESS ??? s1_a_shift_flg, 
+[16] MAINPROCESS ??? pst_a_object, 
+[17] MAINPROCESS ??? s4_a_object_size, 
+[18] MAINPROCESS ??? fl_a_doa_pow_ave, 
+[19] MAINPROCESS ??? fl_a_doa_pow_dev, 
+[20] MAINPROCESS ??? s4_a_doa_bf_peak_bin, 
+[21] MAINPROCESS ??? fl_a_doa_bf_peak_pow, 
+[22] MAINPROCESS ??? pst_a_cluster_info, 
+[23] MAINPROCESS ??? pst_a_aux_trailer_info, 
+[24] MAINPROCESS ??? pst_a_btt_result 
+[25] MAINPROCESS proc ); 
+[26] MAINPROCESS equal au1_g_btt_atd_tflag pst_a_btt_result->TFlag;
+[27] MAINPROCESS ??? if( pst_a_btt_stat->ATD == BTT_RET_t.Func_Stat.DEACTIVE ) 
+[28] MAINPROCESS subproc SUBPROCESS(1) 
+[29] SUBPROCESS(1) ??? fn_btt_set_btt_drv_state( 
+[30] SUBPROCESS(1) ??? *pst_a_btt_stat, 
+[31] SUBPROCESS(1) ??? *pst_a_btt_result 
+[32] SUBPROCESS(1) proc ); 
+[33] SUBPROCESS(1) ??? if( pst_a_btt_stat->BTT_drv == BTT_RET_t.Drv_Stat.CONNECT ) 
+[34] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[35] SUBPROCESS(1) ??? if( pst_a_btt_result->TFlag ==  BTT_RET_t.TFlag.CONNECT ) 
+[36] SUBPROCESS(1) subproc SUBSUBPROCESS(2) 
+[37] MAINPROCESS ??? else 
+[38] MAINPROCESS subproc SUBPROCESS(2) 
+[39] SUBPROCESS(2) func fn_btt_tle_initialize(); 
+[40] SUBPROCESS(2) func fn_btt_twe_initialize(); 
+[41] MAINPROCESS ??? fn_btt_set_btt_drv_state( 
+[42] MAINPROCESS ??? *pst_a_btt_stat, 
+[43] MAINPROCESS ??? *pst_a_btt_result 
+[44] MAINPROCESS proc ); 
+[45] MAINPROCESS equal as4_g_btt_atd_timer[0] st_atd_params.timer;
+[46] MAINPROCESS equal as4_g_btt_atd_timer[1] st_tle_params.timer;
+[47] MAINPROCESS equal as4_g_btt_atd_timer[2] st_twe_params.timer;
+[48] MAINPROCESS proc return; 
+[49] MAINPROCESS func fn_btt_tle_initialize(); 
+[50] MAINPROCESS func fn_btt_twe_initialize(); 
 ----------------- Total Codes : 50 lines
 --------------------------
 [Function Name] : fn_btt_atd_main 
@@ -616,20 +616,20 @@ MAINPROCESS func fn_btt_twe_initialize();
      [10] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [11] : BTT_RESULT*   pst_a_btt_result 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) proc return; 
-MAINPROCESS ??? if( s1_a_shift_flg != (S1) 0 ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) ??? if( fl_a_self_v > BTT_ACTIVE_SPEED_TH ) 
-SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(2) ??? else 
-SUBPROCESS(2) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) func fn_btt_atd_initialize(); 
-MAINPROCESS proc return; 
-MAINPROCESS func fn_btt_atd_initialize(); 
+[1] MAINPROCESS ??? if( st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) proc return; 
+[4] MAINPROCESS ??? if( s1_a_shift_flg != (S1) 0 ) 
+[5] MAINPROCESS subproc SUBPROCESS(2) 
+[6] SUBPROCESS(2) ??? if( fl_a_self_v > BTT_ACTIVE_SPEED_TH ) 
+[7] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[8] SUBPROCESS(2) ??? else 
+[9] SUBPROCESS(2) subproc SUBSUBPROCESS(2) 
+[10] MAINPROCESS ??? else 
+[11] MAINPROCESS subproc SUBPROCESS(3) 
+[12] SUBPROCESS(3) func fn_btt_atd_initialize(); 
+[13] MAINPROCESS proc return; 
+[14] MAINPROCESS func fn_btt_atd_initialize(); 
 ----------------- Total Codes : 14 lines
 --------------------------
 [Function Name] : fn_btt_tle_main 
@@ -643,55 +643,55 @@ MAINPROCESS func fn_btt_atd_initialize();
      [5] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [6] : BTT_STAT   *pst_a_btt_stat 
 ----- Codes -----
-MAINPROCESS equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
-MAINPROCESS proc S4 s4_t_lp_i; 
-MAINPROCESS proc FL fl_a_tle_bf_peak[BTT_TLE_RANGE]; 
-MAINPROCESS func FL fl_a_tle_bf_pow_diff[BTT_TLE_RANGE-(S4)1]; 
-MAINPROCESS equal for(s4_t_lp_i 0;
-MAINPROCESS proc s4_t_lp_i < BTT_TLE_RANGE; 
-MAINPROCESS ??? s4_t_lp_i++) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal fl_a_tle_bf_peak[s4_t_lp_i] (FL)0;
-MAINPROCESS equal for(s4_t_lp_i 0;
-MAINPROCESS func s4_t_lp_i < BTT_TLE_RANGE - (S4)1; 
-MAINPROCESS ??? s4_t_lp_i++) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] (FL)0;
-MAINPROCESS ??? if( st_g_btt_stat.TLE != BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) ??? if( st_g_btt_result.TLength != BTT_TRAILER_SIZE_UNKNOWN ) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? fn_btt_tle_search_peak_bf( 
-MAINPROCESS ??? (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
-MAINPROCESS ??? fl_a_tle_bf_peak 
-MAINPROCESS proc ); 
-MAINPROCESS ??? fn_btt_tle_calc_bf_power_diff( 
-MAINPROCESS ??? fl_a_tle_bf_peak, 
-MAINPROCESS ??? fl_a_tle_bf_pow_diff 
-MAINPROCESS proc ); 
-MAINPROCESS equal for (s4_t_lp_i 0;
-MAINPROCESS proc s4_t_lp_i < 30; 
-MAINPROCESS ??? s4_t_lp_i++ ) 
-MAINPROCESS subproc SUBPROCESS(4) 
-SUBPROCESS(4) ??? fn_bsm_cal_trailer_range_doa_ave( 
-SUBPROCESS(4) ??? 0, 
-SUBPROCESS(4) ??? (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
-SUBPROCESS(4) ??? (256+s4_t_lp_i), 
-SUBPROCESS(4) ??? &afl_a_doa_pow_ave[s4_t_lp_i], 
-SUBPROCESS(4) ??? &afl_a_doa_pow_dev[s4_t_lp_i] 
-SUBPROCESS(4) proc ); 
-MAINPROCESS ??? if( st_tle_params.timer < BTT_TLE_MAX_TIME) 
-MAINPROCESS subproc SUBPROCESS(5) 
-SUBPROCESS(5) ??? fl_t_length = fn_btt_tle_estimate_trailer_length( 
-SUBPROCESS(5) proc ); 
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(6) 
-SUBPROCESS(6) func fn_btt_tle_deactivate(); 
-MAINPROCESS proc st_tle_params.timer++; 
-MAINPROCESS equal fl_t_length (FL)4;
-MAINPROCESS proc return fl_t_length; 
-MAINPROCESS func fn_btt_tle_deactivate(); 
+[1] MAINPROCESS equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
+[2] MAINPROCESS proc S4 s4_t_lp_i; 
+[3] MAINPROCESS proc FL fl_a_tle_bf_peak[BTT_TLE_RANGE]; 
+[4] MAINPROCESS func FL fl_a_tle_bf_pow_diff[BTT_TLE_RANGE-(S4)1]; 
+[5] MAINPROCESS equal for(s4_t_lp_i 0;
+[6] MAINPROCESS proc s4_t_lp_i < BTT_TLE_RANGE; 
+[7] MAINPROCESS ??? s4_t_lp_i++) 
+[8] MAINPROCESS subproc SUBPROCESS(1) 
+[9] SUBPROCESS(1) equal fl_a_tle_bf_peak[s4_t_lp_i] (FL)0;
+[10] MAINPROCESS equal for(s4_t_lp_i 0;
+[11] MAINPROCESS func s4_t_lp_i < BTT_TLE_RANGE - (S4)1; 
+[12] MAINPROCESS ??? s4_t_lp_i++) 
+[13] MAINPROCESS subproc SUBPROCESS(2) 
+[14] SUBPROCESS(2) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] (FL)0;
+[15] MAINPROCESS ??? if( st_g_btt_stat.TLE != BTT_RET_t.Func_Stat.ACTIVE ) 
+[16] MAINPROCESS subproc SUBPROCESS(3) 
+[17] SUBPROCESS(3) ??? if( st_g_btt_result.TLength != BTT_TRAILER_SIZE_UNKNOWN ) 
+[18] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[19] SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
+[20] MAINPROCESS ??? fn_btt_tle_search_peak_bf( 
+[21] MAINPROCESS ??? (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
+[22] MAINPROCESS ??? fl_a_tle_bf_peak 
+[23] MAINPROCESS proc ); 
+[24] MAINPROCESS ??? fn_btt_tle_calc_bf_power_diff( 
+[25] MAINPROCESS ??? fl_a_tle_bf_peak, 
+[26] MAINPROCESS ??? fl_a_tle_bf_pow_diff 
+[27] MAINPROCESS proc ); 
+[28] MAINPROCESS equal for (s4_t_lp_i 0;
+[29] MAINPROCESS proc s4_t_lp_i < 30; 
+[30] MAINPROCESS ??? s4_t_lp_i++ ) 
+[31] MAINPROCESS subproc SUBPROCESS(4) 
+[32] SUBPROCESS(4) ??? fn_bsm_cal_trailer_range_doa_ave( 
+[33] SUBPROCESS(4) ??? 0, 
+[34] SUBPROCESS(4) ??? (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
+[35] SUBPROCESS(4) ??? (256+s4_t_lp_i), 
+[36] SUBPROCESS(4) ??? &afl_a_doa_pow_ave[s4_t_lp_i], 
+[37] SUBPROCESS(4) ??? &afl_a_doa_pow_dev[s4_t_lp_i] 
+[38] SUBPROCESS(4) proc ); 
+[39] MAINPROCESS ??? if( st_tle_params.timer < BTT_TLE_MAX_TIME) 
+[40] MAINPROCESS subproc SUBPROCESS(5) 
+[41] SUBPROCESS(5) ??? fl_t_length = fn_btt_tle_estimate_trailer_length( 
+[42] SUBPROCESS(5) proc ); 
+[43] MAINPROCESS ??? else 
+[44] MAINPROCESS subproc SUBPROCESS(6) 
+[45] SUBPROCESS(6) func fn_btt_tle_deactivate(); 
+[46] MAINPROCESS proc st_tle_params.timer++; 
+[47] MAINPROCESS equal fl_t_length (FL)4;
+[48] MAINPROCESS proc return fl_t_length; 
+[49] MAINPROCESS func fn_btt_tle_deactivate(); 
 ----------------- Total Codes : 49 lines
 --------------------------
 [Function Name] : fn_btt_twe_main 
@@ -706,23 +706,23 @@ MAINPROCESS func fn_btt_tle_deactivate();
      [6] : BTT_HITCH_ANGLE   *pst_a_hitch_angle 
      [7] : BTT_STAT   *pst_a_btt_stat 
 ----- Codes -----
-MAINPROCESS equal FL fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
-MAINPROCESS ??? if( st_g_btt_stat.TWE != BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) proc return fl_t_width; 
-MAINPROCESS ??? if( st_twe_params.timer < BTT_TWE_MAX_TIME) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) ??? fl_t_width = fn_btt_twe_estimate_trailer_width( 
-SUBPROCESS(2) ??? s4_a_curve_r, 
-SUBPROCESS(2) ??? pst_a_object, 
-SUBPROCESS(2) ??? s4_a_object_size 
-SUBPROCESS(2) proc ); 
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) func fn_btt_twe_deactivate(); 
-MAINPROCESS proc st_twe_params.timer++; 
-MAINPROCESS proc return fl_t_width; 
-MAINPROCESS func fn_btt_twe_deactivate(); 
+[1] MAINPROCESS equal FL fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
+[2] MAINPROCESS ??? if( st_g_btt_stat.TWE != BTT_RET_t.Func_Stat.ACTIVE ) 
+[3] MAINPROCESS subproc SUBPROCESS(1) 
+[4] SUBPROCESS(1) proc return fl_t_width; 
+[5] MAINPROCESS ??? if( st_twe_params.timer < BTT_TWE_MAX_TIME) 
+[6] MAINPROCESS subproc SUBPROCESS(2) 
+[7] SUBPROCESS(2) ??? fl_t_width = fn_btt_twe_estimate_trailer_width( 
+[8] SUBPROCESS(2) ??? s4_a_curve_r, 
+[9] SUBPROCESS(2) ??? pst_a_object, 
+[10] SUBPROCESS(2) ??? s4_a_object_size 
+[11] SUBPROCESS(2) proc ); 
+[12] MAINPROCESS ??? else 
+[13] MAINPROCESS subproc SUBPROCESS(3) 
+[14] SUBPROCESS(3) func fn_btt_twe_deactivate(); 
+[15] MAINPROCESS proc st_twe_params.timer++; 
+[16] MAINPROCESS proc return fl_t_width; 
+[17] MAINPROCESS func fn_btt_twe_deactivate(); 
 ----------------- Total Codes : 17 lines
 --------------------------
 [Function Name] : fn_btt_aaz_main 
@@ -738,55 +738,55 @@ MAINPROCESS func fn_btt_twe_deactivate();
      [7] : S4   s4_a_target_size 
      [8] : BTT_HITCH_ANGLE   *pst_a_hitch_angle 
 ----- Codes -----
-MAINPROCESS ??? if( st_g_btt_stat.AAZ != BTT_RET_t.Func_Stat.ACTIVE ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) proc return; 
-MAINPROCESS ??? if( st_aaz_params.First == BTT_RET_t.Bool.TRUE ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) proc return; 
-MAINPROCESS ??? if( pst_a_btt_result->TLength_stat == BTT_RET_t.TSize_Stat.UNKNOWN ) 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) proc st_aaz_params.TLength_unknown_count++; 
-SUBPROCESS(3) ??? if( st_aaz_params.TLength_unknown_count > BTT_AAZ_TH_OFF ) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(3) ??? else 
-SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else if( pst_a_btt_result->TLength_stat == BTT_RET_t.TSize_Stat.VALID ) 
-MAINPROCESS subproc SUBPROCESS(4) 
-SUBPROCESS(4) ??? if( *pu1_alarm_flg == BTT_RET_t.Bool.TRUE ) 
-SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(4) ??? else 
-SUBPROCESS(4) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else if( pst_a_btt_result->TLength_stat == BTT_RET_t.TSize_Stat.INVALID ) 
-MAINPROCESS subproc SUBPROCESS(5) 
-SUBPROCESS(5) proc st_aaz_params.TLength_invalid_count++; 
-SUBPROCESS(5) ??? if( st_aaz_params.TLength_invalid_count > BTT_AAZ_TH_OFF ) 
-SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(5) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(6) 
-MAINPROCESS ??? if( pst_a_btt_result->TWidth_stat == BTT_RET_t.TSize_Stat.UNKNOWN ) 
-MAINPROCESS subproc SUBPROCESS(7) 
-SUBPROCESS(7) proc st_aaz_params.TWidth_unknown_count++; 
-SUBPROCESS(7) ??? if( st_aaz_params.TWidth_unknown_count > BTT_AAZ_TH_OFF ) 
-SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(7) ??? else 
-SUBPROCESS(7) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else if( pst_a_btt_result->TWidth_stat == BTT_RET_t.TSize_Stat.VALID ) 
-MAINPROCESS subproc SUBPROCESS(8) 
-SUBPROCESS(8) ??? if( *pu1_alarm_flg == BTT_RET_t.Bool.TRUE ) 
-SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(8) ??? else 
-SUBPROCESS(8) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else if( pst_a_btt_result->TWidth_stat == BTT_RET_t.TSize_Stat.INVALID ) 
-MAINPROCESS subproc SUBPROCESS(9) 
-SUBPROCESS(9) proc st_aaz_params.TWidth_invalid_count++; 
-SUBPROCESS(9) ??? if( st_aaz_params.TWidth_invalid_count > BTT_AAZ_TH_OFF ) 
-SUBPROCESS(9) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(9) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(10) 
-MAINPROCESS proc return; 
+[1] MAINPROCESS ??? if( st_g_btt_stat.AAZ != BTT_RET_t.Func_Stat.ACTIVE ) 
+[2] MAINPROCESS subproc SUBPROCESS(1) 
+[3] SUBPROCESS(1) proc return; 
+[4] MAINPROCESS ??? if( st_aaz_params.First == BTT_RET_t.Bool.TRUE ) 
+[5] MAINPROCESS subproc SUBPROCESS(2) 
+[6] SUBPROCESS(2) proc return; 
+[7] MAINPROCESS ??? if( pst_a_btt_result->TLength_stat == BTT_RET_t.TSize_Stat.UNKNOWN ) 
+[8] MAINPROCESS subproc SUBPROCESS(3) 
+[9] SUBPROCESS(3) proc st_aaz_params.TLength_unknown_count++; 
+[10] SUBPROCESS(3) ??? if( st_aaz_params.TLength_unknown_count > BTT_AAZ_TH_OFF ) 
+[11] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[12] SUBPROCESS(3) ??? else 
+[13] SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
+[14] MAINPROCESS ??? else if( pst_a_btt_result->TLength_stat == BTT_RET_t.TSize_Stat.VALID ) 
+[15] MAINPROCESS subproc SUBPROCESS(4) 
+[16] SUBPROCESS(4) ??? if( *pu1_alarm_flg == BTT_RET_t.Bool.TRUE ) 
+[17] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[18] SUBPROCESS(4) ??? else 
+[19] SUBPROCESS(4) subproc SUBSUBPROCESS(2) 
+[20] MAINPROCESS ??? else if( pst_a_btt_result->TLength_stat == BTT_RET_t.TSize_Stat.INVALID ) 
+[21] MAINPROCESS subproc SUBPROCESS(5) 
+[22] SUBPROCESS(5) proc st_aaz_params.TLength_invalid_count++; 
+[23] SUBPROCESS(5) ??? if( st_aaz_params.TLength_invalid_count > BTT_AAZ_TH_OFF ) 
+[24] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
+[25] SUBPROCESS(5) subproc SUBSUBPROCESS(2) 
+[26] MAINPROCESS ??? else 
+[27] MAINPROCESS subproc SUBPROCESS(6) 
+[28] MAINPROCESS ??? if( pst_a_btt_result->TWidth_stat == BTT_RET_t.TSize_Stat.UNKNOWN ) 
+[29] MAINPROCESS subproc SUBPROCESS(7) 
+[30] SUBPROCESS(7) proc st_aaz_params.TWidth_unknown_count++; 
+[31] SUBPROCESS(7) ??? if( st_aaz_params.TWidth_unknown_count > BTT_AAZ_TH_OFF ) 
+[32] SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
+[33] SUBPROCESS(7) ??? else 
+[34] SUBPROCESS(7) subproc SUBSUBPROCESS(2) 
+[35] MAINPROCESS ??? else if( pst_a_btt_result->TWidth_stat == BTT_RET_t.TSize_Stat.VALID ) 
+[36] MAINPROCESS subproc SUBPROCESS(8) 
+[37] SUBPROCESS(8) ??? if( *pu1_alarm_flg == BTT_RET_t.Bool.TRUE ) 
+[38] SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
+[39] SUBPROCESS(8) ??? else 
+[40] SUBPROCESS(8) subproc SUBSUBPROCESS(2) 
+[41] MAINPROCESS ??? else if( pst_a_btt_result->TWidth_stat == BTT_RET_t.TSize_Stat.INVALID ) 
+[42] MAINPROCESS subproc SUBPROCESS(9) 
+[43] SUBPROCESS(9) proc st_aaz_params.TWidth_invalid_count++; 
+[44] SUBPROCESS(9) ??? if( st_aaz_params.TWidth_invalid_count > BTT_AAZ_TH_OFF ) 
+[45] SUBPROCESS(9) subproc SUBSUBPROCESS(1) 
+[46] SUBPROCESS(9) subproc SUBSUBPROCESS(2) 
+[47] MAINPROCESS ??? else 
+[48] MAINPROCESS subproc SUBPROCESS(10) 
+[49] MAINPROCESS proc return; 
 ----------------- Total Codes : 49 lines
 --------------------------
 [Function Name] : fn_btt_atd_detect_trailer 
@@ -803,37 +803,37 @@ MAINPROCESS proc return;
      [8] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
      [9] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
 ----- Codes -----
-MAINPROCESS proc S4 s4_t_lp_i; 
-MAINPROCESS equal U1 u1_t_btt_trailer_flg BTT_RET_t.TFlag.UNKNOWN;
-MAINPROCESS ??? fn_btt_atd_trailerobj_tracking( 
-MAINPROCESS ??? pst_a_object, 
-MAINPROCESS ??? s4_a_object_size 
-MAINPROCESS ??? ,fl_a_doa_pow_ave 
-MAINPROCESS ??? ,fl_a_doa_pow_dev 
-MAINPROCESS ??? ,s4_a_doa_bf_peak_bin 
-MAINPROCESS ??? ,fl_a_doa_bf_peak_pow 
-MAINPROCESS proc ); 
-MAINPROCESS ??? if( st_atd_params.atd_counter[0] > BTT_ATD_CONNECT_TH ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.CONNECT;
-MAINPROCESS ??? if( (st_atd_params.atd_counter[1] > BTT_ATD_NOTCONNECT_TH) 
-MAINPROCESS ??? &&  (st_atd_params.atd_counter[1] - st_atd_params.atd_counter[0] > BTT_ATD_CNT_DIFF) ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.NOTCONNECT;
-SUBPROCESS(2) equal for(s4_t_lp_i 0;
-SUBPROCESS(2) proc s4_t_lp_i<6; 
-SUBPROCESS(2) ??? s4_t_lp_i++) 
-SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-MAINPROCESS proc return u1_t_btt_trailer_flg; 
-SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
+[1] MAINPROCESS proc S4 s4_t_lp_i; 
+[2] MAINPROCESS equal U1 u1_t_btt_trailer_flg BTT_RET_t.TFlag.UNKNOWN;
+[3] MAINPROCESS ??? fn_btt_atd_trailerobj_tracking( 
+[4] MAINPROCESS ??? pst_a_object, 
+[5] MAINPROCESS ??? s4_a_object_size 
+[6] MAINPROCESS ??? ,fl_a_doa_pow_ave 
+[7] MAINPROCESS ??? ,fl_a_doa_pow_dev 
+[8] MAINPROCESS ??? ,s4_a_doa_bf_peak_bin 
+[9] MAINPROCESS ??? ,fl_a_doa_bf_peak_pow 
+[10] MAINPROCESS proc ); 
+[11] MAINPROCESS ??? if( st_atd_params.atd_counter[0] > BTT_ATD_CONNECT_TH ) 
+[12] MAINPROCESS subproc SUBPROCESS(1) 
+[13] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.CONNECT;
+[14] MAINPROCESS ??? if( (st_atd_params.atd_counter[1] > BTT_ATD_NOTCONNECT_TH) 
+[15] MAINPROCESS ??? &&  (st_atd_params.atd_counter[1] - st_atd_params.atd_counter[0] > BTT_ATD_CNT_DIFF) ) 
+[16] MAINPROCESS subproc SUBPROCESS(2) 
+[17] SUBPROCESS(2) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.NOTCONNECT;
+[18] SUBPROCESS(2) equal for(s4_t_lp_i 0;
+[19] SUBPROCESS(2) proc s4_t_lp_i<6; 
+[20] SUBPROCESS(2) ??? s4_t_lp_i++) 
+[21] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[22] MAINPROCESS proc return u1_t_btt_trailer_flg; 
+[23] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
 ----------------- Total Codes : 23 lines
 --------------------------
 [Function Name] : fn_btt_tle_estimate_trailer_length 
 -Return type : FL 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
-MAINPROCESS proc return fl_t_length; 
+[1] MAINPROCESS equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
+[2] MAINPROCESS proc return fl_t_length; 
 ----------------- Total Codes : 2 lines
 --------------------------
 [Function Name] : fn_btt_twe_estimate_trailer_width 
@@ -843,76 +843,76 @@ MAINPROCESS proc return fl_t_length;
      [1] : NORMAL_BSM   *pst_a_object 
      [2] : S4   s4_a_object_size 
 ----- Codes -----
-MAINPROCESS proc S4 s4_t_lp_i; 
-MAINPROCESS proc S4 s4_t_cycle; 
-MAINPROCESS proc FL fl_t_width; 
-MAINPROCESS equal FL fl_t_rx_ave (FL)0.0;
-MAINPROCESS equal s4_t_cycle (S4)0;
-MAINPROCESS equal for(s4_t_lp_i 0;
-MAINPROCESS proc s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; 
-MAINPROCESS ??? s4_t_lp_i++) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) ??? if( st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Rxobs != CFL_UNKNOWN_VALUE 
-SUBPROCESS(1) ??? &&  st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Ryobs < (FL)-0.5 
-SUBPROCESS(1) ??? &&  st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Ryobs > (FL)-2.0 ) 
-SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-MAINPROCESS ??? if(s4_t_cycle != (S4)0) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal fl_t_rx_ave fl_t_rx_ave / (FL)s4_t_cycle;
-SUBPROCESS(2) equal fl_t_width (FL)2.0 * fl_t_rx_ave;
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) equal fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
-MAINPROCESS proc return fl_t_width; 
-MAINPROCESS equal fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
+[1] MAINPROCESS proc S4 s4_t_lp_i; 
+[2] MAINPROCESS proc S4 s4_t_cycle; 
+[3] MAINPROCESS proc FL fl_t_width; 
+[4] MAINPROCESS equal FL fl_t_rx_ave (FL)0.0;
+[5] MAINPROCESS equal s4_t_cycle (S4)0;
+[6] MAINPROCESS equal for(s4_t_lp_i 0;
+[7] MAINPROCESS proc s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; 
+[8] MAINPROCESS ??? s4_t_lp_i++) 
+[9] MAINPROCESS subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) ??? if( st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Rxobs != CFL_UNKNOWN_VALUE 
+[11] SUBPROCESS(1) ??? &&  st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Ryobs < (FL)-0.5 
+[12] SUBPROCESS(1) ??? &&  st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Ryobs > (FL)-2.0 ) 
+[13] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[14] MAINPROCESS ??? if(s4_t_cycle != (S4)0) 
+[15] MAINPROCESS subproc SUBPROCESS(2) 
+[16] SUBPROCESS(2) equal fl_t_rx_ave fl_t_rx_ave / (FL)s4_t_cycle;
+[17] SUBPROCESS(2) equal fl_t_width (FL)2.0 * fl_t_rx_ave;
+[18] MAINPROCESS subproc SUBPROCESS(3) 
+[19] SUBPROCESS(3) equal fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
+[20] MAINPROCESS proc return fl_t_width; 
+[21] MAINPROCESS equal fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
 ----------------- Total Codes : 21 lines
 --------------------------
 [Function Name] : fn_check_front_trailer_line 
 -Return type : VD 
 -Argument : 0 
 ----- Codes -----
-MAINPROCESS proc S4 i,j; 
-MAINPROCESS proc FL pfl_a_trailerline_pow_dn; 
-MAINPROCESS proc S4 as4_a_trailerline_doa_dn[LINE_FREQ_BIN_RANGE][1]; 
-MAINPROCESS proc S4 as4_a_trailerline_doa_peak_num_dn[LINE_FREQ_BIN_RANGE]; 
-MAINPROCESS proc FL afl_a_trailerline_dn[LINE_FREQ_BIN_RANGE][2]; 
-MAINPROCESS equal S4 trailerline_start_bin FREQ_BIN_LOWER_LIMIT_T;
-MAINPROCESS equal pfl_a_trailerline_pow_dn (FL)0;
-MAINPROCESS equal for(i 0;
-MAINPROCESS proc i<LINE_FREQ_BIN_RANGE; 
-MAINPROCESS ??? i++) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal as4_a_trailerline_doa_dn[i][0] (S4)0;
-SUBPROCESS(1) equal as4_a_trailerline_doa_peak_num_dn[i] (S4)0;
-SUBPROCESS(1) equal for(j 0;
-SUBPROCESS(1) proc j<2; 
-SUBPROCESS(1) ??? j++) 
-SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-MAINPROCESS ??? pfl_a_trailerline_pow_dn = calc_line_doa_fm( 
-MAINPROCESS ??? (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[1]), 
-MAINPROCESS ??? afl_g_cvw_lfm_ftt_power[1], 
-MAINPROCESS ??? trailerline_start_bin, 
-MAINPROCESS ??? trailerline_start_bin + LINE_FREQ_BIN_RANGE, 
-MAINPROCESS ??? (FL)0.0F, 
-MAINPROCESS ??? as4_a_trailerline_doa_dn, 
-MAINPROCESS ??? as4_a_trailerline_doa_peak_num_dn, 
-MAINPROCESS ??? CU2_LFM_MOD_DN 
-MAINPROCESS proc ); 
-MAINPROCESS ??? fn_btt_atd_check_detect_trailerobjs( 
-MAINPROCESS ??? trailerline_start_bin, 
-MAINPROCESS ??? (const S4 (*)[1])as4_a_trailerline_doa_dn, 
-MAINPROCESS ??? as4_a_trailerline_doa_peak_num_dn, 
-MAINPROCESS ??? afl_a_trailerline_dn 
-MAINPROCESS proc ); 
-MAINPROCESS equal for(i 0;
-MAINPROCESS proc i<LINE_FREQ_BIN_RANGE; 
-MAINPROCESS ??? i++) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal for(j 0;
-SUBPROCESS(2) proc j<2; 
-SUBPROCESS(2) ??? j++) 
-SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal afl_g_btt_nearfield_line_dn[i][j] afl_a_trailerline_dn[i][j];
+[1] MAINPROCESS proc S4 i,j; 
+[2] MAINPROCESS proc FL pfl_a_trailerline_pow_dn; 
+[3] MAINPROCESS proc S4 as4_a_trailerline_doa_dn[LINE_FREQ_BIN_RANGE][1]; 
+[4] MAINPROCESS proc S4 as4_a_trailerline_doa_peak_num_dn[LINE_FREQ_BIN_RANGE]; 
+[5] MAINPROCESS proc FL afl_a_trailerline_dn[LINE_FREQ_BIN_RANGE][2]; 
+[6] MAINPROCESS equal S4 trailerline_start_bin FREQ_BIN_LOWER_LIMIT_T;
+[7] MAINPROCESS equal pfl_a_trailerline_pow_dn (FL)0;
+[8] MAINPROCESS equal for(i 0;
+[9] MAINPROCESS proc i<LINE_FREQ_BIN_RANGE; 
+[10] MAINPROCESS ??? i++) 
+[11] MAINPROCESS subproc SUBPROCESS(1) 
+[12] SUBPROCESS(1) equal as4_a_trailerline_doa_dn[i][0] (S4)0;
+[13] SUBPROCESS(1) equal as4_a_trailerline_doa_peak_num_dn[i] (S4)0;
+[14] SUBPROCESS(1) equal for(j 0;
+[15] SUBPROCESS(1) proc j<2; 
+[16] SUBPROCESS(1) ??? j++) 
+[17] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[18] MAINPROCESS ??? pfl_a_trailerline_pow_dn = calc_line_doa_fm( 
+[19] MAINPROCESS ??? (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[1]), 
+[20] MAINPROCESS ??? afl_g_cvw_lfm_ftt_power[1], 
+[21] MAINPROCESS ??? trailerline_start_bin, 
+[22] MAINPROCESS ??? trailerline_start_bin + LINE_FREQ_BIN_RANGE, 
+[23] MAINPROCESS ??? (FL)0.0F, 
+[24] MAINPROCESS ??? as4_a_trailerline_doa_dn, 
+[25] MAINPROCESS ??? as4_a_trailerline_doa_peak_num_dn, 
+[26] MAINPROCESS ??? CU2_LFM_MOD_DN 
+[27] MAINPROCESS proc ); 
+[28] MAINPROCESS ??? fn_btt_atd_check_detect_trailerobjs( 
+[29] MAINPROCESS ??? trailerline_start_bin, 
+[30] MAINPROCESS ??? (const S4 (*)[1])as4_a_trailerline_doa_dn, 
+[31] MAINPROCESS ??? as4_a_trailerline_doa_peak_num_dn, 
+[32] MAINPROCESS ??? afl_a_trailerline_dn 
+[33] MAINPROCESS proc ); 
+[34] MAINPROCESS equal for(i 0;
+[35] MAINPROCESS proc i<LINE_FREQ_BIN_RANGE; 
+[36] MAINPROCESS ??? i++) 
+[37] MAINPROCESS subproc SUBPROCESS(2) 
+[38] SUBPROCESS(2) equal for(j 0;
+[39] SUBPROCESS(2) proc j<2; 
+[40] SUBPROCESS(2) ??? j++) 
+[41] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[42] MAINPROCESS proc return; 
+[43] SUBSUBPROCESS(1) equal afl_g_btt_nearfield_line_dn[i][j] afl_a_trailerline_dn[i][j];
 ----------------- Total Codes : 43 lines
 --------------------------
 [Function Name] : fn_btt_atd_check_detect_trailerobjs 
@@ -923,30 +923,30 @@ SUBSUBPROCESS(1) equal afl_g_btt_nearfield_line_dn[i][j] afl_a_trailerline_dn[i]
      [2] : const S4   as4_a_trailerline_doa_peak_num_dn[LINE_FREQ_BIN_RANGE] 
      [3] : FL   afl_a_trailerline_dn[LINE_FREQ_BIN_RANGE][2] 
 ----- Codes -----
-MAINPROCESS proc S4 i; 
-MAINPROCESS proc S4 j; 
-MAINPROCESS equal FL tmp_r 0.0F;
-MAINPROCESS equal FL tmp_rx CFL_UNKNOWN_VALUE;
-MAINPROCESS equal FL tmp_ry CFL_UNKNOWN_VALUE;
-MAINPROCESS equal FL tmp_theta 0.0F;
-MAINPROCESS equal for(i 0;
-MAINPROCESS proc i<LINE_FREQ_BIN_RANGE; 
-MAINPROCESS ??? i++) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal for(j 0;
-SUBPROCESS(1) proc j<as4_a_trailerline_doa_peak_num_dn[i]; 
-SUBPROCESS(1) ??? j++) 
-SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal tmp_r - RCOF * 2.0F * (FL)((as4_a_trailerline_start_bin + i) - (FL)NB_FFT_PT * 0.5F);
-SUBSUBPROCESS(1) ??? tmp_theta = fl_transform_doabin_to_rad( 
-SUBSUBPROCESS(1) ??? as4_a_trailerline_doa_dn[i][j], 
-SUBSUBPROCESS(1) ??? 1 
-SUBSUBPROCESS(1) proc ); 
-SUBSUBPROCESS(1) equal tmp_rx tmp_r * fl_sin( tmp_theta ) + st_g_bsm_loop_data.afl_installed_angle[1];
-SUBSUBPROCESS(1) equal tmp_ry tmp_r * fl_cos( tmp_theta );
-SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][0] tmp_rx;
-SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][1] tmp_ry;
+[1] MAINPROCESS proc S4 i; 
+[2] MAINPROCESS proc S4 j; 
+[3] MAINPROCESS equal FL tmp_r 0.0F;
+[4] MAINPROCESS equal FL tmp_rx CFL_UNKNOWN_VALUE;
+[5] MAINPROCESS equal FL tmp_ry CFL_UNKNOWN_VALUE;
+[6] MAINPROCESS equal FL tmp_theta 0.0F;
+[7] MAINPROCESS equal for(i 0;
+[8] MAINPROCESS proc i<LINE_FREQ_BIN_RANGE; 
+[9] MAINPROCESS ??? i++) 
+[10] MAINPROCESS subproc SUBPROCESS(1) 
+[11] SUBPROCESS(1) equal for(j 0;
+[12] SUBPROCESS(1) proc j<as4_a_trailerline_doa_peak_num_dn[i]; 
+[13] SUBPROCESS(1) ??? j++) 
+[14] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[15] MAINPROCESS proc return; 
+[16] SUBSUBPROCESS(1) equal tmp_r - RCOF * 2.0F * (FL)((as4_a_trailerline_start_bin + i) - (FL)NB_FFT_PT * 0.5F);
+[17] SUBSUBPROCESS(1) ??? tmp_theta = fl_transform_doabin_to_rad( 
+[18] SUBSUBPROCESS(1) ??? as4_a_trailerline_doa_dn[i][j], 
+[19] SUBSUBPROCESS(1) ??? 1 
+[20] SUBSUBPROCESS(1) proc ); 
+[21] SUBSUBPROCESS(1) equal tmp_rx tmp_r * fl_sin( tmp_theta ) + st_g_bsm_loop_data.afl_installed_angle[1];
+[22] SUBSUBPROCESS(1) equal tmp_ry tmp_r * fl_cos( tmp_theta );
+[23] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][0] tmp_rx;
+[24] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][1] tmp_ry;
 ----------------- Total Codes : 24 lines
 --------------------------
 [Function Name] : fn_btt_atd_trailerobj_tracking 
@@ -955,95 +955,95 @@ SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][1] tmp_ry;
      [0] : NORMAL_BSM   pst_a_trailer_obj[TRAILER_BUFFSIZE] 
      [1] : S4   as4_a_trailer_obj_num 
 ----- Codes -----
-MAINPROCESS proc S4 s4_t_lp_i, s4_t_lp_j; 
-MAINPROCESS equal S4 as4_a_trk_num (S4)0;
-MAINPROCESS equal S4 as4_a_trk_num2 (S4)0;
-MAINPROCESS equal S4 as4_a_tmp_trailer_obj_num (S4)0;
-MAINPROCESS equal FL afl_a_trailer_obj_rx_ave (FL)0;
-MAINPROCESS equal FL afl_a_trailer_obj_rx_dev (FL)0;
-MAINPROCESS equal FL afl_a_trailer_obj_ry_ave (FL)0;
-MAINPROCESS equal FL afl_a_trailer_obj_ry_dev (FL)0;
-MAINPROCESS equal FL afl_a_trailer_obj_vy_ave (FL)0;
-MAINPROCESS equal FL afl_a_trailer_obj_vy_dev (FL)0;
-MAINPROCESS equal FL afl_a_trailer_doa_pow_up (FL)0;
-MAINPROCESS equal FL afl_a_trailer_doa_pow_dn (FL)0;
-MAINPROCESS equal FL afl_a_trailer_doa_pow_dev_up (FL)0;
-MAINPROCESS equal FL afl_a_trailer_doa_pow_dev_dn (FL)0;
-MAINPROCESS equal FL afl_a_db_doa_peak_ave_diff (FL)0;
-MAINPROCESS equal FL afl_a_trailer_doa_pow_th (FL)0;
-MAINPROCESS ??? if( s4_abs(s2_g_curvr_for_base) > (S2)80 ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
-MAINPROCESS ??? else if( s4_abs(s2_g_curvr_for_base) > (S2)40 ) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal afl_a_trailer_doa_pow_th (FL)55;
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(3) 
-SUBPROCESS(3) ??? if( s2_g_curvr_for_base < 0 ) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
-MAINPROCESS equal for( s4_t_lp_i 0;
-MAINPROCESS proc s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; 
-MAINPROCESS ??? s4_t_lp_i++ ) 
-MAINPROCESS subproc SUBPROCESS(4) 
-SUBPROCESS(4) equal as4_a_tmp_trailer_obj_num st_atd_params.trailer_object_num_total[s4_t_lp_i];
-SUBPROCESS(4) ??? if( as4_a_tmp_trailer_obj_num != (S4)0 ) 
-SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-MAINPROCESS ??? if( as4_a_trk_num2 != (S4)0) 
-MAINPROCESS subproc SUBPROCESS(5) 
-SUBPROCESS(5) equal afl_a_trailer_obj_rx_ave afl_a_trailer_obj_rx_ave / (FL)as4_a_trk_num2;
-SUBPROCESS(5) equal afl_a_trailer_obj_ry_ave afl_a_trailer_obj_ry_ave / (FL)as4_a_trk_num2;
-SUBPROCESS(5) equal afl_a_trailer_obj_vy_ave afl_a_trailer_obj_vy_ave / (FL)as4_a_trk_num2;
-SUBPROCESS(5) equal afl_a_trailer_obj_rx_dev fl_abs((afl_a_trailer_obj_rx_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_rx_ave * afl_a_trailer_obj_rx_ave);
-SUBPROCESS(5) equal afl_a_trailer_obj_ry_dev (afl_a_trailer_obj_ry_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_ry_ave * afl_a_trailer_obj_ry_ave;
-SUBPROCESS(5) equal afl_a_trailer_obj_vy_dev fl_abs((afl_a_trailer_obj_vy_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_vy_ave * afl_a_trailer_obj_vy_ave);
-MAINPROCESS equal afl_a_db_doa_peak_ave_diff fl_a_doa_bf_peak_pow - fl_a_doa_pow_ave[0][1];
-MAINPROCESS ??? if( as4_a_trk_num > BTT_OBJ_DETECT_CYC1 ) 
-MAINPROCESS subproc SUBPROCESS(6) 
-SUBPROCESS(6) ??? if( fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
-SUBPROCESS(6) ??? &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
-SUBPROCESS(6) ??? &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
-SUBPROCESS(6) ??? &&  fl_abs(afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
-SUBPROCESS(6) ??? &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
-SUBPROCESS(6) ??? &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
-SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(6) subproc SUBSUBPROCESS(2) 
-MAINPROCESS ??? else 
-MAINPROCESS subproc SUBPROCESS(7) 
-SUBPROCESS(7) ??? if( as4_a_trk_num2 > (S4)10 
-SUBPROCESS(7) ??? &&  fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
-SUBPROCESS(7) ??? &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
-SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(7) ??? else 
-SUBPROCESS(7) subproc SUBSUBPROCESS(2) 
-MAINPROCESS equal for( s4_t_lp_i 0;
-MAINPROCESS proc s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; 
-MAINPROCESS ??? s4_t_lp_i++ ) 
-MAINPROCESS subproc SUBPROCESS(8) 
-SUBPROCESS(8) equal for( s4_t_lp_j 0;
-SUBPROCESS(8) proc s4_t_lp_j < TRAILER_BUFFSIZE; 
-SUBPROCESS(8) ??? s4_t_lp_j ++ ) 
-SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
-MAINPROCESS equal afl_g_btt_atd_obj_tracking[0] afl_a_trailer_obj_rx_ave;
-MAINPROCESS equal afl_g_btt_atd_obj_tracking[1] afl_a_trailer_obj_ry_ave;
-MAINPROCESS equal afl_g_btt_atd_obj_tracking[2] afl_a_trailer_obj_vy_ave;
-MAINPROCESS equal afl_g_btt_atd_obj_tracking[3] afl_a_trailer_obj_rx_dev;
-MAINPROCESS equal afl_g_btt_atd_obj_tracking[4] afl_a_trailer_obj_ry_dev;
-MAINPROCESS equal afl_g_btt_atd_obj_tracking[5] afl_a_trailer_obj_vy_dev;
-MAINPROCESS equal as4_g_btt_atd_counter[0] as4_a_trk_num;
-MAINPROCESS equal as4_g_btt_atd_counter[1] as4_a_trk_num2;
-MAINPROCESS equal as4_g_btt_atd_counter[2] st_atd_params.atd_counter[0];
-MAINPROCESS equal as4_g_btt_atd_counter[3] st_atd_params.atd_counter[1];
-MAINPROCESS equal afl_g_btt_atd_doa_pow_ave[0] fl_a_doa_pow_ave[0][1];
-MAINPROCESS equal afl_g_btt_atd_doa_pow_ave[1] afl_a_db_doa_peak_ave_diff;
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[0][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
-SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[1][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
-SUBSUBPROCESS(1) ??? if( st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs == (FL)0 ) 
-SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(2) 
-SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] (FL)-120;
-SUBSUBSUBPROCESS(2) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * (FL)3.6;
+[1] MAINPROCESS proc S4 s4_t_lp_i, s4_t_lp_j; 
+[2] MAINPROCESS equal S4 as4_a_trk_num (S4)0;
+[3] MAINPROCESS equal S4 as4_a_trk_num2 (S4)0;
+[4] MAINPROCESS equal S4 as4_a_tmp_trailer_obj_num (S4)0;
+[5] MAINPROCESS equal FL afl_a_trailer_obj_rx_ave (FL)0;
+[6] MAINPROCESS equal FL afl_a_trailer_obj_rx_dev (FL)0;
+[7] MAINPROCESS equal FL afl_a_trailer_obj_ry_ave (FL)0;
+[8] MAINPROCESS equal FL afl_a_trailer_obj_ry_dev (FL)0;
+[9] MAINPROCESS equal FL afl_a_trailer_obj_vy_ave (FL)0;
+[10] MAINPROCESS equal FL afl_a_trailer_obj_vy_dev (FL)0;
+[11] MAINPROCESS equal FL afl_a_trailer_doa_pow_up (FL)0;
+[12] MAINPROCESS equal FL afl_a_trailer_doa_pow_dn (FL)0;
+[13] MAINPROCESS equal FL afl_a_trailer_doa_pow_dev_up (FL)0;
+[14] MAINPROCESS equal FL afl_a_trailer_doa_pow_dev_dn (FL)0;
+[15] MAINPROCESS equal FL afl_a_db_doa_peak_ave_diff (FL)0;
+[16] MAINPROCESS equal FL afl_a_trailer_doa_pow_th (FL)0;
+[17] MAINPROCESS ??? if( s4_abs(s2_g_curvr_for_base) > (S2)80 ) 
+[18] MAINPROCESS subproc SUBPROCESS(1) 
+[19] SUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
+[20] MAINPROCESS ??? else if( s4_abs(s2_g_curvr_for_base) > (S2)40 ) 
+[21] MAINPROCESS subproc SUBPROCESS(2) 
+[22] SUBPROCESS(2) equal afl_a_trailer_doa_pow_th (FL)55;
+[23] MAINPROCESS ??? else 
+[24] MAINPROCESS subproc SUBPROCESS(3) 
+[25] SUBPROCESS(3) ??? if( s2_g_curvr_for_base < 0 ) 
+[26] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[27] SUBPROCESS(3) subproc SUBSUBPROCESS(2) 
+[28] MAINPROCESS equal for( s4_t_lp_i 0;
+[29] MAINPROCESS proc s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; 
+[30] MAINPROCESS ??? s4_t_lp_i++ ) 
+[31] MAINPROCESS subproc SUBPROCESS(4) 
+[32] SUBPROCESS(4) equal as4_a_tmp_trailer_obj_num st_atd_params.trailer_object_num_total[s4_t_lp_i];
+[33] SUBPROCESS(4) ??? if( as4_a_tmp_trailer_obj_num != (S4)0 ) 
+[34] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[35] MAINPROCESS ??? if( as4_a_trk_num2 != (S4)0) 
+[36] MAINPROCESS subproc SUBPROCESS(5) 
+[37] SUBPROCESS(5) equal afl_a_trailer_obj_rx_ave afl_a_trailer_obj_rx_ave / (FL)as4_a_trk_num2;
+[38] SUBPROCESS(5) equal afl_a_trailer_obj_ry_ave afl_a_trailer_obj_ry_ave / (FL)as4_a_trk_num2;
+[39] SUBPROCESS(5) equal afl_a_trailer_obj_vy_ave afl_a_trailer_obj_vy_ave / (FL)as4_a_trk_num2;
+[40] SUBPROCESS(5) equal afl_a_trailer_obj_rx_dev fl_abs((afl_a_trailer_obj_rx_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_rx_ave * afl_a_trailer_obj_rx_ave);
+[41] SUBPROCESS(5) equal afl_a_trailer_obj_ry_dev (afl_a_trailer_obj_ry_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_ry_ave * afl_a_trailer_obj_ry_ave;
+[42] SUBPROCESS(5) equal afl_a_trailer_obj_vy_dev fl_abs((afl_a_trailer_obj_vy_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_vy_ave * afl_a_trailer_obj_vy_ave);
+[43] MAINPROCESS equal afl_a_db_doa_peak_ave_diff fl_a_doa_bf_peak_pow - fl_a_doa_pow_ave[0][1];
+[44] MAINPROCESS ??? if( as4_a_trk_num > BTT_OBJ_DETECT_CYC1 ) 
+[45] MAINPROCESS subproc SUBPROCESS(6) 
+[46] SUBPROCESS(6) ??? if( fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
+[47] SUBPROCESS(6) ??? &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
+[48] SUBPROCESS(6) ??? &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
+[49] SUBPROCESS(6) ??? &&  fl_abs(afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
+[50] SUBPROCESS(6) ??? &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
+[51] SUBPROCESS(6) ??? &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
+[52] SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
+[53] SUBPROCESS(6) subproc SUBSUBPROCESS(2) 
+[54] MAINPROCESS ??? else 
+[55] MAINPROCESS subproc SUBPROCESS(7) 
+[56] SUBPROCESS(7) ??? if( as4_a_trk_num2 > (S4)10 
+[57] SUBPROCESS(7) ??? &&  fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[58] SUBPROCESS(7) ??? &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[59] SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
+[60] SUBPROCESS(7) ??? else 
+[61] SUBPROCESS(7) subproc SUBSUBPROCESS(2) 
+[62] MAINPROCESS equal for( s4_t_lp_i 0;
+[63] MAINPROCESS proc s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; 
+[64] MAINPROCESS ??? s4_t_lp_i++ ) 
+[65] MAINPROCESS subproc SUBPROCESS(8) 
+[66] SUBPROCESS(8) equal for( s4_t_lp_j 0;
+[67] SUBPROCESS(8) proc s4_t_lp_j < TRAILER_BUFFSIZE; 
+[68] SUBPROCESS(8) ??? s4_t_lp_j ++ ) 
+[69] SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
+[70] MAINPROCESS equal afl_g_btt_atd_obj_tracking[0] afl_a_trailer_obj_rx_ave;
+[71] MAINPROCESS equal afl_g_btt_atd_obj_tracking[1] afl_a_trailer_obj_ry_ave;
+[72] MAINPROCESS equal afl_g_btt_atd_obj_tracking[2] afl_a_trailer_obj_vy_ave;
+[73] MAINPROCESS equal afl_g_btt_atd_obj_tracking[3] afl_a_trailer_obj_rx_dev;
+[74] MAINPROCESS equal afl_g_btt_atd_obj_tracking[4] afl_a_trailer_obj_ry_dev;
+[75] MAINPROCESS equal afl_g_btt_atd_obj_tracking[5] afl_a_trailer_obj_vy_dev;
+[76] MAINPROCESS equal as4_g_btt_atd_counter[0] as4_a_trk_num;
+[77] MAINPROCESS equal as4_g_btt_atd_counter[1] as4_a_trk_num2;
+[78] MAINPROCESS equal as4_g_btt_atd_counter[2] st_atd_params.atd_counter[0];
+[79] MAINPROCESS equal as4_g_btt_atd_counter[3] st_atd_params.atd_counter[1];
+[80] MAINPROCESS equal afl_g_btt_atd_doa_pow_ave[0] fl_a_doa_pow_ave[0][1];
+[81] MAINPROCESS equal afl_g_btt_atd_doa_pow_ave[1] afl_a_db_doa_peak_ave_diff;
+[82] MAINPROCESS proc return; 
+[83] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[0][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[84] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[1][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[85] SUBSUBPROCESS(1) ??? if( st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs == (FL)0 ) 
+[86] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[87] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(2) 
+[88] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] (FL)-120;
+[89] SUBSUBSUBPROCESS(2) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * (FL)3.6;
 ----------------- Total Codes : 89 lines
 --------------------------
 [Function Name] : fn_btt_shift_trailerobj 
@@ -1052,18 +1052,18 @@ SUBSUBSUBPROCESS(2) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] st_atd
      [0] : NORMAL_BSM   pst_a_trailer_obj[TRAILER_BUFFSIZE] 
      [1] : S4   as4_a_trailer_obj_num 
 ----- Codes -----
-MAINPROCESS proc S4 s4_t_lp_i; 
-MAINPROCESS equal for( s4_t_lp_i BTT_OBJ_HISTORY_CYCLE - (S4)2 ;
-MAINPROCESS equal s4_t_lp_i > (S4)0;
-MAINPROCESS ??? s4_t_lp_i-- ) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) func fn_move(st_atd_params.trailer_object_total[s4_t_lp_i + (S4)1], st_atd_params.trailer_object_total[s4_t_lp_i], TRAILER_BUFFSIZE); 
-SUBPROCESS(1) equal st_atd_params.trailer_object_num_total[s4_t_lp_i + (S4)1] st_atd_params.trailer_object_num_total[s4_t_lp_i];
-MAINPROCESS func fn_move(st_atd_params.trailer_object_total[(S4)0], pst_a_trailer_obj, TRAILER_BUFFSIZE); 
-MAINPROCESS equal st_atd_params.trailer_object_num_total[0] as4_a_trailer_obj_num;
-MAINPROCESS proc return; 
-MAINPROCESS func fn_move(st_atd_params.trailer_object_total[s4_t_lp_i + (S4)1], st_atd_params.trailer_object_total[s4_t_lp_i], TRAILER_BUFFSIZE); 
-MAINPROCESS equal st_atd_params.trailer_object_num_total[s4_t_lp_i + (S4)1] st_atd_params.trailer_object_num_total[s4_t_lp_i];
+[1] MAINPROCESS proc S4 s4_t_lp_i; 
+[2] MAINPROCESS equal for( s4_t_lp_i BTT_OBJ_HISTORY_CYCLE - (S4)2 ;
+[3] MAINPROCESS equal s4_t_lp_i > (S4)0;
+[4] MAINPROCESS ??? s4_t_lp_i-- ) 
+[5] MAINPROCESS subproc SUBPROCESS(1) 
+[6] SUBPROCESS(1) func fn_move(st_atd_params.trailer_object_total[s4_t_lp_i + (S4)1], st_atd_params.trailer_object_total[s4_t_lp_i], TRAILER_BUFFSIZE); 
+[7] SUBPROCESS(1) equal st_atd_params.trailer_object_num_total[s4_t_lp_i + (S4)1] st_atd_params.trailer_object_num_total[s4_t_lp_i];
+[8] MAINPROCESS func fn_move(st_atd_params.trailer_object_total[(S4)0], pst_a_trailer_obj, TRAILER_BUFFSIZE); 
+[9] MAINPROCESS equal st_atd_params.trailer_object_num_total[0] as4_a_trailer_obj_num;
+[10] MAINPROCESS proc return; 
+[11] MAINPROCESS func fn_move(st_atd_params.trailer_object_total[s4_t_lp_i + (S4)1], st_atd_params.trailer_object_total[s4_t_lp_i], TRAILER_BUFFSIZE); 
+[12] MAINPROCESS equal st_atd_params.trailer_object_num_total[s4_t_lp_i + (S4)1] st_atd_params.trailer_object_num_total[s4_t_lp_i];
 ----------------- Total Codes : 12 lines
 --------------------------
 [Function Name] : fn_btt_sel_exclude_object 
@@ -1072,12 +1072,12 @@ MAINPROCESS equal st_atd_params.trailer_object_num_total[s4_t_lp_i + (S4)1] st_a
      [0] : NORMAL_BSM   pst_a_trailer_obj[TRAILER_BUFFSIZE] 
      [1] : S4   *as4_a_trailer_obj_num 
 ----- Codes -----
-MAINPROCESS ??? fn_btt_sel_exobj_outside_rx( 
-MAINPROCESS ??? pst_a_trailer_obj, 
-MAINPROCESS ??? as4_a_trailer_obj_num 
-MAINPROCESS proc ); 
-MAINPROCESS equal *as4_a_trailer_obj_num s4_trim_trailer(pst_a_trailer_obj);
-MAINPROCESS proc return; 
+[1] MAINPROCESS ??? fn_btt_sel_exobj_outside_rx( 
+[2] MAINPROCESS ??? pst_a_trailer_obj, 
+[3] MAINPROCESS ??? as4_a_trailer_obj_num 
+[4] MAINPROCESS proc ); 
+[5] MAINPROCESS equal *as4_a_trailer_obj_num s4_trim_trailer(pst_a_trailer_obj);
+[6] MAINPROCESS proc return; 
 ----------------- Total Codes : 6 lines
 --------------------------
 [Function Name] : fn_btt_sel_exobj_outside_rx 
@@ -1086,16 +1086,16 @@ MAINPROCESS proc return;
      [0] : NORMAL_BSM   pst_a_trailer_obj[TRAILER_BUFFSIZE] 
      [1] : S4   *as4_a_trailer_obj_num 
 ----- Codes -----
-MAINPROCESS proc S4 s4_t_lp_i; 
-MAINPROCESS equal for(s4_t_lp_i 0;
-MAINPROCESS proc s4_t_lp_i < *as4_a_trailer_obj_num; 
-MAINPROCESS ??? s4_t_lp_i ++) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) ??? if( pst_a_trailer_obj[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE 
-SUBPROCESS(1) ??? &&  fl_abs(pst_a_trailer_obj[s4_t_lp_i].fl_Rxobs) > (FL)2.0) 
-SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) func fn_init(&pst_a_trailer_obj[s4_t_lp_i], 1); 
+[1] MAINPROCESS proc S4 s4_t_lp_i; 
+[2] MAINPROCESS equal for(s4_t_lp_i 0;
+[3] MAINPROCESS proc s4_t_lp_i < *as4_a_trailer_obj_num; 
+[4] MAINPROCESS ??? s4_t_lp_i ++) 
+[5] MAINPROCESS subproc SUBPROCESS(1) 
+[6] SUBPROCESS(1) ??? if( pst_a_trailer_obj[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE 
+[7] SUBPROCESS(1) ??? &&  fl_abs(pst_a_trailer_obj[s4_t_lp_i].fl_Rxobs) > (FL)2.0) 
+[8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[9] MAINPROCESS proc return; 
+[10] SUBSUBPROCESS(1) func fn_init(&pst_a_trailer_obj[s4_t_lp_i], 1); 
 ----------------- Total Codes : 10 lines
 --------------------------
 [Function Name] : fn_btt_tle_search_peak_bf 
@@ -1104,41 +1104,41 @@ SUBSUBPROCESS(1) func fn_init(&pst_a_trailer_obj[s4_t_lp_i], 1);
      [0] : const FL   Ryy[NB_FFT_PT][CORRE_SIZE_4CH] 
      [1] : FL   fl_a_tle_bf_peak[BTT_TLE_RANGE] 
 ----- Codes -----
-MAINPROCESS proc U1 u1_t_lp_i, u1_t_lp_n_doa; 
-MAINPROCESS proc S4 s4_t_focus_bin; 
-MAINPROCESS proc FL afl_t_doa_spec[N_DOA]; 
-MAINPROCESS proc S4 s4_t_doa[1]; 
-MAINPROCESS proc S4 s4_t_doa_range; 
-MAINPROCESS equal s4_t_doa_range (S4)((FL)(N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0] + BTT_DBF_DOA_RANGE);
-MAINPROCESS equal for (u1_t_lp_i (U1)0;
-MAINPROCESS func u1_t_lp_i < (U1)N_DOA; 
-MAINPROCESS ??? u1_t_lp_i++) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_i] (FL)0;
-MAINPROCESS equal for(u1_t_lp_i (U1)0;
-MAINPROCESS func u1_t_lp_i < (U1)BTT_TLE_RANGE; 
-MAINPROCESS ??? u1_t_lp_i++) 
-MAINPROCESS subproc SUBPROCESS(2) 
-SUBPROCESS(2) equal s4_t_doa[0] (S4)0;
-SUBPROCESS(2) equal s4_t_focus_bin FREQ_BIN_LOWER_LIMIT_T + (S4)u1_t_lp_i;
-SUBPROCESS(2) ??? fn_calc_spec_bf_4ch_fm( 
-SUBPROCESS(2) ??? (const FL *)(Ryy[s4_t_focus_bin]), 
-SUBPROCESS(2) ??? afl_t_doa_spec, 
-SUBPROCESS(2) ??? 0, 
-SUBPROCESS(2) ??? s4_t_focus_bin 
-SUBPROCESS(2) proc ); 
-SUBPROCESS(2) equal for (u1_t_lp_n_doa (U1)s4_t_doa_range;
-SUBPROCESS(2) func u1_t_lp_n_doa < (U1)N_DOA; 
-SUBPROCESS(2) ??? u1_t_lp_n_doa++) 
-SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-SUBPROCESS(2) ??? s4_search_peak_bf( 
-SUBPROCESS(2) ??? (const FL *)afl_t_doa_spec, 
-SUBPROCESS(2) ??? s4_t_doa, 
-SUBPROCESS(2) ??? &fl_a_tle_bf_peak[u1_t_lp_i], 
-SUBPROCESS(2) ??? 1 
-SUBPROCESS(2) proc ); 
-MAINPROCESS proc return; 
-SUBSUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_n_doa] (FL)0.0F;
+[1] MAINPROCESS proc U1 u1_t_lp_i, u1_t_lp_n_doa; 
+[2] MAINPROCESS proc S4 s4_t_focus_bin; 
+[3] MAINPROCESS proc FL afl_t_doa_spec[N_DOA]; 
+[4] MAINPROCESS proc S4 s4_t_doa[1]; 
+[5] MAINPROCESS proc S4 s4_t_doa_range; 
+[6] MAINPROCESS equal s4_t_doa_range (S4)((FL)(N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0] + BTT_DBF_DOA_RANGE);
+[7] MAINPROCESS equal for (u1_t_lp_i (U1)0;
+[8] MAINPROCESS func u1_t_lp_i < (U1)N_DOA; 
+[9] MAINPROCESS ??? u1_t_lp_i++) 
+[10] MAINPROCESS subproc SUBPROCESS(1) 
+[11] SUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_i] (FL)0;
+[12] MAINPROCESS equal for(u1_t_lp_i (U1)0;
+[13] MAINPROCESS func u1_t_lp_i < (U1)BTT_TLE_RANGE; 
+[14] MAINPROCESS ??? u1_t_lp_i++) 
+[15] MAINPROCESS subproc SUBPROCESS(2) 
+[16] SUBPROCESS(2) equal s4_t_doa[0] (S4)0;
+[17] SUBPROCESS(2) equal s4_t_focus_bin FREQ_BIN_LOWER_LIMIT_T + (S4)u1_t_lp_i;
+[18] SUBPROCESS(2) ??? fn_calc_spec_bf_4ch_fm( 
+[19] SUBPROCESS(2) ??? (const FL *)(Ryy[s4_t_focus_bin]), 
+[20] SUBPROCESS(2) ??? afl_t_doa_spec, 
+[21] SUBPROCESS(2) ??? 0, 
+[22] SUBPROCESS(2) ??? s4_t_focus_bin 
+[23] SUBPROCESS(2) proc ); 
+[24] SUBPROCESS(2) equal for (u1_t_lp_n_doa (U1)s4_t_doa_range;
+[25] SUBPROCESS(2) func u1_t_lp_n_doa < (U1)N_DOA; 
+[26] SUBPROCESS(2) ??? u1_t_lp_n_doa++) 
+[27] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[28] SUBPROCESS(2) ??? s4_search_peak_bf( 
+[29] SUBPROCESS(2) ??? (const FL *)afl_t_doa_spec, 
+[30] SUBPROCESS(2) ??? s4_t_doa, 
+[31] SUBPROCESS(2) ??? &fl_a_tle_bf_peak[u1_t_lp_i], 
+[32] SUBPROCESS(2) ??? 1 
+[33] SUBPROCESS(2) proc ); 
+[34] MAINPROCESS proc return; 
+[35] SUBSUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_n_doa] (FL)0.0F;
 ----------------- Total Codes : 35 lines
 --------------------------
 [Function Name] : fn_btt_tle_calc_bf_power_diff 
@@ -1147,12 +1147,12 @@ SUBSUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_n_doa] (FL)0.0F;
      [0] : FL   fl_a_tle_bf_peak[BTT_TLE_RANGE] 
      [1] : FL   fl_a_tle_bf_pow_diff[BTT_TLE_RANGE-(S4)1] 
 ----- Codes -----
-MAINPROCESS proc S4 s4_t_lp_i; 
-MAINPROCESS equal for(s4_t_lp_i 0;
-MAINPROCESS func s4_t_lp_i < BTT_TLE_RANGE - (S4)1; 
-MAINPROCESS ??? s4_t_lp_i++) 
-MAINPROCESS subproc SUBPROCESS(1) 
-SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] fl_a_tle_bf_peak[s4_t_lp_i] - fl_a_tle_bf_peak[s4_t_lp_i + 1];
-MAINPROCESS proc return; 
-MAINPROCESS equal fl_a_tle_bf_pow_diff[s4_t_lp_i] fl_a_tle_bf_peak[s4_t_lp_i] - fl_a_tle_bf_peak[s4_t_lp_i + 1];
+[1] MAINPROCESS proc S4 s4_t_lp_i; 
+[2] MAINPROCESS equal for(s4_t_lp_i 0;
+[3] MAINPROCESS func s4_t_lp_i < BTT_TLE_RANGE - (S4)1; 
+[4] MAINPROCESS ??? s4_t_lp_i++) 
+[5] MAINPROCESS subproc SUBPROCESS(1) 
+[6] SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] fl_a_tle_bf_peak[s4_t_lp_i] - fl_a_tle_bf_peak[s4_t_lp_i + 1];
+[7] MAINPROCESS proc return; 
+[8] MAINPROCESS equal fl_a_tle_bf_pow_diff[s4_t_lp_i] fl_a_tle_bf_peak[s4_t_lp_i] - fl_a_tle_bf_peak[s4_t_lp_i + 1];
 ----------------- Total Codes : 8 lines
