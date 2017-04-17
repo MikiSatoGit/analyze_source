@@ -23,8 +23,8 @@ Total functions : 1
 [12] MAINPROCESS ??? ) 
 [13] MAINPROCESS subproc SUBPROCESS(2) 
 [14] SUBPROCESS(2) equal miki1_1 sub;
-[15] SUBPROCESS(2) equal miki1_2 (S1)sub;
-[16] SUBPROCESS(2) func miki1_3() ; 
+[15] SUBPROCESS(2) func miki1_3( 
+[16] SUBPROCESS(2) func ); 
 [17] SUBPROCESS(2) func miki1_4((S1)arg1_1 
 [18] SUBPROCESS(2) func ); 
 [19] SUBPROCESS(2) ??? if(hogehoge1) 

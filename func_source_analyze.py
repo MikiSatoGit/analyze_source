@@ -964,23 +964,37 @@ def devide_end_of_function_in_code(proc_codes):
 	copy_proc_codes = copy.deepcopy(proc_codes)
 	out_proc_codes = []
 	for index in xrange(0,len(copy_proc_codes)):
-		tmp_code = copy_proc_codes[index]
-		if tmp_code.rfind(';')!=-1 \
-		 and tmp_code.rfind(')')!=-1 \
-		 and tmp_code.rfind(')') < tmp_code.rfind(';'):
-			tmp_bracket_to_end = tmp_code[tmp_code.rfind(')')+1:tmp_code.rfind(';')].strip()
-			if len(tmp_bracket_to_end)==0:
-				tmp_start_to_bracket = tmp_code[:tmp_code.rfind(')')].strip()
-				if len(tmp_start_to_bracket)!=0:
-					out_proc_codes.append( tmp_start_to_bracket )
-					out_proc_codes.append(');')
-				else:
-					out_proc_codes.append(');')
-		else:
+# divide by ';'
+		divided_code = copy_proc_codes[index].strip()
+		divided_code = divided_code.split(';')
+# No ';'
+		if len(divided_code)==1:
+			tmp_code = copy_proc_codes[index].strip()
 			out_proc_codes.append( tmp_code )
-
-	print '------FINISH'
+		else:
+			for index2 in range(0,len(divided_code)):
+				if index == len(divided_code):
+					break
+				if len(divided_code[index2])==0:
+					break
+				else:
+					tmp_code = divided_code[index2]+';'
+# check );
+				if tmp_code.rfind(';')!=-1 \
+				 and tmp_code.rfind(')')!=-1 \
+				 and tmp_code.rfind(')') < tmp_code.rfind(';'):
+					tmp_bracket_to_end = tmp_code[tmp_code.rfind(')')+1:tmp_code.rfind(';')].strip()
+					if len(tmp_bracket_to_end)==0:
+						tmp_start_to_bracket = tmp_code[:tmp_code.rfind(')')].strip()
+						if len(tmp_start_to_bracket)!=0:
+							out_proc_codes.append( tmp_start_to_bracket )
+							out_proc_codes.append(');')
+						else:
+							out_proc_codes.append(');')
+				else:
+					out_proc_codes.append( tmp_code )
 	return out_proc_codes
+
 
 def analyze_sub_process(proc_list, title):
 	sub_proc_flag = False
@@ -1009,14 +1023,10 @@ def analyze_sub_process(proc_list, title):
 			sub_proc_list.clear()
 
 			for subcode in proc_list.sub_proc[sub_proc_id]:
-				print '@@@@@ %d subcode %s' % (len(subcode), subcode)
-#0417				sub_proc_list_pre.append(subcode[0])
-				print  isinstance(subcode, str)
 				if isinstance(subcode, str):
 					sub_proc_list_pre.append(subcode)
 				else:
 					for subsubcode in subcode:
-						print '###### %d subsubcode %s' % (len(subsubcode), subsubcode)
 						sub_proc_list_pre.append(subsubcode)
 	
 			sub_proc_list,current_title = analyze_function_codes(sub_proc_list_pre, title)
@@ -1108,7 +1118,6 @@ def analyze_sub_process_code(proc_codes):
 								bracket_level -= 1
 								tmp_find_start = tmp_find_start[0:tmp_find_start.rfind('(')]
 								tmp_find_start.strip()
-							print 'bracket level = %d' % bracket_level
 
 
 #find start '('
@@ -1124,59 +1133,36 @@ def analyze_sub_process_code(proc_codes):
 									tmp_type_r = proc_codes.proc_data_list[index1_r].type[index2_r]
 									tmp_left_r = proc_codes.proc_data_list[index1_r].left[index2_r]
 									tmp_right_r = proc_codes.proc_data_list[index1_r].right[index2_r]
-									print 'start checking ( in %s' % tmp_left_r
 
-
+# reached to previous subproc
 									if tmp_type_r=='subproc':
-										print 'reached to previous subproc'
 										bracket_search_flag=False
 										break
-									else:
-										print '...cheking(type %s) %s' % (tmp_type_r, tmp_left_r)
 
 # check bracket level
-										# count ')' level
-										tmp_find_end = tmp_left_r
+									# count ')' level
+									tmp_find_end = tmp_left_r
+									tmp_find_end.strip()
+									while tmp_find_end.rfind(')')!=-1:
+										bracket_level += 1
+										tmp_find_end = tmp_find_end[0:tmp_find_end.rfind(')')]
 										tmp_find_end.strip()
-										print '(find end) %s' % tmp_find_end
-										while tmp_find_end.rfind(')')!=-1:
-											bracket_level += 1
-											print 'remove bracket(end) %s' % (tmp_find_end),
-											tmp_find_end = tmp_find_end[0:tmp_find_end.rfind(')')]
-											tmp_find_end.strip()
-											print ' -> %s' % (tmp_find_end)
-										# count '(' level
-										tmp_find_start = tmp_left_r
+									# count '(' level
+									tmp_find_start = tmp_left_r
+									tmp_find_start.strip()
+									while tmp_find_start.rfind('(')!=-1:
+										bracket_level -= 1
+										tmp_find_start = tmp_find_start[0:tmp_find_start.rfind('(')]
 										tmp_find_start.strip()
-										print '(find start) %s' % tmp_find_start
-										while tmp_find_start.rfind('(')!=-1:
-											bracket_level -= 1
-											print 'remove bracket(start) %s' % (tmp_find_start),
-											tmp_find_start = tmp_find_start[0:tmp_find_start.rfind('(')]
-											tmp_find_start.strip()
-											print ' -> %s' % (tmp_find_start)
 
-										print 'bracket level = %d' % bracket_level
-
-
-										print 'reverse function[%d][%d], %s, %s, %s, %s' % (index1_r,index1_r,tmp_title_r,tmp_type_r,tmp_left_r,tmp_right_r)
-										if tmp_type_r.find('???')!=-1:
-											proc_codes.proc_data_list[index1_r].type[index2_r] = 'func'
-											if bracket_level==0:
-												print 'find start of function[%d][%d] %s' % (index1_r,index2_r,proc_codes.proc_data_list[index1_r].left[index2_r])
-												bracket_search_flag=False
-												break
-										else:
-											print 'finish reverse function[%d][%d] %s' % (index1_r,index2_r,proc_codes.proc_data_list[index1_r].left[index2_r])
+									if tmp_type_r.find('???')!=-1:
+										proc_codes.proc_data_list[index1_r].type[index2_r] = 'func'
+										if bracket_level==0:
 											bracket_search_flag=False
 											break
-							print '------------------------------'
-#NEED TO MODIFY for
-#func(
-#	arg1,
-#	arg2
-#);
-
+									else:
+										bracket_search_flag=False
+										break
 
 # find process(ctrl statement) (return, break, continue...;)
 					else:
