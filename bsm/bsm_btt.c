@@ -343,8 +343,8 @@ VD init_btt_configuration_parameter_dummy(
 
 
 
-	if(miki=test)
-	{ miki = done; hogehoge{miki = next;} }
+	if(miki==test)
+	{ miki = done; hogehoge{ miki = next; } }
 
 
 

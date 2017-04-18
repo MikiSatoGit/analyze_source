@@ -347,6 +347,10 @@ VD init_btt_configuration_parameter_dummy(
 	}																	/* SUBPROCESS(1) ª */
 
 
+	if(miki==test)
+	{ miki = done; hogehoge{ miki = next; } }
+
+
 	if(
 		miki==test
 	 && miki==debug
@@ -355,6 +359,9 @@ VD init_btt_configuration_parameter_dummy(
 		miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1_1);
 		if(hogehoge1)
 		{																/* SUBSUBPROCESS(1) « */
+
+
+
 			miki2_1 = subsub_1(
 				(S1)arg2_1_1,
 				arg2_1_2 );
@@ -377,9 +384,13 @@ VD init_btt_configuration_parameter_dummy(
 					{
 						(S5)miki5_2 = subsubsubsubsub_2;
 					}
+					else if(hogehoge4_3)
+					{
+						(S5)miki5_3 = subsubsubsubsub_2;
+					}
 					else
 					{
-						(S5)miki5_3 = subsubsubsubsub_3;
+						(S5)miki5_4 = subsubsubsubsub_3;
 					}
 				}														/* SUBSUBSUBSUBPROCESS(1) ª */
 
@@ -404,6 +415,14 @@ VD init_btt_configuration_parameter_dummy(
 				}														/* SUBSUBSUBSUBPROCESS(3) ª */
 
 			}															/* SUBSUBSUBPROCESS(1) ª */
+
+
+
+
+
+
+
+
 		}																/* SUBSUBPROCESS(2) ª */
 	}																	/* SUBPROCESS(2) ª */
 

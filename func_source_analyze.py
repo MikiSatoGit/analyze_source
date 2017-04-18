@@ -1094,8 +1094,6 @@ def analyze_sub_process_code(proc_codes):
 # find process code (hoge;)
 			if is_ctrl_stat(tmp_code)==False:
 
-
-
 ######################################################################
 				while tmp_code.find(';')!=-1:
 					if is_for:
@@ -1106,7 +1104,7 @@ def analyze_sub_process_code(proc_codes):
 					tmp_proc.strip()
 					tmp_left = ''
 					tmp_right = ''
-	# find equal process (hoge = A;)
+# find equal process (hoge = A;)
 					if tmp_proc.find('=')!=-1:
 						tmp_left = tmp_proc[0:tmp_proc.find('=')]
 						tmp_right = tmp_proc[tmp_proc.find('=')+1: ]
@@ -1114,7 +1112,7 @@ def analyze_sub_process_code(proc_codes):
 					else:
 						tmp_left = tmp_proc
 						tmp_right = ''
-	# find func call (hoge();)
+# find func call (hoge();)
 						if tmp_left.rfind(')')!=-1:
 							tmp_bracket_to_end = tmp_left[tmp_left.rfind(')')+1:tmp_left.find(';')].strip()
 							if len(tmp_bracket_to_end)==0:
@@ -1124,7 +1122,7 @@ def analyze_sub_process_code(proc_codes):
 								else:
 									proc_data.append_data(tmp_title,'func<end>', tmp_left.strip(), tmp_right.strip())
 
-	# check bracket level
+# check bracket level
 								# count ')' level
 								bracket_level = 0
 								tmp_find_end = tmp_left
@@ -1142,7 +1140,7 @@ def analyze_sub_process_code(proc_codes):
 									tmp_find_start.strip()
 
 
-	#find start '('
+#find start '('
 								bracket_search_flag = True
 								for index1_r in xrange(proc_codes.get_proc_data_size()-1,-1,-1):
 									if index1_r==-1 or bracket_search_flag==False:
@@ -1156,12 +1154,12 @@ def analyze_sub_process_code(proc_codes):
 										tmp_left_r = proc_codes.proc_data_list[index1_r].left[index2_r]
 										tmp_right_r = proc_codes.proc_data_list[index1_r].right[index2_r]
 
-	# reached to previous subproc
+# reached to previous subproc
 										if tmp_type_r=='subproc':
 											bracket_search_flag=False
 											break
 
-	# check bracket level
+# check bracket level
 										# count ')' level
 										tmp_find_end = tmp_left_r
 										tmp_find_end.strip()
@@ -1185,14 +1183,15 @@ def analyze_sub_process_code(proc_codes):
 											if bracket_level==0:
 												if is_for:
 													is_for = False
-												proc_codes.proc_data_list[index1_r].type[index2_r] += '<start>'
+												else:
+													proc_codes.proc_data_list[index1_r].type[index2_r] += '<start>'
 												bracket_search_flag=False
 												break
 										else:
 											bracket_search_flag=False
 											break
 
-	# find process(ctrl statement) (return, break, continue...;)
+# find process(ctrl statement) (return, break, continue...;)
 						else:
 							if is_for:
 								proc_data.append_data(tmp_title,'???', tmp_left.strip(), tmp_right.strip())
@@ -1386,25 +1385,43 @@ def analyze_control_statement(proc_codes):
 
 
 # set type in ProcessData
+	tmp_ctrl_stat = '???'
 	ctrl_stat_id = 0
+	ctrl_stat_flag = False
+
+
 	for index in range(0, proc_codes.get_proc_data_size()):
 		for index2 in range(0,proc_codes.proc_data_list[index].get_size()):
+# find start of ctrl stat
+			if ctrl_stat_id > len(ctrl_stat_list)-1:
+				break
+
 			if proc_codes.proc_data_list[index].type[index2].find('???')!=-1:
-#				print 'org %s' % proc_codes.proc_data_list[index].left[index2]
-#				print 'ctrl %s' % proc_codes.proc_data_list[index].left[index2]
-				if proc_codes.proc_data_list[index].left[index2].find(ctrl_stat_list[ctrl_stat_id])!=-1:
-					proc_codes.proc_data_list[index].type[index2] = ctrl_stat_list[ctrl_stat_id]+'<start>'
+				if ctrl_stat_list[ctrl_stat_id].find('noctrl')!=-1:
 					ctrl_stat_id += 1
+					if ctrl_stat_id > len(ctrl_stat_list)-1:
+						break
 
-
-
-	#if debug_out:
-	print '-->rewrite ??? to ctrl stat [%d]' % ctrl_stat_id
+				if proc_codes.proc_data_list[index].left[index2].find(ctrl_stat_list[ctrl_stat_id])!=-1:
+					tmp_ctrl_stat = ctrl_stat_list[ctrl_stat_id]
+					proc_codes.proc_data_list[index].type[index2] = tmp_ctrl_stat+'<start>'
+					ctrl_stat_flag = True
+					ctrl_stat_id += 1
+					continue
+# keep setting type until type = subproc
+			if proc_codes.proc_data_list[index].type[index2].find('subproc')!=-1:
+				ctrl_stat_flag = False
+			if ctrl_stat_flag:
+				proc_codes.proc_data_list[index].type[index2] = tmp_ctrl_stat
 
 	if debug_out:
 		ctrl_proc_num = 0
 		for ctrl in ctrl_stat_list:
 			ctrl_proc_num +=1
 			print '-->ctrl stat %s / %d' %  (ctrl, ctrl_proc_num)
+
+# find end of ctrl stat
+#	for index in range(0, proc_codes.get_proc_data_size()):
+#		for index2 in range(0,proc_codes.proc_data_list[index].get_size()):
 
 	return 	ctrl_stat_list
