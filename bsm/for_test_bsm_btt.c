@@ -363,7 +363,7 @@ VD init_btt_configuration_parameter_dummy(
 				(S1)arg2_2_1,
 				arg2_2_2
 			);
-			for(hogehoge2)
+			for(i=0; i<hogehoge2; i++)
 			{															/* SUBSUBSUBPROCESS(1) « */
 				miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3);
 				while(hogehoge3_1)
