@@ -336,17 +336,25 @@ VD init_btt_configuration_parameter_dummy(
 )
 {
 
-	/*! @note (1) do nothing if BTT state is already INITIALIZED */
-	if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED ) {
-		return;
+	for(i=0;i<2;i++)
+	{
+		for_test = True;
 	}
 
+	miki0 = main(
+		arg0_1,
+		arg0_2,
+		(S1)arg0_3 );
+
+	/*! @note (1) do nothing if BTT state is already INITIALIZED */
+	if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED )
+	{																	/* SUBPROCESS(1) « */
+		return;
+	}																	/* SUBPROCESS(1) ª */
 
 
 	if(miki==test)
-	{ miki = done; hogehoge{ miki = next; } }
-
-
+	{ miki = done; if(a==0){ miki = next; } }
 
 
 	/* availability of sub function */

@@ -17,6 +17,8 @@ import operator
 import copy
 import func_source_analyze
 
+############################################################################################
+debug_out = False
 
 
 ##################################################
@@ -103,9 +105,10 @@ for index1 in range(0, func_list.func_num):
 		func_source_analyze.print_out(fout, " %s "  %(func_list.function_data[index1].argument_list[index2].name), 1),
 	
 	# CODE
-	#func_source_analyze.print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
-	#for index2 in range(0, len(func_list.function_data[index1].codes)):
-	#	func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
+	if debug_out:
+		func_source_analyze.print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
+		for index2 in range(0, len(func_list.function_data[index1].codes)):
+			func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
 
 
 ###### copy data ######

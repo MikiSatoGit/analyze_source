@@ -930,7 +930,6 @@ def analyze_function_codes(function_codes, title):
 				else:
 					proc_codes.append(line)
 
-
 ########## save sub process block ##########
 		if len(sub_proc_codes)!=0:
 			tmp_sub_proc_codes = devide_end_of_function_in_code(sub_proc_codes)
@@ -965,13 +964,10 @@ def devide_end_of_function_in_code(proc_codes):
 	out_proc_codes = []
 	for index in xrange(0,len(copy_proc_codes)):
 
-
-
-
-
 # divide by ';'
 		divided_code = copy_proc_codes[index].strip()
 		divided_code = divided_code.split(';')
+
 # No ';'
 		if len(divided_code)==1:
 			tmp_code = copy_proc_codes[index].strip()
@@ -983,7 +979,10 @@ def devide_end_of_function_in_code(proc_codes):
 				if len(divided_code[index2])==0:
 					break
 				else:
-					tmp_code = divided_code[index2]+';'
+					if is_ctrl_stat(divided_code[index2])==True:
+						tmp_code = divided_code[index2]
+					else:
+						tmp_code = divided_code[index2]+';'
 # check );
 				if tmp_code.rfind(';')!=-1 \
 				 and tmp_code.rfind(')')!=-1 \
@@ -1062,7 +1061,8 @@ def analyze_process_code(proc_codes):
 	ctrl_proc_num = 0
 	for ctrl in ctrl_stat_list:
 		ctrl_proc_num +=1
-		print '-->ctrl stat %s / %d' %  (ctrl, ctrl_proc_num)
+		if debug_out:
+			print '-->ctrl stat %s / %d' %  (ctrl, ctrl_proc_num)
 
 ########## analyze condition of control statement ########## 
 
@@ -1201,8 +1201,8 @@ def analyze_sub_process_code(proc_codes):
 					tmp_code = tmptmp_code[tmptmp_code.find(';',1)+1: ]
 ######################################################################
 			else:
-				if is_for==False and is_ctrl_stat_for(tmp_code):
-					is_for = is_ctrl_stat_for(tmp_code)
+				if is_for==False and is_ctrl_stat_word('for', tmp_code):
+					is_for = is_ctrl_stat_word('for', tmp_code)
 ######################################################################
 
 
@@ -1218,17 +1218,35 @@ def analyze_sub_process_code(proc_codes):
 
 
 def is_ctrl_stat(code):
-	if code.find('if')!=-1 \
-	 or code.find('else')!=-1 \
-	 or code.find('for')!=-1 \
-	 or code.find('while')!=-1 \
-	 or code.find('switch')!=-1:
+	if is_ctrl_stat_word('if', code):
 		return True
+	if is_ctrl_stat_word('else if', code):
+		return True
+	if is_ctrl_stat_word('else', code):	# Need to fix 'else (' -> should be error
+		return True
+	if is_ctrl_stat_word('for', code):
+		return True
+	if is_ctrl_stat_word('while', code):
+		return True
+	if is_ctrl_stat_word('switch', code):
+		return True
+
 	return False
 
-def is_ctrl_stat_for(code):
-	if code.find('for')!=-1:
-		return True
+def is_ctrl_stat_word(word, code):
+	tmp_code = code.strip()
+	if tmp_code.find(word)!=-1:
+		# 'for...' or '...[space]for...''
+		if (tmp_code.find(word)==0) or (tmp_code.find(word)>0 and tmp_code[tmp_code.find(word)-1]==' '):
+			# 'for'
+			if len(code)==len(word):
+				return True
+			else:
+				# 'for[space]('
+				if tmp_code.find('(')!=0 and tmp_code.find(word)<tmp_code.find('('):
+					tmp_word_to_bracket = tmp_code[tmp_code.find(word)+len(word):tmp_code.find('(')]
+					if len(tmp_word_to_bracket.strip())==0:
+						return True
 	return False
 
 
@@ -1388,10 +1406,14 @@ def analyze_control_statement(proc_codes):
 	tmp_ctrl_stat = '???'
 	ctrl_stat_id = 0
 	ctrl_stat_flag = False
-
+	last_ctrl_stat_flag = False
 
 	for index in range(0, proc_codes.get_proc_data_size()):
-		for index2 in range(0,proc_codes.proc_data_list[index].get_size()):
+		for index2 in range(0, proc_codes.proc_data_list[index].get_size()):
+
+
+
+
 # find start of ctrl stat
 			if ctrl_stat_id > len(ctrl_stat_list)-1:
 				break
@@ -1400,6 +1422,7 @@ def analyze_control_statement(proc_codes):
 				if ctrl_stat_list[ctrl_stat_id].find('noctrl')!=-1:
 					ctrl_stat_id += 1
 					if ctrl_stat_id > len(ctrl_stat_list)-1:
+						ctrl_stat_id = len(ctrl_stat_list)-1
 						break
 
 				if proc_codes.proc_data_list[index].left[index2].find(ctrl_stat_list[ctrl_stat_id])!=-1:
@@ -1407,12 +1430,20 @@ def analyze_control_statement(proc_codes):
 					proc_codes.proc_data_list[index].type[index2] = tmp_ctrl_stat+'<start>'
 					ctrl_stat_flag = True
 					ctrl_stat_id += 1
+					if ctrl_stat_id > len(ctrl_stat_list)-1:
+						ctrl_stat_id = len(ctrl_stat_list)-1
 					continue
 # keep setting type until type = subproc
 			if proc_codes.proc_data_list[index].type[index2].find('subproc')!=-1:
 				ctrl_stat_flag = False
+				if last_ctrl_stat_flag==True:
+					break
 			if ctrl_stat_flag:
 				proc_codes.proc_data_list[index].type[index2] = tmp_ctrl_stat
+
+
+
+
 
 	if debug_out:
 		ctrl_proc_num = 0
