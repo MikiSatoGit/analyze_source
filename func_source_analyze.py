@@ -1233,6 +1233,7 @@ def is_ctrl_stat(code):
 
 	return False
 
+
 def is_ctrl_stat_word(word, code):
 	tmp_code = code.strip()
 	if tmp_code.find(word)!=-1:
