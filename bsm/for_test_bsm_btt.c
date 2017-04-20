@@ -24,6 +24,13 @@ VD fn_btt_atd_main(
 	/*! @note (2)-1 proceed to ATD process if Shift is not Reverse */
 	if( s1_a_shift_flg != (S1) 0 )	/* (tentative) not R */
 	{
+
+
+
+/*		level 2««««««		*/
+
+
+
 		/*! @note @li (i) detect trailer when Subject speed is over BTT_ACTIVE_SPEED_TH  */
 		if( fl_a_self_v > BTT_ACTIVE_SPEED_TH )
 		{
@@ -37,6 +44,10 @@ VD fn_btt_atd_main(
 			/*! @note @li (ii)-1 detect trailer while ATD timer is under BTT_ATD_MAX_TIME  */
 			if( st_atd_params.timer < BTT_ATD_MAX_TIME)
 			{
+
+
+
+
 
 /* NGNGNGNGNGNGNGNGNGNGNGNGNGNGNG */
 				/*! @note @li keep detecting trailer while TFlag is UNKNOWN */
@@ -79,6 +90,9 @@ VD fn_btt_atd_main(
 /* NGNGNGNGNGNGNGNGNGNGNGNGNGNGNG */
 
 
+
+
+
 			}
 
 
@@ -113,6 +127,15 @@ VD fn_btt_atd_main(
 		{
 			/* wait for next cycle */
 		}
+
+
+
+
+
+/*		level 2ªªªªªª		*/
+
+
+
 	}
 	/*! @note (2)-2 initialize ATD if Shift is Reverse */
 	else

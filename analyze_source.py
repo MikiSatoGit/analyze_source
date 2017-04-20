@@ -122,6 +122,14 @@ for index1 in range(0, func_list.func_num):
 	sub_proc_flag = True
 
 
+
+
+
+
+
+
+
+
 ###### call function (analyze_sub_process) ######
 	while sub_proc_flag == True:
 		sub_proc_list, sub_proc_flag, current_title, tmp_serial_proc_codes = \
@@ -133,12 +141,23 @@ for index1 in range(0, func_list.func_num):
 		sub_proc_list.clear()
 	serial_proc_codes.set_func_name(func_list.function_data[index1].name)
 
+
+
+
+
+
+
+
+
 ###### call function (analyze_process_code) ######
 	serial_proc_codes = func_source_analyze.analyze_process_code(serial_proc_codes)
 	# CODE
 	func_source_analyze.print_out(fout, '----- Codes -----', 1)
 	total_lines = serial_proc_codes.file_print_proc_data_list(fout)
 	func_source_analyze.print_out(fout, "----------------- Total Codes : %d lines" % total_lines, 1)
+
+
+
 
 
 

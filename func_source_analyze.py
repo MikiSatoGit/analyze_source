@@ -126,6 +126,20 @@ class ProcessCodesList:
 		del self.main_proc[:]
 		del self.sub_proc[:]
 
+	def debug_print_main_proc(self):
+		cnt = 0
+		for proc in self.main_proc:
+			cnt += 1
+			print 'MAIN in list[%d]: %s' %(cnt, proc)
+		return
+
+	def debug_print_sub_proc(self):
+		cnt = 0
+		for proc in self.sub_proc:
+			cnt += 1
+			print 'SUB in list[%d]: %s' %(cnt, proc)
+		return
+
 class FunctionData:
 	def __init__(self):
 		self.name = ''
@@ -632,6 +646,17 @@ def find_functions(valid_lines):
 	return func_list
 
 
+
+
+
+
+
+
+
+
+
+
+
 def analyze_function_list(FunctionData, title):
 #0419
 	print '==analyze_function_list'
@@ -660,11 +685,41 @@ def analyze_function_list(FunctionData, title):
 	return current_title
 
 
-def analyze_function_codes(function_codes, title):
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def analyze_function_codes(function_codes, title):	# function_codes = List
 #0419
 	print ' ===analyze_function_codes[/%d]' % len(function_codes)
+	for code in function_codes:
+		print 'code in function_codes %s' % code
+	function_codes = divide_end_of_function_in_code(function_codes)
+	print ' ===after divide_end_of_function_in_code[/%d]' % len(function_codes)
+	for code in function_codes:
+		print 'devided code in function_codes %s' % code
 
 
+
+	parent_level = 0
 	level = 0
 	valid_lines = []
 	line = ''
@@ -723,24 +778,25 @@ def analyze_function_codes(function_codes, title):
 		del proc_codes[:]
 		del sub_proc_codes[:]
 
-		if sub_proc_flg==True:
-			sub_proc_flg_prev = True
-		else:
-			sub_proc_flg_prev = False
+		sub_proc_flg_prev = sub_proc_flg #0419
 
 
 		if line.find('{')!=-1 or line.find('}')!=-1:
 			while line.find('{')!=-1 or line.find('}')!=-1:
+				line.strip()
+
 				code_save = ''
 				code_remain = ''
 ########## find start Curly bracket ({) ########## 
 				if line.find('{')!=-1: 
+#0419
+					print '   searching {'
 					level += 1
-					if level==2:
+					if level > parent_level + 1: #0419
 						sub_proc_flg = True
 
 ##### main process (level 1) [proc_codes]
-					if level<2:
+					if level < parent_level + 2:
 # (1) { only	: remove {
 						if len(line)==1:
 							if line.find('{')==0:
@@ -828,12 +884,17 @@ def analyze_function_codes(function_codes, title):
 
 ########## find end Curly bracket (}) ########## 
 				if line.find('}')!=-1:
+#0419
+					print '   searching }'
+
 					level -= 1
-					if level==1:
+#0419					if level==1:
+					if level < parent_level + 2:	#0419????
 						sub_proc_flg = False
 
+
 ##### main process (level 0) [proc_codes]
-					if level<1:
+					if level < parent_level +1:
 # (1) } only	: remove }
 						if len(line)==1:
 							if line.find('}')==0:
@@ -864,7 +925,7 @@ def analyze_function_codes(function_codes, title):
 # (4) } - }		: save [find(1st})+1:find(2nd})-1] / remove 1st{ (end of sub process) => save } (sub) and next main } (2)
 							if line.find('}') < line.rfind('}'):
 								level += 1
-								if level==2:
+								if level > parent_level +1: #0419
 									sub_proc_flg = True
 
 								code_save ='}'
@@ -886,6 +947,11 @@ def analyze_function_codes(function_codes, title):
 					else:
 # (1) } only	: save }
 						if len(line)==1:
+
+#0419
+							print '   find } (1)'
+
+
 							if line.find('}')==0:
 								code_save ='}'
 								sub_proc_codes.append(copy.deepcopy(code_save))
@@ -893,7 +959,27 @@ def analyze_function_codes(function_codes, title):
 								code_remain = line.replace('}', '',1)
 								code_remain.strip()
 								line = code_remain
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 						else:
+
+#0419
+							print '   find } (2)'
+
+
+
 # (2) begin - }	: save [0:find(})-1] and }
 							if line.find('}')>0:
 								code_save = line[0:line.find('}')-1]
@@ -917,8 +1003,9 @@ def analyze_function_codes(function_codes, title):
 # (4) } - }		: save 1st} and [find(1st})+1:find(2nd})-1] and 2nd}
 							if line.find('}') < line.rfind('}'):
 								level += 1
-								if level==2:
+								if level > parent_level + 1: #0419
 									sub_proc_flg = True
+
 
 								code_save = '}'
 								sub_proc_codes.append(copy.deepcopy(code_save))
@@ -945,7 +1032,7 @@ def analyze_function_codes(function_codes, title):
 
 			if line != '':
 ##### sub process (level 2+) [sub_proc_codes]
-				if level>1:
+				if level > parent_level + 1: #0419
 					sub_proc_codes.append(line)
 
 #0419
@@ -963,30 +1050,12 @@ def analyze_function_codes(function_codes, title):
 ########## save sub process block ##########
 #0419
 		print '------------------------'
-
-
 		if len(sub_proc_codes)!=0:
+			for tmp_code in sub_proc_codes:
+				sub_proc_list.main.append( tmp_code )
 #0419
-			print '       ----> cheking SUB [/%d]%s->%s' % (len(sub_proc_codes), sub_proc_flg_prev, sub_proc_flg)
-			print '       ----> SUB (%d)' % len(sub_proc_codes)
-
-
-			tmp_sub_proc_codes = devide_end_of_function_in_code(sub_proc_codes)
-
-
-#0419
-			print '       ----> divided SUB (%d)' % len(tmp_sub_proc_codes)
-
-
-			if len(tmp_sub_proc_codes)!=0:
-				for tmp_code in tmp_sub_proc_codes:
-					sub_proc_list.main.append( tmp_code )
-#0419
-					print '           ----> ADDED to SUBPROC %s' % (tmp_code)
-
-
-			del sub_proc_codes[:]
-			del tmp_sub_proc_codes[:]
+				print '           ----> ADDED to SUBPROC %s' % (tmp_code)
+		del sub_proc_codes[:]
 
 
 
@@ -1011,6 +1080,7 @@ def analyze_function_codes(function_codes, title):
 
 #0419
 			print '           ----> ADDED to PROC %s(%s)' % (current_title, sub_proc_id)
+			print '           ----> START of SUBPROC'
 
 
 
@@ -1018,6 +1088,10 @@ def analyze_function_codes(function_codes, title):
 
 
 		if sub_proc_flg_prev==True and sub_proc_flg==False:
+#0419
+			print '           ----> END of SUBPROC'
+
+
 			proc_list.sub_proc.append( list(sub_proc_list.main) )
 			sub_proc_list.clear()
 
@@ -1053,13 +1127,10 @@ def analyze_function_codes(function_codes, title):
 
 ########## save main process block ########## 
 		if len(proc_codes)!=0:
-			tmp_main_proc_codes = devide_end_of_function_in_code(proc_codes)
-			for code in tmp_main_proc_codes:
+			for code in proc_codes:
 #0419
-#				print '  ---->main %s' % code
-
+				print '  ---->main %s' % code
 				proc_list.main_proc.append( code )
-
 #0419
 	print ' ===END of analyze_function_codes'
 
@@ -1067,9 +1138,17 @@ def analyze_function_codes(function_codes, title):
 	return proc_list, current_title
 
 
-def devide_end_of_function_in_code(proc_codes):
+
+
+
+
+
+
+
+
+def divide_end_of_function_in_code(proc_codes):		# proc_codes = List
 #0419
-#	print '  ====devide_end_of_function_in_code'
+#	print '  ====divide_end_of_function_in_code'
 
 
 	copy_proc_codes = copy.deepcopy(proc_codes)
@@ -1108,7 +1187,7 @@ def devide_end_of_function_in_code(proc_codes):
 						else:
 							out_proc_codes.append(');')
 				else:
-					out_proc_codes.append( tmp_code )
+					out_proc_codes.append( tmp_code.strip() )
 
 #0419
 #		print '   ---->devided code %s' % out_proc_codes[-1]
@@ -1116,9 +1195,48 @@ def devide_end_of_function_in_code(proc_codes):
 
 
 #0419
-#	print '  ====END of devide_end_of_function_in_code'
+#	print '  ====END of divide_end_of_function_in_code'
 
 	return out_proc_codes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def analyze_sub_process(proc_list, title):
@@ -1167,12 +1285,17 @@ def analyze_sub_process(proc_list, title):
 
 
 
-				if isinstance(subcode, str):
+				if isinstance(subcode, str) or subcode!='':
 					sub_proc_list_pre.append(subcode)
 				else:
 					for subsubcode in subcode:
 						sub_proc_list_pre.append(subsubcode)
 	
+
+#0419
+				print 'SUB CODE %s' % subcode
+				print '>>>>>>>>>>>>>> CALL analyze_function_codes in analyze_sub_process'
+
 
 			sub_proc_list,current_title = analyze_function_codes(sub_proc_list_pre, title)
 
@@ -1198,6 +1321,32 @@ def analyze_sub_process(proc_list, title):
 	print '==END of analyze_sub_process %s' % sub_proc_flag
 
 	return sub_proc_list, sub_proc_flag, current_title, serial_proc_codes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def analyze_process_code(proc_codes):
@@ -1232,9 +1381,32 @@ def analyze_process_code(proc_codes):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 def analyze_sub_process_code(proc_codes):
 	proc_data = ProcessData()
-
 	is_for = False
 	for index in range(0,proc_codes.get_size()):
 		tmp_title = proc_codes.title[index]
@@ -1372,10 +1544,15 @@ def analyze_sub_process_code(proc_codes):
 	return proc_codes
 
 
+
+
+
+
+
 def is_ctrl_stat(code):
-	if is_ctrl_stat_word('if', code):
-		return True
 	if is_ctrl_stat_word('else if', code):
+		return True
+	if is_ctrl_stat_word('if', code):
 		return True
 	if is_ctrl_stat_word('else', code):	# Need to fix 'else (' -> should be error
 		return True
@@ -1404,6 +1581,30 @@ def is_ctrl_stat_word(word, code):
 					if len(tmp_word_to_bracket.strip())==0:
 						return True
 	return False
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def analyze_control_statement(proc_codes):

@@ -1,0 +1,67 @@
+Total lines: 32 
+Total functions : 1 
+--------------------------
+[Function Name] : fn_btt_atd_main 
+-Return type : VD 
+-Argument : 2 
+     [0] : type1   arg1 
+     [1] : type1   arg2 
+{
+if(lv1_1 == 11)
+{
+if(lv1_1_1 == 111)
+{
+level1_1_1_1 = hoge1_1_1_1;
+if(hogehoge_1)
+{
+	if(hogehoge_2)
+{
+level1_1_1_1 = hoge1_1_1_1; level1_1_1_2 = hoge1_1_1_2; 
+}
+}
+}
+else if(lv1_1_2 == 112)
+{
+level1_1_2_1 = hoge1_1_2_1;
+}
+else
+{
+level1_1_3_1 = hoge1_1_3_1;
+}
+}
+else if(lv1_2 == 12)
+{
+level1_2_1 = hoge1_2_1;
+}
+else
+{
+level1_3_1 = hoge1_3_1;
+}
+return;
+}
+----- Codes -----
+[1] MAINPROCESS if<start> if( 
+[2] MAINPROCESS if lv1_1 == 11 
+[3] MAINPROCESS if ) 
+[4] MAINPROCESS subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) if<start> if( 
+[6] SUBPROCESS(1) if lv1_1_1 == 111 
+[7] SUBPROCESS(1) if ) 
+[8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[9] SUBPROCESS(1) else if<start> else if( 
+[10] SUBPROCESS(1) else if lv1_1_2 == 112 
+[11] SUBPROCESS(1) else if ) 
+[12] SUBPROCESS(1) subproc SUBSUBPROCESS(2) 
+[13] SUBPROCESS(1) else<start> else 
+[14] SUBPROCESS(1) subproc SUBSUBPROCESS(3) 
+[15] MAINPROCESS else if<start> else if( 
+[16] MAINPROCESS else if lv1_2 == 12 
+[17] MAINPROCESS else if ) 
+[18] MAINPROCESS subproc SUBPROCESS(2) 
+[19] SUBPROCESS(2) equal level1_2_1 hoge1_2_1;
+[20] MAINPROCESS else<start> else 
+[21] MAINPROCESS subproc SUBPROCESS(3) 
+[22] SUBPROCESS(3) equal level1_3_1 hoge1_3_1;
+[23] MAINPROCESS proc return; 
+[24] MAINPROCESS equal level1_3_1 hoge1_3_1;
+----------------- Total Codes : 24 lines

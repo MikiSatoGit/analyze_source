@@ -349,6 +349,10 @@ VD init_btt_configuration_parameter_dummy(
 
 	if(miki==test)
 	{ miki = done; hogehoge{ miki = next; } }
+	else
+	{
+		miki = ELSETEST
+	}
 
 	if(
 		miki==test
@@ -423,6 +427,10 @@ VD init_btt_configuration_parameter_dummy(
 
 
 		}																/* SUBSUBPROCESS(2) Å™ */
+		else
+		{
+			hogehoge1_ELSE();
+		}
 	}																	/* SUBPROCESS(2) Å™ */
 
 

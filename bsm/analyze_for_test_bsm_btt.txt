@@ -1,4 +1,4 @@
-Total lines: 70 
+Total lines: 69 
 Total functions : 1 
 --------------------------
 [Function Name] : fn_btt_atd_main 
@@ -52,7 +52,6 @@ fn_btt_atd_deactivate();
 else	/* TFlag == BTT_TRAILER_FLAG_UNKNOWN */
 {
 }
-fn_btt_atd_hogehgoe();
 }
 }
 else
