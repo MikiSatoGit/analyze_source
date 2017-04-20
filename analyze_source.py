@@ -92,7 +92,10 @@ for index1 in range(0, func_list.func_num):
 	current_title = current_title_org
 	serial_proc_codes.clear()
 	func_source_analyze.print_out(fout, "--------------------------", 1)
-	print '====== %s ======' % func_list.function_data[index1].name
+
+	if debug_out:
+		print '====== %s ======' % func_list.function_data[index1].name
+
 	# FUNCTION
 	func_source_analyze.print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
 	#func_source_analyze.print_out(fout, "-Code size : %s lines"  % len(func_list.function_data[index1].func_def), 1)
@@ -107,8 +110,9 @@ for index1 in range(0, func_list.func_num):
 	# CODE
 	if debug_out:
 		func_source_analyze.print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
-		for index2 in range(0, len(func_list.function_data[index1].codes)):
-			func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
+
+	for index2 in range(0, len(func_list.function_data[index1].codes)):
+		func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
 
 
 ###### copy data ######

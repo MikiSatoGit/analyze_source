@@ -27,9 +27,18 @@ VD fn_btt_atd_main(
 		/*! @note @li (i) detect trailer when Subject speed is over BTT_ACTIVE_SPEED_TH  */
 		if( fl_a_self_v > BTT_ACTIVE_SPEED_TH )
 		{
+
+
+
+
+
+
+
 			/*! @note @li (ii)-1 detect trailer while ATD timer is under BTT_ATD_MAX_TIME  */
 			if( st_atd_params.timer < BTT_ATD_MAX_TIME)
 			{
+
+/* NGNGNGNGNGNGNGNGNGNGNGNGNGNGNG */
 				/*! @note @li keep detecting trailer while TFlag is UNKNOWN */
 				if( pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN )
 				{
@@ -67,7 +76,17 @@ VD fn_btt_atd_main(
 						/* wait for next cycle */
 					}
 				}
+/* NGNGNGNGNGNGNGNGNGNGNGNGNGNGNG */
+
+
 			}
+
+
+
+
+
+
+
 			/*! @note @li (ii)-2 finish detecting trailer when ATD timer is over BTT_ATD_MAX_TIME  */
 			else
 			{
@@ -76,8 +95,19 @@ VD fn_btt_atd_main(
 				/*! @note @li --> deactivate ATD */
 				fn_btt_atd_deactivate();
 			}
+
+
+
+
+
 			/*! @note @li (iii) increment ATD timer  */
 			st_atd_params.timer++;
+
+
+
+
+
+
 		}
 		else
 		{
