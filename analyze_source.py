@@ -132,6 +132,9 @@ for index1 in range(0, func_list.func_num):
 
 ###### call function (analyze_sub_process) ######
 	while sub_proc_flag == True:
+#0419
+		print 'CALL analyze_sub_process from Main -----------------------------------------'
+
 		sub_proc_list, sub_proc_flag, current_title, tmp_serial_proc_codes = \
 			func_source_analyze.analyze_sub_process(tmp_proc_list,current_title)
 		serial_proc_codes.append_list(tmp_serial_proc_codes)
@@ -150,6 +153,9 @@ for index1 in range(0, func_list.func_num):
 
 
 ###### call function (analyze_process_code) ######
+	print 'CALL analyze_process_code from Main -----------------------------------------'
+
+
 	serial_proc_codes = func_source_analyze.analyze_process_code(serial_proc_codes)
 	# CODE
 	func_source_analyze.print_out(fout, '----- Codes -----', 1)
