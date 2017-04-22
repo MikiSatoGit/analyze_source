@@ -70,27 +70,28 @@ fout = open(outfile,'w')
 ###### call function (load_valid_source_code) ######
 cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
 
-####### output CODE (ORIGINA) #######
-#for line in lines:
-#	func_source_analyze.print_out(fout, line, 0)
-#func_source_analyze.print_out(fout, "", 1)
+####### output CODE (ORIGINAL) #######
+if debug_out:
+	for line in lines:
+		func_source_analyze.print_out(fout, line, 0)
+	func_source_analyze.print_out(fout, "", 1)
 
 func_source_analyze.print_out(fout, "Total lines: %d "  % cnt, 1)
 
 ###### call function (find_functions) ######
 func_list = func_source_analyze.find_functions(lines)
+# [in] lines : List
+# [out] func_list : FunctionList
 
 ###### call function (analyze_function_list) ######
 for index1 in range(0, func_list.func_num):
-	current_title_org = func_source_analyze.analyze_function_list(func_list.function_data[index1], "PROCESS")
+	func_source_analyze.analyze_function_list(func_list.function_data[index1])
+# [in] func_list.function_data : FunctionData
+# [out] func_list.process_code_list : ProcessCodes
 
 ###### File output (Header) ######
 func_source_analyze.print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
-serial_proc_codes = func_source_analyze.ProcessCodes()
-
 for index1 in range(0, func_list.func_num):
-	current_title = current_title_org
-	serial_proc_codes.clear()
 	func_source_analyze.print_out(fout, "--------------------------", 1)
 
 	if debug_out:
@@ -110,39 +111,8 @@ for index1 in range(0, func_list.func_num):
 	# CODE
 	if debug_out:
 		func_source_analyze.print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
-
-	for index2 in range(0, len(func_list.function_data[index1].codes)):
-		func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
-
-
-###### copy data ######
-	tmp_proc_list = func_source_analyze.ProcessCodesList()
-	tmp_proc_list = copy.deepcopy(func_list.function_data[index1].process_code_list)
-	sub_proc_list = func_source_analyze.ProcessCodesList()
-	sub_proc_flag = True
-
-
-
-
-
-
-
-
-
-
-###### call function (analyze_sub_process) ######
-	while sub_proc_flag == True:
-#0419
-		print 'CALL analyze_sub_process from Main -----------------------------------------'
-
-		sub_proc_list, sub_proc_flag, current_title, tmp_serial_proc_codes = \
-			func_source_analyze.analyze_sub_process(tmp_proc_list,current_title)
-		serial_proc_codes.append_list(tmp_serial_proc_codes)
-		###### copy data ######
-		tmp_proc_list.clear()
-		tmp_proc_list = copy.deepcopy(sub_proc_list)
-		sub_proc_list.clear()
-	serial_proc_codes.set_func_name(func_list.function_data[index1].name)
+		for index2 in range(0, len(func_list.function_data[index1].codes)):
+			func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
 
 
 
@@ -153,13 +123,15 @@ for index1 in range(0, func_list.func_num):
 
 
 ###### call function (analyze_process_code) ######
-	print 'CALL analyze_process_code from Main -----------------------------------------'
+	if debug_out:
+		for index2 in range (0, func_list.function_data[index1].process_code_list.get_main_size()):
+			print '--> %s' % func_list.function_data[index1].process_code_list.title[index2],
+			print ' %s' % func_list.function_data[index1].process_code_list.main[index2]
 
-
-	serial_proc_codes = func_source_analyze.analyze_process_code(serial_proc_codes)
+	func_source_analyze.analyze_process_code(func_list.function_data[index1].process_code_list)
 	# CODE
 	func_source_analyze.print_out(fout, '----- Codes -----', 1)
-	total_lines = serial_proc_codes.file_print_proc_data_list(fout)
+	total_lines = func_list.function_data[index1].process_code_list.file_print_proc_data_list(fout)
 	func_source_analyze.print_out(fout, "----------------- Total Codes : %d lines" % total_lines, 1)
 
 
@@ -167,18 +139,6 @@ for index1 in range(0, func_list.func_num):
 
 
 
-
-
-
-	##### For Debug #####
-	# CODE
-	print serial_proc_codes.func_name
-	print 'code:%d (include subprocess header)' % total_lines
-	# ARGUMENT
-	print 'arguments:%d' % func_list.function_data[index1].argument_num
-	#for index2 in range(0, func_list.function_data[index1].argument_num):
-	#		func_source_analyze.print_out(fout, func_list.function_data[index1].argument_list[index2].type, 0),
-	#		func_source_analyze.print_out(fout, func_list.function_data[index1].argument_list[index2].name, 0)
 
 
 

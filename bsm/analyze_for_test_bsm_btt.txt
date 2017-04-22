@@ -16,82 +16,65 @@ Total functions : 1
      [9] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
      [10] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [11] : BTT_RESULT*   pst_a_btt_result 
-{
-if( st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE )
-{
-return;
-}
-if( s1_a_shift_flg != (S1) 0 )	/* (tentative) not R */
-{
-if( fl_a_self_v > BTT_ACTIVE_SPEED_TH )
-{
-if( st_atd_params.timer < BTT_ATD_MAX_TIME)
-{
-if( pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN )
-{
-pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer(
-fl_a_self_v,				/*!< [in] Subject Vehicle speed [km/h] */
-s4_a_curve_r,				/*!< [in] Road curvature [m] */
-pst_a_object,				/*!< [in] Current trailer objects */
-s4_a_object_size,			/*!< [in] Current Number of trailer objects */
-fl_a_doa_pow_ave,
-fl_a_doa_pow_dev,
-s4_a_doa_bf_peak_bin,
-fl_a_doa_bf_peak_pow,
-pst_a_cluster_info,			/*!< [in] (optional) Trailer info selected by driver */
-pst_a_aux_trailer_info		/*!< [in] (optional) Additional trailer or object info from other system or module */
-);
-if( pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT )
-{
-fn_btt_atd_deactivate();
-}
-else if( pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT )
-{
-fn_btt_atd_deactivate();
-}
-else	/* TFlag == BTT_TRAILER_FLAG_UNKNOWN */
-{
-}
-}
-}
-else
-{
-pst_a_btt_result->TFlag = BTT_RET_t.TFlag.UNKNOWN;
-fn_btt_atd_deactivate();
-}
-st_atd_params.timer++;
-}
-else
-{
-}
-}
-else
-{
-fn_btt_atd_initialize();
-}
-return;
-}
 ----- Codes -----
-[1] MAINPROCESS if<start> if( 
-[2] MAINPROCESS if st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE 
-[3] MAINPROCESS if ) 
-[4] MAINPROCESS subproc SUBPROCESS(1) 
-[5] SUBPROCESS(1) proc return; 
-[6] MAINPROCESS if<start> if( 
-[7] MAINPROCESS if s1_a_shift_flg != (S1) 0 
-[8] MAINPROCESS if ) 
-[9] MAINPROCESS subproc SUBPROCESS(2) 
-[10] SUBPROCESS(2) if<start> if( 
-[11] SUBPROCESS(2) if fl_a_self_v > BTT_ACTIVE_SPEED_TH 
-[12] SUBPROCESS(2) if ) 
-[13] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[14] SUBPROCESS(2) else<start> else 
-[15] SUBPROCESS(2) subproc SUBSUBPROCESS(2) 
-[16] MAINPROCESS else<start> else 
-[17] MAINPROCESS subproc SUBPROCESS(3) 
-[18] SUBPROCESS(3) func<start> fn_btt_atd_initialize( 
-[19] SUBPROCESS(3) func<end> ); 
-[20] MAINPROCESS proc return; 
-[21] MAINPROCESS func<start> fn_btt_atd_initialize( 
-[22] MAINPROCESS func<end> ); 
------------------ Total Codes : 22 lines
+[1] MAINPROCESS(1) if<start> if( 
+[2] MAINPROCESS(1) if st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE 
+[3] MAINPROCESS(1) if ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+	[5] SUBPROCESS(1) proc return; 
+[6] MAINPROCESS(2) if<start> if( 
+[7] MAINPROCESS(2) if s1_a_shift_flg != (S1) 0 
+[8] MAINPROCESS(2) if ) 
+[9] MAINPROCESS(2) subproc SUBPROCESS(1) 
+	[10] SUBPROCESS(1) if<start> if( 
+	[11] SUBPROCESS(1) if fl_a_self_v > BTT_ACTIVE_SPEED_TH 
+	[12] SUBPROCESS(1) if ) 
+	[13] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+		[14] SUBSUBPROCESS(1) if<start> if( 
+		[15] SUBSUBPROCESS(1) if st_atd_params.timer < BTT_ATD_MAX_TIME 
+		[16] SUBSUBPROCESS(1) if ) 
+			[17] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+				[18] SUBSUBSUBPROCESS(1) if<start> if( 
+				[19] SUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN 
+				[20] SUBSUBSUBPROCESS(1) if ) 
+				[21] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+						[22] SUBSUBSUBSUBPROCESS(1) func<start> pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer( 
+						[23] SUBSUBSUBSUBPROCESS(1) func fl_a_self_v, 
+						[24] SUBSUBSUBSUBPROCESS(1) func s4_a_curve_r, 
+						[25] SUBSUBSUBSUBPROCESS(1) func pst_a_object, 
+						[26] SUBSUBSUBSUBPROCESS(1) func s4_a_object_size, 
+						[27] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_pow_ave, 
+						[28] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_pow_dev, 
+						[29] SUBSUBSUBSUBPROCESS(1) func s4_a_doa_bf_peak_bin, 
+						[30] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_bf_peak_pow, 
+						[31] SUBSUBSUBSUBPROCESS(1) func pst_a_cluster_info, 
+						[32] SUBSUBSUBSUBPROCESS(1) func pst_a_aux_trailer_info 
+						[33] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+						[34] SUBSUBSUBSUBPROCESS(1) if<start> if( 
+						[35] SUBSUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT 
+						[36] SUBSUBSUBSUBPROCESS(1) if ) 
+						[37] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+							[38] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+							[39] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+						[40] SUBSUBSUBSUBPROCESS(2) else if<start> else if( 
+						[41] SUBSUBSUBSUBPROCESS(2) else if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+						[42] SUBSUBSUBSUBPROCESS(2) else if ) 
+						[43] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+							[44] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+							[45] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+						[46] SUBSUBSUBSUBPROCESS(3) else<start> else 
+						[47] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+							[48] SUBSUBPROCESS(2) else<start> else 
+			[49] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+				[50] SUBSUBSUBPROCESS(1) equal pst_a_btt_result->TFlag BTT_RET_t.TFlag.UNKNOWN;
+				[51] SUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+				[52] SUBSUBSUBPROCESS(1) func<end> ); 
+		[53] SUBSUBPROCESS(3) proc st_atd_params.timer++; 
+	[54] SUBPROCESS(2) else<start> else 
+	[55] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[56] MAINPROCESS(3) else<start> else 
+[57] MAINPROCESS(3) subproc SUBPROCESS(1) 
+	[58] SUBPROCESS(1) func<start> fn_btt_atd_initialize( 
+	[59] SUBPROCESS(1) func<end> ); 
+[60] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 60 lines

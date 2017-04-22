@@ -8,178 +8,113 @@ Total functions : 2
      [1] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
      [2] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [3] : BTT_HITCH_ANGLE   *pst_a_hitch_angle 
-{
-miki0 = main(
-arg0_1,
-arg0_2,
-(S1)arg0_3 );
-if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED )
-{
-/* SUBPROCESS(1) Å´ */
-return;
-}
-if(miki==test)
-{
- miki = done; hogehoge
-{
-miki = next; 
-}
-}
-else
-{
-miki = ELSETEST
-}
-if(
-miki==test
-&& miki==debug
-)
-{
-/* SUBPROCESS(2) Å´ */
-miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1_1);
-if(hogehoge1)
-{
-/* SUBSUBPROCESS(1) Å´ */
-miki2_1 = subsub_1(
-(S1)arg2_1_1,
-arg2_1_2 );
-miki2_2
-= subsub_2(
-(S1)arg2_2_1,
-arg2_2_2
-);
-for(i=0; i<hogehoge2; i++)
-{
-/* SUBSUBSUBPROCESS(1) Å´ */
-miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3);
-while(hogehoge3_1)
-{
-/* SUBSUBSUBSUBPROCESS(1) Å´ */
-miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3);
-if(hogehoge4_1)
-{
-(S5)miki5_1 = subsubsubsubsub_1;
-}
-else if(hogehoge4_2)
-{
-(S5)miki5_2 = subsubsubsubsub_2;
-}
-else if(hogehoge4_3)
-{
-(S5)miki5_3 = subsubsubsubsub_2;
-}
-else
-{
-(S5)miki5_4 = subsubsubsubsub_3;
-}
-}
-switch (hogehoge3_2)
-{
-/* SUBSUBSUBSUBPROCESS(2) Å´ */
-case mode1:
-miki4_2_1 = subsubsubsub_mode_1;
-break;
-case mode1:
-miki4_2_2 = subsubsubsub_mode_2;
-break;
-default:
-miki4_2_3 = subsubsubsub_mode_default;
-break;
-}
-{
-/* SUBSUBSUBSUBPROCESS(3) Å´ */
-miki4_3 = subsubsubsub_mode_default(
-(S1) arg4_3_1,
-arg4_3_2,
-arg4_3_3
-);
-}
-}
-}
-else
-{
-hogehoge1_ELSE();
-}
-}
-st_g_btt_stat.ATD = BTT_RET_t.Func_Stat.ENABLE;
-st_g_btt_stat.TLE = BTT_RET_t.Func_Stat.ENABLE;
-st_g_btt_stat.AAZ = BTT_RET_t.Func_Stat.ENABLE;	//_20161201_BUG_T
-st_g_btt_stat.TWE = BTT_RET_t.Func_Stat.ENABLE;
-st_g_btt_stat.TWE = BTT_RET_t.Func_Stat.DISABLE;
-st_g_btt_stat.TTM = BTT_RET_t.Func_Stat.DISABLE;
-pst_a_bsm_alertarea_for_test->Ymin = (FL) 1.0;
-pst_a_bsm_alertarea_for_test->Ymax = (FL) -7.0;
-pst_a_bsm_alertarea_for_test->Xmin = (FL) 0.5;
-pst_a_bsm_alertarea_for_test->Xmax = (FL) 3.8;
-pst_a_cluster_info->dummy = CFL_UNKNOWN_VALUE;
-pst_a_aux_trailer_info->dummy = CFL_UNKNOWN_VALUE;
-pst_a_hitch_angle->dummy = CFL_UNKNOWN_VALUE;
-return;
-}
 ----- Codes -----
-[1] MAINPROCESS func<start> miki0 = main( 
-[2] MAINPROCESS func arg0_1, 
-[3] MAINPROCESS func arg0_2, 
-[4] MAINPROCESS func (S1)arg0_3 
-[5] MAINPROCESS func<end> ); 
-[6] MAINPROCESS if<start> if( 
-[7] MAINPROCESS if st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
-[8] MAINPROCESS if ) 
-[9] MAINPROCESS subproc SUBPROCESS(1) 
-[10] SUBPROCESS(1) proc return; 
-[11] MAINPROCESS if<start> if( 
-[12] MAINPROCESS if miki==test 
-[13] MAINPROCESS if ) 
-[14] MAINPROCESS subproc SUBPROCESS(2) 
-[15] SUBPROCESS(2) equal miki done;
-[16] SUBPROCESS(2) proc hogehoge; 
-[17] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[18] MAINPROCESS else<start> else 
-[19] MAINPROCESS subproc SUBPROCESS(3) 
-[20] SUBPROCESS(3) ??? miki = ELSETEST 
-[21] MAINPROCESS ??? if( 
-[22] MAINPROCESS ??? miki==test 
-[23] MAINPROCESS ??? && miki==debug 
-[24] MAINPROCESS ??? ) 
-[25] MAINPROCESS subproc SUBPROCESS(4) 
-[26] SUBPROCESS(4) equal miki1_1 sub;
-[27] SUBPROCESS(4) func<start> miki1_3( 
-[28] SUBPROCESS(4) func<end> ); 
-[29] SUBPROCESS(4) func<start> miki1_4((S1)arg1_1 
-[30] SUBPROCESS(4) func<end> ); 
-[31] SUBPROCESS(4) ??? if( 
-[32] SUBPROCESS(4) ??? hogehoge1 
-[33] SUBPROCESS(4) ??? ) 
-[34] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[35] SUBPROCESS(4) ??? else 
-[36] SUBPROCESS(4) subproc SUBSUBPROCESS(2) 
-[37] MAINPROCESS equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
-[38] MAINPROCESS equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
-[39] MAINPROCESS equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
-[40] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
-[41] MAINPROCESS equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
-[42] MAINPROCESS equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
-[43] MAINPROCESS equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
-[44] MAINPROCESS equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
-[45] MAINPROCESS equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
-[46] MAINPROCESS proc return; 
-[47] SUBSUBPROCESS(1) func<start> miki2_1 = subsub_1( 
-[48] SUBSUBPROCESS(1) func (S1)arg2_1_1, 
-[49] SUBSUBPROCESS(1) func arg2_1_2 
-[50] SUBSUBPROCESS(1) func<end> ); 
-[51] SUBSUBPROCESS(1) ??? miki2_2 
-[52] SUBSUBPROCESS(1) func<start> = subsub_2( 
-[53] SUBSUBPROCESS(1) func (S1)arg2_2_1, 
-[54] SUBSUBPROCESS(1) func arg2_2_2 
-[55] SUBSUBPROCESS(1) func<end> ); 
-[56] SUBSUBPROCESS(1) ??? for( 
-[57] SUBSUBPROCESS(1) ??? i=0 
-[58] SUBSUBPROCESS(1) ??? i<hogehoge2; 
-[59] SUBSUBPROCESS(1) ??? i++ 
-[60] SUBSUBPROCESS(1) ??? ) 
-[61] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[62] SUBSUBPROCESS(2) func<start> hogehoge1_ELSE( 
-[63] SUBSUBPROCESS(2) func<end> ); 
------------------ Total Codes : 63 lines
+[1] MAINPROCESS(1) func<start> miki0 = main( 
+[2] MAINPROCESS(1) func arg0_1, 
+[3] MAINPROCESS(1) func arg0_2, 
+[4] MAINPROCESS(1) func (S1)arg0_3 
+[5] MAINPROCESS(1) func<end> ); 
+[6] MAINPROCESS(1) if<start> if( 
+[7] MAINPROCESS(1) if st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
+[8] MAINPROCESS(1) if ) 
+[9] MAINPROCESS(1) subproc SUBPROCESS(1) 
+	[10] SUBPROCESS(1) proc return; 
+[11] MAINPROCESS(2) if<start> if( 
+[12] MAINPROCESS(2) if miki==test 
+[13] MAINPROCESS(2) if ) 
+[14] MAINPROCESS(2) subproc SUBPROCESS(1) 
+	[15] SUBPROCESS(1) equal miki done;
+	[16] SUBPROCESS(1) proc hogehoge; 
+	[17] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+		[18] SUBSUBPROCESS(1) equal miki next;
+[19] MAINPROCESS(3) else<start> else 
+[20] MAINPROCESS(3) subproc SUBPROCESS(1) 
+	[21] SUBPROCESS(1) ??? miki = ELSETEST 
+[22] MAINPROCESS(4) ??? if( 
+[23] MAINPROCESS(4) ??? miki==test 
+[24] MAINPROCESS(4) ??? && miki==debug 
+[25] MAINPROCESS(4) ??? ) 
+[26] MAINPROCESS(4) subproc SUBPROCESS(1) 
+	[27] SUBPROCESS(1) equal miki1_1 sub;
+	[28] SUBPROCESS(1) func<start> miki1_3( 
+	[29] SUBPROCESS(1) func<end> ); 
+	[30] SUBPROCESS(1) func<start> miki1_4((S1)arg1_1 
+	[31] SUBPROCESS(1) func<end> ); 
+	[32] SUBPROCESS(1) ??? if( 
+	[33] SUBPROCESS(1) ??? hogehoge1 
+	[34] SUBPROCESS(1) ??? ) 
+	[35] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+		[36] SUBSUBPROCESS(1) func<start> miki2_1 = subsub_1( 
+		[37] SUBSUBPROCESS(1) func (S1)arg2_1_1, 
+		[38] SUBSUBPROCESS(1) func arg2_1_2 
+		[39] SUBSUBPROCESS(1) func<end> ); 
+		[40] SUBSUBPROCESS(1) ??? miki2_2 
+		[41] SUBSUBPROCESS(1) func<start> = subsub_2( 
+		[42] SUBSUBPROCESS(1) func (S1)arg2_2_1, 
+		[43] SUBSUBPROCESS(1) func arg2_2_2 
+		[44] SUBSUBPROCESS(1) func<end> ); 
+		[45] SUBSUBPROCESS(1) ??? for( 
+		[46] SUBSUBPROCESS(1) ??? i=0 
+		[47] SUBSUBPROCESS(1) ??? i<hogehoge2; 
+		[48] SUBSUBPROCESS(1) ??? i++ 
+		[49] SUBSUBPROCESS(1) ??? ) 
+		[50] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+			[51] SUBSUBSUBPROCESS(1) func<start> miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3 
+			[52] SUBSUBSUBPROCESS(1) func<end> ); 
+			[53] SUBSUBSUBPROCESS(1) ??? while( 
+			[54] SUBSUBSUBPROCESS(1) ??? hogehoge3_1 
+			[55] SUBSUBSUBPROCESS(1) ??? ) 
+			[56] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+				[57] SUBSUBSUBSUBPROCESS(1) func<start> miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3 
+				[58] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+				[59] SUBSUBSUBSUBPROCESS(1) ??? if( 
+				[60] SUBSUBSUBSUBPROCESS(1) ??? hogehoge4_1 
+				[61] SUBSUBSUBSUBPROCESS(1) ??? ) 
+					[62] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+				[63] SUBSUBSUBSUBPROCESS(2) ??? else if( 
+				[64] SUBSUBSUBSUBPROCESS(2) ??? hogehoge4_2 
+				[65] SUBSUBSUBSUBPROCESS(2) ??? ) 
+					[66] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+				[67] SUBSUBSUBSUBPROCESS(3) ??? else if( 
+				[68] SUBSUBSUBSUBPROCESS(3) ??? hogehoge4_3 
+				[69] SUBSUBSUBSUBPROCESS(3) ??? ) 
+					[70] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+				[71] SUBSUBSUBSUBPROCESS(4) ??? else 
+					[72] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+			[73] SUBSUBSUBPROCESS(2) ??? switch ( 
+			[74] SUBSUBSUBPROCESS(2) ??? hogehoge3_2 
+			[75] SUBSUBSUBPROCESS(2) ??? ) 
+			[76] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+				[77] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
+				[78] SUBSUBSUBSUBPROCESS(1) equal miki4_2_1 subsubsubsub_mode_1;
+				[79] SUBSUBSUBSUBPROCESS(1) proc break; 
+				[80] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
+				[81] SUBSUBSUBSUBPROCESS(1) equal miki4_2_2 subsubsubsub_mode_2;
+				[82] SUBSUBSUBSUBPROCESS(1) proc break; 
+				[83] SUBSUBSUBSUBPROCESS(1) ??? default: 
+				[84] SUBSUBSUBSUBPROCESS(1) equal miki4_2_3 subsubsubsub_mode_default;
+				[85] SUBSUBSUBSUBPROCESS(1) proc break; 
+			[86] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+				[87] SUBSUBSUBSUBPROCESS(1) func<start> miki4_3 = subsubsubsub_mode_default( 
+				[88] SUBSUBSUBSUBPROCESS(1) func (S1) arg4_3_1, 
+				[89] SUBSUBSUBSUBPROCESS(1) func arg4_3_2, 
+				[90] SUBSUBSUBSUBPROCESS(1) func arg4_3_3 
+				[91] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+	[92] SUBPROCESS(2) ??? else 
+	[93] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+	[94] SUBSUBPROCESS(1) func<start> hogehoge1_ELSE( 
+	[95] SUBSUBPROCESS(1) func<end> ); 
+[96] MAINPROCESS(5) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[97] MAINPROCESS(5) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
+[98] MAINPROCESS(5) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
+[99] MAINPROCESS(5) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
+[100] MAINPROCESS(5) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
+[101] MAINPROCESS(5) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
+[102] MAINPROCESS(5) equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
+[103] MAINPROCESS(5) equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
+[104] MAINPROCESS(5) equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
+[105] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 105 lines
 --------------------------
 [Function Name] : fn_btt_atd_main 
 -Return type : VD 
@@ -196,82 +131,65 @@ return;
      [9] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
      [10] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [11] : BTT_RESULT*   pst_a_btt_result 
-{
-if( st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE )
-{
-return;
-}
-if( s1_a_shift_flg != (S1) 0 )	/* (tentative) not R */
-{
-if( fl_a_self_v > BTT_ACTIVE_SPEED_TH )
-{
-if( st_atd_params.timer < BTT_ATD_MAX_TIME)
-{
-if( pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN )
-{
-pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer(
-fl_a_self_v,				/*!< [in] Subject Vehicle speed [km/h] */
-s4_a_curve_r,				/*!< [in] Road curvature [m] */
-pst_a_object,				/*!< [in] Current trailer objects */
-s4_a_object_size,			/*!< [in] Current Number of trailer objects */
-fl_a_doa_pow_ave,
-fl_a_doa_pow_dev,
-s4_a_doa_bf_peak_bin,
-fl_a_doa_bf_peak_pow,
-pst_a_cluster_info,			/*!< [in] (optional) Trailer info selected by driver */
-pst_a_aux_trailer_info		/*!< [in] (optional) Additional trailer or object info from other system or module */
-);
-if( pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT )
-{
-fn_btt_atd_deactivate();
-}
-else if( pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT )
-{
-fn_btt_atd_deactivate();
-}
-else	/* TFlag == BTT_TRAILER_FLAG_UNKNOWN */
-{
-}
-}
-}
-else
-{
-pst_a_btt_result->TFlag = BTT_RET_t.TFlag.UNKNOWN;
-fn_btt_atd_deactivate();
-}
-st_atd_params.timer++;
-}
-else
-{
-}
-}
-else
-{
-fn_btt_atd_initialize();
-}
-return;
-}
 ----- Codes -----
-[1] MAINPROCESS if<start> if( 
-[2] MAINPROCESS if st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE 
-[3] MAINPROCESS if ) 
-[4] MAINPROCESS subproc SUBPROCESS(1) 
+[1] MAINPROCESS(1) if<start> if( 
+[2] MAINPROCESS(1) if st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE 
+[3] MAINPROCESS(1) if ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [5] SUBPROCESS(1) proc return; 
-[6] MAINPROCESS if<start> if( 
-[7] MAINPROCESS if s1_a_shift_flg != (S1) 0 
-[8] MAINPROCESS if ) 
-[9] MAINPROCESS subproc SUBPROCESS(2) 
-[10] SUBPROCESS(2) if<start> if( 
-[11] SUBPROCESS(2) if fl_a_self_v > BTT_ACTIVE_SPEED_TH 
-[12] SUBPROCESS(2) if ) 
-[13] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[14] SUBPROCESS(2) else<start> else 
-[15] SUBPROCESS(2) subproc SUBSUBPROCESS(2) 
-[16] MAINPROCESS else<start> else 
-[17] MAINPROCESS subproc SUBPROCESS(3) 
-[18] SUBPROCESS(3) func<start> fn_btt_atd_initialize( 
-[19] SUBPROCESS(3) func<end> ); 
-[20] MAINPROCESS proc return; 
-[21] MAINPROCESS func<start> fn_btt_atd_initialize( 
-[22] MAINPROCESS func<end> ); 
------------------ Total Codes : 22 lines
+[6] MAINPROCESS(2) if<start> if( 
+[7] MAINPROCESS(2) if s1_a_shift_flg != (S1) 0 
+[8] MAINPROCESS(2) if ) 
+[9] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) if<start> if( 
+[11] SUBPROCESS(1) if fl_a_self_v > BTT_ACTIVE_SPEED_TH 
+[12] SUBPROCESS(1) if ) 
+[13] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[14] SUBSUBPROCESS(1) if<start> if( 
+[15] SUBSUBPROCESS(1) if st_atd_params.timer < BTT_ATD_MAX_TIME 
+[16] SUBSUBPROCESS(1) if ) 
+[17] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBPROCESS(1) if<start> if( 
+[19] SUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[20] SUBSUBSUBPROCESS(1) if ) 
+[21] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[22] SUBSUBSUBSUBPROCESS(1) func<start> pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer( 
+[23] SUBSUBSUBSUBPROCESS(1) func fl_a_self_v, 
+[24] SUBSUBSUBSUBPROCESS(1) func s4_a_curve_r, 
+[25] SUBSUBSUBSUBPROCESS(1) func pst_a_object, 
+[26] SUBSUBSUBSUBPROCESS(1) func s4_a_object_size, 
+[27] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_pow_ave, 
+[28] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_pow_dev, 
+[29] SUBSUBSUBSUBPROCESS(1) func s4_a_doa_bf_peak_bin, 
+[30] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_bf_peak_pow, 
+[31] SUBSUBSUBSUBPROCESS(1) func pst_a_cluster_info, 
+[32] SUBSUBSUBSUBPROCESS(1) func pst_a_aux_trailer_info 
+[33] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[34] SUBSUBSUBSUBPROCESS(1) if<start> if( 
+[35] SUBSUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT 
+[36] SUBSUBSUBSUBPROCESS(1) if ) 
+[37] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[38] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[39] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[40] SUBSUBSUBSUBPROCESS(2) else if<start> else if( 
+[41] SUBSUBSUBSUBPROCESS(2) else if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[42] SUBSUBSUBSUBPROCESS(2) else if ) 
+[43] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[44] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[45] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[46] SUBSUBSUBSUBPROCESS(3) else<start> else 
+[47] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[48] SUBSUBPROCESS(2) else<start> else 
+[49] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[50] SUBSUBSUBPROCESS(1) equal pst_a_btt_result->TFlag BTT_RET_t.TFlag.UNKNOWN;
+[51] SUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[52] SUBSUBSUBPROCESS(1) func<end> ); 
+[53] SUBSUBPROCESS(3) proc st_atd_params.timer++; 
+[54] SUBPROCESS(2) else<start> else 
+[55] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[56] MAINPROCESS(3) else<start> else 
+[57] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[58] SUBPROCESS(1) func<start> fn_btt_atd_initialize( 
+[59] SUBPROCESS(1) func<end> ); 
+[60] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 60 lines
