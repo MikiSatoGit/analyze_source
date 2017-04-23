@@ -20,7 +20,7 @@ class ArgumentData:
 
 class FunctionList:
 	def __init__(self):
-		self.function_data = [] 
+		self.function_data = [] #List of FunctionData
 		self.func_num = 0
 
 
@@ -265,6 +265,10 @@ def set_func_def_lines(FunctionData, lines):
 
 
 def set_code_lines(FunctionData, lines):
+# [in] FunctionData
+# [in] lines * List
+# [out] FunctionData.code = code_list : List
+
 	code_list = []
 	code_tmp = ''
 	code_divided = ''
@@ -377,6 +381,7 @@ def set_function_data(FunctionData, func_def_lines, func_content_lines):
 	FunctionData.count_arguments()
 	set_code_lines(FunctionData, func_content_lines)
 	FunctionData.count_lines()
+	return
 
 
 def remove_comment_line(line):
@@ -574,10 +579,11 @@ def find_functions(valid_lines):
 
 		#remove space and comment
 		line = remove_comment_line(line_org)
-
 		#find "{"
 		if searching == 0:
 			func_def_lines.append(line_org)
+
+
 			if line.find('{')!=-1:
 
 				if line.find('=')!=-1 \
@@ -592,7 +598,7 @@ def find_functions(valid_lines):
 					level = 1
 					function_data = FunctionData()
 					func_def_lines.pop()
-					func_content_lines.append(line_org)
+					func_content_lines.append(line)
 					if line.find('}')!=-1: #finish function code at the same line
 						searching = 0
 						level = 0
@@ -604,7 +610,7 @@ def find_functions(valid_lines):
 
 		#find "}"
 		else:
-			func_content_lines.append(line_org)
+			func_content_lines.append(line)
 			if line.find('{')!=-1:
 				level += 1
 			if line.find('}')!=-1:
@@ -614,7 +620,6 @@ def find_functions(valid_lines):
 						set_function_data(function_data, func_def_lines, func_content_lines)
 						func_list.function_data.append(function_data)
 						func_list.func_num += 1
-
 					searching = 0
 					del func_content_lines[:]
 					del func_def_lines[:]
@@ -635,19 +640,7 @@ def analyze_function_list(FunctionData):
 	# [out] proc_list: ProcessCodes
 	FunctionData.process_code_list = proc_list
 
-	##### For Debug #####
 	if debug_out:
-		print '<analyze_function_list> -------------------------------------'
-		print '<analyze_function_list> %s' % FunctionData.name, 
-		print '<analyze_function_list> %d' % len(FunctionData.codes)
-		if len(FunctionData.process_code_list.main_proc)!=0:
-			for code in FunctionData.process_code_list.main_proc:
-				print '<analyze_function_list> (main) %s' %code
-		if len(FunctionData.process_code_list.sub_proc)!=0:
-			for code in FunctionData.process_code_list.sub_proc:
-				print '--------'
-				for subcode in code:
-					print '<analyze_function_list> (sub) %s' % subcode[0]
 		print '<analyze_function_list> END of analyze_function_list'
 
 	return
@@ -695,7 +688,6 @@ def analyze_function_codes(function_codes):
 	proc_id = []
 	proc_id.append(0)
 	for index1 in range(0, len(proc_codes)):
-
 		current_level = proc_levels[index1]
 		if current_level > previous_level:
 			if len(proc_id) < current_level:
@@ -718,12 +710,12 @@ def analyze_function_codes(function_codes):
 			proc_ids.append(proc_id[0])
 		previous_level = current_level
 
-	if debug_out:
-		print '<analyze_function_codes> '
-		for index1 in range(0,len(proc_codes)):
-			print proc_titles[index1],
-			print '(%d)' % proc_ids[index1] ,
-			print proc_codes[index1]
+#0422	if debug_out:
+	print '<analyze_function_codes> '
+	for index1 in range(0,len(proc_codes)):
+		print proc_titles[index1],
+		print '(%d)' % proc_ids[index1] ,
+		print proc_codes[index1]
 
 ##### remove line of { }
 	previous_level = 0
@@ -774,11 +766,9 @@ def divide_end_of_function_in_code(proc_codes):
 	if debug_out:
 		print '<divide_end_of_function_in_code> START of divide_end_of_function_in_code'
 
-
 	copy_proc_codes = copy.deepcopy(proc_codes)
 	out_proc_codes = []
 	for index in xrange(0,len(copy_proc_codes)):
-
 # divide by ';'
 		divided_code = copy_proc_codes[index].strip()
 		divided_code = divided_code.split(';')
@@ -810,6 +800,8 @@ def divide_end_of_function_in_code(proc_codes):
 							out_proc_codes.append(');')
 						else:
 							out_proc_codes.append(');')
+					else:
+						out_proc_codes.append( tmp_code.strip() )
 				else:
 					out_proc_codes.append( tmp_code.strip() )
 

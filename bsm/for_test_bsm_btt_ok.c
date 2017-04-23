@@ -351,7 +351,7 @@ VD init_btt_configuration_parameter_dummy(
 	{ miki = done; hogehoge{ miki = next; } }
 	else
 	{
-		miki = ELSETEST
+		miki = ELSETEST;
 	}
 
 	if(

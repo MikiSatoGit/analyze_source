@@ -47,6 +47,7 @@ if filename1.find('\\')!=-1:
 	str = filename1.rsplit('\\',1)
 elif filename1.find('/')!=-1:
 	str = filename1.rsplit('/',1)
+
 if len(str)>1:
 	outfile = str[0] +'\\analyze_' + str[1]
 else:
@@ -70,6 +71,7 @@ fout = open(outfile,'w')
 ###### call function (load_valid_source_code) ######
 cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
 
+
 ####### output CODE (ORIGINAL) #######
 if debug_out:
 	for line in lines:
@@ -78,24 +80,28 @@ if debug_out:
 
 func_source_analyze.print_out(fout, "Total lines: %d "  % cnt, 1)
 
+
 ###### call function (find_functions) ######
+func_list = func_source_analyze.FunctionList()
 func_list = func_source_analyze.find_functions(lines)
 # [in] lines : List
 # [out] func_list : FunctionList
 
+
 ###### call function (analyze_function_list) ######
-for index1 in range(0, func_list.func_num):
-	func_source_analyze.analyze_function_list(func_list.function_data[index1])
+for func in func_list.function_data:
+	func_source_analyze.analyze_function_list(func)
 # [in] func_list.function_data : FunctionData
 # [out] func_list.process_code_list : ProcessCodes
+
 
 ###### File output (Header) ######
 func_source_analyze.print_out(fout, "Total functions : %d "  % func_list.func_num, 1)
 for index1 in range(0, func_list.func_num):
 	func_source_analyze.print_out(fout, "--------------------------", 1)
 
-	if debug_out:
-		print '====== %s ======' % func_list.function_data[index1].name
+#0422	if debug_out:
+	print '====== %s ======' % func_list.function_data[index1].name
 
 	# FUNCTION
 	func_source_analyze.print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)

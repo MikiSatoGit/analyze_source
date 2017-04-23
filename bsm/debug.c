@@ -1,3 +1,4 @@
+
 VD fn_btt_atd_main(
 	type1 arg1,
 	type1 arg2
@@ -35,9 +36,6 @@ VD fn_btt_atd_main(
 }
 
 
-
-
-
 VD init_btt_configuration_parameter_dummy(
 	BSM_STANDARD *pst_a_bsm_alertarea_for_test,		/*!< [in] Standard BSM alert area (should be provided from outside BTT)*/
 	BTT_CLUSTER_INFO *pst_a_cluster_info,			/*!< [in] (optional) Trailer info selected by driver */
@@ -62,7 +60,7 @@ VD init_btt_configuration_parameter_dummy(
 	{ miki = done; hogehoge{ miki = next; } }
 	else
 	{
-		miki = ELSETEST
+		miki = ELSETEST;
 	}
 
 	if(
@@ -73,9 +71,6 @@ VD init_btt_configuration_parameter_dummy(
 		miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1_1);
 		if(hogehoge1)
 		{																/* SUBSUBPROCESS(1) « */
-
-
-
 			miki2_1 = subsub_1(
 				(S1)arg2_1_1,
 				arg2_1_2 );
@@ -92,19 +87,19 @@ VD init_btt_configuration_parameter_dummy(
 					miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3);
 					if(hogehoge4_1)
 					{
-						(S5)miki5_1 = subsubsubsubsub_1;
+						(S5)miki5_1 = subsubsubsubsub_5_1;
 					}
 					else if(hogehoge4_2)
 					{
-						(S5)miki5_2 = subsubsubsubsub_2;
+						(S5)miki5_2 = subsubsubsubsub_5_2;
 					}
 					else if(hogehoge4_3)
 					{
-						(S5)miki5_3 = subsubsubsubsub_2;
+						(S5)miki5_3 = subsubsubsubsub_5_3;
 					}
 					else
 					{
-						(S5)miki5_4 = subsubsubsubsub_3;
+						(S5)miki5_4 = subsubsubsubsub_5_4;
 					}
 				}														/* SUBSUBSUBSUBPROCESS(1) ª */
 
@@ -129,14 +124,6 @@ VD init_btt_configuration_parameter_dummy(
 				}														/* SUBSUBSUBSUBPROCESS(3) ª */
 
 			}															/* SUBSUBSUBPROCESS(1) ª */
-
-
-
-
-
-
-
-
 		}																/* SUBSUBPROCESS(2) ª */
 		else
 		{
@@ -144,3 +131,5 @@ VD init_btt_configuration_parameter_dummy(
 		}
 	}																	/* SUBPROCESS(2) ª */
 }
+
+
