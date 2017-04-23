@@ -1206,8 +1206,15 @@ def analyze_control_statement(proc_codes):
 	ctrl_stat_list = []
 	sub_proc_flag = False
 
+#0422
+	print 'analyze_control_statement ORG [/%d]' % (proc_codes.get_proc_data_size()),
+
 	for index in range(0, proc_codes.get_proc_data_size()):
 		sub_proc_flag = False
+
+#0422
+		print '[/%d]' % (proc_codes.proc_data_list[index].get_main_size())
+
 		for index2 in range(0,proc_codes.proc_data_list[index].get_main_size()):
 			if proc_codes.proc_data_list[index].type[index2].find('subproc')!=-1:
 				sub_proc_flag = True
@@ -1233,9 +1240,15 @@ def analyze_control_statement(proc_codes):
 						break
 
 					for index2_r in xrange(index2,-1,-1):
-						if index2_r==-1:
+#0422 mod						if index2_r==-1:
+						if index2_r==0:
 							continue
-# reverse loop until previous main process(not ???)
+
+# reverse loop until previous main process(not ???)	
+
+#0422
+						print 'analyze_control_statement[%d/%d][%d/%d]' % (index1_r, index, index2_r, index2)
+
 						if proc_codes.proc_data_list[index1_r].type[index2_r].find('???')==-1:
 							if index1_r!=org_index1 or index2_r!= org_index2:
 
@@ -1297,7 +1310,23 @@ def analyze_control_statement(proc_codes):
 					if previous_process_index1 <= org_index1:
 						for index1_f in xrange(previous_process_index1,org_index1):
 							if previous_process_index2 <= org_index2:
+
+#0422
+
+								print '<analyze_control_statement> Find else in [%d/%d-%d/%d][/%d-%d/%d]' % \
+								(index1_f, previous_process_index1, org_index1, proc_codes.get_proc_data_size(), \
+								previous_process_index2, org_index2+1, proc_codes.proc_data_list[index1_f].get_main_size() )
+
+#0422 add
+								if proc_codes.proc_data_list[index1_f].get_main_size()==0:
+									continue
+
+
 								for index2_f in xrange(previous_process_index2, org_index2+1):
+
+#0422
+									print '<analyze_control_statement> ->[%d][%d]' % (index1_f, index2_f)
+
 									if proc_codes.proc_data_list[index1_f].left[index2_f].find('else')!=-1:
 										condition_start_index1 = -2
 										condition_start_index2 = -2
