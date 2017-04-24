@@ -1,8 +1,165 @@
 Total lines: 266 
-Total functions : 2 
+Total functions : 14 
+--------------------------
+[Function Name] : = 
+-Return type : const BTT_RETRUN_t BTT_RET_t 
+-Argument : 1 
+     [0] : const BTT_RETRUN_t BTT_RET_t   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? BTT_CAN_CONFIG_DISABLE, 
+[2] MAINPROCESS(1) ??? BTT_CAN_CONFIG_ENABLE, 
+[3] MAINPROCESS(1) ??? BTT_DRV_SW_OFF, 
+[4] MAINPROCESS(1) ??? BTT_DRV_SW_ON, 
+[5] MAINPROCESS(1) ??? BTT_STATE_DISABLE, 
+[6] MAINPROCESS(1) ??? BTT_STATE_OFF, 
+[7] MAINPROCESS(1) ??? BTT_STATE_ON, 
+[8] MAINPROCESS(1) ??? BTT_STATE_OFFTEMP, 
+[9] MAINPROCESS(1) ??? BTT_DRV_STATE_DISABLE, 
+[10] MAINPROCESS(1) ??? BTT_DRV_STATE_OFF, 
+[11] MAINPROCESS(1) ??? BTT_DRV_STATE_PENDING, 
+[12] MAINPROCESS(1) ??? BTT_DRV_STATE_CONNECT, 
+[13] MAINPROCESS(1) ??? BTT_DRV_STATE_NOTCONNECT, 
+[14] MAINPROCESS(1) ??? BTT_DRV_STATE_OFFTEMP, 
+[15] MAINPROCESS(1) ??? BTT_FUNC_DEACTIVE, 
+[16] MAINPROCESS(1) ??? BTT_FUNC_ACTIVE, 
+[17] MAINPROCESS(1) ??? BTT_FUNC_DISABLE, 
+[18] MAINPROCESS(1) ??? BTT_FUNC_ENABLE, 
+[19] MAINPROCESS(1) ??? BTT_TRAILER_FLAG_UNKNOWN, 
+[20] MAINPROCESS(1) ??? BTT_TRAILER_FLAG_CONNECT, 
+[21] MAINPROCESS(1) ??? BTT_TRAILER_FLAG_NOTCONNECT, 
+[22] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_STAT_UNKNOWN, 
+[23] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_STAT_VALID, 
+[24] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_STAT_INVALID, 
+[25] MAINPROCESS(1) ??? BTT_UNINITIALIZED, 
+[26] MAINPROCESS(1) ??? BTT_INITIALIZED, 
+[27] MAINPROCESS(1) ??? BTT_TRUE, 
+[28] MAINPROCESS(1) ??? BTT_FALSE 
+----------------- Total Codes : 28 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_STAT st_g_btt_stat 
+-Argument : 1 
+     [0] : BTT_STAT st_g_btt_stat   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? BTT_STATE_DISABLE, 
+[2] MAINPROCESS(1) ??? BTT_STATE_DISABLE, 
+[3] MAINPROCESS(1) ??? BTT_DRV_STATE_DISABLE, 
+[4] MAINPROCESS(1) ??? BTT_FUNC_DEACTIVE, 
+[5] MAINPROCESS(1) ??? BTT_FUNC_DEACTIVE, 
+[6] MAINPROCESS(1) ??? BTT_FUNC_DEACTIVE, 
+[7] MAINPROCESS(1) ??? BTT_FUNC_DEACTIVE, 
+[8] MAINPROCESS(1) ??? BTT_FUNC_DEACTIVE, 
+[9] MAINPROCESS(1) ??? BTT_UNINITIALIZED 
+[10] MAINPROCESS(1) ??? ,BTT_FALSE 
+[11] MAINPROCESS(1) ??? ,(S4)0 
+----------------- Total Codes : 11 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_RESULT st_g_btt_result 
+-Argument : 1 
+     [0] : BTT_RESULT st_g_btt_result   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? BTT_TRAILER_FLAG_UNKNOWN, 
+[2] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_UNKNOWN, 
+[3] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_STAT_UNKNOWN, 
+[4] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_UNKNOWN, 
+[5] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_STAT_UNKNOWN 
+----------------- Total Codes : 5 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_ALERTAREA st_g_btt_alertarea 
+-Argument : 1 
+     [0] : BTT_ALERTAREA st_g_btt_alertarea   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? BTT_REAR_RANGE_UNKNOWN, 
+[2] MAINPROCESS(1) ??? BTT_REAR_RANGE_UNKNOWN, 
+[3] MAINPROCESS(1) ??? BTT_SIDE_RANGE_UNKNOWN, 
+[4] MAINPROCESS(1) ??? BTT_SIDE_RANGE_UNKNOWN, 
+[5] MAINPROCESS(1) ??? BTT_REAR_RANGE_UNKNOWN, 
+[6] MAINPROCESS(1) ??? BTT_REAR_RANGE_UNKNOWN, 
+[7] MAINPROCESS(1) ??? BTT_SIDE_RANGE_UNKNOWN, 
+[8] MAINPROCESS(1) ??? BTT_SIDE_RANGE_UNKNOWN, 
+[9] MAINPROCESS(1) ??? BTT_SIDE_RANGE_UNKNOWN 
+----------------- Total Codes : 9 lines
+--------------------------
+[Function Name] : = 
+-Return type : BSM_STANDARD st_g_bsm_alertarea_for_test 
+-Argument : 1 
+     [0] : BSM_STANDARD st_g_bsm_alertarea_for_test   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? BTT_REAR_RANGE_UNKNOWN, 
+[2] MAINPROCESS(1) ??? BTT_REAR_RANGE_UNKNOWN, 
+[3] MAINPROCESS(1) ??? BTT_SIDE_RANGE_UNKNOWN, 
+[4] MAINPROCESS(1) ??? BTT_SIDE_RANGE_UNKNOWN 
+----------------- Total Codes : 4 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_CLUSTER_INFO st_g_cluster_info_for_test 
+-Argument : 1 
+     [0] : BTT_CLUSTER_INFO st_g_cluster_info_for_test   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? CFL_UNKNOWN_VALUE 
+----------------- Total Codes : 1 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_AUX_TRAILER_INFO st_g_aux_trailer_info_for_test 
+-Argument : 1 
+     [0] : BTT_AUX_TRAILER_INFO st_g_aux_trailer_info_for_test   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? CFL_UNKNOWN_VALUE 
+----------------- Total Codes : 1 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_HITCH_ANGLE st_g_hitch_angle_for_test 
+-Argument : 1 
+     [0] : BTT_HITCH_ANGLE st_g_hitch_angle_for_test   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? CFL_UNKNOWN_VALUE 
+----------------- Total Codes : 1 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_ATD_PARAM st_atd_params 
+-Argument : 1 
+     [0] : BTT_ATD_PARAM st_atd_params   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? (S4) 0 
+----------------- Total Codes : 1 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_TLE_PARAM st_tle_params 
+-Argument : 1 
+     [0] : BTT_TLE_PARAM st_tle_params   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? (S4) 0 
+----------------- Total Codes : 1 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_TWE_PARAM st_twe_params 
+-Argument : 1 
+     [0] : BTT_TWE_PARAM st_twe_params   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? (S4) 0 
+----------------- Total Codes : 1 lines
+--------------------------
+[Function Name] : = 
+-Return type : BTT_AAZ_PARAM st_aaz_params 
+-Argument : 1 
+     [0] : BTT_AAZ_PARAM st_aaz_params   = 
+----- Codes -----
+[1] MAINPROCESS(1) ??? BTT_REAR_RANGE_UNKNOWN, 
+[2] MAINPROCESS(1) ??? BTT_TRUE, 
+[3] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_UNKNOWN, 
+[4] MAINPROCESS(1) ??? (S4) 0, 
+[5] MAINPROCESS(1) ??? (S4) 0, 
+[6] MAINPROCESS(1) ??? (S4) 0, 
+[7] MAINPROCESS(1) ??? BTT_TRAILER_SIZE_UNKNOWN, 
+[8] MAINPROCESS(1) ??? (S4) 0, 
+[9] MAINPROCESS(1) ??? (S4) 0, 
+[10] MAINPROCESS(1) ??? (S4) 0 
+----------------- Total Codes : 10 lines
 --------------------------
 [Function Name] : init_btt_configuration_parameter_dummy 
--Return type : VD 
+-Return type : ;VD 
 -Argument : 4 
      [0] : BSM_STANDARD   *pst_a_bsm_alertarea_for_test 
      [1] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
@@ -24,7 +181,7 @@ Total functions : 2
 [13] MAINPROCESS(2) if ) 
 [14] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [15] SUBPROCESS(1) equal miki done;
-[16] SUBPROCESS(1) proc hogehoge; 
+[16] SUBPROCESS(1) noctrl hogehoge 
 [17] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [18] SUBSUBPROCESS(1) equal miki next;
 [19] MAINPROCESS(3) else<start> else 
@@ -55,75 +212,74 @@ Total functions : 2
 [44] SUBSUBPROCESS(1) func arg2_2_2 
 [45] SUBSUBPROCESS(1) func<end> ); 
 [46] SUBSUBPROCESS(1) for<start> for( 
-[47] SUBSUBPROCESS(1) for i=0 
+[47] SUBSUBPROCESS(1) for i=0; 
 [48] SUBSUBPROCESS(1) for i<hogehoge2; 
-[49] SUBSUBPROCESS(1) for i++ 
-[50] SUBSUBPROCESS(1) for ) 
-[51] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[52] SUBSUBSUBPROCESS(1) func<start> miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3 
-[53] SUBSUBSUBPROCESS(1) func<end> ); 
-[54] SUBSUBSUBPROCESS(1) while<start> while( 
-[55] SUBSUBSUBPROCESS(1) while hogehoge3_1 
-[56] SUBSUBSUBPROCESS(1) while ) 
-[57] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[58] SUBSUBSUBSUBPROCESS(1) func<start> miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3 
-[59] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[60] SUBSUBSUBSUBPROCESS(1) if<start> if( 
-[61] SUBSUBSUBSUBPROCESS(1) if hogehoge4_1 
-[62] SUBSUBSUBSUBPROCESS(1) if ) 
-[63] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[64] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_1 subsubsubsubsub_1;
-[65] SUBSUBSUBSUBPROCESS(2) else if<start> else if( 
-[66] SUBSUBSUBSUBPROCESS(2) else if hogehoge4_2 
-[67] SUBSUBSUBSUBPROCESS(2) else if ) 
-[68] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[69] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_2 subsubsubsubsub_2;
-[70] SUBSUBSUBSUBPROCESS(3) else if<start> else if( 
-[71] SUBSUBSUBSUBPROCESS(3) else if hogehoge4_3 
-[72] SUBSUBSUBSUBPROCESS(3) else if ) 
-[73] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[74] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_3 subsubsubsubsub_2;
-[75] SUBSUBSUBSUBPROCESS(4) else<start> else 
-[76] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[77] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_4 subsubsubsubsub_3;
-[78] SUBSUBSUBPROCESS(2) switch <start> switch ( 
-[79] SUBSUBSUBPROCESS(2) switch  hogehoge3_2 
-[80] SUBSUBSUBPROCESS(2) switch  ) 
-[81] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[82] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
-[83] SUBSUBSUBSUBPROCESS(1) equal miki4_2_1 subsubsubsub_mode_1;
-[84] SUBSUBSUBSUBPROCESS(1) proc break; 
-[85] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
-[86] SUBSUBSUBSUBPROCESS(1) equal miki4_2_2 subsubsubsub_mode_2;
-[87] SUBSUBSUBSUBPROCESS(1) proc break; 
-[88] SUBSUBSUBSUBPROCESS(1) ??? default: 
-[89] SUBSUBSUBSUBPROCESS(1) equal miki4_2_3 subsubsubsub_mode_default;
-[90] SUBSUBSUBSUBPROCESS(1) proc break; 
-[91] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
-[92] SUBSUBSUBSUBPROCESS(1) func<start> miki4_3 = subsubsubsub_mode_default( 
-[93] SUBSUBSUBSUBPROCESS(1) func (S1) arg4_3_1, 
-[94] SUBSUBSUBSUBPROCESS(1) func arg4_3_2, 
-[95] SUBSUBSUBSUBPROCESS(1) func arg4_3_3 
-[96] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[97] SUBPROCESS(2) else<start> else 
-[98] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[99] SUBSUBPROCESS(1) func<start> hogehoge1_ELSE( 
-[100] SUBSUBPROCESS(1) func<end> ); 
-[101] MAINPROCESS(5) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
-[102] MAINPROCESS(5) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
-[103] MAINPROCESS(5) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
-[104] MAINPROCESS(5) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
-[105] MAINPROCESS(5) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
-[106] MAINPROCESS(5) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
-[107] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
-[108] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
-[109] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
-[110] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
-[111] MAINPROCESS(5) equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
-[112] MAINPROCESS(5) equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
-[113] MAINPROCESS(5) equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
-[114] MAINPROCESS(5) proc return; 
------------------ Total Codes : 114 lines
+[49] SUBSUBPROCESS(1) for i++) 
+[50] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[51] SUBSUBSUBPROCESS(1) func<start> miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3 
+[52] SUBSUBSUBPROCESS(1) func<end> ); 
+[53] SUBSUBSUBPROCESS(1) while<start> while( 
+[54] SUBSUBSUBPROCESS(1) while hogehoge3_1 
+[55] SUBSUBSUBPROCESS(1) while ) 
+[56] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[57] SUBSUBSUBSUBPROCESS(1) func<start> miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3 
+[58] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[59] SUBSUBSUBSUBPROCESS(1) if<start> if( 
+[60] SUBSUBSUBSUBPROCESS(1) if hogehoge4_1 
+[61] SUBSUBSUBSUBPROCESS(1) if ) 
+[62] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[63] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_1 subsubsubsubsub_1;
+[64] SUBSUBSUBSUBPROCESS(2) else if<start> else if( 
+[65] SUBSUBSUBSUBPROCESS(2) else if hogehoge4_2 
+[66] SUBSUBSUBSUBPROCESS(2) else if ) 
+[67] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[68] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_2 subsubsubsubsub_2;
+[69] SUBSUBSUBSUBPROCESS(3) else if<start> else if( 
+[70] SUBSUBSUBSUBPROCESS(3) else if hogehoge4_3 
+[71] SUBSUBSUBSUBPROCESS(3) else if ) 
+[72] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[73] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_3 subsubsubsubsub_2;
+[74] SUBSUBSUBSUBPROCESS(4) else<start> else 
+[75] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[76] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_4 subsubsubsubsub_3;
+[77] SUBSUBSUBPROCESS(2) switch <start> switch ( 
+[78] SUBSUBSUBPROCESS(2) switch  hogehoge3_2 
+[79] SUBSUBSUBPROCESS(2) switch  ) 
+[80] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[81] SUBSUBSUBSUBPROCESS(1) noctrl case mode1: 
+[82] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_1 subsubsubsub_mode_1;
+[83] SUBSUBSUBSUBPROCESS(1) noctrl break; 
+[84] SUBSUBSUBSUBPROCESS(1) noctrl case mode1: 
+[85] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_2 subsubsubsub_mode_2;
+[86] SUBSUBSUBSUBPROCESS(1) noctrl break; 
+[87] SUBSUBSUBSUBPROCESS(1) noctrl default: 
+[88] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_3 subsubsubsub_mode_default;
+[89] SUBSUBSUBSUBPROCESS(1) noctrl break; 
+[90] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[91] SUBSUBSUBSUBPROCESS(1) func<start> miki4_3 = subsubsubsub_mode_default( 
+[92] SUBSUBSUBSUBPROCESS(1) func (S1) arg4_3_1, 
+[93] SUBSUBSUBSUBPROCESS(1) func arg4_3_2, 
+[94] SUBSUBSUBSUBPROCESS(1) func arg4_3_3 
+[95] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[96] SUBPROCESS(2) else<start> else 
+[97] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[98] SUBSUBPROCESS(1) func<start> hogehoge1_ELSE( 
+[99] SUBSUBPROCESS(1) func<end> ); 
+[100] MAINPROCESS(5) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[101] MAINPROCESS(5) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
+[102] MAINPROCESS(5) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
+[103] MAINPROCESS(5) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
+[104] MAINPROCESS(5) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
+[105] MAINPROCESS(5) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
+[106] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
+[107] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
+[108] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
+[109] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
+[110] MAINPROCESS(5) equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
+[111] MAINPROCESS(5) equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
+[112] MAINPROCESS(5) equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
+[113] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 113 lines
 --------------------------
 [Function Name] : fn_btt_atd_main 
 -Return type : VD 

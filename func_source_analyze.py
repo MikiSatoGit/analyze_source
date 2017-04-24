@@ -560,7 +560,7 @@ def load_valid_source_code(source_file):
 	cnt, valid_lines = remove_undefined_codes(lines)
 	cnt, valid_lines = remove_comment_codes(valid_lines)
 
-#0422 if debug_out:
+#0422	if debug_out:
 	for line in valid_lines:
 		print '<load_valid_source_code> %s' % line,
 
@@ -571,6 +571,43 @@ def find_functions(valid_lines):
 # [in] valid_lines : List
 # [return] func_list : FunctionList
 
+	if debug_out:
+		print '<find_functions> START of find_functions'
+
+	#remove comment and change line after }
+	tmp_valid_lines =[]
+	for line_org in valid_lines:
+		tmp_line = remove_comment_line(line_org.strip())
+		tmp_line = tmp_line.strip()
+		while tmp_line.find('}')!=-1:
+			tmptmp_line = tmp_line[:tmp_line.find('}')]
+			if len(tmptmp_line)!=0:
+				tmp_valid_lines.append(remove_comment_line(tmptmp_line))
+			tmp_valid_lines.append(remove_comment_line('}'))
+			tmp_line = tmp_line[tmp_line.find('}')+1:]
+		if len(tmp_line)!=0:
+			tmp_valid_lines.append(remove_comment_line(tmp_line))
+	valid_lines = copy.deepcopy(tmp_valid_lines)
+
+	#change line after {
+	del tmp_valid_lines[:]
+	for line_org in valid_lines:
+		tmp_line = line_org.strip()
+		while tmp_line.find('{')!=-1:
+			tmptmp_line = tmp_line[:tmp_line.find('{')]
+			if len(tmptmp_line)!=0:
+				tmp_valid_lines.append(remove_comment_line(tmptmp_line))
+			tmp_valid_lines.append(remove_comment_line('{'))
+			tmp_line = tmp_line[tmp_line.find('{')+1:]
+		if len(tmp_line)!=0:
+			tmp_valid_lines.append(remove_comment_line(tmp_line))
+	valid_lines = copy.deepcopy(tmp_valid_lines)
+
+#0422	if debug_out:
+	for debug_line in valid_lines:
+		print '<find_functions> (1) %s' % debug_line
+
+
 	cnt = 0
 	func_list = FunctionList()
 	searching = 0
@@ -578,18 +615,14 @@ def find_functions(valid_lines):
 	func_def_lines = []
 	func_content_lines = []
 	level = 0
+
 	for line_org in valid_lines:
 		line_num += 1
-
-		#remove space and comment
-		line = remove_comment_line(line_org)
+		line = line_org.strip()
 		#find "{"
 		if searching == 0:
 			func_def_lines.append(line_org)
-
-
 			if line.find('{')!=-1:
-
 				if line.find('=')!=-1 \
 				and line.find('=')<line.find('{'): #start array definition
 					searching = 1	#array
@@ -631,9 +664,12 @@ def find_functions(valid_lines):
 
 #0422	if debug_out:
 	for debug_func_data in func_list.function_data:
-		print '<find_functions> %s' % debug_func_data.name
+		print '<find_functions> Func Name %s' % debug_func_data.name
 		for debug_code in debug_func_data.codes:
-			print '<find_functions> --> %s' % debug_code
+			print '<find_functions> (2) --> %s' % debug_code
+
+		if debug_out:
+			print '<find_functions> END of find_functions'
 
 	return func_list
 
@@ -651,13 +687,9 @@ def analyze_function_list(FunctionData):
 	# [out] proc_list: ProcessCodes
 	FunctionData.process_code_list = proc_list
 
-
 #0422	if debug_out:
 	for debug_index in range(0, FunctionData.process_code_list.get_main_size()) :
-		print '<analyze_function_list> %s' % (FunctionData.process_code_list.main[debug_index])
-			
-
-
+		print '<analyze_function_list> %s : ' % (FunctionData.process_code_list.main[debug_index])
 
 	if debug_out:
 		print '<analyze_function_list> END of analyze_function_list'
@@ -668,6 +700,10 @@ def analyze_function_list(FunctionData):
 def analyze_function_codes(function_codes):
 # [in] List
 # [return] ProcessCodes
+
+	if debug_out:
+		print '<analyze_function_codes> START of analyze_function_codes'
+
 	function_codes = divide_end_of_function_in_code(function_codes)
 
 	valid_lines = []
@@ -776,6 +812,9 @@ def analyze_function_codes(function_codes):
 		print '(%d)' % proc_ids_2nd[index1] ,
 		print proc_codes_2nd[index1]
 
+	if debug_out:
+		print '<analyze_function_codes> END of analyze_function_codes'
+
 	return out_proc_list
 
 
@@ -791,7 +830,11 @@ def divide_end_of_function_in_code(proc_codes):
 	for index in xrange(0,len(copy_proc_codes)):
 # divide by ';'
 		divided_code = copy_proc_codes[index].strip()
-		divided_code = divided_code.split(';')
+		divided_code = divided_code.replace(';',';$')
+		divided_code = divided_code.split('$')
+
+		if debug_out:
+			print '<divide_end_of_function_in_code> dividing %s' % divided_code
 
 # No ';'
 		if len(divided_code)==1:
@@ -799,15 +842,12 @@ def divide_end_of_function_in_code(proc_codes):
 			out_proc_codes.append( tmp_code )
 		else:
 			for index2 in range(0,len(divided_code)):
-				if index == len(divided_code):
+				if index2 == len(divided_code):
 					break
 				if len(divided_code[index2])==0:
 					break
 				else:
-					if is_ctrl_stat(divided_code[index2])==True:
-						tmp_code = divided_code[index2]
-					else:
-						tmp_code = divided_code[index2]+';'
+					tmp_code = divided_code[index2]
 # check );
 				if tmp_code.rfind(';')!=-1 \
 				 and tmp_code.rfind(')')!=-1 \
@@ -1042,13 +1082,17 @@ def analyze_sub_process_code(proc_codes):
 # [in] proc_codes : ProcessCodes (main)
 # [out] proc_codes : ProcessCodes (proc_data_list)
 	proc_data = ProcessData()
-	is_for = False
+	is_for = 0
 	for index in range(0,proc_codes.get_main_size()):
 		tmp_title = proc_codes.title[index]
 		tmp_code = proc_codes.main[index]
 
 		if debug_out:
 			print '<analyze_sub_process_code> checking %s' % tmp_code
+
+		if is_for > 0:
+			if tmp_code.count(')')!=-1:
+				is_for -=  tmp_code.count(')')
 
 
 		proc_data.clear()
@@ -1071,11 +1115,7 @@ def analyze_sub_process_code(proc_codes):
 
 ######################################################################
 				while tmp_code.find(';')!=-1:
-
-					if debug_out:
-						print '<analyze_sub_process_code>  find ;'
-
-					if is_for:
+					if is_for>0:
 						tmp_type = '???'
 					else:
 						tmp_type = 'proc'
@@ -1111,7 +1151,7 @@ def analyze_sub_process_code(proc_codes):
 								if debug_out:
 									print '<analyze_sub_process_code>  find );'
 
-								if is_for:
+								if is_for!=0:
 									tmp_left = tmp_left[:tmp_left.find(';')]
 									proc_data.append_data(tmp_title,'???', tmp_left.strip(), tmp_right.strip())	#for<end>
 
@@ -1175,15 +1215,20 @@ def analyze_sub_process_code(proc_codes):
 											tmp_find_start.strip()
 
 										if tmp_type_r.find('???')!=-1:
-											if is_for:
+											if is_for!=0:
 												proc_codes.proc_data_list[index1_r].type[index2_r] = '???'
 											else:
 												proc_codes.proc_data_list[index1_r].type[index2_r] = 'func'
 											if bracket_level==0:
-												if is_for:
-													is_for = False
-												else:
-													proc_codes.proc_data_list[index1_r].type[index2_r] += '<start>'
+
+#0422												if is_for==0:
+#0422													is_for = 0
+#0422												else:
+#0422													proc_codes.proc_data_list[index1_r].type[index2_r] += '<start>'
+												proc_codes.proc_data_list[index1_r].type[index2_r] += '<start>'
+
+
+
 												bracket_search_flag=False
 												break
 										else:
@@ -1207,7 +1252,7 @@ def analyze_sub_process_code(proc_codes):
 								print '<analyze_sub_process_code>  not find )'
 
 
-							if is_for:
+							if is_for!=0:
 								proc_data.append_data(tmp_title,'???', tmp_left.strip(), tmp_right.strip())
 	
 								if debug_out:
@@ -1223,11 +1268,15 @@ def analyze_sub_process_code(proc_codes):
 					tmp_code = tmptmp_code[tmptmp_code.find(';',1)+1: ]
 
 ######################################################################
-			else:
+			else: #is_ctrl_stat(tmp_code)==True
 				if debug_out:
 					print '<analyze_sub_process_code> NOT append'
 
-				if is_for==False and is_ctrl_stat_word('for', tmp_code):
+				if is_for==0 and is_ctrl_stat_word('for', tmp_code):
+					if tmp_code.count('(')!=-1:
+						is_for += tmp_code.count('(')
+					if tmp_code.count(')')!=-1:
+						is_for -= tmp_code.count(')')
 					is_for = is_ctrl_stat_word('for', tmp_code)
 
 ######################################################################
@@ -1306,8 +1355,6 @@ def analyze_control_statement(proc_codes):
 	condition_start_index2 = -1
 	condition_end_index1 = -1
 	condition_end_index2 = -1
-	previous_process_index1 = 0
-	previous_process_index2 = 0
 	ctrl_proc_num = 0
 	ctrl_stat_list = []
 	sub_proc_flag = False
@@ -1334,7 +1381,7 @@ def analyze_control_statement(proc_codes):
 			if proc_codes.proc_data_list[index].type[index2].find('subproc')!=-1:
 
 #0422			if debug_out:
-				print '<analyze_control_statement> TYPE subproc'
+				print '<analyze_control_statement> find TYPE subproc'
 
 				sub_proc_flag = True
 				ctrl_proc_num += 1
@@ -1344,11 +1391,9 @@ def analyze_control_statement(proc_codes):
 				condition_start_index2 = -1
 				condition_end_index1 = -1
 				condition_end_index2 = -1
-				previous_process_index1 = 0
-				previous_process_index2 = 0
 
 #0422				if debug_out:
-				print '<analyze_control_statement> check previous data ->[%d/%d][%d/%d] %s:%s' % \
+				print '<analyze_control_statement> start checking previous data ->[%d/%d][%d/%d] %s:%s' % \
 				(index, proc_codes.get_proc_data_size(), \
 				 index2, proc_codes.proc_data_list[index].get_main_size(), \
 				 proc_codes.proc_data_list[index].type[index2], \
@@ -1358,11 +1403,10 @@ def analyze_control_statement(proc_codes):
 				org_index2 = index2
 				subproc_search = True
 
-
-
 # search by reverse loop
+				subproc_reverse = True
 				for index1_r in xrange(index,-1,-1):
-					if index1_r==-1 or subproc_search==False:
+					if index1_r==-1 or  subproc_search==False or subproc_reverse==False:
 
 #0422						if debug_out:
 						print '<analyze_control_statement> reverse check: no more data (index1_r)'
@@ -1370,12 +1414,9 @@ def analyze_control_statement(proc_codes):
 						break
 
 					for index2_r in xrange(index2,-1,-1):
-#0422 mod						if index2_r==-1:0?
-						if index2_r==-1:
+						if index2_r==-1 or subproc_search==False or subproc_reverse==False:
 #0422							if debug_out:
 							print '<analyze_control_statement> reverse check: no more data (index2_r)'
-
-
 							continue
 
 
@@ -1384,53 +1425,36 @@ def analyze_control_statement(proc_codes):
 
 # reverse loop until previous main process(not ???)	
 #0422						if debug_out:
-						print '<analyze_control_statement> reverse check ->[%d/%d][%d/%d] %s:%s' % \
+						print '<analyze_control_statement> ---------------------------------------- reverse check ->[%d/%d][%d/%d] %s:%s' % \
 						(index1_r, index, index2_r, index2, \
 						 proc_codes.proc_data_list[index1_r].type[index2_r], \
 						 proc_codes.proc_data_list[index1_r].left[index2_r] )
 
-
+# Type is NOT ???
 						if proc_codes.proc_data_list[index1_r].type[index2_r].find('???')==-1:
 
 #0422							if debug_out:
 							print '<analyze_control_statement> Type is NOT ???'
-
-							if index1_r!=org_index1 or index2_r!= org_index2:
-								if debug_out:
-									print '<analyze_control_statement> [%d][%d] No more ()' % (index1_r, index2_r)
-
-								previous_process_index1 = index1_r
-								previous_process_index2 = index2_r
-								subproc_search = False
-								break;
-								# 0422 bug
-								# ??? for
-								# ??? i=0;
-								# proc i< (S4) 0; -> proc!=??? -> break
-								# ??? i++
+							print '<analyze_control_statement> org1 [%d] vs curent1 [%d]' % (org_index1, index1_r)
+							print '<analyze_control_statement> org2 [%d] vs curent2 [%d]' % (org_index2, index2_r)
+							print '<analyze_control_statement> end1 [%d] end2 [%d]' % (condition_end_index1, condition_end_index2)
 
 
-
+# Type is ???
 						else:
-
 #0422							if debug_out:
 							print '<analyze_control_statement> Type is ???'
-
-# find ')' of condition
+###### find ')' of condition
 							if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')!=-1 \
 							 and condition_end_index1==-1:
-
 #0422								if debug_out:
 								print '<analyze_control_statement> [%d][%d] Find ) @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')'))
-
 								condition_end_index1 = index1_r
 								condition_end_index2 = index2_r
-# find '(' of condition
+###### find '(' of condition
 							if proc_codes.proc_data_list[index1_r].left[index2_r].find('(')!=-1:
-
 #0422								if debug_out:
 								print '<analyze_control_statement> [%d][%d] Find ( @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('))
-
 								condition_start_index1 = index1_r
 								condition_start_index2 = index2_r
 # divide by ( and )
@@ -1438,7 +1462,6 @@ def analyze_control_statement(proc_codes):
 									proc_codes.proc_data_list[index1_r].left[index2_r][0:proc_codes.proc_data_list[index1_r].left[index2_r].find('(')+1].strip(), \
 									proc_codes.proc_data_list[index1_r].left[index2_r][proc_codes.proc_data_list[index1_r].left[index2_r].find('(')+1:].strip() \
 								]
-
 #0422								if debug_out:
 								print '<analyze_control_statement>  -> ( in %s' % tmp_left_split
 
@@ -1447,9 +1470,17 @@ def analyze_control_statement(proc_codes):
 									tmp_left_split[-1] = tmp_left_split[-1][0:tmp_left_split[-1].rfind(')')].strip()
 									tmp_left_split.append(')')
 
+
 								tmp_left_split_num = 0
+								tmptmp_left_split = []
 								for tmp_div in tmp_left_split:
-									tmp_left_split_num += 1
+									if len(tmp_div.strip())!=0:
+										tmptmp_left_split.append(tmp_div.strip())
+										tmp_left_split_num += 1
+								tmp_left_split = copy.deepcopy(tmptmp_left_split)
+
+								print tmp_left_split_num
+
 								if len(tmp_left_split[-1])!=0:
 									tmp_title_split = []
 									tmp_type_split = []
@@ -1460,66 +1491,73 @@ def analyze_control_statement(proc_codes):
 										tmp_right_split.append(proc_codes.proc_data_list[index1_r].right[index2_r])
 
 #0422									if debug_out:
-									print '<analyze_control_statement> title %s' % tmp_title_split
-									print '<analyze_control_statement> type %s' % tmp_type_split
-									print '<analyze_control_statement> left %s' % tmp_left_split
-									print '<analyze_control_statement> right %s' % tmp_right_split
-									print '<analyze_control_statement> sub_proc_flag %s' % tmp_right_split
-									print '<analyze_control_statement> condition_start_index1 %s' % condition_start_index1
-									print '<analyze_control_statement> condition_start_index2 %s' % condition_start_index2
-									print '<analyze_control_statement> condition_end_index1 %s' % condition_end_index1
-									print '<analyze_control_statement> condition_end_index2 %s' % condition_end_index2
+									print '<analyze_control_statement>    title %s' % tmp_title_split
+									print '<analyze_control_statement>    type %s' % tmp_type_split
+									print '<analyze_control_statement>    left %s' % tmp_left_split
+									print '<analyze_control_statement>    right %s' % tmp_right_split
+									print '<analyze_control_statement>    sub_proc_flag %s' % tmp_right_split
+									print '<analyze_control_statement>    condition_start_index1 %s' % condition_start_index1
+									print '<analyze_control_statement>    condition_start_index2 %s' % condition_start_index2
+									print '<analyze_control_statement>    condition_end_index1 %s' % condition_end_index1
+									print '<analyze_control_statement>    condition_end_index2 %s' % condition_end_index2
 	
-
 									proc_codes.proc_data_list[index1_r].left[index2_r : index2_r+1] = tmp_left_split
 									proc_codes.proc_data_list[index1_r].title[index2_r : index2_r+1] = tmp_title_split
 									proc_codes.proc_data_list[index1_r].type[index2_r : index2_r+1] = tmp_type_split
 									proc_codes.proc_data_list[index1_r].right[index2_r : index2_r+1] = tmp_right_split
 
+									subproc_reverse = False
 
 
-# find 'else'
-				# Could not find Ctrl Stat
-				if sub_proc_flag==True and condition_start_index1==-1 and condition_end_index2==-1:
-					if previous_process_index1 <= org_index1:
-						for index1_f in xrange(previous_process_index1,org_index1):
-							if previous_process_index2 <= org_index2:
-
-#0422								if debug_out:
-								print '<analyze_control_statement> No Ctrl Stat in [%d/%d-%d/%d][/%d-%d/%d]' % \
-								(index1_f, previous_process_index1, org_index1, proc_codes.get_proc_data_size(), \
-								previous_process_index2, org_index2+1, proc_codes.proc_data_list[index1_f].get_main_size() )
-
-#0422 add
-								if proc_codes.proc_data_list[index1_f].get_main_size()==0:
-									continue
 
 
-								for index2_f in xrange(previous_process_index2, org_index2+1):
+###### find else
+							if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')==-1 \
+							and proc_codes.proc_data_list[index1_r].left[index2_r].find('('):
+
+#								if proc_codes.proc_data_list[index1_r].left[index2_r].find('else')!=-1 and proc_codes.proc_data_list[index1_r].left[index2_r].find('else if')==-1:
+								if is_ctrl_stat_word('else', proc_codes.proc_data_list[index1_r].left[index2_r]) and proc_codes.proc_data_list[index1_r].left[index2_r].find('else if')==-1:
+
+									condition_start_index1 = -2
+									condition_start_index2 = -2
+									condition_end_index1 = -2
+									condition_end_index2 = -2
+									subproc_reverse = False
 
 #0422									if debug_out:
-									print '<analyze_control_statement> ->[%d][%d] %s / %s' % \
-									 (index1_f, index2_f, \
-									  proc_codes.proc_data_list[index1_f].left[index2_f], \
-									  proc_codes.proc_data_list[index1_f].right[index2_f] )
+									print '<analyze_control_statement>  -> else in %s' % proc_codes.proc_data_list[index1_r].left[index2_r]
+									print '<analyze_control_statement>    condition_start_index1 %s' % condition_start_index1
+									print '<analyze_control_statement>    condition_start_index2 %s' % condition_start_index2
+									print '<analyze_control_statement>    condition_end_index1 %s' % condition_end_index1
+									print '<analyze_control_statement>    condition_end_index2 %s' % condition_end_index2
 
-									if proc_codes.proc_data_list[index1_f].left[index2_f].find('else')!=-1:
-										condition_start_index1 = -2
-										condition_start_index2 = -2
-										condition_end_index1 = -2
-										condition_end_index2 = -2
-									else:
-										condition_start_index1 = -3
-										condition_start_index2 = -3
-										condition_end_index1 = -3
-										condition_end_index2 = -3
-# find strl statement before '('
 
-				if debug_out:
-					print '<analyze_control_statement> -> start index [%d][%d]' %  (condition_start_index1,condition_start_index2)
-					print '<analyze_control_statement> -> end index [%d][%d]' %  (condition_end_index1,condition_end_index2)
-					print '<analyze_control_statement> -> previous index [%d][%d]' %  (previous_process_index1,previous_process_index2)
+#0422				if debug_out:
+				print '<analyze_control_statement> ---------------------------------------- End of reserve check'
+				print '<analyze_control_statement> -> start index [%d][%d]' %  (condition_start_index1,condition_start_index2)
+				print '<analyze_control_statement> -> end index [%d][%d]' %  (condition_end_index1,condition_end_index2)
 
+
+###### could not find ctrl stat
+				if condition_end_index1==-1 and condition_end_index2==-1:
+
+#0422				if debug_out:
+					print '<analyze_control_statement>  -> noctrl for %s' % proc_codes.proc_data_list[org_index1].left[org_index2]
+
+					condition_start_index1 = -3
+					condition_start_index2 = -3
+					condition_end_index1 = -3
+					condition_end_index2 = -3
+					subproc_reverse = False
+
+#0422					if debug_out:
+					print '<analyze_control_statement>  -> noctrl in %s' % proc_codes.proc_data_list[index1_r].left[index2_r]
+					print '<analyze_control_statement>    condition_start_index1 %s' % condition_start_index1
+					print '<analyze_control_statement>    condition_start_index2 %s' % condition_start_index2
+					print '<analyze_control_statement>    condition_end_index1 %s' % condition_end_index1
+					print '<analyze_control_statement>    condition_end_index2 %s' % condition_end_index2
+
+# find ctrl statement before '('
 				tmp_ctrl = ''
 				tmptmp_ctrl = ''
 				if condition_start_index1!=-1 and condition_end_index1!=-1:
@@ -1528,22 +1566,58 @@ def analyze_control_statement(proc_codes):
 					elif condition_start_index1==-3:	#no ctrl stat
 						tmp_ctrl = 'noctrl'
 					else:
-						for index1_r in xrange(condition_start_index1, previous_process_index1-1,-1):
-							if index1_r==-1:
+
+#0422						if debug_out:
+						print '<analyze_control_statement> -> check strl stat [%d][%d]' %  (condition_start_index1,condition_start_index2)
+
+						ctrl_stat_search = True
+						for index1_r in xrange(condition_end_index1, condition_start_index1-1,-1):
+							if index1_r==condition_start_index1-1 or ctrl_stat_search==False:
+								print 'break(1)'
 								break
-							for index2_r in xrange(condition_start_index2,-1,-1):
-								if index2_r==-1:
+							for index2_r in xrange(condition_end_index2, -1,-1):
+								if index2_r==-1 or ctrl_stat_search==False:
 									break
 								if proc_codes.proc_data_list[index1_r].type[index2_r].find('???')!=-1:
-									if debug_out:
-										print '<analyze_control_statement> search in <%s>' % proc_codes.proc_data_list[index1_r].left[index2_r]
-									tmptmp_ctrl = proc_codes.proc_data_list[index1_r].left[index2_r][0:proc_codes.proc_data_list[index1_r].left[index2_r].find('(')]
-									tmp_ctrl = tmptmp_ctrl + tmp_ctrl
-									tmp_ctrl.strip()
+									if proc_codes.proc_data_list[index1_r].left[index2_r].find('(')!=-1:
+										tmp_ctrl = proc_codes.proc_data_list[index1_r].left[index2_r][0:proc_codes.proc_data_list[index1_r].left[index2_r].find('(')]
+										tmp_ctrl.strip()
+
+#0422										if debug_out:
+										print '<analyze_control_statement> search in [%d][%d]%s->%s' % \
+										(index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r], tmp_ctrl)
+
+										if is_ctrl_stat(tmp_ctrl):
+
+#0422											if debug_out:
+											print '<analyze_control_statement> Find ctrl stat in [%d][%d]%s' % \
+											(index1_r, index2_r, tmp_ctrl)
+
+											ctrl_stat_search=False
+											break
+
+# save crrl stat
 				ctrl_stat_list.append(tmp_ctrl)
 
 				if debug_out:
 					print '<analyze_control_statement> ->ctrl stat %s / %d' %  (tmp_ctrl, ctrl_proc_num)
+
+
+
+
+#0422	if debug_out:
+	for debug_index in range(0, proc_codes.get_proc_data_size()):
+		for debug_index2 in range(0, proc_codes.proc_data_list[debug_index].get_main_size()):
+			print '<analyze_control_statement> %s %s %s' % ( \
+				proc_codes.proc_data_list[debug_index].type[debug_index2], \
+				proc_codes.proc_data_list[debug_index].left[debug_index2], \
+				proc_codes.proc_data_list[debug_index].right[debug_index2]
+			)
+	for debug_ctrl_stat in ctrl_stat_list:
+			print '<analyze_control_statement> ctrl_stat %s' % debug_ctrl_stat
+
+
+
 
 # set type in ProcessData
 	tmp_ctrl_stat = '???'
@@ -1555,13 +1629,18 @@ def analyze_control_statement(proc_codes):
 # find start of ctrl stat
 			if ctrl_stat_id > len(ctrl_stat_list)-1:
 				break
+
+
 			if proc_codes.proc_data_list[index].type[index2].find('???')!=-1:
-				if ctrl_stat_list[ctrl_stat_id].find('noctrl')!=-1:
-					ctrl_stat_id += 1
-					if ctrl_stat_id > len(ctrl_stat_list)-1:
-						ctrl_stat_id = len(ctrl_stat_list)-1
-						break
+
+				print 'Type[%d][%d]<%s> CtrlStat[%d]<%s>' % ( \
+					index, index2, proc_codes.proc_data_list[index].type[index2], \
+					ctrl_stat_id, ctrl_stat_list[ctrl_stat_id] )
+
+
 				if is_ctrl_stat_word(ctrl_stat_list[ctrl_stat_id], proc_codes.proc_data_list[index].left[index2]):
+					print 'find %s in %s' % (ctrl_stat_list[ctrl_stat_id], proc_codes.proc_data_list[index].left[index2])
+
 					tmp_ctrl_stat = ctrl_stat_list[ctrl_stat_id]
 					proc_codes.proc_data_list[index].type[index2] = tmp_ctrl_stat+'<start>'
 					ctrl_stat_flag = True
@@ -1569,6 +1648,20 @@ def analyze_control_statement(proc_codes):
 					if ctrl_stat_id > len(ctrl_stat_list)-1:
 						ctrl_stat_id = len(ctrl_stat_list)-1
 					continue
+				else:
+					if ctrl_stat_list[ctrl_stat_id].find('noctrl')!=-1 and ctrl_stat_flag==False:
+						print 'finding %s in %s' % (ctrl_stat_list[ctrl_stat_id], proc_codes.proc_data_list[index].left[index2])
+						tmp_ctrl_stat = ctrl_stat_list[ctrl_stat_id]
+						proc_codes.proc_data_list[index].type[index2] = tmp_ctrl_stat
+						ctrl_stat_flag = True
+						ctrl_stat_id += 1
+						if ctrl_stat_id > len(ctrl_stat_list)-1:
+							ctrl_stat_id = len(ctrl_stat_list)-1
+
+
+
+
+
 # keep setting type until type = subproc
 			if proc_codes.proc_data_list[index].type[index2].find('subproc')!=-1:
 				ctrl_stat_flag = False

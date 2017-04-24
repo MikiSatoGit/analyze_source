@@ -1,4 +1,4 @@
-
+/*
 VD fn_btt_atd_main(
 	type1 arg1,
 	type1 arg2
@@ -34,7 +34,7 @@ VD fn_btt_atd_main(
 
 	return;
 }
-
+*/
 
 VD init_btt_configuration_parameter_dummy(
 	BSM_STANDARD *pst_a_bsm_alertarea_for_test,		/*!< [in] Standard BSM alert area (should be provided from outside BTT)*/
@@ -57,7 +57,7 @@ VD init_btt_configuration_parameter_dummy(
 
 
 	if(miki==test)
-	{ miki = done; hogehoge{ miki = next; } }
+	{ miki = done; hogehoge_ng{ miki = next; } }
 	else
 	{
 		miki = ELSETEST;

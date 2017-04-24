@@ -39,26 +39,24 @@ if argc==2 :
 	filename1 = argvs[1]
 else:
 	filename1 = raw_input("Please specify [source file path] -> ")
-
-filename1 = str(filename1)
 print filename1
 if not os.path.exists(filename1):
 	print "ERROR:Could not start %s." % argvs[0]
 	quit()
 
-sourcefile = open(filename1)
+
 
 if filename1.find('\\')!=-1:
-	str = filename1.rsplit('\\',1)
+	str_filename1 = filename1.rsplit('\\',1)
 elif filename1.find('/')!=-1:
-	str = filename1.rsplit('/',1)
-
-if len(str)>1:
-	outfile = str[0] +'\\analyze_' + str[1]
+	str = str_filename1.rsplit('/',1)
+str = str(str_filename1)
+if len(str_filename1)>1:
+	outfile = str_filename1[0] +'\\analyze_' + str_filename1[1]
 else:
-	outfile = 'analyze_' + str[0]
+	outfile = 'analyze_' + str_filename1[0]
 
-
+sourcefile = open(filename1)
 outfile = outfile[0:outfile.rfind('.')] + '.txt'
 fout = open(outfile,'w')
 

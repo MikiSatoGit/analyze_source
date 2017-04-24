@@ -11,3 +11,67 @@ Total functions : 1
      [4] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
      [5] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
      [6] : BTT_STAT   *pst_a_btt_stat 
+----- Codes -----
+[1] MAINPROCESS(1) equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
+[2] MAINPROCESS(1) proc S4 s4_t_lp_i; 
+[3] MAINPROCESS(1) proc FL fl_a_tle_bf_peak[BTT_TLE_RANGE]; 
+[4] MAINPROCESS(1) proc FL fl_a_tle_bf_pow_diff[BTT_TLE_RANGE-(S4)1]; 
+[5] MAINPROCESS(1) for<start> for( 
+[6] MAINPROCESS(1) for s4_t_lp_i = 0; 
+[7] MAINPROCESS(1) for s4_t_lp_i < BTT_TLE_RANGE; 
+[8] MAINPROCESS(1) for s4_t_lp_i++) 
+[9] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) equal fl_a_tle_bf_peak[s4_t_lp_i] (FL)0;
+[11] MAINPROCESS(2) for<start> for( 
+[12] MAINPROCESS(2) for s4_t_lp_i = 0; 
+[13] MAINPROCESS(2) for s4_t_lp_i < BTT_TLE_RANGE - (S4)1; 
+[14] MAINPROCESS(2) for s4_t_lp_i++) 
+[15] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[16] SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] (FL)0;
+[17] MAINPROCESS(3) if<start> if( 
+[18] MAINPROCESS(3) if st_g_btt_stat.TLE != BTT_RET_t.Func_Stat.ACTIVE 
+[19] MAINPROCESS(3) if ) 
+[20] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[21] SUBPROCESS(1) if<start> if( 
+[22] SUBPROCESS(1) if st_g_btt_result.TLength != BTT_TRAILER_SIZE_UNKNOWN 
+[23] SUBPROCESS(1) if ) 
+[24] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[25] SUBSUBPROCESS(1) proc return st_g_btt_result.TLength; 
+[26] SUBPROCESS(2) else<start> else 
+[27] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[28] SUBSUBPROCESS(1) proc return fl_t_length; 
+[29] SUBPROCESS(3) proc return fl_t_length; 
+[30] MAINPROCESS(4) func<start> fn_btt_tle_search_peak_bf( 
+[31] MAINPROCESS(4) func (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
+[32] MAINPROCESS(4) func fl_a_tle_bf_peak 
+[33] MAINPROCESS(4) func<end> ); 
+[34] MAINPROCESS(4) func<start> fn_btt_tle_calc_bf_power_diff( 
+[35] MAINPROCESS(4) func fl_a_tle_bf_peak, 
+[36] MAINPROCESS(4) func fl_a_tle_bf_pow_diff 
+[37] MAINPROCESS(4) func<end> ); 
+[38] MAINPROCESS(4) for <start> for ( 
+[39] MAINPROCESS(4) for  s4_t_lp_i = 0; 
+[40] MAINPROCESS(4) for  s4_t_lp_i < 30; 
+[41] MAINPROCESS(4) for  s4_t_lp_i++ ) 
+[42] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[43] SUBPROCESS(1) func<start> fn_bsm_cal_trailer_range_doa_ave( 
+[44] SUBPROCESS(1) func 0, 
+[45] SUBPROCESS(1) func (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
+[46] SUBPROCESS(1) func (256+s4_t_lp_i), 
+[47] SUBPROCESS(1) func &afl_a_doa_pow_ave[s4_t_lp_i], 
+[48] SUBPROCESS(1) func &afl_a_doa_pow_dev[s4_t_lp_i] 
+[49] SUBPROCESS(1) func<end> ); 
+[50] MAINPROCESS(5) if<start> if( 
+[51] MAINPROCESS(5) if st_tle_params.timer < BTT_TLE_MAX_TIME 
+[52] MAINPROCESS(5) if ) 
+[53] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[54] SUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_estimate_trailer_length( 
+[55] SUBPROCESS(1) func<end> ); 
+[56] MAINPROCESS(6) else<start> else 
+[57] MAINPROCESS(6) subproc SUBPROCESS(1) 
+[58] SUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
+[59] SUBPROCESS(1) func<end> ); 
+[60] MAINPROCESS(7) proc st_tle_params.timer++; 
+[61] MAINPROCESS(7) equal fl_t_length (FL)4;
+[62] MAINPROCESS(7) proc return fl_t_length; 
+----------------- Total Codes : 62 lines
