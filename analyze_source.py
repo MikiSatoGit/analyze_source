@@ -10,7 +10,7 @@
 #
 #   NOTE:
 #
-
+import os.path
 import sys
 import csv
 import operator
@@ -37,11 +37,16 @@ fout = ""
 
 if argc==2 :
 	filename1 = argvs[1]
-	sourcefile = open(filename1)
 else:
+	filename1 = raw_input("Please specify [source file path] -> ")
+
+filename1 = str(filename1)
+print filename1
+if not os.path.exists(filename1):
 	print "ERROR:Could not start %s." % argvs[0]
-	print "Please specify [source file path]."
 	quit()
+
+sourcefile = open(filename1)
 
 if filename1.find('\\')!=-1:
 	str = filename1.rsplit('\\',1)

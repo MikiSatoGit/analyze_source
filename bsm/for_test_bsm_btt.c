@@ -40,6 +40,7 @@ FL fn_btt_tle_main(									/*!< [out] Trailer length */
 	}	
 
 	for(s4_t_lp_i = 0; s4_t_lp_i < BTT_TLE_RANGE - (S4)1; s4_t_lp_i++){
+//	for(s4_t_lp_i = 0; s4_t_lp_i < BTT_TLE_RANGE - 1; s4_t_lp_i++){
 		fl_a_tle_bf_pow_diff[s4_t_lp_i] = (FL)0;
 	}
 #endif
