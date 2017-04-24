@@ -1,5 +1,5 @@
-Total lines: 86 
-Total functions : 1 
+Total lines: 140 
+Total functions : 2 
 --------------------------
 [Function Name] : init_btt_configuration_parameter_dummy 
 -Return type : VD 
@@ -109,3 +109,73 @@ Total functions : 1
 [98] SUBSUBPROCESS(1) func<start> hogehoge1_ELSE( 
 [99] SUBSUBPROCESS(1) func<end> ); 
 ----------------- Total Codes : 99 lines
+--------------------------
+[Function Name] : fn_btt_initialize 
+-Return type : VD 
+-Argument : 5 
+     [0] : U1   u1_a_bsm_configuration 
+     [1] : U1   u1_a_bsm_drv_cmd 
+     [2] : U1   u1_a_btt_configuration 
+     [3] : U1   u1_a_btt_drv_cmd 
+     [4] : BSM_STANDARD   st_a_bsm_alertarea 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  (fl_g_v_self_bsm_for_base > BTT_ACTIVE_SPEED_TH) 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_TRUE;
+[6] MAINPROCESS(2) ??? if( st_g_btt_stat.BTT_RESET == BTT_TRUE 
+[7] MAINPROCESS(2) ??? && st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
+[8] MAINPROCESS(2) && fl_g_v_self_bsm_for_base < <start> && fl_g_v_self_bsm_for_base < ( 
+[9] MAINPROCESS(2) && fl_g_v_self_bsm_for_base <  FL)0.5 
+[10] MAINPROCESS(2) && fl_g_v_self_bsm_for_base <  ) 
+[11] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[12] SUBPROCESS(1) proc st_g_btt_stat.BTT_timer ++; 
+[13] SUBPROCESS(1) if<start> if( 
+[14] SUBPROCESS(1) if st_g_btt_stat.BTT_timer > (S4)150 
+[15] SUBPROCESS(1) if ) 
+[16] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[17] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.UNINITIALIZED;
+[18] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_FALSE;
+[19] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_timer (S4)0;
+[20] SUBSUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[21] MAINPROCESS(3) if<start> if( 
+[22] MAINPROCESS(3) if st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
+[23] MAINPROCESS(3) if ) 
+[24] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[25] SUBPROCESS(1) proc return; 
+[26] MAINPROCESS(4) equal st_g_btt_alertarea.standard st_a_bsm_alertarea;
+[27] MAINPROCESS(4) equal st_g_btt_result.TFlag BTT_RET_t.TFlag.UNKNOWN;
+[28] MAINPROCESS(4) func<start> fn_btt_set_trailer_length( BTT_TRAILER_SIZE_UNKNOWN 
+[29] MAINPROCESS(4) func<end> ); 
+[30] MAINPROCESS(4) func<start> fn_btt_set_trailer_width( BTT_TRAILER_SIZE_UNKNOWN 
+[31] MAINPROCESS(4) func<end> ); 
+[32] MAINPROCESS(4) equal st_g_btt_alertarea.rear.VarY (FL) 0.0;
+[33] MAINPROCESS(4) equal st_g_btt_alertarea.rear.VarYmax BTT_REAR_RANGE_MAX;
+[34] MAINPROCESS(4) equal st_g_btt_alertarea.side.VarXin (FL) 0.0;
+[35] MAINPROCESS(4) equal st_g_btt_alertarea.side.VarXmax (FL) 0.0;
+[36] MAINPROCESS(4) equal st_g_btt_alertarea.side.VarXout (FL) 0.0;
+[37] MAINPROCESS(4) func<start> fn_btt_ttm_activate( 
+[38] MAINPROCESS(4) func<end> ); 
+[39] MAINPROCESS(4) func<start> fn_btt_atd_activate( 
+[40] MAINPROCESS(4) func<end> ); 
+[41] MAINPROCESS(4) func<start> fn_btt_atd_initialize( 
+[42] MAINPROCESS(4) func<end> ); 
+[43] MAINPROCESS(4) func<start> fn_btt_set_bsm_final_state( 
+[44] MAINPROCESS(4) func u1_a_bsm_configuration, 
+[45] MAINPROCESS(4) func u1_a_bsm_drv_cmd 
+[46] MAINPROCESS(4) func<end> ); 
+[47] MAINPROCESS(4) func<start> fn_btt_set_btt_final_state( 
+[48] MAINPROCESS(4) func u1_a_btt_configuration, 
+[49] MAINPROCESS(4) func u1_a_btt_drv_cmd, 
+[50] MAINPROCESS(4) func st_g_btt_result 
+[51] MAINPROCESS(4) func<end> ); 
+[52] MAINPROCESS(4) if<start> if( 
+[53] MAINPROCESS(4) if u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON 
+[54] MAINPROCESS(4) if ) 
+[55] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[56] SUBPROCESS(1) func<start> fn_btt_aaz_activate( 
+[57] SUBPROCESS(1) func<end> ); 
+[58] MAINPROCESS(5) equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.INITIALIZED;
+[59] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 59 lines
