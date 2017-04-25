@@ -45,12 +45,14 @@ if not os.path.exists(filename1):
 	quit()
 
 
-
+str_filename1 = filename1
 if filename1.find('\\')!=-1:
 	str_filename1 = filename1.rsplit('\\',1)
 elif filename1.find('/')!=-1:
-	str = str_filename1.rsplit('/',1)
-str = str(str_filename1)
+	str_filename1 = str_filename1.rsplit('/',1)
+
+
+
 if len(str_filename1)>1:
 	outfile = str_filename1[0] +'\\analyze_' + str_filename1[1]
 else:

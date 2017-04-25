@@ -246,15 +246,15 @@ Total functions : 15
 [78] SUBSUBSUBPROCESS(2) switch  hogehoge3_2 
 [79] SUBSUBSUBPROCESS(2) switch  ) 
 [80] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[81] SUBSUBSUBSUBPROCESS(1) noctrl case mode1: 
-[82] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_1 subsubsubsub_mode_1;
-[83] SUBSUBSUBSUBPROCESS(1) noctrl break; 
-[84] SUBSUBSUBSUBPROCESS(1) noctrl case mode1: 
-[85] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_2 subsubsubsub_mode_2;
-[86] SUBSUBSUBSUBPROCESS(1) noctrl break; 
-[87] SUBSUBSUBSUBPROCESS(1) noctrl default: 
-[88] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_3 subsubsubsub_mode_default;
-[89] SUBSUBSUBSUBPROCESS(1) noctrl break; 
+[81] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
+[82] SUBSUBSUBSUBPROCESS(1) equal miki4_2_1 subsubsubsub_mode_1;
+[83] SUBSUBSUBSUBPROCESS(1) proc break; 
+[84] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
+[85] SUBSUBSUBSUBPROCESS(1) equal miki4_2_2 subsubsubsub_mode_2;
+[86] SUBSUBSUBSUBPROCESS(1) proc break; 
+[87] SUBSUBSUBSUBPROCESS(1) ??? default: 
+[88] SUBSUBSUBSUBPROCESS(1) equal miki4_2_3 subsubsubsub_mode_default;
+[89] SUBSUBSUBSUBPROCESS(1) proc break; 
 [90] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
 [91] SUBSUBSUBSUBPROCESS(1) func<start> miki4_3 = subsubsubsub_mode_default( 
 [92] SUBSUBSUBSUBPROCESS(1) func (S1) arg4_3_1, 
