@@ -1,153 +1,198 @@
-Total lines: 121 
-Total functions : 2 
+Total lines: 145 
+Total functions : 1 
 --------------------------
-[Function Name] : init_btt_configuration_parameter_dummy 
+[Function Name] : fn_btt_atd_trailerobj_tracking 
 -Return type : VD 
--Argument : 4 
-     [0] : BSM_STANDARD   *pst_a_bsm_alertarea_for_test 
-     [1] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
-     [2] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
-     [3] : BTT_HITCH_ANGLE   *pst_a_hitch_angle 
+-Argument : 2 
+     [0] : NORMAL_BSM   pst_a_trailer_obj[TRAILER_BUFFSIZE] 
+     [1] : S4   as4_a_trailer_obj_num 
 ----- Codes -----
-[1] MAINPROCESS(1) func<start> miki0 = main( 
-[2] MAINPROCESS(1) func arg0_1, 
-[3] MAINPROCESS(1) func arg0_2, 
-[4] MAINPROCESS(1) func (S1)arg0_3 
-[5] MAINPROCESS(1) func<end> ); 
-[6] MAINPROCESS(1) if<start> if( 
-[7] MAINPROCESS(1) if st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
-[8] MAINPROCESS(1) if ) 
-[9] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[10] SUBPROCESS(1) proc return; 
-[11] MAINPROCESS(2) if<start> if( 
-[12] MAINPROCESS(2) if miki==test 
-[13] MAINPROCESS(2) if ) 
-[14] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[15] SUBPROCESS(1) equal miki done;
-[16] SUBPROCESS(1) noctrl hogehoge_ng 
-[17] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[18] SUBSUBPROCESS(1) equal miki next;
-[19] MAINPROCESS(3) else<start> else 
-[20] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[21] SUBPROCESS(1) equal miki ELSETEST;
-[22] MAINPROCESS(4) if<start> if( 
-[23] MAINPROCESS(4) if miki==test 
-[24] MAINPROCESS(4) if && miki==debug 
-[25] MAINPROCESS(4) if ) 
-[26] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[27] SUBPROCESS(1) equal miki1_1 sub;
-[28] SUBPROCESS(1) equal miki1_2 (S1)sub;
-[29] SUBPROCESS(1) func<start> miki1_3( 
-[30] SUBPROCESS(1) func<end> ); 
-[31] SUBPROCESS(1) func<start> miki1_4((S1)arg1_1 
-[32] SUBPROCESS(1) func<end> ); 
-[33] SUBPROCESS(1) if<start> if( 
-[34] SUBPROCESS(1) if hogehoge1 
-[35] SUBPROCESS(1) if ) 
-[36] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[37] SUBSUBPROCESS(1) func<start> miki2_1 = subsub_1( 
-[38] SUBSUBPROCESS(1) func (S1)arg2_1_1, 
-[39] SUBSUBPROCESS(1) func arg2_1_2 
-[40] SUBSUBPROCESS(1) func<end> ); 
-[41] SUBSUBPROCESS(1) ??? miki2_2 
-[42] SUBSUBPROCESS(1) func<start> = subsub_2( 
-[43] SUBSUBPROCESS(1) func (S1)arg2_2_1, 
-[44] SUBSUBPROCESS(1) func arg2_2_2 
-[45] SUBSUBPROCESS(1) func<end> ); 
-[46] SUBSUBPROCESS(1) for<start> for( 
-[47] SUBSUBPROCESS(1) for i=0; 
-[48] SUBSUBPROCESS(1) for i<hogehoge2; 
-[49] SUBSUBPROCESS(1) for i++) 
-[50] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[51] SUBSUBSUBPROCESS(1) func<start> miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3 
-[52] SUBSUBSUBPROCESS(1) func<end> ); 
-[53] SUBSUBSUBPROCESS(1) while<start> while( 
-[54] SUBSUBSUBPROCESS(1) while hogehoge3_1 
-[55] SUBSUBSUBPROCESS(1) while ) 
-[56] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[57] SUBSUBSUBSUBPROCESS(1) func<start> miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3 
-[58] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[59] SUBSUBSUBSUBPROCESS(1) if<start> if( 
-[60] SUBSUBSUBSUBPROCESS(1) if hogehoge4_1 
-[61] SUBSUBSUBSUBPROCESS(1) if ) 
-[62] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[63] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_1 subsubsubsubsub_5_1;
-[64] SUBSUBSUBSUBPROCESS(2) else if<start> else if( 
-[65] SUBSUBSUBSUBPROCESS(2) else if hogehoge4_2 
-[66] SUBSUBSUBSUBPROCESS(2) else if ) 
-[67] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[68] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_2 subsubsubsubsub_5_2;
-[69] SUBSUBSUBSUBPROCESS(3) else if<start> else if( 
-[70] SUBSUBSUBSUBPROCESS(3) else if hogehoge4_3 
-[71] SUBSUBSUBSUBPROCESS(3) else if ) 
-[72] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[73] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_3 subsubsubsubsub_5_3;
-[74] SUBSUBSUBSUBPROCESS(4) else<start> else 
-[75] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[76] SUBSUBSUBSUBSUBPROCESS(1) equal (S5)miki5_4 subsubsubsubsub_5_4;
-[77] SUBSUBSUBPROCESS(2) switch <start> switch ( 
-[78] SUBSUBSUBPROCESS(2) switch  hogehoge3_2 
-[79] SUBSUBSUBPROCESS(2) switch  ) 
-[80] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[81] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
-[82] SUBSUBSUBSUBPROCESS(1) equal miki4_2_1 subsubsubsub_mode_1;
-[83] SUBSUBSUBSUBPROCESS(1) proc break; 
-[84] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
-[85] SUBSUBSUBSUBPROCESS(1) equal miki4_2_2 subsubsubsub_mode_2;
-[86] SUBSUBSUBSUBPROCESS(1) proc break; 
-[87] SUBSUBSUBSUBPROCESS(1) ??? default: 
-[88] SUBSUBSUBSUBPROCESS(1) equal miki4_2_3 subsubsubsub_mode_default;
-[89] SUBSUBSUBSUBPROCESS(1) proc break; 
-[90] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
-[91] SUBSUBSUBSUBPROCESS(1) func<start> miki4_3 = subsubsubsub_mode_default( 
-[92] SUBSUBSUBSUBPROCESS(1) func (S1) arg4_3_1, 
-[93] SUBSUBSUBSUBPROCESS(1) func arg4_3_2, 
-[94] SUBSUBSUBSUBPROCESS(1) func arg4_3_3 
-[95] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[96] SUBPROCESS(2) else<start> else 
-[97] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[98] SUBSUBPROCESS(1) func<start> hogehoge1_ELSE( 
-[99] SUBSUBPROCESS(1) func<end> ); 
------------------ Total Codes : 99 lines
---------------------------
-[Function Name] : fn_btt_atd_detect_trailer 
--Return type : U1 
--Argument : 10 
-     [0] : FL   fl_a_self_v 
-     [1] : S4   s4_a_curve_r 
-     [2] : NORMAL_BSM   *pst_a_object 
-     [3] : S4   s4_a_object_size 
-     [4] : FL   fl_a_doa_pow_ave[2][3] 
-     [5] : FL   fl_a_doa_pow_dev[2][3] 
-     [6] : S4   s4_a_doa_bf_peak_bin 
-     [7] : FL   fl_a_doa_bf_peak_pow 
-     [8] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
-     [9] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
------ Codes -----
-[1] MAINPROCESS(1) proc S4 s4_t_lp_i; 
-[2] MAINPROCESS(1) equal U1 u1_t_btt_trailer_flg BTT_RET_t.TFlag.UNKNOWN;
-[3] MAINPROCESS(1) func<start> fn_btt_atd_trailerobj_tracking( 
-[4] MAINPROCESS(1) func pst_a_object, 
-[5] MAINPROCESS(1) func s4_a_object_size 
-[6] MAINPROCESS(1) func ,fl_a_doa_pow_ave 
-[7] MAINPROCESS(1) func ,fl_a_doa_pow_dev 
-[8] MAINPROCESS(1) func ,s4_a_doa_bf_peak_bin 
-[9] MAINPROCESS(1) func ,fl_a_doa_bf_peak_pow 
-[10] MAINPROCESS(1) func<end> ); 
-[11] MAINPROCESS(1) if<start> if( 
-[12] MAINPROCESS(1) if st_atd_params.atd_counter[0] > BTT_ATD_CONNECT_TH 
-[13] MAINPROCESS(1) if ) 
-[14] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[15] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.CONNECT;
-[16] MAINPROCESS(2) ??? if( (st_atd_params.atd_counter[1] > BTT_ATD_NOTCONNECT_TH) 
-[17] MAINPROCESS(2) ??? &&  (st_atd_params.atd_counter[1] - st_atd_params.atd_counter[0] > BTT_ATD_CNT_DIFF) ) 
-[18] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[19] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.NOTCONNECT;
-[20] SUBPROCESS(1) ??? for( 
-[21] SUBPROCESS(1) ??? s4_t_lp_i=0; 
-[22] SUBPROCESS(1) ??? s4_t_lp_i<6; 
-[23] SUBPROCESS(1) ??? s4_t_lp_i++) 
-[24] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[25] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
-[26] MAINPROCESS(3) proc return u1_t_btt_trailer_flg; 
------------------ Total Codes : 26 lines
+[1] MAINPROCESS(1) proc S4 s4_t_lp_i, s4_t_lp_j; 
+[2] MAINPROCESS(1) equal S4 as4_a_trk_num (S4)0;
+[3] MAINPROCESS(1) equal S4 as4_a_trk_num2 (S4)0;
+[4] MAINPROCESS(1) equal S4 as4_a_tmp_trailer_obj_num (S4)0;
+[5] MAINPROCESS(1) equal FL afl_a_trailer_obj_rx_ave (FL)0;
+[6] MAINPROCESS(1) equal FL afl_a_trailer_obj_rx_dev (FL)0;
+[7] MAINPROCESS(1) equal FL afl_a_trailer_obj_ry_ave (FL)0;
+[8] MAINPROCESS(1) equal FL afl_a_trailer_obj_ry_dev (FL)0;
+[9] MAINPROCESS(1) equal FL afl_a_trailer_obj_vy_ave (FL)0;
+[10] MAINPROCESS(1) equal FL afl_a_trailer_obj_vy_dev (FL)0;
+[11] MAINPROCESS(1) equal FL afl_a_trailer_doa_pow_up (FL)0;
+[12] MAINPROCESS(1) equal FL afl_a_trailer_doa_pow_dn (FL)0;
+[13] MAINPROCESS(1) equal FL afl_a_trailer_doa_pow_dev_up (FL)0;
+[14] MAINPROCESS(1) equal FL afl_a_trailer_doa_pow_dev_dn (FL)0;
+[15] MAINPROCESS(1) equal FL afl_a_db_doa_peak_ave_diff (FL)0;
+[16] MAINPROCESS(1) equal FL afl_a_trailer_doa_pow_th (FL)0;
+[17] MAINPROCESS(1) if<start> if( 
+[18] MAINPROCESS(1) if s4_abs(s2_g_curvr_for_base) > (S2)80 
+[19] MAINPROCESS(1) if ) 
+[20] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[21] SUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
+[22] MAINPROCESS(2) else if<start> else if( 
+[23] MAINPROCESS(2) else if s4_abs(s2_g_curvr_for_base) > (S2)40 
+[24] MAINPROCESS(2) else if ) 
+[25] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[26] SUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)55;
+[27] MAINPROCESS(3) else<start> else 
+[28] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[29] SUBPROCESS(1) if<start> if( 
+[30] SUBPROCESS(1) if s2_g_curvr_for_base < 0 
+[31] SUBPROCESS(1) if ) 
+[32] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[33] SUBSUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)45;
+[34] SUBPROCESS(2) else<start> else 
+[35] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[36] SUBSUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
+[37] MAINPROCESS(4) for<start> for( 
+[38] MAINPROCESS(4) for s4_t_lp_i = 0; 
+[39] MAINPROCESS(4) for s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; 
+[40] MAINPROCESS(4) for s4_t_lp_i++ ) 
+[41] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[42] SUBPROCESS(1) equal as4_a_tmp_trailer_obj_num st_atd_params.trailer_object_num_total[s4_t_lp_i];
+[43] SUBPROCESS(1) if<start> if( 
+[44] SUBPROCESS(1) if as4_a_tmp_trailer_obj_num != (S4)0 
+[45] SUBPROCESS(1) if ) 
+[46] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[47] SUBSUBPROCESS(1) proc as4_a_trk_num ++; 
+[48] SUBSUBPROCESS(1) for<start> for( 
+[49] SUBSUBPROCESS(1) for s4_t_lp_j = 0; 
+[50] SUBSUBPROCESS(1) for s4_t_lp_j < as4_a_tmp_trailer_obj_num; 
+[51] SUBSUBPROCESS(1) for s4_t_lp_j++ ) 
+[52] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[53] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_rx_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[54] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_rx_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs 
+[55] SUBSUBSUBPROCESS(1) func<end> ); 
+[56] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_ry_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[57] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_ry_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs 
+[58] SUBSUBSUBPROCESS(1) func<end> ); 
+[59] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_vy_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs;
+[60] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_vy_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs 
+[61] SUBSUBSUBPROCESS(1) func<end> ); 
+[62] SUBSUBSUBPROCESS(1) proc as4_a_trk_num2 ++; 
+[63] MAINPROCESS(5) if<start> if( 
+[64] MAINPROCESS(5) if as4_a_trk_num2 != (S4)0 
+[65] MAINPROCESS(5) if ) 
+[66] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[67] SUBPROCESS(1) equal afl_a_trailer_obj_rx_ave afl_a_trailer_obj_rx_ave / (FL)as4_a_trk_num2;
+[68] SUBPROCESS(1) equal afl_a_trailer_obj_ry_ave afl_a_trailer_obj_ry_ave / (FL)as4_a_trk_num2;
+[69] SUBPROCESS(1) equal afl_a_trailer_obj_vy_ave afl_a_trailer_obj_vy_ave / (FL)as4_a_trk_num2;
+[70] SUBPROCESS(1) func<start> afl_a_trailer_obj_rx_dev = fl_abs((afl_a_trailer_obj_rx_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_rx_ave * afl_a_trailer_obj_rx_ave 
+[71] SUBPROCESS(1) func<end> ); 
+[72] SUBPROCESS(1) equal afl_a_trailer_obj_ry_dev (afl_a_trailer_obj_ry_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_ry_ave * afl_a_trailer_obj_ry_ave;
+[73] SUBPROCESS(1) func<start> afl_a_trailer_obj_vy_dev = fl_abs((afl_a_trailer_obj_vy_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_vy_ave * afl_a_trailer_obj_vy_ave 
+[74] SUBPROCESS(1) func<end> ); 
+[75] MAINPROCESS(6) equal afl_a_db_doa_peak_ave_diff fl_a_doa_bf_peak_pow - fl_a_doa_pow_ave[0][1];
+[76] MAINPROCESS(6) if<start> if( 
+[77] MAINPROCESS(6) if as4_a_trk_num > BTT_OBJ_DETECT_CYC1 
+[78] MAINPROCESS(6) if ) 
+[79] MAINPROCESS(6) subproc SUBPROCESS(1) 
+[80] SUBPROCESS(1) ??? if( fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
+[81] SUBPROCESS(1) ??? &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
+[82] SUBPROCESS(1) ??? &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
+[83] SUBPROCESS(1) ??? &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE 
+[84] SUBPROCESS(1) ??? &&  afl_a_trailer_obj_ry_dev < BTT_OBJ_DEV_TH 
+[85] SUBPROCESS(1) &&  fl_abs<start> &&  fl_abs( 
+[86] SUBPROCESS(1) &&  fl_abs afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
+[87] SUBPROCESS(1) &&  fl_abs &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
+[88] SUBPROCESS(1) &&  fl_abs &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
+[89] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[90] SUBSUBPROCESS(1) if<start> if( 
+[91] SUBSUBPROCESS(1) if s4_abs(s2_g_curvr_for_base) > (S2)CU1_CANOUT_CURVER_MIN_SOT 
+[92] SUBSUBPROCESS(1) if ) 
+[93] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[94] SUBSUBSUBPROCESS(1) if<start> if( 
+[95] SUBSUBSUBPROCESS(1) if afl_a_db_doa_peak_ave_diff > (FL)5.0 
+[96] SUBSUBSUBPROCESS(1) if ||  fl_a_doa_pow_ave[0][1] < afl_a_trailer_doa_pow_th 
+[97] SUBSUBSUBPROCESS(1) if ) 
+[98] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[99] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[100] SUBSUBSUBPROCESS(2) else if<start> else if( 
+[101] SUBSUBSUBPROCESS(2) else if as4_a_trk_num2 < (S4)10 
+[102] SUBSUBSUBPROCESS(2) else if ) 
+[103] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[104] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[105] SUBSUBSUBPROCESS(3) else<start> else 
+[106] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[107] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[108] SUBSUBPROCESS(2) else if<start> else if( 
+[109] SUBSUBPROCESS(2) else if s4_abs(s2_g_curvr_for_base) >= (S2)10 
+[110] SUBSUBPROCESS(2) else if ) 
+[111] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[112] SUBSUBSUBPROCESS(1) if<start> if( 
+[113] SUBSUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[114] SUBSUBSUBPROCESS(1) if ) 
+[115] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[116] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[117] SUBSUBSUBPROCESS(2) else<start> else 
+[118] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[119] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[120] SUBSUBPROCESS(3) proc st_atd_params.atd_counter[0] ++; 
+[121] SUBPROCESS(2) else<start> else 
+[122] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[123] SUBSUBPROCESS(1) if<start> if( 
+[124] SUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[125] SUBSUBPROCESS(1) if &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[126] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[127] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[128] SUBSUBPROCESS(2) else<start> else 
+[129] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[130] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[131] SUBSUBPROCESS(3) proc st_atd_params.atd_counter[1] ++; 
+[132] MAINPROCESS(7) else<start> else 
+[133] MAINPROCESS(7) subproc SUBPROCESS(1) 
+[134] SUBPROCESS(1) if<start> if( 
+[135] SUBPROCESS(1) if as4_a_trk_num2 > (S4)10 
+[136] SUBPROCESS(1) if &&  fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[137] SUBPROCESS(1) if &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[138] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[139] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[140] SUBPROCESS(2) else<start> else 
+[141] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[142] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[143] SUBPROCESS(3) if<start> if( 
+[144] SUBPROCESS(3) if as4_a_trk_num > BTT_OBJ_DETECT_CYC3 
+[145] SUBPROCESS(3) if &&  fl_a_doa_pow_ave[0][1] > (FL)62.0 
+[146] SUBPROCESS(3) if &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[147] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[148] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[149] SUBPROCESS(4) else if<start> else if( 
+[150] SUBPROCESS(4) else if as4_a_trk_num < BTT_OBJ_DETECT_CYC2 
+[151] SUBPROCESS(4) else if ) 
+[152] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[153] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[154] SUBPROCESS(5) else<start> else 
+[155] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
+[156] MAINPROCESS(8) for<start> for( 
+[157] MAINPROCESS(8) for s4_t_lp_i = 0; 
+[158] MAINPROCESS(8) for s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; 
+[159] MAINPROCESS(8) for s4_t_lp_i++ ) 
+[160] MAINPROCESS(8) subproc SUBPROCESS(1) 
+[161] SUBPROCESS(1) for<start> for( 
+[162] SUBPROCESS(1) for s4_t_lp_j = 0; 
+[163] SUBPROCESS(1) for s4_t_lp_j < TRAILER_BUFFSIZE; 
+[164] SUBPROCESS(1) for s4_t_lp_j ++ ) 
+[165] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[166] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[0][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[167] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[1][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[168] SUBSUBPROCESS(1) if<start> if( 
+[169] SUBSUBPROCESS(1) if st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs == (FL)0 
+[170] SUBSUBPROCESS(1) if ) 
+[171] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[172] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] (FL)-120;
+[173] SUBSUBPROCESS(2) else<start> else 
+[174] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[175] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * (FL)3.6;
+[176] MAINPROCESS(9) equal afl_g_btt_atd_obj_tracking[0] afl_a_trailer_obj_rx_ave;
+[177] MAINPROCESS(9) equal afl_g_btt_atd_obj_tracking[1] afl_a_trailer_obj_ry_ave;
+[178] MAINPROCESS(9) equal afl_g_btt_atd_obj_tracking[2] afl_a_trailer_obj_vy_ave;
+[179] MAINPROCESS(9) equal afl_g_btt_atd_obj_tracking[3] afl_a_trailer_obj_rx_dev;
+[180] MAINPROCESS(9) equal afl_g_btt_atd_obj_tracking[4] afl_a_trailer_obj_ry_dev;
+[181] MAINPROCESS(9) equal afl_g_btt_atd_obj_tracking[5] afl_a_trailer_obj_vy_dev;
+[182] MAINPROCESS(9) equal as4_g_btt_atd_counter[0] as4_a_trk_num;
+[183] MAINPROCESS(9) equal as4_g_btt_atd_counter[1] as4_a_trk_num2;
+[184] MAINPROCESS(9) equal as4_g_btt_atd_counter[2] st_atd_params.atd_counter[0];
+[185] MAINPROCESS(9) equal as4_g_btt_atd_counter[3] st_atd_params.atd_counter[1];
+[186] MAINPROCESS(9) equal afl_g_btt_atd_doa_pow_ave[0] fl_a_doa_pow_ave[0][1];
+[187] MAINPROCESS(9) equal afl_g_btt_atd_doa_pow_ave[1] afl_a_db_doa_peak_ave_diff;
+[188] MAINPROCESS(9) proc return; 
+----------------- Total Codes : 188 lines

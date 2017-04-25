@@ -1,155 +1,196 @@
-VD init_btt_configuration_parameter_dummy(
-	BSM_STANDARD *pst_a_bsm_alertarea_for_test,		/*!< [in] Standard BSM alert area (should be provided from outside BTT)*/
-	BTT_CLUSTER_INFO *pst_a_cluster_info,			/*!< [in] (optional) Trailer info selected by driver */
-	BTT_AUX_TRAILER_INFO *pst_a_aux_trailer_info,	/*!< [out] (optional) Additional trailer or object info from other system or module */
-	BTT_HITCH_ANGLE *pst_a_hitch_angle				/*!< [out] (optional) Angle between subject vehicle and trailer */
+VD fn_btt_atd_trailerobj_tracking(
+	NORMAL_BSM pst_a_trailer_obj[TRAILER_BUFFSIZE],
+	S4 as4_a_trailer_obj_num
+#ifndef _20170119_ATD_DOADBF_CHECK
+	,FL fl_a_doa_pow_ave[2][3]
+	,FL fl_a_doa_pow_dev[2][3]
+	,S4 s4_a_doa_bf_peak_bin
+	,FL fl_a_doa_bf_peak_pow
+#endif
 )
 {
+	S4 s4_t_lp_i, s4_t_lp_j;
 
-	miki0 = main(
-		arg0_1,
-		arg0_2,
-		(S1)arg0_3 );
+	S4 as4_a_trk_num = (S4)0;
+	S4 as4_a_trk_num2 = (S4)0;
+	S4 as4_a_tmp_trailer_obj_num = (S4)0;
+	FL afl_a_trailer_obj_rx_ave = (FL)0;
+	FL afl_a_trailer_obj_rx_dev = (FL)0;
+	FL afl_a_trailer_obj_ry_ave = (FL)0;
+	FL afl_a_trailer_obj_ry_dev = (FL)0;
+	FL afl_a_trailer_obj_vy_ave = (FL)0;
+	FL afl_a_trailer_obj_vy_dev = (FL)0;
 
-	/*! @note (1) do nothing if BTT state is already INITIALIZED */
-	if( st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED )
-	{																	/* SUBPROCESS(1) « */
-		return;
-	}																	/* SUBPROCESS(1) ª */
+#ifndef _20170119_ATD_DOADBF_CHECK
+	FL afl_a_trailer_doa_pow_up = (FL)0;
+	FL afl_a_trailer_doa_pow_dn = (FL)0;
+	FL afl_a_trailer_doa_pow_dev_up = (FL)0;
+	FL afl_a_trailer_doa_pow_dev_dn = (FL)0;
+	FL afl_a_db_doa_peak_ave_diff = (FL)0;
+#endif
 
+#ifndef _20170220_BTT_TRAILEROBJ	
+	/* set the powert threshold based on the curvature */
+	FL afl_a_trailer_doa_pow_th = (FL)0;
+	if( s4_abs(s2_g_curvr_for_base) > (S2)80 ){
+		afl_a_trailer_doa_pow_th = (FL)58;
+	}
+	else if( s4_abs(s2_g_curvr_for_base) > (S2)40 ){
+		afl_a_trailer_doa_pow_th = (FL)55;
+	}
+	else{
+		if( s2_g_curvr_for_base < 0 ){
+			/* outside: lower threshold */
+			afl_a_trailer_doa_pow_th = (FL)45;
+		} else{
+			/* inside: higher threshold to avoid wrong detection */
+			afl_a_trailer_doa_pow_th = (FL)58;
+		}
+	}
+#endif
 
-	if(miki==test)
-	{ miki = done; hogehoge_ng{ miki = next; } }
-	else
-	{
-		miki = ELSETEST;
+	/* check the detection history (12 cycles) of trailer objects */
+	for( s4_t_lp_i = 0; s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; s4_t_lp_i++ ) {
+		as4_a_tmp_trailer_obj_num = st_atd_params.trailer_object_num_total[s4_t_lp_i];
+		if( as4_a_tmp_trailer_obj_num != (S4)0 ){
+			as4_a_trk_num ++;
+			for( s4_t_lp_j = 0; s4_t_lp_j < as4_a_tmp_trailer_obj_num; s4_t_lp_j++ ) {
+				/* calculate the average and deviation of trailer objects within ATD range */
+				afl_a_trailer_obj_rx_ave += st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+				afl_a_trailer_obj_rx_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs);
+				afl_a_trailer_obj_ry_ave += st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+				afl_a_trailer_obj_ry_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs);
+				afl_a_trailer_obj_vy_ave += st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs;
+				afl_a_trailer_obj_vy_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs);
+				as4_a_trk_num2 ++;
+			}
+		}
 	}
 
-	if(
-		miki==test
-	 && miki==debug
-	)
-	{																	/* SUBPROCESS(2) « */
-		miki1_1=sub; miki1_2 = (S1)sub; miki1_3() ; miki1_4((S1)arg1_1);
-		if(hogehoge1)
-		{																/* SUBSUBPROCESS(1) « */
-			miki2_1 = subsub_1(
-				(S1)arg2_1_1,
-				arg2_1_2 );
-			miki2_2 
-			= subsub_2(
-				(S1)arg2_2_1,
-				arg2_2_2
-			);
-			for(i=0; i<hogehoge2; i++)
-			{															/* SUBSUBSUBPROCESS(1) « */
-				miki3 = (S1)subsubsub(arg3_1,arg3_2,arg3_3);
-				while(hogehoge3_1)
-				{														/* SUBSUBSUBSUBPROCESS(1) « */
-					miki4_1 = subsubsubsub((S1)arg4_1,(S2)arg4_2,(S3)arg4_3);
-					if(hogehoge4_1)
-					{
-						(S5)miki5_1 = subsubsubsubsub_5_1;
-					}
-					else if(hogehoge4_2)
-					{
-						(S5)miki5_2 = subsubsubsubsub_5_2;
-					}
-					else if(hogehoge4_3)
-					{
-						(S5)miki5_3 = subsubsubsubsub_5_3;
-					}
-					else
-					{
-						(S5)miki5_4 = subsubsubsubsub_5_4;
-					}
-				}														/* SUBSUBSUBSUBPROCESS(1) ª */
+	if( as4_a_trk_num2 != (S4)0){
+		afl_a_trailer_obj_rx_ave = afl_a_trailer_obj_rx_ave / (FL)as4_a_trk_num2;
+		afl_a_trailer_obj_ry_ave = afl_a_trailer_obj_ry_ave / (FL)as4_a_trk_num2;
+		afl_a_trailer_obj_vy_ave = afl_a_trailer_obj_vy_ave / (FL)as4_a_trk_num2;
+		afl_a_trailer_obj_rx_dev = fl_abs((afl_a_trailer_obj_rx_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_rx_ave * afl_a_trailer_obj_rx_ave);
+		afl_a_trailer_obj_ry_dev = (afl_a_trailer_obj_ry_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_ry_ave * afl_a_trailer_obj_ry_ave;
+		afl_a_trailer_obj_vy_dev = fl_abs((afl_a_trailer_obj_vy_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_vy_ave * afl_a_trailer_obj_vy_ave);
+	}
 
-				switch (hogehoge3_2){									/* SUBSUBSUBSUBPROCESS(2) « */
-				case mode1:
-					miki4_2_1 = subsubsubsub_mode_1;
-					break;
-				case mode1:
-					miki4_2_2 = subsubsubsub_mode_2;
-					break;
-				default:
-					miki4_2_3 = subsubsubsub_mode_default;
-					break;
-				}														/* SUBSUBSUBSUBPROCESS(2) ª */
 
-				{														/* SUBSUBSUBSUBPROCESS(3) « */
-					miki4_3 = subsubsubsub_mode_default(
-						(S1) arg4_3_1,
-						arg4_3_2,
-						arg4_3_3
-					);
-				}														/* SUBSUBSUBSUBPROCESS(3) ª */
+#ifndef _20170119_ATD_DOADBF_CHECK
+	/* calculate the power difference between dbf doa peak power (0-70) and doa power average (0-30) */
+	/* --> if there are both trailer and heisou TV, the difference should be small */
+	afl_a_db_doa_peak_ave_diff = fl_a_doa_bf_peak_pow - fl_a_doa_pow_ave[0][1];
+#endif
 
-			}															/* SUBSUBSUBPROCESS(1) ª */
-		}																/* SUBSUBPROCESS(2) ª */
-		else
-		{
-			hogehoge1_ELSE();
+	/* If there is object be detected more than half of history checking cycle */
+	if( as4_a_trk_num > BTT_OBJ_DETECT_CYC1 ){
+		if( fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE
+#ifndef _20170220_BTT_TRAILEROBJ	//_0314
+		&&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD
+		&&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD
+#else
+		&&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE
+		&&  afl_a_trailer_obj_ry_dev < BTT_OBJ_DEV_TH
+#endif
+		&&  fl_abs(afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
+		&&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
+		&&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ){
+			/* connect */
+#ifndef _20170220_BTT_TRAILEROBJ	//_0314
+			/* When driving straightly */
+			if( s4_abs(s2_g_curvr_for_base) > (S2)CU1_CANOUT_CURVER_MIN_SOT){
+				/* check the dbf doa power difference and doa power average */
+				if( afl_a_db_doa_peak_ave_diff > (FL)5.0
+				||  fl_a_doa_pow_ave[0][1] < afl_a_trailer_doa_pow_th
+				){
+					st_atd_params.atd_counter[1] ++; 
+				} else if( as4_a_trk_num2 < (S4)10 ){
+					st_atd_params.atd_counter[1] ++; 
+				} else{
+					st_atd_params.atd_counter[0] ++;				
+				}
+			}
+			/* When curvature is small (10 < curv < 40 -> not accumulate ATD counter when SV make a turn) */
+			else if( s4_abs(s2_g_curvr_for_base) >= (S2)10) {  
+				if( fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th ){
+					st_atd_params.atd_counter[0] ++;
+				} else{
+					st_atd_params.atd_counter[1] ++;
+				}
+			}
+#else
+			st_atd_params.atd_counter[0] ++;
+#endif
+		} else{
+#ifndef _20170119_ATD_DOADBF_CHECK
+			/* check the dbf doa power difference and doa power average */
+			if( fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+			&&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ){
+				st_atd_params.atd_counter[0] ++; 
+			} else{
+				st_atd_params.atd_counter[1] ++; 
+			}
+#else
+			st_atd_params.atd_counter[1] ++; 
+#endif
 		}
-	}																	/* SUBPROCESS(2) ª */
-}
-
-U1 fn_btt_atd_detect_trailer(						/*!< [out] trailer flag  */
-#ifndef _20161209_BTT_ATD_TRACKING
-	FL fl_a_self_v,									/*!< [in] Subject Vehicle speed [km/h] */
-	S4 s4_a_curve_r,								/*!< [in] Road curvature [m] */
-	NORMAL_BSM *pst_a_object,						/*!< [in] (Current) Position and speed of objects detected by SRR */
-	S4 s4_a_object_size,							/*!< [in] (Current) Number of objects */
+	}
 #ifndef _20170119_ATD_DOADBF_CHECK
-	FL fl_a_doa_pow_ave[2][3],
-	FL fl_a_doa_pow_dev[2][3],
-	S4 s4_a_doa_bf_peak_bin,
-	FL fl_a_doa_bf_peak_pow,
+	else{
+#ifndef _20170220_BTT_TRAILEROBJ	//_0314
+		if( as4_a_trk_num2 > (S4)10
+		&&  fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th
+		&&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ){
+			st_atd_params.atd_counter[0] ++;
+		}
+		else{
+			st_atd_params.atd_counter[1] ++; 
+		}
+#else
+		if( as4_a_trk_num > BTT_OBJ_DETECT_CYC3
+		&&  fl_a_doa_pow_ave[0][1] > (FL)62.0
+		&&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ){
+			st_atd_params.atd_counter[0] ++;
+		}
+		else if( as4_a_trk_num < BTT_OBJ_DETECT_CYC2 ) {
+			/* not connect */
+			st_atd_params.atd_counter[1] ++; 
+		}
+		else{
+			/* DO NOTHING */
+		}
 #endif
-	BTT_CLUSTER_INFO *pst_a_cluster_info,			/*!< [in] (optional) Trailer info selected by driver */
-	BTT_AUX_TRAILER_INFO *pst_a_aux_trailer_info	/*!< [in] (optional) Additional trailer or object info from other system or module */
+	}
 #endif
-)
-{
-	S4 s4_t_lp_i;
-
-	U1 u1_t_btt_trailer_flg = BTT_RET_t.TFlag.UNKNOWN;
-
-#ifndef _20161209_BTT_ATD_TRACKING
-	fn_btt_atd_trailerobj_tracking(
-		pst_a_object,
-		s4_a_object_size
-#ifndef _20170119_ATD_DOADBF_CHECK
-		,fl_a_doa_pow_ave
-		,fl_a_doa_pow_dev
-		,s4_a_doa_bf_peak_bin
-		,fl_a_doa_bf_peak_pow
-#endif
-	);	
-
-	if( st_atd_params.atd_counter[0] > BTT_ATD_CONNECT_TH ){
-		u1_t_btt_trailer_flg = BTT_RET_t.TFlag.CONNECT;
-	} 
-	if( (st_atd_params.atd_counter[1] > BTT_ATD_NOTCONNECT_TH)
-	&&  (st_atd_params.atd_counter[1] - st_atd_params.atd_counter[0] > BTT_ATD_CNT_DIFF) ){
-		u1_t_btt_trailer_flg = BTT_RET_t.TFlag.NOTCONNECT;
 
 #if !defined(_291B_DEV_20161005_BTT_TEST) && !defined(_291B_20161101_BTT_OUTPUT_T)
-		/* set trailer object to unknown value for VI output */
-		for(s4_t_lp_i=0; s4_t_lp_i<6; s4_t_lp_i++){
-			afl_g_btt_atd_obj_tracking[s4_t_lp_i] = (FL)-120;
+	for( s4_t_lp_i = 0; s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; s4_t_lp_i++ ){
+		for( s4_t_lp_j = 0; s4_t_lp_j < TRAILER_BUFFSIZE; s4_t_lp_j ++ ){
+			afl_g_btt_atd_obj_info[0][s4_t_lp_j][s4_t_lp_i] = st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+			afl_g_btt_atd_obj_info[1][s4_t_lp_j][s4_t_lp_i] = st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+			if( st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs == (FL)0 ){
+				afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] = (FL)-120;
+			} else {
+				afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] = st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * (FL)3.6;
+			}
 		}
-#endif
 	}
+	afl_g_btt_atd_obj_tracking[0] = afl_a_trailer_obj_rx_ave;
+	afl_g_btt_atd_obj_tracking[1] = afl_a_trailer_obj_ry_ave;
+	afl_g_btt_atd_obj_tracking[2] = afl_a_trailer_obj_vy_ave;
+	afl_g_btt_atd_obj_tracking[3] = afl_a_trailer_obj_rx_dev;
+	afl_g_btt_atd_obj_tracking[4] = afl_a_trailer_obj_ry_dev;
+	afl_g_btt_atd_obj_tracking[5] = afl_a_trailer_obj_vy_dev;
+
+	as4_g_btt_atd_counter[0] = as4_a_trk_num;	/* there is object detected in this cycle */
+	as4_g_btt_atd_counter[1] = as4_a_trk_num2;	/* total objects detected in 12 cycles */
+	as4_g_btt_atd_counter[2] = st_atd_params.atd_counter[0];	/* connect counter */
+	as4_g_btt_atd_counter[3] = st_atd_params.atd_counter[1];	/* not connect counter */
+
+	afl_g_btt_atd_doa_pow_ave[0] = fl_a_doa_pow_ave[0][1];
+	afl_g_btt_atd_doa_pow_ave[1] = afl_a_db_doa_peak_ave_diff;
 #endif
 
-
-	/*! @note  TBD */
-	/*! @test ATD Core Logic Output Signal Pattern\n
-		(1) u1_t_btt_trailer_flg = BTT_RET_t.TFlag.CONNECT;	\n
-		(2) u1_t_btt_trailer_flg = BTT_RET_t.TFlag.NOTCONNECT;	\n
-	*/
-
-	return u1_t_btt_trailer_flg;
+	return;
 }
-

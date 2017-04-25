@@ -1391,6 +1391,7 @@ def analyze_control_statement(proc_codes):
 # search by reverse loop
 				subproc_reverse = True
 				bracket_level = 0
+				bracket_search = False #0422
 				for index1_r in xrange(index,-1,-1):
 					if index1_r==-1 or  subproc_search==False or subproc_reverse==False:
 						break
@@ -1401,10 +1402,11 @@ def analyze_control_statement(proc_codes):
 
 # reverse loop until previous main process(not ???)	
 #0422						if debug_out:
-						print '<analyze_control_statement> ---------------------------------------- reverse check ->[%d/%d][%d/%d] %s:%s' % \
+						print '<analyze_control_statement> ---------------------------------------- reverse check ->[%d/%d][%d/%d] %s:%s+%s' % \
 						(index1_r, index, index2_r, index2, \
 						 proc_codes.proc_data_list[index1_r].type[index2_r], \
-						 proc_codes.proc_data_list[index1_r].left[index2_r] )
+						 proc_codes.proc_data_list[index1_r].left[index2_r], \
+						 proc_codes.proc_data_list[index1_r].right[index2_r] )
 
 # Type is NOT ???
 						if proc_codes.proc_data_list[index1_r].type[index2_r].find('???')==-1:
@@ -1417,27 +1419,47 @@ def analyze_control_statement(proc_codes):
 # Type is ???
 						else:
 #0422							if debug_out:
-							print '<analyze_control_statement> Type is ???'
+							print '<analyze_control_statement> Type is ??? [%d]%d' % (bracket_level, condition_end_index1)
 ###### find ')' of condition
 							if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')!=-1 \
-							 and condition_end_index1==-1:
+							and condition_end_index1==-1:
 							 	if bracket_level==0 and proc_codes.proc_data_list[index1_r].left[index2_r].count(')')>0:
+							 		bracket_search = True #0422
 #0422									if debug_out:
 									print '<analyze_control_statement> [%d][%d] Find ) @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')'))
 
 									condition_end_index1 = index1_r
 									condition_end_index2 = index2_r
-								bracket_level += proc_codes.proc_data_list[index1_r].left[index2_r].count(')')
+#0422								bracket_level += proc_codes.proc_data_list[index1_r].left[index2_r].count(')')
 
 
 
 ###### find '(' of condition
 							if proc_codes.proc_data_list[index1_r].left[index2_r].find('(')!=-1:
-								bracket_level -= proc_codes.proc_data_list[index1_r].left[index2_r].count('(')
-								if bracket_level==0:
+#0422								bracket_level -= proc_codes.proc_data_list[index1_r].left[index2_r].count('(')
+#0422								if bracket_level==0:
+
+								if bracket_search==True:
+									print bracket_level
+									print proc_codes.proc_data_list[index1_r].left[index2_r].count('(')
+									bracket_level -= proc_codes.proc_data_list[index1_r].left[index2_r].count('(')
+									print '-%s' % bracket_level
+
+								if bracket_search==True and proc_codes.proc_data_list[index1_r].left[index2_r].find(')')!=-1:
+									print proc_codes.proc_data_list[index1_r].left[index2_r].count(')')
+									bracket_level += proc_codes.proc_data_list[index1_r].left[index2_r].count(')')
+									print '+%s' % bracket_level
+
+								if bracket_level<=0:
+									bracket_search = False
+
+
+
 #------------------------------
 	#0422								if debug_out:
-									print '<analyze_control_statement> [%d][%d] Find ( @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('))
+									print '<analyze_control_statement> [%d][%d] Find ( @[%d]' % \
+									( index1_r, index2_r, \
+									  proc_codes.proc_data_list[index1_r].left[index2_r].rfind('(') )
 
 									condition_start_index1 = index1_r
 									condition_start_index2 = index2_r
@@ -1510,7 +1532,8 @@ def analyze_control_statement(proc_codes):
 ###### find else
 							if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')==-1 \
 							and proc_codes.proc_data_list[index1_r].left[index2_r].find('(')==-1:
-								if is_ctrl_stat_word('else', proc_codes.proc_data_list[index1_r].left[index2_r]) and proc_codes.proc_data_list[index1_r].left[index2_r].find('else if')==-1:
+								if is_ctrl_stat_word('else', proc_codes.proc_data_list[index1_r].left[index2_r]) and \
+								   proc_codes.proc_data_list[index1_r].left[index2_r].find('else if')==-1:
 									condition_start_index1 = -2
 									condition_start_index2 = -2
 									condition_end_index1 = -2

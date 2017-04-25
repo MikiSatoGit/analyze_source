@@ -1,5 +1,5 @@
-Total lines: 300 
-Total functions : 15 
+Total lines: 448 
+Total functions : 18 
 --------------------------
 [Function Name] : = 
 -Return type : const BTT_RETRUN_t BTT_RET_t 
@@ -246,15 +246,15 @@ Total functions : 15
 [78] SUBSUBSUBPROCESS(2) switch  hogehoge3_2 
 [79] SUBSUBSUBPROCESS(2) switch  ) 
 [80] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[81] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
-[82] SUBSUBSUBSUBPROCESS(1) equal miki4_2_1 subsubsubsub_mode_1;
-[83] SUBSUBSUBSUBPROCESS(1) proc break; 
-[84] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
-[85] SUBSUBSUBSUBPROCESS(1) equal miki4_2_2 subsubsubsub_mode_2;
-[86] SUBSUBSUBSUBPROCESS(1) proc break; 
-[87] SUBSUBSUBSUBPROCESS(1) ??? default: 
-[88] SUBSUBSUBSUBPROCESS(1) equal miki4_2_3 subsubsubsub_mode_default;
-[89] SUBSUBSUBSUBPROCESS(1) proc break; 
+[81] SUBSUBSUBSUBPROCESS(1) noctrl case mode1: 
+[82] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_1 subsubsubsub_mode_1;
+[83] SUBSUBSUBSUBPROCESS(1) noctrl break; 
+[84] SUBSUBSUBSUBPROCESS(1) noctrl case mode1: 
+[85] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_2 subsubsubsub_mode_2;
+[86] SUBSUBSUBSUBPROCESS(1) noctrl break; 
+[87] SUBSUBSUBSUBPROCESS(1) noctrl default: 
+[88] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_3 subsubsubsub_mode_default;
+[89] SUBSUBSUBSUBPROCESS(1) noctrl break; 
 [90] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
 [91] SUBSUBSUBSUBPROCESS(1) func<start> miki4_3 = subsubsubsub_mode_default( 
 [92] SUBSUBSUBSUBPROCESS(1) func (S1) arg4_3_1, 
@@ -359,6 +359,81 @@ Total functions : 15
 [60] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 60 lines
 --------------------------
+[Function Name] : fn_btt_tle_main 
+-Return type : FL 
+-Argument : 7 
+     [0] : FL   fl_a_self_v 
+     [1] : S4   s4_a_curve_r 
+     [2] : NORMAL_BSM   *pst_a_object 
+     [3] : S4   s4_a_object_size 
+     [4] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
+     [5] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
+     [6] : BTT_STAT   *pst_a_btt_stat 
+----- Codes -----
+[1] MAINPROCESS(1) equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
+[2] MAINPROCESS(1) proc S4 s4_t_lp_i; 
+[3] MAINPROCESS(1) proc FL fl_a_tle_bf_peak[BTT_TLE_RANGE]; 
+[4] MAINPROCESS(1) proc FL fl_a_tle_bf_pow_diff[BTT_TLE_RANGE-(S4)1]; 
+[5] MAINPROCESS(1) for<start> for( 
+[6] MAINPROCESS(1) for s4_t_lp_i = 0; 
+[7] MAINPROCESS(1) for s4_t_lp_i < BTT_TLE_RANGE; 
+[8] MAINPROCESS(1) for s4_t_lp_i++) 
+[9] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) equal fl_a_tle_bf_peak[s4_t_lp_i] (FL)0;
+[11] MAINPROCESS(2) for<start> for( 
+[12] MAINPROCESS(2) for s4_t_lp_i = 0; 
+[13] MAINPROCESS(2) for s4_t_lp_i < BTT_TLE_RANGE - (S4)1; 
+[14] MAINPROCESS(2) for s4_t_lp_i++) 
+[15] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[16] SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] (FL)0;
+[17] MAINPROCESS(3) if<start> if( 
+[18] MAINPROCESS(3) if st_g_btt_stat.TLE != BTT_RET_t.Func_Stat.ACTIVE 
+[19] MAINPROCESS(3) if ) 
+[20] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[21] SUBPROCESS(1) if<start> if( 
+[22] SUBPROCESS(1) if st_g_btt_result.TLength != BTT_TRAILER_SIZE_UNKNOWN 
+[23] SUBPROCESS(1) if ) 
+[24] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[25] SUBSUBPROCESS(1) proc return st_g_btt_result.TLength; 
+[26] SUBPROCESS(2) else<start> else 
+[27] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[28] SUBSUBPROCESS(1) proc return fl_t_length; 
+[29] SUBPROCESS(3) proc return fl_t_length; 
+[30] MAINPROCESS(4) func<start> fn_btt_tle_search_peak_bf( 
+[31] MAINPROCESS(4) func (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
+[32] MAINPROCESS(4) func fl_a_tle_bf_peak 
+[33] MAINPROCESS(4) func<end> ); 
+[34] MAINPROCESS(4) func<start> fn_btt_tle_calc_bf_power_diff( 
+[35] MAINPROCESS(4) func fl_a_tle_bf_peak, 
+[36] MAINPROCESS(4) func fl_a_tle_bf_pow_diff 
+[37] MAINPROCESS(4) func<end> ); 
+[38] MAINPROCESS(4) for <start> for ( 
+[39] MAINPROCESS(4) for  s4_t_lp_i = 0; 
+[40] MAINPROCESS(4) for  s4_t_lp_i < 30; 
+[41] MAINPROCESS(4) for  s4_t_lp_i++ ) 
+[42] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[43] SUBPROCESS(1) func<start> fn_bsm_cal_trailer_range_doa_ave( 
+[44] SUBPROCESS(1) func 0, 
+[45] SUBPROCESS(1) func (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
+[46] SUBPROCESS(1) func (256+s4_t_lp_i), 
+[47] SUBPROCESS(1) func &afl_a_doa_pow_ave[s4_t_lp_i], 
+[48] SUBPROCESS(1) func &afl_a_doa_pow_dev[s4_t_lp_i] 
+[49] SUBPROCESS(1) func<end> ); 
+[50] MAINPROCESS(5) if<start> if( 
+[51] MAINPROCESS(5) if st_tle_params.timer < BTT_TLE_MAX_TIME 
+[52] MAINPROCESS(5) if ) 
+[53] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[54] SUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_estimate_trailer_length( 
+[55] SUBPROCESS(1) func<end> ); 
+[56] MAINPROCESS(6) else<start> else 
+[57] MAINPROCESS(6) subproc SUBPROCESS(1) 
+[58] SUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
+[59] SUBPROCESS(1) func<end> ); 
+[60] MAINPROCESS(7) proc st_tle_params.timer++; 
+[61] MAINPROCESS(7) equal fl_t_length (FL)4;
+[62] MAINPROCESS(7) proc return fl_t_length; 
+----------------- Total Codes : 62 lines
+--------------------------
 [Function Name] : fn_miki_test 
 -Return type : VD 
 -Argument : 2 
@@ -402,3 +477,116 @@ Total functions : 15
 [35] SUBPROCESS(1) equal level1_3_1 hoge1_3_1;
 [36] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 36 lines
+--------------------------
+[Function Name] : fn_btt_initialize 
+-Return type : VD 
+-Argument : 5 
+     [0] : U1   u1_a_bsm_configuration 
+     [1] : U1   u1_a_bsm_drv_cmd 
+     [2] : U1   u1_a_btt_configuration 
+     [3] : U1   u1_a_btt_drv_cmd 
+     [4] : BSM_STANDARD   st_a_bsm_alertarea 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  (fl_g_v_self_bsm_for_base > BTT_ACTIVE_SPEED_TH) 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_TRUE;
+[6] MAINPROCESS(2) if<start> if( 
+[7] MAINPROCESS(2) if st_g_btt_stat.BTT_RESET == BTT_TRUE 
+[8] MAINPROCESS(2) if && st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
+[9] MAINPROCESS(2) if && fl_g_v_self_bsm_for_base < (FL)0.5 ) 
+[10] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[11] SUBPROCESS(1) proc st_g_btt_stat.BTT_timer ++; 
+[12] SUBPROCESS(1) if<start> if( 
+[13] SUBPROCESS(1) if st_g_btt_stat.BTT_timer > (S4)150 
+[14] SUBPROCESS(1) if ) 
+[15] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[16] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.UNINITIALIZED;
+[17] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_FALSE;
+[18] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_timer (S4)0;
+[19] SUBSUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[20] MAINPROCESS(3) if<start> if( 
+[21] MAINPROCESS(3) if st_g_btt_stat.BTT_initialized == BTT_RET_t.Init_Stat.INITIALIZED 
+[22] MAINPROCESS(3) if ) 
+[23] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[24] SUBPROCESS(1) proc return; 
+[25] MAINPROCESS(4) equal st_g_btt_alertarea.standard st_a_bsm_alertarea;
+[26] MAINPROCESS(4) equal st_g_btt_result.TFlag BTT_RET_t.TFlag.UNKNOWN;
+[27] MAINPROCESS(4) func<start> fn_btt_set_trailer_length( BTT_TRAILER_SIZE_UNKNOWN 
+[28] MAINPROCESS(4) func<end> ); 
+[29] MAINPROCESS(4) func<start> fn_btt_set_trailer_width( BTT_TRAILER_SIZE_UNKNOWN 
+[30] MAINPROCESS(4) func<end> ); 
+[31] MAINPROCESS(4) equal st_g_btt_alertarea.rear.VarY (FL) 0.0;
+[32] MAINPROCESS(4) equal st_g_btt_alertarea.rear.VarYmax BTT_REAR_RANGE_MAX;
+[33] MAINPROCESS(4) equal st_g_btt_alertarea.side.VarXin (FL) 0.0;
+[34] MAINPROCESS(4) equal st_g_btt_alertarea.side.VarXmax (FL) 0.0;
+[35] MAINPROCESS(4) equal st_g_btt_alertarea.side.VarXout (FL) 0.0;
+[36] MAINPROCESS(4) func<start> fn_btt_ttm_activate( 
+[37] MAINPROCESS(4) func<end> ); 
+[38] MAINPROCESS(4) func<start> fn_btt_atd_activate( 
+[39] MAINPROCESS(4) func<end> ); 
+[40] MAINPROCESS(4) func<start> fn_btt_atd_initialize( 
+[41] MAINPROCESS(4) func<end> ); 
+[42] MAINPROCESS(4) func<start> fn_btt_set_bsm_final_state( 
+[43] MAINPROCESS(4) func u1_a_bsm_configuration, 
+[44] MAINPROCESS(4) func u1_a_bsm_drv_cmd 
+[45] MAINPROCESS(4) func<end> ); 
+[46] MAINPROCESS(4) func<start> fn_btt_set_btt_final_state( 
+[47] MAINPROCESS(4) func u1_a_btt_configuration, 
+[48] MAINPROCESS(4) func u1_a_btt_drv_cmd, 
+[49] MAINPROCESS(4) func st_g_btt_result 
+[50] MAINPROCESS(4) func<end> ); 
+[51] MAINPROCESS(4) if<start> if( 
+[52] MAINPROCESS(4) if u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON 
+[53] MAINPROCESS(4) if ) 
+[54] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[55] SUBPROCESS(1) func<start> fn_btt_aaz_activate( 
+[56] SUBPROCESS(1) func<end> ); 
+[57] MAINPROCESS(5) equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.INITIALIZED;
+[58] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 58 lines
+--------------------------
+[Function Name] : fn_btt_atd_detect_trailer 
+-Return type : U1 
+-Argument : 10 
+     [0] : FL   fl_a_self_v 
+     [1] : S4   s4_a_curve_r 
+     [2] : NORMAL_BSM   *pst_a_object 
+     [3] : S4   s4_a_object_size 
+     [4] : FL   fl_a_doa_pow_ave[2][3] 
+     [5] : FL   fl_a_doa_pow_dev[2][3] 
+     [6] : S4   s4_a_doa_bf_peak_bin 
+     [7] : FL   fl_a_doa_bf_peak_pow 
+     [8] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
+     [9] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 s4_t_lp_i; 
+[2] MAINPROCESS(1) equal U1 u1_t_btt_trailer_flg BTT_RET_t.TFlag.UNKNOWN;
+[3] MAINPROCESS(1) func<start> fn_btt_atd_trailerobj_tracking( 
+[4] MAINPROCESS(1) func pst_a_object, 
+[5] MAINPROCESS(1) func s4_a_object_size 
+[6] MAINPROCESS(1) func ,fl_a_doa_pow_ave 
+[7] MAINPROCESS(1) func ,fl_a_doa_pow_dev 
+[8] MAINPROCESS(1) func ,s4_a_doa_bf_peak_bin 
+[9] MAINPROCESS(1) func ,fl_a_doa_bf_peak_pow 
+[10] MAINPROCESS(1) func<end> ); 
+[11] MAINPROCESS(1) if<start> if( 
+[12] MAINPROCESS(1) if st_atd_params.atd_counter[0] > BTT_ATD_CONNECT_TH 
+[13] MAINPROCESS(1) if ) 
+[14] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[15] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.CONNECT;
+[16] MAINPROCESS(2) if<start> if( 
+[17] MAINPROCESS(2) if (st_atd_params.atd_counter[1] > BTT_ATD_NOTCONNECT_TH 
+[18] MAINPROCESS(2) if ) 
+[19] MAINPROCESS(2) if &&  (st_atd_params.atd_counter[1] - st_atd_params.atd_counter[0] > BTT_ATD_CNT_DIFF) ) 
+[20] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[21] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.NOTCONNECT;
+[22] SUBPROCESS(1) for<start> for( 
+[23] SUBPROCESS(1) for s4_t_lp_i=0; 
+[24] SUBPROCESS(1) for s4_t_lp_i<6; 
+[25] SUBPROCESS(1) for s4_t_lp_i++) 
+[26] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[27] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
+[28] MAINPROCESS(3) proc return u1_t_btt_trailer_flg; 
+----------------- Total Codes : 28 lines
