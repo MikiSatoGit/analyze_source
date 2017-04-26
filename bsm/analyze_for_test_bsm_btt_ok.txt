@@ -246,15 +246,15 @@ Total functions : 20
 [78] SUBSUBSUBPROCESS(2) switch  hogehoge3_2 
 [79] SUBSUBSUBPROCESS(2) switch  ) 
 [80] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[81] SUBSUBSUBSUBPROCESS(1) noctrl case mode1: 
-[82] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_1 subsubsubsub_mode_1;
-[83] SUBSUBSUBSUBPROCESS(1) noctrl break; 
-[84] SUBSUBSUBSUBPROCESS(1) noctrl case mode1: 
-[85] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_2 subsubsubsub_mode_2;
-[86] SUBSUBSUBSUBPROCESS(1) noctrl break; 
-[87] SUBSUBSUBSUBPROCESS(1) noctrl default: 
-[88] SUBSUBSUBSUBPROCESS(1) noctrl miki4_2_3 subsubsubsub_mode_default;
-[89] SUBSUBSUBSUBPROCESS(1) noctrl break; 
+[81] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
+[82] SUBSUBSUBSUBPROCESS(1) equal miki4_2_1 subsubsubsub_mode_1;
+[83] SUBSUBSUBSUBPROCESS(1) proc break; 
+[84] SUBSUBSUBSUBPROCESS(1) ??? case mode1: 
+[85] SUBSUBSUBSUBPROCESS(1) equal miki4_2_2 subsubsubsub_mode_2;
+[86] SUBSUBSUBSUBPROCESS(1) proc break; 
+[87] SUBSUBSUBSUBPROCESS(1) ??? default: 
+[88] SUBSUBSUBSUBPROCESS(1) equal miki4_2_3 subsubsubsub_mode_default;
+[89] SUBSUBSUBSUBPROCESS(1) proc break; 
 [90] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
 [91] SUBSUBSUBSUBPROCESS(1) func<start> miki4_3 = subsubsubsub_mode_default( 
 [92] SUBSUBSUBSUBPROCESS(1) func (S1) arg4_3_1, 
@@ -634,13 +634,13 @@ Total functions : 20
 [77] MAINPROCESS(6) if as4_a_trk_num > BTT_OBJ_DETECT_CYC1 
 [78] MAINPROCESS(6) if ) 
 [79] MAINPROCESS(6) subproc SUBPROCESS(1) 
-[80] SUBPROCESS(1) ??? if( fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
-[81] SUBPROCESS(1) ??? &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
-[82] SUBPROCESS(1) ??? &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
-[83] SUBPROCESS(1) &&  fl_abs<start> &&  fl_abs( 
-[84] SUBPROCESS(1) &&  fl_abs afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
-[85] SUBPROCESS(1) &&  fl_abs &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
-[86] SUBPROCESS(1) &&  fl_abs &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
+[80] SUBPROCESS(1) if<start> if( 
+[81] SUBPROCESS(1) if fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
+[82] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
+[83] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
+[84] SUBPROCESS(1) if &&  fl_abs(afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
+[85] SUBPROCESS(1) if &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
+[86] SUBPROCESS(1) if &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
 [87] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [88] SUBSUBPROCESS(1) if<start> if( 
 [89] SUBSUBPROCESS(1) if s4_abs(s2_g_curvr_for_base) > (S2)CU1_CANOUT_CURVER_MIN_SOT 
