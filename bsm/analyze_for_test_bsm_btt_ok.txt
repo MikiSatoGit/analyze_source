@@ -1,4 +1,4 @@
-Total lines: 448 
+Total lines: 451 
 Total functions : 18 
 --------------------------
 [Function Name] : = 
@@ -269,17 +269,16 @@ Total functions : 18
 [101] MAINPROCESS(5) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
 [102] MAINPROCESS(5) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
 [103] MAINPROCESS(5) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
-[104] MAINPROCESS(5) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
-[105] MAINPROCESS(5) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
-[106] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
-[107] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
-[108] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
-[109] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
-[110] MAINPROCESS(5) equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
-[111] MAINPROCESS(5) equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
-[112] MAINPROCESS(5) equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
-[113] MAINPROCESS(5) proc return; 
------------------ Total Codes : 113 lines
+[104] MAINPROCESS(5) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
+[105] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
+[106] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
+[107] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
+[108] MAINPROCESS(5) equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
+[109] MAINPROCESS(5) equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
+[110] MAINPROCESS(5) equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
+[111] MAINPROCESS(5) equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
+[112] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 112 lines
 --------------------------
 [Function Name] : fn_btt_atd_main 
 -Return type : VD 
@@ -398,85 +397,40 @@ Total functions : 18
 [26] SUBPROCESS(2) else<start> else 
 [27] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
 [28] SUBSUBPROCESS(1) proc return fl_t_length; 
-[29] SUBPROCESS(3) proc return fl_t_length; 
-[30] MAINPROCESS(4) func<start> fn_btt_tle_search_peak_bf( 
-[31] MAINPROCESS(4) func (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
-[32] MAINPROCESS(4) func fl_a_tle_bf_peak 
-[33] MAINPROCESS(4) func<end> ); 
-[34] MAINPROCESS(4) func<start> fn_btt_tle_calc_bf_power_diff( 
-[35] MAINPROCESS(4) func fl_a_tle_bf_peak, 
-[36] MAINPROCESS(4) func fl_a_tle_bf_pow_diff 
-[37] MAINPROCESS(4) func<end> ); 
-[38] MAINPROCESS(4) for <start> for ( 
-[39] MAINPROCESS(4) for  s4_t_lp_i = 0; 
-[40] MAINPROCESS(4) for  s4_t_lp_i < 30; 
-[41] MAINPROCESS(4) for  s4_t_lp_i++ ) 
-[42] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[43] SUBPROCESS(1) func<start> fn_bsm_cal_trailer_range_doa_ave( 
-[44] SUBPROCESS(1) func 0, 
-[45] SUBPROCESS(1) func (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
-[46] SUBPROCESS(1) func (256+s4_t_lp_i), 
-[47] SUBPROCESS(1) func &afl_a_doa_pow_ave[s4_t_lp_i], 
-[48] SUBPROCESS(1) func &afl_a_doa_pow_dev[s4_t_lp_i] 
-[49] SUBPROCESS(1) func<end> ); 
-[50] MAINPROCESS(5) if<start> if( 
-[51] MAINPROCESS(5) if st_tle_params.timer < BTT_TLE_MAX_TIME 
-[52] MAINPROCESS(5) if ) 
-[53] MAINPROCESS(5) subproc SUBPROCESS(1) 
-[54] SUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_estimate_trailer_length( 
-[55] SUBPROCESS(1) func<end> ); 
-[56] MAINPROCESS(6) else<start> else 
-[57] MAINPROCESS(6) subproc SUBPROCESS(1) 
-[58] SUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
-[59] SUBPROCESS(1) func<end> ); 
-[60] MAINPROCESS(7) proc st_tle_params.timer++; 
-[61] MAINPROCESS(7) equal fl_t_length (FL)4;
-[62] MAINPROCESS(7) proc return fl_t_length; 
------------------ Total Codes : 62 lines
---------------------------
-[Function Name] : fn_miki_test 
--Return type : VD 
--Argument : 2 
-     [0] : type1   arg1 
-     [1] : type1   arg2 
------ Codes -----
-[1] MAINPROCESS(1) if<start> if( 
-[2] MAINPROCESS(1) if lv1_1 == 11 
-[3] MAINPROCESS(1) if ) 
-[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[5] SUBPROCESS(1) if<start> if( 
-[6] SUBPROCESS(1) if lv1_1_1 == 111 
-[7] SUBPROCESS(1) if ) 
-[8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[9] SUBSUBPROCESS(1) equal level1_1_1_1 hoge1_1_1_1;
-[10] SUBSUBPROCESS(1) if<start> if( 
-[11] SUBSUBPROCESS(1) if hogehoge_1 
-[12] SUBSUBPROCESS(1) if ) 
-[13] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[14] SUBSUBSUBPROCESS(1) if<start> if( 
-[15] SUBSUBSUBPROCESS(1) if hogehoge_2 
-[16] SUBSUBSUBPROCESS(1) if ) 
-[17] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[18] SUBSUBSUBSUBPROCESS(1) equal level1_1_1_1 hoge1_1_1_1;
-[19] SUBSUBSUBSUBPROCESS(1) equal level1_1_1_2 hoge1_1_1_2;
-[20] SUBPROCESS(2) else if<start> else if( 
-[21] SUBPROCESS(2) else if lv1_1_2 == 112 
-[22] SUBPROCESS(2) else if ) 
-[23] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[24] SUBSUBPROCESS(1) equal level1_1_2_1 hoge1_1_2_1;
-[25] SUBPROCESS(3) else<start> else 
-[26] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[27] SUBSUBPROCESS(1) equal level1_1_3_1 hoge1_1_3_1;
-[28] MAINPROCESS(2) else if<start> else if( 
-[29] MAINPROCESS(2) else if lv1_2 == 12 
-[30] MAINPROCESS(2) else if ) 
-[31] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[32] SUBPROCESS(1) equal level1_2_1 hoge1_2_1;
-[33] MAINPROCESS(3) else<start> else 
-[34] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[35] SUBPROCESS(1) equal level1_3_1 hoge1_3_1;
-[36] MAINPROCESS(4) proc return; 
------------------ Total Codes : 36 lines
+[29] MAINPROCESS(4) func<start> fn_btt_tle_search_peak_bf( 
+[30] MAINPROCESS(4) func (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
+[31] MAINPROCESS(4) func fl_a_tle_bf_peak 
+[32] MAINPROCESS(4) func<end> ); 
+[33] MAINPROCESS(4) func<start> fn_btt_tle_calc_bf_power_diff( 
+[34] MAINPROCESS(4) func fl_a_tle_bf_peak, 
+[35] MAINPROCESS(4) func fl_a_tle_bf_pow_diff 
+[36] MAINPROCESS(4) func<end> ); 
+[37] MAINPROCESS(4) for <start> for ( 
+[38] MAINPROCESS(4) for  s4_t_lp_i = 0; 
+[39] MAINPROCESS(4) for  s4_t_lp_i < 30; 
+[40] MAINPROCESS(4) for  s4_t_lp_i++ ) 
+[41] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[42] SUBPROCESS(1) func<start> fn_bsm_cal_trailer_range_doa_ave( 
+[43] SUBPROCESS(1) func 0, 
+[44] SUBPROCESS(1) func (const FL (*)[CORRE_SIZE_4CH])(afl_g_cvw_lfm_ryy_matrix[0]), 
+[45] SUBPROCESS(1) func (256+s4_t_lp_i), 
+[46] SUBPROCESS(1) func &afl_a_doa_pow_ave[s4_t_lp_i], 
+[47] SUBPROCESS(1) func &afl_a_doa_pow_dev[s4_t_lp_i] 
+[48] SUBPROCESS(1) func<end> ); 
+[49] MAINPROCESS(5) if<start> if( 
+[50] MAINPROCESS(5) if st_tle_params.timer < BTT_TLE_MAX_TIME 
+[51] MAINPROCESS(5) if ) 
+[52] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[53] SUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_estimate_trailer_length( 
+[54] SUBPROCESS(1) func<end> ); 
+[55] MAINPROCESS(6) else<start> else 
+[56] MAINPROCESS(6) subproc SUBPROCESS(1) 
+[57] SUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
+[58] SUBPROCESS(1) func<end> ); 
+[59] MAINPROCESS(7) proc st_tle_params.timer++; 
+[60] MAINPROCESS(7) equal fl_t_length (FL)4;
+[61] MAINPROCESS(7) proc return fl_t_length; 
+----------------- Total Codes : 61 lines
 --------------------------
 [Function Name] : fn_btt_initialize 
 -Return type : VD 
@@ -590,3 +544,52 @@ Total functions : 18
 [27] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
 [28] MAINPROCESS(3) proc return u1_t_btt_trailer_flg; 
 ----------------- Total Codes : 28 lines
+--------------------------
+[Function Name] : fn_miki_test 
+-Return type : VD 
+-Argument : 2 
+     [0] : type1   arg1 
+     [1] : type1   arg2 
+----- Codes -----
+[1] MAINPROCESS(1) equal TEST_IFNDEF_15_VALID 0;
+[2] MAINPROCESS(1) equal TEST_ELSE_18_VALID 0;
+[3] MAINPROCESS(1) equal TEST_IFNDEF_2_VALID 0;
+[4] MAINPROCESS(1) equal TEST_IFNDEF_21_VALID 0;
+[5] MAINPROCESS(1) equal TEST_ELSE_24_VALID 0;
+[6] MAINPROCESS(1) if<start> if( 
+[7] MAINPROCESS(1) if lv1_1 == 11 
+[8] MAINPROCESS(1) if ) 
+[9] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) if<start> if( 
+[11] SUBPROCESS(1) if lv1_1_1 == 111 
+[12] SUBPROCESS(1) if ) 
+[13] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[14] SUBSUBPROCESS(1) equal level1_1_1_1 hoge1_1_1_1;
+[15] SUBSUBPROCESS(1) if<start> if( 
+[16] SUBSUBPROCESS(1) if hogehoge_1 
+[17] SUBSUBPROCESS(1) if ) 
+[18] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[19] SUBSUBSUBPROCESS(1) if<start> if( 
+[20] SUBSUBSUBPROCESS(1) if hogehoge_2 
+[21] SUBSUBSUBPROCESS(1) if ) 
+[22] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBSUBPROCESS(1) equal level1_1_1_1 hoge1_1_1_1;
+[24] SUBSUBSUBSUBPROCESS(1) equal level1_1_1_2 hoge1_1_1_2;
+[25] SUBPROCESS(2) else if<start> else if( 
+[26] SUBPROCESS(2) else if lv1_1_2 == 112 
+[27] SUBPROCESS(2) else if ) 
+[28] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[29] SUBSUBPROCESS(1) equal level1_1_2_1 hoge1_1_2_1;
+[30] SUBPROCESS(3) else<start> else 
+[31] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[32] SUBSUBPROCESS(1) equal level1_1_3_1 hoge1_1_3_1;
+[33] MAINPROCESS(2) else if<start> else if( 
+[34] MAINPROCESS(2) else if lv1_2 == 12 
+[35] MAINPROCESS(2) else if ) 
+[36] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[37] SUBPROCESS(1) equal level1_2_1 hoge1_2_1;
+[38] MAINPROCESS(3) else<start> else 
+[39] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[40] SUBPROCESS(1) equal level1_3_1 hoge1_3_1;
+[41] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 41 lines

@@ -688,47 +688,6 @@ FL fn_btt_tle_main(									/*!< [out] Trailer length */
 }
 
 
-
-
-
-
-VD fn_miki_test(
-	type1 arg1,
-	type1 arg2
-)
-{
-	if(lv1_1 == 11)
-	{
-		if(lv1_1_1 == 111)
-		{
-			level1_1_1_1 = hoge1_1_1_1;
-			if(hogehoge_1)
-			{
-				if(hogehoge_2){ level1_1_1_1 = hoge1_1_1_1; level1_1_1_2 = hoge1_1_1_2; }
-			}
-		}
-		else if(lv1_1_2 == 112)
-		{
-			level1_1_2_1 = hoge1_1_2_1;
-		}
-		else
-		{
-			level1_1_3_1 = hoge1_1_3_1;
-		}
-	}
-	else if(lv1_2 == 12)
-	{
-		level1_2_1 = hoge1_2_1;
-	}
-	else
-	{
-		level1_3_1 = hoge1_3_1;
-	}
-
-	return;
-}
-
-
 VD fn_btt_initialize(
 	U1 u1_a_bsm_configuration,			/*!< [in] BSM CAN configuration */
 	U1 u1_a_bsm_drv_cmd,				/*!< [in] BSM on/off switch */
@@ -868,3 +827,100 @@ U1 fn_btt_atd_detect_trailer(						/*!< [out] trailer flag  */
 	return u1_t_btt_trailer_flg;
 }
 
+
+
+VD fn_miki_test(
+	type1 arg1,
+	type1 arg2
+)
+{
+
+#ifdef TEST_IFDEF_1
+	TEST_IFDEF_1_INVALID = 0;	// invalid
+#ifndef TEST_DEF_11
+	TEST_IFNDEF_12_INVALID = 0;	// invalid
+#else
+	TEST_ELSE_12_INVALID = 0;	// invalid
+#endif
+#ifdef TEST_DEF_11
+	TEST_IFDEF_13_INVALID = 0;	// invalid
+#else
+	TEST_ELSE_14_INVALID = 0;	// invalid
+#endif
+
+#else
+
+#ifndef TEST_DEF_12
+	TEST_IFNDEF_15_VALID = 0;	// valid
+#else
+	TEST_ELSE_16_INVALID = 0;	// invalid
+#endif
+#ifdef TEST_DEF_12
+	TEST_IFDEF_17_INVALID = 0;	// invalid
+#else
+	TEST_ELSE_18_VALID = 0;	// valid
+#endif
+#endif
+
+
+
+#ifndef TEST_IFNDEF_2
+	TEST_IFNDEF_2_VALID = 0;	// valid
+#ifndef TEST_DEF_21
+	TEST_IFNDEF_21_VALID = 0;	// valid
+#else
+	TEST_ELSE_22_INVALID = 0;	// invalid
+#endif
+
+#ifdef TEST_DEF_21
+	TEST_IFDEF_23_INVALID = 0;	// invalid
+#else
+	TEST_ELSE_24_VALID = 0;		// valid
+#endif
+
+#else
+
+#ifndef TEST_DEF_22
+	TEST_IFNDEF_25_INVALID = 0;	// invalid
+#else
+	TEST_ELSE_26_INVALID = 0;	// invalid
+#endif
+#ifdef TEST_DEF_22
+	TEST_IFDEF_27_INVALID = 0;	// invalid
+#else
+	TEST_ELSE_28_INVALID = 0;	// invalid
+#endif
+#endif
+
+
+
+	if(lv1_1 == 11)
+	{
+		if(lv1_1_1 == 111)
+		{
+			level1_1_1_1 = hoge1_1_1_1;
+			if(hogehoge_1)
+			{
+				if(hogehoge_2){ level1_1_1_1 = hoge1_1_1_1; level1_1_1_2 = hoge1_1_1_2; }
+			}
+		}
+		else if(lv1_1_2 == 112)
+		{
+			level1_1_2_1 = hoge1_1_2_1;
+		}
+		else
+		{
+			level1_1_3_1 = hoge1_1_3_1;
+		}
+	}
+	else if(lv1_2 == 12)
+	{
+		level1_2_1 = hoge1_2_1;
+	}
+	else
+	{
+		level1_3_1 = hoge1_3_1;
+	}
+
+	return;
+}

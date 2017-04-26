@@ -136,9 +136,21 @@ VD fn_btt_atd_trailerobj_tracking(
 #endif
 		}
 	}
-#ifndef _20170119_ATD_DOADBF_CHECK
+
+
+
+
+
+
+
+
+
+
+
+
+#ifndef _20170119_ATD_DOADBF_CHECK	//_0422NG
 	else{
-#ifndef _20170220_BTT_TRAILEROBJ	//_0314
+#ifndef _20170220_BTT_TRAILEROBJ	//_0314NG
 		if( as4_a_trk_num2 > (S4)10
 		&&  fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th
 		&&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ){
@@ -163,6 +175,17 @@ VD fn_btt_atd_trailerobj_tracking(
 #endif
 	}
 #endif
+
+
+
+
+
+
+
+
+
+
+
 
 #if !defined(_291B_DEV_20161005_BTT_TEST) && !defined(_291B_20161101_BTT_OUTPUT_T)
 	for( s4_t_lp_i = 0; s4_t_lp_i < BTT_OBJ_HISTORY_CYCLE; s4_t_lp_i++ ){
