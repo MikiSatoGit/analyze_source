@@ -446,6 +446,9 @@ def remove_comment_codes(lines):
 
 
 def remove_undefined_codes(lines):
+# [in] lines : List
+# [return] cnt : number of List items
+# [return] valid_lines : List
 	########## VARID PREPROCESSOR (only for #if) #################
 #	valid_preprocessor_code = []
 #	valid_preprocessor_code.append('SIM_MODE')
@@ -454,118 +457,88 @@ def remove_undefined_codes(lines):
 	##############################################################
 
 	cnt = 0
-	skipping = 0
-	level = 0
+	tmp_lines = []
 	valid_lines = []
+	skipping = 0
 	invalid_else = 0
-	skip_dummy = 0
-	for line_org in lines :
-		line = line_org.strip()
-		
 
-##### not skipping
-		if skipping == 0:
-			# preprocessor (#ifdef - #else) -> skip
-			if line.find('#ifdef')!=-1:	#start preprocessor (invalid)
-				# skip till the end of preprocessor
-				skipping = 1
+	level = 0
+	valid_lines = copy.deepcopy(lines)
+	max_level = 1
+
+	while max_level!=0:
+		max_level = 0
+		cnt = 0
+		del tmp_lines[:]
+		for line_org in valid_lines :
+			line = line_org.strip()
+			if line.find('#if')==0:
 				level += 1
-			# preprocessor (#ifndef - #else) -> save
-			elif line.find('#ifndef')!=-1: #start preprocessor (valid)
-				# skip current line
-				skip_dummy = cnt
-				level += 1 #0422
-				invalid_else = level #1 #0422
+			if line.find('#endif')==0:
+				level -= 1
+			if level > max_level:
+				max_level = level
 
-			elif line.find('#else')!= -1: #else of #ifndef or #if(valid)?
-				if invalid_else == level: #else of #if(valid)
-					# skip till the end of preprocessor
+			if level==0:
+				if line.find('#endif')!= -1: #finish preprocessor for ifndef, ifdef, if, elif(valid)
 					skipping = 1
-				else: #else of #else of #if(invalid)
-					# skip current line
-					skip_dummy = cnt
-
-			elif line.find('#endif')!= -1: #finish preprocessor for ifndef, if(valid), elif(valid)
-				# skip current line
-				skip_dummy = cnt
-#				if level > 0:
-				level -= 1	#0422
-				invalid_else = level #0 #0422
-				print 'ENDIF!!!!!!!!!!!!(1)'
-
-			elif line.find('#if ')!=-1 or line.find('#if(')!=-1: #start preprocessor (select)
-				if line.find('#if 0')!=-1:
-					# skip till the end of preprocessor
-					skipping = 1
-					level += 1
 				else:
+					skipping = 0
+				invalid_else = 0
+
+			elif level==1:
+				if line.find('#ifdef')!=-1:	#start preprocessor (invalid)
+					skipping = 1
+					continue
+
+				elif line.find('#ifndef')!=-1: #start preprocessor (valid)
+					skipping = 0
+					invalid_else = 1
+					continue
+
+				elif line.find('#else')!= -1: #else of #ifndef or #if(valid)?
+					if invalid_else==1:
+						skipping = 1
+					else:
+						skipping = 0
+					continue
+
+				elif line.find('#endif')!= -1: #finish preprocessor for ifndef, ifdef, if, elif(valid)
+#					continue
+					skipping = skipping
+
+				elif line.find('#if ')!=-1 or line.find('#if(')!=-1: #start preprocessor (select)
+					if line.find('#if 0')!=-1: #if (invalid)
+						skipping = 1
+					else:
+						# check valid preprocessor
+						for index in range(0, len(valid_preprocessor_code)):
+							if line.find(valid_preprocessor_code[index])!=-1: #start preprocessor (valid)
+								skipping = 0
+								invalid_else = 1
+								break
+					continue
+
+				elif line.find('#elif')!=-1: #start preprocessor (select)
 					# check valid preprocessor
 					for index in range(0, len(valid_preprocessor_code)):
 						if line.find(valid_preprocessor_code[index])!=-1: #start preprocessor (valid)
-							# skip current line only
 							skipping = 0
-							level += 1
-							invalid_else = level #0422
+							invalid_else = 1
 							break
-						else:
-							# skip till the end of preprocessor
-							skipping = 1
-			elif line.find('#elif')!=-1: #start preprocessor (select)
-				# check valid preprocessor
-				for index in range(0, len(valid_preprocessor_code)):
-					if line.find(valid_preprocessor_code[index])!=-1: #start preprocessor (valid)
-						# skip current line only
-						skipping = 0
-						level += 1
-						invalid_else = level #0422
-						break
-					else:
-						# skip till the end of preprocessor
-						skipping = 1
-			else:
+					continue
+
+			if skipping == 0:
 				# save line
-				valid_lines.append(line_org)
+				tmp_lines.append(line_org)
 				cnt += 1
-##### while skipping
-		else:
-			if line.find('#ifdef')!=-1:
-				level += 1
-			if line.find('#ifndef')!=-1:	#start sub-preprocessor
-				level += 1
-			if line.find('#endif')!=-1: #finish preprocessor at the same line
-				level -= 1
-				if (invalid_else!=0 and invalid_else==level):
-					invalid_else = level #0422
-					skipping = 0
-				if level==0:
-					skipping = 0
 
-			if line.find('#else')!=-1: #else of #ifdef or #if(valid)?
-				if (invalid_else!=0 and level==invalid_else) or level==1:	#'else' should be saved (else of #if(invalid))
-					print 'stop skipping [%d][%d]' % (invalid_else, level)
-					skipping = 0
-#					level -= 1
-				else: #'else' should be skipped (else of #if(valid))
-					#keep skipping
-					skip_dummy = cnt
+		valid_lines = copy.deepcopy(tmp_lines)
 
-			if line.find('#elif')!=-1:	#elif of #if preprocessor
-				# check valid preprocessor
-				for index in range(0, len(valid_preprocessor_code)):
-					if line.find(valid_preprocessor_code[index])!=-1: #start preprocessor after #if(invalid)
-						# skip current line only
-						skipping = 0
-#0422						level = 0
-#						invalid_else = level #1 #'else' should be skipped
-						break
-					else: #'elif' should be skipped
-						# skip till the end of preprocessor
-						skipping = 1
-#0422						level = 1
-#						invalid_else = level #0 #'else' should be saved
+	if debug_out:
+		for line in valid_lines:
+			print '<remove_undefined_codes> %s' % (line.strip())
 
-		#if debug_out:
-		print '<remove_undefined_codes> [%d][%d][%d] %s' % (skipping, level, invalid_else, line)
 	return cnt, valid_lines
 
 
