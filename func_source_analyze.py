@@ -1094,7 +1094,6 @@ def analyze_sub_process_code(proc_codes):
 		proc_data.clear()
 ########## skip sub process ##########
 		if tmp_code.find('SUBPROCESS')!=-1:
-#0422 NG			titel = tmp_code.strip()
 			proc_data.append_data(tmp_title, 'subproc', tmp_code.strip(), '')
 
 			if debug_out:
@@ -1111,10 +1110,6 @@ def analyze_sub_process_code(proc_codes):
 
 ######################################################################
 				while tmp_code.find(';')!=-1:
-#0422 NG					if is_for>0:
-#0422 NG						tmp_type = '???'
-#0422 NG					else:
-#0422 NG						tmp_type = 'proc'
 					tmp_proc = tmp_code[0:tmp_code.find(';')+1]
 					tmp_proc.strip()
 					tmp_left = ''
@@ -1160,7 +1155,6 @@ def analyze_sub_process_code(proc_codes):
 									if debug_out:
 										print '<analyze_sub_process_code>   -> append(4) %s %s' % (tmp_left.strip(), tmp_right.strip())
 
-
 # check bracket level
 								# count ')' level
 								bracket_level = 0
@@ -1186,10 +1180,8 @@ def analyze_sub_process_code(proc_codes):
 										if index2_r==-1:
 											bracket_search_flag=False
 											break
-#0422 NG										tmp_title_r = proc_codes.proc_data_list[index1_r].title[index2_r]
 										tmp_type_r = proc_codes.proc_data_list[index1_r].type[index2_r]
 										tmp_left_r = proc_codes.proc_data_list[index1_r].left[index2_r]
-#0422 NG										tmp_right_r = proc_codes.proc_data_list[index1_r].right[index2_r]
 # reached to previous subproc
 										if tmp_type_r=='subproc':
 											bracket_search_flag=False
