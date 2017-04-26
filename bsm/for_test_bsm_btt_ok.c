@@ -1049,10 +1049,7 @@ VD fn_btt_atd_trailerobj_tracking(
 }
 
 
-VD fn_miki_test(
-	type1 arg1,
-	type1 arg2
-)
+VD fn_miki_test1( type1 arg1, type2 arg2 )
 {
 
 #ifndef A_TEST_IFDEF_1
@@ -1069,9 +1066,9 @@ VD fn_miki_test(
 	return;
 }
 
-VD fn_miki_test(
+VD fn_miki_test2(
 	type1 arg1,
-	type1 arg2
+	type2 arg2
 )
 {
 

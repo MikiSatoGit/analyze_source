@@ -74,48 +74,56 @@ class FunctionData:
 		return
 
 	def count_arguments(self):
-		str = ''
+		str_div = ''
+		str_tmp = ''
 		str_name = ''
 		str_type = ''
 		level = 0
 
 		for index1 in range(0, len(self.func_def)):
-			str = self.func_def[index1]
-			str = remove_comment_line(str)
-			str.strip()
-			if str!='':
-				if str.find('(')!=-1:
-					level += 1
-					if level==1:
-						str = str[str.find('('): ]
-				if str.find(')')!=-1:
-					level -= 1
-					if level==0:
-						str = str[0:str.find(')')]
-				if str.find(',')!=-1:
-					str = str[0:str.find(',')]
-				if len(str)!=0:
-					str = str.split()
-					if len(str)>2:
-						str_type = str[0]
-						for index in range(1, len(str)-1):
-							str_type += " "
-							str_type += str[index]
-						str_name = str[len(str)-1]
-					elif len(str)>1:
-						str_type = str[0]
-						str_name = str[1]
-					else:
-						str_type = ''
-						str_name = ''
+			str_div = self.func_def[index1]
+			str_div = remove_comment_line(str_div)
+			str_div.strip()
+			str_div = str_div.split(',')
 
-					str_type.strip()
-					str_name.strip()
-					if len(str_type)!=0 or len(str_name)!=0:
-						arg_data = ArgumentData()
-						arg_data.type = str_type
-						arg_data.name = str_name
-						self.argument_list.append(arg_data)
+			for str_tmp in str_div:
+				if str_tmp!='':
+					if str_tmp.find('(')!=-1:
+						level += 1
+						if level==1:
+							str_tmp = str_tmp[str_tmp.find('(')+1: ]
+
+					if str_tmp.find(')')!=-1:
+						level -= 1
+						if level==0:
+							str_tmp = str_tmp[0:str_tmp.find(')')]
+
+					if str_tmp.find(',')!=-1:
+						str_tmp = str_tmp[0:str_tmp.find(',')]
+
+					if len(str_tmp)!=0:
+						str_tmp = str_tmp.split()
+						if len(str_tmp)>2:
+							str_type = str_tmp[0]
+							for index in range(1, len(str_tmp)-1):
+								str_type += " "
+								str_type += str_tmp[index]
+							str_name = str_tmp[len(str_tmp)-1]
+						elif len(str_tmp)>1:
+							str_type = str_tmp[0]
+							str_name = str_tmp[1]
+						else:
+							str_type = ''
+							str_name = ''
+
+						str_type.strip()
+						str_name.strip()
+						if len(str_type)!=0 or len(str_name)!=0:
+							arg_data = ArgumentData()
+							arg_data.type = str_type
+							arg_data.name = str_name
+							self.argument_list.append(arg_data)
+
 		self.argument_num = len(self.argument_list)
 		if self.argument_num==1 and self.argument_list[0].name=='':
 			self.argument_num = 0
@@ -504,7 +512,7 @@ def remove_undefined_codes(lines):
 					continue
 
 				elif line.find('#endif')!= -1: #finish preprocessor for ifndef, ifdef, if, elif(valid)
-#					continue
+					# dummy process for saving this line
 					skipping = skipping
 
 				elif line.find('#if ')!=-1 or line.find('#if(')!=-1: #start preprocessor (select)

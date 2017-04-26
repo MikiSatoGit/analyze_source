@@ -1,4 +1,4 @@
-Total lines: 592 
+Total lines: 589 
 Total functions : 20 
 --------------------------
 [Function Name] : = 
@@ -547,9 +547,13 @@ Total functions : 20
 --------------------------
 [Function Name] : fn_btt_atd_trailerobj_tracking 
 -Return type : VD 
--Argument : 2 
+-Argument : 6 
      [0] : NORMAL_BSM   pst_a_trailer_obj[TRAILER_BUFFSIZE] 
      [1] : S4   as4_a_trailer_obj_num 
+     [2] : FL   fl_a_doa_pow_ave[2][3] 
+     [3] : FL   fl_a_doa_pow_dev[2][3] 
+     [4] : S4   s4_a_doa_bf_peak_bin 
+     [5] : FL   fl_a_doa_bf_peak_pow 
 ----- Codes -----
 [1] MAINPROCESS(1) proc S4 s4_t_lp_i, s4_t_lp_j; 
 [2] MAINPROCESS(1) equal S4 as4_a_trk_num (S4)0;
@@ -724,11 +728,11 @@ Total functions : 20
 [171] MAINPROCESS(9) proc return; 
 ----------------- Total Codes : 171 lines
 --------------------------
-[Function Name] : fn_miki_test 
+[Function Name] : fn_miki_test1 
 -Return type : VD 
 -Argument : 2 
      [0] : type1   arg1 
-     [1] : type1   arg2 
+     [1] : type2   arg2 
 ----- Codes -----
 [1] MAINPROCESS(1) equal TEST_IFDEF_1_VALID 0;
 [2] MAINPROCESS(1) equal TEST_IFNDEF_2_VALID 0;
@@ -736,11 +740,11 @@ Total functions : 20
 [4] MAINPROCESS(1) proc return; 
 ----------------- Total Codes : 4 lines
 --------------------------
-[Function Name] : fn_miki_test 
+[Function Name] : fn_miki_test2 
 -Return type : VD 
 -Argument : 2 
      [0] : type1   arg1 
-     [1] : type1   arg2 
+     [1] : type2   arg2 
 ----- Codes -----
 [1] MAINPROCESS(1) equal TEST_IFNDEF_15_VALID 0;
 [2] MAINPROCESS(1) equal TEST_ELSE_18_VALID 0;
