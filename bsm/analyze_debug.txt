@@ -1,28 +1,20 @@
-Total lines: 21 
+Total lines: 15 
 Total functions : 1 
 --------------------------
-[Function Name] : fn_btt_atd_trailerobj_tracking 
+[Function Name] : fn_miki_test3 
 -Return type : VD 
--Argument : 6 
-     [0] : NORMAL_BSM   pst_a_trailer_obj[TRAILER_BUFFSIZE] 
-     [1] : S4   as4_a_trailer_obj_num 
-     [2] : FL   fl_a_doa_pow_ave[2][3] 
-     [3] : FL   fl_a_doa_pow_dev[2][3] 
-     [4] : S4   s4_a_doa_bf_peak_bin 
-     [5] : FL   fl_a_doa_bf_peak_pow 
+-Argument : 2 
+     [0] : type1   arg1 
+     [1] : type2   arg2 
 ----- Codes -----
-[1] MAINPROCESS(1) if<start> if( 
-[2] MAINPROCESS(1) if as4_a_trk_num() > (S4)BTT_OBJ_DETECT_CYC1 
-[3] MAINPROCESS(1) if ) 
-[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[5] SUBPROCESS(1) if<start> if( 
-[6] SUBPROCESS(1) if fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
-[7] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
-[8] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
-[9] SUBPROCESS(1) if &&  fl_abs(afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
-[10] SUBPROCESS(1) if &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
-[11] SUBPROCESS(1) if &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
-[12] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[13] SUBSUBPROCESS(1) equal MIKI_TEST 1;
-[14] MAINPROCESS(2) proc return; 
------------------ Total Codes : 14 lines
+[1] MAINPROCESS(1) func<start> miki2_1 = subsub_1( 
+[2] MAINPROCESS(1) func (S1)arg2_1_1, 
+[3] MAINPROCESS(1) func arg2_1_2 
+[4] MAINPROCESS(1) func<end> ); 
+[5] MAINPROCESS(1) ??? miki2_2 
+[6] MAINPROCESS(1) func<start> = subsub_2( 
+[7] MAINPROCESS(1) func (S1)arg2_2_1, 
+[8] MAINPROCESS(1) func arg2_2_2 
+[9] MAINPROCESS(1) func<end> ); 
+[10] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 10 lines
