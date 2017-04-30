@@ -654,3 +654,63 @@ static S4 s4_bsm_chkfr_check_tos_alart_sts(
 
 	return s4_t_exit;
 }
+
+static VD fn_bsm_low_calc_deviation(
+	S4 s4_a_forward_priod,
+	S4 as4_a_nearfield_doa_i[SLOW_SOT_FREQ_BIN_RANGE][1],
+	S4 as4_a_nearfield_doa_q[SLOW_SOT_FREQ_BIN_RANGE][1],
+	const S4 as4_stationary_doa_line[N_DOA],
+	S4 *ps4_a_backward_priod,
+	FL afl_a_buf_dev[2],
+    S4 s4_a_v0_doa,
+    S4 *ps4_a_fast_sot_num,
+    S4 *ps4_a_not_fast_sot_num,
+    FL afl_a_sot_check_object_i[SLOW_SOT_FREQ_BIN_RANGE][4],
+    FL afl_a_sot_check_object_q[SLOW_SOT_FREQ_BIN_RANGE][4]
+)
+{
+
+	S4 fast_sot_limit_line[N_DOA];
+
+
+	afl_a_buf_dev[0] = 999.9F;
+	afl_a_buf_dev[1] = 999.9F;
+
+	if(
+		fl_g_v_self_bsm_for_base>5.0F
+	)
+	{
+		{
+			afl_a_buf_dev[0] = calc_deviation_of_doa_freq_line_stationary_2(
+				(const S4 (*)[1])as4_a_nearfield_doa_i,
+				SLOW_SOT_FREQ_BIN_START_I,
+				(const S4 *)as4_stationary_doa_line,
+				0
+				,ps4_a_backward_priod
+				,s4_a_v0_doa
+				,ps4_a_fast_sot_num
+				,ps4_a_not_fast_sot_num
+				,fast_sot_limit_line
+				,(const FL (*)[4])afl_a_sot_check_object_i
+			);
+		}
+
+		{
+			afl_a_buf_dev[1] = calc_deviation_of_doa_freq_line_stationary_2(
+				(const S4 (*)[1])as4_a_nearfield_doa_q,
+				SLOW_SOT_FREQ_BIN_START_Q-SLOW_SOT_FREQ_BIN_RANGE,
+				(const S4 *)as4_stationary_doa_line,
+				1
+				,ps4_a_backward_priod
+				,s4_a_v0_doa
+				,ps4_a_fast_sot_num
+				,ps4_a_not_fast_sot_num
+				,fast_sot_limit_line
+				,(const FL (*)[4])afl_a_sot_check_object_q
+			);
+		}
+	}
+	
+	return;
+}
+

@@ -1,4 +1,4 @@
-Total lines: 742 
+`Total lines: 742 
 Total functions : 13 
 --------------------------
 [Function Name] : fn_bsm_seek_2f_object 
