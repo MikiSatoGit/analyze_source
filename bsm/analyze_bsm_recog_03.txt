@@ -1,0 +1,1329 @@
+Total lines: 4350 
+Total functions : 27 
+--------------------------
+[Function Name] : s4_seek_sidewinder 
+-Return type : S4 
+-Argument : 2 
+     [0] : NORMAL_BSM   ast_a_normal_wall[1] 
+     [1] : NORMAL_BSM   ast_a_normal_sot[1] 
+----- Codes -----
+[1] MAINPROCESS(1) equal S4 object_num 0;
+[2] MAINPROCESS(1) equal S4 tmp_fm_obj_flg 0;
+[3] MAINPROCESS(1) equal S4 tmp_fm_flg 0;
+[4] MAINPROCESS(1) equal S4 tmp_wall_flg 0;
+[5] MAINPROCESS(1) equal S4 tmp_leading_flg1 st_g_bsm_loop_data.as4_flg_leading[0];
+[6] MAINPROCESS(1) equal S4 tmp_leading_flg2 st_g_bsm_loop_data.as4_flg_leading[0];
+[7] MAINPROCESS(1) proc NORMAL_BSM tmp_normal[1]; 
+[8] MAINPROCESS(1) proc NORMAL_BSM normal_wall[1]; 
+[9] MAINPROCESS(1) proc NORMAL_BSM normal_wall_prev[1]; 
+[10] MAINPROCESS(1) proc NORMAL_BSM tmp_normal_sot[1]; 
+[11] MAINPROCESS(1) proc NORMAL_BSM normal_sot[1]; 
+[12] MAINPROCESS(1) proc NORMAL_BSM normal_sot_prev[1]; 
+[13] MAINPROCESS(1) equal FL tmp_cos 0.0F;
+[14] MAINPROCESS(1) proc FL sot_thres_up[NB_FFT_PT]; 
+[15] MAINPROCESS(1) proc FL sot_thres_dn[NB_FFT_PT]; 
+[16] MAINPROCESS(1) proc FL tmp_fm_nearfield_power; 
+[17] MAINPROCESS(1) proc FL tmp_sot_wall_angle; 
+[18] MAINPROCESS(1) proc FL tmp_sot_real_angle; 
+[19] MAINPROCESS(1) equal S4 tmp_wall_reject_th WALL_REJECT_TH3;
+[20] MAINPROCESS(1) func<start> fn_initialize_wall_data( 
+[21] MAINPROCESS(1) func tmp_normal 
+[22] MAINPROCESS(1) func<end> ); 
+[23] MAINPROCESS(1) func<start> fn_move( 
+[24] MAINPROCESS(1) func normal_wall, 
+[25] MAINPROCESS(1) func tmp_normal, 
+[26] MAINPROCESS(1) func 1 
+[27] MAINPROCESS(1) func<end> ); 
+[28] MAINPROCESS(1) func<start> fn_move( 
+[29] MAINPROCESS(1) func normal_wall_prev, 
+[30] MAINPROCESS(1) func ast_a_normal_wall, 
+[31] MAINPROCESS(1) func 1 
+[32] MAINPROCESS(1) func<end> ); 
+[33] MAINPROCESS(1) func<start> fn_move( 
+[34] MAINPROCESS(1) func tmp_normal_sot, 
+[35] MAINPROCESS(1) func ast_a_normal_sot, 
+[36] MAINPROCESS(1) func 1 
+[37] MAINPROCESS(1) func<end> ); 
+[38] MAINPROCESS(1) func<start> fn_move( 
+[39] MAINPROCESS(1) func normal_sot_prev, 
+[40] MAINPROCESS(1) func ast_a_normal_sot, 
+[41] MAINPROCESS(1) func 1 
+[42] MAINPROCESS(1) func<end> ); 
+[43] MAINPROCESS(1) func<start> fn_move( 
+[44] MAINPROCESS(1) func normal_sot, 
+[45] MAINPROCESS(1) func ast_a_normal_sot, 
+[46] MAINPROCESS(1) func 1 
+[47] MAINPROCESS(1) func<end> ); 
+[48] MAINPROCESS(1) func<start> tmp_fm_nearfield_power = fl_bsm_side_cal_fm_nearfield_power( 
+[49] MAINPROCESS(1) func<end> ); 
+[50] MAINPROCESS(1) func<start> tmp_fm_obj_flg = check_fm_object( 
+[51] MAINPROCESS(1) func (const NORMAL_BSM *)normal_sot_prev, 
+[52] MAINPROCESS(1) func tmp_leading_flg1, 
+[53] MAINPROCESS(1) func tmp_normal 
+[54] MAINPROCESS(1) func<end> ); 
+[55] MAINPROCESS(1) equal tmp_fm_flg 0;
+[56] MAINPROCESS(1) func<start> tmp_fm_flg = check_fm_spectrum( 
+[57] MAINPROCESS(1) func sot_thres_up, 
+[58] MAINPROCESS(1) func sot_thres_dn 
+[59] MAINPROCESS(1) func<end> ); 
+[60] MAINPROCESS(1) func<start> fn_bsm_side_check_leading_object( 
+[61] MAINPROCESS(1) func (const NORMAL_BSM *)tmp_normal, 
+[62] MAINPROCESS(1) func tmp_fm_obj_flg, 
+[63] MAINPROCESS(1) func tmp_fm_flg, 
+[64] MAINPROCESS(1) func &tmp_wall_flg, 
+[65] MAINPROCESS(1) func &tmp_leading_flg1, 
+[66] MAINPROCESS(1) func &tmp_leading_flg2, 
+[67] MAINPROCESS(1) func &tmp_sot_wall_angle, 
+[68] MAINPROCESS(1) func &tmp_sot_real_angle, 
+[69] MAINPROCESS(1) func tmp_normal_sot, 
+[70] MAINPROCESS(1) func &tmp_wall_reject_th 
+[71] MAINPROCESS(1) func<end> ); 
+[72] MAINPROCESS(1) func<start> fn_bsm_side_check_wall( 
+[73] MAINPROCESS(1) func tmp_fm_obj_flg, 
+[74] MAINPROCESS(1) func tmp_leading_flg1, 
+[75] MAINPROCESS(1) func tmp_sot_wall_angle, 
+[76] MAINPROCESS(1) func tmp_sot_real_angle, 
+[77] MAINPROCESS(1) func (const NORMAL_BSM *)tmp_normal, 
+[78] MAINPROCESS(1) func &tmp_wall_flg, 
+[79] MAINPROCESS(1) func normal_wall, 
+[80] MAINPROCESS(1) func tmp_wall_reject_th 
+[81] MAINPROCESS(1) func<end> ); 
+[82] MAINPROCESS(1) func<start> fn_bsm_side_tracking_wall( 
+[83] MAINPROCESS(1) func tmp_fm_obj_flg, 
+[84] MAINPROCESS(1) func tmp_wall_flg, 
+[85] MAINPROCESS(1) func tmp_leading_flg1, 
+[86] MAINPROCESS(1) func tmp_leading_flg2, 
+[87] MAINPROCESS(1) func (const NORMAL_BSM *)tmp_normal, 
+[88] MAINPROCESS(1) func (const NORMAL_BSM *)normal_wall_prev, 
+[89] MAINPROCESS(1) func normal_wall 
+[90] MAINPROCESS(1) func<end> ); 
+[91] MAINPROCESS(1) func<start> object_num = s4_bsm_side_tracking_heisou( 
+[92] MAINPROCESS(1) func tmp_fm_nearfield_power, 
+[93] MAINPROCESS(1) func tmp_fm_obj_flg, 
+[94] MAINPROCESS(1) func &tmp_leading_flg2, 
+[95] MAINPROCESS(1) func (const NORMAL_BSM *)normal_sot_prev, 
+[96] MAINPROCESS(1) func (const NORMAL_BSM *)tmp_normal_sot, 
+[97] MAINPROCESS(1) func normal_sot 
+[98] MAINPROCESS(1) func<end> ); 
+[99] MAINPROCESS(1) func<start> fn_move( 
+[100] MAINPROCESS(1) func ast_a_normal_wall, 
+[101] MAINPROCESS(1) func normal_wall, 
+[102] MAINPROCESS(1) func 1 
+[103] MAINPROCESS(1) func<end> ); 
+[104] MAINPROCESS(1) equal st_g_bsm_loop_data.afl_wall_width[0] ast_a_normal_wall[0].fl_Rxfil;
+[105] MAINPROCESS(1) if<start> if( 
+[106] MAINPROCESS(1) if st_g_bsm_loop_data.as4_slow_sot_find[1] > tmp_wall_reject_th 
+[107] MAINPROCESS(1) if ) 
+[108] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[109] SUBPROCESS(1) func<start> fn_init(&normal_sot[0], 1 
+[110] SUBPROCESS(1) func<end> ); 
+[111] SUBPROCESS(1) equal object_num 0;
+[112] MAINPROCESS(2) func<start> fn_move( 
+[113] MAINPROCESS(2) func ast_a_normal_sot, 
+[114] MAINPROCESS(2) func normal_sot, 
+[115] MAINPROCESS(2) func 1 
+[116] MAINPROCESS(2) func<end> ); 
+[117] MAINPROCESS(2) equal st_g_bsm_loop_data.as4_flg_leading[0] tmp_leading_flg2;
+[118] MAINPROCESS(2) func<start> fn_bsm_side_check_wall_for_erase_fa_seg((const NORMAL_BSM *)tmp_normal, tmp_fm_obj_flg 
+[119] MAINPROCESS(2) func<end> ); 
+[120] MAINPROCESS(2) proc return object_num; 
+----------------- Total Codes : 120 lines
+--------------------------
+[Function Name] : fl_bsm_side_cal_fm_nearfield_power 
+-Return type : static FL 
+-Argument : 0 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 i; 
+[2] MAINPROCESS(1) proc FL fl_t_fm_nearfield_power; 
+[3] MAINPROCESS(1) equal fl_t_fm_nearfield_power 0.0F;
+[4] MAINPROCESS(1) for<start> for( 
+[5] MAINPROCESS(1) for i = VI_TOS_END_FREQ_BIN; 
+[6] MAINPROCESS(1) for i < (VI_TOS_END_FREQ_BIN + SOT_FMPEAK_RANGE 
+[7] MAINPROCESS(1) for ); 
+[8] MAINPROCESS(1) for i++) 
+[9] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) equal fl_t_fm_nearfield_power + afl_g_cvw_lfm_ftt_power[0][i];
+[11] MAINPROCESS(2) equal fl_t_fm_nearfield_power fl_t_fm_nearfield_power/SOT_FMPEAK_RANGE;
+[12] MAINPROCESS(2) proc return fl_t_fm_nearfield_power; 
+----------------- Total Codes : 12 lines
+--------------------------
+[Function Name] : fn_bsm_side_check_leading_object 
+-Return type : static VD 
+-Argument : 10 
+     [0] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [1] : S4   s4_a_fm_obj_flg 
+     [2] : S4   s4_a_fm_flg 
+     [3] : S4   *ps4_a_wall_flg 
+     [4] : S4   *ps4_a_leading_flg1 
+     [5] : S4   *ps4_a_leading_flg2 
+     [6] : FL   *pfl_a_sot_wall_angle 
+     [7] : FL   *pfl_sot_real_angle 
+     [8] : NORMAL_BSM   ast_a_normal_sot[1] 
+     [9] : S4   *ps4_a_wall_reject_th 
+----- Codes -----
+[1] MAINPROCESS(1) func<start> fn_bsm_side_check1_leading_object( 
+[2] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
+[3] MAINPROCESS(1) func s4_a_fm_obj_flg, 
+[4] MAINPROCESS(1) func s4_a_fm_flg, 
+[5] MAINPROCESS(1) func ps4_a_wall_flg, 
+[6] MAINPROCESS(1) func ps4_a_leading_flg1, 
+[7] MAINPROCESS(1) func ps4_a_wall_reject_th 
+[8] MAINPROCESS(1) func<end> ); 
+[9] MAINPROCESS(1) func<start> fn_bsm_side_check2_leading_object( 
+[10] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
+[11] MAINPROCESS(1) func s4_a_fm_obj_flg, 
+[12] MAINPROCESS(1) func s4_a_fm_flg, 
+[13] MAINPROCESS(1) func ps4_a_wall_flg, 
+[14] MAINPROCESS(1) func ps4_a_leading_flg1, 
+[15] MAINPROCESS(1) func ps4_a_leading_flg2, 
+[16] MAINPROCESS(1) func pfl_a_sot_wall_angle, 
+[17] MAINPROCESS(1) func pfl_sot_real_angle 
+[18] MAINPROCESS(1) func<end> ); 
+[19] MAINPROCESS(1) func<start> fn_bsm_side_set_leading_object( 
+[20] MAINPROCESS(1) func *ps4_a_leading_flg2, 
+[21] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
+[22] MAINPROCESS(1) func ast_a_normal_sot 
+[23] MAINPROCESS(1) func<end> ); 
+[24] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 24 lines
+--------------------------
+[Function Name] : fn_bsm_side_check1_leading_object 
+-Return type : static VD 
+-Argument : 6 
+     [0] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [1] : S4   s4_a_fm_obj_flg 
+     [2] : S4   s4_a_fm_flg 
+     [3] : S4   *ps4_a_wall_flg 
+     [4] : S4   *ps4_a_leading_flg1 
+     [5] : S4   *ps4_a_wall_reject_th 
+----- Codes -----
+[1] MAINPROCESS(1) proc FL tmp_sot_wall_diff; 
+[2] MAINPROCESS(1) if<start> if( 
+[3] MAINPROCESS(1) if st_g_bsm_loop_data.as4_low_speed_flg[0]==1 
+[4] MAINPROCESS(1) if ) 
+[5] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[6] SUBPROCESS(1) equal *ps4_a_wall_reject_th 3;
+[7] MAINPROCESS(2) if<start> if( 
+[8] MAINPROCESS(2) if *ps4_a_leading_flg1 == 0 
+[9] MAINPROCESS(2) if ) 
+[10] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[11] SUBPROCESS(1) if <start> if ( 
+[12] SUBPROCESS(1) if  (s4_a_fm_obj_flg != 0 
+[13] SUBPROCESS(1) if  ) 
+[14] SUBPROCESS(1) if  &&  (s4_a_fm_flg != 0)) 
+[15] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[16] SUBSUBPROCESS(1) if<start> if( 
+[17] SUBSUBPROCESS(1) if st_g_bsm_loop_data.afl_wall_width[0]!=WALL_MAX 
+[18] SUBSUBPROCESS(1) if ) 
+[19] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[20] SUBSUBSUBPROCESS(1) equal tmp_sot_wall_diff CFL_SOT_WALL_DIFF + st_g_bsm_loop_data.afl_installed_angle[1];
+[21] SUBSUBPROCESS(2) else<start> else 
+[22] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBPROCESS(1) equal tmp_sot_wall_diff SOT_WALL_DIFF_DEFAULT;
+[24] SUBSUBPROCESS(3) if <start> if ( 
+[25] SUBSUBPROCESS(3) if  ((st_g_bsm_loop_data.afl_wall_width[0] - ast_a_normal_fm[0].fl_Rxobs) > tmp_sot_wall_diff 
+[26] SUBSUBPROCESS(3) if  ) 
+[27] SUBSUBPROCESS(3) if  &&  (st_g_bsm_loop_data.as4_slow_sot_find[1] < *ps4_a_wall_reject_th)) 
+[28] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+[29] SUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg 0;
+[30] SUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg1 1;
+[31] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 31 lines
+--------------------------
+[Function Name] : fn_bsm_side_check2_leading_object 
+-Return type : static VD 
+-Argument : 8 
+     [0] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [1] : S4   s4_a_fm_obj_flg 
+     [2] : S4   s4_a_fm_flg 
+     [3] : S4   *ps4_a_wall_flg 
+     [4] : S4   *ps4_a_leading_flg1 
+     [5] : S4   *ps4_a_leading_flg2 
+     [6] : FL   *pfl_a_sot_wall_angle 
+     [7] : FL   *pfl_sot_real_angle 
+----- Codes -----
+[1] MAINPROCESS(1) proc FL tmp_t_wall_diff_th; 
+[2] MAINPROCESS(1) equal *pfl_a_sot_wall_angle SOT_WALL_ANGLE_TH;
+[3] MAINPROCESS(1) equal tmp_t_wall_diff_th SOT_WALL_DIFF_FAST;
+[4] MAINPROCESS(1) if<start> if( 
+[5] MAINPROCESS(1) if fl_g_v_self_bsm_for_base < WALL_TRK_LOW_VSELF_TH 
+[6] MAINPROCESS(1) if ) 
+[7] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[8] SUBPROCESS(1) equal *pfl_a_sot_wall_angle SOT_WALL_ANGLE_TH_FORWARD;
+[9] SUBPROCESS(1) equal tmp_t_wall_diff_th SOT_WALL_DIFF_SLOW;
+[10] MAINPROCESS(2) func<start> *pfl_sot_real_angle = 180.0F/PI*0.5F*(ast_a_normal_fm[0].fl_theta_up + ast_a_normal_fm[0].fl_theta_dn 
+[11] MAINPROCESS(2) func<end> ); 
+[12] MAINPROCESS(2) if <start> if ( 
+[13] MAINPROCESS(2) if  (st_g_bsm_loop_data.as4_slow_sot_find[0] > 0 
+[14] MAINPROCESS(2) if  ) 
+[15] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.afl_wall_width[0] != WALL_MAX)) 
+[16] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[17] SUBPROCESS(1) if <start> if ( 
+[18] SUBPROCESS(1) if  s4_a_fm_obj_flg != 0 
+[19] SUBPROCESS(1) if  ) 
+[20] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[21] SUBSUBPROCESS(1) if <start> if ( 
+[22] SUBSUBPROCESS(1) if  (st_g_bsm_loop_data.afl_wall_width[0] - ast_a_normal_fm[0].fl_Rxobs) > tmp_t_wall_diff_th 
+[23] SUBSUBPROCESS(1) if  ) 
+[24] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[25] SUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg 0;
+[26] SUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg1 1;
+[27] SUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg2 1;
+[28] SUBSUBPROCESS(2) else<start> else 
+[29] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[30] SUBSUBSUBPROCESS(1) if <start> if ( 
+[31] SUBSUBSUBPROCESS(1) if  (*pfl_sot_real_angle > *pfl_a_sot_wall_angle 
+[32] SUBSUBSUBPROCESS(1) if  ) 
+[33] SUBSUBSUBPROCESS(1) if  &&  (*pfl_sot_real_angle < SOT_WALL_ANGLE_TH_BACKWARD) 
+[34] SUBSUBSUBPROCESS(1) if  &&  (fl_g_v_self_bsm_for_base > CFL_CANOUT_VSELF_MIN)) 
+[35] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[36] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg 1;
+[37] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg1 0;
+[38] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg2 0;
+[39] SUBSUBSUBPROCESS(2) if<start> if( 
+[40] SUBSUBSUBPROCESS(2) if st_g_bsm_loop_data.as4_slow_sot_find[1]==0 
+[41] SUBSUBSUBPROCESS(2) if ) 
+[42] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[43] SUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_slow_sot_find[1] WALL_REJECT_TH3;
+[44] MAINPROCESS(3) if <start> if ( 
+[45] MAINPROCESS(3) if  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)1 
+[46] MAINPROCESS(3) if  ) 
+[47] MAINPROCESS(3) if  &&	(s4_a_fm_obj_flg != (S4)0)) 
+[48] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[49] SUBPROCESS(1) equal *ps4_a_wall_flg (S4)0;
+[50] SUBPROCESS(1) equal *ps4_a_leading_flg1 (S4)1;
+[51] SUBPROCESS(1) equal *ps4_a_leading_flg2 (S4)1;
+[52] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 52 lines
+--------------------------
+[Function Name] : fn_bsm_side_set_leading_object 
+-Return type : static VD 
+-Argument : 3 
+     [0] : S4   s4_a_leading_flg2 
+     [1] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [2] : NORMAL_BSM   ast_a_normal_heisou[1] 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  s4_a_leading_flg2 != 0 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) if <start> if ( 
+[6] SUBPROCESS(1) if  ((ast_a_normal_fm[0].s4_bin_up < FREQ_BIN_LOWER_LIMIT 
+[7] SUBPROCESS(1) if  ) 
+[8] SUBPROCESS(1) if  &&   (ast_a_normal_fm[0].fl_power_up < PEAK_POW_TH_AROUND_CENTER)) 
+[9] SUBPROCESS(1) if  ||  ((ast_a_normal_fm[0].s4_bin_dn < FREQ_BIN_LOWER_LIMIT) 
+[10] SUBPROCESS(1) if  &&   (ast_a_normal_fm[0].fl_power_dn < PEAK_POW_TH_AROUND_CENTER))) 
+[11] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[12] SUBPROCESS(2) else<start> else 
+[13] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[14] SUBSUBPROCESS(1) func<start> fn_move( 
+[15] SUBSUBPROCESS(1) func ast_a_normal_heisou, 
+[16] SUBSUBPROCESS(1) func ast_a_normal_fm, 
+[17] SUBSUBPROCESS(1) func 1 
+[18] SUBSUBPROCESS(1) func<end> ); 
+[19] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 19 lines
+--------------------------
+[Function Name] : fn_bsm_side_check_wall 
+-Return type : static VD 
+-Argument : 8 
+     [0] : S4   s4_a_fm_obj_flg 
+     [1] : S4   s4_a_leading_flg1 
+     [2] : FL   fl_a_sot_wall_angle 
+     [3] : FL   fl_sot_real_angle 
+     [4] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [5] : S4   *ps4_a_wall_flg 
+     [6] : NORMAL_BSM   ast_a_normal_wall[1] 
+     [7] : S4   s4_a_wall_reject_th 
+----- Codes -----
+[1] MAINPROCESS(1) func<start> fn_bsm_side_check1_wall( 
+[2] MAINPROCESS(1) func s4_a_fm_obj_flg, 
+[3] MAINPROCESS(1) func s4_a_leading_flg1, 
+[4] MAINPROCESS(1) func fl_a_sot_wall_angle, 
+[5] MAINPROCESS(1) func fl_sot_real_angle, 
+[6] MAINPROCESS(1) func ps4_a_wall_flg, 
+[7] MAINPROCESS(1) func s4_a_wall_reject_th 
+[8] MAINPROCESS(1) func<end> ); 
+[9] MAINPROCESS(1) func<start> fn_bsm_side_set_wall_object( 
+[10] MAINPROCESS(1) func *ps4_a_wall_flg, 
+[11] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
+[12] MAINPROCESS(1) func ast_a_normal_wall 
+[13] MAINPROCESS(1) func<end> ); 
+[14] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 14 lines
+--------------------------
+[Function Name] : fn_bsm_side_check1_wall 
+-Return type : static VD 
+-Argument : 6 
+     [0] : S4   s4_a_fm_obj_flg 
+     [1] : S4   s4_a_leading_flg1 
+     [2] : FL   fl_a_sot_wall_angle 
+     [3] : FL   fl_sot_real_angle 
+     [4] : S4   *ps4_a_wall_flg 
+     [5] : S4   s4_a_wall_reject_th 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  (s4_a_leading_flg1 == 0 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) if  &&  (st_g_bsm_loop_data.as4_flg_passing[0] <= PASSING_COUNT_MIN) 
+[5] MAINPROCESS(1) if  &&  (s4_a_fm_obj_flg != 0) 
+[6] MAINPROCESS(1) if  &&  (st_g_bsm_loop_data.as4_slow_sot_find[1] > s4_a_wall_reject_th)) 
+[7] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[8] SUBPROCESS(1) if <start> if ( 
+[9] SUBPROCESS(1) if  fl_sot_real_angle > fl_a_sot_wall_angle 
+[10] SUBPROCESS(1) if  ) 
+[11] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[12] SUBSUBPROCESS(1) equal *ps4_a_wall_flg 1;
+[13] MAINPROCESS(2) if <start> if ( 
+[14] MAINPROCESS(2) if  (s4_a_leading_flg1 == (S4)0 
+[15] MAINPROCESS(2) if  ) 
+[16] MAINPROCESS(2) if  &&  (s4_a_fm_obj_flg != (S4)0) 
+[17] MAINPROCESS(2) if  &&  (fl_sot_real_angle > fl_a_sot_wall_angle) 
+[18] MAINPROCESS(2) if  &&  ((st_g_bsm_loop_data.as4_flg_passing[0] <= (S4)PASSING_COUNT_MIN) 
+[19] MAINPROCESS(2) if  ||   ((st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[4] < (S4)CFL_WALL_DEV_TH12) 
+[20] MAINPROCESS(2) if  &&    (st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[5] < (S4)WALL_DEV_TH1))) 
+[21] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.as4_slow_sot_find[1] > s4_a_wall_reject_th)) 
+[22] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[23] SUBPROCESS(1) if <start> if ( 
+[24] SUBPROCESS(1) if  (!(st_g_bsm_loop_data.as4_low_speed_flg[0] == (S4)1) 
+[25] SUBPROCESS(1) if  ) 
+[26] SUBPROCESS(1) if  &&  (st_g_bsm_loop_data.afl_wall_width[0] > WALL_WIDTH_TH)) 
+[27] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[28] SUBSUBPROCESS(1) if <start> if ( 
+[29] SUBSUBPROCESS(1) if  (fl_sot_real_angle > fl_a_sot_wall_angle 
+[30] SUBSUBPROCESS(1) if  ) 
+[31] SUBSUBPROCESS(1) if  &&  (fl_sot_real_angle < SOT_WALL_ANGLE_TH_BACKWARD)) 
+[32] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[33] SUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg (S4)1;
+[34] SUBPROCESS(2) else<start> else 
+[35] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[36] SUBSUBPROCESS(1) if <start> if ( 
+[37] SUBSUBPROCESS(1) if  fl_sot_real_angle > fl_a_sot_wall_angle 
+[38] SUBSUBPROCESS(1) if  ) 
+[39] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[40] SUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg (S4)1;
+[41] MAINPROCESS(3) if <start> if ( 
+[42] MAINPROCESS(3) if  (s4_a_leading_flg1 == 0 
+[43] MAINPROCESS(3) if  ) 
+[44] MAINPROCESS(3) if  &&  (fl_g_v_self_bsm_for_base < WALL_TRK_LOW_VSELF_TH) 
+[45] MAINPROCESS(3) if  &&  (s4_a_fm_obj_flg != 0) 
+[46] MAINPROCESS(3) if  &&  (st_g_bsm_loop_data.as4_slow_sot_find[1] > 1)) 
+[47] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[48] SUBPROCESS(1) if <start> if ( 
+[49] SUBPROCESS(1) if  fl_sot_real_angle < SOT_WALL_ANGLE_TH_BACKWARD 
+[50] SUBPROCESS(1) if  ) 
+[51] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[52] SUBSUBPROCESS(1) equal *ps4_a_wall_flg 1;
+[53] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 53 lines
+--------------------------
+[Function Name] : fn_bsm_side_set_wall_object 
+-Return type : static VD 
+-Argument : 3 
+     [0] : S4   s4_a_wall_flg 
+     [1] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [2] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  s4_a_wall_flg != 0 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) func<start> fn_move( 
+[6] SUBPROCESS(1) func ast_a_normal_wall, 
+[7] SUBPROCESS(1) func ast_a_normal_fm, 
+[8] SUBPROCESS(1) func 1 
+[9] SUBPROCESS(1) func<end> ); 
+[10] SUBPROCESS(1) if <start> if ( 
+[11] SUBPROCESS(1) if  (ast_a_normal_wall[0].s4_bin_up <= ((NB_FFT_PT / 2) + CENTER_FREQ_RANGE + 1 + 1) 
+[12] SUBPROCESS(1) if  ) 
+[13] SUBPROCESS(1) if  &&  (ast_a_normal_wall[0].s4_bin_dn <= ((NB_FFT_PT / 2) + CENTER_FREQ_RANGE + 1 + 1))) 
+[14] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[15] SUBSUBPROCESS(1) if <start> if ( 
+[16] SUBSUBPROCESS(1) if  (ast_a_normal_wall[0].fl_power_up > CFL_SOT_WALL_NEAR_POWER_TH1 
+[17] SUBSUBPROCESS(1) if  ) 
+[18] SUBSUBPROCESS(1) if  &&  (ast_a_normal_wall[0].fl_power_dn > CFL_SOT_WALL_NEAR_POWER_TH1)) 
+[19] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[20] SUBSUBSUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs st_g_bsm_loop_data.afl_installed_angle[1] + WALL_MIN;
+[21] SUBSUBPROCESS(2) else if <start> else if ( 
+[22] SUBSUBPROCESS(2) else if  (ast_a_normal_wall[0].fl_power_up > CFL_SOT_WALL_NEAR_POWER_TH2 
+[23] SUBSUBPROCESS(2) else if  ) 
+[24] SUBSUBPROCESS(2) else if  &&  (ast_a_normal_wall[0].fl_power_dn > CFL_SOT_WALL_NEAR_POWER_TH2)) 
+[25] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[26] SUBSUBSUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs st_g_bsm_loop_data.afl_installed_angle[1] + WALL_MIN + 0.5F;
+[27] SUBSUBPROCESS(3) else if <start> else if ( 
+[28] SUBSUBPROCESS(3) else if  (ast_a_normal_wall[0].fl_power_up > CFL_SOT_WALL_NEAR_POWER_TH3 
+[29] SUBSUBPROCESS(3) else if  ) 
+[30] SUBSUBPROCESS(3) else if  &&  (ast_a_normal_wall[0].fl_power_dn > CFL_SOT_WALL_NEAR_POWER_TH3)) 
+[31] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+[32] SUBSUBSUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs st_g_bsm_loop_data.afl_installed_angle[1] + WALL_MIN + 1.0F;
+[33] SUBSUBPROCESS(4) else<start> else 
+[34] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
+[35] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 35 lines
+--------------------------
+[Function Name] : fn_bsm_side_tracking_wall 
+-Return type : static VD 
+-Argument : 7 
+     [0] : S4   s4_a_fm_obj_flg 
+     [1] : S4   s4_a_wall_flg 
+     [2] : S4   s4_a_leading_flg1 
+     [3] : S4   s4_a_leading_flg2 
+     [4] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [5] : const NORMAL_BSM   ast_a_normal_wall_prev[1] 
+     [6] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  s4_a_wall_flg != 0 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) func<start> fn_bsm_side_tracking_wall_with_obs( 
+[6] SUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_wall_prev, 
+[7] SUBPROCESS(1) func ast_a_normal_wall 
+[8] SUBPROCESS(1) func<end> ); 
+[9] MAINPROCESS(2) else<start> else 
+[10] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[11] SUBPROCESS(1) func<start> fn_bsm_side_tracking_wall_without_obs( 
+[12] SUBPROCESS(1) func s4_a_fm_obj_flg, 
+[13] SUBPROCESS(1) func s4_a_leading_flg1, 
+[14] SUBPROCESS(1) func s4_a_leading_flg2, 
+[15] SUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
+[16] SUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_wall_prev, 
+[17] SUBPROCESS(1) func ast_a_normal_wall 
+[18] SUBPROCESS(1) func<end> ); 
+[19] MAINPROCESS(3) func<start> fn_bsm_side_guard_wall_rxfil( 
+[20] MAINPROCESS(3) func ast_a_normal_wall 
+[21] MAINPROCESS(3) func<end> ); 
+[22] MAINPROCESS(3) equal st_g_bsm_loop_data.afl_wall_width[0] ast_a_normal_wall[0].fl_Rxfil;
+[23] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 23 lines
+--------------------------
+[Function Name] : fn_bsm_side_tracking_wall_with_obs 
+-Return type : static VD 
+-Argument : 2 
+     [0] : const NORMAL_BSM   ast_a_normal_wall_prev[1] 
+     [1] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) func<start> fn_bsm_side_intpl_cur_wall_object( 
+[2] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_wall_prev, 
+[3] MAINPROCESS(1) func ast_a_normal_wall 
+[4] MAINPROCESS(1) func<end> ); 
+[5] MAINPROCESS(1) func<start> fn_ab_track_wall( 
+[6] MAINPROCESS(1) func &ast_a_normal_wall_prev[0], 
+[7] MAINPROCESS(1) func &ast_a_normal_wall[0], 
+[8] MAINPROCESS(1) func 0 
+[9] MAINPROCESS(1) func<end> ); 
+[10] MAINPROCESS(1) func<start> fn_calc_prediction_of_normaldata( 
+[11] MAINPROCESS(1) func &ast_a_normal_wall[0] 
+[12] MAINPROCESS(1) func<end> ); 
+[13] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 13 lines
+--------------------------
+[Function Name] : fn_bsm_side_intpl_cur_wall_object 
+-Return type : static VD 
+-Argument : 2 
+     [0] : const NORMAL_BSM   ast_a_normal_wall_prev[1] 
+     [1] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  (ast_a_normal_wall[0].fl_Rxobs - ast_a_normal_wall_prev[0].fl_Rxfil) > SOT_WALL_WIDEN_DIFF_TH 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs SOT_WALL_WIDEN_COEF*(ast_a_normal_wall[0].fl_Rxobs - ast_a_normal_wall_prev[0].fl_Rxfil)+ast_a_normal_wall_prev[0].fl_Rxfil;
+[6] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Vxobs SOT_WALL_WIDEN_COEF*ast_a_normal_wall[0].fl_Vxobs;
+[7] MAINPROCESS(2) if <start> if ( 
+[8] MAINPROCESS(2) if  (ast_a_normal_wall[0].fl_Rxobs - ast_a_normal_wall_prev[0].fl_Rxfil) < SOT_WALL_NARROW_DIFF_TH 
+[9] MAINPROCESS(2) if  ) 
+[10] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[11] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs SOT_WALL_NARROW_COEF*(ast_a_normal_wall[0].fl_Rxobs - ast_a_normal_wall_prev[0].fl_Rxfil) + ast_a_normal_wall_prev[0].fl_Rxfil;
+[12] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Vxobs SOT_WALL_NARROW_COEF*ast_a_normal_wall[0].fl_Vxobs;
+[13] MAINPROCESS(3) if <start> if ( 
+[14] MAINPROCESS(3) if  ast_a_normal_wall[0].fl_Rxobs > SOT_WALL_MAX 
+[15] MAINPROCESS(3) if  ) 
+[16] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[17] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs SOT_WALL_MAX;
+[18] MAINPROCESS(4) if <start> if ( 
+[19] MAINPROCESS(4) if  ast_a_normal_wall[0].fl_Rxobs < WALL_MIN 
+[20] MAINPROCESS(4) if  ) 
+[21] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[22] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs WALL_MIN;
+[23] MAINPROCESS(5) equal ast_a_normal_wall[0].fl_Vyobs 0.0F;
+[24] MAINPROCESS(5) equal ast_a_normal_wall[0].fl_doa_up_interpolate (FL)ast_a_normal_wall[0].s4_bin_up_music;
+[25] MAINPROCESS(5) equal ast_a_normal_wall[0].fl_doa_dn_interpolate (FL)ast_a_normal_wall[0].s4_bin_dn_music;
+[26] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 26 lines
+--------------------------
+[Function Name] : fn_bsm_side_tracking_wall_without_obs 
+-Return type : static VD 
+-Argument : 6 
+     [0] : S4   s4_a_fm_obj_flg 
+     [1] : S4   s4_a_leading_flg1 
+     [2] : S4   s4_a_leading_flg2 
+     [3] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [4] : const NORMAL_BSM   ast_a_normal_wall_prev[1] 
+     [5] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) proc FL fl_t_wall_pos; 
+[2] MAINPROCESS(1) equal fl_t_wall_pos 0.0F;
+[3] MAINPROCESS(1) func<start> fn_bsm_side_confirm_prev_wall_object( 
+[4] MAINPROCESS(1) func s4_a_fm_obj_flg, 
+[5] MAINPROCESS(1) func s4_a_leading_flg1, 
+[6] MAINPROCESS(1) func s4_a_leading_flg2, 
+[7] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
+[8] MAINPROCESS(1) func &fl_t_wall_pos 
+[9] MAINPROCESS(1) func<end> ); 
+[10] MAINPROCESS(1) if<start> if( 
+[11] MAINPROCESS(1) if ast_a_normal_wall_prev[0].fl_Rxpred < fl_t_wall_pos 
+[12] MAINPROCESS(1) if ) 
+[13] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[14] SUBPROCESS(1) func<start> fn_bsm_side_cal1_next_wall_object( 
+[15] SUBPROCESS(1) func s4_a_fm_obj_flg, 
+[16] SUBPROCESS(1) func s4_a_leading_flg1, 
+[17] SUBPROCESS(1) func s4_a_leading_flg2, 
+[18] SUBPROCESS(1) func fl_t_wall_pos, 
+[19] SUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_wall_prev, 
+[20] SUBPROCESS(1) func ast_a_normal_wall 
+[21] SUBPROCESS(1) func<end> ); 
+[22] MAINPROCESS(2) else<start> else 
+[23] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[24] SUBPROCESS(1) if<start> if( 
+[25] SUBPROCESS(1) if s4_a_fm_obj_flg != 0 
+[26] SUBPROCESS(1) if ) 
+[27] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[28] SUBSUBPROCESS(1) func<start> fn_bsm_side_cal2_next_wall_object( 
+[29] SUBSUBPROCESS(1) func fl_t_wall_pos, 
+[30] SUBSUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_wall_prev, 
+[31] SUBSUBPROCESS(1) func ast_a_normal_wall 
+[32] SUBSUBPROCESS(1) func<end> ); 
+[33] SUBPROCESS(2) else<start> else 
+[34] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[35] SUBSUBPROCESS(1) func<start> fn_bsm_side_cal3_next_wall_object( 
+[36] SUBSUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_wall_prev, 
+[37] SUBSUBPROCESS(1) func ast_a_normal_wall 
+[38] SUBSUBPROCESS(1) func<end> ); 
+[39] SUBPROCESS(3) func<start> fn_bsm_side_guard_wall_xpred( 
+[40] SUBPROCESS(3) func ast_a_normal_wall 
+[41] SUBPROCESS(3) func<end> ); 
+[42] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 42 lines
+--------------------------
+[Function Name] : fn_bsm_side_confirm_prev_wall_object 
+-Return type : static VD 
+-Argument : 5 
+     [0] : S4   s4_a_fm_obj_flg 
+     [1] : S4   s4_a_leading_flg1 
+     [2] : S4   s4_a_leading_flg2 
+     [3] : const NORMAL_BSM   ast_a_normal_fm[1] 
+     [4] : FL   *pfl_a_wall_pos 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  s4_a_fm_obj_flg != 0 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) equal *pfl_a_wall_pos ast_a_normal_fm[0].fl_Rxobs;
+[6] MAINPROCESS(2) else<start> else 
+[7] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[8] SUBPROCESS(1) equal *pfl_a_wall_pos WALL_MAX;
+[9] MAINPROCESS(3) if <start> if ( 
+[10] MAINPROCESS(3) if  (s4_a_leading_flg1 != 0 
+[11] MAINPROCESS(3) if  ) 
+[12] MAINPROCESS(3) if  ||  (s4_a_leading_flg2 != 0) 
+[13] MAINPROCESS(3) if  ||  (st_g_bsm_loop_data.as4_flg_passing[0] > PASSING_COUNT_MIN) 
+[14] MAINPROCESS(3) if  ||  (st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[3] > 0)) 
+[15] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[16] SUBPROCESS(1) if <start> if ( 
+[17] SUBPROCESS(1) if  *pfl_a_wall_pos < WALL_MAX 
+[18] SUBPROCESS(1) if  ) 
+[19] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[20] SUBSUBPROCESS(1) equal *pfl_a_wall_pos WALL_MAX;
+[21] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 21 lines
+--------------------------
+[Function Name] : fn_bsm_side_cal1_next_wall_object 
+-Return type : static VD 
+-Argument : 6 
+     [0] : S4   s4_a_fm_obj_flg 
+     [1] : S4   s4_a_leading_flg1 
+     [2] : S4   s4_a_leading_flg2 
+     [3] : FL   fl_a_wall_pos 
+     [4] : const NORMAL_BSM   ast_a_normal_wall_prev[1] 
+     [5] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) func<start> fn_init(&ast_a_normal_wall[0], 1 
+[2] MAINPROCESS(1) func<end> ); 
+[3] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Ryobs 0.0F;
+[4] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Ryfil 0.0F;
+[5] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Rypred 0.0F;
+[6] MAINPROCESS(1) func<start> ast_a_normal_wall[0].fl_Rxobs = fl_bsm_side_cal1_cal_wall_rxobs( 
+[7] MAINPROCESS(1) func s4_a_fm_obj_flg, 
+[8] MAINPROCESS(1) func s4_a_leading_flg1, 
+[9] MAINPROCESS(1) func s4_a_leading_flg2, 
+[10] MAINPROCESS(1) func fl_a_wall_pos, 
+[11] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_wall_prev 
+[12] MAINPROCESS(1) func<end> ); 
+[13] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Rxfil ast_a_normal_wall[0].fl_Rxobs;
+[14] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Rxpred ast_a_normal_wall[0].fl_Rxobs;
+[15] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Robs ast_a_normal_wall[0].fl_Rxobs;
+[16] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Robs_pred ast_a_normal_wall[0].fl_Rxpred;
+[17] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_doa_up_interpolate (FL)ast_a_normal_wall[0].s4_bin_up_music;
+[18] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_doa_dn_interpolate (FL)ast_a_normal_wall[0].s4_bin_dn_music;
+[19] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_doa_up_interpolate_pred (FL)ast_a_normal_wall[0].s4_bin_up_music_pred;
+[20] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_doa_dn_interpolate_pred (FL)ast_a_normal_wall[0].s4_bin_dn_music_pred;
+[21] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_bin_up_interpolate (FL)ast_a_normal_wall[0].s4_bin_up;
+[22] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_bin_dn_interpolate (FL)ast_a_normal_wall[0].s4_bin_dn;
+[23] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_bin_up_interpolate_pred (FL)ast_a_normal_wall[0].s4_bin_up_pred;
+[24] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_bin_dn_interpolate_pred (FL)ast_a_normal_wall[0].s4_bin_dn_pred;
+[25] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 25 lines
+--------------------------
+[Function Name] : fl_bsm_side_cal1_cal_wall_rxobs 
+-Return type : static FL 
+-Argument : 5 
+     [0] : S4   s4_a_fm_obj_flg 
+     [1] : S4   s4_a_leading_flg1 
+     [2] : S4   s4_a_leading_flg2 
+     [3] : FL   fl_a_wall_pos 
+     [4] : const NORMAL_BSM   ast_a_normal_wall_prev[1] 
+----- Codes -----
+[1] MAINPROCESS(1) proc FL fl_t_rxobs; 
+[2] MAINPROCESS(1) if <start> if ( 
+[3] MAINPROCESS(1) if  s4_a_leading_flg1 == 0 
+[4] MAINPROCESS(1) if  ) 
+[5] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[6] SUBPROCESS(1) if <start> if ( 
+[7] SUBPROCESS(1) if  st_g_bsm_loop_data.as4_flg_passing[0] > PASSING_COUNT_MIN 
+[8] SUBPROCESS(1) if  ) 
+[9] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[10] SUBSUBPROCESS(1) equal fl_t_rxobs ast_a_normal_wall_prev[0].fl_Rxfil*(1-WALL_LOST_ALPHA) + WALL_LOST_ALPHA*fl_a_wall_pos;
+[11] SUBPROCESS(2) else<start> else 
+[12] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[13] SUBSUBPROCESS(1) if <start> if ( 
+[14] SUBSUBPROCESS(1) if  fl_g_v_self_bsm_for_base > WALL_RET_LOW_VSELF_TH 
+[15] SUBSUBPROCESS(1) if  ) 
+[16] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[17] SUBSUBSUBPROCESS(1) if <start> if ( 
+[18] SUBSUBSUBPROCESS(1) if  s4_a_fm_obj_flg != 0 
+[19] SUBSUBSUBPROCESS(1) if  ) 
+[20] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[21] SUBSUBSUBSUBPROCESS(1) equal fl_t_rxobs ast_a_normal_wall_prev[0].fl_Rxfil*(1-WALL_LOST_ALPHA_MID) + WALL_LOST_ALPHA_MID*fl_a_wall_pos;
+[22] SUBSUBSUBPROCESS(2) else<start> else 
+[23] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[24] SUBSUBSUBSUBPROCESS(1) equal fl_t_rxobs ast_a_normal_wall_prev[0].fl_Rxfil*(1-WALL_LOST_ALPHA_MID) + WALL_LOST_ALPHA_MID*fl_a_wall_pos;
+[25] SUBSUBPROCESS(2) else<start> else 
+[26] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[27] SUBSUBSUBPROCESS(1) if <start> if ( 
+[28] SUBSUBSUBPROCESS(1) if  s4_a_fm_obj_flg != 0 
+[29] SUBSUBSUBPROCESS(1) if  ) 
+[30] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[31] SUBSUBSUBSUBPROCESS(1) equal fl_t_rxobs ast_a_normal_wall_prev[0].fl_Rxfil*(1-WALL_LOST_ALPHA_MID) + WALL_LOST_ALPHA_MID*fl_a_wall_pos;
+[32] SUBSUBSUBPROCESS(2) else<start> else 
+[33] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[34] SUBSUBSUBSUBPROCESS(1) equal fl_t_rxobs ast_a_normal_wall_prev[0].fl_Rxfil;
+[35] MAINPROCESS(2) else<start> else 
+[36] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[37] SUBPROCESS(1) if <start> if ( 
+[38] SUBPROCESS(1) if  fl_g_v_self_bsm_for_base > WALL_RET_LOW_VSELF_TH 
+[39] SUBPROCESS(1) if  ) 
+[40] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[41] SUBSUBPROCESS(1) equal fl_t_rxobs ast_a_normal_wall_prev[0].fl_Rxfil*(1-WALL_LOST_ALPHA_FAST) + WALL_LOST_ALPHA_FAST*fl_a_wall_pos;
+[42] SUBPROCESS(2) else<start> else 
+[43] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[44] SUBSUBPROCESS(1) if <start> if ( 
+[45] SUBSUBPROCESS(1) if  (s4_a_fm_obj_flg != 0 
+[46] SUBSUBPROCESS(1) if  ) 
+[47] SUBSUBPROCESS(1) if  &&  (s4_a_leading_flg2 == 0)) 
+[48] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[49] SUBSUBSUBPROCESS(1) equal fl_t_rxobs ast_a_normal_wall_prev[0].fl_Rxfil*(1-WALL_LOST_ALPHA_MID) + WALL_LOST_ALPHA_MID*fl_a_wall_pos;
+[50] SUBSUBPROCESS(2) else<start> else 
+[51] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[52] SUBSUBSUBPROCESS(1) equal fl_t_rxobs ast_a_normal_wall_prev[0].fl_Rxfil;
+[53] MAINPROCESS(3) if <start> if ( 
+[54] MAINPROCESS(3) if  fl_t_rxobs > fl_a_wall_pos 
+[55] MAINPROCESS(3) if  ) 
+[56] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[57] SUBPROCESS(1) equal fl_t_rxobs fl_a_wall_pos;
+[58] MAINPROCESS(4) if <start> if ( 
+[59] MAINPROCESS(4) if  fl_t_rxobs < WALL_MIN 
+[60] MAINPROCESS(4) if  ) 
+[61] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[62] SUBPROCESS(1) equal fl_t_rxobs WALL_MIN;
+[63] MAINPROCESS(5) proc return fl_t_rxobs; 
+----------------- Total Codes : 63 lines
+--------------------------
+[Function Name] : fn_bsm_side_cal2_next_wall_object 
+-Return type : static VD 
+-Argument : 3 
+     [0] : FL   fl_a_wall_pos 
+     [1] : const NORMAL_BSM   ast_a_normal_wall_prev[1] 
+     [2] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs ast_a_normal_wall_prev[0].fl_Rxfil*(1-WALL_LOST_ALPHA_MID) + WALL_LOST_ALPHA_MID*fl_a_wall_pos;
+[2] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Rxfil ast_a_normal_wall[0].fl_Rxobs;
+[3] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Rxpred ast_a_normal_wall[0].fl_Rxobs;
+[4] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Robs ast_a_normal_wall[0].fl_Rxobs;
+[5] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Robs_pred ast_a_normal_wall[0].fl_Rxpred;
+[6] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 6 lines
+--------------------------
+[Function Name] : fn_bsm_side_cal3_next_wall_object 
+-Return type : static VD 
+-Argument : 2 
+     [0] : const NORMAL_BSM   ast_a_normal_wall_prev[1] 
+     [1] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) equal ast_a_normal_wall[0].s4_bin_up ast_a_normal_wall_prev[0].s4_bin_up_pred;
+[2] MAINPROCESS(1) equal ast_a_normal_wall[0].s4_bin_dn ast_a_normal_wall_prev[0].s4_bin_dn_pred;
+[3] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_bin_up_interpolate ast_a_normal_wall_prev[0].fl_bin_up_interpolate_pred;
+[4] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_bin_dn_interpolate ast_a_normal_wall_prev[0].fl_bin_dn_interpolate_pred;
+[5] MAINPROCESS(1) equal ast_a_normal_wall[0].s4_bin_up_music ast_a_normal_wall_prev[0].s4_bin_up_music_pred;
+[6] MAINPROCESS(1) equal ast_a_normal_wall[0].s4_bin_dn_music ast_a_normal_wall_prev[0].s4_bin_dn_music_pred;
+[7] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_doa_up_interpolate ast_a_normal_wall_prev[0].fl_doa_up_interpolate_pred;
+[8] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_doa_dn_interpolate ast_a_normal_wall_prev[0].fl_doa_dn_interpolate_pred;
+[9] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_theta_up ast_a_normal_wall_prev[0].fl_theta_up_pred;
+[10] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_theta_dn ast_a_normal_wall_prev[0].fl_theta_dn_pred;
+[11] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Robs ast_a_normal_wall_prev[0].fl_Robs_pred;
+[12] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Vobs ast_a_normal_wall_prev[0].fl_Vobs_pred;
+[13] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Rxobs ast_a_normal_wall_prev[0].fl_Rxpred;
+[14] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Vxobs ast_a_normal_wall_prev[0].fl_Vxpred;
+[15] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Ryobs ast_a_normal_wall_prev[0].fl_Rypred*(1-WALL_LOST_ALPHA_FAST) + WALL_LOST_ALPHA_FAST*0.0F;
+[16] MAINPROCESS(1) equal ast_a_normal_wall[0].fl_Vyobs 0.0F;
+[17] MAINPROCESS(1) func<start> fn_ab_track_wall( 
+[18] MAINPROCESS(1) func &ast_a_normal_wall_prev[0], 
+[19] MAINPROCESS(1) func &ast_a_normal_wall[0], 
+[20] MAINPROCESS(1) func 0 
+[21] MAINPROCESS(1) func<end> ); 
+[22] MAINPROCESS(1) func<start> fn_calc_prediction_of_normaldata( 
+[23] MAINPROCESS(1) func &ast_a_normal_wall[0] 
+[24] MAINPROCESS(1) func<end> ); 
+[25] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 25 lines
+--------------------------
+[Function Name] : fn_bsm_side_guard_wall_xpred 
+-Return type : static VD 
+-Argument : 1 
+     [0] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) if<start> if( 
+[2] MAINPROCESS(1) if ast_a_normal_wall[0].fl_Rxpred > SOT_WALL_MAX 
+[3] MAINPROCESS(1) if ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxpred SOT_WALL_MAX;
+[6] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 6 lines
+--------------------------
+[Function Name] : fn_bsm_side_guard_wall_rxfil 
+-Return type : static VD 
+-Argument : 1 
+     [0] : NORMAL_BSM   ast_a_normal_wall[1] 
+----- Codes -----
+[1] MAINPROCESS(1) if <start> if ( 
+[2] MAINPROCESS(1) if  ast_a_normal_wall[0].fl_Rxfil > SOT_WALL_MAX 
+[3] MAINPROCESS(1) if  ) 
+[4] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[5] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxfil SOT_WALL_MAX;
+[6] MAINPROCESS(2) if <start> if ( 
+[7] MAINPROCESS(2) if  ast_a_normal_wall[0].fl_Rxfil < WALL_MIN 
+[8] MAINPROCESS(2) if  ) 
+[9] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) equal ast_a_normal_wall[0].fl_Rxfil WALL_MIN;
+[11] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 11 lines
+--------------------------
+[Function Name] : s4_bsm_side_tracking_heisou 
+-Return type : static S4 
+-Argument : 6 
+     [0] : FL   fl_a_fm_nearfield_power 
+     [1] : S4   s4_a_fm_obj_flg 
+     [2] : S4   *ps4_a_leading_flg2 
+     [3] : const NORMAL_BSM   ast_a_normal_sot_prev[1] 
+     [4] : const NORMAL_BSM   ast_a_normal_sot_heisou[1] 
+     [5] : NORMAL_BSM   ast_a_normal_sot[1] 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4	s4_t_object_num; 
+[2] MAINPROCESS(1) equal s4_t_object_num 0;
+[3] MAINPROCESS(1) equal ast_a_normal_sot[0].s4_flg_new 0;
+[4] MAINPROCESS(1) if <start> if ( 
+[5] MAINPROCESS(1) if  *ps4_a_leading_flg2 != 0 
+[6] MAINPROCESS(1) if  ) 
+[7] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[8] SUBPROCESS(1) if <start> if ( 
+[9] SUBPROCESS(1) if  s4_a_fm_obj_flg != 0 
+[10] SUBPROCESS(1) if  ) 
+[11] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[12] SUBSUBPROCESS(1) func<start> s4_t_object_num = s4_bsm_side_tracking_heisou_with_obs( 
+[13] SUBSUBPROCESS(1) func fl_a_fm_nearfield_power, 
+[14] SUBSUBPROCESS(1) func ps4_a_leading_flg2, 
+[15] SUBSUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_sot_prev, 
+[16] SUBSUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_sot_heisou, 
+[17] SUBSUBPROCESS(1) func ast_a_normal_sot 
+[18] SUBSUBPROCESS(1) func<end> ); 
+[19] SUBPROCESS(2) else<start> else 
+[20] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[21] SUBSUBPROCESS(1) func<start> s4_t_object_num = s4_bsm_side_tracking_heisou_without_obs( 
+[22] SUBSUBPROCESS(1) func fl_a_fm_nearfield_power, 
+[23] SUBSUBPROCESS(1) func ps4_a_leading_flg2, 
+[24] SUBSUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_sot_prev, 
+[25] SUBSUBPROCESS(1) func ast_a_normal_sot 
+[26] SUBSUBPROCESS(1) func<end> ); 
+[27] SUBPROCESS(3) if <start> if ( 
+[28] SUBPROCESS(3) if  *ps4_a_leading_flg2 != 0 
+[29] SUBPROCESS(3) if  ) 
+[30] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[31] SUBSUBPROCESS(1) func<start> fn_bsm_side_check_tracking_heisou_range( 
+[32] SUBSUBPROCESS(1) func ps4_a_leading_flg2, 
+[33] SUBSUBPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_sot 
+[34] SUBSUBPROCESS(1) func<end> ); 
+[35] MAINPROCESS(2) else<start> else 
+[36] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[37] SUBPROCESS(1) func<start> fn_init(&ast_a_normal_sot[0], 1 
+[38] SUBPROCESS(1) func<end> ); 
+[39] SUBPROCESS(1) equal *ps4_a_leading_flg2 0;
+[40] MAINPROCESS(3) proc return s4_t_object_num; 
+----------------- Total Codes : 40 lines
+--------------------------
+[Function Name] : s4_bsm_side_tracking_heisou_with_obs 
+-Return type : static S4 
+-Argument : 5 
+     [0] : FL   fl_a_fm_nearfield_power 
+     [1] : S4   *ps4_a_leading_flg2 
+     [2] : const NORMAL_BSM   ast_a_normal_sot_prev[1] 
+     [3] : const NORMAL_BSM   ast_a_normal_sot_heisou[1] 
+     [4] : NORMAL_BSM   ast_a_normal_sot[1] 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 s4_t_object_num; 
+[2] MAINPROCESS(1) equal s4_t_object_num 0;
+[3] MAINPROCESS(1) func<start> fn_move( 
+[4] MAINPROCESS(1) func ast_a_normal_sot, 
+[5] MAINPROCESS(1) func ast_a_normal_sot_heisou, 
+[6] MAINPROCESS(1) func 1 
+[7] MAINPROCESS(1) func<end> ); 
+[8] MAINPROCESS(1) equal ast_a_normal_sot[0].s4_flg_heiso_up 1;
+[9] MAINPROCESS(1) equal ast_a_normal_sot[0].s4_flg_heiso_dn 1;
+[10] MAINPROCESS(1) equal ast_a_normal_sot[0].s4_flg_dc OBJECT_TYPE_SOT;
+[11] MAINPROCESS(1) if <start> if ( 
+[12] MAINPROCESS(1) if  (ast_a_normal_sot_prev[0].fl_Rxpred != CFL_UNKNOWN_VALUE 
+[13] MAINPROCESS(1) if  ) 
+[14] MAINPROCESS(1) if  &&  (ast_a_normal_sot_prev[0].fl_Rypred != CFL_UNKNOWN_VALUE)) 
+[15] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[16] SUBPROCESS(1) func<start> fn_ab_track( 
+[17] SUBPROCESS(1) func &ast_a_normal_sot_prev[0], 
+[18] SUBPROCESS(1) func &ast_a_normal_sot[0], 
+[19] SUBPROCESS(1) func 0 
+[20] SUBPROCESS(1) func<end> ); 
+[21] SUBPROCESS(1) func<start> fn_calc_prediction_of_normaldata( 
+[22] SUBPROCESS(1) func &ast_a_normal_sot[0] 
+[23] SUBPROCESS(1) func<end> ); 
+[24] SUBPROCESS(1) if <start> if ( 
+[25] SUBPROCESS(1) if  ast_a_normal_sot[0].s4_flg_track == CS4_S4MAX 
+[26] SUBPROCESS(1) if  ) 
+[27] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[28] SUBPROCESS(2) else<start> else 
+[29] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[30] SUBSUBPROCESS(1) equal ast_a_normal_sot[0].s4_flg_track ast_a_normal_sot_prev[0].s4_flg_track +1;
+[31] SUBPROCESS(3) equal ast_a_normal_sot[0].s4_flg_lost 0;
+[32] SUBPROCESS(3) equal s4_t_object_num 1;
+[33] MAINPROCESS(2) else<start> else 
+[34] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[35] SUBPROCESS(1) if <start> if ( 
+[36] SUBPROCESS(1) if  fl_a_fm_nearfield_power > CFL_SLOW_SOT_POW_TH 
+[37] SUBPROCESS(1) if  ) 
+[38] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[39] SUBSUBPROCESS(1) equal S4 tmptmp_erased_num 0;
+[40] SUBSUBPROCESS(1) proc S4 tmptmp_passing_flg[1]; 
+[41] SUBSUBPROCESS(1) proc S4 tmptmp_leading_flg[1]; 
+[42] SUBSUBPROCESS(1) equal tmptmp_passing_flg[0] (S4)0;
+[43] SUBSUBPROCESS(1) equal tmptmp_leading_flg[0] *ps4_a_leading_flg2;
+[44] SUBSUBPROCESS(1) func<start> tmptmp_erased_num = s4_start_prediction( 
+[45] SUBSUBPROCESS(1) func ast_a_normal_sot, 
+[46] SUBSUBPROCESS(1) func 1, 
+[47] SUBSUBPROCESS(1) func 1, 
+[48] SUBSUBPROCESS(1) func (const S4 (*))tmptmp_passing_flg, 
+[49] SUBSUBPROCESS(1) func (const S4 (*))tmptmp_leading_flg 
+[50] SUBSUBPROCESS(1) func<end> ); 
+[51] SUBSUBPROCESS(1) func<start> s4_t_object_num = s4_copy_prediction_to_filtered_data( 
+[52] SUBSUBPROCESS(1) func ast_a_normal_sot, 
+[53] SUBSUBPROCESS(1) func 1 
+[54] SUBSUBPROCESS(1) func<end> ); 
+[55] SUBSUBPROCESS(1) if <start> if (tmptmp_erased_num==1) 
+[56] SUBSUBPROCESS(1) if  if ( 
+[57] SUBSUBPROCESS(1) if  s4_t_object_num == (S4)0 
+[58] SUBSUBPROCESS(1) if  ) 
+[59] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[60] SUBSUBSUBPROCESS(1) func<start> fn_init(&ast_a_normal_sot[0], 1 
+[61] SUBSUBSUBPROCESS(1) func<end> ); 
+[62] SUBSUBPROCESS(2) else<start> else 
+[63] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[64] SUBSUBSUBPROCESS(1) equal ast_a_normal_sot[0].s4_flg_new 1;
+[65] SUBSUBSUBPROCESS(1) equal ast_a_normal_sot[0].s4_flg_track PRIOR_TRK_NUM+1;
+[66] SUBPROCESS(2) else<start> else 
+[67] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[68] SUBSUBPROCESS(1) func<start> fn_init(&ast_a_normal_sot[0], 1 
+[69] SUBSUBPROCESS(1) func<end> ); 
+[70] SUBSUBPROCESS(1) equal *ps4_a_leading_flg2 0;
+[71] MAINPROCESS(3) proc return s4_t_object_num; 
+----------------- Total Codes : 71 lines
+--------------------------
+[Function Name] : s4_bsm_side_tracking_heisou_without_obs 
+-Return type : static S4 
+-Argument : 4 
+     [0] : FL   fl_a_fm_nearfield_power 
+     [1] : S4   *ps4_a_leading_flg2 
+     [2] : const NORMAL_BSM   ast_a_normal_sot_prev[1] 
+     [3] : NORMAL_BSM   ast_a_normal_sot[1] 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 s4_t_object_num; 
+[2] MAINPROCESS(1) equal s4_t_object_num 0;
+[3] MAINPROCESS(1) if <start> if ( 
+[4] MAINPROCESS(1) if  (ast_a_normal_sot_prev[0].fl_Rxpred != CFL_UNKNOWN_VALUE 
+[5] MAINPROCESS(1) if  ) 
+[6] MAINPROCESS(1) if  &&  (ast_a_normal_sot_prev[0].fl_Rypred != CFL_UNKNOWN_VALUE) 
+[7] MAINPROCESS(1) if  &&  (fl_a_fm_nearfield_power > CFL_SLOW_SOT_POW_TH2) 
+[8] MAINPROCESS(1) if  &&  (ast_a_normal_sot_prev[0].s4_flg_lost < SOT_LOST_NUM_MAX)) 
+[9] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) equal ast_a_normal_sot[0].s4_bin_up ast_a_normal_sot_prev[0].s4_bin_up_pred;
+[11] SUBPROCESS(1) equal ast_a_normal_sot[0].s4_bin_dn ast_a_normal_sot_prev[0].s4_bin_dn_pred;
+[12] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_bin_up_interpolate ast_a_normal_sot_prev[0].fl_bin_up_interpolate_pred;
+[13] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_bin_dn_interpolate ast_a_normal_sot_prev[0].fl_bin_dn_interpolate_pred;
+[14] SUBPROCESS(1) equal ast_a_normal_sot[0].s4_bin_up_music ast_a_normal_sot_prev[0].s4_bin_up_music_pred;
+[15] SUBPROCESS(1) equal ast_a_normal_sot[0].s4_bin_dn_music ast_a_normal_sot_prev[0].s4_bin_dn_music_pred;
+[16] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_doa_up_interpolate ast_a_normal_sot_prev[0].fl_doa_up_interpolate_pred;
+[17] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_doa_dn_interpolate ast_a_normal_sot_prev[0].fl_doa_dn_interpolate_pred;
+[18] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_theta_up ast_a_normal_sot_prev[0].fl_theta_up_pred;
+[19] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_theta_dn ast_a_normal_sot_prev[0].fl_theta_dn_pred;
+[20] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_Robs ast_a_normal_sot_prev[0].fl_Robs_pred;
+[21] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_Rxobs ast_a_normal_sot_prev[0].fl_Rxpred;
+[22] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_Ryobs ast_a_normal_sot_prev[0].fl_Rypred;
+[23] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_Vobs ast_a_normal_sot_prev[0].fl_Vobs_pred;
+[24] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_Vxobs ast_a_normal_sot_prev[0].fl_Vxpred;
+[25] SUBPROCESS(1) equal ast_a_normal_sot[0].fl_Vyobs ast_a_normal_sot_prev[0].fl_Vypred;
+[26] SUBPROCESS(1) func<start> fn_ab_track( 
+[27] SUBPROCESS(1) func &ast_a_normal_sot_prev[0], 
+[28] SUBPROCESS(1) func &ast_a_normal_sot[0], 
+[29] SUBPROCESS(1) func 0 
+[30] SUBPROCESS(1) func<end> ); 
+[31] SUBPROCESS(1) func<start> fn_calc_prediction_of_normaldata( 
+[32] SUBPROCESS(1) func &ast_a_normal_sot[0] 
+[33] SUBPROCESS(1) func<end> ); 
+[34] SUBPROCESS(1) if <start> if ( 
+[35] SUBPROCESS(1) if  ast_a_normal_sot[0].s4_flg_track == CS4_S4MAX 
+[36] SUBPROCESS(1) if  ) 
+[37] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[38] SUBPROCESS(2) else<start> else 
+[39] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[40] SUBSUBPROCESS(1) equal ast_a_normal_sot[0].s4_flg_track ast_a_normal_sot_prev[0].s4_flg_track +1;
+[41] SUBPROCESS(3) equal ast_a_normal_sot[0].s4_flg_lost ast_a_normal_sot_prev[0].s4_flg_lost + 1;
+[42] SUBPROCESS(3) equal s4_t_object_num 1;
+[43] MAINPROCESS(2) else<start> else 
+[44] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[45] SUBPROCESS(1) func<start> fn_init(ast_a_normal_sot, 1 
+[46] SUBPROCESS(1) func<end> ); 
+[47] SUBPROCESS(1) equal *ps4_a_leading_flg2 0;
+[48] MAINPROCESS(3) proc return s4_t_object_num; 
+----------------- Total Codes : 48 lines
+--------------------------
+[Function Name] : fn_bsm_side_check_tracking_heisou_range 
+-Return type : static VD 
+-Argument : 2 
+     [0] : S4   *ps4_a_leading_flg2 
+     [1] : const NORMAL_BSM   ast_a_normal_sot[1] 
+----- Codes -----
+[1] MAINPROCESS(1) proc FL tmp_Rxmax; 
+[2] MAINPROCESS(1) if <start> if ( 
+[3] MAINPROCESS(1) if  *ps4_a_leading_flg2 != 0 
+[4] MAINPROCESS(1) if  ) 
+[5] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[6] SUBPROCESS(1) equal tmp_Rxmax WALL_MAX;
+[7] SUBPROCESS(1) if <start> if ( 
+[8] SUBPROCESS(1) if  st_g_bsm_loop_data.afl_wall_width[0] < WALL_MAX 
+[9] SUBPROCESS(1) if  ) 
+[10] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[11] SUBSUBPROCESS(1) equal tmp_Rxmax st_g_bsm_loop_data.afl_wall_width[0];
+[12] SUBPROCESS(2) if <start> if ( 
+[13] SUBPROCESS(2) if  (ast_a_normal_sot[0].fl_Rxpred < SOT_TRACK_XMIN 
+[14] SUBPROCESS(2) if  ) 
+[15] SUBPROCESS(2) if  ||  (ast_a_normal_sot[0].fl_Rxpred > tmp_Rxmax) 
+[16] SUBPROCESS(2) if  ||  (ast_a_normal_sot[0].fl_Rypred > SOT_TRACK_YMAX) 
+[17] SUBPROCESS(2) if  ||  (ast_a_normal_sot[0].fl_Rypred < SOT_TRACK_YMIN)) 
+[18] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[19] SUBSUBPROCESS(1) equal *ps4_a_leading_flg2 0;
+[20] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 20 lines
+--------------------------
+[Function Name] : fn_bsm_side_check_wall_for_erase_fa_seg 
+-Return type : VD 
+-Argument : 2 
+     [0] : const NORMAL_BSM   ast_a_normal_sot_ena[1] 
+     [1] : S4   s4_a_fm_obj_flg 
+----- Codes -----
+[1] MAINPROCESS(1) proc FL fl_t_diff_x; 
+[2] MAINPROCESS(1) if <start> if ( 
+[3] MAINPROCESS(1) if  (!(fl_g_v_self_bsm_for_base > CFL_CANOUT_VSELF_MIN) 
+[4] MAINPROCESS(1) if  ) 
+[5] MAINPROCESS(1) if  ||  (s4_a_fm_obj_flg != (S4)1)) 
+[6] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[7] SUBPROCESS(1) equal st_g_bsm_loop_data.fl_fm_obj_x_pre CFL_UNKNOWN_VALUE;
+[8] SUBPROCESS(1) equal st_g_bsm_loop_data.u1_flg_fm_obj_x_pre_enable CU1_DF_OFF;
+[9] SUBPROCESS(1) equal st_g_bsm_loop_data.u1_fm_object_stable_count (U1)0;
+[10] MAINPROCESS(2) else<start> else 
+[11] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[12] SUBPROCESS(1) if <start> if ( 
+[13] SUBPROCESS(1) if  st_g_bsm_loop_data.u1_flg_fm_obj_x_pre_enable == CU1_DF_ON 
+[14] SUBPROCESS(1) if  ) 
+[15] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[16] SUBSUBPROCESS(1) func<start> fl_t_diff_x = fl_abs(ast_a_normal_sot_ena[0].fl_Rxobs - st_g_bsm_loop_data.fl_fm_obj_x_pre 
+[17] SUBSUBPROCESS(1) func<end> ); 
+[18] SUBSUBPROCESS(1) if <start> if ( 
+[19] SUBSUBPROCESS(1) if  fl_t_diff_x < (FL)0.5F 
+[20] SUBSUBPROCESS(1) if  ) 
+[21] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[22] SUBSUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_fm_object_stable_count = (U1)u2_data_add((U2)st_g_bsm_loop_data.u1_fm_object_stable_count, (S2)1, (U2)100, (U2)0 
+[23] SUBSUBSUBPROCESS(1) func<end> ); 
+[24] SUBSUBPROCESS(2) else<start> else 
+[25] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[26] SUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_fm_object_stable_count (U1)0;
+[27] SUBPROCESS(2) equal st_g_bsm_loop_data.fl_fm_obj_x_pre ast_a_normal_sot_ena[0].fl_Rxobs;
+[28] SUBPROCESS(2) equal st_g_bsm_loop_data.u1_flg_fm_obj_x_pre_enable CU1_DF_ON;
+[29] MAINPROCESS(3) if <start> if ( 
+[30] MAINPROCESS(3) if  fl_g_v_self_bsm_for_base > CFL_CANOUT_VSELF_MIN 
+[31] MAINPROCESS(3) if  ) 
+[32] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[33] SUBPROCESS(1) if <start> if ( 
+[34] SUBPROCESS(1) if  st_g_bsm_loop_data.as4_slow_sot_find[1] > (S4)WALL_REJECT_TH3 
+[35] SUBPROCESS(1) if  ) 
+[36] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[37] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_wall_flg_for_fa_judgement (U1)1;
+[38] SUBPROCESS(2) else if <start> else if ( 
+[39] SUBPROCESS(2) else if  st_g_bsm_loop_data.u1_fm_object_stable_count >= (U1)38 
+[40] SUBPROCESS(2) else if  ) 
+[41] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[42] SUBPROCESS(3) else<start> else 
+[43] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[44] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_wall_flg_for_fa_judgement (U1)0;
+[45] MAINPROCESS(4) else<start> else 
+[46] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[47] SUBPROCESS(1) equal st_g_bsm_loop_data.u1_wall_flg_for_fa_judgement (U1)0;
+[48] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 48 lines
+--------------------------
+[Function Name] : fl_seek_low_speed_sot 
+-Return type : FL 
+-Argument : 2 
+     [0] : const FL   afl_a_sot_detect_param[9] 
+     [1] : U1   u1_a_alarming_flag 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 i; 
+[2] MAINPROCESS(1) proc S4 j, k; 
+[3] MAINPROCESS(1) proc S4 nearfield_doa_i[SLOW_SOT_FREQ_BIN_RANGE][1]; 
+[4] MAINPROCESS(1) proc S4 nearfield_doa_peak_num_i[SLOW_SOT_FREQ_BIN_RANGE]; 
+[5] MAINPROCESS(1) proc S4 nearfield_doa_q[SLOW_SOT_FREQ_BIN_RANGE][1]; 
+[6] MAINPROCESS(1) proc S4 nearfield_doa_peak_num_q[SLOW_SOT_FREQ_BIN_RANGE]; 
+[7] MAINPROCESS(1) proc S4 v0_doa_def; 
+[8] MAINPROCESS(1) proc S4 v0_doa; 
+[9] MAINPROCESS(1) proc FL dev; 
+[10] MAINPROCESS(1) equal FL power_ave 0.0F;
+[11] MAINPROCESS(1) proc S4 stationary_doa_line[N_DOA]; 
+[12] MAINPROCESS(1) proc S4 sot_limit_doa_line_forward[N_DOA]; 
+[13] MAINPROCESS(1) proc S4 sot_limit_doa_line_backward[N_DOA]; 
+[14] MAINPROCESS(1) proc FL afl_t_sot_check_object_i[SLOW_SOT_FREQ_BIN_RANGE][4]; 
+[15] MAINPROCESS(1) proc FL afl_t_sot_check_object_q[SLOW_SOT_FREQ_BIN_RANGE][4]; 
+[16] MAINPROCESS(1) proc S4 fast_sot_num; 
+[17] MAINPROCESS(1) proc S4 not_fast_sot_num; 
+[18] MAINPROCESS(1) equal S4 backward_priod 0;
+[19] MAINPROCESS(1) equal S4 forward_point 0;
+[20] MAINPROCESS(1) proc FL tmp_dev[2]; 
+[21] MAINPROCESS(1) proc S4 sot_stop; 
+[22] MAINPROCESS(1) equal S4 forward_priod 1;
+[23] MAINPROCESS(1) proc U1 u1_t_alarming_flag_local; 
+[24] MAINPROCESS(1) proc U1 u1_t_num_nearfield_doa_2f_i; 
+[25] MAINPROCESS(1) proc U1 u1_t_num_nearfield_doa_2f_q; 
+[26] MAINPROCESS(1) proc U1 u1_t_num_forward; 
+[27] MAINPROCESS(1) proc U1 u1_t_num_backward; 
+[28] MAINPROCESS(1) equal tmp_dev[0] 999.9F;
+[29] MAINPROCESS(1) equal tmp_dev[1] 999.9F;
+[30] MAINPROCESS(1) equal fast_sot_num (S4)0;
+[31] MAINPROCESS(1) equal not_fast_sot_num (S4)0;
+[32] MAINPROCESS(1) equal u1_t_alarming_flag_local (U1)0;
+[33] MAINPROCESS(1) equal u1_t_num_nearfield_doa_2f_i (U1)0;
+[34] MAINPROCESS(1) equal u1_t_num_nearfield_doa_2f_q (U1)0;
+[35] MAINPROCESS(1) equal u1_t_num_forward (U1)0;
+[36] MAINPROCESS(1) equal u1_t_num_backward (U1)0;
+[37] MAINPROCESS(1) for<start> for( 
+[38] MAINPROCESS(1) for j=0; 
+[39] MAINPROCESS(1) for j<N_DOA; 
+[40] MAINPROCESS(1) for j++) 
+[41] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[42] SUBPROCESS(1) equal stationary_doa_line[j] 0;
+[43] MAINPROCESS(2) for <start> for ( 
+[44] MAINPROCESS(2) for  j = (S4)0; 
+[45] MAINPROCESS(2) for  j < SLOW_SOT_FREQ_BIN_RANGE; 
+[46] MAINPROCESS(2) for  j++) 
+[47] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[48] SUBPROCESS(1) for <start> for ( 
+[49] SUBPROCESS(1) for  k = (S4)0; 
+[50] SUBPROCESS(1) for  k < (S4)4; 
+[51] SUBPROCESS(1) for  k++) 
+[52] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[53] SUBSUBPROCESS(1) equal afl_t_sot_check_object_i[j][k] CFL_UNKNOWN_VALUE;
+[54] SUBSUBPROCESS(1) equal afl_t_sot_check_object_q[j][k] CFL_UNKNOWN_VALUE;
+[55] MAINPROCESS(3) for <start> for ( 
+[56] MAINPROCESS(3) for  j = (S4)0; 
+[57] MAINPROCESS(3) for  j < SLOW_SOT_FREQ_BIN_RANGE; 
+[58] MAINPROCESS(3) for  j++) 
+[59] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[60] SUBPROCESS(1) equal nearfield_doa_i[j][0] (S4)-1;
+[61] SUBPROCESS(1) equal nearfield_doa_q[j][0] (S4)-1;
+[62] SUBPROCESS(1) equal nearfield_doa_peak_num_i[j] (S4)0;
+[63] SUBPROCESS(1) equal nearfield_doa_peak_num_q[j] (S4)0;
+[64] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[65] SUBPROCESS(1) func<start> u1_t_num_nearfield_doa_2f_i = calc_nearfield_doa_2f_I( 
+[66] SUBPROCESS(1) func nearfield_doa_i, 
+[67] SUBPROCESS(1) func nearfield_doa_peak_num_i, 
+[68] SUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_I, 
+[69] SUBPROCESS(1) func afl_t_sot_check_object_i 
+[70] SUBPROCESS(1) func<end> ); 
+[71] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[72] SUBPROCESS(1) func<start> u1_t_num_nearfield_doa_2f_q = calc_nearfield_doa_2f_Q( 
+[73] SUBPROCESS(1) func nearfield_doa_q, 
+[74] SUBPROCESS(1) func nearfield_doa_peak_num_q, 
+[75] SUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_Q, 
+[76] SUBPROCESS(1) func afl_t_sot_check_object_q 
+[77] SUBPROCESS(1) func<end> ); 
+[78] MAINPROCESS(6) func<start> v0_doa_def = (S4)(180.0 - st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_sot_detect_param[2] 
+[79] MAINPROCESS(6) func<end> ); 
+[80] MAINPROCESS(6) func<start> v0_doa     = (S4)(180.0 - st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_sot_detect_param[2] 
+[81] MAINPROCESS(6) func<end> ); 
+[82] MAINPROCESS(6) func<start> set_stationary_doa_line_2f( 
+[83] MAINPROCESS(6) func stationary_doa_line, 
+[84] MAINPROCESS(6) func v0_doa_def, 
+[85] MAINPROCESS(6) func v0_doa 
+[86] MAINPROCESS(6) func<end> ); 
+[87] MAINPROCESS(6) func<start> set_sot_limit_doa_line_2f( 
+[88] MAINPROCESS(6) func sot_limit_doa_line_backward, 
+[89] MAINPROCESS(6) func v0_doa_def, 
+[90] MAINPROCESS(6) func v0_doa, 
+[91] MAINPROCESS(6) func CFL_SoT_V_TH_BWD 
+[92] MAINPROCESS(6) func<end> ); 
+[93] MAINPROCESS(6) func<start> memcpy(as4_g_stationary_doa_line, stationary_doa_line, sizeof(S4)*N_DOA 
+[94] MAINPROCESS(6) func<end> ); 
+[95] MAINPROCESS(6) func<start> memcpy(as4_g_sot_limit_doa_line_backward, sot_limit_doa_line_backward, sizeof(S4)*N_DOA 
+[96] MAINPROCESS(6) func<end> ); 
+[97] MAINPROCESS(6) func<start> memset(as4_g_nearfield_doa, 0x00, sizeof(as4_g_nearfield_doa) 
+[98] MAINPROCESS(6) func<end> ); 
+[99] MAINPROCESS(6) ??? for( 
+[100] MAINPROCESS(6) ??? i=0; 
+[101] MAINPROCESS(6) ??? i<SLOW_SOT_FREQ_BIN_RANGE; 
+[102] MAINPROCESS(6) ??? i++) 
+[103] MAINPROCESS(6) subproc SUBPROCESS(1) 
+[104] SUBPROCESS(1) ??? if( 
+[105] SUBPROCESS(1) ??? nearfield_doa_i[i][0]!=-1 
+[106] SUBPROCESS(1) ??? ) 
+[107] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[108] SUBSUBPROCESS(1) equal as4_g_nearfield_doa[nearfield_doa_i[i][0]] SLOW_SOT_FREQ_BIN_START_I+i;
+[109] SUBPROCESS(2) ??? if( 
+[110] SUBPROCESS(2) ??? nearfield_doa_q[i][0]!=-1 
+[111] SUBPROCESS(2) ??? ) 
+[112] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[113] SUBSUBPROCESS(1) equal as4_g_nearfield_doa[nearfield_doa_q[i][0]] SLOW_SOT_FREQ_BIN_START_Q-i;
+[114] MAINPROCESS(7) func<start> fn_bsm_low_calc_deviation( 
+[115] MAINPROCESS(7) func forward_priod, 
+[116] MAINPROCESS(7) func nearfield_doa_i, 
+[117] MAINPROCESS(7) func nearfield_doa_q, 
+[118] MAINPROCESS(7) func (const S4 *)stationary_doa_line, 
+[119] MAINPROCESS(7) func &backward_priod, 
+[120] MAINPROCESS(7) func tmp_dev, 
+[121] MAINPROCESS(7) func v0_doa, 
+[122] MAINPROCESS(7) func &fast_sot_num, 
+[123] MAINPROCESS(7) func &not_fast_sot_num, 
+[124] MAINPROCESS(7) func afl_t_sot_check_object_i, 
+[125] MAINPROCESS(7) func afl_t_sot_check_object_q 
+[126] MAINPROCESS(7) func<end> ); 
+[127] MAINPROCESS(7) func<start> fn_bsm_low_judge_sot( 
+[128] MAINPROCESS(7) func stationary_doa_line, 
+[129] MAINPROCESS(7) func sot_limit_doa_line_forward, 
+[130] MAINPROCESS(7) func sot_limit_doa_line_backward, 
+[131] MAINPROCESS(7) func (const S4 *)nearfield_doa_peak_num_i, 
+[132] MAINPROCESS(7) func nearfield_doa_i, 
+[133] MAINPROCESS(7) func (const S4 *)nearfield_doa_peak_num_q, 
+[134] MAINPROCESS(7) func nearfield_doa_q, 
+[135] MAINPROCESS(7) func forward_priod, 
+[136] MAINPROCESS(7) func backward_priod, 
+[137] MAINPROCESS(7) func tmp_dev, 
+[138] MAINPROCESS(7) func &dev, 
+[139] MAINPROCESS(7) func v0_doa, 
+[140] MAINPROCESS(7) func u1_a_alarming_flag, 
+[141] MAINPROCESS(7) func u1_t_num_nearfield_doa_2f_i, 
+[142] MAINPROCESS(7) func u1_t_num_nearfield_doa_2f_q, 
+[143] MAINPROCESS(7) func afl_t_sot_check_object_i, 
+[144] MAINPROCESS(7) func afl_t_sot_check_object_q, 
+[145] MAINPROCESS(7) func &u1_t_num_forward, 
+[146] MAINPROCESS(7) func &u1_t_num_backward 
+[147] MAINPROCESS(7) func<end> ); 
+[148] MAINPROCESS(7) func<start> fn_bsm_low_judge_wall( 
+[149] MAINPROCESS(7) func (const FL *)tmp_dev, 
+[150] MAINPROCESS(7) func u1_t_num_nearfield_doa_2f_i, 
+[151] MAINPROCESS(7) func u1_t_num_nearfield_doa_2f_q, 
+[152] MAINPROCESS(7) func u1_t_num_forward, 
+[153] MAINPROCESS(7) func u1_t_num_backward 
+[154] MAINPROCESS(7) func<end> ); 
+[155] MAINPROCESS(7) func<start> fn_bsm_low_judge_fast_sot( 
+[156] MAINPROCESS(7) func fast_sot_num, 
+[157] MAINPROCESS(7) func not_fast_sot_num, 
+[158] MAINPROCESS(7) func u1_a_alarming_flag 
+[159] MAINPROCESS(7) func<end> ); 
+[160] MAINPROCESS(7) func<start> fn_bsm_low_judge_exist_leading_car_main((const S4 (*)[1])nearfield_doa_i, 
+[161] MAINPROCESS(7) func (const S4 (*)[1])nearfield_doa_q, 
+[162] MAINPROCESS(7) func (const FL (*)[4])afl_t_sot_check_object_i, 
+[163] MAINPROCESS(7) func (const FL (*)[4])afl_t_sot_check_object_q 
+[164] MAINPROCESS(7) func<end> ); 
+[165] MAINPROCESS(7) proc return dev; 
+----------------- Total Codes : 165 lines
+--------------------------
+[Function Name] : fn_bsm_low_calc_deviation 
+-Return type : static VD 
+-Argument : 11 
+     [0] : S4   s4_a_forward_priod 
+     [1] : S4   as4_a_nearfield_doa_i[SLOW_SOT_FREQ_BIN_RANGE][1] 
+     [2] : S4   as4_a_nearfield_doa_q[SLOW_SOT_FREQ_BIN_RANGE][1] 
+     [3] : const S4   as4_stationary_doa_line[N_DOA] 
+     [4] : S4   *ps4_a_backward_priod 
+     [5] : FL   afl_a_buf_dev[2] 
+     [6] : S4   s4_a_v0_doa 
+     [7] : S4   *ps4_a_fast_sot_num 
+     [8] : S4   *ps4_a_not_fast_sot_num 
+     [9] : FL   afl_a_sot_check_object_i[SLOW_SOT_FREQ_BIN_RANGE][4] 
+     [10] : FL   afl_a_sot_check_object_q[SLOW_SOT_FREQ_BIN_RANGE][4] 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 fast_sot_limit_line[N_DOA]; 
+[2] MAINPROCESS(1) equal afl_a_buf_dev[0] 999.9F;
+[3] MAINPROCESS(1) equal afl_a_buf_dev[1] 999.9F;
+[4] MAINPROCESS(1) if<start> if( 
+[5] MAINPROCESS(1) if fl_g_v_self_bsm_for_base>5.0F 
+[6] MAINPROCESS(1) if ) 
+[7] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) func<start> afl_a_buf_dev[0] = calc_deviation_of_doa_freq_line_stationary_2( 
+[10] SUBSUBPROCESS(1) func (const S4 (*)[1])as4_a_nearfield_doa_i, 
+[11] SUBSUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_I, 
+[12] SUBSUBPROCESS(1) func (const S4 *)as4_stationary_doa_line, 
+[13] SUBSUBPROCESS(1) func 0 
+[14] SUBSUBPROCESS(1) func ,ps4_a_backward_priod 
+[15] SUBSUBPROCESS(1) func ,s4_a_v0_doa 
+[16] SUBSUBPROCESS(1) func ,ps4_a_fast_sot_num 
+[17] SUBSUBPROCESS(1) func ,ps4_a_not_fast_sot_num 
+[18] SUBSUBPROCESS(1) func ,fast_sot_limit_line 
+[19] SUBSUBPROCESS(1) func ,(const FL (*)[4])afl_a_sot_check_object_i 
+[20] SUBSUBPROCESS(1) func<end> ); 
+[21] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[22] SUBSUBPROCESS(1) func<start> afl_a_buf_dev[1] = calc_deviation_of_doa_freq_line_stationary_2( 
+[23] SUBSUBPROCESS(1) func (const S4 (*)[1])as4_a_nearfield_doa_q, 
+[24] SUBSUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_Q-SLOW_SOT_FREQ_BIN_RANGE, 
+[25] SUBSUBPROCESS(1) func (const S4 *)as4_stationary_doa_line, 
+[26] SUBSUBPROCESS(1) func 1 
+[27] SUBSUBPROCESS(1) func ,ps4_a_backward_priod 
+[28] SUBSUBPROCESS(1) func ,s4_a_v0_doa 
+[29] SUBSUBPROCESS(1) func ,ps4_a_fast_sot_num 
+[30] SUBSUBPROCESS(1) func ,ps4_a_not_fast_sot_num 
+[31] SUBSUBPROCESS(1) func ,fast_sot_limit_line 
+[32] SUBSUBPROCESS(1) func ,(const FL (*)[4])afl_a_sot_check_object_q 
+[33] SUBSUBPROCESS(1) func<end> ); 
+[34] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 34 lines

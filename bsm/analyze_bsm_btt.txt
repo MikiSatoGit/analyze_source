@@ -1,4 +1,4 @@
-Total lines: 1383 
+Total lines: 1382 
 Total functions : 52 
 --------------------------
 [Function Name] : = 
@@ -196,17 +196,16 @@ Total functions : 52
 [28] MAINPROCESS(4) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ENABLE;
 [29] MAINPROCESS(4) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ENABLE;
 [30] MAINPROCESS(4) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ENABLE;
-[31] MAINPROCESS(4) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DISABLE;
-[32] MAINPROCESS(4) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
-[33] MAINPROCESS(4) equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
-[34] MAINPROCESS(4) equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
-[35] MAINPROCESS(4) equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
-[36] MAINPROCESS(4) equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
-[37] MAINPROCESS(4) equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
-[38] MAINPROCESS(4) equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
-[39] MAINPROCESS(4) equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
-[40] MAINPROCESS(4) proc return; 
------------------ Total Codes : 40 lines
+[31] MAINPROCESS(4) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DISABLE;
+[32] MAINPROCESS(4) equal pst_a_bsm_alertarea_for_test->Ymin (FL) 1.0;
+[33] MAINPROCESS(4) equal pst_a_bsm_alertarea_for_test->Ymax (FL) -7.0;
+[34] MAINPROCESS(4) equal pst_a_bsm_alertarea_for_test->Xmin (FL) 0.5;
+[35] MAINPROCESS(4) equal pst_a_bsm_alertarea_for_test->Xmax (FL) 3.8;
+[36] MAINPROCESS(4) equal pst_a_cluster_info->dummy CFL_UNKNOWN_VALUE;
+[37] MAINPROCESS(4) equal pst_a_aux_trailer_info->dummy CFL_UNKNOWN_VALUE;
+[38] MAINPROCESS(4) equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
+[39] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 39 lines
 --------------------------
 [Function Name] : enter_btt_dummy 
 -Return type : VD 
@@ -1465,9 +1464,13 @@ Total functions : 52
 --------------------------
 [Function Name] : fn_btt_atd_trailerobj_tracking 
 -Return type : VD 
--Argument : 2 
+-Argument : 6 
      [0] : NORMAL_BSM   pst_a_trailer_obj[TRAILER_BUFFSIZE] 
      [1] : S4   as4_a_trailer_obj_num 
+     [2] : FL   fl_a_doa_pow_ave[2][3] 
+     [3] : FL   fl_a_doa_pow_dev[2][3] 
+     [4] : S4   s4_a_doa_bf_peak_bin 
+     [5] : FL   fl_a_doa_bf_peak_pow 
 ----- Codes -----
 [1] MAINPROCESS(1) proc S4 s4_t_lp_i, s4_t_lp_j; 
 [2] MAINPROCESS(1) equal S4 as4_a_trk_num (S4)0;
@@ -1548,13 +1551,13 @@ Total functions : 52
 [77] MAINPROCESS(6) if as4_a_trk_num > BTT_OBJ_DETECT_CYC1 
 [78] MAINPROCESS(6) if ) 
 [79] MAINPROCESS(6) subproc SUBPROCESS(1) 
-[80] SUBPROCESS(1) ??? if( fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
-[81] SUBPROCESS(1) ??? &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
-[82] SUBPROCESS(1) ??? &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
-[83] SUBPROCESS(1) &&  fl_abs<start> &&  fl_abs( 
-[84] SUBPROCESS(1) &&  fl_abs afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
-[85] SUBPROCESS(1) &&  fl_abs &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
-[86] SUBPROCESS(1) &&  fl_abs &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
+[80] SUBPROCESS(1) if<start> if( 
+[81] SUBPROCESS(1) if fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
+[82] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
+[83] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
+[84] SUBPROCESS(1) if &&  fl_abs(afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
+[85] SUBPROCESS(1) if &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
+[86] SUBPROCESS(1) if &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
 [87] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [88] SUBSUBPROCESS(1) if<start> if( 
 [89] SUBSUBPROCESS(1) if s4_abs(s2_g_curvr_for_base) > (S2)CU1_CANOUT_CURVER_MIN_SOT 
