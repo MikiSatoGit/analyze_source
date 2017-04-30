@@ -331,1497 +331,1484 @@ Total functions : 12
 [229] SUBSUBPROCESS(1) if ) 
 [230] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
 [231] SUBSUBSUBPROCESS(1) proc (*ps4_a_flontline_dn_num)++; 
-[232] SUBPROCESS(2) equal *ps4_a_tos_line_count 0;
-[233] SUBPROCESS(2) for<start> for( 
-[234] SUBPROCESS(2) for i=0; 
-[235] SUBPROCESS(2) for i<LINE_FREQ_BIN_RANGE; 
-[236] SUBPROCESS(2) for i++) 
-[237] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[238] SUBSUBPROCESS(1) if <start> if ( 
-[239] SUBSUBPROCESS(1) if  (afl_a_frontline_dn[i][1] > -0.5F 
-[240] SUBSUBPROCESS(1) if  ) 
-[241] SUBSUBPROCESS(1) if  &&  (afl_a_frontline_dn[i][1] < 1.0F)) 
-[242] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[243] SUBSUBSUBPROCESS(1) proc (*ps4_a_tos_line_count)++; 
-[244] SUBPROCESS(3) proc return; 
-[245] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg<start> static VD fn_bsm_chkfr_check_frontline_flg( 
-[246] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg FL fl_a_frontline_pow_current, 
-[247] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg FL fl_a_pow_th, 
-[248] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg S4 s4_a_flontline_dn_num, 
-[249] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg S4 s4_a_tos_line_count, 
-[250] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg FL afl_a_frontline_dn[LINE_FREQ_BIN_RANGE][2], 
-[251] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg S4 *ps4_a_frontline_flag 
-[252] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg ) 
-[253] MAINPROCESS(8) subproc SUBPROCESS(1) 
-[254] SUBPROCESS(1) equal *ps4_a_frontline_flag 0;
-[255] SUBPROCESS(1) if<start> if( 
-[256] SUBPROCESS(1) if s4_a_tos_line_count >= 3 
-[257] SUBPROCESS(1) if ) 
-[258] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[259] SUBSUBPROCESS(1) if <start> if ( 
-[260] SUBSUBPROCESS(1) if  (st_g_bsm_loop_data.as4_flg_tos_end[0]==0 
-[261] SUBSUBPROCESS(1) if  ) 
-[262] SUBSUBPROCESS(1) if  &&  ((afl_a_frontline_dn[0][1] - afl_a_frontline_dn[s4_a_flontline_dn_num-1][1]) >= -2.0F)) 
-[263] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[264] SUBSUBSUBPROCESS(1) if<start> if( 
-[265] SUBSUBSUBPROCESS(1) if fl_a_frontline_pow_current > fl_a_pow_th 
-[266] SUBSUBSUBPROCESS(1) if ) 
-[267] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[268] SUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.afl_tos_frontline_pow[0] fl_a_frontline_pow_current;
-[269] SUBSUBSUBPROCESS(2) equal *ps4_a_frontline_flag (S4)CU1_TOS_END_MASK_CYCLE;
-[270] SUBPROCESS(2) else<start> else 
-[271] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[272] SUBSUBPROCESS(1) if<start> if( 
-[273] SUBSUBPROCESS(1) if st_g_bsm_loop_data.as4_flg_tos_frontline[0]!=0 
-[274] SUBSUBPROCESS(1) if ) 
-[275] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[276] SUBSUBSUBPROCESS(1) equal *ps4_a_frontline_flag st_g_bsm_loop_data.as4_flg_tos_frontline[0] - (S4)1;
-[277] SUBPROCESS(3) proc return; 
-[278] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg<start> static VD fn_bsm_chkfr_check_tos_end_flg( 
-[279] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE], 
-[280] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg FL fl_a_frontline_pow_current, 
-[281] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg S4 *ps4_a_tos_end_flag 
-[282] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg ) 
-[283] MAINPROCESS(9) subproc SUBPROCESS(1) 
-[284] SUBPROCESS(1) if<start> if( 
-[285] SUBPROCESS(1) if st_g_bsm_loop_data.as4_flg_tos_end[0] == 0 
-[286] SUBPROCESS(1) if ) 
-[287] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[288] SUBSUBPROCESS(1) if<start> if( 
-[289] SUBSUBPROCESS(1) if st_g_bsm_loop_data.afl_tos_frontline_pow[0] != 0.0F 
-[290] SUBSUBPROCESS(1) if ) 
-[291] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[292] SUBSUBSUBPROCESS(1) if <start> if ( 
-[293] SUBSUBSUBPROCESS(1) if  (st_g_bsm_loop_data.afl_tos_frontline_pow[0] - fl_a_frontline_pow_current) > afl_a_tos_end_param[2] 
-[294] SUBSUBSUBPROCESS(1) if  ) 
-[295] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[296] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_tos_end_flag 1;
-[297] SUBPROCESS(2) else<start> else 
-[298] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[299] SUBSUBPROCESS(1) equal *ps4_a_tos_end_flag st_g_bsm_loop_data.as4_flg_tos_end[0] + (S4)1;
-[300] SUBPROCESS(3) if<start> if( 
-[301] SUBPROCESS(3) if *ps4_a_tos_end_flag > (S4)CU1_TOS_END_MASK_CYCLE 
-[302] SUBPROCESS(3) if ) 
-[303] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[304] SUBSUBPROCESS(1) equal *ps4_a_tos_end_flag 0;
-[305] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.afl_tos_frontline_pow[0] 0.0F;
-[306] SUBPROCESS(4) proc return; 
-[307] MAINPROCESS(10) S4 s4_delete_tos_end<start> S4 s4_delete_tos_end( 
-[308] MAINPROCESS(10) S4 s4_delete_tos_end S4 target_num, 
-[309] MAINPROCESS(10) S4 s4_delete_tos_end S4 Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[310] MAINPROCESS(10) S4 s4_delete_tos_end FL Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
-[311] MAINPROCESS(10) S4 s4_delete_tos_end const FL tos_end_param[TOS_END_PARAM_SIZE] 
-[312] MAINPROCESS(10) S4 s4_delete_tos_end ) 
-[313] MAINPROCESS(10) subproc SUBPROCESS(1) 
-[314] SUBPROCESS(1) equal S4 iret target_num;
-[315] SUBPROCESS(1) proc U1 u1_t_jdg_g13_flg; 
-[316] SUBPROCESS(1) func<start> u1_t_jdg_g13_flg = u1_delete_tos_end_g13(st_g_bsm_loop_data.as4_flg_passing[0] 
-[317] SUBPROCESS(1) func<end> ); 
-[318] SUBPROCESS(1) if <start> if ( 
-[319] SUBPROCESS(1) if  (st_g_bsm_loop_data.as4_flg_tos_end[0] > 1 
-[320] SUBPROCESS(1) if  ) 
-[321] SUBPROCESS(1) if  ||  ((st_g_bsm_loop_data.as4_slow_sot_find[1] > WALL_REJECT_TH1) 
-[322] SUBPROCESS(1) if  &&   (st_g_bsm_loop_data.as4_flg_passing[0] <= PASSING_COUNT_MIN)) 
-[323] SUBPROCESS(1) if  ||  ((st_g_bsm_loop_data.as4_slow_sot_find[1] > (S4)CU1_WALL_REJECT_TH2) 
-[324] SUBPROCESS(1) if  &&   (u1_t_jdg_g13_flg == CU1_TRUE))) 
-[325] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[326] SUBSUBPROCESS(1) func<start> fn_bsm_deltos_delete_tx( 
-[327] SUBSUBPROCESS(1) func tos_end_param, 
-[328] SUBSUBPROCESS(1) func &iret, 
-[329] SUBSUBPROCESS(1) func Tx_int, 
-[330] SUBSUBPROCESS(1) func Tx_float 
+[232] SUBPROCESS(2) for<start> for( 
+[233] SUBPROCESS(2) for i=0; 
+[234] SUBPROCESS(2) for i<LINE_FREQ_BIN_RANGE; 
+[235] SUBPROCESS(2) for i++) 
+[236] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[237] SUBSUBPROCESS(1) if <start> if ( 
+[238] SUBSUBPROCESS(1) if  (afl_a_frontline_dn[i][1] > -0.5F 
+[239] SUBSUBPROCESS(1) if  ) 
+[240] SUBSUBPROCESS(1) if  &&  (afl_a_frontline_dn[i][1] < 1.0F)) 
+[241] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[242] SUBSUBSUBPROCESS(1) proc (*ps4_a_tos_line_count)++; 
+[243] SUBPROCESS(3) proc return; 
+[244] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg<start> static VD fn_bsm_chkfr_check_frontline_flg( 
+[245] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg FL fl_a_frontline_pow_current, 
+[246] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg FL fl_a_pow_th, 
+[247] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg S4 s4_a_flontline_dn_num, 
+[248] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg S4 s4_a_tos_line_count, 
+[249] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg FL afl_a_frontline_dn[LINE_FREQ_BIN_RANGE][2], 
+[250] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg S4 *ps4_a_frontline_flag 
+[251] MAINPROCESS(8) static VD fn_bsm_chkfr_check_frontline_flg ) 
+[252] MAINPROCESS(8) subproc SUBPROCESS(1) 
+[253] SUBPROCESS(1) equal *ps4_a_frontline_flag 0;
+[254] SUBPROCESS(1) if<start> if( 
+[255] SUBPROCESS(1) if s4_a_tos_line_count >= 3 
+[256] SUBPROCESS(1) if ) 
+[257] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[258] SUBSUBPROCESS(1) if <start> if ( 
+[259] SUBSUBPROCESS(1) if  (st_g_bsm_loop_data.as4_flg_tos_end[0]==0 
+[260] SUBSUBPROCESS(1) if  ) 
+[261] SUBSUBPROCESS(1) if  &&  ((afl_a_frontline_dn[0][1] - afl_a_frontline_dn[s4_a_flontline_dn_num-1][1]) >= -2.0F)) 
+[262] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[263] SUBSUBSUBPROCESS(1) if<start> if( 
+[264] SUBSUBSUBPROCESS(1) if fl_a_frontline_pow_current > fl_a_pow_th 
+[265] SUBSUBSUBPROCESS(1) if ) 
+[266] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[267] SUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.afl_tos_frontline_pow[0] fl_a_frontline_pow_current;
+[268] SUBPROCESS(2) else<start> else 
+[269] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[270] SUBSUBPROCESS(1) if<start> if( 
+[271] SUBSUBPROCESS(1) if st_g_bsm_loop_data.as4_flg_tos_frontline[0]!=0 
+[272] SUBSUBPROCESS(1) if ) 
+[273] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[274] SUBSUBSUBPROCESS(1) equal *ps4_a_frontline_flag st_g_bsm_loop_data.as4_flg_tos_frontline[0] - (S4)1;
+[275] SUBPROCESS(3) proc return; 
+[276] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg<start> static VD fn_bsm_chkfr_check_tos_end_flg( 
+[277] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE], 
+[278] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg FL fl_a_frontline_pow_current, 
+[279] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg S4 *ps4_a_tos_end_flag 
+[280] MAINPROCESS(9) static VD fn_bsm_chkfr_check_tos_end_flg ) 
+[281] MAINPROCESS(9) subproc SUBPROCESS(1) 
+[282] SUBPROCESS(1) if<start> if( 
+[283] SUBPROCESS(1) if st_g_bsm_loop_data.as4_flg_tos_end[0] == 0 
+[284] SUBPROCESS(1) if ) 
+[285] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[286] SUBSUBPROCESS(1) if<start> if( 
+[287] SUBSUBPROCESS(1) if st_g_bsm_loop_data.afl_tos_frontline_pow[0] != 0.0F 
+[288] SUBSUBPROCESS(1) if ) 
+[289] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[290] SUBSUBSUBPROCESS(1) if <start> if ( 
+[291] SUBSUBSUBPROCESS(1) if  (st_g_bsm_loop_data.afl_tos_frontline_pow[0] - fl_a_frontline_pow_current) > afl_a_tos_end_param[2] 
+[292] SUBSUBSUBPROCESS(1) if  ) 
+[293] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[294] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_tos_end_flag 1;
+[295] SUBPROCESS(2) else<start> else 
+[296] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[297] SUBSUBPROCESS(1) equal *ps4_a_tos_end_flag st_g_bsm_loop_data.as4_flg_tos_end[0] + (S4)1;
+[298] SUBPROCESS(3) if<start> if( 
+[299] SUBPROCESS(3) if *ps4_a_tos_end_flag > (S4)CU1_TOS_END_MASK_CYCLE 
+[300] SUBPROCESS(3) if ) 
+[301] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[302] SUBSUBPROCESS(1) equal *ps4_a_tos_end_flag 0;
+[303] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.afl_tos_frontline_pow[0] 0.0F;
+[304] SUBPROCESS(4) proc return; 
+[305] MAINPROCESS(10) S4 s4_delete_tos_end<start> S4 s4_delete_tos_end( 
+[306] MAINPROCESS(10) S4 s4_delete_tos_end S4 target_num, 
+[307] MAINPROCESS(10) S4 s4_delete_tos_end S4 Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[308] MAINPROCESS(10) S4 s4_delete_tos_end FL Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
+[309] MAINPROCESS(10) S4 s4_delete_tos_end const FL tos_end_param[TOS_END_PARAM_SIZE] 
+[310] MAINPROCESS(10) S4 s4_delete_tos_end ) 
+[311] MAINPROCESS(10) subproc SUBPROCESS(1) 
+[312] SUBPROCESS(1) equal S4 iret target_num;
+[313] SUBPROCESS(1) proc U1 u1_t_jdg_g13_flg; 
+[314] SUBPROCESS(1) func<start> u1_t_jdg_g13_flg = u1_delete_tos_end_g13(st_g_bsm_loop_data.as4_flg_passing[0] 
+[315] SUBPROCESS(1) func<end> ); 
+[316] SUBPROCESS(1) if <start> if ( 
+[317] SUBPROCESS(1) if  (st_g_bsm_loop_data.as4_flg_tos_end[0] > 1 
+[318] SUBPROCESS(1) if  ) 
+[319] SUBPROCESS(1) if  ||  ((st_g_bsm_loop_data.as4_slow_sot_find[1] > WALL_REJECT_TH1) 
+[320] SUBPROCESS(1) if  &&   (st_g_bsm_loop_data.as4_flg_passing[0] <= PASSING_COUNT_MIN)) 
+[321] SUBPROCESS(1) if  ||  ((st_g_bsm_loop_data.as4_slow_sot_find[1] > (S4)CU1_WALL_REJECT_TH2) 
+[322] SUBPROCESS(1) if  &&   (u1_t_jdg_g13_flg == CU1_TRUE))) 
+[323] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[324] SUBSUBPROCESS(1) func<start> fn_bsm_deltos_delete_tx( 
+[325] SUBSUBPROCESS(1) func tos_end_param, 
+[326] SUBSUBPROCESS(1) func &iret, 
+[327] SUBSUBPROCESS(1) func Tx_int, 
+[328] SUBSUBPROCESS(1) func Tx_float 
+[329] SUBSUBPROCESS(1) func<end> ); 
+[330] SUBSUBPROCESS(1) func<start> fn_bsm_deltos_delete_normal(tos_end_param 
 [331] SUBSUBPROCESS(1) func<end> ); 
-[332] SUBSUBPROCESS(1) func<start> fn_bsm_deltos_delete_normal(tos_end_param 
+[332] SUBSUBPROCESS(1) func<start> fn_bsm_deltos_delete_target(tos_end_param 
 [333] SUBSUBPROCESS(1) func<end> ); 
-[334] SUBSUBPROCESS(1) func<start> fn_bsm_deltos_delete_target(tos_end_param 
+[334] SUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal_sot[0], 1 
 [335] SUBSUBPROCESS(1) func<end> ); 
-[336] SUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal_sot[0], 1 
-[337] SUBSUBPROCESS(1) func<end> ); 
-[338] SUBPROCESS(2) proc return iret; 
-[339] MAINPROCESS(11) static U1 u1_delete_tos_end_g13<start> static U1 u1_delete_tos_end_g13( 
-[340] MAINPROCESS(11) static U1 u1_delete_tos_end_g13 S4 s4_a_passing_flg 
-[341] MAINPROCESS(11) static U1 u1_delete_tos_end_g13 ) 
-[342] MAINPROCESS(11) subproc SUBPROCESS(1) 
-[343] SUBPROCESS(1) proc U1 u1_t_jdg_g13_flag; 
-[344] SUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_FALSE;
-[345] SUBPROCESS(1) if <start> if ( 
-[346] SUBPROCESS(1) if  s4_a_passing_flg <= (S4)100 
-[347] SUBPROCESS(1) if  ) 
-[348] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[349] SUBSUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_TRUE;
-[350] SUBPROCESS(2) else<start> else 
-[351] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[352] SUBSUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_FALSE;
-[353] SUBPROCESS(3) if <start> if ( 
-[354] SUBPROCESS(3) if  s4_a_passing_flg <= (S4)50 
-[355] SUBPROCESS(3) if  ) 
-[356] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[357] SUBSUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_TRUE;
-[358] SUBPROCESS(4) else<start> else 
-[359] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[360] SUBSUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_FALSE;
-[361] SUBPROCESS(5) proc return u1_t_jdg_g13_flag; 
-[362] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx<start> static VD fn_bsm_deltos_delete_tx( 
-[363] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE], 
-[364] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx S4 *ps4_a_final_target_num, 
-[365] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx S4  as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[366] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT] 
-[367] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx ) 
-[368] MAINPROCESS(12) subproc SUBPROCESS(1) 
-[369] SUBPROCESS(1) proc S4 i; 
-[370] SUBPROCESS(1) for<start> for( 
-[371] SUBPROCESS(1) for i=0; 
-[372] SUBPROCESS(1) for i<*ps4_a_final_target_num; 
-[373] SUBPROCESS(1) for i++) 
-[374] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[375] SUBSUBPROCESS(1) if<start> if( 
-[376] SUBSUBPROCESS(1) if afl_a_Tx_float[i][7] > afl_a_tos_end_param[3] 
-[377] SUBSUBPROCESS(1) if ) 
-[378] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[379] SUBSUBSUBPROCESS(1) func<start> s4_initialize_specified_Tx_data( 
-[380] SUBSUBSUBPROCESS(1) func as4_a_Tx_int, 
-[381] SUBSUBSUBPROCESS(1) func afl_a_Tx_float, 
-[382] SUBSUBSUBPROCESS(1) func i 
-[383] SUBSUBSUBPROCESS(1) func<end> ); 
-[384] SUBSUBPROCESS(2) if <start> if ( 
-[385] SUBSUBPROCESS(2) if  (afl_a_Tx_float[i][7] > (afl_a_tos_end_param[3] - TOS_END_ADDITIONAL_RANGE_2F_TGT) 
-[386] SUBSUBPROCESS(2) if  ) 
-[387] SUBSUBPROCESS(2) if  &&  (as4_a_Tx_int[i][14] == OBJECT_TYPE_2F)) 
-[388] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[389] SUBSUBSUBPROCESS(1) func<start> s4_initialize_specified_Tx_data( 
-[390] SUBSUBSUBPROCESS(1) func as4_a_Tx_int, 
-[391] SUBSUBSUBPROCESS(1) func afl_a_Tx_float, 
-[392] SUBSUBSUBPROCESS(1) func i 
-[393] SUBSUBSUBPROCESS(1) func<end> ); 
-[394] SUBPROCESS(2) func<start> *ps4_a_final_target_num = s4_trim_Tx_data( 
-[395] SUBPROCESS(2) func as4_a_Tx_int, 
-[396] SUBPROCESS(2) func afl_a_Tx_float 
-[397] SUBPROCESS(2) func<end> ); 
-[398] SUBPROCESS(2) proc return; 
-[399] MAINPROCESS(13) static VD fn_bsm_deltos_delete_normal<start> static VD fn_bsm_deltos_delete_normal( 
-[400] MAINPROCESS(13) static VD fn_bsm_deltos_delete_normal const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE] 
-[401] MAINPROCESS(13) static VD fn_bsm_deltos_delete_normal ) 
-[402] MAINPROCESS(13) subproc SUBPROCESS(1) 
-[403] SUBPROCESS(1) proc S4 i; 
-[404] SUBPROCESS(1) for<start> for( 
-[405] SUBPROCESS(1) for i=0; 
-[406] SUBPROCESS(1) for i<st_g_bsm_loop_data.as4_buf_pair_num[0]; 
-[407] SUBPROCESS(1) for i++) 
-[408] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[409] SUBSUBPROCESS(1) if<start> if( 
-[410] SUBSUBPROCESS(1) if st_g_bsm_loop_data.ast_normal[i].fl_Ryfil > afl_a_tos_end_param[3] 
-[411] SUBSUBPROCESS(1) if ) 
-[412] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[413] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal[i], 1 
-[414] SUBSUBSUBPROCESS(1) func<end> ); 
-[415] SUBSUBPROCESS(2) if <start> if ( 
-[416] SUBSUBPROCESS(2) if  (st_g_bsm_loop_data.ast_normal[i].fl_Ryfil > (afl_a_tos_end_param[3] - TOS_END_ADDITIONAL_RANGE_2F_NRM) 
-[417] SUBSUBPROCESS(2) if  ) 
-[418] SUBSUBPROCESS(2) if  &&  (st_g_bsm_loop_data.ast_normal[i].s4_flg_dc == OBJECT_TYPE_2F)) 
-[419] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[420] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal[i], 1 
-[421] SUBSUBSUBPROCESS(1) func<end> ); 
-[422] SUBSUBPROCESS(3) if <start> if ( 
-[423] SUBSUBPROCESS(3) if  (st_g_bsm_loop_data.ast_normal[i].fl_Ryfil > (afl_a_tos_end_param[3] - 1.0F) 
-[424] SUBSUBPROCESS(3) if  ) 
-[425] SUBSUBPROCESS(3) if  &&  (st_g_bsm_loop_data.ast_normal[i].s4_flg_lost != 0)) 
-[426] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
-[427] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal[i], 1 
-[428] SUBSUBSUBPROCESS(1) func<end> ); 
-[429] SUBPROCESS(2) func<start> st_g_bsm_loop_data.as4_buf_pair_num[0] = s4_trim_normal(st_g_bsm_loop_data.ast_normal 
-[430] SUBPROCESS(2) func<end> ); 
-[431] SUBPROCESS(2) proc return; 
-[432] MAINPROCESS(14) static VD fn_bsm_deltos_delete_target<start> static VD fn_bsm_deltos_delete_target( 
-[433] MAINPROCESS(14) static VD fn_bsm_deltos_delete_target const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE] 
-[434] MAINPROCESS(14) static VD fn_bsm_deltos_delete_target ) 
-[435] MAINPROCESS(14) subproc SUBPROCESS(1) 
-[436] SUBPROCESS(1) proc S4 i; 
-[437] SUBPROCESS(1) for<start> for( 
-[438] SUBPROCESS(1) for i=0; 
-[439] SUBPROCESS(1) for i<st_g_bsm_loop_data.as4_buf_pair_num[1]; 
-[440] SUBPROCESS(1) for i++) 
-[441] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[442] SUBSUBPROCESS(1) if<start> if( 
-[443] SUBSUBPROCESS(1) if st_g_bsm_loop_data.ast_target[i].fl_Ryfil > afl_a_tos_end_param[3] 
-[444] SUBSUBPROCESS(1) if ) 
-[445] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[446] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_target[i], 1 
-[447] SUBSUBSUBPROCESS(1) func<end> ); 
-[448] SUBSUBPROCESS(2) if <start> if ( 
-[449] SUBSUBPROCESS(2) if  (st_g_bsm_loop_data.ast_target[i].fl_Ryfil > (afl_a_tos_end_param[3] - TOS_END_ADDITIONAL_RANGE_2F_TGT) 
-[450] SUBSUBPROCESS(2) if  ) 
-[451] SUBSUBPROCESS(2) if  &&  (st_g_bsm_loop_data.ast_target[i].s4_flg_dc == OBJECT_TYPE_2F)) 
-[452] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[453] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_target[i], 1 
-[454] SUBSUBSUBPROCESS(1) func<end> ); 
-[455] SUBPROCESS(2) func<start> st_g_bsm_loop_data.as4_buf_pair_num[1] = s4_trim_target(st_g_bsm_loop_data.ast_target 
-[456] SUBPROCESS(2) func<end> ); 
-[457] SUBPROCESS(2) proc return; 
-[458] MAINPROCESS(15) S4 s4_alarm_bsm2<start> S4 s4_alarm_bsm2( 
-[459] MAINPROCESS(15) S4 s4_alarm_bsm2 S4 s4_a_final_target_num, 
-[460] MAINPROCESS(15) S4 s4_alarm_bsm2 S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[461] MAINPROCESS(15) S4 s4_alarm_bsm2 FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
-[462] MAINPROCESS(15) S4 s4_alarm_bsm2 U1 u1_a_alarming_flg, 
-[463] MAINPROCESS(15) S4 s4_alarm_bsm2 const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE], 
-[464] MAINPROCESS(15) S4 s4_alarm_bsm2 FL fl_a_frontline_pow, 
-[465] MAINPROCESS(15) S4 s4_alarm_bsm2 S4 as4_a_frontline_doa_dn[LINE_FREQ_BIN_RANGE][1], 
-[466] MAINPROCESS(15) S4 s4_alarm_bsm2 const S4 as4_a_froneline_doa_peak_num_dn[LINE_FREQ_BIN_RANGE] 
-[467] MAINPROCESS(15) S4 s4_alarm_bsm2 ) 
-[468] MAINPROCESS(15) subproc SUBPROCESS(1) 
-[469] SUBPROCESS(1) equal S4 iret 0;
-[470] SUBPROCESS(1) equal S4 not_alarm 0;
-[471] SUBPROCESS(1) proc FL tmp_alarmed_target[TARGET_BUFFSIZE][ALARM_INFO_SIZE]; 
-[472] SUBPROCESS(1) proc S4 tmp_alarmed_num[1]; 
-[473] SUBPROCESS(1) proc S4 tmp_checked_target[TARGET_BUFFSIZE]; 
-[474] SUBPROCESS(1) proc S4 tmp_checked_alarmed[TARGET_BUFFSIZE]; 
-[475] SUBPROCESS(1) proc S4 tos_flg; 
-[476] SUBPROCESS(1) proc FL fl_t_alarm_area_y_min; 
-[477] SUBPROCESS(1) proc U1 u1_t_lp_num_target; 
-[478] SUBPROCESS(1) proc S4 i; 
-[479] SUBPROCESS(1) func<start> fn_initialize_alarm_info(tmp_alarmed_target 
-[480] SUBPROCESS(1) func<end> ); 
-[481] SUBPROCESS(1) equal tmp_alarmed_num[0] 0;
-[482] SUBPROCESS(1) for <start> for ( 
-[483] SUBPROCESS(1) for  u1_t_lp_num_target = (U1)0; 
-[484] SUBPROCESS(1) for  u1_t_lp_num_target < (U1)TARGET_BUFFSIZE; 
-[485] SUBPROCESS(1) for  u1_t_lp_num_target++) 
-[486] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[487] SUBSUBPROCESS(1) equal tmp_checked_target[u1_t_lp_num_target] (S4)0;
-[488] SUBSUBPROCESS(1) equal tmp_checked_alarmed[u1_t_lp_num_target] (S4)0;
-[489] SUBPROCESS(2) equal fl_t_alarm_area_y_min CFL_ALARM_Y_BACKWARD;
-[490] SUBPROCESS(2) if <start> if ( 
-[491] SUBPROCESS(2) if  (u1_a_alarming_flg == (U1)0 
-[492] SUBPROCESS(2) if  ) 
-[493] SUBPROCESS(2) if  &&  (st_g_bsm_loop_data.as4_flg_tos_end[0] == (S4)0)) 
-[494] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[495] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_tos_frontline[0] (S4)0;
-[496] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.afl_tos_frontline_pow[0] (FL)0.0F;
-[497] SUBPROCESS(3) if <start> if ( 
-[498] SUBPROCESS(3) if  (st_g_bsm_loop_data.u1_truck_flg == (U1)0 
-[499] SUBPROCESS(3) if  ) 
-[500] SUBPROCESS(3) if  &&  (st_g_bsm_loop_data.as4_slow_sot_find[0] == (S4)0)) 
-[501] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[502] SUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.as4_flg_tos_end[0] = s4_check_front_1m_line(afl_a_tos_end_param, 
-[503] SUBSUBPROCESS(1) func fl_a_frontline_pow, 
-[504] SUBSUBPROCESS(1) func as4_a_frontline_doa_dn, 
-[505] SUBSUBPROCESS(1) func as4_a_froneline_doa_peak_num_dn 
-[506] SUBSUBPROCESS(1) func<end> ); 
-[507] SUBPROCESS(4) func<start> st_g_bsm_loop_data.s4_final_target_num = s4_delete_tos_end(st_g_bsm_loop_data.s4_final_target_num, 
-[508] SUBPROCESS(4) func as4_a_Tx_int, 
-[509] SUBPROCESS(4) func afl_a_Tx_float, 
-[510] SUBPROCESS(4) func afl_a_tos_end_param 
-[511] SUBPROCESS(4) func<end> ); 
-[512] SUBPROCESS(4) func<start> fn_drv_time_chk(34, &au2_g_bsm_check_tmr[34] 
-[513] SUBPROCESS(4) func<end> ); 
-[514] SUBPROCESS(4) func<start> fn_bsm_alart_long_fa_cancel_main(u1_a_alarming_flg, as4_a_Tx_int, afl_a_Tx_float 
+[336] SUBPROCESS(2) proc return iret; 
+[337] MAINPROCESS(11) static U1 u1_delete_tos_end_g13<start> static U1 u1_delete_tos_end_g13( 
+[338] MAINPROCESS(11) static U1 u1_delete_tos_end_g13 S4 s4_a_passing_flg 
+[339] MAINPROCESS(11) static U1 u1_delete_tos_end_g13 ) 
+[340] MAINPROCESS(11) subproc SUBPROCESS(1) 
+[341] SUBPROCESS(1) proc U1 u1_t_jdg_g13_flag; 
+[342] SUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_FALSE;
+[343] SUBPROCESS(1) if <start> if ( 
+[344] SUBPROCESS(1) if  s4_a_passing_flg <= (S4)100 
+[345] SUBPROCESS(1) if  ) 
+[346] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[347] SUBSUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_TRUE;
+[348] SUBPROCESS(2) else<start> else 
+[349] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[350] SUBSUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_FALSE;
+[351] SUBPROCESS(3) if <start> if ( 
+[352] SUBPROCESS(3) if  s4_a_passing_flg <= (S4)50 
+[353] SUBPROCESS(3) if  ) 
+[354] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[355] SUBSUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_TRUE;
+[356] SUBPROCESS(4) else<start> else 
+[357] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[358] SUBSUBPROCESS(1) equal u1_t_jdg_g13_flag CU1_FALSE;
+[359] SUBPROCESS(5) proc return u1_t_jdg_g13_flag; 
+[360] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx<start> static VD fn_bsm_deltos_delete_tx( 
+[361] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE], 
+[362] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx S4 *ps4_a_final_target_num, 
+[363] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx S4  as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[364] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT] 
+[365] MAINPROCESS(12) static VD fn_bsm_deltos_delete_tx ) 
+[366] MAINPROCESS(12) subproc SUBPROCESS(1) 
+[367] SUBPROCESS(1) proc S4 i; 
+[368] SUBPROCESS(1) for<start> for( 
+[369] SUBPROCESS(1) for i=0; 
+[370] SUBPROCESS(1) for i<*ps4_a_final_target_num; 
+[371] SUBPROCESS(1) for i++) 
+[372] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[373] SUBSUBPROCESS(1) if<start> if( 
+[374] SUBSUBPROCESS(1) if afl_a_Tx_float[i][7] > afl_a_tos_end_param[3] 
+[375] SUBSUBPROCESS(1) if ) 
+[376] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[377] SUBSUBSUBPROCESS(1) func<start> s4_initialize_specified_Tx_data( 
+[378] SUBSUBSUBPROCESS(1) func as4_a_Tx_int, 
+[379] SUBSUBSUBPROCESS(1) func afl_a_Tx_float, 
+[380] SUBSUBSUBPROCESS(1) func i 
+[381] SUBSUBSUBPROCESS(1) func<end> ); 
+[382] SUBSUBPROCESS(2) if <start> if ( 
+[383] SUBSUBPROCESS(2) if  (afl_a_Tx_float[i][7] > (afl_a_tos_end_param[3] - TOS_END_ADDITIONAL_RANGE_2F_TGT) 
+[384] SUBSUBPROCESS(2) if  ) 
+[385] SUBSUBPROCESS(2) if  &&  (as4_a_Tx_int[i][14] == OBJECT_TYPE_2F)) 
+[386] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[387] SUBSUBSUBPROCESS(1) func<start> s4_initialize_specified_Tx_data( 
+[388] SUBSUBSUBPROCESS(1) func as4_a_Tx_int, 
+[389] SUBSUBSUBPROCESS(1) func afl_a_Tx_float, 
+[390] SUBSUBSUBPROCESS(1) func i 
+[391] SUBSUBSUBPROCESS(1) func<end> ); 
+[392] SUBPROCESS(2) func as4_a_Tx_int, 
+[393] SUBPROCESS(2) func afl_a_Tx_float 
+[394] SUBPROCESS(2) func<end> ); 
+[395] SUBPROCESS(2) proc return; 
+[396] MAINPROCESS(13) static VD fn_bsm_deltos_delete_normal<start> static VD fn_bsm_deltos_delete_normal( 
+[397] MAINPROCESS(13) static VD fn_bsm_deltos_delete_normal const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE] 
+[398] MAINPROCESS(13) static VD fn_bsm_deltos_delete_normal ) 
+[399] MAINPROCESS(13) subproc SUBPROCESS(1) 
+[400] SUBPROCESS(1) proc S4 i; 
+[401] SUBPROCESS(1) for<start> for( 
+[402] SUBPROCESS(1) for i=0; 
+[403] SUBPROCESS(1) for i<st_g_bsm_loop_data.as4_buf_pair_num[0]; 
+[404] SUBPROCESS(1) for i++) 
+[405] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[406] SUBSUBPROCESS(1) if<start> if( 
+[407] SUBSUBPROCESS(1) if st_g_bsm_loop_data.ast_normal[i].fl_Ryfil > afl_a_tos_end_param[3] 
+[408] SUBSUBPROCESS(1) if ) 
+[409] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[410] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal[i], 1 
+[411] SUBSUBSUBPROCESS(1) func<end> ); 
+[412] SUBSUBPROCESS(2) if <start> if ( 
+[413] SUBSUBPROCESS(2) if  (st_g_bsm_loop_data.ast_normal[i].fl_Ryfil > (afl_a_tos_end_param[3] - TOS_END_ADDITIONAL_RANGE_2F_NRM) 
+[414] SUBSUBPROCESS(2) if  ) 
+[415] SUBSUBPROCESS(2) if  &&  (st_g_bsm_loop_data.ast_normal[i].s4_flg_dc == OBJECT_TYPE_2F)) 
+[416] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[417] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal[i], 1 
+[418] SUBSUBSUBPROCESS(1) func<end> ); 
+[419] SUBSUBPROCESS(3) if <start> if ( 
+[420] SUBSUBPROCESS(3) if  (st_g_bsm_loop_data.ast_normal[i].fl_Ryfil > (afl_a_tos_end_param[3] - 1.0F) 
+[421] SUBSUBPROCESS(3) if  ) 
+[422] SUBSUBPROCESS(3) if  &&  (st_g_bsm_loop_data.ast_normal[i].s4_flg_lost != 0)) 
+[423] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+[424] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal[i], 1 
+[425] SUBSUBSUBPROCESS(1) func<end> ); 
+[426] SUBPROCESS(2) func<start> st_g_bsm_loop_data.as4_buf_pair_num[0] = s4_trim_normal(st_g_bsm_loop_data.ast_normal 
+[427] SUBPROCESS(2) func<end> ); 
+[428] SUBPROCESS(2) proc return; 
+[429] MAINPROCESS(14) static VD fn_bsm_deltos_delete_target<start> static VD fn_bsm_deltos_delete_target( 
+[430] MAINPROCESS(14) static VD fn_bsm_deltos_delete_target const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE] 
+[431] MAINPROCESS(14) static VD fn_bsm_deltos_delete_target ) 
+[432] MAINPROCESS(14) subproc SUBPROCESS(1) 
+[433] SUBPROCESS(1) proc S4 i; 
+[434] SUBPROCESS(1) for<start> for( 
+[435] SUBPROCESS(1) for i=0; 
+[436] SUBPROCESS(1) for i<st_g_bsm_loop_data.as4_buf_pair_num[1]; 
+[437] SUBPROCESS(1) for i++) 
+[438] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[439] SUBSUBPROCESS(1) if<start> if( 
+[440] SUBSUBPROCESS(1) if st_g_bsm_loop_data.ast_target[i].fl_Ryfil > afl_a_tos_end_param[3] 
+[441] SUBSUBPROCESS(1) if ) 
+[442] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[443] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_target[i], 1 
+[444] SUBSUBSUBPROCESS(1) func<end> ); 
+[445] SUBSUBPROCESS(2) if <start> if ( 
+[446] SUBSUBPROCESS(2) if  (st_g_bsm_loop_data.ast_target[i].fl_Ryfil > (afl_a_tos_end_param[3] - TOS_END_ADDITIONAL_RANGE_2F_TGT) 
+[447] SUBSUBPROCESS(2) if  ) 
+[448] SUBSUBPROCESS(2) if  &&  (st_g_bsm_loop_data.ast_target[i].s4_flg_dc == OBJECT_TYPE_2F)) 
+[449] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[450] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_target[i], 1 
+[451] SUBSUBSUBPROCESS(1) func<end> ); 
+[452] SUBPROCESS(2) func<start> st_g_bsm_loop_data.as4_buf_pair_num[1] = s4_trim_target(st_g_bsm_loop_data.ast_target 
+[453] SUBPROCESS(2) func<end> ); 
+[454] SUBPROCESS(2) proc return; 
+[455] MAINPROCESS(15) S4 s4_alarm_bsm2<start> S4 s4_alarm_bsm2( 
+[456] MAINPROCESS(15) S4 s4_alarm_bsm2 S4 s4_a_final_target_num, 
+[457] MAINPROCESS(15) S4 s4_alarm_bsm2 S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[458] MAINPROCESS(15) S4 s4_alarm_bsm2 FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
+[459] MAINPROCESS(15) S4 s4_alarm_bsm2 U1 u1_a_alarming_flg, 
+[460] MAINPROCESS(15) S4 s4_alarm_bsm2 const FL afl_a_tos_end_param[TOS_END_PARAM_SIZE], 
+[461] MAINPROCESS(15) S4 s4_alarm_bsm2 FL fl_a_frontline_pow, 
+[462] MAINPROCESS(15) S4 s4_alarm_bsm2 S4 as4_a_frontline_doa_dn[LINE_FREQ_BIN_RANGE][1], 
+[463] MAINPROCESS(15) S4 s4_alarm_bsm2 const S4 as4_a_froneline_doa_peak_num_dn[LINE_FREQ_BIN_RANGE] 
+[464] MAINPROCESS(15) S4 s4_alarm_bsm2 ) 
+[465] MAINPROCESS(15) subproc SUBPROCESS(1) 
+[466] SUBPROCESS(1) equal S4 iret 0;
+[467] SUBPROCESS(1) equal S4 not_alarm 0;
+[468] SUBPROCESS(1) proc FL tmp_alarmed_target[TARGET_BUFFSIZE][ALARM_INFO_SIZE]; 
+[469] SUBPROCESS(1) proc S4 tmp_alarmed_num[1]; 
+[470] SUBPROCESS(1) proc S4 tmp_checked_target[TARGET_BUFFSIZE]; 
+[471] SUBPROCESS(1) proc S4 tmp_checked_alarmed[TARGET_BUFFSIZE]; 
+[472] SUBPROCESS(1) proc S4 tos_flg; 
+[473] SUBPROCESS(1) proc FL fl_t_alarm_area_y_min; 
+[474] SUBPROCESS(1) proc U1 u1_t_lp_num_target; 
+[475] SUBPROCESS(1) proc S4 i; 
+[476] SUBPROCESS(1) func<start> fn_initialize_alarm_info(tmp_alarmed_target 
+[477] SUBPROCESS(1) func<end> ); 
+[478] SUBPROCESS(1) equal tmp_alarmed_num[0] 0;
+[479] SUBPROCESS(1) for <start> for ( 
+[480] SUBPROCESS(1) for  u1_t_lp_num_target = (U1)0; 
+[481] SUBPROCESS(1) for  u1_t_lp_num_target < (U1)TARGET_BUFFSIZE; 
+[482] SUBPROCESS(1) for  u1_t_lp_num_target++) 
+[483] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[484] SUBSUBPROCESS(1) equal tmp_checked_target[u1_t_lp_num_target] (S4)0;
+[485] SUBSUBPROCESS(1) equal tmp_checked_alarmed[u1_t_lp_num_target] (S4)0;
+[486] SUBPROCESS(2) equal fl_t_alarm_area_y_min CFL_ALARM_Y_BACKWARD;
+[487] SUBPROCESS(2) if <start> if ( 
+[488] SUBPROCESS(2) if  (u1_a_alarming_flg == (U1)0 
+[489] SUBPROCESS(2) if  ) 
+[490] SUBPROCESS(2) if  &&  (st_g_bsm_loop_data.as4_flg_tos_end[0] == (S4)0)) 
+[491] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[492] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_tos_frontline[0] (S4)0;
+[493] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.afl_tos_frontline_pow[0] (FL)0.0F;
+[494] SUBPROCESS(3) if <start> if ( 
+[495] SUBPROCESS(3) if  (st_g_bsm_loop_data.u1_truck_flg == (U1)0 
+[496] SUBPROCESS(3) if  ) 
+[497] SUBPROCESS(3) if  &&  (st_g_bsm_loop_data.as4_slow_sot_find[0] == (S4)0)) 
+[498] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[499] SUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.as4_flg_tos_end[0] = s4_check_front_1m_line(afl_a_tos_end_param, 
+[500] SUBSUBPROCESS(1) func fl_a_frontline_pow, 
+[501] SUBSUBPROCESS(1) func as4_a_frontline_doa_dn, 
+[502] SUBSUBPROCESS(1) func as4_a_froneline_doa_peak_num_dn 
+[503] SUBSUBPROCESS(1) func<end> ); 
+[504] SUBPROCESS(4) func<start> st_g_bsm_loop_data.s4_final_target_num = s4_delete_tos_end(st_g_bsm_loop_data.s4_final_target_num, 
+[505] SUBPROCESS(4) func as4_a_Tx_int, 
+[506] SUBPROCESS(4) func afl_a_Tx_float, 
+[507] SUBPROCESS(4) func afl_a_tos_end_param 
+[508] SUBPROCESS(4) func<end> ); 
+[509] SUBPROCESS(4) func<start> fn_drv_time_chk(34, &au2_g_bsm_check_tmr[34] 
+[510] SUBPROCESS(4) func<end> ); 
+[511] SUBPROCESS(4) func<start> fn_bsm_alart_long_fa_cancel_main(u1_a_alarming_flg, as4_a_Tx_int, afl_a_Tx_float 
+[512] SUBPROCESS(4) func<end> ); 
+[513] SUBPROCESS(4) func<start> fn_bsm_alart_check_active( 
+[514] SUBPROCESS(4) func &not_alarm, &fl_t_alarm_area_y_min, (const S4 (*)[NORM_INT])as4_a_Tx_int, (const FL (*)[TGT_FLT])afl_a_Tx_float 
 [515] SUBPROCESS(4) func<end> ); 
-[516] SUBPROCESS(4) func<start> fn_bsm_alart_check_active( 
-[517] SUBPROCESS(4) func &not_alarm, &fl_t_alarm_area_y_min, (const S4 (*)[NORM_INT])as4_a_Tx_int, (const FL (*)[TGT_FLT])afl_a_Tx_float 
-[518] SUBPROCESS(4) func<end> ); 
-[519] SUBPROCESS(4) func<start> fn_bsm_alart_check_cont_altobj( 
-[520] SUBPROCESS(4) func s4_a_final_target_num, 
-[521] SUBPROCESS(4) func as4_a_Tx_int, 
-[522] SUBPROCESS(4) func afl_a_Tx_float, 
-[523] SUBPROCESS(4) func tmp_checked_target, 
-[524] SUBPROCESS(4) func tmp_checked_alarmed, 
-[525] SUBPROCESS(4) func tmp_alarmed_num, 
-[526] SUBPROCESS(4) func tmp_alarmed_target, 
-[527] SUBPROCESS(4) func &tos_flg, 
-[528] SUBPROCESS(4) func &iret 
-[529] SUBPROCESS(4) func<end> ); 
-[530] SUBPROCESS(4) func<start> fn_bsm_alart_check_exp_altobj( 
-[531] SUBPROCESS(4) func tmp_checked_alarmed, 
-[532] SUBPROCESS(4) func tmp_alarmed_num, 
-[533] SUBPROCESS(4) func tmp_alarmed_target, 
-[534] SUBPROCESS(4) func &iret 
-[535] SUBPROCESS(4) func<end> ); 
-[536] SUBPROCESS(4) func<start> fn_bsm_alart_check_new_altobj( 
-[537] SUBPROCESS(4) func s4_a_final_target_num, 
-[538] SUBPROCESS(4) func as4_a_Tx_int, 
-[539] SUBPROCESS(4) func afl_a_Tx_float, 
-[540] SUBPROCESS(4) func (const S4 (*))tmp_checked_target, 
-[541] SUBPROCESS(4) func tos_flg, 
-[542] SUBPROCESS(4) func tmp_alarmed_num, 
-[543] SUBPROCESS(4) func tmp_alarmed_target, 
-[544] SUBPROCESS(4) func fl_t_alarm_area_y_min, 
-[545] SUBPROCESS(4) func &iret 
-[546] SUBPROCESS(4) func<end> ); 
-[547] SUBPROCESS(4) func<start> fn_bsm_alart_set_alart_target( 
-[548] SUBPROCESS(4) func (const S4 (*))tmp_alarmed_num, 
-[549] SUBPROCESS(4) func (const FL (*)[ALARM_INFO_SIZE])tmp_alarmed_target 
-[550] SUBPROCESS(4) func<end> ); 
-[551] SUBPROCESS(4) func<start> fn_bsm_alart_extend_alart( 
-[552] SUBPROCESS(4) func tos_flg, 
-[553] SUBPROCESS(4) func not_alarm, 
-[554] SUBPROCESS(4) func &iret 
-[555] SUBPROCESS(4) func<end> ); 
-[556] SUBPROCESS(4) for<start> for( 
-[557] SUBPROCESS(4) for i=0; 
-[558] SUBPROCESS(4) for i<TARGET_BUFFSIZE; 
-[559] SUBPROCESS(4) for i++) 
-[560] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[561] SUBSUBPROCESS(1) equal afl_g_alarmed_target_position[i][0] tmp_alarmed_target[i][0];
-[562] SUBSUBPROCESS(1) equal afl_g_alarmed_target_position[i][1] tmp_alarmed_target[i][1];
-[563] SUBPROCESS(5) proc return iret; 
-[564] MAINPROCESS(16) VD fn_bsm_alart_long_fa_cancel_main<start> VD fn_bsm_alart_long_fa_cancel_main( 
-[565] MAINPROCESS(16) VD fn_bsm_alart_long_fa_cancel_main U1 u1_a_alarming_flg, 
-[566] MAINPROCESS(16) VD fn_bsm_alart_long_fa_cancel_main S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[567] MAINPROCESS(16) VD fn_bsm_alart_long_fa_cancel_main FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT]) 
-[568] MAINPROCESS(16) subproc SUBPROCESS(1) 
-[569] SUBPROCESS(1) proc FL fl_t_delete_area; 
-[570] SUBPROCESS(1) proc U1 u1_t_flg_obj_delete; 
-[571] SUBPROCESS(1) func<start> fn_bsm_alart_long_fa_monitoring_target(u1_a_alarming_flg 
-[572] SUBPROCESS(1) func<end> ); 
-[573] SUBPROCESS(1) func<start> fn_bsm_alart_long_fa_set_delete_area(&fl_t_delete_area, &u1_t_flg_obj_delete 
-[574] SUBPROCESS(1) func<end> ); 
-[575] SUBPROCESS(1) func<start> fn_bsm_alart_long_fa_delete_obj(fl_t_delete_area, u1_t_flg_obj_delete, as4_a_Tx_int, afl_a_Tx_float 
-[576] SUBPROCESS(1) func<end> ); 
-[577] SUBPROCESS(1) proc return; 
-[578] MAINPROCESS(17) VD fn_bsm_alart_long_fa_monitoring_target<start> VD fn_bsm_alart_long_fa_monitoring_target( 
-[579] MAINPROCESS(17) VD fn_bsm_alart_long_fa_monitoring_target U1 u1_a_alarming_flg 
-[580] MAINPROCESS(17) VD fn_bsm_alart_long_fa_monitoring_target ) 
-[581] MAINPROCESS(17) subproc SUBPROCESS(1) 
-[582] SUBPROCESS(1) proc U4 u4_t_lp_target; 
-[583] SUBPROCESS(1) proc U4 u4_t_lp_max_target_num; 
-[584] SUBPROCESS(1) if <start> if ( 
-[585] SUBPROCESS(1) if  st_g_bsm_loop_data.as4_buf_pair_num[1] > (S4)TARGET_BUFFSIZE 
-[586] SUBPROCESS(1) if  ) 
-[587] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[588] SUBSUBPROCESS(1) equal u4_t_lp_max_target_num (U4)TARGET_BUFFSIZE;
-[589] SUBPROCESS(2) else<start> else 
-[590] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[591] SUBSUBPROCESS(1) equal u4_t_lp_max_target_num (U4)st_g_bsm_loop_data.as4_buf_pair_num[1];
-[592] SUBPROCESS(3) if <start> if ( 
-[593] SUBPROCESS(3) if  (u1_a_alarming_flg == (U1)1 
-[594] SUBPROCESS(3) if  ) 
-[595] SUBPROCESS(3) if  &&	(st_g_bsm_loop_data.u1_wall_flg_for_fa_judgement == (U1)1)) 
-[596] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[597] SUBSUBPROCESS(1) for <start> for ( 
-[598] SUBSUBPROCESS(1) for  u4_t_lp_target = (U4)0; 
-[599] SUBSUBPROCESS(1) for  u4_t_lp_target < u4_t_lp_max_target_num; 
-[600] SUBSUBPROCESS(1) for  u4_t_lp_target++) 
-[601] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[602] SUBSUBSUBPROCESS(1) if <start> if ( 
-[603] SUBSUBSUBPROCESS(1) if  ((st_g_bsm_loop_data.ast_target[u4_t_lp_target].fl_Ryfil > CFL_FA_MONITORING_AREA 
-[604] SUBSUBSUBPROCESS(1) if  ) 
-[605] SUBSUBSUBPROCESS(1) if  &&	 (st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[4] < (S4)80) 
-[606] SUBSUBSUBPROCESS(1) if  &&	 (st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[5] < (S4)80)) 
-[607] SUBSUBSUBPROCESS(1) if  ||	(st_g_bsm_loop_data.ast_target[u4_t_lp_target].fl_Ryfil > (FL)200.0F)) 
-[608] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[609] SUBSUBSUBSUBPROCESS(1) if <start> if ( 
-[610] SUBSUBSUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa >= (U4)125 
-[611] SUBSUBSUBSUBPROCESS(1) if  ) 
-[612] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[613] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa (U4)125;
-[614] SUBSUBSUBSUBPROCESS(2) else<start> else 
-[615] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[616] SUBSUBSUBSUBSUBPROCESS(1) proc st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa++; 
-[617] SUBSUBSUBPROCESS(2) else if <start> else if ( 
-[618] SUBSUBSUBPROCESS(2) else if  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)0 
-[619] SUBSUBSUBPROCESS(2) else if  ) 
-[620] SUBSUBSUBPROCESS(2) else if  &&  (st_g_bsm_loop_data.ast_target[u4_t_lp_target].fl_Ryfil > CFL_FA_MONITORING_AREA) 
-[621] SUBSUBSUBPROCESS(2) else if  &&  ((st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[4] < (S4)80) 
-[622] SUBSUBSUBPROCESS(2) else if  ||   (st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[5] < (S4)80))) 
-[623] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[624] SUBSUBSUBSUBPROCESS(1) if <start> if ( 
-[625] SUBSUBSUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa > (U4)0 
-[626] SUBSUBSUBSUBPROCESS(1) if  ) 
-[627] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[628] SUBSUBSUBSUBSUBPROCESS(1) proc st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa--; 
-[629] SUBSUBSUBPROCESS(3) else<start> else 
-[630] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
-[631] SUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa (U4)0;
-[632] SUBPROCESS(4) else<start> else 
-[633] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[634] SUBSUBPROCESS(1) for <start> for ( 
-[635] SUBSUBPROCESS(1) for  u4_t_lp_target = (U4)0; 
-[636] SUBSUBPROCESS(1) for  u4_t_lp_target < (U4)TARGET_BUFFSIZE; 
-[637] SUBSUBPROCESS(1) for  u4_t_lp_target++) 
-[638] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[639] SUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa (U4)0;
-[640] SUBPROCESS(5) proc return; 
-[641] MAINPROCESS(18) VD fn_bsm_alart_long_fa_set_delete_area<start> VD fn_bsm_alart_long_fa_set_delete_area( 
-[642] MAINPROCESS(18) VD fn_bsm_alart_long_fa_set_delete_area FL* pfl_a_delete_area, U1* pu1_a_flg_obj_delete 
-[643] MAINPROCESS(18) VD fn_bsm_alart_long_fa_set_delete_area ) 
-[644] MAINPROCESS(18) subproc SUBPROCESS(1) 
-[645] SUBPROCESS(1) proc U4 u4_t_lp_target; 
-[646] SUBPROCESS(1) proc U4 u4_t_ctr_fa_max; 
-[647] SUBPROCESS(1) proc FL fl_t_delete_area; 
-[648] SUBPROCESS(1) proc U1 u1_t_flg_obj_delete; 
-[649] SUBPROCESS(1) equal u1_t_flg_obj_delete CU1_DF_OFF;
-[650] SUBPROCESS(1) equal u4_t_ctr_fa_max (U4)0;
-[651] SUBPROCESS(1) for <start> for ( 
-[652] SUBPROCESS(1) for  u4_t_lp_target = (U4)0; 
-[653] SUBPROCESS(1) for  u4_t_lp_target < (U4)TARGET_BUFFSIZE; 
-[654] SUBPROCESS(1) for  u4_t_lp_target++) 
-[655] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[656] SUBSUBPROCESS(1) if <start> if ( 
-[657] SUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa > u4_t_ctr_fa_max 
-[658] SUBSUBPROCESS(1) if  ) 
-[659] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[660] SUBSUBSUBPROCESS(1) equal u4_t_ctr_fa_max st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa;
-[661] SUBPROCESS(2) if <start> if ( 
-[662] SUBPROCESS(2) if  u4_t_ctr_fa_max > (U4)CU1_TH_FA_DELETE_CYCLE 
-[663] SUBPROCESS(2) if  ) 
-[664] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[665] SUBSUBPROCESS(1) equal fl_t_delete_area CFL_FA_DELETE_AREA;
-[666] SUBSUBPROCESS(1) equal u1_t_flg_obj_delete CU1_DF_ON;
-[667] SUBPROCESS(3) else<start> else 
-[668] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[669] SUBSUBPROCESS(1) equal fl_t_delete_area (FL)100.0F;
-[670] SUBSUBPROCESS(1) equal u1_t_flg_obj_delete CU1_DF_OFF;
-[671] SUBPROCESS(4) equal *pfl_a_delete_area fl_t_delete_area;
-[672] SUBPROCESS(4) equal *pu1_a_flg_obj_delete u1_t_flg_obj_delete;
-[673] SUBPROCESS(4) proc return; 
-[674] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj<start> VD fn_bsm_alart_long_fa_delete_obj( 
-[675] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj FL fl_a_delete_area, 
-[676] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj U1 u1_a_flg_obj_delete, 
-[677] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[678] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT]) 
-[679] MAINPROCESS(19) subproc SUBPROCESS(1) 
-[680] SUBPROCESS(1) proc U4 u4_t_lp_target; 
-[681] SUBPROCESS(1) proc U4 u4_t_lp_final_target; 
-[682] SUBPROCESS(1) proc U4 u4_t_lp_normal; 
-[683] SUBPROCESS(1) proc U4 u4_t_lp_max_target_num; 
-[684] SUBPROCESS(1) proc U4 u4_t_lp_max_final_target_num; 
-[685] SUBPROCESS(1) proc U4 u4_t_lp_max_normal_num; 
-[686] SUBPROCESS(1) if <start> if ( 
-[687] SUBPROCESS(1) if  st_g_bsm_loop_data.as4_buf_pair_num[1] > (S4)TARGET_BUFFSIZE 
-[688] SUBPROCESS(1) if  ) 
-[689] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[690] SUBSUBPROCESS(1) equal u4_t_lp_max_target_num (U4)TARGET_BUFFSIZE;
-[691] SUBPROCESS(2) else<start> else 
-[692] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[693] SUBSUBPROCESS(1) equal u4_t_lp_max_target_num (U4)st_g_bsm_loop_data.as4_buf_pair_num[1];
-[694] SUBPROCESS(3) if <start> if ( 
-[695] SUBPROCESS(3) if  st_g_bsm_loop_data.s4_final_target_num > (S4)TARGET_BUFFSIZE 
-[696] SUBPROCESS(3) if  ) 
-[697] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[698] SUBSUBPROCESS(1) equal u4_t_lp_max_final_target_num (U4)TARGET_BUFFSIZE;
-[699] SUBPROCESS(4) else<start> else 
-[700] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[701] SUBSUBPROCESS(1) equal u4_t_lp_max_final_target_num (U4)st_g_bsm_loop_data.s4_final_target_num;
-[702] SUBPROCESS(5) if <start> if ( 
-[703] SUBPROCESS(5) if  st_g_bsm_loop_data.as4_buf_pair_num[0] > (S4)NORMAL_BUFFSIZE 
-[704] SUBPROCESS(5) if  ) 
-[705] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
-[706] SUBSUBPROCESS(1) equal u4_t_lp_max_normal_num (U4)NORMAL_BUFFSIZE;
-[707] SUBPROCESS(6) else<start> else 
-[708] SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
-[709] SUBSUBPROCESS(1) equal u4_t_lp_max_normal_num (U4)st_g_bsm_loop_data.as4_buf_pair_num[0];
-[710] SUBPROCESS(7) if <start> if ( 
-[711] SUBPROCESS(7) if  u1_a_flg_obj_delete == CU1_DF_ON 
-[712] SUBPROCESS(7) if  ) 
-[713] SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
-[714] SUBSUBPROCESS(1) for <start> for ( 
-[715] SUBSUBPROCESS(1) for  u4_t_lp_target = (U4)0; 
-[716] SUBSUBPROCESS(1) for  u4_t_lp_target < u4_t_lp_max_target_num; 
-[717] SUBSUBPROCESS(1) for  u4_t_lp_target++) 
-[718] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[719] SUBSUBSUBPROCESS(1) if <start> if ( 
-[720] SUBSUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[u4_t_lp_target].fl_Ryfil > fl_a_delete_area 
-[721] SUBSUBSUBPROCESS(1) if  ) 
-[722] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[723] SUBSUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_target[u4_t_lp_target], (S4)1 
-[724] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[725] SUBSUBPROCESS(2) func<start> st_g_bsm_loop_data.as4_buf_pair_num[1] = s4_trim_target(st_g_bsm_loop_data.ast_target 
-[726] SUBSUBPROCESS(2) func<end> ); 
-[727] SUBSUBPROCESS(2) for <start> for ( 
-[728] SUBSUBPROCESS(2) for  u4_t_lp_final_target = (U4)0; 
-[729] SUBSUBPROCESS(2) for  u4_t_lp_final_target < u4_t_lp_max_final_target_num; 
-[730] SUBSUBPROCESS(2) for  u4_t_lp_final_target++) 
-[731] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[732] SUBSUBSUBPROCESS(1) if <start> if ( 
-[733] SUBSUBSUBPROCESS(1) if  afl_a_Tx_float[u4_t_lp_final_target][7] > fl_a_delete_area 
-[734] SUBSUBSUBPROCESS(1) if  ) 
-[735] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[736] SUBSUBSUBSUBPROCESS(1) func<start> s4_initialize_specified_Tx_data(as4_a_Tx_int, afl_a_Tx_float, u4_t_lp_final_target 
-[737] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[738] SUBSUBPROCESS(3) func<start> st_g_bsm_loop_data.s4_final_target_num = s4_trim_Tx_data(as4_a_Tx_int, afl_a_Tx_float 
-[739] SUBSUBPROCESS(3) func<end> ); 
-[740] SUBSUBPROCESS(3) for <start> for ( 
-[741] SUBSUBPROCESS(3) for  u4_t_lp_normal = (U4)0; 
-[742] SUBSUBPROCESS(3) for  u4_t_lp_normal < u4_t_lp_max_normal_num; 
-[743] SUBSUBPROCESS(3) for  u4_t_lp_normal++) 
-[744] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
-[745] SUBSUBSUBPROCESS(1) if <start> if ( 
-[746] SUBSUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_normal[u4_t_lp_normal].fl_Ryfil > fl_a_delete_area 
-[747] SUBSUBSUBPROCESS(1) if  ) 
-[748] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[749] SUBSUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal[u4_t_lp_normal], (S4)1 
-[750] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[751] SUBSUBPROCESS(4) func<start> st_g_bsm_loop_data.as4_buf_pair_num[0] = s4_trim_normal(st_g_bsm_loop_data.ast_normal 
-[752] SUBSUBPROCESS(4) func<end> ); 
-[753] SUBSUBPROCESS(4) if <start> if ( 
-[754] SUBSUBPROCESS(4) if  st_g_bsm_loop_data.ast_normal_sot[0].fl_Ryfil > fl_a_delete_area 
-[755] SUBSUBPROCESS(4) if  ) 
-[756] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
-[757] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal_sot[0], (S4)1 
-[758] SUBSUBSUBPROCESS(1) func<end> ); 
-[759] SUBSUBPROCESS(5) equal st_g_bsm_loop_data.u1_fa_delete_count (U1)10 + (U1)1;
-[760] SUBPROCESS(8) func<start> st_g_bsm_loop_data.u1_fa_delete_count = (U1)u2_data_add((U2)st_g_bsm_loop_data.u1_fa_delete_count, (S2)-1, (U2)CU1_U1MAX, (U2)0 
-[761] SUBPROCESS(8) func<end> ); 
-[762] SUBPROCESS(8) proc return; 
-[763] MAINPROCESS(20) static VD fn_bsm_alart_check_active<start> static VD fn_bsm_alart_check_active( 
-[764] MAINPROCESS(20) static VD fn_bsm_alart_check_active S4 *ps4_t_not_alarm, 
-[765] MAINPROCESS(20) static VD fn_bsm_alart_check_active FL *pfl_a_alarm_area_y_min, 
-[766] MAINPROCESS(20) static VD fn_bsm_alart_check_active const S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[767] MAINPROCESS(20) static VD fn_bsm_alart_check_active const FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT] 
-[768] MAINPROCESS(20) static VD fn_bsm_alart_check_active ) 
-[769] MAINPROCESS(20) subproc SUBPROCESS(1) 
-[770] SUBPROCESS(1) proc FL fl_t_th_canout_curvr; 
-[771] SUBPROCESS(1) proc S2 s2_t_th_canout_curvr; 
-[772] SUBPROCESS(1) proc S4 s4_t_lp_tx_num; 
-[773] SUBPROCESS(1) proc U1 u1_t_flg_tos_target_in; 
-[774] SUBPROCESS(1) if <start> if ( 
-[775] SUBPROCESS(1) if  st_g_bsm_alarm_data.s4_alarm_prev != (S4)0 
-[776] SUBPROCESS(1) if  ) 
-[777] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[778] SUBSUBPROCESS(1) if <start> if ( 
-[779] SUBSUBPROCESS(1) if  fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN_OFF 
-[780] SUBSUBPROCESS(1) if  ) 
-[781] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[782] SUBSUBSUBPROCESS(1) equal st_g_bsm_alarm_data.as4_alarm_off_count[0] (S4)0;
-[783] SUBSUBSUBPROCESS(1) equal *ps4_t_not_alarm (S4)1;
-[784] SUBPROCESS(2) else<start> else 
-[785] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[786] SUBSUBPROCESS(1) if <start> if ( 
-[787] SUBSUBPROCESS(1) if  fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN 
-[788] SUBSUBPROCESS(1) if  ) 
-[789] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[790] SUBSUBSUBPROCESS(1) equal st_g_bsm_alarm_data.as4_alarm_off_count[0] (S4)0;
-[791] SUBSUBSUBPROCESS(1) equal *ps4_t_not_alarm (S4)1;
-[792] SUBPROCESS(3) equal u1_t_flg_tos_target_in (U1)0;
-[793] SUBPROCESS(3) for <start> for ( 
-[794] SUBPROCESS(3) for  s4_t_lp_tx_num = (S4)0; 
-[795] SUBPROCESS(3) for  s4_t_lp_tx_num < st_g_bsm_loop_data.s4_final_target_num; 
-[796] SUBPROCESS(3) for  s4_t_lp_tx_num++) 
-[797] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[798] SUBSUBPROCESS(1) if <start> if ( 
-[799] SUBSUBPROCESS(1) if  (as4_a_Tx_int[s4_t_lp_tx_num][17] >= (S4)5 
-[800] SUBSUBPROCESS(1) if  ) 
-[801] SUBSUBPROCESS(1) if  &&  (afl_a_Tx_float[s4_t_lp_tx_num][10] > (CFL_ALARM_Y_BACKWARD + ALARM_Y_OFFSET))) 
-[802] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[803] SUBSUBSUBPROCESS(1) equal u1_t_flg_tos_target_in (U1)1;
-[804] SUBSUBSUBPROCESS(1) proc break; 
-[805] SUBPROCESS(4) if <start> if ( 
-[806] SUBPROCESS(4) if  (u1_slipjdg_get_slip_flag() == (U1)1 
-[807] SUBPROCESS(4) if  ) 
-[808] SUBPROCESS(4) if  &&  (u1_t_flg_tos_target_in == (U1)0)) 
-[809] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[810] SUBSUBPROCESS(1) equal st_g_bsm_alarm_data.as4_alarm_off_count[0] (S4)0;
-[811] SUBSUBPROCESS(1) equal *ps4_t_not_alarm (S4)1;
-[812] SUBPROCESS(5) equal fl_t_th_canout_curvr (FL)CANOUT_CURVER_MIN;
-[813] SUBPROCESS(5) func<start> s2_t_th_canout_curvr = s2_cast_from_fl(fl_t_th_canout_curvr 
-[814] SUBPROCESS(5) func<end> ); 
-[815] SUBPROCESS(5) if <start> if ( 
-[816] SUBPROCESS(5) if  (s4_abs((S4)s2_g_curvr_for_base) < (S4)s2_t_th_canout_curvr 
-[817] SUBPROCESS(5) if  ) 
-[818] SUBPROCESS(5) if  &&	(st_g_bsm_alarm_data.s4_alarm_prev == (S4)0)) 
-[819] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
-[820] SUBSUBPROCESS(1) equal *ps4_t_not_alarm (S4)1;
-[821] SUBPROCESS(6) func<start> fn_bsm_alart_set_reliable_jdg_mask_count((const S4 (*))ps4_t_not_alarm 
-[822] SUBPROCESS(6) func<end> ); 
-[823] SUBPROCESS(6) func<start> fn_bsm_alart_set_backward_line_of_alarm_area(pfl_a_alarm_area_y_min 
-[824] SUBPROCESS(6) func<end> ); 
-[825] SUBPROCESS(6) proc return; 
-[826] MAINPROCESS(21) static VD fn_bsm_alart_set_reliable_jdg_mask_count<start> static VD fn_bsm_alart_set_reliable_jdg_mask_count( 
-[827] MAINPROCESS(21) static VD fn_bsm_alart_set_reliable_jdg_mask_count const S4 *ps4_a_not_alarm 
-[828] MAINPROCESS(21) static VD fn_bsm_alart_set_reliable_jdg_mask_count ) 
-[829] MAINPROCESS(21) subproc SUBPROCESS(1) 
-[830] SUBPROCESS(1) if <start> if ( 
-[831] SUBPROCESS(1) if  (st_g_bsm_alarm_data.s4_alarm_prev == (S4)1 
-[832] SUBPROCESS(1) if  ) 
-[833] SUBPROCESS(1) if  ||  (*ps4_a_not_alarm == (S4)1)) 
-[834] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[835] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_reliable_jdg_mask_count (U1)12;
-[836] SUBPROCESS(2) else<start> else 
-[837] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[838] SUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_reliable_jdg_mask_count = (U1)u2_data_add(st_g_bsm_loop_data.u1_reliable_jdg_mask_count, (S2)-1, (U2)CU1_U1MAX, (U2)0 
-[839] SUBSUBPROCESS(1) func<end> ); 
-[840] SUBPROCESS(3) proc return; 
-[841] MAINPROCESS(22) static VD fn_bsm_alart_set_backward_line_of_alarm_area<start> static VD fn_bsm_alart_set_backward_line_of_alarm_area( 
-[842] MAINPROCESS(22) static VD fn_bsm_alart_set_backward_line_of_alarm_area FL *pfl_a_alarm_area_y_min 
-[843] MAINPROCESS(22) static VD fn_bsm_alart_set_backward_line_of_alarm_area ) 
-[844] MAINPROCESS(22) subproc SUBPROCESS(1) 
-[845] SUBPROCESS(1) proc FL fl_t_shrink_keep_count_sec; 
-[846] SUBPROCESS(1) proc FL fl_t_alarm_area_y_min; 
-[847] SUBPROCESS(1) equal fl_t_alarm_area_y_min CFL_ALARM_Y_BACKWARD;
-[848] SUBPROCESS(1) if <start> if ( 
-[849] SUBPROCESS(1) if  (fl_g_v_self_bsm_for_base >= CFL_CANOUT_VSELF_MIN 
-[850] SUBPROCESS(1) if  ) 
-[851] SUBPROCESS(1) if  &&	((s2_g_curvr_for_base > (S4)0) 
-[852] SUBPROCESS(1) if  &&   (s2_g_curvr_for_base < (S4)30))) 
-[853] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[854] SUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_shrink_on_count = (U1)u2_data_add((U2)st_g_bsm_loop_data.u1_shrink_on_count, (S2)1, (U2)12, (U2)0 
-[855] SUBSUBPROCESS(1) func<end> ); 
-[856] SUBPROCESS(2) else<start> else 
-[857] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[858] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_shrink_on_count (U1)0;
-[859] SUBPROCESS(3) if <start> if ( 
-[860] SUBPROCESS(3) if  st_g_bsm_loop_data.u1_shrink_on_count >= (U1)12 
-[861] SUBPROCESS(3) if  ) 
-[862] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[863] SUBSUBPROCESS(1) equal fl_t_shrink_keep_count_sec ((FL)7.0F / (fl_g_v_self_bsm_for_base / (FL)3.6F)) + (FL)0.3F;
-[864] SUBSUBPROCESS(1) if <start> if ( 
-[865] SUBSUBPROCESS(1) if  fl_t_shrink_keep_count_sec > (FL)2.5F 
-[866] SUBSUBPROCESS(1) if  ) 
-[867] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[868] SUBSUBSUBPROCESS(1) equal fl_t_shrink_keep_count_sec (FL)2.5F;
-[869] SUBSUBPROCESS(2) func<start> st_g_bsm_loop_data.u1_shrink_keep_count = u1_cast_from_fl(fl_t_shrink_keep_count_sec / CFL_SAMPLING_TIME 
-[870] SUBSUBPROCESS(2) func<end> ); 
-[871] SUBPROCESS(4) if <start> if ( 
-[872] SUBPROCESS(4) if  fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN 
-[873] SUBPROCESS(4) if  ) 
-[874] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[875] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_shrink_keep_count (U1)0;
-[876] SUBPROCESS(5) if <start> if ( 
-[877] SUBPROCESS(5) if  s4_abs(s2_g_curvr_for_base) < (S4)30 
-[878] SUBPROCESS(5) if  ) 
-[879] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
-[880] SUBSUBPROCESS(1) equal fl_t_alarm_area_y_min (FL)-1.0F;
-[881] SUBPROCESS(6) else if <start> else if ( 
-[882] SUBPROCESS(6) else if  s4_abs(s2_g_curvr_for_base) < (S4)55 
-[883] SUBPROCESS(6) else if  ) 
-[884] SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
-[885] SUBSUBPROCESS(1) equal fl_t_alarm_area_y_min (FL)-4.0F;
-[886] SUBPROCESS(7) else<start> else 
-[887] SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
-[888] SUBSUBPROCESS(1) if <start> if ( 
-[889] SUBSUBPROCESS(1) if  st_g_bsm_loop_data.u1_shrink_keep_count > (U1)0 
-[890] SUBSUBPROCESS(1) if  ) 
-[891] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[892] SUBSUBSUBPROCESS(1) equal fl_t_alarm_area_y_min (FL)-4.0F;
-[893] SUBSUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_shrink_keep_count = (U1)u2_data_add((U2)st_g_bsm_loop_data.u1_shrink_keep_count, (S2)-1, (U2)31, (U2)0 
-[894] SUBSUBSUBPROCESS(1) func<end> ); 
-[895] SUBSUBPROCESS(2) else<start> else 
-[896] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[897] SUBPROCESS(8) equal *pfl_a_alarm_area_y_min fl_t_alarm_area_y_min;
-[898] SUBPROCESS(8) proc return; 
-[899] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj<start> static VD fn_bsm_alart_check_cont_altobj( 
-[900] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 s4_final_a_target_num, 
-[901] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[902] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
-[903] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 as4_a_checked_target[TARGET_BUFFSIZE], 
-[904] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 as4_a_checked_alarmed[TARGET_BUFFSIZE], 
-[905] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 as4_a_alarmed_target_num_current[1], 
-[906] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
-[907] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 *ps4_a_tos_flg, 
-[908] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 *ps4_a_alarm_flg 
-[909] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj ) 
-[910] MAINPROCESS(23) subproc SUBPROCESS(1) 
-[911] SUBPROCESS(1) func<start> fn_bsm_alart_check_tos_status( 
-[912] SUBPROCESS(1) func ps4_a_tos_flg 
-[913] SUBPROCESS(1) func<end> ); 
-[914] SUBPROCESS(1) func<start> fn_bsm_alart_cont_altobj( 
-[915] SUBPROCESS(1) func s4_final_a_target_num, 
-[916] SUBPROCESS(1) func as4_a_Tx_int, 
-[917] SUBPROCESS(1) func afl_a_Tx_float, 
-[918] SUBPROCESS(1) func as4_a_checked_target, 
-[919] SUBPROCESS(1) func as4_a_checked_alarmed, 
-[920] SUBPROCESS(1) func as4_a_alarmed_target_num_current, 
-[921] SUBPROCESS(1) func afl_a_alarmed_target_current, 
-[922] SUBPROCESS(1) func ps4_a_alarm_flg 
-[923] SUBPROCESS(1) func<end> ); 
-[924] SUBPROCESS(1) proc return; 
-[925] MAINPROCESS(24) static VD fn_bsm_alart_check_tos_status<start> static VD fn_bsm_alart_check_tos_status( 
-[926] MAINPROCESS(24) static VD fn_bsm_alart_check_tos_status S4 *ps4_a_tos_flg 
-[927] MAINPROCESS(24) static VD fn_bsm_alart_check_tos_status ) 
-[928] MAINPROCESS(24) subproc SUBPROCESS(1) 
-[929] SUBPROCESS(1) proc S4 i; 
-[930] SUBPROCESS(1) equal *ps4_a_tos_flg 0;
-[931] SUBPROCESS(1) for<start> for( 
-[932] SUBPROCESS(1) for i=0; 
-[933] SUBPROCESS(1) for i<st_g_bsm_alarm_data.as4_alarmed_num[0]; 
-[934] SUBPROCESS(1) for i++) 
-[935] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[936] SUBSUBPROCESS(1) if<start> if( 
-[937] SUBSUBPROCESS(1) if st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_TOS 
-[938] SUBSUBPROCESS(1) if ) 
-[939] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[940] SUBSUBSUBPROCESS(1) equal *ps4_a_tos_flg 1;
-[941] SUBSUBSUBPROCESS(1) proc break; 
-[942] SUBPROCESS(2) proc return; 
-[943] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj<start> static VD fn_bsm_alart_cont_altobj( 
-[944] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 s4_final_a_target_num, 
-[945] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj signed long as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[946] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
-[947] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 as4_a_checked_target[TARGET_BUFFSIZE], 
-[948] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 as4_a_checked_alarmed[TARGET_BUFFSIZE], 
-[949] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 as4_a_alarmed_target_num_current[1], 
-[950] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
-[951] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 *ps4_a_alarm_flg 
-[952] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj ) 
-[953] MAINPROCESS(25) subproc SUBPROCESS(1) 
-[954] SUBPROCESS(1) proc S4 i; 
-[955] SUBPROCESS(1) proc S4 s4_t_index; 
-[956] SUBPROCESS(1) proc S4 s4_t_selected_alarmed_target_index; 
-[957] SUBPROCESS(1) for<start> for( 
-[958] SUBPROCESS(1) for i=0; 
-[959] SUBPROCESS(1) for i<s4_final_a_target_num; 
-[960] SUBPROCESS(1) for i++) 
-[961] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[962] SUBSUBPROCESS(1) equal s4_t_index -1;
-[963] SUBSUBPROCESS(1) equal s4_t_selected_alarmed_target_index -1;
-[964] SUBSUBPROCESS(1) func<start> fn_bsm_alart_select_altobj_prev( 
-[965] SUBSUBPROCESS(1) func &as4_a_Tx_int[i], 
-[966] SUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
-[967] SUBSUBPROCESS(1) func &s4_t_selected_alarmed_target_index 
-[968] SUBSUBPROCESS(1) func<end> ); 
-[969] SUBSUBPROCESS(1) if<start> if( 
-[970] SUBSUBPROCESS(1) if s4_t_selected_alarmed_target_index != -1 
-[971] SUBSUBPROCESS(1) if ) 
-[972] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[973] SUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_set_altobj_cur( 
-[974] SUBSUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
-[975] SUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&st_g_bsm_alarm_data.afl_alarmed_target[s4_t_selected_alarmed_target_index], 
-[976] SUBSUBSUBPROCESS(1) func (const S4 (*))as4_a_alarmed_target_num_current, 
-[977] SUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])afl_a_alarmed_target_current, 
-[978] SUBSUBSUBPROCESS(1) func &s4_t_index 
-[979] SUBSUBSUBPROCESS(1) func<end> ); 
-[980] SUBSUBSUBPROCESS(1) equal as4_a_checked_target[i] 1;
-[981] SUBSUBSUBPROCESS(1) equal as4_a_checked_alarmed[s4_t_selected_alarmed_target_index] 1;
-[982] SUBSUBPROCESS(2) if<start> if( 
-[983] SUBSUBPROCESS(2) if s4_t_index != -1 
-[984] SUBSUBPROCESS(2) if ) 
-[985] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[986] SUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_store_cont_altobj( 
-[987] SUBSUBSUBPROCESS(1) func (const signed long (*)[NORM_INT])&as4_a_Tx_int[i], 
-[988] SUBSUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
-[989] SUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&st_g_bsm_alarm_data.afl_alarmed_target[s4_t_selected_alarmed_target_index], 
-[990] SUBSUBSUBPROCESS(1) func &afl_a_alarmed_target_current[as4_a_alarmed_target_num_current[0]], 
-[991] SUBSUBSUBPROCESS(1) func ps4_a_alarm_flg 
-[992] SUBSUBSUBPROCESS(1) func<end> ); 
-[993] SUBSUBSUBPROCESS(1) proc as4_a_alarmed_target_num_current[0]++; 
-[994] SUBPROCESS(2) proc return; 
-[995] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev<start> static VD fn_bsm_alart_select_altobj_prev( 
-[996] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev signed long as4_a_Tx_int[1][NORM_INT], 
-[997] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev const FL afl_a_Tx_float[1][TGT_FLT], 
-[998] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev S4 *ps4_a_selected_alarmed_target_index 
-[999] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev ) 
-[1000] MAINPROCESS(26) subproc SUBPROCESS(1) 
-[1001] SUBPROCESS(1) proc S4 j; 
-[1002] SUBPROCESS(1) proc FL object_x; 
-[1003] SUBPROCESS(1) proc FL object_y; 
-[1004] SUBPROCESS(1) proc FL alarmed_x; 
-[1005] SUBPROCESS(1) proc FL alarmed_y; 
-[1006] SUBPROCESS(1) func<start> FL tmp_xydiff_min = fl_abs(CFL_UNKNOWN_VALUE*2 
-[1007] SUBPROCESS(1) func<end> ); 
-[1008] SUBPROCESS(1) equal object_x afl_a_Tx_float[0][9];
-[1009] SUBPROCESS(1) equal object_y afl_a_Tx_float[0][10];
-[1010] SUBPROCESS(1) if<start> if( 
-[1011] SUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
-[1012] SUBPROCESS(1) if ) 
-[1013] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1014] SUBSUBPROCESS(1) equal object_x -object_x;
-[1015] SUBPROCESS(2) equal *ps4_a_selected_alarmed_target_index -1;
-[1016] SUBPROCESS(2) func<start> tmp_xydiff_min = fl_abs(CFL_UNKNOWN_VALUE*2.0F 
-[1017] SUBPROCESS(2) func<end> ); 
-[1018] SUBPROCESS(2) for<start> for( 
-[1019] SUBPROCESS(2) for j=0; 
-[1020] SUBPROCESS(2) for j<st_g_bsm_alarm_data.as4_alarmed_num[0]; 
-[1021] SUBPROCESS(2) for j++) 
-[1022] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1023] SUBSUBPROCESS(1) equal alarmed_x st_g_bsm_alarm_data.afl_alarmed_target[j][0];
-[1024] SUBSUBPROCESS(1) if<start> if( 
-[1025] SUBSUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
-[1026] SUBSUBPROCESS(1) if ) 
-[1027] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[1028] SUBSUBSUBPROCESS(1) equal alarmed_x - alarmed_x;
-[1029] SUBSUBPROCESS(2) equal alarmed_y st_g_bsm_alarm_data.afl_alarmed_target[j][1];
-[1030] SUBSUBPROCESS(2) if <start> if ( 
-[1031] SUBSUBPROCESS(2) if  (fl_abs(object_x - alarmed_x) < RX_TH_ALM 
-[1032] SUBSUBPROCESS(2) if  ) 
-[1033] SUBSUBPROCESS(2) if  &&  (fl_abs(object_y - alarmed_y) < RY_TH_ALM) 
-[1034] SUBSUBPROCESS(2) if  &&  (tmp_xydiff_min > (fl_abs(object_x - alarmed_x) + fl_abs(object_y - alarmed_y)))) 
-[1035] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[1036] SUBSUBSUBPROCESS(1) func<start> tmp_xydiff_min = fl_abs(object_x - alarmed_x) + fl_abs(object_y - alarmed_y 
-[1037] SUBSUBSUBPROCESS(1) func<end> ); 
-[1038] SUBSUBSUBPROCESS(1) equal *ps4_a_selected_alarmed_target_index j;
-[1039] SUBPROCESS(3) proc return; 
-[1040] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur<start> static VD fn_bsm_alart_set_altobj_cur( 
-[1041] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur const FL afl_a_Tx_float[1][TGT_FLT], 
-[1042] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
-[1043] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur const S4 as4_a_alarmed_target_num_current[1], 
-[1044] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur const FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
-[1045] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur S4 *ps4_a_index 
-[1046] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur ) 
-[1047] MAINPROCESS(27) subproc SUBPROCESS(1) 
-[1048] SUBPROCESS(1) proc S4 k; 
-[1049] SUBPROCESS(1) proc FL object_x; 
-[1050] SUBPROCESS(1) proc FL object_y; 
-[1051] SUBPROCESS(1) proc FL tmp_x_min; 
-[1052] SUBPROCESS(1) proc FL tmp_x_max; 
-[1053] SUBPROCESS(1) proc FL tmp_y_min; 
-[1054] SUBPROCESS(1) proc FL tmp_y_max; 
-[1055] SUBPROCESS(1) proc FL tmp_alarm_area[4]; 
-[1056] SUBPROCESS(1) proc FL tmp_offset[3]; 
-[1057] SUBPROCESS(1) proc FL tmp_comp; 
-[1058] SUBPROCESS(1) proc FL tmp_min; 
-[1059] SUBPROCESS(1) equal object_x afl_a_Tx_float[0][9];
-[1060] SUBPROCESS(1) equal object_y afl_a_Tx_float[0][10];
-[1061] SUBPROCESS(1) if<start> if( 
-[1062] SUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
-[1063] SUBPROCESS(1) if ) 
-[1064] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1065] SUBSUBPROCESS(1) equal object_x -object_x;
-[1066] SUBPROCESS(2) equal tmp_alarm_area[0] afl_a_alarmed_target[0][12];
-[1067] SUBPROCESS(2) equal tmp_alarm_area[1] afl_a_alarmed_target[0][13];
-[1068] SUBPROCESS(2) equal tmp_alarm_area[2] afl_a_alarmed_target[0][14];
-[1069] SUBPROCESS(2) equal tmp_alarm_area[3] afl_a_alarmed_target[0][15];
-[1070] SUBPROCESS(2) equal tmp_offset[0] ALARM_X_OFFSET_OUT;
-[1071] SUBPROCESS(2) equal tmp_offset[1] ALARM_Y_OFFSET;
-[1072] SUBPROCESS(2) equal tmp_offset[2] ALARM_X_OFFSET_IN;
-[1073] SUBPROCESS(2) func<start> get_hysteresis_area( 
-[1074] SUBPROCESS(2) func object_y, 
-[1075] SUBPROCESS(2) func afl_a_alarmed_target[0][4], 
-[1076] SUBPROCESS(2) func tmp_alarm_area, 
-[1077] SUBPROCESS(2) func tmp_offset 
-[1078] SUBPROCESS(2) func<end> ); 
-[1079] SUBPROCESS(2) equal tmp_x_min tmp_alarm_area[0];
-[1080] SUBPROCESS(2) equal tmp_x_max tmp_alarm_area[1];
-[1081] SUBPROCESS(2) equal tmp_y_min tmp_alarm_area[2];
-[1082] SUBPROCESS(2) equal tmp_y_max tmp_alarm_area[3];
-[1083] SUBPROCESS(2) if <start> if ( 
-[1084] SUBPROCESS(2) if  afl_a_Tx_float[0][15] < (FL)0.1F 
-[1085] SUBPROCESS(2) if  ) 
-[1086] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1087] SUBSUBPROCESS(1) equal tmp_x_max + (FL)0.1F;
-[1088] SUBPROCESS(3) if <start> if ( 
-[1089] SUBPROCESS(3) if  (object_x > tmp_x_min 
-[1090] SUBPROCESS(3) if  ) 
-[1091] SUBPROCESS(3) if  &&  (object_x < tmp_x_max) 
-[1092] SUBPROCESS(3) if  &&  (object_y < tmp_y_max) 
-[1093] SUBPROCESS(3) if  &&  (object_y > tmp_y_min)) 
-[1094] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[1095] SUBSUBPROCESS(1) if<start> if( 
-[1096] SUBSUBPROCESS(1) if as4_a_alarmed_target_num_current[0] < (S4)(TARGET_BUFFSIZE-1) 
-[1097] SUBSUBPROCESS(1) if ) 
-[1098] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[1099] SUBSUBSUBPROCESS(1) equal *ps4_a_index as4_a_alarmed_target_num_current[0];
-[1100] SUBSUBPROCESS(2) else<start> else 
-[1101] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[1102] SUBSUBSUBPROCESS(1) equal tmp_min 1000.0F;
-[1103] SUBSUBSUBPROCESS(1) equal tmp_comp 0.0F;
-[1104] SUBSUBSUBPROCESS(1) for<start> for( 
-[1105] SUBSUBSUBPROCESS(1) for k=0; 
-[1106] SUBSUBSUBPROCESS(1) for k<TARGET_BUFFSIZE; 
-[1107] SUBSUBSUBPROCESS(1) for k++) 
-[1108] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[1109] SUBSUBSUBSUBPROCESS(1) ??? tmp_comp = fl_abs(afl_a_alarmed_target_current[k][0]-afl_a_Tx_float[0][8]) 
-[1110] SUBSUBSUBSUBPROCESS(1) func<start> + fl_abs(afl_a_alarmed_target_current[k][1]-afl_a_Tx_float[0][7] 
-[1111] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[1112] SUBSUBSUBSUBPROCESS(1) if<start> if( 
-[1113] SUBSUBSUBSUBPROCESS(1) if tmp_comp < tmp_min 
-[1114] SUBSUBSUBSUBPROCESS(1) if ) 
-[1115] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[1116] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_index k;
-[1117] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_min tmp_comp;
-[1118] SUBPROCESS(4) proc return; 
-[1119] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj<start> static VD fn_bsm_alart_store_cont_altobj( 
-[1120] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj const signed long as4_a_Tx_int[1][NORM_INT], 
-[1121] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj const FL afl_a_Tx_float[1][TGT_FLT], 
-[1122] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
-[1123] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj FL afl_a_alarmed_target_current[1][ALARM_INFO_SIZE], 
-[1124] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj S4 *ps4_a_alarm_flg 
-[1125] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj ) 
-[1126] MAINPROCESS(28) subproc SUBPROCESS(1) 
-[1127] SUBPROCESS(1) proc S4 tmp_peak_bin_up; 
-[1128] SUBPROCESS(1) proc S4 tmp_peak_bin_dn; 
-[1129] SUBPROCESS(1) proc S4 tmp_start; 
-[1130] SUBPROCESS(1) proc S4 tmp_end; 
-[1131] SUBPROCESS(1) proc FL tmp_power_up; 
-[1132] SUBPROCESS(1) proc FL tmp_power_dn; 
-[1133] SUBPROCESS(1) equal *ps4_a_alarm_flg 1;
-[1134] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][0] afl_a_Tx_float[0][9];
-[1135] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][1] afl_a_Tx_float[0][10];
-[1136] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][2] (FL)as4_a_Tx_int[0][11];
-[1137] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][3] afl_a_alarmed_target[0][3] + 1.0F;
-[1138] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][4] afl_a_alarmed_target[0][4];
-[1139] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][5] afl_a_alarmed_target[0][5];
-[1140] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][6] afl_a_alarmed_target[0][6];
-[1141] SUBPROCESS(1) equal tmp_peak_bin_up as4_a_Tx_int[0][4];
-[1142] SUBPROCESS(1) equal tmp_peak_bin_dn as4_a_Tx_int[0][5];
-[1143] SUBPROCESS(1) equal tmp_start tmp_peak_bin_up-5;
-[1144] SUBPROCESS(1) equal tmp_end tmp_peak_bin_up+5;
-[1145] SUBPROCESS(1) func<start> tmp_power_up = get_fmpower_of_specified_interval( 
-[1146] SUBPROCESS(1) func (const FL (*))afl_g_cvw_lfm_ftt_power[0], 
-[1147] SUBPROCESS(1) func tmp_start, 
-[1148] SUBPROCESS(1) func tmp_end 
-[1149] SUBPROCESS(1) func<end> ); 
-[1150] SUBPROCESS(1) equal tmp_start tmp_peak_bin_dn-5;
-[1151] SUBPROCESS(1) equal tmp_end tmp_peak_bin_dn+5;
-[1152] SUBPROCESS(1) func<start> tmp_power_dn = get_fmpower_of_specified_interval( 
-[1153] SUBPROCESS(1) func (const FL (*))afl_g_cvw_lfm_ftt_power[1], 
-[1154] SUBPROCESS(1) func tmp_start, 
-[1155] SUBPROCESS(1) func tmp_end 
-[1156] SUBPROCESS(1) func<end> ); 
-[1157] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][7] (tmp_power_up+tmp_power_dn)*0.5F - afl_a_alarmed_target_current[0][6];
-[1158] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][8] afl_a_Tx_float[0][15];
-[1159] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][9] afl_a_Tx_float[0][16];
-[1160] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][10] afl_a_alarmed_target[0][10];
-[1161] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][11] afl_a_alarmed_target[0][11];
-[1162] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][12] afl_a_alarmed_target[0][12];
-[1163] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][13] afl_a_alarmed_target[0][13];
-[1164] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][14] afl_a_alarmed_target[0][14];
-[1165] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][15] afl_a_alarmed_target[0][15];
-[1166] SUBPROCESS(1) proc return; 
-[1167] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj<start> static VD fn_bsm_alart_check_exp_altobj( 
-[1168] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj S4 as4_a_checked_alarmed[TARGET_BUFFSIZE], 
-[1169] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj S4 as4_a_alarmed_target_num_current[1], 
-[1170] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
-[1171] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj S4 *ps4_a_alarm_flg 
-[1172] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj ) 
-[1173] MAINPROCESS(29) subproc SUBPROCESS(1) 
-[1174] SUBPROCESS(1) proc S4 i; 
-[1175] SUBPROCESS(1) proc S4 s4_t_lost; 
-[1176] SUBPROCESS(1) for<start> for( 
-[1177] SUBPROCESS(1) for i=0; 
-[1178] SUBPROCESS(1) for i<st_g_bsm_alarm_data.as4_alarmed_num[0]; 
-[1179] SUBPROCESS(1) for i++) 
-[1180] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1181] SUBSUBPROCESS(1) if<start> if( 
-[1182] SUBSUBPROCESS(1) if as4_a_checked_alarmed[i]==0 
-[1183] SUBSUBPROCESS(1) if ) 
-[1184] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[1185] SUBSUBSUBPROCESS(1) equal s4_t_lost 0;
-[1186] SUBSUBSUBPROCESS(1) func<start> s4_t_lost = s4_bsm_alart_set_exp_altobj( 
-[1187] SUBSUBSUBPROCESS(1) func &st_g_bsm_alarm_data.afl_alarmed_target[i] 
-[1188] SUBSUBSUBPROCESS(1) func<end> ); 
-[1189] SUBSUBSUBPROCESS(1) if<start> if( 
-[1190] SUBSUBSUBPROCESS(1) if s4_t_lost != 0 
-[1191] SUBSUBSUBPROCESS(1) if ) 
-[1192] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[1193] SUBSUBSUBSUBPROCESS(1) if<start> if( 
-[1194] SUBSUBSUBSUBPROCESS(1) if as4_a_alarmed_target_num_current[0] < (S4)(TARGET_BUFFSIZE-1) 
-[1195] SUBSUBSUBSUBPROCESS(1) if ) 
-[1196] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[1197] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_alarm_flg 1;
-[1198] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_store_exp_altobj( 
-[1199] SUBSUBSUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&st_g_bsm_alarm_data.afl_alarmed_target[i], 
-[1200] SUBSUBSUBSUBSUBPROCESS(1) func &afl_a_alarmed_target_current[as4_a_alarmed_target_num_current[0]] 
-[1201] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
-[1202] SUBSUBSUBSUBSUBPROCESS(1) equal as4_a_checked_alarmed[i] 1;
-[1203] SUBSUBSUBSUBSUBPROCESS(1) proc as4_a_alarmed_target_num_current[0]++; 
-[1204] SUBPROCESS(2) proc return; 
-[1205] MAINPROCESS(30) static S4 s4_bsm_alart_set_exp_altobj<start> static S4 s4_bsm_alart_set_exp_altobj( 
-[1206] MAINPROCESS(30) static S4 s4_bsm_alart_set_exp_altobj FL afl_a_alarmed_target[1][ALARM_INFO_SIZE] 
-[1207] MAINPROCESS(30) static S4 s4_bsm_alart_set_exp_altobj ) 
-[1208] MAINPROCESS(30) subproc SUBPROCESS(1) 
-[1209] SUBPROCESS(1) proc S4 s4_t_lost; 
-[1210] SUBPROCESS(1) proc FL alarmed_x; 
-[1211] SUBPROCESS(1) proc FL alarmed_y; 
-[1212] SUBPROCESS(1) proc FL tmp_x_min; 
-[1213] SUBPROCESS(1) proc FL tmp_x_max; 
-[1214] SUBPROCESS(1) proc FL tmp_y_min; 
-[1215] SUBPROCESS(1) proc FL tmp_y_max; 
-[1216] SUBPROCESS(1) proc FL tmp_alarm_area[4]; 
-[1217] SUBPROCESS(1) proc FL tmp_offset[3]; 
-[1218] SUBPROCESS(1) equal tmp_offset[0] ALARM_X_OFFSET_OUT;
-[1219] SUBPROCESS(1) equal tmp_offset[1] ALARM_Y_OFFSET;
-[1220] SUBPROCESS(1) equal tmp_offset[2] ALARM_X_OFFSET_IN;
-[1221] SUBPROCESS(1) equal s4_t_lost 0;
-[1222] SUBPROCESS(1) equal alarmed_x afl_a_alarmed_target[0][0];
-[1223] SUBPROCESS(1) equal alarmed_y afl_a_alarmed_target[0][1];
-[1224] SUBPROCESS(1) if<start> if( 
-[1225] SUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
-[1226] SUBPROCESS(1) if ) 
-[1227] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1228] SUBSUBPROCESS(1) equal alarmed_x - alarmed_x;
-[1229] SUBPROCESS(2) equal tmp_alarm_area[0] afl_a_alarmed_target[0][12];
-[1230] SUBPROCESS(2) equal tmp_alarm_area[1] afl_a_alarmed_target[0][13];
-[1231] SUBPROCESS(2) equal tmp_alarm_area[2] afl_a_alarmed_target[0][14];
-[1232] SUBPROCESS(2) equal tmp_alarm_area[3] afl_a_alarmed_target[0][15];
-[1233] SUBPROCESS(2) func<start> get_hysteresis_area( 
-[1234] SUBPROCESS(2) func alarmed_y, 
-[1235] SUBPROCESS(2) func afl_a_alarmed_target[0][4], 
-[1236] SUBPROCESS(2) func tmp_alarm_area, 
-[1237] SUBPROCESS(2) func tmp_offset 
-[1238] SUBPROCESS(2) func<end> ); 
-[1239] SUBPROCESS(2) equal tmp_x_min tmp_alarm_area[0];
-[1240] SUBPROCESS(2) equal tmp_x_max tmp_alarm_area[1];
-[1241] SUBPROCESS(2) equal tmp_y_min tmp_alarm_area[2];
-[1242] SUBPROCESS(2) equal tmp_y_max tmp_alarm_area[3];
-[1243] SUBPROCESS(2) if<start> if( 
-[1244] SUBPROCESS(2) if afl_a_alarmed_target[0][4]==ALARM_TYPE_SOT 
-[1245] SUBPROCESS(2) if ) 
-[1246] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1247] SUBSUBPROCESS(1) func<start> s4_t_lost = s4_bsm_alart_check_exp_sot( 
-[1248] SUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&afl_a_alarmed_target[0], 
-[1249] SUBSUBPROCESS(1) func alarmed_x, 
-[1250] SUBSUBPROCESS(1) func alarmed_y, 
-[1251] SUBSUBPROCESS(1) func tmp_x_min, 
-[1252] SUBSUBPROCESS(1) func tmp_x_max, 
-[1253] SUBSUBPROCESS(1) func tmp_y_min, 
-[1254] SUBSUBPROCESS(1) func tmp_y_max 
-[1255] SUBSUBPROCESS(1) func<end> ); 
-[1256] SUBPROCESS(3) else if<start> else if( 
-[1257] SUBPROCESS(3) else if afl_a_alarmed_target[0][4]==ALARM_TYPE_TOS 
-[1258] SUBPROCESS(3) else if ) 
-[1259] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[1260] SUBSUBPROCESS(1) func<start> s4_t_lost = s4_bsm_alart_check_exp_tos( 
-[1261] SUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&afl_a_alarmed_target[0], 
-[1262] SUBSUBPROCESS(1) func alarmed_x, 
-[1263] SUBSUBPROCESS(1) func alarmed_y, 
-[1264] SUBSUBPROCESS(1) func tmp_x_min, 
-[1265] SUBSUBPROCESS(1) func tmp_x_max, 
-[1266] SUBSUBPROCESS(1) func tmp_y_min, 
-[1267] SUBSUBPROCESS(1) func tmp_y_max 
-[1268] SUBSUBPROCESS(1) func<end> ); 
-[1269] SUBPROCESS(4) else<start> else 
-[1270] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[1271] SUBSUBPROCESS(1) func<start> s4_t_lost = s4_bsm_alart_check_exp_other( 
-[1272] SUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&afl_a_alarmed_target[0], 
-[1273] SUBSUBPROCESS(1) func alarmed_x, 
-[1274] SUBSUBPROCESS(1) func alarmed_y, 
-[1275] SUBSUBPROCESS(1) func tmp_x_min, 
-[1276] SUBSUBPROCESS(1) func tmp_x_max, 
-[1277] SUBSUBPROCESS(1) func tmp_y_min, 
-[1278] SUBSUBPROCESS(1) func tmp_y_max 
-[1279] SUBSUBPROCESS(1) func<end> ); 
-[1280] SUBPROCESS(5) proc return s4_t_lost; 
-[1281] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot<start> static S4 s4_bsm_alart_check_exp_sot( 
-[1282] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
-[1283] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_alarmed_x, 
-[1284] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_alarmed_y, 
-[1285] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_x_min, 
-[1286] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_x_max, 
-[1287] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_y_min, 
-[1288] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_y_max 
-[1289] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot ) 
-[1290] MAINPROCESS(31) subproc SUBPROCESS(1) 
-[1291] SUBPROCESS(1) proc S4 s4_t_lost; 
-[1292] SUBPROCESS(1) proc S4 s4_t_lost_max; 
-[1293] SUBPROCESS(1) equal s4_t_lost 0;
-[1294] SUBPROCESS(1) equal s4_t_lost_max ALARM_SOT_LOST_MAX;
-[1295] SUBPROCESS(1) if<start> if( 
-[1296] SUBPROCESS(1) if st_g_bsm_loop_data.as4_flg_tos_end[0] > 1 
-[1297] SUBPROCESS(1) if ) 
-[1298] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1299] SUBSUBPROCESS(1) equal s4_t_lost_max ALARM_TOS_END_LOST_MAX;
-[1300] SUBPROCESS(2) if<start> if( 
-[1301] SUBPROCESS(2) if st_g_bsm_loop_data.u1_truck_flg != (U1)0 
-[1302] SUBPROCESS(2) if ) 
-[1303] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1304] SUBSUBPROCESS(1) equal s4_t_lost_max + ALARM_LOST_TRK_EXTEND;
-[1305] SUBPROCESS(3) if <start> if ( 
-[1306] SUBPROCESS(3) if  (st_g_bsm_loop_data.u1_fa_delete_count > (U1)0 
-[1307] SUBPROCESS(3) if  ) 
-[1308] SUBPROCESS(3) if  &&  (fl_a_alarmed_y > CFL_FA_DELETE_AREA)) 
-[1309] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[1310] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)0;
-[1311] SUBPROCESS(4) if <start> if ( 
-[1312] SUBPROCESS(4) if  (fl_a_alarmed_x > fl_a_x_min 
-[1313] SUBPROCESS(4) if  ) 
-[1314] SUBPROCESS(4) if  &&  (fl_a_alarmed_x < fl_a_x_max) 
-[1315] SUBPROCESS(4) if  &&  (fl_a_alarmed_y > fl_a_y_min) 
-[1316] SUBPROCESS(4) if  &&  (fl_a_alarmed_y < fl_a_y_max) 
-[1317] SUBPROCESS(4) if  &&  (afl_a_alarmed_target[0][5] < (FL)s4_t_lost_max)) 
-[1318] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[1319] SUBSUBPROCESS(1) equal s4_t_lost 1;
-[1320] SUBPROCESS(5) proc return s4_t_lost; 
-[1321] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos<start> static S4 s4_bsm_alart_check_exp_tos( 
-[1322] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
-[1323] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_alarmed_x, 
-[1324] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_alarmed_y, 
-[1325] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_x_min, 
-[1326] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_x_max, 
-[1327] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_y_min, 
-[1328] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_y_max 
-[1329] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos ) 
-[1330] MAINPROCESS(32) subproc SUBPROCESS(1) 
-[1331] SUBPROCESS(1) proc S4 s4_t_lost; 
-[1332] SUBPROCESS(1) proc S4 s4_t_lost_max; 
-[1333] SUBPROCESS(1) proc U1 u1_t_jdg_b25_flg; 
-[1334] SUBPROCESS(1) equal s4_t_lost 0;
-[1335] SUBPROCESS(1) func<start> u1_t_jdg_b25_flg = u1_bsm_alart_check_exp_tos_b25(fl_a_alarmed_y, fl_a_y_max 
-[1336] SUBPROCESS(1) func<end> ); 
-[1337] SUBPROCESS(1) if<start> if( 
-[1338] SUBPROCESS(1) if u1_t_jdg_b25_flg == CU1_TRUE 
-[1339] SUBPROCESS(1) if ) 
-[1340] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1341] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)CU1_ALARM_TOS_LOST_MAX_FWD;
-[1342] SUBPROCESS(2) else<start> else 
-[1343] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1344] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)CU1_ALARM_TOS_LOST_MAX;
-[1345] SUBPROCESS(3) if<start> if( 
-[1346] SUBPROCESS(3) if st_g_bsm_loop_data.as4_flg_tos_end[0] > 1 
-[1347] SUBPROCESS(3) if ) 
-[1348] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[1349] SUBSUBPROCESS(1) equal s4_t_lost_max ALARM_TOS_END_LOST_MAX;
-[1350] SUBPROCESS(4) if <start> if ( 
-[1351] SUBPROCESS(4) if  (st_g_bsm_loop_data.u1_fa_delete_count > (U1)0 
-[1352] SUBPROCESS(4) if  ) 
-[1353] SUBPROCESS(4) if  &&  (fl_a_alarmed_y > CFL_FA_DELETE_AREA)) 
-[1354] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[1355] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)0;
-[1356] SUBPROCESS(5) if <start> if ( 
-[1357] SUBPROCESS(5) if  (fl_a_alarmed_x > fl_a_x_min 
-[1358] SUBPROCESS(5) if  ) 
-[1359] SUBPROCESS(5) if  &&  (fl_a_alarmed_x < fl_a_x_max) 
-[1360] SUBPROCESS(5) if  &&  (fl_a_alarmed_y > fl_a_y_min) 
-[1361] SUBPROCESS(5) if  &&  (fl_a_alarmed_y < fl_a_y_max) 
-[1362] SUBPROCESS(5) if  &&  (afl_a_alarmed_target[0][5] < (FL)s4_t_lost_max) 
-[1363] SUBPROCESS(5) if  &&  (afl_a_alarmed_target[0][7] > ALARM_POWER_TOS_TH)) 
-[1364] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
-[1365] SUBSUBPROCESS(1) equal s4_t_lost 1;
-[1366] SUBPROCESS(6) proc return s4_t_lost; 
-[1367] MAINPROCESS(33) static U1 u1_bsm_alart_check_exp_tos_b25<start> static U1 u1_bsm_alart_check_exp_tos_b25( 
-[1368] MAINPROCESS(33) static U1 u1_bsm_alart_check_exp_tos_b25 FL fl_a_alarmed_y, FL fl_a_alarm_area_ymax 
-[1369] MAINPROCESS(33) static U1 u1_bsm_alart_check_exp_tos_b25 ) 
-[1370] MAINPROCESS(33) subproc SUBPROCESS(1) 
-[1371] SUBPROCESS(1) proc U1 u1_t_jdg_b25_flag; 
-[1372] SUBPROCESS(1) equal u1_t_jdg_b25_flag CU1_FALSE;
-[1373] SUBPROCESS(1) if <start> if ( 
-[1374] SUBPROCESS(1) if  fl_a_alarmed_y >= (fl_a_alarm_area_ymax - (FL)1.0F) 
-[1375] SUBPROCESS(1) if  ) 
-[1376] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[516] SUBPROCESS(4) func<start> fn_bsm_alart_check_cont_altobj( 
+[517] SUBPROCESS(4) func s4_a_final_target_num, 
+[518] SUBPROCESS(4) func as4_a_Tx_int, 
+[519] SUBPROCESS(4) func afl_a_Tx_float, 
+[520] SUBPROCESS(4) func tmp_checked_target, 
+[521] SUBPROCESS(4) func tmp_checked_alarmed, 
+[522] SUBPROCESS(4) func tmp_alarmed_num, 
+[523] SUBPROCESS(4) func tmp_alarmed_target, 
+[524] SUBPROCESS(4) func &tos_flg, 
+[525] SUBPROCESS(4) func &iret 
+[526] SUBPROCESS(4) func<end> ); 
+[527] SUBPROCESS(4) func<start> fn_bsm_alart_check_exp_altobj( 
+[528] SUBPROCESS(4) func tmp_checked_alarmed, 
+[529] SUBPROCESS(4) func tmp_alarmed_num, 
+[530] SUBPROCESS(4) func tmp_alarmed_target, 
+[531] SUBPROCESS(4) func &iret 
+[532] SUBPROCESS(4) func<end> ); 
+[533] SUBPROCESS(4) func<start> fn_bsm_alart_check_new_altobj( 
+[534] SUBPROCESS(4) func s4_a_final_target_num, 
+[535] SUBPROCESS(4) func as4_a_Tx_int, 
+[536] SUBPROCESS(4) func afl_a_Tx_float, 
+[537] SUBPROCESS(4) func (const S4 (*))tmp_checked_target, 
+[538] SUBPROCESS(4) func tos_flg, 
+[539] SUBPROCESS(4) func tmp_alarmed_num, 
+[540] SUBPROCESS(4) func tmp_alarmed_target, 
+[541] SUBPROCESS(4) func fl_t_alarm_area_y_min, 
+[542] SUBPROCESS(4) func &iret 
+[543] SUBPROCESS(4) func<end> ); 
+[544] SUBPROCESS(4) func<start> fn_bsm_alart_set_alart_target( 
+[545] SUBPROCESS(4) func (const S4 (*))tmp_alarmed_num, 
+[546] SUBPROCESS(4) func (const FL (*)[ALARM_INFO_SIZE])tmp_alarmed_target 
+[547] SUBPROCESS(4) func<end> ); 
+[548] SUBPROCESS(4) func<start> fn_bsm_alart_extend_alart( 
+[549] SUBPROCESS(4) func tos_flg, 
+[550] SUBPROCESS(4) func not_alarm, 
+[551] SUBPROCESS(4) func &iret 
+[552] SUBPROCESS(4) func<end> ); 
+[553] SUBPROCESS(4) for<start> for( 
+[554] SUBPROCESS(4) for i=0; 
+[555] SUBPROCESS(4) for i<TARGET_BUFFSIZE; 
+[556] SUBPROCESS(4) for i++) 
+[557] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[558] SUBSUBPROCESS(1) equal afl_g_alarmed_target_position[i][0] tmp_alarmed_target[i][0];
+[559] SUBSUBPROCESS(1) equal afl_g_alarmed_target_position[i][1] tmp_alarmed_target[i][1];
+[560] SUBPROCESS(5) proc return iret; 
+[561] MAINPROCESS(16) VD fn_bsm_alart_long_fa_cancel_main<start> VD fn_bsm_alart_long_fa_cancel_main( 
+[562] MAINPROCESS(16) VD fn_bsm_alart_long_fa_cancel_main U1 u1_a_alarming_flg, 
+[563] MAINPROCESS(16) VD fn_bsm_alart_long_fa_cancel_main S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[564] MAINPROCESS(16) VD fn_bsm_alart_long_fa_cancel_main FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT]) 
+[565] MAINPROCESS(16) subproc SUBPROCESS(1) 
+[566] SUBPROCESS(1) proc FL fl_t_delete_area; 
+[567] SUBPROCESS(1) proc U1 u1_t_flg_obj_delete; 
+[568] SUBPROCESS(1) func<start> fn_bsm_alart_long_fa_monitoring_target(u1_a_alarming_flg 
+[569] SUBPROCESS(1) func<end> ); 
+[570] SUBPROCESS(1) func<start> fn_bsm_alart_long_fa_set_delete_area(&fl_t_delete_area, &u1_t_flg_obj_delete 
+[571] SUBPROCESS(1) func<end> ); 
+[572] SUBPROCESS(1) func<start> fn_bsm_alart_long_fa_delete_obj(fl_t_delete_area, u1_t_flg_obj_delete, as4_a_Tx_int, afl_a_Tx_float 
+[573] SUBPROCESS(1) func<end> ); 
+[574] SUBPROCESS(1) proc return; 
+[575] MAINPROCESS(17) VD fn_bsm_alart_long_fa_monitoring_target<start> VD fn_bsm_alart_long_fa_monitoring_target( 
+[576] MAINPROCESS(17) VD fn_bsm_alart_long_fa_monitoring_target U1 u1_a_alarming_flg 
+[577] MAINPROCESS(17) VD fn_bsm_alart_long_fa_monitoring_target ) 
+[578] MAINPROCESS(17) subproc SUBPROCESS(1) 
+[579] SUBPROCESS(1) proc U4 u4_t_lp_target; 
+[580] SUBPROCESS(1) proc U4 u4_t_lp_max_target_num; 
+[581] SUBPROCESS(1) if <start> if ( 
+[582] SUBPROCESS(1) if  st_g_bsm_loop_data.as4_buf_pair_num[1] > (S4)TARGET_BUFFSIZE 
+[583] SUBPROCESS(1) if  ) 
+[584] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[585] SUBSUBPROCESS(1) equal u4_t_lp_max_target_num (U4)TARGET_BUFFSIZE;
+[586] SUBPROCESS(2) else<start> else 
+[587] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[588] SUBSUBPROCESS(1) equal u4_t_lp_max_target_num (U4)st_g_bsm_loop_data.as4_buf_pair_num[1];
+[589] SUBPROCESS(3) if <start> if ( 
+[590] SUBPROCESS(3) if  (u1_a_alarming_flg == (U1)1 
+[591] SUBPROCESS(3) if  ) 
+[592] SUBPROCESS(3) if  &&	(st_g_bsm_loop_data.u1_wall_flg_for_fa_judgement == (U1)1)) 
+[593] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[594] SUBSUBPROCESS(1) for <start> for ( 
+[595] SUBSUBPROCESS(1) for  u4_t_lp_target = (U4)0; 
+[596] SUBSUBPROCESS(1) for  u4_t_lp_target < u4_t_lp_max_target_num; 
+[597] SUBSUBPROCESS(1) for  u4_t_lp_target++) 
+[598] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[599] SUBSUBSUBPROCESS(1) if <start> if ( 
+[600] SUBSUBSUBPROCESS(1) if  ((st_g_bsm_loop_data.ast_target[u4_t_lp_target].fl_Ryfil > CFL_FA_MONITORING_AREA 
+[601] SUBSUBSUBPROCESS(1) if  ) 
+[602] SUBSUBSUBPROCESS(1) if  &&	 (st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[4] < (S4)80) 
+[603] SUBSUBSUBPROCESS(1) if  &&	 (st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[5] < (S4)80)) 
+[604] SUBSUBSUBPROCESS(1) if  ||	(st_g_bsm_loop_data.ast_target[u4_t_lp_target].fl_Ryfil > (FL)200.0F)) 
+[605] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[606] SUBSUBSUBSUBPROCESS(1) if <start> if ( 
+[607] SUBSUBSUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa >= (U4)125 
+[608] SUBSUBSUBSUBPROCESS(1) if  ) 
+[609] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[610] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa (U4)125;
+[611] SUBSUBSUBSUBPROCESS(2) else<start> else 
+[612] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[613] SUBSUBSUBSUBSUBPROCESS(1) proc st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa++; 
+[614] SUBSUBSUBPROCESS(2) else if <start> else if ( 
+[615] SUBSUBSUBPROCESS(2) else if  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)0 
+[616] SUBSUBSUBPROCESS(2) else if  ) 
+[617] SUBSUBSUBPROCESS(2) else if  &&  (st_g_bsm_loop_data.ast_target[u4_t_lp_target].fl_Ryfil > CFL_FA_MONITORING_AREA) 
+[618] SUBSUBSUBPROCESS(2) else if  &&  ((st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[4] < (S4)80) 
+[619] SUBSUBSUBPROCESS(2) else if  ||   (st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[5] < (S4)80))) 
+[620] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[621] SUBSUBSUBSUBPROCESS(1) if <start> if ( 
+[622] SUBSUBSUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa > (U4)0 
+[623] SUBSUBSUBSUBPROCESS(1) if  ) 
+[624] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[625] SUBSUBSUBSUBSUBPROCESS(1) proc st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa--; 
+[626] SUBSUBSUBPROCESS(3) else<start> else 
+[627] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[628] SUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa (U4)0;
+[629] SUBPROCESS(4) else<start> else 
+[630] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[631] SUBSUBPROCESS(1) for <start> for ( 
+[632] SUBSUBPROCESS(1) for  u4_t_lp_target = (U4)0; 
+[633] SUBSUBPROCESS(1) for  u4_t_lp_target < (U4)TARGET_BUFFSIZE; 
+[634] SUBSUBPROCESS(1) for  u4_t_lp_target++) 
+[635] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[636] SUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa (U4)0;
+[637] SUBPROCESS(5) proc return; 
+[638] MAINPROCESS(18) VD fn_bsm_alart_long_fa_set_delete_area<start> VD fn_bsm_alart_long_fa_set_delete_area( 
+[639] MAINPROCESS(18) VD fn_bsm_alart_long_fa_set_delete_area FL* pfl_a_delete_area, U1* pu1_a_flg_obj_delete 
+[640] MAINPROCESS(18) VD fn_bsm_alart_long_fa_set_delete_area ) 
+[641] MAINPROCESS(18) subproc SUBPROCESS(1) 
+[642] SUBPROCESS(1) proc U4 u4_t_lp_target; 
+[643] SUBPROCESS(1) proc U4 u4_t_ctr_fa_max; 
+[644] SUBPROCESS(1) proc FL fl_t_delete_area; 
+[645] SUBPROCESS(1) proc U1 u1_t_flg_obj_delete; 
+[646] SUBPROCESS(1) equal u1_t_flg_obj_delete CU1_DF_OFF;
+[647] SUBPROCESS(1) equal u4_t_ctr_fa_max (U4)0;
+[648] SUBPROCESS(1) for <start> for ( 
+[649] SUBPROCESS(1) for  u4_t_lp_target = (U4)0; 
+[650] SUBPROCESS(1) for  u4_t_lp_target < (U4)TARGET_BUFFSIZE; 
+[651] SUBPROCESS(1) for  u4_t_lp_target++) 
+[652] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[653] SUBSUBPROCESS(1) if <start> if ( 
+[654] SUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa > u4_t_ctr_fa_max 
+[655] SUBSUBPROCESS(1) if  ) 
+[656] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[657] SUBSUBSUBPROCESS(1) equal u4_t_ctr_fa_max st_g_bsm_loop_data.ast_target[u4_t_lp_target].u4_ctr_fa;
+[658] SUBPROCESS(2) if <start> if ( 
+[659] SUBPROCESS(2) if  u4_t_ctr_fa_max > (U4)CU1_TH_FA_DELETE_CYCLE 
+[660] SUBPROCESS(2) if  ) 
+[661] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[662] SUBSUBPROCESS(1) equal fl_t_delete_area CFL_FA_DELETE_AREA;
+[663] SUBSUBPROCESS(1) equal u1_t_flg_obj_delete CU1_DF_ON;
+[664] SUBPROCESS(3) else<start> else 
+[665] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[666] SUBSUBPROCESS(1) equal fl_t_delete_area (FL)100.0F;
+[667] SUBSUBPROCESS(1) equal u1_t_flg_obj_delete CU1_DF_OFF;
+[668] SUBPROCESS(4) proc return; 
+[669] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj<start> VD fn_bsm_alart_long_fa_delete_obj( 
+[670] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj FL fl_a_delete_area, 
+[671] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj U1 u1_a_flg_obj_delete, 
+[672] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[673] MAINPROCESS(19) VD fn_bsm_alart_long_fa_delete_obj FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT]) 
+[674] MAINPROCESS(19) subproc SUBPROCESS(1) 
+[675] SUBPROCESS(1) proc U4 u4_t_lp_target; 
+[676] SUBPROCESS(1) proc U4 u4_t_lp_final_target; 
+[677] SUBPROCESS(1) proc U4 u4_t_lp_normal; 
+[678] SUBPROCESS(1) proc U4 u4_t_lp_max_target_num; 
+[679] SUBPROCESS(1) proc U4 u4_t_lp_max_final_target_num; 
+[680] SUBPROCESS(1) proc U4 u4_t_lp_max_normal_num; 
+[681] SUBPROCESS(1) if <start> if ( 
+[682] SUBPROCESS(1) if  st_g_bsm_loop_data.as4_buf_pair_num[1] > (S4)TARGET_BUFFSIZE 
+[683] SUBPROCESS(1) if  ) 
+[684] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[685] SUBSUBPROCESS(1) equal u4_t_lp_max_target_num (U4)TARGET_BUFFSIZE;
+[686] SUBPROCESS(2) else<start> else 
+[687] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[688] SUBSUBPROCESS(1) equal u4_t_lp_max_target_num (U4)st_g_bsm_loop_data.as4_buf_pair_num[1];
+[689] SUBPROCESS(3) if <start> if ( 
+[690] SUBPROCESS(3) if  st_g_bsm_loop_data.s4_final_target_num > (S4)TARGET_BUFFSIZE 
+[691] SUBPROCESS(3) if  ) 
+[692] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[693] SUBSUBPROCESS(1) equal u4_t_lp_max_final_target_num (U4)TARGET_BUFFSIZE;
+[694] SUBPROCESS(4) else<start> else 
+[695] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[696] SUBSUBPROCESS(1) equal u4_t_lp_max_final_target_num (U4)st_g_bsm_loop_data.s4_final_target_num;
+[697] SUBPROCESS(5) if <start> if ( 
+[698] SUBPROCESS(5) if  st_g_bsm_loop_data.as4_buf_pair_num[0] > (S4)NORMAL_BUFFSIZE 
+[699] SUBPROCESS(5) if  ) 
+[700] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
+[701] SUBSUBPROCESS(1) equal u4_t_lp_max_normal_num (U4)NORMAL_BUFFSIZE;
+[702] SUBPROCESS(6) else<start> else 
+[703] SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
+[704] SUBSUBPROCESS(1) equal u4_t_lp_max_normal_num (U4)st_g_bsm_loop_data.as4_buf_pair_num[0];
+[705] SUBPROCESS(7) if <start> if ( 
+[706] SUBPROCESS(7) if  u1_a_flg_obj_delete == CU1_DF_ON 
+[707] SUBPROCESS(7) if  ) 
+[708] SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
+[709] SUBSUBPROCESS(1) for <start> for ( 
+[710] SUBSUBPROCESS(1) for  u4_t_lp_target = (U4)0; 
+[711] SUBSUBPROCESS(1) for  u4_t_lp_target < u4_t_lp_max_target_num; 
+[712] SUBSUBPROCESS(1) for  u4_t_lp_target++) 
+[713] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[714] SUBSUBSUBPROCESS(1) if <start> if ( 
+[715] SUBSUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[u4_t_lp_target].fl_Ryfil > fl_a_delete_area 
+[716] SUBSUBSUBPROCESS(1) if  ) 
+[717] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[718] SUBSUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_target[u4_t_lp_target], (S4)1 
+[719] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[720] SUBSUBPROCESS(2) func<start> st_g_bsm_loop_data.as4_buf_pair_num[1] = s4_trim_target(st_g_bsm_loop_data.ast_target 
+[721] SUBSUBPROCESS(2) func<end> ); 
+[722] SUBSUBPROCESS(2) for <start> for ( 
+[723] SUBSUBPROCESS(2) for  u4_t_lp_final_target = (U4)0; 
+[724] SUBSUBPROCESS(2) for  u4_t_lp_final_target < u4_t_lp_max_final_target_num; 
+[725] SUBSUBPROCESS(2) for  u4_t_lp_final_target++) 
+[726] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[727] SUBSUBSUBPROCESS(1) if <start> if ( 
+[728] SUBSUBSUBPROCESS(1) if  afl_a_Tx_float[u4_t_lp_final_target][7] > fl_a_delete_area 
+[729] SUBSUBSUBPROCESS(1) if  ) 
+[730] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[731] SUBSUBSUBSUBPROCESS(1) func<start> s4_initialize_specified_Tx_data(as4_a_Tx_int, afl_a_Tx_float, u4_t_lp_final_target 
+[732] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[733] SUBSUBPROCESS(3) func<start> st_g_bsm_loop_data.s4_final_target_num = s4_trim_Tx_data(as4_a_Tx_int, afl_a_Tx_float 
+[734] SUBSUBPROCESS(3) func<end> ); 
+[735] SUBSUBPROCESS(3) for <start> for ( 
+[736] SUBSUBPROCESS(3) for  u4_t_lp_normal = (U4)0; 
+[737] SUBSUBPROCESS(3) for  u4_t_lp_normal < u4_t_lp_max_normal_num; 
+[738] SUBSUBPROCESS(3) for  u4_t_lp_normal++) 
+[739] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+[740] SUBSUBSUBPROCESS(1) if <start> if ( 
+[741] SUBSUBSUBPROCESS(1) if  st_g_bsm_loop_data.ast_normal[u4_t_lp_normal].fl_Ryfil > fl_a_delete_area 
+[742] SUBSUBSUBPROCESS(1) if  ) 
+[743] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[744] SUBSUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal[u4_t_lp_normal], (S4)1 
+[745] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[746] SUBSUBPROCESS(4) func<start> st_g_bsm_loop_data.as4_buf_pair_num[0] = s4_trim_normal(st_g_bsm_loop_data.ast_normal 
+[747] SUBSUBPROCESS(4) func<end> ); 
+[748] SUBSUBPROCESS(4) if <start> if ( 
+[749] SUBSUBPROCESS(4) if  st_g_bsm_loop_data.ast_normal_sot[0].fl_Ryfil > fl_a_delete_area 
+[750] SUBSUBPROCESS(4) if  ) 
+[751] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
+[752] SUBSUBSUBPROCESS(1) func<start> fn_init(&st_g_bsm_loop_data.ast_normal_sot[0], (S4)1 
+[753] SUBSUBSUBPROCESS(1) func<end> ); 
+[754] SUBSUBPROCESS(5) equal st_g_bsm_loop_data.u1_fa_delete_count (U1)10 + (U1)1;
+[755] SUBPROCESS(8) func<start> st_g_bsm_loop_data.u1_fa_delete_count = (U1)u2_data_add((U2)st_g_bsm_loop_data.u1_fa_delete_count, (S2)-1, (U2)CU1_U1MAX, (U2)0 
+[756] SUBPROCESS(8) func<end> ); 
+[757] SUBPROCESS(8) proc return; 
+[758] MAINPROCESS(20) static VD fn_bsm_alart_check_active<start> static VD fn_bsm_alart_check_active( 
+[759] MAINPROCESS(20) static VD fn_bsm_alart_check_active S4 *ps4_t_not_alarm, 
+[760] MAINPROCESS(20) static VD fn_bsm_alart_check_active FL *pfl_a_alarm_area_y_min, 
+[761] MAINPROCESS(20) static VD fn_bsm_alart_check_active const S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[762] MAINPROCESS(20) static VD fn_bsm_alart_check_active const FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT] 
+[763] MAINPROCESS(20) static VD fn_bsm_alart_check_active ) 
+[764] MAINPROCESS(20) subproc SUBPROCESS(1) 
+[765] SUBPROCESS(1) proc FL fl_t_th_canout_curvr; 
+[766] SUBPROCESS(1) proc S2 s2_t_th_canout_curvr; 
+[767] SUBPROCESS(1) proc S4 s4_t_lp_tx_num; 
+[768] SUBPROCESS(1) proc U1 u1_t_flg_tos_target_in; 
+[769] SUBPROCESS(1) if <start> if ( 
+[770] SUBPROCESS(1) if  st_g_bsm_alarm_data.s4_alarm_prev != (S4)0 
+[771] SUBPROCESS(1) if  ) 
+[772] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[773] SUBSUBPROCESS(1) if <start> if ( 
+[774] SUBSUBPROCESS(1) if  fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN_OFF 
+[775] SUBSUBPROCESS(1) if  ) 
+[776] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[777] SUBSUBSUBPROCESS(1) equal st_g_bsm_alarm_data.as4_alarm_off_count[0] (S4)0;
+[778] SUBSUBSUBPROCESS(1) equal *ps4_t_not_alarm (S4)1;
+[779] SUBPROCESS(2) else<start> else 
+[780] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[781] SUBSUBPROCESS(1) if <start> if ( 
+[782] SUBSUBPROCESS(1) if  fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN 
+[783] SUBSUBPROCESS(1) if  ) 
+[784] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[785] SUBSUBSUBPROCESS(1) equal st_g_bsm_alarm_data.as4_alarm_off_count[0] (S4)0;
+[786] SUBSUBSUBPROCESS(1) equal *ps4_t_not_alarm (S4)1;
+[787] SUBPROCESS(3) equal u1_t_flg_tos_target_in (U1)0;
+[788] SUBPROCESS(3) for <start> for ( 
+[789] SUBPROCESS(3) for  s4_t_lp_tx_num = (S4)0; 
+[790] SUBPROCESS(3) for  s4_t_lp_tx_num < st_g_bsm_loop_data.s4_final_target_num; 
+[791] SUBPROCESS(3) for  s4_t_lp_tx_num++) 
+[792] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[793] SUBSUBPROCESS(1) if <start> if ( 
+[794] SUBSUBPROCESS(1) if  (as4_a_Tx_int[s4_t_lp_tx_num][17] >= (S4)5 
+[795] SUBSUBPROCESS(1) if  ) 
+[796] SUBSUBPROCESS(1) if  &&  (afl_a_Tx_float[s4_t_lp_tx_num][10] > (CFL_ALARM_Y_BACKWARD + ALARM_Y_OFFSET))) 
+[797] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[798] SUBSUBSUBPROCESS(1) equal u1_t_flg_tos_target_in (U1)1;
+[799] SUBSUBSUBPROCESS(1) proc break; 
+[800] SUBPROCESS(4) if <start> if ( 
+[801] SUBPROCESS(4) if  (u1_slipjdg_get_slip_flag() == (U1)1 
+[802] SUBPROCESS(4) if  ) 
+[803] SUBPROCESS(4) if  &&  (u1_t_flg_tos_target_in == (U1)0)) 
+[804] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[805] SUBSUBPROCESS(1) equal st_g_bsm_alarm_data.as4_alarm_off_count[0] (S4)0;
+[806] SUBSUBPROCESS(1) equal *ps4_t_not_alarm (S4)1;
+[807] SUBPROCESS(5) equal fl_t_th_canout_curvr (FL)CANOUT_CURVER_MIN;
+[808] SUBPROCESS(5) func<start> s2_t_th_canout_curvr = s2_cast_from_fl(fl_t_th_canout_curvr 
+[809] SUBPROCESS(5) func<end> ); 
+[810] SUBPROCESS(5) if <start> if ( 
+[811] SUBPROCESS(5) if  (s4_abs((S4)s2_g_curvr_for_base) < (S4)s2_t_th_canout_curvr 
+[812] SUBPROCESS(5) if  ) 
+[813] SUBPROCESS(5) if  &&	(st_g_bsm_alarm_data.s4_alarm_prev == (S4)0)) 
+[814] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
+[815] SUBSUBPROCESS(1) equal *ps4_t_not_alarm (S4)1;
+[816] SUBPROCESS(6) func<start> fn_bsm_alart_set_reliable_jdg_mask_count((const S4 (*))ps4_t_not_alarm 
+[817] SUBPROCESS(6) func<end> ); 
+[818] SUBPROCESS(6) func<start> fn_bsm_alart_set_backward_line_of_alarm_area(pfl_a_alarm_area_y_min 
+[819] SUBPROCESS(6) func<end> ); 
+[820] SUBPROCESS(6) proc return; 
+[821] MAINPROCESS(21) static VD fn_bsm_alart_set_reliable_jdg_mask_count<start> static VD fn_bsm_alart_set_reliable_jdg_mask_count( 
+[822] MAINPROCESS(21) static VD fn_bsm_alart_set_reliable_jdg_mask_count const S4 *ps4_a_not_alarm 
+[823] MAINPROCESS(21) static VD fn_bsm_alart_set_reliable_jdg_mask_count ) 
+[824] MAINPROCESS(21) subproc SUBPROCESS(1) 
+[825] SUBPROCESS(1) if <start> if ( 
+[826] SUBPROCESS(1) if  (st_g_bsm_alarm_data.s4_alarm_prev == (S4)1 
+[827] SUBPROCESS(1) if  ) 
+[828] SUBPROCESS(1) if  ||  (*ps4_a_not_alarm == (S4)1)) 
+[829] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[830] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_reliable_jdg_mask_count (U1)12;
+[831] SUBPROCESS(2) else<start> else 
+[832] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[833] SUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_reliable_jdg_mask_count = (U1)u2_data_add(st_g_bsm_loop_data.u1_reliable_jdg_mask_count, (S2)-1, (U2)CU1_U1MAX, (U2)0 
+[834] SUBSUBPROCESS(1) func<end> ); 
+[835] SUBPROCESS(3) proc return; 
+[836] MAINPROCESS(22) static VD fn_bsm_alart_set_backward_line_of_alarm_area<start> static VD fn_bsm_alart_set_backward_line_of_alarm_area( 
+[837] MAINPROCESS(22) static VD fn_bsm_alart_set_backward_line_of_alarm_area FL *pfl_a_alarm_area_y_min 
+[838] MAINPROCESS(22) static VD fn_bsm_alart_set_backward_line_of_alarm_area ) 
+[839] MAINPROCESS(22) subproc SUBPROCESS(1) 
+[840] SUBPROCESS(1) proc FL fl_t_shrink_keep_count_sec; 
+[841] SUBPROCESS(1) proc FL fl_t_alarm_area_y_min; 
+[842] SUBPROCESS(1) equal fl_t_alarm_area_y_min CFL_ALARM_Y_BACKWARD;
+[843] SUBPROCESS(1) if <start> if ( 
+[844] SUBPROCESS(1) if  (fl_g_v_self_bsm_for_base >= CFL_CANOUT_VSELF_MIN 
+[845] SUBPROCESS(1) if  ) 
+[846] SUBPROCESS(1) if  &&	((s2_g_curvr_for_base > (S4)0) 
+[847] SUBPROCESS(1) if  &&   (s2_g_curvr_for_base < (S4)30))) 
+[848] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[849] SUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_shrink_on_count = (U1)u2_data_add((U2)st_g_bsm_loop_data.u1_shrink_on_count, (S2)1, (U2)12, (U2)0 
+[850] SUBSUBPROCESS(1) func<end> ); 
+[851] SUBPROCESS(2) else<start> else 
+[852] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[853] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_shrink_on_count (U1)0;
+[854] SUBPROCESS(3) if <start> if ( 
+[855] SUBPROCESS(3) if  st_g_bsm_loop_data.u1_shrink_on_count >= (U1)12 
+[856] SUBPROCESS(3) if  ) 
+[857] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[858] SUBSUBPROCESS(1) equal fl_t_shrink_keep_count_sec ((FL)7.0F / (fl_g_v_self_bsm_for_base / (FL)3.6F)) + (FL)0.3F;
+[859] SUBSUBPROCESS(1) if <start> if ( 
+[860] SUBSUBPROCESS(1) if  fl_t_shrink_keep_count_sec > (FL)2.5F 
+[861] SUBSUBPROCESS(1) if  ) 
+[862] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[863] SUBSUBSUBPROCESS(1) equal fl_t_shrink_keep_count_sec (FL)2.5F;
+[864] SUBSUBPROCESS(2) func<start> st_g_bsm_loop_data.u1_shrink_keep_count = u1_cast_from_fl(fl_t_shrink_keep_count_sec / CFL_SAMPLING_TIME 
+[865] SUBSUBPROCESS(2) func<end> ); 
+[866] SUBPROCESS(4) if <start> if ( 
+[867] SUBPROCESS(4) if  fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN 
+[868] SUBPROCESS(4) if  ) 
+[869] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[870] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_shrink_keep_count (U1)0;
+[871] SUBPROCESS(5) if <start> if ( 
+[872] SUBPROCESS(5) if  s4_abs(s2_g_curvr_for_base) < (S4)30 
+[873] SUBPROCESS(5) if  ) 
+[874] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
+[875] SUBSUBPROCESS(1) equal fl_t_alarm_area_y_min (FL)-1.0F;
+[876] SUBPROCESS(6) else if <start> else if ( 
+[877] SUBPROCESS(6) else if  s4_abs(s2_g_curvr_for_base) < (S4)55 
+[878] SUBPROCESS(6) else if  ) 
+[879] SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
+[880] SUBSUBPROCESS(1) equal fl_t_alarm_area_y_min (FL)-4.0F;
+[881] SUBPROCESS(7) else<start> else 
+[882] SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
+[883] SUBSUBPROCESS(1) if <start> if ( 
+[884] SUBSUBPROCESS(1) if  st_g_bsm_loop_data.u1_shrink_keep_count > (U1)0 
+[885] SUBSUBPROCESS(1) if  ) 
+[886] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[887] SUBSUBSUBPROCESS(1) equal fl_t_alarm_area_y_min (FL)-4.0F;
+[888] SUBSUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_shrink_keep_count = (U1)u2_data_add((U2)st_g_bsm_loop_data.u1_shrink_keep_count, (S2)-1, (U2)31, (U2)0 
+[889] SUBSUBSUBPROCESS(1) func<end> ); 
+[890] SUBSUBPROCESS(2) else<start> else 
+[891] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[892] SUBPROCESS(8) proc return; 
+[893] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj<start> static VD fn_bsm_alart_check_cont_altobj( 
+[894] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 s4_final_a_target_num, 
+[895] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[896] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
+[897] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 as4_a_checked_target[TARGET_BUFFSIZE], 
+[898] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 as4_a_checked_alarmed[TARGET_BUFFSIZE], 
+[899] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 as4_a_alarmed_target_num_current[1], 
+[900] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
+[901] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 *ps4_a_tos_flg, 
+[902] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj S4 *ps4_a_alarm_flg 
+[903] MAINPROCESS(23) static VD fn_bsm_alart_check_cont_altobj ) 
+[904] MAINPROCESS(23) subproc SUBPROCESS(1) 
+[905] SUBPROCESS(1) func<start> fn_bsm_alart_check_tos_status( 
+[906] SUBPROCESS(1) func ps4_a_tos_flg 
+[907] SUBPROCESS(1) func<end> ); 
+[908] SUBPROCESS(1) func<start> fn_bsm_alart_cont_altobj( 
+[909] SUBPROCESS(1) func s4_final_a_target_num, 
+[910] SUBPROCESS(1) func as4_a_Tx_int, 
+[911] SUBPROCESS(1) func afl_a_Tx_float, 
+[912] SUBPROCESS(1) func as4_a_checked_target, 
+[913] SUBPROCESS(1) func as4_a_checked_alarmed, 
+[914] SUBPROCESS(1) func as4_a_alarmed_target_num_current, 
+[915] SUBPROCESS(1) func afl_a_alarmed_target_current, 
+[916] SUBPROCESS(1) func ps4_a_alarm_flg 
+[917] SUBPROCESS(1) func<end> ); 
+[918] SUBPROCESS(1) proc return; 
+[919] MAINPROCESS(24) static VD fn_bsm_alart_check_tos_status<start> static VD fn_bsm_alart_check_tos_status( 
+[920] MAINPROCESS(24) static VD fn_bsm_alart_check_tos_status S4 *ps4_a_tos_flg 
+[921] MAINPROCESS(24) static VD fn_bsm_alart_check_tos_status ) 
+[922] MAINPROCESS(24) subproc SUBPROCESS(1) 
+[923] SUBPROCESS(1) proc S4 i; 
+[924] SUBPROCESS(1) equal *ps4_a_tos_flg 0;
+[925] SUBPROCESS(1) for<start> for( 
+[926] SUBPROCESS(1) for i=0; 
+[927] SUBPROCESS(1) for i<st_g_bsm_alarm_data.as4_alarmed_num[0]; 
+[928] SUBPROCESS(1) for i++) 
+[929] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[930] SUBSUBPROCESS(1) if<start> if( 
+[931] SUBSUBPROCESS(1) if st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_TOS 
+[932] SUBSUBPROCESS(1) if ) 
+[933] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[934] SUBSUBSUBPROCESS(1) equal *ps4_a_tos_flg 1;
+[935] SUBSUBSUBPROCESS(1) proc break; 
+[936] SUBPROCESS(2) proc return; 
+[937] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj<start> static VD fn_bsm_alart_cont_altobj( 
+[938] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 s4_final_a_target_num, 
+[939] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj signed long as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[940] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
+[941] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 as4_a_checked_target[TARGET_BUFFSIZE], 
+[942] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 as4_a_checked_alarmed[TARGET_BUFFSIZE], 
+[943] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 as4_a_alarmed_target_num_current[1], 
+[944] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
+[945] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj S4 *ps4_a_alarm_flg 
+[946] MAINPROCESS(25) static VD fn_bsm_alart_cont_altobj ) 
+[947] MAINPROCESS(25) subproc SUBPROCESS(1) 
+[948] SUBPROCESS(1) proc S4 i; 
+[949] SUBPROCESS(1) proc S4 s4_t_index; 
+[950] SUBPROCESS(1) proc S4 s4_t_selected_alarmed_target_index; 
+[951] SUBPROCESS(1) for<start> for( 
+[952] SUBPROCESS(1) for i=0; 
+[953] SUBPROCESS(1) for i<s4_final_a_target_num; 
+[954] SUBPROCESS(1) for i++) 
+[955] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[956] SUBSUBPROCESS(1) equal s4_t_index -1;
+[957] SUBSUBPROCESS(1) equal s4_t_selected_alarmed_target_index -1;
+[958] SUBSUBPROCESS(1) func<start> fn_bsm_alart_select_altobj_prev( 
+[959] SUBSUBPROCESS(1) func &as4_a_Tx_int[i], 
+[960] SUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
+[961] SUBSUBPROCESS(1) func &s4_t_selected_alarmed_target_index 
+[962] SUBSUBPROCESS(1) func<end> ); 
+[963] SUBSUBPROCESS(1) if<start> if( 
+[964] SUBSUBPROCESS(1) if s4_t_selected_alarmed_target_index != -1 
+[965] SUBSUBPROCESS(1) if ) 
+[966] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[967] SUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_set_altobj_cur( 
+[968] SUBSUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
+[969] SUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&st_g_bsm_alarm_data.afl_alarmed_target[s4_t_selected_alarmed_target_index], 
+[970] SUBSUBSUBPROCESS(1) func (const S4 (*))as4_a_alarmed_target_num_current, 
+[971] SUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])afl_a_alarmed_target_current, 
+[972] SUBSUBSUBPROCESS(1) func &s4_t_index 
+[973] SUBSUBSUBPROCESS(1) func<end> ); 
+[974] SUBSUBSUBPROCESS(1) equal as4_a_checked_target[i] 1;
+[975] SUBSUBSUBPROCESS(1) equal as4_a_checked_alarmed[s4_t_selected_alarmed_target_index] 1;
+[976] SUBSUBPROCESS(2) if<start> if( 
+[977] SUBSUBPROCESS(2) if s4_t_index != -1 
+[978] SUBSUBPROCESS(2) if ) 
+[979] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[980] SUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_store_cont_altobj( 
+[981] SUBSUBSUBPROCESS(1) func (const signed long (*)[NORM_INT])&as4_a_Tx_int[i], 
+[982] SUBSUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
+[983] SUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&st_g_bsm_alarm_data.afl_alarmed_target[s4_t_selected_alarmed_target_index], 
+[984] SUBSUBSUBPROCESS(1) func &afl_a_alarmed_target_current[as4_a_alarmed_target_num_current[0]], 
+[985] SUBSUBSUBPROCESS(1) func ps4_a_alarm_flg 
+[986] SUBSUBSUBPROCESS(1) func<end> ); 
+[987] SUBSUBSUBPROCESS(1) proc as4_a_alarmed_target_num_current[0]++; 
+[988] SUBPROCESS(2) proc return; 
+[989] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev<start> static VD fn_bsm_alart_select_altobj_prev( 
+[990] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev signed long as4_a_Tx_int[1][NORM_INT], 
+[991] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev const FL afl_a_Tx_float[1][TGT_FLT], 
+[992] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev S4 *ps4_a_selected_alarmed_target_index 
+[993] MAINPROCESS(26) static VD fn_bsm_alart_select_altobj_prev ) 
+[994] MAINPROCESS(26) subproc SUBPROCESS(1) 
+[995] SUBPROCESS(1) proc S4 j; 
+[996] SUBPROCESS(1) proc FL object_x; 
+[997] SUBPROCESS(1) proc FL object_y; 
+[998] SUBPROCESS(1) proc FL alarmed_x; 
+[999] SUBPROCESS(1) proc FL alarmed_y; 
+[1000] SUBPROCESS(1) func<start> FL tmp_xydiff_min = fl_abs(CFL_UNKNOWN_VALUE*2 
+[1001] SUBPROCESS(1) func<end> ); 
+[1002] SUBPROCESS(1) equal object_x afl_a_Tx_float[0][9];
+[1003] SUBPROCESS(1) equal object_y afl_a_Tx_float[0][10];
+[1004] SUBPROCESS(1) if<start> if( 
+[1005] SUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
+[1006] SUBPROCESS(1) if ) 
+[1007] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1008] SUBSUBPROCESS(1) equal object_x -object_x;
+[1009] SUBPROCESS(2) func<start> tmp_xydiff_min = fl_abs(CFL_UNKNOWN_VALUE*2.0F 
+[1010] SUBPROCESS(2) func<end> ); 
+[1011] SUBPROCESS(2) for<start> for( 
+[1012] SUBPROCESS(2) for j=0; 
+[1013] SUBPROCESS(2) for j<st_g_bsm_alarm_data.as4_alarmed_num[0]; 
+[1014] SUBPROCESS(2) for j++) 
+[1015] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1016] SUBSUBPROCESS(1) equal alarmed_x st_g_bsm_alarm_data.afl_alarmed_target[j][0];
+[1017] SUBSUBPROCESS(1) if<start> if( 
+[1018] SUBSUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
+[1019] SUBSUBPROCESS(1) if ) 
+[1020] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[1021] SUBSUBSUBPROCESS(1) equal alarmed_x - alarmed_x;
+[1022] SUBSUBPROCESS(2) equal alarmed_y st_g_bsm_alarm_data.afl_alarmed_target[j][1];
+[1023] SUBSUBPROCESS(2) if <start> if ( 
+[1024] SUBSUBPROCESS(2) if  (fl_abs(object_x - alarmed_x) < RX_TH_ALM 
+[1025] SUBSUBPROCESS(2) if  ) 
+[1026] SUBSUBPROCESS(2) if  &&  (fl_abs(object_y - alarmed_y) < RY_TH_ALM) 
+[1027] SUBSUBPROCESS(2) if  &&  (tmp_xydiff_min > (fl_abs(object_x - alarmed_x) + fl_abs(object_y - alarmed_y)))) 
+[1028] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[1029] SUBSUBSUBPROCESS(1) func<start> tmp_xydiff_min = fl_abs(object_x - alarmed_x) + fl_abs(object_y - alarmed_y 
+[1030] SUBSUBSUBPROCESS(1) func<end> ); 
+[1031] SUBSUBSUBPROCESS(1) equal *ps4_a_selected_alarmed_target_index j;
+[1032] SUBPROCESS(3) proc return; 
+[1033] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur<start> static VD fn_bsm_alart_set_altobj_cur( 
+[1034] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur const FL afl_a_Tx_float[1][TGT_FLT], 
+[1035] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
+[1036] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur const S4 as4_a_alarmed_target_num_current[1], 
+[1037] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur const FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
+[1038] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur S4 *ps4_a_index 
+[1039] MAINPROCESS(27) static VD fn_bsm_alart_set_altobj_cur ) 
+[1040] MAINPROCESS(27) subproc SUBPROCESS(1) 
+[1041] SUBPROCESS(1) proc S4 k; 
+[1042] SUBPROCESS(1) proc FL object_x; 
+[1043] SUBPROCESS(1) proc FL object_y; 
+[1044] SUBPROCESS(1) proc FL tmp_x_min; 
+[1045] SUBPROCESS(1) proc FL tmp_x_max; 
+[1046] SUBPROCESS(1) proc FL tmp_y_min; 
+[1047] SUBPROCESS(1) proc FL tmp_y_max; 
+[1048] SUBPROCESS(1) proc FL tmp_alarm_area[4]; 
+[1049] SUBPROCESS(1) proc FL tmp_offset[3]; 
+[1050] SUBPROCESS(1) proc FL tmp_comp; 
+[1051] SUBPROCESS(1) proc FL tmp_min; 
+[1052] SUBPROCESS(1) equal object_x afl_a_Tx_float[0][9];
+[1053] SUBPROCESS(1) equal object_y afl_a_Tx_float[0][10];
+[1054] SUBPROCESS(1) if<start> if( 
+[1055] SUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
+[1056] SUBPROCESS(1) if ) 
+[1057] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1058] SUBSUBPROCESS(1) equal object_x -object_x;
+[1059] SUBPROCESS(2) equal tmp_alarm_area[0] afl_a_alarmed_target[0][12];
+[1060] SUBPROCESS(2) equal tmp_alarm_area[1] afl_a_alarmed_target[0][13];
+[1061] SUBPROCESS(2) equal tmp_alarm_area[2] afl_a_alarmed_target[0][14];
+[1062] SUBPROCESS(2) equal tmp_alarm_area[3] afl_a_alarmed_target[0][15];
+[1063] SUBPROCESS(2) equal tmp_offset[0] ALARM_X_OFFSET_OUT;
+[1064] SUBPROCESS(2) equal tmp_offset[1] ALARM_Y_OFFSET;
+[1065] SUBPROCESS(2) equal tmp_offset[2] ALARM_X_OFFSET_IN;
+[1066] SUBPROCESS(2) func<start> get_hysteresis_area( 
+[1067] SUBPROCESS(2) func object_y, 
+[1068] SUBPROCESS(2) func afl_a_alarmed_target[0][4], 
+[1069] SUBPROCESS(2) func tmp_alarm_area, 
+[1070] SUBPROCESS(2) func tmp_offset 
+[1071] SUBPROCESS(2) func<end> ); 
+[1072] SUBPROCESS(2) equal tmp_x_min tmp_alarm_area[0];
+[1073] SUBPROCESS(2) equal tmp_x_max tmp_alarm_area[1];
+[1074] SUBPROCESS(2) equal tmp_y_min tmp_alarm_area[2];
+[1075] SUBPROCESS(2) equal tmp_y_max tmp_alarm_area[3];
+[1076] SUBPROCESS(2) if <start> if ( 
+[1077] SUBPROCESS(2) if  afl_a_Tx_float[0][15] < (FL)0.1F 
+[1078] SUBPROCESS(2) if  ) 
+[1079] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1080] SUBSUBPROCESS(1) equal tmp_x_max + (FL)0.1F;
+[1081] SUBPROCESS(3) if <start> if ( 
+[1082] SUBPROCESS(3) if  (object_x > tmp_x_min 
+[1083] SUBPROCESS(3) if  ) 
+[1084] SUBPROCESS(3) if  &&  (object_x < tmp_x_max) 
+[1085] SUBPROCESS(3) if  &&  (object_y < tmp_y_max) 
+[1086] SUBPROCESS(3) if  &&  (object_y > tmp_y_min)) 
+[1087] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[1088] SUBSUBPROCESS(1) if<start> if( 
+[1089] SUBSUBPROCESS(1) if as4_a_alarmed_target_num_current[0] < (S4)(TARGET_BUFFSIZE-1) 
+[1090] SUBSUBPROCESS(1) if ) 
+[1091] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[1092] SUBSUBSUBPROCESS(1) equal *ps4_a_index as4_a_alarmed_target_num_current[0];
+[1093] SUBSUBPROCESS(2) else<start> else 
+[1094] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[1095] SUBSUBSUBPROCESS(1) equal tmp_min 1000.0F;
+[1096] SUBSUBSUBPROCESS(1) equal tmp_comp 0.0F;
+[1097] SUBSUBSUBPROCESS(1) for<start> for( 
+[1098] SUBSUBSUBPROCESS(1) for k=0; 
+[1099] SUBSUBSUBPROCESS(1) for k<TARGET_BUFFSIZE; 
+[1100] SUBSUBSUBPROCESS(1) for k++) 
+[1101] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[1102] SUBSUBSUBSUBPROCESS(1) func<start> tmp_comp = fl_abs(afl_a_alarmed_target_current[k][0]-afl_a_Tx_float[0][8]) + fl_abs(afl_a_alarmed_target_current[k][1]-afl_a_Tx_float[0][7] 
+[1103] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1104] SUBSUBSUBSUBPROCESS(1) if<start> if( 
+[1105] SUBSUBSUBSUBPROCESS(1) if tmp_comp < tmp_min 
+[1106] SUBSUBSUBSUBPROCESS(1) if ) 
+[1107] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[1108] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_index k;
+[1109] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_min tmp_comp;
+[1110] SUBPROCESS(4) proc return; 
+[1111] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj<start> static VD fn_bsm_alart_store_cont_altobj( 
+[1112] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj const signed long as4_a_Tx_int[1][NORM_INT], 
+[1113] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj const FL afl_a_Tx_float[1][TGT_FLT], 
+[1114] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
+[1115] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj FL afl_a_alarmed_target_current[1][ALARM_INFO_SIZE], 
+[1116] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj S4 *ps4_a_alarm_flg 
+[1117] MAINPROCESS(28) static VD fn_bsm_alart_store_cont_altobj ) 
+[1118] MAINPROCESS(28) subproc SUBPROCESS(1) 
+[1119] SUBPROCESS(1) proc S4 tmp_peak_bin_up; 
+[1120] SUBPROCESS(1) proc S4 tmp_peak_bin_dn; 
+[1121] SUBPROCESS(1) proc S4 tmp_start; 
+[1122] SUBPROCESS(1) proc S4 tmp_end; 
+[1123] SUBPROCESS(1) proc FL tmp_power_up; 
+[1124] SUBPROCESS(1) proc FL tmp_power_dn; 
+[1125] SUBPROCESS(1) equal *ps4_a_alarm_flg 1;
+[1126] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][0] afl_a_Tx_float[0][9];
+[1127] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][1] afl_a_Tx_float[0][10];
+[1128] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][2] (FL)as4_a_Tx_int[0][11];
+[1129] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][3] afl_a_alarmed_target[0][3] + 1.0F;
+[1130] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][4] afl_a_alarmed_target[0][4];
+[1131] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][5] afl_a_alarmed_target[0][5];
+[1132] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][6] afl_a_alarmed_target[0][6];
+[1133] SUBPROCESS(1) equal tmp_peak_bin_up as4_a_Tx_int[0][4];
+[1134] SUBPROCESS(1) equal tmp_peak_bin_dn as4_a_Tx_int[0][5];
+[1135] SUBPROCESS(1) equal tmp_start tmp_peak_bin_up-5;
+[1136] SUBPROCESS(1) equal tmp_end tmp_peak_bin_up+5;
+[1137] SUBPROCESS(1) func<start> tmp_power_up = get_fmpower_of_specified_interval( 
+[1138] SUBPROCESS(1) func (const FL (*))afl_g_cvw_lfm_ftt_power[0], 
+[1139] SUBPROCESS(1) func tmp_start, 
+[1140] SUBPROCESS(1) func tmp_end 
+[1141] SUBPROCESS(1) func<end> ); 
+[1142] SUBPROCESS(1) equal tmp_start tmp_peak_bin_dn-5;
+[1143] SUBPROCESS(1) equal tmp_end tmp_peak_bin_dn+5;
+[1144] SUBPROCESS(1) func<start> tmp_power_dn = get_fmpower_of_specified_interval( 
+[1145] SUBPROCESS(1) func (const FL (*))afl_g_cvw_lfm_ftt_power[1], 
+[1146] SUBPROCESS(1) func tmp_start, 
+[1147] SUBPROCESS(1) func tmp_end 
+[1148] SUBPROCESS(1) func<end> ); 
+[1149] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][7] (tmp_power_up+tmp_power_dn)*0.5F - afl_a_alarmed_target_current[0][6];
+[1150] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][8] afl_a_Tx_float[0][15];
+[1151] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][9] afl_a_Tx_float[0][16];
+[1152] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][10] afl_a_alarmed_target[0][10];
+[1153] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][11] afl_a_alarmed_target[0][11];
+[1154] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][12] afl_a_alarmed_target[0][12];
+[1155] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][13] afl_a_alarmed_target[0][13];
+[1156] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][14] afl_a_alarmed_target[0][14];
+[1157] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][15] afl_a_alarmed_target[0][15];
+[1158] SUBPROCESS(1) proc return; 
+[1159] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj<start> static VD fn_bsm_alart_check_exp_altobj( 
+[1160] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj S4 as4_a_checked_alarmed[TARGET_BUFFSIZE], 
+[1161] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj S4 as4_a_alarmed_target_num_current[1], 
+[1162] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
+[1163] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj S4 *ps4_a_alarm_flg 
+[1164] MAINPROCESS(29) static VD fn_bsm_alart_check_exp_altobj ) 
+[1165] MAINPROCESS(29) subproc SUBPROCESS(1) 
+[1166] SUBPROCESS(1) proc S4 i; 
+[1167] SUBPROCESS(1) proc S4 s4_t_lost; 
+[1168] SUBPROCESS(1) for<start> for( 
+[1169] SUBPROCESS(1) for i=0; 
+[1170] SUBPROCESS(1) for i<st_g_bsm_alarm_data.as4_alarmed_num[0]; 
+[1171] SUBPROCESS(1) for i++) 
+[1172] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1173] SUBSUBPROCESS(1) if<start> if( 
+[1174] SUBSUBPROCESS(1) if as4_a_checked_alarmed[i]==0 
+[1175] SUBSUBPROCESS(1) if ) 
+[1176] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[1177] SUBSUBSUBPROCESS(1) equal s4_t_lost 0;
+[1178] SUBSUBSUBPROCESS(1) func<start> s4_t_lost = s4_bsm_alart_set_exp_altobj( 
+[1179] SUBSUBSUBPROCESS(1) func &st_g_bsm_alarm_data.afl_alarmed_target[i] 
+[1180] SUBSUBSUBPROCESS(1) func<end> ); 
+[1181] SUBSUBSUBPROCESS(1) if<start> if( 
+[1182] SUBSUBSUBPROCESS(1) if s4_t_lost != 0 
+[1183] SUBSUBSUBPROCESS(1) if ) 
+[1184] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[1185] SUBSUBSUBSUBPROCESS(1) if<start> if( 
+[1186] SUBSUBSUBSUBPROCESS(1) if as4_a_alarmed_target_num_current[0] < (S4)(TARGET_BUFFSIZE-1) 
+[1187] SUBSUBSUBSUBPROCESS(1) if ) 
+[1188] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[1189] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_alarm_flg 1;
+[1190] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_store_exp_altobj( 
+[1191] SUBSUBSUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&st_g_bsm_alarm_data.afl_alarmed_target[i], 
+[1192] SUBSUBSUBSUBSUBPROCESS(1) func &afl_a_alarmed_target_current[as4_a_alarmed_target_num_current[0]] 
+[1193] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1194] SUBSUBSUBSUBSUBPROCESS(1) equal as4_a_checked_alarmed[i] 1;
+[1195] SUBSUBSUBSUBSUBPROCESS(1) proc as4_a_alarmed_target_num_current[0]++; 
+[1196] SUBPROCESS(2) proc return; 
+[1197] MAINPROCESS(30) static S4 s4_bsm_alart_set_exp_altobj<start> static S4 s4_bsm_alart_set_exp_altobj( 
+[1198] MAINPROCESS(30) static S4 s4_bsm_alart_set_exp_altobj FL afl_a_alarmed_target[1][ALARM_INFO_SIZE] 
+[1199] MAINPROCESS(30) static S4 s4_bsm_alart_set_exp_altobj ) 
+[1200] MAINPROCESS(30) subproc SUBPROCESS(1) 
+[1201] SUBPROCESS(1) proc S4 s4_t_lost; 
+[1202] SUBPROCESS(1) proc FL alarmed_x; 
+[1203] SUBPROCESS(1) proc FL alarmed_y; 
+[1204] SUBPROCESS(1) proc FL tmp_x_min; 
+[1205] SUBPROCESS(1) proc FL tmp_x_max; 
+[1206] SUBPROCESS(1) proc FL tmp_y_min; 
+[1207] SUBPROCESS(1) proc FL tmp_y_max; 
+[1208] SUBPROCESS(1) proc FL tmp_alarm_area[4]; 
+[1209] SUBPROCESS(1) proc FL tmp_offset[3]; 
+[1210] SUBPROCESS(1) equal tmp_offset[0] ALARM_X_OFFSET_OUT;
+[1211] SUBPROCESS(1) equal tmp_offset[1] ALARM_Y_OFFSET;
+[1212] SUBPROCESS(1) equal tmp_offset[2] ALARM_X_OFFSET_IN;
+[1213] SUBPROCESS(1) equal s4_t_lost 0;
+[1214] SUBPROCESS(1) equal alarmed_x afl_a_alarmed_target[0][0];
+[1215] SUBPROCESS(1) equal alarmed_y afl_a_alarmed_target[0][1];
+[1216] SUBPROCESS(1) if<start> if( 
+[1217] SUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
+[1218] SUBPROCESS(1) if ) 
+[1219] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1220] SUBSUBPROCESS(1) equal alarmed_x - alarmed_x;
+[1221] SUBPROCESS(2) equal tmp_alarm_area[0] afl_a_alarmed_target[0][12];
+[1222] SUBPROCESS(2) equal tmp_alarm_area[1] afl_a_alarmed_target[0][13];
+[1223] SUBPROCESS(2) equal tmp_alarm_area[2] afl_a_alarmed_target[0][14];
+[1224] SUBPROCESS(2) equal tmp_alarm_area[3] afl_a_alarmed_target[0][15];
+[1225] SUBPROCESS(2) func<start> get_hysteresis_area( 
+[1226] SUBPROCESS(2) func alarmed_y, 
+[1227] SUBPROCESS(2) func afl_a_alarmed_target[0][4], 
+[1228] SUBPROCESS(2) func tmp_alarm_area, 
+[1229] SUBPROCESS(2) func tmp_offset 
+[1230] SUBPROCESS(2) func<end> ); 
+[1231] SUBPROCESS(2) equal tmp_x_min tmp_alarm_area[0];
+[1232] SUBPROCESS(2) equal tmp_x_max tmp_alarm_area[1];
+[1233] SUBPROCESS(2) equal tmp_y_min tmp_alarm_area[2];
+[1234] SUBPROCESS(2) equal tmp_y_max tmp_alarm_area[3];
+[1235] SUBPROCESS(2) if<start> if( 
+[1236] SUBPROCESS(2) if afl_a_alarmed_target[0][4]==ALARM_TYPE_SOT 
+[1237] SUBPROCESS(2) if ) 
+[1238] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1239] SUBSUBPROCESS(1) func<start> s4_t_lost = s4_bsm_alart_check_exp_sot( 
+[1240] SUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&afl_a_alarmed_target[0], 
+[1241] SUBSUBPROCESS(1) func alarmed_x, 
+[1242] SUBSUBPROCESS(1) func alarmed_y, 
+[1243] SUBSUBPROCESS(1) func tmp_x_min, 
+[1244] SUBSUBPROCESS(1) func tmp_x_max, 
+[1245] SUBSUBPROCESS(1) func tmp_y_min, 
+[1246] SUBSUBPROCESS(1) func tmp_y_max 
+[1247] SUBSUBPROCESS(1) func<end> ); 
+[1248] SUBPROCESS(3) else if<start> else if( 
+[1249] SUBPROCESS(3) else if afl_a_alarmed_target[0][4]==ALARM_TYPE_TOS 
+[1250] SUBPROCESS(3) else if ) 
+[1251] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[1252] SUBSUBPROCESS(1) func<start> s4_t_lost = s4_bsm_alart_check_exp_tos( 
+[1253] SUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&afl_a_alarmed_target[0], 
+[1254] SUBSUBPROCESS(1) func alarmed_x, 
+[1255] SUBSUBPROCESS(1) func alarmed_y, 
+[1256] SUBSUBPROCESS(1) func tmp_x_min, 
+[1257] SUBSUBPROCESS(1) func tmp_x_max, 
+[1258] SUBSUBPROCESS(1) func tmp_y_min, 
+[1259] SUBSUBPROCESS(1) func tmp_y_max 
+[1260] SUBSUBPROCESS(1) func<end> ); 
+[1261] SUBPROCESS(4) else<start> else 
+[1262] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[1263] SUBSUBPROCESS(1) func<start> s4_t_lost = s4_bsm_alart_check_exp_other( 
+[1264] SUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])&afl_a_alarmed_target[0], 
+[1265] SUBSUBPROCESS(1) func alarmed_x, 
+[1266] SUBSUBPROCESS(1) func alarmed_y, 
+[1267] SUBSUBPROCESS(1) func tmp_x_min, 
+[1268] SUBSUBPROCESS(1) func tmp_x_max, 
+[1269] SUBSUBPROCESS(1) func tmp_y_min, 
+[1270] SUBSUBPROCESS(1) func tmp_y_max 
+[1271] SUBSUBPROCESS(1) func<end> ); 
+[1272] SUBPROCESS(5) proc return s4_t_lost; 
+[1273] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot<start> static S4 s4_bsm_alart_check_exp_sot( 
+[1274] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
+[1275] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_alarmed_x, 
+[1276] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_alarmed_y, 
+[1277] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_x_min, 
+[1278] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_x_max, 
+[1279] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_y_min, 
+[1280] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot FL fl_a_y_max 
+[1281] MAINPROCESS(31) static S4 s4_bsm_alart_check_exp_sot ) 
+[1282] MAINPROCESS(31) subproc SUBPROCESS(1) 
+[1283] SUBPROCESS(1) proc S4 s4_t_lost; 
+[1284] SUBPROCESS(1) proc S4 s4_t_lost_max; 
+[1285] SUBPROCESS(1) equal s4_t_lost 0;
+[1286] SUBPROCESS(1) equal s4_t_lost_max ALARM_SOT_LOST_MAX;
+[1287] SUBPROCESS(1) if<start> if( 
+[1288] SUBPROCESS(1) if st_g_bsm_loop_data.as4_flg_tos_end[0] > 1 
+[1289] SUBPROCESS(1) if ) 
+[1290] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1291] SUBSUBPROCESS(1) equal s4_t_lost_max ALARM_TOS_END_LOST_MAX;
+[1292] SUBPROCESS(2) if<start> if( 
+[1293] SUBPROCESS(2) if st_g_bsm_loop_data.u1_truck_flg != (U1)0 
+[1294] SUBPROCESS(2) if ) 
+[1295] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1296] SUBSUBPROCESS(1) equal s4_t_lost_max + ALARM_LOST_TRK_EXTEND;
+[1297] SUBPROCESS(3) if <start> if ( 
+[1298] SUBPROCESS(3) if  (st_g_bsm_loop_data.u1_fa_delete_count > (U1)0 
+[1299] SUBPROCESS(3) if  ) 
+[1300] SUBPROCESS(3) if  &&  (fl_a_alarmed_y > CFL_FA_DELETE_AREA)) 
+[1301] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[1302] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)0;
+[1303] SUBPROCESS(4) if <start> if ( 
+[1304] SUBPROCESS(4) if  (fl_a_alarmed_x > fl_a_x_min 
+[1305] SUBPROCESS(4) if  ) 
+[1306] SUBPROCESS(4) if  &&  (fl_a_alarmed_x < fl_a_x_max) 
+[1307] SUBPROCESS(4) if  &&  (fl_a_alarmed_y > fl_a_y_min) 
+[1308] SUBPROCESS(4) if  &&  (fl_a_alarmed_y < fl_a_y_max) 
+[1309] SUBPROCESS(4) if  &&  (afl_a_alarmed_target[0][5] < (FL)s4_t_lost_max)) 
+[1310] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[1311] SUBSUBPROCESS(1) equal s4_t_lost 1;
+[1312] SUBPROCESS(5) proc return s4_t_lost; 
+[1313] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos<start> static S4 s4_bsm_alart_check_exp_tos( 
+[1314] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
+[1315] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_alarmed_x, 
+[1316] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_alarmed_y, 
+[1317] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_x_min, 
+[1318] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_x_max, 
+[1319] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_y_min, 
+[1320] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos FL fl_a_y_max 
+[1321] MAINPROCESS(32) static S4 s4_bsm_alart_check_exp_tos ) 
+[1322] MAINPROCESS(32) subproc SUBPROCESS(1) 
+[1323] SUBPROCESS(1) proc S4 s4_t_lost; 
+[1324] SUBPROCESS(1) proc S4 s4_t_lost_max; 
+[1325] SUBPROCESS(1) proc U1 u1_t_jdg_b25_flg; 
+[1326] SUBPROCESS(1) equal s4_t_lost 0;
+[1327] SUBPROCESS(1) func<start> u1_t_jdg_b25_flg = u1_bsm_alart_check_exp_tos_b25(fl_a_alarmed_y, fl_a_y_max 
+[1328] SUBPROCESS(1) func<end> ); 
+[1329] SUBPROCESS(1) if<start> if( 
+[1330] SUBPROCESS(1) if u1_t_jdg_b25_flg == CU1_TRUE 
+[1331] SUBPROCESS(1) if ) 
+[1332] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1333] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)CU1_ALARM_TOS_LOST_MAX_FWD;
+[1334] SUBPROCESS(2) else<start> else 
+[1335] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1336] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)CU1_ALARM_TOS_LOST_MAX;
+[1337] SUBPROCESS(3) if<start> if( 
+[1338] SUBPROCESS(3) if st_g_bsm_loop_data.as4_flg_tos_end[0] > 1 
+[1339] SUBPROCESS(3) if ) 
+[1340] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[1341] SUBSUBPROCESS(1) equal s4_t_lost_max ALARM_TOS_END_LOST_MAX;
+[1342] SUBPROCESS(4) if <start> if ( 
+[1343] SUBPROCESS(4) if  (st_g_bsm_loop_data.u1_fa_delete_count > (U1)0 
+[1344] SUBPROCESS(4) if  ) 
+[1345] SUBPROCESS(4) if  &&  (fl_a_alarmed_y > CFL_FA_DELETE_AREA)) 
+[1346] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[1347] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)0;
+[1348] SUBPROCESS(5) if <start> if ( 
+[1349] SUBPROCESS(5) if  (fl_a_alarmed_x > fl_a_x_min 
+[1350] SUBPROCESS(5) if  ) 
+[1351] SUBPROCESS(5) if  &&  (fl_a_alarmed_x < fl_a_x_max) 
+[1352] SUBPROCESS(5) if  &&  (fl_a_alarmed_y > fl_a_y_min) 
+[1353] SUBPROCESS(5) if  &&  (fl_a_alarmed_y < fl_a_y_max) 
+[1354] SUBPROCESS(5) if  &&  (afl_a_alarmed_target[0][5] < (FL)s4_t_lost_max) 
+[1355] SUBPROCESS(5) if  &&  (afl_a_alarmed_target[0][7] > ALARM_POWER_TOS_TH)) 
+[1356] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
+[1357] SUBSUBPROCESS(1) equal s4_t_lost 1;
+[1358] SUBPROCESS(6) proc return s4_t_lost; 
+[1359] MAINPROCESS(33) static U1 u1_bsm_alart_check_exp_tos_b25<start> static U1 u1_bsm_alart_check_exp_tos_b25( 
+[1360] MAINPROCESS(33) static U1 u1_bsm_alart_check_exp_tos_b25 FL fl_a_alarmed_y, FL fl_a_alarm_area_ymax 
+[1361] MAINPROCESS(33) static U1 u1_bsm_alart_check_exp_tos_b25 ) 
+[1362] MAINPROCESS(33) subproc SUBPROCESS(1) 
+[1363] SUBPROCESS(1) proc U1 u1_t_jdg_b25_flag; 
+[1364] SUBPROCESS(1) equal u1_t_jdg_b25_flag CU1_FALSE;
+[1365] SUBPROCESS(1) if <start> if ( 
+[1366] SUBPROCESS(1) if  fl_a_alarmed_y >= (fl_a_alarm_area_ymax - (FL)1.0F) 
+[1367] SUBPROCESS(1) if  ) 
+[1368] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1369] SUBSUBPROCESS(1) equal u1_t_jdg_b25_flag CU1_TRUE;
+[1370] SUBPROCESS(2) else<start> else 
+[1371] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1372] SUBSUBPROCESS(1) equal u1_t_jdg_b25_flag CU1_FALSE;
+[1373] SUBPROCESS(3) if <start> if ( 
+[1374] SUBPROCESS(3) if  fl_a_alarmed_y > fl_a_alarm_area_ymax - (FL)1.8F 
+[1375] SUBPROCESS(3) if  ) 
+[1376] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
 [1377] SUBSUBPROCESS(1) equal u1_t_jdg_b25_flag CU1_TRUE;
-[1378] SUBPROCESS(2) else<start> else 
-[1379] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1378] SUBPROCESS(4) else<start> else 
+[1379] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
 [1380] SUBSUBPROCESS(1) equal u1_t_jdg_b25_flag CU1_FALSE;
-[1381] SUBPROCESS(3) if <start> if ( 
-[1382] SUBPROCESS(3) if  fl_a_alarmed_y > fl_a_alarm_area_ymax - (FL)1.8F 
-[1383] SUBPROCESS(3) if  ) 
-[1384] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[1385] SUBSUBPROCESS(1) equal u1_t_jdg_b25_flag CU1_TRUE;
-[1386] SUBPROCESS(4) else<start> else 
-[1387] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[1388] SUBSUBPROCESS(1) equal u1_t_jdg_b25_flag CU1_FALSE;
-[1389] SUBPROCESS(5) proc return u1_t_jdg_b25_flag; 
-[1390] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other<start> static S4 s4_bsm_alart_check_exp_other( 
-[1391] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
-[1392] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_alarmed_x, 
-[1393] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_alarmed_y, 
-[1394] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_x_min, 
-[1395] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_x_max, 
-[1396] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_y_min, 
-[1397] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_y_max 
-[1398] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other ) 
-[1399] MAINPROCESS(34) subproc SUBPROCESS(1) 
-[1400] SUBPROCESS(1) proc S4 s4_t_lost; 
-[1401] SUBPROCESS(1) proc S4 s4_t_lost_max; 
-[1402] SUBPROCESS(1) equal s4_t_lost 0;
-[1403] SUBPROCESS(1) equal s4_t_lost_max (S4)CU1_ALARM_MID_LOST_MAX;
-[1404] SUBPROCESS(1) if <start> if ( 
-[1405] SUBPROCESS(1) if  (st_g_bsm_loop_data.u1_fa_delete_count > (U1)0 
-[1406] SUBPROCESS(1) if  ) 
-[1407] SUBPROCESS(1) if  &&  (fl_a_alarmed_y > CFL_FA_DELETE_AREA)) 
-[1408] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1409] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)0;
-[1410] SUBPROCESS(2) if <start> if ( 
-[1411] SUBPROCESS(2) if  (fl_a_alarmed_x >  fl_a_x_min 
-[1412] SUBPROCESS(2) if  ) 
-[1413] SUBPROCESS(2) if  &&  (fl_a_alarmed_x < (fl_a_x_max - ((fl_a_x_max - fl_a_x_min) * 0.25F))) 
-[1414] SUBPROCESS(2) if  &&  (fl_a_alarmed_y > (fl_a_y_min + ((fl_a_y_max - fl_a_y_min) * 0.25F))) 
-[1415] SUBPROCESS(2) if  &&  (fl_a_alarmed_y < (fl_a_y_max - ((fl_a_y_max - fl_a_y_min) * 0.25F))) 
-[1416] SUBPROCESS(2) if  &&  (afl_a_alarmed_target[0][5] < (FL)s4_t_lost_max)) 
-[1417] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1418] SUBSUBPROCESS(1) equal s4_t_lost 1;
-[1419] SUBPROCESS(3) proc return s4_t_lost; 
-[1420] MAINPROCESS(35) static VD fn_bsm_alart_store_exp_altobj<start> static VD fn_bsm_alart_store_exp_altobj( 
-[1421] MAINPROCESS(35) static VD fn_bsm_alart_store_exp_altobj const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
-[1422] MAINPROCESS(35) static VD fn_bsm_alart_store_exp_altobj FL afl_a_alarmed_target_current[1][ALARM_INFO_SIZE] 
-[1423] MAINPROCESS(35) static VD fn_bsm_alart_store_exp_altobj ) 
-[1424] MAINPROCESS(35) subproc SUBPROCESS(1) 
-[1425] SUBPROCESS(1) proc S4 tmp_peak_bin; 
-[1426] SUBPROCESS(1) proc S4 tmp_peak_bin_up; 
-[1427] SUBPROCESS(1) proc S4 tmp_peak_bin_dn; 
-[1428] SUBPROCESS(1) proc S4 tmp_start; 
-[1429] SUBPROCESS(1) proc S4 tmp_end; 
-[1430] SUBPROCESS(1) proc FL tmp_power_up; 
-[1431] SUBPROCESS(1) proc FL tmp_power_dn; 
-[1432] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][0] afl_a_alarmed_target[0][0]+afl_a_alarmed_target[0][8]*CFL_SAMPLING_TIME;
-[1433] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][1] afl_a_alarmed_target[0][1]+afl_a_alarmed_target[0][9]*CFL_SAMPLING_TIME;
-[1434] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][2] afl_a_alarmed_target[0][2];
-[1435] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][3] afl_a_alarmed_target[0][3] + 1.0F;
-[1436] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][4] afl_a_alarmed_target[0][4];
-[1437] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][5] afl_a_alarmed_target[0][5] + 1.0F;
-[1438] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][6] afl_a_alarmed_target[0][6];
-[1439] SUBPROCESS(1) func<start> tmp_peak_bin = (S4)( fl_abs(fl_sqrt(afl_a_alarmed_target[0][0]*afl_a_alarmed_target[0][0]+afl_a_alarmed_target[0][1]*afl_a_alarmed_target[0][1]))/RCOF*0.5F 
-[1440] SUBPROCESS(1) func + NB_FFT_PT*0.5F 
-[1441] SUBPROCESS(1) func<end> ); 
-[1442] SUBPROCESS(1) func<start> tmp_peak_bin_up = tmp_peak_bin + (S4)( 0.5*(-afl_a_alarmed_target[0][9])/VCOF 
+[1381] SUBPROCESS(5) proc return u1_t_jdg_b25_flag; 
+[1382] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other<start> static S4 s4_bsm_alart_check_exp_other( 
+[1383] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
+[1384] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_alarmed_x, 
+[1385] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_alarmed_y, 
+[1386] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_x_min, 
+[1387] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_x_max, 
+[1388] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_y_min, 
+[1389] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other FL fl_a_y_max 
+[1390] MAINPROCESS(34) static S4 s4_bsm_alart_check_exp_other ) 
+[1391] MAINPROCESS(34) subproc SUBPROCESS(1) 
+[1392] SUBPROCESS(1) proc S4 s4_t_lost; 
+[1393] SUBPROCESS(1) proc S4 s4_t_lost_max; 
+[1394] SUBPROCESS(1) equal s4_t_lost 0;
+[1395] SUBPROCESS(1) equal s4_t_lost_max (S4)CU1_ALARM_MID_LOST_MAX;
+[1396] SUBPROCESS(1) if <start> if ( 
+[1397] SUBPROCESS(1) if  (st_g_bsm_loop_data.u1_fa_delete_count > (U1)0 
+[1398] SUBPROCESS(1) if  ) 
+[1399] SUBPROCESS(1) if  &&  (fl_a_alarmed_y > CFL_FA_DELETE_AREA)) 
+[1400] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1401] SUBSUBPROCESS(1) equal s4_t_lost_max (S4)0;
+[1402] SUBPROCESS(2) if <start> if ( 
+[1403] SUBPROCESS(2) if  (fl_a_alarmed_x >  fl_a_x_min 
+[1404] SUBPROCESS(2) if  ) 
+[1405] SUBPROCESS(2) if  &&  (fl_a_alarmed_x < (fl_a_x_max - ((fl_a_x_max - fl_a_x_min) * 0.25F))) 
+[1406] SUBPROCESS(2) if  &&  (fl_a_alarmed_y > (fl_a_y_min + ((fl_a_y_max - fl_a_y_min) * 0.25F))) 
+[1407] SUBPROCESS(2) if  &&  (fl_a_alarmed_y < (fl_a_y_max - ((fl_a_y_max - fl_a_y_min) * 0.25F))) 
+[1408] SUBPROCESS(2) if  &&  (afl_a_alarmed_target[0][5] < (FL)s4_t_lost_max)) 
+[1409] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1410] SUBSUBPROCESS(1) equal s4_t_lost 1;
+[1411] SUBPROCESS(3) proc return s4_t_lost; 
+[1412] MAINPROCESS(35) static VD fn_bsm_alart_store_exp_altobj<start> static VD fn_bsm_alart_store_exp_altobj( 
+[1413] MAINPROCESS(35) static VD fn_bsm_alart_store_exp_altobj const FL afl_a_alarmed_target[1][ALARM_INFO_SIZE], 
+[1414] MAINPROCESS(35) static VD fn_bsm_alart_store_exp_altobj FL afl_a_alarmed_target_current[1][ALARM_INFO_SIZE] 
+[1415] MAINPROCESS(35) static VD fn_bsm_alart_store_exp_altobj ) 
+[1416] MAINPROCESS(35) subproc SUBPROCESS(1) 
+[1417] SUBPROCESS(1) proc S4 tmp_peak_bin; 
+[1418] SUBPROCESS(1) proc S4 tmp_peak_bin_up; 
+[1419] SUBPROCESS(1) proc S4 tmp_peak_bin_dn; 
+[1420] SUBPROCESS(1) proc S4 tmp_start; 
+[1421] SUBPROCESS(1) proc S4 tmp_end; 
+[1422] SUBPROCESS(1) proc FL tmp_power_up; 
+[1423] SUBPROCESS(1) proc FL tmp_power_dn; 
+[1424] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][0] afl_a_alarmed_target[0][0]+afl_a_alarmed_target[0][8]*CFL_SAMPLING_TIME;
+[1425] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][1] afl_a_alarmed_target[0][1]+afl_a_alarmed_target[0][9]*CFL_SAMPLING_TIME;
+[1426] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][2] afl_a_alarmed_target[0][2];
+[1427] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][3] afl_a_alarmed_target[0][3] + 1.0F;
+[1428] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][4] afl_a_alarmed_target[0][4];
+[1429] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][5] afl_a_alarmed_target[0][5] + 1.0F;
+[1430] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][6] afl_a_alarmed_target[0][6];
+[1431] SUBPROCESS(1) func<start> tmp_peak_bin = (S4)( fl_abs(fl_sqrt(afl_a_alarmed_target[0][0]*afl_a_alarmed_target[0][0]+afl_a_alarmed_target[0][1]*afl_a_alarmed_target[0][1]))/RCOF*0.5F + NB_FFT_PT*0.5F 
+[1432] SUBPROCESS(1) func<end> ); 
+[1433] SUBPROCESS(1) func<start> tmp_peak_bin_up = tmp_peak_bin + (S4)( 0.5*(-afl_a_alarmed_target[0][9])/VCOF 
+[1434] SUBPROCESS(1) func<end> ); 
+[1435] SUBPROCESS(1) func<start> tmp_peak_bin_dn = tmp_peak_bin - (S4)( 0.5*(-afl_a_alarmed_target[0][9])/VCOF 
+[1436] SUBPROCESS(1) func<end> ); 
+[1437] SUBPROCESS(1) equal tmp_start tmp_peak_bin_up-5;
+[1438] SUBPROCESS(1) equal tmp_end tmp_peak_bin_up+5;
+[1439] SUBPROCESS(1) func<start> tmp_power_up = get_fmpower_of_specified_interval( 
+[1440] SUBPROCESS(1) func (const FL (*))afl_g_cvw_lfm_ftt_power[0], 
+[1441] SUBPROCESS(1) func tmp_start, 
+[1442] SUBPROCESS(1) func tmp_end 
 [1443] SUBPROCESS(1) func<end> ); 
-[1444] SUBPROCESS(1) func<start> tmp_peak_bin_dn = tmp_peak_bin - (S4)( 0.5*(-afl_a_alarmed_target[0][9])/VCOF 
-[1445] SUBPROCESS(1) func<end> ); 
-[1446] SUBPROCESS(1) equal tmp_start tmp_peak_bin_up-5;
-[1447] SUBPROCESS(1) equal tmp_end tmp_peak_bin_up+5;
-[1448] SUBPROCESS(1) func<start> tmp_power_up = get_fmpower_of_specified_interval( 
-[1449] SUBPROCESS(1) func (const FL (*))afl_g_cvw_lfm_ftt_power[0], 
-[1450] SUBPROCESS(1) func tmp_start, 
-[1451] SUBPROCESS(1) func tmp_end 
-[1452] SUBPROCESS(1) func<end> ); 
-[1453] SUBPROCESS(1) equal tmp_start tmp_peak_bin_dn-5;
-[1454] SUBPROCESS(1) equal tmp_end tmp_peak_bin_dn+5;
-[1455] SUBPROCESS(1) func<start> tmp_power_dn = get_fmpower_of_specified_interval( 
-[1456] SUBPROCESS(1) func (const FL (*))afl_g_cvw_lfm_ftt_power[1], 
-[1457] SUBPROCESS(1) func tmp_start, 
-[1458] SUBPROCESS(1) func tmp_end 
-[1459] SUBPROCESS(1) func<end> ); 
-[1460] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][7] (tmp_power_up+tmp_power_dn)*0.5F-afl_a_alarmed_target_current[0][6];
-[1461] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][8] afl_a_alarmed_target[0][8];
-[1462] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][9] afl_a_alarmed_target[0][9];
-[1463] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][10] afl_a_alarmed_target[0][10];
-[1464] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][11] afl_a_alarmed_target[0][11];
-[1465] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][12] afl_a_alarmed_target[0][12];
-[1466] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][13] afl_a_alarmed_target[0][13];
-[1467] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][14] afl_a_alarmed_target[0][14];
-[1468] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][15] afl_a_alarmed_target[0][15];
-[1469] SUBPROCESS(1) proc return; 
-[1470] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj<start> static VD fn_bsm_alart_check_new_altobj( 
-[1471] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj S4 s4_final_a_target_num, 
-[1472] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj signed long as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
-[1473] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
-[1474] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj const S4 as4_a_checked_target[TARGET_BUFFSIZE], 
-[1475] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj S4 s4_a_tos_flg, 
-[1476] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj S4 as4_a_alarmed_target_num_current[1], 
-[1477] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
-[1478] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj FL fl_a_alarm_area_y_min, 
-[1479] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj S4 *ps4_a_alarm_flg 
-[1480] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj ) 
-[1481] MAINPROCESS(36) subproc SUBPROCESS(1) 
-[1482] SUBPROCESS(1) proc S4 i; 
-[1483] SUBPROCESS(1) proc S4 s4_t_index; 
-[1484] SUBPROCESS(1) proc FL fl_t_erased_type; 
-[1485] SUBPROCESS(1) proc FL fl_t_object_x; 
-[1486] SUBPROCESS(1) proc FL fl_t_object_y; 
-[1487] SUBPROCESS(1) proc FL fl_t_object_vy; 
-[1488] SUBPROCESS(1) proc FL fl_t_x_min; 
-[1489] SUBPROCESS(1) proc FL fl_t_x_max; 
-[1490] SUBPROCESS(1) proc FL fl_t_y_min; 
-[1491] SUBPROCESS(1) proc FL fl_t_y_max; 
-[1492] SUBPROCESS(1) equal fl_t_object_x 0.0F;
-[1493] SUBPROCESS(1) equal fl_t_object_y 0.0F;
-[1494] SUBPROCESS(1) equal fl_t_object_vy 0.0F;
-[1495] SUBPROCESS(1) for<start> for( 
-[1496] SUBPROCESS(1) for i=0; 
-[1497] SUBPROCESS(1) for i<10; 
-[1498] SUBPROCESS(1) for i++) 
-[1499] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1500] SUBSUBPROCESS(1) equal afl_g_alarm_x_min[i] fl_get_road_width(s2_g_curvr_for_base, -(float)i) + ALARM_X_IN + ALARM_X_OFFSET_IN;
-[1501] SUBSUBPROCESS(1) equal afl_g_alarm_x_max[i] fl_get_road_width(s2_g_curvr_for_base, -(float)i) + ALARM_X_OUT + ALARM_X_OFFSET_OUT;
-[1502] SUBSUBPROCESS(1) equal afl_g_alarm_y[i] -(float)i;
-[1503] SUBPROCESS(2) if<start> if( 
-[1504] SUBPROCESS(2) if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.CONNECT 
-[1505] SUBPROCESS(2) if ) 
-[1506] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1507] SUBSUBPROCESS(1) equal fl_a_alarm_area_y_min - st_g_btt_alertarea.rear.VarY;
-[1508] SUBPROCESS(3) equal afl_g_btt_aaz_area[3] fl_a_alarm_area_y_min;
-[1509] SUBPROCESS(3) for<start> for( 
-[1510] SUBPROCESS(3) for i=0; 
-[1511] SUBPROCESS(3) for i<s4_final_a_target_num; 
-[1512] SUBPROCESS(3) for i++) 
-[1513] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[1514] SUBSUBPROCESS(1) equal fl_t_x_min ALARM_X_IN + ALARM_X_OFFSET_IN + st_g_btt_alertarea.side.VarXin;
-[1515] SUBSUBPROCESS(1) equal fl_t_x_max ALARM_X_OUT + ALARM_X_OFFSET_OUT + st_g_btt_alertarea.side.VarXout;
-[1516] SUBSUBPROCESS(1) equal fl_t_x_min ALARM_X_IN + ALARM_X_OFFSET_IN;
-[1517] SUBSUBPROCESS(1) equal fl_t_x_max ALARM_X_OUT + ALARM_X_OFFSET_OUT;
-[1518] SUBSUBPROCESS(1) equal fl_t_y_min fl_a_alarm_area_y_min - ALARM_Y_OFFSET;
-[1519] SUBSUBPROCESS(1) equal fl_t_y_max ALARM_Y_FORWARD;
-[1520] SUBSUBPROCESS(1) equal fl_t_y_max ALARM_Y_FORWARD - ALARM_Y_OFFSET;
-[1521] SUBSUBPROCESS(1) if<start> if( 
-[1522] SUBSUBPROCESS(1) if as4_a_checked_target[i]==0 
-[1523] SUBSUBPROCESS(1) if ) 
-[1524] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[1525] SUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_get_alart_area( 
-[1526] SUBSUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
-[1527] SUBSUBSUBPROCESS(1) func &fl_t_object_x, 
-[1528] SUBSUBSUBPROCESS(1) func &fl_t_object_y, 
-[1529] SUBSUBSUBPROCESS(1) func &fl_t_object_vy, 
-[1530] SUBSUBSUBPROCESS(1) func &fl_t_x_min, 
-[1531] SUBSUBSUBPROCESS(1) func &fl_t_x_max, 
-[1532] SUBSUBSUBPROCESS(1) func &fl_t_y_min 
-[1533] SUBSUBSUBPROCESS(1) func<end> ); 
-[1534] SUBSUBSUBPROCESS(1) equal s4_t_index -1;
-[1535] SUBSUBSUBPROCESS(1) equal fl_t_erased_type -1.0F;
-[1536] SUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_get_store_index( 
-[1537] SUBSUBSUBPROCESS(1) func (const signed long (*)[NORM_INT])&as4_a_Tx_int[i], 
-[1538] SUBSUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
-[1539] SUBSUBSUBPROCESS(1) func (const S4 (*))as4_a_alarmed_target_num_current, 
-[1540] SUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])afl_a_alarmed_target_current, 
-[1541] SUBSUBSUBPROCESS(1) func fl_t_object_x, 
-[1542] SUBSUBSUBPROCESS(1) func fl_t_object_y, 
-[1543] SUBSUBSUBPROCESS(1) func fl_t_x_min, 
-[1544] SUBSUBSUBPROCESS(1) func fl_t_x_max, 
-[1545] SUBSUBSUBPROCESS(1) func fl_t_y_min, 
-[1546] SUBSUBSUBPROCESS(1) func fl_t_y_max, 
-[1547] SUBSUBSUBPROCESS(1) func &fl_t_erased_type, 
-[1548] SUBSUBSUBPROCESS(1) func &s4_t_index, 
-[1549] SUBSUBSUBPROCESS(1) func fl_a_alarm_area_y_min 
-[1550] SUBSUBSUBPROCESS(1) func<end> ); 
-[1551] SUBSUBSUBPROCESS(1) if<start> if( 
-[1552] SUBSUBSUBPROCESS(1) if s4_t_index != -1 
-[1553] SUBSUBSUBPROCESS(1) if ) 
-[1554] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[1555] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_store_new_altobj( 
-[1556] SUBSUBSUBSUBPROCESS(1) func &as4_a_Tx_int[i], 
-[1557] SUBSUBSUBSUBPROCESS(1) func &afl_a_Tx_float[i], 
-[1558] SUBSUBSUBSUBPROCESS(1) func fl_t_object_x, 
-[1559] SUBSUBSUBSUBPROCESS(1) func fl_t_object_y, 
-[1560] SUBSUBSUBSUBPROCESS(1) func s4_a_tos_flg, 
-[1561] SUBSUBSUBSUBPROCESS(1) func fl_t_erased_type, 
-[1562] SUBSUBSUBSUBPROCESS(1) func &afl_a_alarmed_target_current[s4_t_index], 
-[1563] SUBSUBSUBSUBPROCESS(1) func ps4_a_alarm_flg, 
-[1564] SUBSUBSUBSUBPROCESS(1) func fl_a_alarm_area_y_min 
-[1565] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[1566] SUBSUBSUBSUBPROCESS(1) proc as4_a_alarmed_target_num_current[0]++; 
-[1567] SUBPROCESS(4) proc return; 
-[1568] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area<start> static VD fn_bsm_alart_get_alart_area( 
-[1569] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area const FL afl_a_Tx_float[1][TGT_FLT], 
-[1570] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_object_x, 
-[1571] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_object_y, 
-[1572] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_object_vy, 
-[1573] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_x_min, 
-[1574] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_x_max, 
-[1575] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_y_min 
-[1576] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area ) 
-[1577] MAINPROCESS(37) subproc SUBPROCESS(1) 
-[1578] SUBPROCESS(1) equal *pfl_a_object_x afl_a_Tx_float[0][9];
-[1579] SUBPROCESS(1) equal *pfl_a_object_y afl_a_Tx_float[0][10];
-[1580] SUBPROCESS(1) if<start> if( 
-[1581] SUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
-[1582] SUBPROCESS(1) if ) 
-[1583] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1584] SUBSUBPROCESS(1) equal *pfl_a_object_x - *pfl_a_object_x;
-[1585] SUBPROCESS(2) equal *pfl_a_object_vy afl_a_Tx_float[0][16];
-[1586] SUBPROCESS(2) if<start> if( 
-[1587] SUBPROCESS(2) if *pfl_a_object_y < 0.0F 
-[1588] SUBPROCESS(2) if ) 
-[1589] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1590] SUBSUBPROCESS(1) equal *pfl_a_x_min fl_get_road_width(s2_g_curvr_for_base, *pfl_a_object_y) + *pfl_a_x_min;
-[1591] SUBSUBPROCESS(1) equal *pfl_a_x_max fl_get_road_width(s2_g_curvr_for_base, *pfl_a_object_y) + *pfl_a_x_max;
-[1592] SUBPROCESS(3) else<start> else 
-[1593] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[1594] SUBPROCESS(4) func<start> *pfl_a_y_min = get_time_offset_area( *pfl_a_y_min, *pfl_a_object_vy, ALARM_OFFSET_TIME 
-[1595] SUBPROCESS(4) func<end> ); 
-[1596] SUBPROCESS(4) proc return; 
-[1597] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index<start> static VD fn_bsm_alart_get_store_index( 
-[1598] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index const signed long as4_a_Tx_int[1][NORM_INT], 
-[1599] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index const FL afl_a_Tx_float[1][TGT_FLT], 
-[1600] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index const S4 as4_a_alarmed_target_num_current[1], 
-[1601] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index const FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
-[1602] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_object_x, 
-[1603] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_object_y, 
-[1604] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_x_min, 
-[1605] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_x_max, 
-[1606] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_y_min, 
-[1607] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_y_max, 
-[1608] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL *pfl_a_erased_type, 
-[1609] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index S4 *ps4_a_index, 
-[1610] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_alarm_area_y_min 
-[1611] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index ) 
-[1612] MAINPROCESS(38) subproc SUBPROCESS(1) 
-[1613] SUBPROCESS(1) proc S4 j; 
-[1614] SUBPROCESS(1) proc FL fl_t_comp; 
-[1615] SUBPROCESS(1) proc FL fl_t_min; 
-[1616] SUBPROCESS(1) if <start> if ( 
-[1617] SUBPROCESS(1) if  (fl_a_object_x > fl_a_x_min 
-[1618] SUBPROCESS(1) if  ) 
-[1619] SUBPROCESS(1) if  &&  (fl_a_object_x < fl_a_x_max) 
-[1620] SUBPROCESS(1) if  &&  (fl_a_object_y < fl_a_y_max) 
-[1621] SUBPROCESS(1) if  &&  (fl_a_object_y > fl_a_y_min) 
-[1622] SUBPROCESS(1) if  &&  (as4_a_Tx_int[0][10] == 0) 
-[1623] SUBPROCESS(1) if  &&  (!((as4_a_Tx_int[0][14] == OBJECT_TYPE_2F) 
-[1624] SUBPROCESS(1) if  &&     (as4_a_Tx_int[0][12] == (S4)1)))) 
-[1625] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[1626] SUBSUBPROCESS(1) if <start> if ( 
-[1627] SUBSUBPROCESS(1) if  (afl_a_Tx_float[0][13]  < ((FL)-10.0F / (FL)3.6F) 
-[1628] SUBSUBPROCESS(1) if  ) 
-[1629] SUBSUBPROCESS(1) if  ||  ((afl_a_Tx_float[0][13] < ((FL)-8.5F / (FL)3.6F)) 
-[1630] SUBSUBPROCESS(1) if  &&   (afl_a_Tx_float[0][7]  < (fl_a_alarm_area_y_min + (FL)1.0F)))) 
-[1631] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[1444] SUBPROCESS(1) equal tmp_start tmp_peak_bin_dn-5;
+[1445] SUBPROCESS(1) equal tmp_end tmp_peak_bin_dn+5;
+[1446] SUBPROCESS(1) func<start> tmp_power_dn = get_fmpower_of_specified_interval( 
+[1447] SUBPROCESS(1) func (const FL (*))afl_g_cvw_lfm_ftt_power[1], 
+[1448] SUBPROCESS(1) func tmp_start, 
+[1449] SUBPROCESS(1) func tmp_end 
+[1450] SUBPROCESS(1) func<end> ); 
+[1451] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][7] (tmp_power_up+tmp_power_dn)*0.5F-afl_a_alarmed_target_current[0][6];
+[1452] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][8] afl_a_alarmed_target[0][8];
+[1453] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][9] afl_a_alarmed_target[0][9];
+[1454] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][10] afl_a_alarmed_target[0][10];
+[1455] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][11] afl_a_alarmed_target[0][11];
+[1456] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][12] afl_a_alarmed_target[0][12];
+[1457] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][13] afl_a_alarmed_target[0][13];
+[1458] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][14] afl_a_alarmed_target[0][14];
+[1459] SUBPROCESS(1) equal afl_a_alarmed_target_current[0][15] afl_a_alarmed_target[0][15];
+[1460] SUBPROCESS(1) proc return; 
+[1461] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj<start> static VD fn_bsm_alart_check_new_altobj( 
+[1462] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj S4 s4_final_a_target_num, 
+[1463] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj signed long as4_a_Tx_int[TARGET_BUFFSIZE][NORM_INT], 
+[1464] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj FL afl_a_Tx_float[TARGET_BUFFSIZE][TGT_FLT], 
+[1465] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj const S4 as4_a_checked_target[TARGET_BUFFSIZE], 
+[1466] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj S4 s4_a_tos_flg, 
+[1467] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj S4 as4_a_alarmed_target_num_current[1], 
+[1468] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
+[1469] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj FL fl_a_alarm_area_y_min, 
+[1470] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj S4 *ps4_a_alarm_flg 
+[1471] MAINPROCESS(36) static VD fn_bsm_alart_check_new_altobj ) 
+[1472] MAINPROCESS(36) subproc SUBPROCESS(1) 
+[1473] SUBPROCESS(1) proc S4 i; 
+[1474] SUBPROCESS(1) proc S4 s4_t_index; 
+[1475] SUBPROCESS(1) proc FL fl_t_erased_type; 
+[1476] SUBPROCESS(1) proc FL fl_t_object_x; 
+[1477] SUBPROCESS(1) proc FL fl_t_object_y; 
+[1478] SUBPROCESS(1) proc FL fl_t_object_vy; 
+[1479] SUBPROCESS(1) proc FL fl_t_x_min; 
+[1480] SUBPROCESS(1) proc FL fl_t_x_max; 
+[1481] SUBPROCESS(1) proc FL fl_t_y_min; 
+[1482] SUBPROCESS(1) proc FL fl_t_y_max; 
+[1483] SUBPROCESS(1) equal fl_t_object_x 0.0F;
+[1484] SUBPROCESS(1) equal fl_t_object_y 0.0F;
+[1485] SUBPROCESS(1) equal fl_t_object_vy 0.0F;
+[1486] SUBPROCESS(1) for<start> for( 
+[1487] SUBPROCESS(1) for i=0; 
+[1488] SUBPROCESS(1) for i<10; 
+[1489] SUBPROCESS(1) for i++) 
+[1490] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1491] SUBSUBPROCESS(1) equal afl_g_alarm_x_min[i] fl_get_road_width(s2_g_curvr_for_base, -(float)i) + ALARM_X_IN + ALARM_X_OFFSET_IN;
+[1492] SUBSUBPROCESS(1) equal afl_g_alarm_x_max[i] fl_get_road_width(s2_g_curvr_for_base, -(float)i) + ALARM_X_OUT + ALARM_X_OFFSET_OUT;
+[1493] SUBSUBPROCESS(1) equal afl_g_alarm_y[i] -(float)i;
+[1494] SUBPROCESS(2) if<start> if( 
+[1495] SUBPROCESS(2) if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.CONNECT 
+[1496] SUBPROCESS(2) if ) 
+[1497] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1498] SUBSUBPROCESS(1) equal fl_a_alarm_area_y_min - st_g_btt_alertarea.rear.VarY;
+[1499] SUBPROCESS(3) equal afl_g_btt_aaz_area[3] fl_a_alarm_area_y_min;
+[1500] SUBPROCESS(3) for<start> for( 
+[1501] SUBPROCESS(3) for i=0; 
+[1502] SUBPROCESS(3) for i<s4_final_a_target_num; 
+[1503] SUBPROCESS(3) for i++) 
+[1504] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[1505] SUBSUBPROCESS(1) equal fl_t_x_min ALARM_X_IN + ALARM_X_OFFSET_IN + st_g_btt_alertarea.side.VarXin;
+[1506] SUBSUBPROCESS(1) equal fl_t_x_max ALARM_X_OUT + ALARM_X_OFFSET_OUT + st_g_btt_alertarea.side.VarXout;
+[1507] SUBSUBPROCESS(1) equal fl_t_x_min ALARM_X_IN + ALARM_X_OFFSET_IN;
+[1508] SUBSUBPROCESS(1) equal fl_t_x_max ALARM_X_OUT + ALARM_X_OFFSET_OUT;
+[1509] SUBSUBPROCESS(1) equal fl_t_y_min fl_a_alarm_area_y_min - ALARM_Y_OFFSET;
+[1510] SUBSUBPROCESS(1) equal fl_t_y_max ALARM_Y_FORWARD;
+[1511] SUBSUBPROCESS(1) equal fl_t_y_max ALARM_Y_FORWARD - ALARM_Y_OFFSET;
+[1512] SUBSUBPROCESS(1) if<start> if( 
+[1513] SUBSUBPROCESS(1) if as4_a_checked_target[i]==0 
+[1514] SUBSUBPROCESS(1) if ) 
+[1515] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[1516] SUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_get_alart_area( 
+[1517] SUBSUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
+[1518] SUBSUBSUBPROCESS(1) func &fl_t_object_x, 
+[1519] SUBSUBSUBPROCESS(1) func &fl_t_object_y, 
+[1520] SUBSUBSUBPROCESS(1) func &fl_t_object_vy, 
+[1521] SUBSUBSUBPROCESS(1) func &fl_t_x_min, 
+[1522] SUBSUBSUBPROCESS(1) func &fl_t_x_max, 
+[1523] SUBSUBSUBPROCESS(1) func &fl_t_y_min 
+[1524] SUBSUBSUBPROCESS(1) func<end> ); 
+[1525] SUBSUBSUBPROCESS(1) equal s4_t_index -1;
+[1526] SUBSUBSUBPROCESS(1) equal fl_t_erased_type -1.0F;
+[1527] SUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_get_store_index( 
+[1528] SUBSUBSUBPROCESS(1) func (const signed long (*)[NORM_INT])&as4_a_Tx_int[i], 
+[1529] SUBSUBSUBPROCESS(1) func (const FL (*)[TGT_FLT])&afl_a_Tx_float[i], 
+[1530] SUBSUBSUBPROCESS(1) func (const S4 (*))as4_a_alarmed_target_num_current, 
+[1531] SUBSUBSUBPROCESS(1) func (const FL (*)[ALARM_INFO_SIZE])afl_a_alarmed_target_current, 
+[1532] SUBSUBSUBPROCESS(1) func fl_t_object_x, 
+[1533] SUBSUBSUBPROCESS(1) func fl_t_object_y, 
+[1534] SUBSUBSUBPROCESS(1) func fl_t_x_min, 
+[1535] SUBSUBSUBPROCESS(1) func fl_t_x_max, 
+[1536] SUBSUBSUBPROCESS(1) func fl_t_y_min, 
+[1537] SUBSUBSUBPROCESS(1) func fl_t_y_max, 
+[1538] SUBSUBSUBPROCESS(1) func &fl_t_erased_type, 
+[1539] SUBSUBSUBPROCESS(1) func &s4_t_index, 
+[1540] SUBSUBSUBPROCESS(1) func fl_a_alarm_area_y_min 
+[1541] SUBSUBSUBPROCESS(1) func<end> ); 
+[1542] SUBSUBSUBPROCESS(1) if<start> if( 
+[1543] SUBSUBSUBPROCESS(1) if s4_t_index != -1 
+[1544] SUBSUBSUBPROCESS(1) if ) 
+[1545] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[1546] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_alart_store_new_altobj( 
+[1547] SUBSUBSUBSUBPROCESS(1) func &as4_a_Tx_int[i], 
+[1548] SUBSUBSUBSUBPROCESS(1) func &afl_a_Tx_float[i], 
+[1549] SUBSUBSUBSUBPROCESS(1) func fl_t_object_x, 
+[1550] SUBSUBSUBSUBPROCESS(1) func fl_t_object_y, 
+[1551] SUBSUBSUBSUBPROCESS(1) func s4_a_tos_flg, 
+[1552] SUBSUBSUBSUBPROCESS(1) func fl_t_erased_type, 
+[1553] SUBSUBSUBSUBPROCESS(1) func &afl_a_alarmed_target_current[s4_t_index], 
+[1554] SUBSUBSUBSUBPROCESS(1) func ps4_a_alarm_flg, 
+[1555] SUBSUBSUBSUBPROCESS(1) func fl_a_alarm_area_y_min 
+[1556] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1557] SUBSUBSUBSUBPROCESS(1) proc as4_a_alarmed_target_num_current[0]++; 
+[1558] SUBPROCESS(4) proc return; 
+[1559] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area<start> static VD fn_bsm_alart_get_alart_area( 
+[1560] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area const FL afl_a_Tx_float[1][TGT_FLT], 
+[1561] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_object_x, 
+[1562] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_object_y, 
+[1563] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_object_vy, 
+[1564] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_x_min, 
+[1565] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_x_max, 
+[1566] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area FL *pfl_a_y_min 
+[1567] MAINPROCESS(37) static VD fn_bsm_alart_get_alart_area ) 
+[1568] MAINPROCESS(37) subproc SUBPROCESS(1) 
+[1569] SUBPROCESS(1) equal *pfl_a_object_x afl_a_Tx_float[0][9];
+[1570] SUBPROCESS(1) equal *pfl_a_object_y afl_a_Tx_float[0][10];
+[1571] SUBPROCESS(1) if<start> if( 
+[1572] SUBPROCESS(1) if u1_g_sns_pos==SENSOR_LEFT 
+[1573] SUBPROCESS(1) if ) 
+[1574] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1575] SUBSUBPROCESS(1) equal *pfl_a_object_x - *pfl_a_object_x;
+[1576] SUBPROCESS(2) if<start> if( 
+[1577] SUBPROCESS(2) if *pfl_a_object_y < 0.0F 
+[1578] SUBPROCESS(2) if ) 
+[1579] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1580] SUBSUBPROCESS(1) equal *pfl_a_x_min fl_get_road_width(s2_g_curvr_for_base, *pfl_a_object_y) + *pfl_a_x_min;
+[1581] SUBSUBPROCESS(1) equal *pfl_a_x_max fl_get_road_width(s2_g_curvr_for_base, *pfl_a_object_y) + *pfl_a_x_max;
+[1582] SUBPROCESS(3) else<start> else 
+[1583] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[1584] SUBPROCESS(4) proc return; 
+[1585] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index<start> static VD fn_bsm_alart_get_store_index( 
+[1586] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index const signed long as4_a_Tx_int[1][NORM_INT], 
+[1587] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index const FL afl_a_Tx_float[1][TGT_FLT], 
+[1588] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index const S4 as4_a_alarmed_target_num_current[1], 
+[1589] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index const FL afl_a_alarmed_target_current[TARGET_BUFFSIZE][ALARM_INFO_SIZE], 
+[1590] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_object_x, 
+[1591] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_object_y, 
+[1592] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_x_min, 
+[1593] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_x_max, 
+[1594] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_y_min, 
+[1595] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_y_max, 
+[1596] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL *pfl_a_erased_type, 
+[1597] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index S4 *ps4_a_index, 
+[1598] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index FL fl_a_alarm_area_y_min 
+[1599] MAINPROCESS(38) static VD fn_bsm_alart_get_store_index ) 
+[1600] MAINPROCESS(38) subproc SUBPROCESS(1) 
+[1601] SUBPROCESS(1) proc S4 j; 
+[1602] SUBPROCESS(1) proc FL fl_t_comp; 
+[1603] SUBPROCESS(1) proc FL fl_t_min; 
+[1604] SUBPROCESS(1) if <start> if ( 
+[1605] SUBPROCESS(1) if  (fl_a_object_x > fl_a_x_min 
+[1606] SUBPROCESS(1) if  ) 
+[1607] SUBPROCESS(1) if  &&  (fl_a_object_x < fl_a_x_max) 
+[1608] SUBPROCESS(1) if  &&  (fl_a_object_y < fl_a_y_max) 
+[1609] SUBPROCESS(1) if  &&  (fl_a_object_y > fl_a_y_min) 
+[1610] SUBPROCESS(1) if  &&  (as4_a_Tx_int[0][10] == 0) 
+[1611] SUBPROCESS(1) if  &&  (!((as4_a_Tx_int[0][14] == OBJECT_TYPE_2F) 
+[1612] SUBPROCESS(1) if  &&     (as4_a_Tx_int[0][12] == (S4)1)))) 
+[1613] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[1614] SUBSUBPROCESS(1) if <start> if ( 
+[1615] SUBSUBPROCESS(1) if  (afl_a_Tx_float[0][13]  < ((FL)-10.0F / (FL)3.6F) 
+[1616] SUBSUBPROCESS(1) if  ) 
+[1617] SUBSUBPROCESS(1) if  ||  ((afl_a_Tx_float[0][13] < ((FL)-8.5F / (FL)3.6F)) 
+[1618] SUBSUBPROCESS(1) if  &&   (afl_a_Tx_float[0][7]  < (fl_a_alarm_area_y_min + (FL)1.0F)))) 
+[1619] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[1620] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
+[1621] SUBSUBPROCESS(2) else if <start> else if ( 
+[1622] SUBSUBPROCESS(2) else if  (st_g_bsm_loop_data.as4_fast_sot_flg[0] > (S4)0 
+[1623] SUBSUBPROCESS(2) else if  ) 
+[1624] SUBSUBPROCESS(2) else if  &&  (as4_a_Tx_int[0][17] < (S4)5)) 
+[1625] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[1626] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
+[1627] SUBSUBPROCESS(3) else if <start> else if ( 
+[1628] SUBSUBPROCESS(3) else if  (as4_a_Tx_int[0][15] > (S4)0 
+[1629] SUBSUBPROCESS(3) else if  ) 
+[1630] SUBSUBPROCESS(3) else if  &&  (as4_a_Tx_int[0][17] < (S4)5)) 
+[1631] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
 [1632] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
-[1633] SUBSUBPROCESS(2) else if <start> else if ( 
-[1634] SUBSUBPROCESS(2) else if  (st_g_bsm_loop_data.as4_fast_sot_flg[0] > (S4)0 
-[1635] SUBSUBPROCESS(2) else if  ) 
-[1636] SUBSUBPROCESS(2) else if  &&  (as4_a_Tx_int[0][17] < (S4)5)) 
-[1637] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[1633] SUBSUBPROCESS(4) else if <start> else if ( 
+[1634] SUBSUBPROCESS(4) else if  (as4_a_Tx_int[0][16] == (S4)0 
+[1635] SUBSUBPROCESS(4) else if  ) 
+[1636] SUBSUBPROCESS(4) else if  &&  (st_g_bsm_loop_data.u1_reliable_jdg_mask_count == (U1)0)) 
+[1637] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
 [1638] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
-[1639] SUBSUBPROCESS(3) else if <start> else if ( 
-[1640] SUBSUBPROCESS(3) else if  (as4_a_Tx_int[0][15] > (S4)0 
-[1641] SUBSUBPROCESS(3) else if  ) 
-[1642] SUBSUBPROCESS(3) else if  &&  (as4_a_Tx_int[0][17] < (S4)5)) 
-[1643] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
-[1644] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
-[1645] SUBSUBPROCESS(4) else if <start> else if ( 
-[1646] SUBSUBPROCESS(4) else if  (as4_a_Tx_int[0][16] == (S4)0 
-[1647] SUBSUBPROCESS(4) else if  ) 
-[1648] SUBSUBPROCESS(4) else if  &&  (st_g_bsm_loop_data.u1_reliable_jdg_mask_count == (U1)0)) 
-[1649] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
+[1639] SUBSUBPROCESS(5) ??? else 
+[1640] SUBPROCESS(2) else if <start> else if ( 
+[1641] SUBPROCESS(2) else if  (fl_g_v_self_bsm_for_base < (FL)35.0F 
+[1642] SUBPROCESS(2) else if  ) 
+[1643] SUBPROCESS(2) else if  &&  (fl_a_object_y < (FL)-3.5F) 
+[1644] SUBPROCESS(2) else if  &&  (fl_a_object_y > (FL)-7.5F)) 
+[1645] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1646] SUBSUBPROCESS(1) if <start> if ( 
+[1647] SUBSUBPROCESS(1) if  fl_a_object_x < fl_a_x_min + (FL)0.1F 
+[1648] SUBSUBPROCESS(1) if  ) 
+[1649] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
 [1650] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
-[1651] SUBSUBPROCESS(5) ??? else 
-[1652] SUBPROCESS(2) else if <start> else if ( 
-[1653] SUBPROCESS(2) else if  (fl_g_v_self_bsm_for_base < (FL)35.0F 
-[1654] SUBPROCESS(2) else if  ) 
-[1655] SUBPROCESS(2) else if  &&  (fl_a_object_y < (FL)-3.5F) 
-[1656] SUBPROCESS(2) else if  &&  (fl_a_object_y > (FL)-7.5F)) 
-[1657] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[1658] SUBSUBPROCESS(1) if <start> if ( 
-[1659] SUBSUBPROCESS(1) if  fl_a_object_x < fl_a_x_min + (FL)0.1F 
-[1660] SUBSUBPROCESS(1) if  ) 
-[1661] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[1662] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
-[1663] SUBSUBPROCESS(2) else if <start> else if ( 
-[1664] SUBSUBPROCESS(2) else if  fl_a_object_x < fl_a_x_min + (FL)0.4F 
-[1665] SUBSUBPROCESS(2) else if  ) 
-[1666] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[1651] SUBSUBPROCESS(2) else if <start> else if ( 
+[1652] SUBSUBPROCESS(2) else if  fl_a_object_x < fl_a_x_min + (FL)0.4F 
+[1653] SUBSUBPROCESS(2) else if  ) 
+[1654] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[1655] SUBSUBSUBPROCESS(1) if <start> if ( 
+[1656] SUBSUBSUBPROCESS(1) if  afl_a_Tx_float[0][13] * (FL)3.6F < (FL)2.6F 
+[1657] SUBSUBSUBPROCESS(1) if  ) 
+[1658] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[1659] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
+[1660] SUBSUBSUBPROCESS(2) else<start> else 
+[1661] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[1662] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)1;
+[1663] SUBSUBPROCESS(3) else if <start> else if ( 
+[1664] SUBSUBPROCESS(3) else if  fl_a_object_x < fl_a_x_min + (FL)0.8F 
+[1665] SUBSUBPROCESS(3) else if  ) 
+[1666] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
 [1667] SUBSUBSUBPROCESS(1) if <start> if ( 
-[1668] SUBSUBSUBPROCESS(1) if  afl_a_Tx_float[0][13] * (FL)3.6F < (FL)2.6F 
+[1668] SUBSUBSUBPROCESS(1) if  afl_a_Tx_float[0][13] * (FL)3.6F < (FL)3.5F 
 [1669] SUBSUBSUBPROCESS(1) if  ) 
 [1670] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
 [1671] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
 [1672] SUBSUBSUBPROCESS(2) else<start> else 
 [1673] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
 [1674] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)1;
-[1675] SUBSUBPROCESS(3) else if <start> else if ( 
-[1676] SUBSUBPROCESS(3) else if  fl_a_object_x < fl_a_x_min + (FL)0.8F 
-[1677] SUBSUBPROCESS(3) else if  ) 
-[1678] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
-[1679] SUBSUBSUBPROCESS(1) if <start> if ( 
-[1680] SUBSUBSUBPROCESS(1) if  afl_a_Tx_float[0][13] * (FL)3.6F < (FL)3.5F 
-[1681] SUBSUBSUBPROCESS(1) if  ) 
-[1682] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[1683] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)-1;
-[1684] SUBSUBSUBPROCESS(2) else<start> else 
-[1685] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[1686] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)1;
-[1687] SUBSUBPROCESS(4) else<start> else 
-[1688] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
-[1689] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)1;
-[1690] SUBPROCESS(3) else<start> else 
-[1691] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[1692] SUBSUBPROCESS(1) equal *ps4_a_index (S4)1;
-[1693] SUBPROCESS(4) if <start> if ( 
-[1694] SUBPROCESS(4) if  *ps4_a_index != (S4)-1 
-[1695] SUBPROCESS(4) if  ) 
-[1696] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[1697] SUBSUBPROCESS(1) if<start> if( 
-[1698] SUBSUBPROCESS(1) if as4_a_alarmed_target_num_current[0] < (S4)(TARGET_BUFFSIZE-1) 
-[1699] SUBSUBPROCESS(1) if ) 
-[1700] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[1701] SUBSUBSUBPROCESS(1) equal *ps4_a_index as4_a_alarmed_target_num_current[0];
-[1702] SUBSUBPROCESS(2) else<start> else 
-[1703] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[1704] SUBSUBSUBPROCESS(1) equal fl_t_min 1000.0F;
-[1705] SUBSUBSUBPROCESS(1) equal fl_t_comp 0.0F;
-[1706] SUBSUBSUBPROCESS(1) for<start> for( 
-[1707] SUBSUBSUBPROCESS(1) for j=0; 
-[1708] SUBSUBSUBPROCESS(1) for j<TARGET_BUFFSIZE; 
-[1709] SUBSUBSUBPROCESS(1) for j++) 
-[1710] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[1711] SUBSUBSUBSUBPROCESS(1) ??? fl_t_comp = fl_abs(afl_a_alarmed_target_current[j][0]-afl_a_Tx_float[0][8]) 
-[1712] SUBSUBSUBSUBPROCESS(1) func<start> + fl_abs(afl_a_alarmed_target_current[j][1]-afl_a_Tx_float[0][7] 
-[1713] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[1714] SUBSUBSUBSUBPROCESS(1) if<start> if( 
-[1715] SUBSUBSUBSUBPROCESS(1) if fl_t_comp < fl_t_min 
-[1716] SUBSUBSUBSUBPROCESS(1) if ) 
-[1717] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[1718] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_index j;
-[1719] SUBSUBSUBSUBSUBPROCESS(1) equal fl_t_min fl_t_comp;
-[1720] SUBSUBSUBSUBSUBPROCESS(1) equal *pfl_a_erased_type afl_a_alarmed_target_current[j][4];
-[1721] MAINPROCESS(39) proc return; 
------------------ Total Codes : 1721 lines
+[1675] SUBSUBPROCESS(4) else<start> else 
+[1676] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
+[1677] SUBSUBSUBPROCESS(1) equal *ps4_a_index (S4)1;
+[1678] SUBPROCESS(3) else<start> else 
+[1679] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[1680] SUBSUBPROCESS(1) equal *ps4_a_index (S4)1;
+[1681] SUBPROCESS(4) if <start> if ( 
+[1682] SUBPROCESS(4) if  *ps4_a_index != (S4)-1 
+[1683] SUBPROCESS(4) if  ) 
+[1684] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[1685] SUBSUBPROCESS(1) if<start> if( 
+[1686] SUBSUBPROCESS(1) if as4_a_alarmed_target_num_current[0] < (S4)(TARGET_BUFFSIZE-1) 
+[1687] SUBSUBPROCESS(1) if ) 
+[1688] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[1689] SUBSUBSUBPROCESS(1) equal *ps4_a_index as4_a_alarmed_target_num_current[0];
+[1690] SUBSUBPROCESS(2) else<start> else 
+[1691] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[1692] SUBSUBSUBPROCESS(1) equal fl_t_min 1000.0F;
+[1693] SUBSUBSUBPROCESS(1) equal fl_t_comp 0.0F;
+[1694] SUBSUBSUBPROCESS(1) for<start> for( 
+[1695] SUBSUBSUBPROCESS(1) for j=0; 
+[1696] SUBSUBSUBPROCESS(1) for j<TARGET_BUFFSIZE; 
+[1697] SUBSUBSUBPROCESS(1) for j++) 
+[1698] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[1699] SUBSUBSUBSUBPROCESS(1) func<start> fl_t_comp = fl_abs(afl_a_alarmed_target_current[j][0]-afl_a_Tx_float[0][8]) + fl_abs(afl_a_alarmed_target_current[j][1]-afl_a_Tx_float[0][7] 
+[1700] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1701] SUBSUBSUBSUBPROCESS(1) if<start> if( 
+[1702] SUBSUBSUBSUBPROCESS(1) if fl_t_comp < fl_t_min 
+[1703] SUBSUBSUBSUBPROCESS(1) if ) 
+[1704] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[1705] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_index j;
+[1706] SUBSUBSUBSUBSUBPROCESS(1) equal fl_t_min fl_t_comp;
+[1707] SUBSUBSUBSUBSUBPROCESS(1) equal *pfl_a_erased_type afl_a_alarmed_target_current[j][4];
+[1708] MAINPROCESS(39) proc return; 
+----------------- Total Codes : 1708 lines
 --------------------------
 [Function Name] : fn_bsm_alart_store_new_altobj 
 -Return type : static VD 

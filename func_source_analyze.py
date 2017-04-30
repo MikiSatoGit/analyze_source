@@ -573,37 +573,23 @@ def find_functions(valid_lines):
 		print '<find_functions> START of find_functions'
 
 	#remove comment and change line after }
-	tmp_valid_lines =[]
-	for line_org in valid_lines:
-		tmp_line = remove_comment_line(line_org.strip())
-		tmp_line = tmp_line.strip()
-		while tmp_line.find('}')!=-1:
-			tmptmp_line = tmp_line[:tmp_line.find('}')]
-			if len(tmptmp_line)!=0:
-				tmp_valid_lines.append(remove_comment_line(tmptmp_line))
-			tmp_valid_lines.append(remove_comment_line('}'))
-			tmp_line = tmp_line[tmp_line.find('}')+1:]
-		if len(tmp_line)!=0:
-			tmp_valid_lines.append(remove_comment_line(tmp_line))
-	valid_lines = copy.deepcopy(tmp_valid_lines)
+	valid_lines = change_line_after_bracket(valid_lines, '}')
 
 	#change line after {
-	del tmp_valid_lines[:]
-	for line_org in valid_lines:
-		tmp_line = line_org.strip()
-		while tmp_line.find('{')!=-1:
-			tmptmp_line = tmp_line[:tmp_line.find('{')]
-			if len(tmptmp_line)!=0:
-				tmp_valid_lines.append(remove_comment_line(tmptmp_line))
-			tmp_valid_lines.append(remove_comment_line('{'))
-			tmp_line = tmp_line[tmp_line.find('{')+1:]
-		if len(tmp_line)!=0:
-			tmp_valid_lines.append(remove_comment_line(tmp_line))
-	valid_lines = copy.deepcopy(tmp_valid_lines)
+	valid_lines = change_line_after_bracket(valid_lines, '{')
+
+
+	#delete LF before operator (top of the line) / after operator (end of the line)
+	valid_lines = delete_change_line_around_operator(valid_lines, '=')
+	valid_lines = delete_change_line_around_operator(valid_lines, '+')
+	valid_lines = delete_change_line_around_operator(valid_lines, '-')
+	valid_lines = delete_change_line_around_operator(valid_lines, '*')
+	valid_lines = delete_change_line_around_operator(valid_lines, '/')
 
 	if debug_out:
 		for debug_line in valid_lines:
 			print '<find_functions> (pre) %s' % debug_line
+
 
 	func_list = FunctionList()
 	searching = 0
@@ -668,6 +654,47 @@ def find_functions(valid_lines):
 		print '<find_functions> END of find_functions'
 
 	return func_list
+
+def change_line_after_bracket(valid_lines, bracket):
+	tmp_valid_lines =[]
+	for line_org in valid_lines:
+		tmp_line = remove_comment_line(line_org.strip())
+		tmp_line = tmp_line.strip()
+		while tmp_line.find(bracket)!=-1:
+			tmptmp_line = tmp_line[:tmp_line.find(bracket)]
+			if len(tmptmp_line)!=0:
+				tmp_valid_lines.append(remove_comment_line(tmptmp_line))
+			tmp_valid_lines.append(remove_comment_line(bracket))
+			tmp_line = tmp_line[tmp_line.find(bracket)+1:]
+		if len(tmp_line)!=0:
+			tmp_valid_lines.append(remove_comment_line(tmp_line))
+	valid_lines = copy.deepcopy(tmp_valid_lines)
+	return valid_lines
+
+def delete_change_line_around_operator(valid_lines, operator):
+	tmp_valid_lines =[]
+	#delete LF before operator (top of the line)
+	for index in range (0, len(valid_lines)):
+		line_org = valid_lines[index]
+		tmp_line = line_org.strip()
+		if tmp_line.find(operator)==0:
+			tmp_valid_lines[-1] += ' ' + remove_comment_line(tmp_line)
+		else:
+			tmp_valid_lines.append(remove_comment_line(tmp_line))
+	valid_lines = copy.deepcopy(tmp_valid_lines)
+
+	#delete LF after operator (end of the line)
+	del tmp_valid_lines[:]
+	for index in range (0, len(valid_lines)):
+		line_org = valid_lines[index]
+		tmp_line = line_org.strip()
+		if index>0 and tmp_valid_lines[-1].find(operator)==len(tmp_valid_lines[-1])-1:
+			tmp_valid_lines[-1] += ' ' + remove_comment_line(tmp_line)
+		else:
+			tmp_valid_lines.append(remove_comment_line(tmp_line))
+	valid_lines = copy.deepcopy(tmp_valid_lines)
+	return valid_lines
+
 
 
 def analyze_function_list(FunctionData):
@@ -1083,13 +1110,14 @@ def analyze_sub_process_code(proc_codes):
 		tmp_title = proc_codes.title[index]
 		tmp_code = proc_codes.main[index]
 
-		if debug_out:
-			print '<analyze_sub_process_code> checking %s' % tmp_code
+#0422		if debug_out:
+		print '<analyze_sub_process_code> checking %s' % tmp_code
 
 		if is_for > 0:
+			if tmp_code.count('(')!=-1:
+				is_for += tmp_code.count('(')
 			if tmp_code.count(')')!=-1:
-				is_for -=  tmp_code.count(')')
-
+				is_for -= tmp_code.count(')')
 
 		proc_data.clear()
 ########## skip sub process ##########
@@ -1120,40 +1148,40 @@ def analyze_sub_process_code(proc_codes):
 						tmp_right = tmp_proc[tmp_proc.find('=')+1: ]
 						proc_data.append_data(tmp_title, 'equal', tmp_left.strip(), tmp_right.strip())
 
-						if debug_out:
-							print '<analyze_sub_process_code>   -> append(2) %s = %s' % (tmp_left, tmp_right)
+#0422						if debug_out:
+						print '<analyze_sub_process_code>   -> append(2) %s = %s' % (tmp_left, tmp_right)
 
 					else:
 
-						if debug_out:
-							print '<analyze_sub_process_code>  not find ='
+#0422						if debug_out:
+						print '<analyze_sub_process_code>  not find = in %s' % (tmp_proc)
 
 						tmp_left = tmp_proc
 						tmp_right = ''
 # find func call (hoge();)
 						if tmp_left.rfind(')')!=-1:
 
-							if debug_out:
-								print '<analyze_sub_process_code>  find )'
+#0422							if debug_out:
+							print '<analyze_sub_process_code>  find )'
 
 							tmp_bracket_to_end = tmp_left[tmp_left.rfind(')')+1:tmp_left.find(';')].strip()
 							if len(tmp_bracket_to_end)==0:
 
-								if debug_out:
-									print '<analyze_sub_process_code>  find );'
+#0422								if debug_out:
+								print '<analyze_sub_process_code>  find );'
 
 								if is_for!=0:
-									tmp_left = tmp_left[:tmp_left.find(';')]
+									tmp_left = tmp_left[:tmp_left.find(';')+1]
 									proc_data.append_data(tmp_title,'???', tmp_left.strip(), tmp_right.strip())	#for<end>
 
-									if debug_out:
-										print '<analyze_sub_process_code>   -> append(3) %s %s' % (tmp_left.strip(), tmp_right.strip())
+#0422									if debug_out:
+									print '<analyze_sub_process_code>   -> append(3) %s %s' % (tmp_left.strip(), tmp_right.strip())
 
 								else:
 									proc_data.append_data(tmp_title,'func<end>', tmp_left.strip(), tmp_right.strip())
 
-									if debug_out:
-										print '<analyze_sub_process_code>   -> append(4) %s %s' % (tmp_left.strip(), tmp_right.strip())
+#0422									if debug_out:
+									print '<analyze_sub_process_code>   -> append(4) %s %s' % (tmp_left.strip(), tmp_right.strip())
 
 # check bracket level
 								# count ')' level
@@ -1257,7 +1285,6 @@ def analyze_sub_process_code(proc_codes):
 						is_for += tmp_code.count('(')
 					if tmp_code.count(')')!=-1:
 						is_for -= tmp_code.count(')')
-					is_for = is_ctrl_stat_word('for', tmp_code)
 
 ######################################################################
 

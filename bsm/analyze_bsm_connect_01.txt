@@ -462,12 +462,8 @@ Total functions : 37
 [35] SUBSUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBSUBPROCESS(1) 
 [36] SUBSUBSUBSUBSUBSUBPROCESS(1) func<start> fn_init(&ast_a_normal_ordinary[s4_t_lp_num_ordi], (S4)1 
 [37] SUBSUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
-[38] MAINPROCESS(2) func<start> *ps4_a_pair_num_ordinary = s4_trim_ordinary(ast_a_normal_ordinary 
-[39] MAINPROCESS(2) func<end> ); 
-[40] MAINPROCESS(2) func<start> *ps4_a_pair_num_prior = s4_trim_prior(ast_a_normal_prior 
-[41] MAINPROCESS(2) func<end> ); 
-[42] MAINPROCESS(2) proc return; 
------------------ Total Codes : 42 lines
+[38] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 38 lines
 --------------------------
 [Function Name] : fn_bsm_con_copy_ordinay_to_sot 
 -Return type : static VD 
@@ -524,45 +520,43 @@ Total functions : 37
 [18] SUBSUBPROCESS(1) if  ) 
 [19] SUBSUBPROCESS(1) if  &&  ((fl_abs(ast_a_normal_sot[0].fl_Ryfil - ast_a_normal_ordinary[i].fl_Ryobs)) < 0.5F) 
 [20] SUBSUBPROCESS(1) if  &&  (ast_a_normal_sot[0].fl_Rxfil > ast_a_normal_ordinary[i].fl_Rxobs) 
-[21] SUBSUBPROCESS(1) if  &&  (tmp_sot_others_diff_min > (fl_abs(ast_a_normal_sot[0].fl_Rxfil - ast_a_normal_ordinary[i].fl_Rxobs) 
-[22] SUBSUBPROCESS(1) if  +  fl_abs(ast_a_normal_sot[0].fl_Ryfil - ast_a_normal_ordinary[i].fl_Ryobs)))) 
-[23] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[24] SUBSUBSUBPROCESS(1) ??? tmp_sot_others_diff_min = fl_abs(ast_a_normal_sot[0].fl_Rxfil-ast_a_normal_ordinary[i].fl_Rxobs) 
-[25] SUBSUBSUBPROCESS(1) func<start> +fl_abs(ast_a_normal_sot[0].fl_Ryfil-ast_a_normal_ordinary[i].fl_Ryobs 
-[26] SUBSUBSUBPROCESS(1) func<end> ); 
-[27] SUBSUBSUBPROCESS(1) equal tmp_sot_others_index i;
-[28] SUBPROCESS(2) else if <start> else if ( 
-[29] SUBPROCESS(2) else if  (st_g_bsm_loop_data.u1_truck_flg != 0 
-[30] SUBPROCESS(2) else if  ) 
-[31] SUBPROCESS(2) else if  &&  (st_g_bsm_loop_data.as4_flg_passing[0] > 0) 
-[32] SUBPROCESS(2) else if  &&  (st_g_bsm_loop_data.as4_slow_sot_find[0] != 0)) 
-[33] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[34] SUBSUBPROCESS(1) if <start> if ( 
-[35] SUBSUBPROCESS(1) if  (fl_abs(ast_a_normal_ordinary[i].fl_Ryobs) < 0.5F 
-[36] SUBSUBPROCESS(1) if  ) 
-[37] SUBSUBPROCESS(1) if  &&  (ast_a_normal_ordinary[i].fl_Rxobs < st_g_bsm_loop_data.afl_wall_width[0]) 
-[38] SUBSUBPROCESS(1) if  &&  (tmp_sot_truck_x_min > fl_abs(ast_a_normal_ordinary[i].fl_Rxobs))) 
-[39] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[40] SUBSUBSUBPROCESS(1) func<start> tmp_sot_truck_x_min = fl_abs(ast_a_normal_ordinary[i].fl_Rxobs 
-[41] SUBSUBSUBPROCESS(1) func<end> ); 
-[42] SUBSUBSUBPROCESS(1) equal tmp_sot_others_index i;
-[43] SUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_leading[0] 1;
-[44] SUBPROCESS(3) else<start> else 
-[45] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[46] SUBPROCESS(4) if <start> if ( 
-[47] SUBPROCESS(4) if  (st_g_bsm_loop_data.as4_low_speed_flg[0] == 1 
-[48] SUBPROCESS(4) if  ) 
-[49] SUBPROCESS(4) if  &&  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)0)) 
-[50] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[51] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_leading[0] 0;
-[52] SUBPROCESS(5) if <start> if ( 
-[53] SUBPROCESS(5) if  (fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN 
-[54] SUBPROCESS(5) if  ) 
-[55] SUBPROCESS(5) if  &&  (st_g_bsm_loop_data.s4_flg_alarm == (S4)0)) 
-[56] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
-[57] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_leading[0] 0;
-[58] MAINPROCESS(2) proc return tmp_sot_others_index; 
------------------ Total Codes : 58 lines
+[21] SUBSUBPROCESS(1) if  &&  (tmp_sot_others_diff_min > (fl_abs(ast_a_normal_sot[0].fl_Rxfil - ast_a_normal_ordinary[i].fl_Rxobs) +  fl_abs(ast_a_normal_sot[0].fl_Ryfil - ast_a_normal_ordinary[i].fl_Ryobs)))) 
+[22] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBPROCESS(1) func<start> tmp_sot_others_diff_min = fl_abs(ast_a_normal_sot[0].fl_Rxfil-ast_a_normal_ordinary[i].fl_Rxobs) +fl_abs(ast_a_normal_sot[0].fl_Ryfil-ast_a_normal_ordinary[i].fl_Ryobs 
+[24] SUBSUBSUBPROCESS(1) func<end> ); 
+[25] SUBSUBSUBPROCESS(1) equal tmp_sot_others_index i;
+[26] SUBPROCESS(2) else if <start> else if ( 
+[27] SUBPROCESS(2) else if  (st_g_bsm_loop_data.u1_truck_flg != 0 
+[28] SUBPROCESS(2) else if  ) 
+[29] SUBPROCESS(2) else if  &&  (st_g_bsm_loop_data.as4_flg_passing[0] > 0) 
+[30] SUBPROCESS(2) else if  &&  (st_g_bsm_loop_data.as4_slow_sot_find[0] != 0)) 
+[31] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[32] SUBSUBPROCESS(1) if <start> if ( 
+[33] SUBSUBPROCESS(1) if  (fl_abs(ast_a_normal_ordinary[i].fl_Ryobs) < 0.5F 
+[34] SUBSUBPROCESS(1) if  ) 
+[35] SUBSUBPROCESS(1) if  &&  (ast_a_normal_ordinary[i].fl_Rxobs < st_g_bsm_loop_data.afl_wall_width[0]) 
+[36] SUBSUBPROCESS(1) if  &&  (tmp_sot_truck_x_min > fl_abs(ast_a_normal_ordinary[i].fl_Rxobs))) 
+[37] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[38] SUBSUBSUBPROCESS(1) func<start> tmp_sot_truck_x_min = fl_abs(ast_a_normal_ordinary[i].fl_Rxobs 
+[39] SUBSUBSUBPROCESS(1) func<end> ); 
+[40] SUBSUBSUBPROCESS(1) equal tmp_sot_others_index i;
+[41] SUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_leading[0] 1;
+[42] SUBPROCESS(3) else<start> else 
+[43] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[44] SUBPROCESS(4) if <start> if ( 
+[45] SUBPROCESS(4) if  (st_g_bsm_loop_data.as4_low_speed_flg[0] == 1 
+[46] SUBPROCESS(4) if  ) 
+[47] SUBPROCESS(4) if  &&  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)0)) 
+[48] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[49] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_leading[0] 0;
+[50] SUBPROCESS(5) if <start> if ( 
+[51] SUBPROCESS(5) if  (fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN 
+[52] SUBPROCESS(5) if  ) 
+[53] SUBPROCESS(5) if  &&  (st_g_bsm_loop_data.s4_flg_alarm == (S4)0)) 
+[54] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
+[55] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_leading[0] 0;
+[56] MAINPROCESS(2) proc return tmp_sot_others_index; 
+----------------- Total Codes : 56 lines
 --------------------------
 [Function Name] : fn_bsm_con_add_sot_object_to_normal2 
 -Return type : static VD 
@@ -666,9 +660,8 @@ Total functions : 37
 [44] SUBSUBPROCESS(1) proc break; 
 [45] SUBPROCESS(2) equal ast_a_normal2[index] ast_a_normal_2f[i];
 [46] SUBPROCESS(2) proc index++; 
-[47] MAINPROCESS(5) equal *ps4_a_pair_num_total index;
-[48] MAINPROCESS(5) proc return; 
------------------ Total Codes : 48 lines
+[47] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 47 lines
 --------------------------
 [Function Name] : fn_bsm_con_tracking 
 -Return type : static VD 
@@ -720,32 +713,31 @@ Total functions : 37
 [1] MAINPROCESS(1) proc S4 i; 
 [2] MAINPROCESS(1) proc S4 s4_t_pair_num_erased; 
 [3] MAINPROCESS(1) func<start> s4_t_pair_num_erased = s4_start_prediction( 
-[4] MAINPROCESS(1) func pst_a_normal2, 
-[5] MAINPROCESS(1) func *ps4_a_pair_num_total, 
-[6] MAINPROCESS(1) func NORMAL_BUFFSIZE, 
-[7] MAINPROCESS(1) func (const S4 (*))st_g_bsm_loop_data.as4_flg_passing, 
-[8] MAINPROCESS(1) func (const S4 (*))st_g_bsm_loop_data.as4_flg_leading 
-[9] MAINPROCESS(1) func<end> ); 
-[10] MAINPROCESS(1) equal *ps4_a_pair_num_total *ps4_a_pair_num_total - s4_t_pair_num_erased;
-[11] MAINPROCESS(1) for<start> for( 
-[12] MAINPROCESS(1) for i=0; 
-[13] MAINPROCESS(1) for i<NORMAL_BUFFSIZE; 
-[14] MAINPROCESS(1) for i++) 
-[15] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[16] SUBPROCESS(1) if <start> if ( 
-[17] SUBPROCESS(1) if  (pst_a_normal2[i].s4_bin_up_pred > NB_FFT_PT 
-[18] SUBPROCESS(1) if  ) 
-[19] SUBPROCESS(1) if  ||  (pst_a_normal2[i].s4_bin_dn_pred > NB_FFT_PT)) 
-[20] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[21] SUBSUBPROCESS(1) func<start> fn_init(&pst_a_normal2[i], 1 
-[22] SUBSUBPROCESS(1) func<end> ); 
-[23] SUBSUBPROCESS(1) proc (*ps4_a_pair_num_total)--; 
-[24] MAINPROCESS(2) func<start> fn_bsm_con_pack_object( 
-[25] MAINPROCESS(2) func ps4_a_pair_num_total, 
-[26] MAINPROCESS(2) func pst_a_normal2 
-[27] MAINPROCESS(2) func<end> ); 
-[28] MAINPROCESS(2) proc return; 
------------------ Total Codes : 28 lines
+[4] MAINPROCESS(1) func pst_a_normal2, *ps4_a_pair_num_total, 
+[5] MAINPROCESS(1) func NORMAL_BUFFSIZE, 
+[6] MAINPROCESS(1) func (const S4 (*))st_g_bsm_loop_data.as4_flg_passing, 
+[7] MAINPROCESS(1) func (const S4 (*))st_g_bsm_loop_data.as4_flg_leading 
+[8] MAINPROCESS(1) func<end> ); 
+[9] MAINPROCESS(1) equal *ps4_a_pair_num_total *ps4_a_pair_num_total - s4_t_pair_num_erased;
+[10] MAINPROCESS(1) for<start> for( 
+[11] MAINPROCESS(1) for i=0; 
+[12] MAINPROCESS(1) for i<NORMAL_BUFFSIZE; 
+[13] MAINPROCESS(1) for i++) 
+[14] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[15] SUBPROCESS(1) if <start> if ( 
+[16] SUBPROCESS(1) if  (pst_a_normal2[i].s4_bin_up_pred > NB_FFT_PT 
+[17] SUBPROCESS(1) if  ) 
+[18] SUBPROCESS(1) if  ||  (pst_a_normal2[i].s4_bin_dn_pred > NB_FFT_PT)) 
+[19] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[20] SUBSUBPROCESS(1) func<start> fn_init(&pst_a_normal2[i], 1 
+[21] SUBSUBPROCESS(1) func<end> ); 
+[22] SUBSUBPROCESS(1) proc (*ps4_a_pair_num_total)--; 
+[23] MAINPROCESS(2) func<start> fn_bsm_con_pack_object( 
+[24] MAINPROCESS(2) func ps4_a_pair_num_total, 
+[25] MAINPROCESS(2) func pst_a_normal2 
+[26] MAINPROCESS(2) func<end> ); 
+[27] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 27 lines
 --------------------------
 [Function Name] : fn_bsm_con_pack_object 
 -Return type : static VD 
@@ -785,12 +777,11 @@ Total functions : 37
 [30] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
 [31] SUBSUBPROCESS(1) func<start> fn_init(&pst_a_normal2[s2_t_loop], 1 
 [32] SUBSUBPROCESS(1) func<end> ); 
-[33] MAINPROCESS(3) func<start> *ps4_a_pair_num_total = s4_copy_prediction_to_filtered_data( 
-[34] MAINPROCESS(3) func pst_a_normal2, 
-[35] MAINPROCESS(3) func NORMAL_BUFFSIZE 
-[36] MAINPROCESS(3) func<end> ); 
-[37] MAINPROCESS(3) proc return; 
------------------ Total Codes : 37 lines
+[33] MAINPROCESS(3) func pst_a_normal2, 
+[34] MAINPROCESS(3) func NORMAL_BUFFSIZE 
+[35] MAINPROCESS(3) func<end> ); 
+[36] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 36 lines
 --------------------------
 [Function Name] : fn_bsm_con_jdg_object_probability 
 -Return type : VD 

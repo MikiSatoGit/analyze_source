@@ -179,13 +179,12 @@ Total functions : 27
 [16] MAINPROCESS(1) func pfl_a_sot_wall_angle, 
 [17] MAINPROCESS(1) func pfl_sot_real_angle 
 [18] MAINPROCESS(1) func<end> ); 
-[19] MAINPROCESS(1) func<start> fn_bsm_side_set_leading_object( 
-[20] MAINPROCESS(1) func *ps4_a_leading_flg2, 
-[21] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
-[22] MAINPROCESS(1) func ast_a_normal_sot 
-[23] MAINPROCESS(1) func<end> ); 
-[24] MAINPROCESS(1) proc return; 
------------------ Total Codes : 24 lines
+[19] MAINPROCESS(1) func<start> fn_bsm_side_set_leading_object( *ps4_a_leading_flg2, 
+[20] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
+[21] MAINPROCESS(1) func ast_a_normal_sot 
+[22] MAINPROCESS(1) func<end> ); 
+[23] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 23 lines
 --------------------------
 [Function Name] : fn_bsm_side_check1_leading_object 
 -Return type : static VD 
@@ -251,50 +250,48 @@ Total functions : 27
 [7] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [8] SUBPROCESS(1) equal *pfl_a_sot_wall_angle SOT_WALL_ANGLE_TH_FORWARD;
 [9] SUBPROCESS(1) equal tmp_t_wall_diff_th SOT_WALL_DIFF_SLOW;
-[10] MAINPROCESS(2) func<start> *pfl_sot_real_angle = 180.0F/PI*0.5F*(ast_a_normal_fm[0].fl_theta_up + ast_a_normal_fm[0].fl_theta_dn 
-[11] MAINPROCESS(2) func<end> ); 
-[12] MAINPROCESS(2) if <start> if ( 
-[13] MAINPROCESS(2) if  (st_g_bsm_loop_data.as4_slow_sot_find[0] > 0 
-[14] MAINPROCESS(2) if  ) 
-[15] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.afl_wall_width[0] != WALL_MAX)) 
-[16] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[17] SUBPROCESS(1) if <start> if ( 
-[18] SUBPROCESS(1) if  s4_a_fm_obj_flg != 0 
-[19] SUBPROCESS(1) if  ) 
-[20] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[21] SUBSUBPROCESS(1) if <start> if ( 
-[22] SUBSUBPROCESS(1) if  (st_g_bsm_loop_data.afl_wall_width[0] - ast_a_normal_fm[0].fl_Rxobs) > tmp_t_wall_diff_th 
-[23] SUBSUBPROCESS(1) if  ) 
-[24] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[25] SUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg 0;
-[26] SUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg1 1;
-[27] SUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg2 1;
-[28] SUBSUBPROCESS(2) else<start> else 
-[29] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[30] SUBSUBSUBPROCESS(1) if <start> if ( 
-[31] SUBSUBSUBPROCESS(1) if  (*pfl_sot_real_angle > *pfl_a_sot_wall_angle 
-[32] SUBSUBSUBPROCESS(1) if  ) 
-[33] SUBSUBSUBPROCESS(1) if  &&  (*pfl_sot_real_angle < SOT_WALL_ANGLE_TH_BACKWARD) 
-[34] SUBSUBSUBPROCESS(1) if  &&  (fl_g_v_self_bsm_for_base > CFL_CANOUT_VSELF_MIN)) 
-[35] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[36] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg 1;
-[37] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg1 0;
-[38] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg2 0;
-[39] SUBSUBSUBPROCESS(2) if<start> if( 
-[40] SUBSUBSUBPROCESS(2) if st_g_bsm_loop_data.as4_slow_sot_find[1]==0 
-[41] SUBSUBSUBPROCESS(2) if ) 
-[42] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[43] SUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_slow_sot_find[1] WALL_REJECT_TH3;
-[44] MAINPROCESS(3) if <start> if ( 
-[45] MAINPROCESS(3) if  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)1 
-[46] MAINPROCESS(3) if  ) 
-[47] MAINPROCESS(3) if  &&	(s4_a_fm_obj_flg != (S4)0)) 
-[48] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[49] SUBPROCESS(1) equal *ps4_a_wall_flg (S4)0;
-[50] SUBPROCESS(1) equal *ps4_a_leading_flg1 (S4)1;
-[51] SUBPROCESS(1) equal *ps4_a_leading_flg2 (S4)1;
-[52] MAINPROCESS(4) proc return; 
------------------ Total Codes : 52 lines
+[10] MAINPROCESS(2) if <start> if ( 
+[11] MAINPROCESS(2) if  (st_g_bsm_loop_data.as4_slow_sot_find[0] > 0 
+[12] MAINPROCESS(2) if  ) 
+[13] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.afl_wall_width[0] != WALL_MAX)) 
+[14] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[15] SUBPROCESS(1) if <start> if ( 
+[16] SUBPROCESS(1) if  s4_a_fm_obj_flg != 0 
+[17] SUBPROCESS(1) if  ) 
+[18] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[19] SUBSUBPROCESS(1) if <start> if ( 
+[20] SUBSUBPROCESS(1) if  (st_g_bsm_loop_data.afl_wall_width[0] - ast_a_normal_fm[0].fl_Rxobs) > tmp_t_wall_diff_th 
+[21] SUBSUBPROCESS(1) if  ) 
+[22] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg 0;
+[24] SUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg1 1;
+[25] SUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg2 1;
+[26] SUBSUBPROCESS(2) else<start> else 
+[27] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBPROCESS(1) if <start> if ( 
+[29] SUBSUBSUBPROCESS(1) if  (*pfl_sot_real_angle > *pfl_a_sot_wall_angle 
+[30] SUBSUBSUBPROCESS(1) if  ) 
+[31] SUBSUBSUBPROCESS(1) if  &&  (*pfl_sot_real_angle < SOT_WALL_ANGLE_TH_BACKWARD) 
+[32] SUBSUBSUBPROCESS(1) if  &&  (fl_g_v_self_bsm_for_base > CFL_CANOUT_VSELF_MIN)) 
+[33] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[34] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_wall_flg 1;
+[35] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg1 0;
+[36] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_leading_flg2 0;
+[37] SUBSUBSUBPROCESS(2) if<start> if( 
+[38] SUBSUBSUBPROCESS(2) if st_g_bsm_loop_data.as4_slow_sot_find[1]==0 
+[39] SUBSUBSUBPROCESS(2) if ) 
+[40] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[41] SUBSUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_slow_sot_find[1] WALL_REJECT_TH3;
+[42] MAINPROCESS(3) if <start> if ( 
+[43] MAINPROCESS(3) if  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)1 
+[44] MAINPROCESS(3) if  ) 
+[45] MAINPROCESS(3) if  &&	(s4_a_fm_obj_flg != (S4)0)) 
+[46] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[47] SUBPROCESS(1) equal *ps4_a_wall_flg (S4)0;
+[48] SUBPROCESS(1) equal *ps4_a_leading_flg1 (S4)1;
+[49] SUBPROCESS(1) equal *ps4_a_leading_flg2 (S4)1;
+[50] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 50 lines
 --------------------------
 [Function Name] : fn_bsm_side_set_leading_object 
 -Return type : static VD 
@@ -344,13 +341,12 @@ Total functions : 27
 [6] MAINPROCESS(1) func ps4_a_wall_flg, 
 [7] MAINPROCESS(1) func s4_a_wall_reject_th 
 [8] MAINPROCESS(1) func<end> ); 
-[9] MAINPROCESS(1) func<start> fn_bsm_side_set_wall_object( 
-[10] MAINPROCESS(1) func *ps4_a_wall_flg, 
-[11] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
-[12] MAINPROCESS(1) func ast_a_normal_wall 
-[13] MAINPROCESS(1) func<end> ); 
-[14] MAINPROCESS(1) proc return; 
------------------ Total Codes : 14 lines
+[9] MAINPROCESS(1) func<start> fn_bsm_side_set_wall_object( *ps4_a_wall_flg, 
+[10] MAINPROCESS(1) func (const NORMAL_BSM *)ast_a_normal_fm, 
+[11] MAINPROCESS(1) func ast_a_normal_wall 
+[12] MAINPROCESS(1) func<end> ); 
+[13] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 13 lines
 --------------------------
 [Function Name] : fn_bsm_side_check1_wall 
 -Return type : static VD 
