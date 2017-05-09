@@ -1,5 +1,5 @@
-Total lines: 1125 
-Total functions : 11 
+Total lines: 1183 
+Total functions : 19 
 --------------------------
 [Function Name] : init_btt_configuration_parameter_dummy 
 -Return type : ;VD 
@@ -1111,3 +1111,276 @@ Total functions : 11
 [155] SUBPROCESS(1) equal as4_a_peak_wave_num[s4_t_lp_i] s4_t_wave_number[s4_t_lp_i];
 [156] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 156 lines
+--------------------------
+[Function Name] : fn_bsm_chkfr_check_alart_max_cycle 
+-Return type : static VD 
+-Argument : 2 
+     [0] : S4   *ps4_a_tos_cycle_max 
+     [1] : S4   *ps4_a_sot_cycle_max 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 i; 
+[2] MAINPROCESS(1) for<start> for( 
+[3] MAINPROCESS(1) for i=0; 
+[4] MAINPROCESS(1) for i<TARGET_BUFFSIZE; 
+[5] MAINPROCESS(1) for i++) 
+[6] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[7] SUBPROCESS(1) if <start> if ( 
+[8] SUBPROCESS(1) if  st_g_bsm_alarm_data.afl_alarmed_target[i][0] != CFL_UNKNOWN_VALUE 
+[9] SUBPROCESS(1) if  ) 
+[10] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[11] SUBSUBPROCESS(1) if <start> if ( 
+[12] SUBSUBPROCESS(1) if  st_g_bsm_alarm_data.afl_alarmed_target[i][4] == ALARM_TYPE_TOS 
+[13] SUBSUBPROCESS(1) if  ) 
+[14] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[15] SUBSUBSUBPROCESS(1) if <start> if ( 
+[16] SUBSUBSUBPROCESS(1) if  (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_tos_cycle_max 
+[17] SUBSUBSUBPROCESS(1) if  ) 
+[18] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[19] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_tos_cycle_max (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+[20] SUBSUBPROCESS(2) if<start> if( 
+[21] SUBSUBPROCESS(2) if (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_SOT 
+[22] SUBSUBPROCESS(2) if ) 
+[23] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[24] SUBSUBSUBPROCESS(1) if<start> if( 
+[25] SUBSUBSUBPROCESS(1) if (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_sot_cycle_max 
+[26] SUBSUBSUBPROCESS(1) if ) 
+[27] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_sot_cycle_max (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+[29] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 29 lines
+--------------------------
+[Function Name] : s4_bsm_chkfr_check_tos_alart_sts 
+-Return type : static S4 
+-Argument : 2 
+     [0] : S4   s4_a_tos_cycle_max 
+     [1] : S4   s4_a_sot_cycle_max 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 s4_t_tmp_tos_flag; 
+[2] MAINPROCESS(1) proc S4 s4_t_exit; 
+[3] MAINPROCESS(1) equal s4_t_exit 0;
+[4] MAINPROCESS(1) equal s4_t_tmp_tos_flag 0;
+[5] MAINPROCESS(1) if<start> if( 
+[6] MAINPROCESS(1) if s4_a_tos_cycle_max > s4_a_sot_cycle_max 
+[7] MAINPROCESS(1) if ) 
+[8] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[9] SUBPROCESS(1) equal s4_t_tmp_tos_flag 1;
+[10] MAINPROCESS(2) if <start> if ( 
+[11] MAINPROCESS(2) if  (s4_t_tmp_tos_flag==0 
+[12] MAINPROCESS(2) if  ) 
+[13] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.as4_flg_tos_frontline[0]==0) 
+[14] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.as4_flg_tos_end[0] == 0)) 
+[15] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[16] SUBPROCESS(1) equal s4_t_exit 1;
+[17] MAINPROCESS(3) proc return s4_t_exit; 
+----------------- Total Codes : 17 lines
+--------------------------
+[Function Name] : fn_bsm_chkfr_check_alart_max_cycle 
+-Return type : static VD 
+-Argument : 2 
+     [0] : S4   *ps4_a_tos_cycle_max 
+     [1] : S4   *ps4_a_sot_cycle_max 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 i; 
+[2] MAINPROCESS(1) for<start> for( 
+[3] MAINPROCESS(1) for i=0; 
+[4] MAINPROCESS(1) for i<TARGET_BUFFSIZE; 
+[5] MAINPROCESS(1) for i++) 
+[6] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[7] SUBPROCESS(1) if <start> if ( 
+[8] SUBPROCESS(1) if  st_g_bsm_alarm_data.afl_alarmed_target[i][0] != CFL_UNKNOWN_VALUE 
+[9] SUBPROCESS(1) if  ) 
+[10] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[11] SUBSUBPROCESS(1) if <start> if ( 
+[12] SUBSUBPROCESS(1) if  st_g_bsm_alarm_data.afl_alarmed_target[i][4] == ALARM_TYPE_TOS 
+[13] SUBSUBPROCESS(1) if  ) 
+[14] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[15] SUBSUBSUBPROCESS(1) if <start> if ( 
+[16] SUBSUBSUBPROCESS(1) if  (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_tos_cycle_max 
+[17] SUBSUBSUBPROCESS(1) if  ) 
+[18] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[19] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_tos_cycle_max (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+[20] SUBSUBPROCESS(2) if<start> if( 
+[21] SUBSUBPROCESS(2) if (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_SOT 
+[22] SUBSUBPROCESS(2) if ) 
+[23] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[24] SUBSUBSUBPROCESS(1) if<start> if( 
+[25] SUBSUBSUBPROCESS(1) if (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_sot_cycle_max 
+[26] SUBSUBSUBPROCESS(1) if ) 
+[27] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_sot_cycle_max (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+[29] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 29 lines
+--------------------------
+[Function Name] : fn_bsm_chkfr_check_alart_max_cycle 
+-Return type : static VD 
+-Argument : 2 
+     [0] : S4   *ps4_a_tos_cycle_max 
+     [1] : S4   *ps4_a_sot_cycle_max 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 i; 
+[2] MAINPROCESS(1) for<start> for( 
+[3] MAINPROCESS(1) for i=0; 
+[4] MAINPROCESS(1) for i<TARGET_BUFFSIZE; 
+[5] MAINPROCESS(1) for i++) 
+[6] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[7] SUBPROCESS(1) if <start> if ( 
+[8] SUBPROCESS(1) if  st_g_bsm_alarm_data.afl_alarmed_target[i][0] != CFL_UNKNOWN_VALUE 
+[9] SUBPROCESS(1) if  ) 
+[10] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[11] SUBSUBPROCESS(1) if <start> if ( 
+[12] SUBSUBPROCESS(1) if  st_g_bsm_alarm_data.afl_alarmed_target[i][4] == ALARM_TYPE_TOS 
+[13] SUBSUBPROCESS(1) if  ) 
+[14] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[15] SUBSUBSUBPROCESS(1) if <start> if ( 
+[16] SUBSUBSUBPROCESS(1) if  (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_tos_cycle_max 
+[17] SUBSUBSUBPROCESS(1) if  ) 
+[18] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[19] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_tos_cycle_max (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+[20] SUBSUBPROCESS(2) if<start> if( 
+[21] SUBSUBPROCESS(2) if (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_SOT 
+[22] SUBSUBPROCESS(2) if ) 
+[23] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[24] SUBSUBSUBPROCESS(1) if<start> if( 
+[25] SUBSUBSUBPROCESS(1) if (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_sot_cycle_max 
+[26] SUBSUBSUBPROCESS(1) if ) 
+[27] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBSUBPROCESS(1) equal *ps4_a_sot_cycle_max (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+[29] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 29 lines
+--------------------------
+[Function Name] : s4_bsm_chkfr_check_tos_alart_sts 
+-Return type : static S4 
+-Argument : 2 
+     [0] : S4   s4_a_tos_cycle_max 
+     [1] : S4   s4_a_sot_cycle_max 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 s4_t_tmp_tos_flag; 
+[2] MAINPROCESS(1) proc S4 s4_t_exit; 
+[3] MAINPROCESS(1) equal s4_t_exit 0;
+[4] MAINPROCESS(1) equal s4_t_tmp_tos_flag 0;
+[5] MAINPROCESS(1) if<start> if( 
+[6] MAINPROCESS(1) if s4_a_tos_cycle_max > s4_a_sot_cycle_max 
+[7] MAINPROCESS(1) if ) 
+[8] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[9] SUBPROCESS(1) equal s4_t_tmp_tos_flag 1;
+[10] MAINPROCESS(2) if <start> if ( 
+[11] MAINPROCESS(2) if  (s4_t_tmp_tos_flag==0 
+[12] MAINPROCESS(2) if  ) 
+[13] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.as4_flg_tos_frontline[0]==0) 
+[14] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.as4_flg_tos_end[0] == 0)) 
+[15] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[16] SUBPROCESS(1) equal s4_t_exit 1;
+[17] MAINPROCESS(3) proc return s4_t_exit; 
+----------------- Total Codes : 17 lines
+--------------------------
+[Function Name] : fn_bsm_low_calc_deviation 
+-Return type : static VD 
+-Argument : 11 
+     [0] : S4   s4_a_forward_priod 
+     [1] : S4   as4_a_nearfield_doa_i[SLOW_SOT_FREQ_BIN_RANGE][1] 
+     [2] : S4   as4_a_nearfield_doa_q[SLOW_SOT_FREQ_BIN_RANGE][1] 
+     [3] : const S4   as4_stationary_doa_line[N_DOA] 
+     [4] : S4   *ps4_a_backward_priod 
+     [5] : FL   afl_a_buf_dev[2] 
+     [6] : S4   s4_a_v0_doa 
+     [7] : S4   *ps4_a_fast_sot_num 
+     [8] : S4   *ps4_a_not_fast_sot_num 
+     [9] : FL   afl_a_sot_check_object_i[SLOW_SOT_FREQ_BIN_RANGE][4] 
+     [10] : FL   afl_a_sot_check_object_q[SLOW_SOT_FREQ_BIN_RANGE][4] 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4 fast_sot_limit_line[N_DOA]; 
+[2] MAINPROCESS(1) equal afl_a_buf_dev[0] 999.9F;
+[3] MAINPROCESS(1) equal afl_a_buf_dev[1] 999.9F;
+[4] MAINPROCESS(1) if<start> if( 
+[5] MAINPROCESS(1) if fl_g_v_self_bsm_for_base>5.0F 
+[6] MAINPROCESS(1) if ) 
+[7] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) func<start> afl_a_buf_dev[0] = calc_deviation_of_doa_freq_line_stationary_2( 
+[10] SUBSUBPROCESS(1) func (const S4 (*)[1])as4_a_nearfield_doa_i, 
+[11] SUBSUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_I, 
+[12] SUBSUBPROCESS(1) func (const S4 *)as4_stationary_doa_line, 
+[13] SUBSUBPROCESS(1) func 0 
+[14] SUBSUBPROCESS(1) func ,ps4_a_backward_priod 
+[15] SUBSUBPROCESS(1) func ,s4_a_v0_doa 
+[16] SUBSUBPROCESS(1) func ,ps4_a_fast_sot_num 
+[17] SUBSUBPROCESS(1) func ,ps4_a_not_fast_sot_num 
+[18] SUBSUBPROCESS(1) func ,fast_sot_limit_line 
+[19] SUBSUBPROCESS(1) func ,(const FL (*)[4])afl_a_sot_check_object_i 
+[20] SUBSUBPROCESS(1) func<end> ); 
+[21] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[22] SUBSUBPROCESS(1) func<start> afl_a_buf_dev[1] = calc_deviation_of_doa_freq_line_stationary_2( 
+[23] SUBSUBPROCESS(1) func (const S4 (*)[1])as4_a_nearfield_doa_q, 
+[24] SUBSUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_Q-SLOW_SOT_FREQ_BIN_RANGE, 
+[25] SUBSUBPROCESS(1) func (const S4 *)as4_stationary_doa_line, 
+[26] SUBSUBPROCESS(1) func 1 
+[27] SUBSUBPROCESS(1) func ,ps4_a_backward_priod 
+[28] SUBSUBPROCESS(1) func ,s4_a_v0_doa 
+[29] SUBSUBPROCESS(1) func ,ps4_a_fast_sot_num 
+[30] SUBSUBPROCESS(1) func ,ps4_a_not_fast_sot_num 
+[31] SUBSUBPROCESS(1) func ,fast_sot_limit_line 
+[32] SUBSUBPROCESS(1) func ,(const FL (*)[4])afl_a_sot_check_object_q 
+[33] SUBSUBPROCESS(1) func<end> ); 
+[34] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 34 lines
+--------------------------
+[Function Name] : fn_miki_test1 
+-Return type : VD 
+-Argument : 2 
+     [0] : type1   arg1 
+     [1] : type2   arg2 
+----- Codes -----
+[1] MAINPROCESS(1) equal TEST_IFDEF_1_VALID 0;
+[2] MAINPROCESS(1) equal TEST_IFNDEF_2_VALID 0;
+[3] MAINPROCESS(1) equal TEST_ELSE_4_VALID 0;
+[4] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 4 lines
+--------------------------
+[Function Name] : fn_miki_test2 
+-Return type : VD 
+-Argument : 2 
+     [0] : type1   arg1 
+     [1] : type2   arg2 
+----- Codes -----
+[1] MAINPROCESS(1) equal TEST_IFNDEF_15_VALID 0;
+[2] MAINPROCESS(1) equal TEST_ELSE_18_VALID 0;
+[3] MAINPROCESS(1) equal TEST_IFNDEF_2_VALID 0;
+[4] MAINPROCESS(1) equal TEST_IFNDEF_21_VALID 0;
+[5] MAINPROCESS(1) equal TEST_ELSE_24_VALID 0;
+[6] MAINPROCESS(1) if<start> if( 
+[7] MAINPROCESS(1) if lv1_1 == 11 
+[8] MAINPROCESS(1) if ) 
+[9] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) if<start> if( 
+[11] SUBPROCESS(1) if lv1_1_1 == 111 
+[12] SUBPROCESS(1) if ) 
+[13] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[14] SUBSUBPROCESS(1) equal level1_1_1_1 hoge1_1_1_1;
+[15] SUBSUBPROCESS(1) if<start> if( 
+[16] SUBSUBPROCESS(1) if hogehoge_1 
+[17] SUBSUBPROCESS(1) if ) 
+[18] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[19] SUBSUBSUBPROCESS(1) if<start> if( 
+[20] SUBSUBSUBPROCESS(1) if hogehoge_2 
+[21] SUBSUBSUBPROCESS(1) if ) 
+[22] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBSUBPROCESS(1) equal level1_1_1_1 hoge1_1_1_1;
+[24] SUBSUBSUBSUBPROCESS(1) equal level1_1_1_2 hoge1_1_1_2;
+[25] SUBPROCESS(2) else if<start> else if( 
+[26] SUBPROCESS(2) else if lv1_1_2 == 112 
+[27] SUBPROCESS(2) else if ) 
+[28] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[29] SUBSUBPROCESS(1) equal level1_1_2_1 hoge1_1_2_1;
+[30] SUBPROCESS(3) else<start> else 
+[31] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[32] SUBSUBPROCESS(1) equal level1_1_3_1 hoge1_1_3_1;
+[33] MAINPROCESS(2) else if<start> else if( 
+[34] MAINPROCESS(2) else if lv1_2 == 12 
+[35] MAINPROCESS(2) else if ) 
+[36] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[37] SUBPROCESS(1) equal level1_2_1 hoge1_2_1;
+[38] MAINPROCESS(3) else<start> else 
+[39] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[40] SUBPROCESS(1) equal level1_3_1 hoge1_3_1;
+[41] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 41 lines

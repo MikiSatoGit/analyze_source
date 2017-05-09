@@ -1,4 +1,4 @@
-`Total lines: 742 
+Total lines: 730 
 Total functions : 13 
 --------------------------
 [Function Name] : fn_bsm_seek_2f_object 
@@ -62,50 +62,48 @@ Total functions : 13
 [52] SUBPROCESS(1) func (const FL *)afl_t_thres_2f 
 [53] SUBPROCESS(1) func<end> ); 
 [54] MAINPROCESS(3) equal st_g_tx_noise_chk_fsk_bsm.u1_peak_num (U1)s4_t_peak_num_2f;
-[55] MAINPROCESS(3) equal u1_g_bsm_2f_music_peak_num (U1)s4_t_peak_num_2f;
-[56] MAINPROCESS(3) func<start> fn_bsm_2f_estimate_doa( 
-[57] MAINPROCESS(3) func 0, 
-[58] MAINPROCESS(3) func afl_g_cvw_fcw_ryy_matrix, 
-[59] MAINPROCESS(3) func s4_t_peak_num_2f, 
-[60] MAINPROCESS(3) func (const S4 *)as4_t_peak_bin_2f, 
-[61] MAINPROCESS(3) func (const FL *)afl_t_peak_power_2f, 
-[62] MAINPROCESS(3) func &s4_t_peak_num_2f_doa, 
-[63] MAINPROCESS(3) func afl_t_peak_bins_intpl_2f, 
-[64] MAINPROCESS(3) func afl_t_peak_powers_2f, 
-[65] MAINPROCESS(3) func afl_t_peak_doa_bins_intpl_2f, 
-[66] MAINPROCESS(3) func afl_t_peak_doa_powers_2f, 
-[67] MAINPROCESS(3) func as4_t_peak_wave_num 
-[68] MAINPROCESS(3) func<end> ); 
-[69] MAINPROCESS(3) equal u1_g_bsm_2f_pair_num (U1)s4_t_peak_num_2f_doa;
-[70] MAINPROCESS(3) func<start> fn_bsm_2f_make_pair( 
-[71] MAINPROCESS(3) func s4_t_peak_num_2f_doa, 
-[72] MAINPROCESS(3) func as4_t_peak_wave_num, 
-[73] MAINPROCESS(3) func (const FL *)afl_t_peak_bins_intpl_2f, 
-[74] MAINPROCESS(3) func (const FL *)afl_t_peak_doa_bins_intpl_2f, 
-[75] MAINPROCESS(3) func (const FL *)afl_t_peak_doa_powers_2f, 
-[76] MAINPROCESS(3) func ps4_a_pair_num_2f, 
-[77] MAINPROCESS(3) func ast_a_normal_2f 
-[78] MAINPROCESS(3) func<end> ); 
-[79] MAINPROCESS(3) func<start> fn_bsm_2f_set_object( 
-[80] MAINPROCESS(3) func (const S4 *)ps4_a_pair_num_2f, 
-[81] MAINPROCESS(3) func ast_a_normal_2f 
+[55] MAINPROCESS(3) func<start> fn_bsm_2f_estimate_doa( 
+[56] MAINPROCESS(3) func 0, 
+[57] MAINPROCESS(3) func afl_g_cvw_fcw_ryy_matrix, 
+[58] MAINPROCESS(3) func s4_t_peak_num_2f, 
+[59] MAINPROCESS(3) func (const S4 *)as4_t_peak_bin_2f, 
+[60] MAINPROCESS(3) func (const FL *)afl_t_peak_power_2f, 
+[61] MAINPROCESS(3) func &s4_t_peak_num_2f_doa, 
+[62] MAINPROCESS(3) func afl_t_peak_bins_intpl_2f, 
+[63] MAINPROCESS(3) func afl_t_peak_powers_2f, 
+[64] MAINPROCESS(3) func afl_t_peak_doa_bins_intpl_2f, 
+[65] MAINPROCESS(3) func afl_t_peak_doa_powers_2f, 
+[66] MAINPROCESS(3) func as4_t_peak_wave_num 
+[67] MAINPROCESS(3) func<end> ); 
+[68] MAINPROCESS(3) func<start> fn_bsm_2f_make_pair( 
+[69] MAINPROCESS(3) func s4_t_peak_num_2f_doa, 
+[70] MAINPROCESS(3) func as4_t_peak_wave_num, 
+[71] MAINPROCESS(3) func (const FL *)afl_t_peak_bins_intpl_2f, 
+[72] MAINPROCESS(3) func (const FL *)afl_t_peak_doa_bins_intpl_2f, 
+[73] MAINPROCESS(3) func (const FL *)afl_t_peak_doa_powers_2f, 
+[74] MAINPROCESS(3) func ps4_a_pair_num_2f, 
+[75] MAINPROCESS(3) func ast_a_normal_2f 
+[76] MAINPROCESS(3) func<end> ); 
+[77] MAINPROCESS(3) func<start> fn_bsm_2f_set_object( 
+[78] MAINPROCESS(3) func (const S4 *)ps4_a_pair_num_2f, 
+[79] MAINPROCESS(3) func ast_a_normal_2f 
+[80] MAINPROCESS(3) func<end> ); 
+[81] MAINPROCESS(3) func<start> memset(afl_g_peak_2f, 0x00, sizeof(afl_g_peak_2f) 
 [82] MAINPROCESS(3) func<end> ); 
-[83] MAINPROCESS(3) func<start> memset(afl_g_peak_2f, 0x00, sizeof(afl_g_peak_2f) 
-[84] MAINPROCESS(3) func<end> ); 
-[85] MAINPROCESS(3) for<start> for( 
-[86] MAINPROCESS(3) for i=0; 
-[87] MAINPROCESS(3) for i<s4_t_peak_num_2f_doa; 
-[88] MAINPROCESS(3) for i++) 
-[89] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[90] SUBPROCESS(1) equal afl_g_peak_2f[(int)(afl_t_peak_bins_intpl_2f[i]+0.5F)] afl_t_peak_doa_powers_2f[i];
-[91] MAINPROCESS(4) func ast_a_normal_2f, 
-[92] MAINPROCESS(4) func (const S4 *)as4_t_peak_wave_num, 
-[93] MAINPROCESS(4) func (const FL (*)[CORRE_SIZE_4CH])afl_g_cvw_lfm_ryy_matrix[0], 
-[94] MAINPROCESS(4) func (const FL (*)[CORRE_SIZE_4CH])afl_g_cvw_lfm_ryy_matrix[1], 
-[95] MAINPROCESS(4) func u1_a_alarming_flag 
-[96] MAINPROCESS(4) func<end> ); 
-[97] MAINPROCESS(4) proc return; 
------------------ Total Codes : 97 lines
+[83] MAINPROCESS(3) for<start> for( 
+[84] MAINPROCESS(3) for i=0; 
+[85] MAINPROCESS(3) for i<s4_t_peak_num_2f_doa; 
+[86] MAINPROCESS(3) for i++) 
+[87] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[88] SUBPROCESS(1) equal afl_g_peak_2f[(int)(afl_t_peak_bins_intpl_2f[i]+0.5F)] afl_t_peak_doa_powers_2f[i];
+[89] MAINPROCESS(4) func ast_a_normal_2f, 
+[90] MAINPROCESS(4) func (const S4 *)as4_t_peak_wave_num, 
+[91] MAINPROCESS(4) func (const FL (*)[CORRE_SIZE_4CH])afl_g_cvw_lfm_ryy_matrix[0], 
+[92] MAINPROCESS(4) func (const FL (*)[CORRE_SIZE_4CH])afl_g_cvw_lfm_ryy_matrix[1], 
+[93] MAINPROCESS(4) func u1_a_alarming_flag 
+[94] MAINPROCESS(4) func<end> ); 
+[95] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 95 lines
 --------------------------
 [Function Name] : fn_bsm_2f_init_data 
 -Return type : VD 
@@ -793,23 +791,15 @@ Total functions : 13
 [1] MAINPROCESS(1) proc U1 u1_t_jdg_b10_flag; 
 [2] MAINPROCESS(1) equal u1_t_jdg_b10_flag CU1_FALSE;
 [3] MAINPROCESS(1) if <start> if ( 
-[4] MAINPROCESS(1) if  fl_a_Ryobs < (FL)-5.0F 
+[4] MAINPROCESS(1) if  fl_a_Ryobs < (FL)-3.5F 
 [5] MAINPROCESS(1) if  ) 
 [6] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [7] SUBPROCESS(1) equal u1_t_jdg_b10_flag CU1_TRUE;
 [8] MAINPROCESS(2) else<start> else 
 [9] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [10] SUBPROCESS(1) equal u1_t_jdg_b10_flag CU1_FALSE;
-[11] MAINPROCESS(3) if <start> if ( 
-[12] MAINPROCESS(3) if  fl_a_Ryobs < (FL)-3.5F 
-[13] MAINPROCESS(3) if  ) 
-[14] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[15] SUBPROCESS(1) equal u1_t_jdg_b10_flag CU1_TRUE;
-[16] MAINPROCESS(4) else<start> else 
-[17] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[18] SUBPROCESS(1) equal u1_t_jdg_b10_flag CU1_FALSE;
-[19] MAINPROCESS(5) proc return u1_t_jdg_b10_flag; 
------------------ Total Codes : 19 lines
+[11] MAINPROCESS(3) proc return u1_t_jdg_b10_flag; 
+----------------- Total Codes : 11 lines
 --------------------------
 [Function Name] : u1_bsm_2f_compare_with_FMCW_a3 
 -Return type : static U1 
@@ -820,20 +810,12 @@ Total functions : 13
 [1] MAINPROCESS(1) proc U1 u1_t_jdg_a3_flag; 
 [2] MAINPROCESS(1) equal u1_t_jdg_a3_flag CU1_FALSE;
 [3] MAINPROCESS(1) if <start> if ( 
-[4] MAINPROCESS(1) if  fl_abs(fl_a_power_up_music - fl_a_peak_power_up) > (FL)3.0F 
+[4] MAINPROCESS(1) if  fl_a_power_up_music < (FL)45.0F 
 [5] MAINPROCESS(1) if  ) 
 [6] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [7] SUBPROCESS(1) equal u1_t_jdg_a3_flag CU1_TRUE;
 [8] MAINPROCESS(2) else<start> else 
 [9] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [10] SUBPROCESS(1) equal u1_t_jdg_a3_flag CU1_FALSE;
-[11] MAINPROCESS(3) if <start> if ( 
-[12] MAINPROCESS(3) if  fl_a_power_up_music < (FL)45.0F 
-[13] MAINPROCESS(3) if  ) 
-[14] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[15] SUBPROCESS(1) equal u1_t_jdg_a3_flag CU1_TRUE;
-[16] MAINPROCESS(4) else<start> else 
-[17] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[18] SUBPROCESS(1) equal u1_t_jdg_a3_flag CU1_FALSE;
-[19] MAINPROCESS(5) proc return u1_t_jdg_a3_flag; 
------------------ Total Codes : 19 lines
+[11] MAINPROCESS(3) proc return u1_t_jdg_a3_flag; 
+----------------- Total Codes : 11 lines

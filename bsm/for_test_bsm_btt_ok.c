@@ -1680,6 +1680,135 @@ static VD fn_bsm_chkfr_check_alart_max_cycle(
 	return;
 }
 
+
+static S4 s4_bsm_chkfr_check_tos_alart_sts(
+	S4 s4_a_tos_cycle_max,
+	S4 s4_a_sot_cycle_max
+)
+{
+	S4 s4_t_tmp_tos_flag;
+
+	S4 s4_t_exit;
+
+	s4_t_exit = 0;
+	s4_t_tmp_tos_flag = 0;
+
+	/***** 4) ToS警報状態の確認 *****/
+	if(s4_a_tos_cycle_max > s4_a_sot_cycle_max)							/* COND.f11 */
+	{
+			s4_t_tmp_tos_flag = 1;
+	}
+	/* NOT ToS */
+	if ((s4_t_tmp_tos_flag==0)										/* COND.f12 NOT ToS in current frame */
+	&&  (st_g_bsm_loop_data.as4_flg_tos_frontline[0]==0)			/* COND.f3  NOT ToS in previous frame */
+	&&  (st_g_bsm_loop_data.as4_flg_tos_end[0] == 0)) {				/* COND.f4 */
+		s4_t_exit = 1;
+	}
+
+	return s4_t_exit;
+}
+
+
+
+static VD fn_bsm_chkfr_check_alart_max_cycle(
+	S4 *ps4_a_tos_cycle_max,
+	S4 *ps4_a_sot_cycle_max
+)
+{
+	S4 i;
+
+	/***** 2) ToS警報回数の確認 *****/
+	/***** 3) SoT警報回数の確認 *****/
+	for(i=0; i<TARGET_BUFFSIZE; i++)
+	{
+#if (BSM_OPTION_SW_ALART == TYPE_A)
+		if(st_g_bsm_alarm_data.afl_alarmed_target[i][0] != CFL_UNKNOWN_VALUE)				/* COND.f5 */
+		{
+			/* check ToS event */
+			if(
+				(st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_TOS) 			/* COND.f6 */
+			||  (st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_MERGEIN) 		/* COND.f7 */
+			)
+			{
+				if( (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_tos_cycle_max)	/* COND.f8 */
+				{
+					*ps4_a_tos_cycle_max = (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+				}
+			}
+#elif (BSM_OPTION_SW_ALART == TYPE_B)
+		if (st_g_bsm_alarm_data.afl_alarmed_target[i][0] != CFL_UNKNOWN_VALUE) {					/* COND.f5 */
+			if (st_g_bsm_alarm_data.afl_alarmed_target[i][4] == ALARM_TYPE_TOS) { 					/* COND.f6 */
+				if ((S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_tos_cycle_max) {		/* COND.f8 */
+					*ps4_a_tos_cycle_max = (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+				}
+			}
+#else
+	マクロ未定義の場合は、コンパイルエラーとする
+#endif /* BSM_OPTION_SW_ALART */
+			/* check SoT event */
+			if( (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_SOT )		/* COND.f9 */
+			{
+				if( (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_sot_cycle_max )	/* COND.f10 */
+				{
+					*ps4_a_sot_cycle_max = (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+				}
+			}
+		}
+	}
+
+	return;
+}
+
+
+static VD fn_bsm_chkfr_check_alart_max_cycle(
+	S4 *ps4_a_tos_cycle_max,
+	S4 *ps4_a_sot_cycle_max
+)
+{
+	S4 i;
+
+	/***** 2) ToS警報回数の確認 *****/
+	/***** 3) SoT警報回数の確認 *****/
+	for(i=0; i<TARGET_BUFFSIZE; i++)
+	{
+#if (BSM_OPTION_SW_ALART == TYPE_A)
+		if(st_g_bsm_alarm_data.afl_alarmed_target[i][0] != CFL_UNKNOWN_VALUE)				/* COND.f5 */
+		{
+			/* check ToS event */
+			if(
+				(st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_TOS) 			/* COND.f6 */
+			||  (st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_MERGEIN) 		/* COND.f7 */
+			)
+			{
+				if( (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_tos_cycle_max)	/* COND.f8 */
+				{
+					*ps4_a_tos_cycle_max = (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+				}
+			}
+#elif (BSM_OPTION_SW_ALART == TYPE_B)
+		if (st_g_bsm_alarm_data.afl_alarmed_target[i][0] != CFL_UNKNOWN_VALUE) {					/* COND.f5 */
+			if (st_g_bsm_alarm_data.afl_alarmed_target[i][4] == ALARM_TYPE_TOS) { 					/* COND.f6 */
+				if ((S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_tos_cycle_max) {		/* COND.f8 */
+					*ps4_a_tos_cycle_max = (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+				}
+			}
+#else
+	マクロ未定義の場合は、コンパイルエラーとする
+#endif /* BSM_OPTION_SW_ALART */
+			/* check SoT event */
+			if( (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][4]==ALARM_TYPE_SOT )		/* COND.f9 */
+			{
+				if( (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3] > *ps4_a_sot_cycle_max )	/* COND.f10 */
+				{
+					*ps4_a_sot_cycle_max = (S4)st_g_bsm_alarm_data.afl_alarmed_target[i][3];
+				}
+			}
+		}
+	}
+
+	return;
+}
+
 static S4 s4_bsm_chkfr_check_tos_alart_sts(
 	S4 s4_a_tos_cycle_max,
 	S4 s4_a_sot_cycle_max
@@ -1765,6 +1894,29 @@ static VD fn_bsm_low_calc_deviation(
 	
 	return;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

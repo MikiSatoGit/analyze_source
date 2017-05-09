@@ -519,6 +519,8 @@ def remove_undefined_codes(lines):
 					if line.find('#if 0')!=-1: #if (invalid)
 						skipping = 1
 					else:
+						skipping = 1
+
 						# check valid preprocessor
 						for index in range(0, len(valid_preprocessor_code)):
 							if line.find(valid_preprocessor_code[index])!=-1: #start preprocessor (valid)
@@ -558,7 +560,7 @@ def load_valid_source_code(source_file):
 	cnt, valid_lines = remove_undefined_codes(lines)
 	cnt, valid_lines = remove_comment_codes(valid_lines)
 
-#0422	if debug_out:
+#0508	if debug_out:
 	for line in valid_lines:
 		print '<load_valid_source_code> %s' % line,
 
@@ -608,19 +610,27 @@ def find_functions(valid_lines):
 				if line.find('=')!=-1 \
 				and line.find('=')<line.find('{'): #start array definition
 					searching = 1	#array
-					level = 1
+#0508					level = 1
+					level += line.count('{')
+
 					if line.find('}')!=-1: #finish array definition at the same line
 						searching = 0
-						level = 0
+#0508						level = 0
+						level -= line.count('}')
+
 				else: #start function code
 					searching = 2	#function
-					level = 1
+#0508					level = 1
+					level += line.count('{')
+
 					function_data = FunctionData()
 					func_def_lines.pop()
 					func_content_lines.append(line)
 					if line.find('}')!=-1: #finish function code at the same line
 						searching = 0
-						level = 0
+#0508						level = 0
+						level -= line.count('}')
+
 						set_function_data(function_data, func_def_lines, func_content_lines)
 						func_list.function_data.append(function_data)
 						func_list.func_num += 1	
@@ -631,9 +641,13 @@ def find_functions(valid_lines):
 		else:
 			func_content_lines.append(line)
 			if line.find('{')!=-1:
-				level += 1
+#0508				level += 1
+				level += line.count('{')
+
 			if line.find('}')!=-1:
-				level -= 1
+#0508				level -= 1
+				level -= line.count('}')
+
 				if level == 0:
 					if searching == 2:	#finish function code
 						set_function_data(function_data, func_def_lines, func_content_lines)
@@ -643,8 +657,7 @@ def find_functions(valid_lines):
 					del func_content_lines[:]
 					del func_def_lines[:]
 
-
-#0422	if debug_out:
+#0508	if debug_out:
 	for debug_func_data in func_list.function_data:
 		print '<find_functions> Func Name %s' % debug_func_data.name
 		for debug_code in debug_func_data.codes:
@@ -710,7 +723,7 @@ def analyze_function_list(FunctionData):
 	# [out] proc_list: ProcessCodes
 	FunctionData.process_code_list = proc_list
 
-#0422	if debug_out:
+#0508	if debug_out:
 	for debug_index in range(0, FunctionData.process_code_list.get_main_size()) :
 		print '<analyze_function_list> %s : ' % (FunctionData.process_code_list.main[debug_index])
 
@@ -828,7 +841,7 @@ def analyze_function_codes(function_codes):
 		 proc_levels_2nd[index1], \
 		 proc_ids_2nd[index1] )
 
-#0422		if debug_out:
+#0508		if debug_out:
 		print '<analyze_function_codes>  ----> ',
 		print proc_titles_2nd[index1],
 		print '[%d]' % proc_levels_2nd[index1] ,	
@@ -1069,7 +1082,7 @@ def analyze_process_code(proc_codes):
 	# [in] proc_codes : ProcessCodes (main)
 	# [out] proc_codes : ProcessCodes (proc_data_list)
 
-#0422	if debug_out:
+#0508	if debug_out:
 	for debug_index in range (0, proc_codes.get_proc_data_size()):
 		for debug_index2 in range (0, proc_codes.proc_data_list[debug_index].get_main_size()):
 			print '<analyze_process_code> [%s] %s / %s' % \
@@ -1110,7 +1123,7 @@ def analyze_sub_process_code(proc_codes):
 		tmp_title = proc_codes.title[index]
 		tmp_code = proc_codes.main[index]
 
-#0422		if debug_out:
+#0508		if debug_out:
 		print '<analyze_sub_process_code> checking %s' % tmp_code
 
 		if is_for > 0:

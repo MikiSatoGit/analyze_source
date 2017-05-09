@@ -1,4 +1,4 @@
-fTotal lines: 1382 
+Total lines: 1382 
 Total functions : 40 
 --------------------------
 [Function Name] : init_btt_configuration_parameter_dummy 

@@ -1,4 +1,4 @@
-Total lines: 949 
+Total lines: 945 
 Total functions : 15 
 --------------------------
 [Function Name] : fn_bsm_seek_trailer_object 
@@ -170,44 +170,38 @@ Total functions : 15
 [155] MAINPROCESS(5) func ,afl_t_doa_pow_ave[1] 
 [156] MAINPROCESS(5) func ,afl_t_doa_pow_dev[1] 
 [157] MAINPROCESS(5) func<end> ); 
-[158] MAINPROCESS(5) func<start> fn_drv_time_chk(28, &au2_g_bsm_check_tmr[28] 
-[159] MAINPROCESS(5) func<end> ); 
-[160] MAINPROCESS(5) equal u1_g_bsm_trailer_up_pair_num (U1)s4_t_peak_num_up_music;
-[161] MAINPROCESS(5) equal u1_g_bsm_trailer_dn_pair_num (U1)s4_t_peak_num_dn_music;
-[162] MAINPROCESS(5) func<start> fn_bsm_trailer_make_pair( 
-[163] MAINPROCESS(5) func s4_t_peak_num_up_music, 
-[164] MAINPROCESS(5) func (const FL *)afl_t_peak_bins_intpl_up, 
-[165] MAINPROCESS(5) func afl_t_peak_powers_up, 
-[166] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_bins_intpl_up, 
-[167] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_powers_up, 
-[168] MAINPROCESS(5) func s4_t_peak_num_dn_music, 
-[169] MAINPROCESS(5) func (const FL *)afl_t_peak_bins_intpl_dn, 
-[170] MAINPROCESS(5) func afl_t_peak_powers_dn, 
-[171] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_bins_intpl_dn, 
-[172] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_powers_dn, 
-[173] MAINPROCESS(5) func ps4_a_pair_num_trailer, 
-[174] MAINPROCESS(5) func ast_a_normaltrailer 
-[175] MAINPROCESS(5) func<end> ); 
-[176] MAINPROCESS(5) func<start> fn_check_ordinary_trailer_obj( 
-[177] MAINPROCESS(5) func ps4_a_pair_num_ordinary, 
-[178] MAINPROCESS(5) func ast_a_normalordinary, 
-[179] MAINPROCESS(5) func ps4_a_pair_num_trailer, 
-[180] MAINPROCESS(5) func ast_a_normaltrailer, 
-[181] MAINPROCESS(5) func afl_t_thres_trailer 
+[158] MAINPROCESS(5) func<start> fn_bsm_trailer_make_pair( 
+[159] MAINPROCESS(5) func s4_t_peak_num_up_music, 
+[160] MAINPROCESS(5) func (const FL *)afl_t_peak_bins_intpl_up, 
+[161] MAINPROCESS(5) func afl_t_peak_powers_up, 
+[162] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_bins_intpl_up, 
+[163] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_powers_up, 
+[164] MAINPROCESS(5) func s4_t_peak_num_dn_music, 
+[165] MAINPROCESS(5) func (const FL *)afl_t_peak_bins_intpl_dn, 
+[166] MAINPROCESS(5) func afl_t_peak_powers_dn, 
+[167] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_bins_intpl_dn, 
+[168] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_powers_dn, 
+[169] MAINPROCESS(5) func ps4_a_pair_num_trailer, 
+[170] MAINPROCESS(5) func ast_a_normaltrailer 
+[171] MAINPROCESS(5) func<end> ); 
+[172] MAINPROCESS(5) func<start> fn_check_ordinary_trailer_obj( 
+[173] MAINPROCESS(5) func ps4_a_pair_num_ordinary, 
+[174] MAINPROCESS(5) func ast_a_normalordinary, 
+[175] MAINPROCESS(5) func ps4_a_pair_num_trailer, 
+[176] MAINPROCESS(5) func ast_a_normaltrailer, 
+[177] MAINPROCESS(5) func afl_t_thres_trailer 
+[178] MAINPROCESS(5) func<end> ); 
+[179] MAINPROCESS(5) func<start> fn_check_bf_doa_power( 
+[180] MAINPROCESS(5) func s4_a_doa_bf_peak_bin, 
+[181] MAINPROCESS(5) func fl_a_doa_bf_peak_pow 
 [182] MAINPROCESS(5) func<end> ); 
-[183] MAINPROCESS(5) func<start> fn_check_bf_doa_power( 
-[184] MAINPROCESS(5) func s4_a_doa_bf_peak_bin, 
-[185] MAINPROCESS(5) func fl_a_doa_bf_peak_pow 
-[186] MAINPROCESS(5) func<end> ); 
-[187] MAINPROCESS(5) equal afl_g_btt_atd_doa_pow_ave[0] *fl_a_doa_bf_peak_pow-afl_t_doa_pow_ave[0][1];
-[188] MAINPROCESS(5) equal afl_g_btt_atd_doa_pow_ave[1] *fl_a_doa_bf_peak_pow;
-[189] MAINPROCESS(5) func<start> fn_drv_time_chk(29, &au2_g_bsm_check_tmr[29] 
-[190] MAINPROCESS(5) func<end> ); 
-[191] MAINPROCESS(5) func<start> fn_bsm_trailer_set_object( 
-[192] MAINPROCESS(5) func (const S4 *)ps4_a_pair_num_trailer, 
-[193] MAINPROCESS(5) func ast_a_normaltrailer 
-[194] MAINPROCESS(5) func<end> ); 
------------------ Total Codes : 194 lines
+[183] MAINPROCESS(5) equal afl_g_btt_atd_doa_pow_ave[0] *fl_a_doa_bf_peak_pow-afl_t_doa_pow_ave[0][1];
+[184] MAINPROCESS(5) equal afl_g_btt_atd_doa_pow_ave[1] *fl_a_doa_bf_peak_pow;
+[185] MAINPROCESS(5) func<start> fn_bsm_trailer_set_object( 
+[186] MAINPROCESS(5) func (const S4 *)ps4_a_pair_num_trailer, 
+[187] MAINPROCESS(5) func ast_a_normaltrailer 
+[188] MAINPROCESS(5) func<end> ); 
+----------------- Total Codes : 188 lines
 --------------------------
 [Function Name] : fn_bsm_trailer_init_data 
 -Return type : VD 
