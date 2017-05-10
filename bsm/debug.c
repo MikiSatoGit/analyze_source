@@ -1,58 +1,48 @@
-VD fn_miki_test3(
-	type1 arg1
-	,type2 arg2
+static VD fn_bsm_sel_exobj_bumper_reflection(
+	S4 s4_a_pair_num_current,
+	NORMAL_BSM ast_a_normal_current[NORMAL_BUFFSIZE]
 )
 {
-	miki2_1 = subsub_1(
-		(S1)arg2_1_1,
-		arg2_1_2 );
-	miki2_2 
-	= subsub_2(
-		(S1)arg2_2_1,
-		arg2_2_2
-	);
-	miki2_3 = 
-	subsub_3(
-		(S1)arg2_3_1,
-		arg2_3_2
-	);
+	S4 s4_t_lp_normal;			/* NORMAL物標のループ変数 仕様書ではi */
+	FL fl_t_thd_exobj_range;	/* 物標除去閾値（距離） [m] */
+	FL fl_t_thd_exobj_power;	/* 物標除去閾値（電力） [dB] */
+	FL fl_t_obj_power;			/* 条件n6の平均方位電力格納変数 */
+	FL fl_t_abs_robs;			/* Robsの絶対値格納変数 */
+	FL fl_t_abs_vobs;			/* Vobsの絶対値格納変数 */
 
+	const FL CFL_D_MAP_EXOBJ_POWER[CU2_MAP_EXOBJ_POWER_INDEX][2] = {
+		/* 直線距離[m]  電力閾値[dB] */
+		{(FL)1.0,		(FL)72.0},
+		{(FL)2.0,		(FL)65.0},
+		{(FL)2.5,		(FL)62.5},
+		{(FL)3.0,		(FL)57.7},
+		{(FL)4.0,		(FL)52.7},
+		{(FL)5.0,		(FL)48.9},
+		{(FL)6.0,		(FL)45.7},
+		{(FL)9.0,		(FL)38.6}
+	};
 
-	switch (hogehoge3_2){									/* SUBSUBSUBSUBPROCESS(2) ↓ */
-	case mode1:
-		miki4_2_1 = subsubsubsub_mode_1;
-		break;
-	case mode1:
-		miki4_2_2 = subsubsubsub_mode_2;
-		break;
-	default:
-		miki4_2_3 = subsubsubsub_mode_default;
-		break;
-	}														/* SUBSUBSUBSUBPROCESS(2) ↑ */
+	for (s4_t_lp_normal = (S4)0; s4_t_lp_normal < s4_a_pair_num_current; s4_t_lp_normal++) {
+		if (ast_a_normal_current[s4_t_lp_normal].fl_Robs != CFL_UNKNOWN_VALUE) {			/* COND.b2 */
+			/* 条件チェック用に各情報を変換 */
+			fl_t_obj_power = (ast_a_normal_current[s4_t_lp_normal].fl_power_up_music + ast_a_normal_current[s4_t_lp_normal].fl_power_dn_music) * (FL)0.5;
+			fl_t_abs_robs = fl_abs(ast_a_normal_current[s4_t_lp_normal].fl_Robs);
+			fl_t_abs_vobs = fl_abs(ast_a_normal_current[s4_t_lp_normal].fl_Vobs);
 
+			/* 閾値を設定 */
+			fl_t_thd_exobj_range = (FL)9.0;
+			fl_t_thd_exobj_power = fl_smap_new(CFL_D_MAP_EXOBJ_POWER, CU2_MAP_EXOBJ_POWER_INDEX, fl_t_abs_robs);
 
-	fl_t_tmp_theta = -(PI / 180.0F * (st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_peak_doa_bins_intpl_2f[s4_t_lp_i] +  (FL)DOA_BIN_START_ANG));
-
-	if (
-		(fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]) < POW_DIFF_UP_DOWN_DOA)							/* COND. j1 */
-		 && (fl_abs(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]) < (FL)s4_t_tmp_doa_diff_up_down)		/* COND. j2 */
-	) {
-		afl_t_compare[s4_t_lp_i][s4_t_lp_k] = ( 8.0F * fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]))
-											  + 1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]));
+			/* 不要物標を削除 */
+			if ((ast_a_normal_current[s4_t_lp_normal].s4_flg_dc != (S4)OBJECT_TYPE_2F)		/* COND.n2 */
+			&&	(fl_t_abs_robs < fl_t_thd_exobj_range)										/* COND.n3 */
+			&&	(ast_a_normal_current[s4_t_lp_normal].fl_Ryobs < (FL)-EKF_RY_SIDE)			/* COND.n4 */
+			&&	(fl_t_abs_vobs < ((FL)5.0 * (FL)VCOF))										/* COND.n5 */
+			&&	(fl_t_obj_power < fl_t_thd_exobj_power)) {									/* COND.n6 */
+				fn_init(&ast_a_normal_current[s4_t_lp_normal], (S4)1);
+			}
+		}
 	}
-
-
-	afl_t_compare[s4_a_peak_num_up - 1 - s4_t_lp_i][s4_t_lp_k]
-			= (0.5F * fl_abs(afl_a_peak_doa_powers_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]))							/* DOA pow.	0.5F: weighting factor */
-			+ (1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k])))			/* DOA */
-			+ (1.0F * fl_abs((FL)(afl_a_peak_bins_intpl_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_bins_intpl_dn[s4_t_lp_k] - (FL)s4_t_shift)));	/* FREQ */
-
-
-	tmp_comp = fl_abs(afl_a_alarmed_target_current[k][0]-afl_a_Tx_float[0][8])	 		/* PROC.15 Rxfil + Ryfil */
-				+ fl_abs(afl_a_alarmed_target_current[k][1]-afl_a_Tx_float[0][7]);
-
-	tmp_comp = fl_abs(afl_a_alarmed_target_current[k][0]-afl_a_Tx_float[0][8]) +	 		/* PROC.15 Rxfil + Ryfil */
-				fl_abs(afl_a_alarmed_target_current[k][1]-afl_a_Tx_float[0][7]);
 
 	return;
 }
