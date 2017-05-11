@@ -32,7 +32,7 @@ Total functions : 14
 [23] MAINPROCESS(1) proc S4 s4_t_lp_target_num; 
 [24] MAINPROCESS(1) func<start> fn_init(ast_t_normal, PRIOR_BUFFSIZE 
 [25] MAINPROCESS(1) func<end> ); 
-[26] MAINPROCESS(1) for <start> for ( 
+[26] MAINPROCESS(1) for  for ( 
 [27] MAINPROCESS(1) for  s4_t_lp_i = (S4)0; 
 [28] MAINPROCESS(1) for  s4_t_lp_i < (S4)NORMAL_BUFFSIZE; 
 [29] MAINPROCESS(1) for  s4_t_lp_i++) 
@@ -41,7 +41,7 @@ Total functions : 14
 [32] MAINPROCESS(2) func<start> fn_sort_normal_by_power(ast_t_ast_normal_copy 
 [33] MAINPROCESS(2) func<end> ); 
 [34] MAINPROCESS(2) equal *ps4_a_pair_num_prior 0;
-[35] MAINPROCESS(2) if <start> if ( 
+[35] MAINPROCESS(2) if  if ( 
 [36] MAINPROCESS(2) if  (fl_abs(fl_g_v_self_bsm_for_base) < CFL_CANOUT_VSELF_MIN) 
 [37] MAINPROCESS(2) if  || (s4_abs(s2_g_curvr_for_base) < CANOUT_CURVER_MIN) 
 [38] MAINPROCESS(2) if  ) 
@@ -52,29 +52,29 @@ Total functions : 14
 [43] MAINPROCESS(3) equal u1_t_up_peak_num_of_search 0;
 [44] MAINPROCESS(3) equal u1_t_dn_peak_num_of_search 0;
 [45] MAINPROCESS(3) equal u1_t_flg_near_target_exist (U1)0;
-[46] MAINPROCESS(3) for <start> for ( 
+[46] MAINPROCESS(3) for  for ( 
 [47] MAINPROCESS(3) for  s4_t_lp_target_num = (S4)0; 
 [48] MAINPROCESS(3) for  s4_t_lp_target_num < st_g_bsm_loop_data.as4_buf_pair_num[1]; 
 [49] MAINPROCESS(3) for  s4_t_lp_target_num++) 
 [50] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[51] SUBPROCESS(1) if <start> if ( 
+[51] SUBPROCESS(1) if  if ( 
 [52] SUBPROCESS(1) if  st_g_bsm_loop_data.ast_target[s4_t_lp_target_num].fl_Ryfil > (FL)-15.0F 
 [53] SUBPROCESS(1) if  ) 
 [54] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [55] SUBSUBPROCESS(1) equal u1_t_flg_near_target_exist (U1)1;
 [56] SUBSUBPROCESS(1) proc break; 
 [57] MAINPROCESS(4) equal s4_t_normal_num 0;
-[58] MAINPROCESS(4) for <start> for ( 
+[58] MAINPROCESS(4) for  for ( 
 [59] MAINPROCESS(4) for  s4_t_lp_i = 0; 
 [60] MAINPROCESS(4) for  s4_t_lp_i < st_g_bsm_loop_data.as4_buf_pair_num[0]; 
 [61] MAINPROCESS(4) for  s4_t_lp_i++) 
 [62] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[63] SUBPROCESS(1) if <start> if ( 
+[63] SUBPROCESS(1) if  if ( 
 [64] SUBPROCESS(1) if  s4_t_lp_i >= PRIOR_BUFFSIZE 
 [65] SUBPROCESS(1) if  ) 
 [66] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [67] SUBSUBPROCESS(1) proc break; 
-[68] SUBPROCESS(2) if <start> if ( 
+[68] SUBPROCESS(2) if  if ( 
 [69] SUBPROCESS(2) if  (u1_t_flg_near_target_exist == (U1)0 
 [70] SUBPROCESS(2) if  ) 
 [71] SUBPROCESS(2) if  &&  (st_g_bsm_loop_data.s4_flg_alarm == (S4)0) 
@@ -82,171 +82,90 @@ Total functions : 14
 [73] SUBPROCESS(2) if  &&  (ast_t_ast_normal_copy[s4_t_lp_i].fl_Rypred  < (FL)-EKF_RY_SIDE) 
 [74] SUBPROCESS(2) if  &&  (st_g_bsm_loop_data.as4_low_speed_flg[0] == (S4)0)) 
 [75] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[76] SUBPROCESS(3) else<start> else 
+[76] SUBPROCESS(3) else else 
 [77] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
 [78] SUBSUBPROCESS(1) equal s4_t_lower_limit_th FREQ_BIN_LOWER_LIMIT_PRIOR;
-[79] SUBSUBPROCESS(1) if <start> if ( 
+[79] SUBSUBPROCESS(1) if  if ( 
 [80] SUBSUBPROCESS(1) if  (ast_t_ast_normal_copy[s4_t_lp_i].fl_Rypred < FREQ_EXPAND_R_TH 
 [81] SUBSUBPROCESS(1) if  ) 
 [82] SUBSUBPROCESS(1) if  &&  (ast_t_ast_normal_copy[s4_t_lp_i].fl_Vypred > FREQ_EXPAND_V_TH)) 
 [83] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
 [84] SUBSUBSUBPROCESS(1) equal s4_t_lower_limit_th FREQ_BIN_LOWER_LIMIT_PRIOR_EX;
-[85] SUBSUBPROCESS(2) if <start> if ( 
+[85] SUBSUBPROCESS(2) if  if ( 
 [86] SUBSUBPROCESS(2) if  (ast_t_ast_normal_copy[s4_t_lp_i].s4_flg_track > PRIOR_TRK_NUM) 
 [87] SUBSUBPROCESS(2) if  || (ast_t_ast_normal_copy[s4_t_lp_i].s4_flg_dc == OBJECT_TYPE_PRIOR) 
 [88] SUBSUBPROCESS(2) if  ) 
 [89] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
 [90] SUBSUBSUBPROCESS(1) equal s4_t_peak_num_prior_up 0;
-[91] SUBSUBSUBPROCESS(1) if <start> if ( 
+[91] SUBSUBSUBPROCESS(1) if  if ( 
 [92] SUBSUBSUBPROCESS(1) if  ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_up_pred > FREQ_BIN_LOWER_LIMIT 
 [93] SUBSUBSUBPROCESS(1) if  ) 
 [94] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
 [95] SUBSUBSUBSUBPROCESS(1) proc u1_t_up_peak_num_of_search++; 
 [96] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_init_data( 
-[97] SUBSUBSUBSUBPROCESS(1) func &s4_t_peak_num_prior_up, 
-[98] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_bins_intpl_up, 
-[99] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_powers_up, 
-[100] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_bins_intpl_up, 
-[101] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_up 
-[102] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[103] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_set_peak( 
-[104] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_up_pred, 
-[105] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_Ayfil, 
-[106] SUBSUBSUBSUBPROCESS(1) func CU2_LFM_MOD_UP, 
-[107] SUBSUBSUBSUBPROCESS(1) func &s4_t_start_bin 
-[108] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[109] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_estimate_doa( 
-[110] SUBSUBSUBSUBPROCESS(1) func 0, 
-[111] SUBSUBSUBSUBPROCESS(1) func afl_g_cvw_lfm_ryy_matrix[0], 
-[112] SUBSUBSUBSUBPROCESS(1) func (const FL *)(afl_g_cvw_lfm_ftt_power[0]), 
-[113] SUBSUBSUBSUBPROCESS(1) func s4_t_start_bin, 
-[114] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_power_up, 
-[115] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_doa_up_interpolate_pred, 
-[116] SUBSUBSUBSUBPROCESS(1) func &s4_t_peak_num_prior_up, 
-[117] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_bins_intpl_up, 
-[118] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_powers_up, 
-[119] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_bins_intpl_up, 
-[120] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_up 
-[121] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[122] SUBSUBSUBPROCESS(2) else if<start> else if( 
-[123] SUBSUBSUBPROCESS(2) else if ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_up_pred > s4_t_lower_limit_th 
-[124] SUBSUBSUBPROCESS(2) else if ) 
-[125] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[126] SUBSUBSUBSUBPROCESS(1) proc u1_t_up_peak_num_of_search++; 
-[127] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_estimate_doa_around_dc( 
-[128] SUBSUBSUBSUBPROCESS(1) func 0, 
-[129] SUBSUBSUBSUBPROCESS(1) func (const FL (*)[CORRE_SIZE_4CH])afl_g_cvw_lfm_ryy_matrix[0], 
-[130] SUBSUBSUBSUBPROCESS(1) func (const FL *)afl_g_cvw_lfm_ftt_power[0], 
-[131] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_up_pred, 
-[132] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_dn_pred, 
-[133] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_bin_up_interpolate_pred, 
-[134] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_doa_dn_interpolate_pred, 
-[135] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_power_dn_music, 
-[136] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_dn_music_pred, 
-[137] SUBSUBSUBSUBPROCESS(1) func &s4_t_peak_num_prior_up, 
-[138] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_bins_intpl_up, 
-[139] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_powers_up, 
-[140] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_bins_intpl_up, 
-[141] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_up 
-[142] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[143] SUBSUBSUBPROCESS(3) else<start> else 
-[144] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
-[145] SUBSUBSUBPROCESS(4) equal s4_t_peak_num_prior_dn 0;
-[146] SUBSUBSUBPROCESS(4) if <start> if ( 
-[147] SUBSUBSUBPROCESS(4) if  ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_dn_pred > FREQ_BIN_LOWER_LIMIT 
-[148] SUBSUBSUBPROCESS(4) if  ) 
-[149] SUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBPROCESS(1) 
-[150] SUBSUBSUBSUBPROCESS(1) proc u1_t_dn_peak_num_of_search++; 
-[151] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_init_data( 
-[152] SUBSUBSUBSUBPROCESS(1) func &s4_t_peak_num_prior_dn, 
-[153] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_bins_intpl_dn, 
-[154] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_powers_dn, 
-[155] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_bins_intpl_dn, 
-[156] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_dn 
-[157] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[158] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_set_peak( 
-[159] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_dn_pred, 
-[160] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_Ayfil, 
-[161] SUBSUBSUBSUBPROCESS(1) func CU2_LFM_MOD_DN, 
-[162] SUBSUBSUBSUBPROCESS(1) func &s4_t_start_bin 
-[163] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[164] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_estimate_doa( 
-[165] SUBSUBSUBSUBPROCESS(1) func 1, 
-[166] SUBSUBSUBSUBPROCESS(1) func afl_g_cvw_lfm_ryy_matrix[1], 
-[167] SUBSUBSUBSUBPROCESS(1) func (const FL *)(afl_g_cvw_lfm_ftt_power[1]), 
-[168] SUBSUBSUBSUBPROCESS(1) func s4_t_start_bin, 
-[169] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_power_dn, 
-[170] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_doa_dn_interpolate_pred, 
-[171] SUBSUBSUBSUBPROCESS(1) func &s4_t_peak_num_prior_dn, 
-[172] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_bins_intpl_dn, 
-[173] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_powers_dn, 
-[174] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_bins_intpl_dn, 
-[175] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_dn 
-[176] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[177] SUBSUBSUBPROCESS(5) else if<start> else if( 
-[178] SUBSUBSUBPROCESS(5) else if ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_dn_pred > s4_t_lower_limit_th 
-[179] SUBSUBSUBPROCESS(5) else if ) 
-[180] SUBSUBSUBPROCESS(5) subproc SUBSUBSUBSUBPROCESS(1) 
-[181] SUBSUBSUBSUBPROCESS(1) proc u1_t_dn_peak_num_of_search++; 
-[182] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_estimate_doa_around_dc( 
-[183] SUBSUBSUBSUBPROCESS(1) func 1, 
-[184] SUBSUBSUBSUBPROCESS(1) func (const FL (*)[CORRE_SIZE_4CH])afl_g_cvw_lfm_ryy_matrix[1], 
-[185] SUBSUBSUBSUBPROCESS(1) func (const FL *)afl_g_cvw_lfm_ftt_power[1], 
-[186] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_dn_pred, 
-[187] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_up_pred, 
-[188] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_bin_dn_interpolate_pred, 
-[189] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_doa_up_interpolate_pred, 
-[190] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].fl_power_up_music, 
-[191] SUBSUBSUBSUBPROCESS(1) func ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_up_music_pred, 
-[192] SUBSUBSUBSUBPROCESS(1) func &s4_t_peak_num_prior_dn, 
-[193] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_bins_intpl_dn, 
-[194] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_powers_dn, 
-[195] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_bins_intpl_dn, 
-[196] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_dn 
-[197] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[198] SUBSUBSUBPROCESS(6) else<start> else 
-[199] SUBSUBSUBPROCESS(6) subproc SUBSUBSUBSUBPROCESS(1) 
-[200] SUBSUBSUBPROCESS(7) func<start> fn_init(&st_t_buf_normal, 1 
-[201] SUBSUBSUBPROCESS(7) func<end> ); 
-[202] SUBSUBSUBPROCESS(7) func<start> u1_make_pair_result = u1_bsm_prior_make_pair( 
-[203] SUBSUBSUBPROCESS(7) func ast_t_ast_normal_copy[s4_t_lp_i].fl_doa_up_interpolate_pred, 
-[204] SUBSUBSUBPROCESS(7) func ast_t_ast_normal_copy[s4_t_lp_i].fl_doa_dn_interpolate_pred, 
-[205] SUBSUBSUBPROCESS(7) func ast_t_ast_normal_copy[s4_t_lp_i].fl_power_up_music, 
-[206] SUBSUBSUBPROCESS(7) func ast_t_ast_normal_copy[s4_t_lp_i].fl_power_dn_music, 
-[207] SUBSUBSUBPROCESS(7) func s4_t_peak_num_prior_up, 
-[208] SUBSUBSUBPROCESS(7) func afl_t_peak_bins_intpl_up, 
-[209] SUBSUBSUBPROCESS(7) func afl_t_peak_powers_up, 
-[210] SUBSUBSUBPROCESS(7) func afl_t_peak_doa_bins_intpl_up, 
-[211] SUBSUBSUBPROCESS(7) func afl_t_peak_doa_powers_up, 
-[212] SUBSUBSUBPROCESS(7) func s4_t_peak_num_prior_dn, 
-[213] SUBSUBSUBPROCESS(7) func afl_t_peak_bins_intpl_dn, 
-[214] SUBSUBSUBPROCESS(7) func afl_t_peak_powers_dn, 
-[215] SUBSUBSUBPROCESS(7) func afl_t_peak_doa_bins_intpl_dn, 
-[216] SUBSUBSUBPROCESS(7) func afl_t_peak_doa_powers_dn, 
-[217] SUBSUBSUBPROCESS(7) func s4_t_normal_num, 
-[218] SUBSUBSUBPROCESS(7) func &st_t_buf_normal 
-[219] SUBSUBSUBPROCESS(7) func<end> ); 
-[220] SUBSUBSUBPROCESS(7) if<start> if( 
-[221] SUBSUBSUBPROCESS(7) if u1_make_pair_result == CU1_TRUE 
-[222] SUBSUBSUBPROCESS(7) if ) 
-[223] SUBSUBSUBPROCESS(7) subproc SUBSUBSUBSUBPROCESS(1) 
-[224] SUBSUBSUBSUBPROCESS(1) equal ast_t_normal[s4_t_normal_num] st_t_buf_normal;
-[225] SUBSUBSUBSUBPROCESS(1) equal as4_t_prev_index[s4_t_normal_num] s4_t_lp_i;
-[226] SUBSUBSUBSUBPROCESS(1) proc s4_t_normal_num++; 
-[227] MAINPROCESS(5) func<start> fn_bsm_prior_delete_same_object( 
-[228] MAINPROCESS(5) func (const S4 *)as4_t_prev_index, 
-[229] MAINPROCESS(5) func s4_t_normal_num, 
-[230] MAINPROCESS(5) func ast_t_normal, 
-[231] MAINPROCESS(5) func (const NORMAL_BSM *)ast_t_ast_normal_copy 
-[232] MAINPROCESS(5) func<end> ); 
-[233] MAINPROCESS(5) func<start> fn_bsm_prior_set_object( 
-[234] MAINPROCESS(5) func ps4_a_pair_num_prior, 
-[235] MAINPROCESS(5) func ast_a_normal_prior, 
-[236] MAINPROCESS(5) func s4_t_normal_num, 
-[237] MAINPROCESS(5) func (const NORMAL_BSM *)ast_t_normal 
-[238] MAINPROCESS(5) func<end> ); 
-[239] MAINPROCESS(5) proc return; 
------------------ Total Codes : 239 lines
+[97] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_up 
+[98] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[99] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_set_peak( 
+[100] SUBSUBSUBSUBPROCESS(1) func &s4_t_start_bin 
+[101] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[102] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_estimate_doa( 
+[103] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_up 
+[104] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[105] SUBSUBSUBPROCESS(2) else if else if( 
+[106] SUBSUBSUBPROCESS(2) else if ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_up_pred > s4_t_lower_limit_th 
+[107] SUBSUBSUBPROCESS(2) else if ) 
+[108] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[109] SUBSUBSUBSUBPROCESS(1) proc u1_t_up_peak_num_of_search++; 
+[110] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_estimate_doa_around_dc( 
+[111] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_up 
+[112] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[113] SUBSUBSUBPROCESS(3) else else 
+[114] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[115] SUBSUBSUBPROCESS(4) equal s4_t_peak_num_prior_dn 0;
+[116] SUBSUBSUBPROCESS(4) if  if ( 
+[117] SUBSUBSUBPROCESS(4) if  ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_dn_pred > FREQ_BIN_LOWER_LIMIT 
+[118] SUBSUBSUBPROCESS(4) if  ) 
+[119] SUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBPROCESS(1) 
+[120] SUBSUBSUBSUBPROCESS(1) proc u1_t_dn_peak_num_of_search++; 
+[121] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_init_data( 
+[122] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_dn 
+[123] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[124] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_set_peak( 
+[125] SUBSUBSUBSUBPROCESS(1) func &s4_t_start_bin 
+[126] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[127] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_estimate_doa( 
+[128] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_dn 
+[129] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[130] SUBSUBSUBPROCESS(5) else if else if( 
+[131] SUBSUBSUBPROCESS(5) else if ast_t_ast_normal_copy[s4_t_lp_i].s4_bin_dn_pred > s4_t_lower_limit_th 
+[132] SUBSUBSUBPROCESS(5) else if ) 
+[133] SUBSUBSUBPROCESS(5) subproc SUBSUBSUBSUBPROCESS(1) 
+[134] SUBSUBSUBSUBPROCESS(1) proc u1_t_dn_peak_num_of_search++; 
+[135] SUBSUBSUBSUBPROCESS(1) func<start> fn_bsm_prior_estimate_doa_around_dc( 
+[136] SUBSUBSUBSUBPROCESS(1) func afl_t_peak_doa_powers_dn 
+[137] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[138] SUBSUBSUBPROCESS(6) else else 
+[139] SUBSUBSUBPROCESS(6) subproc SUBSUBSUBSUBPROCESS(1) 
+[140] SUBSUBSUBPROCESS(7) func<start> fn_init(&st_t_buf_normal, 1 
+[141] SUBSUBSUBPROCESS(7) func<end> ); 
+[142] SUBSUBSUBPROCESS(7) func<start> u1_make_pair_result = u1_bsm_prior_make_pair( 
+[143] SUBSUBSUBPROCESS(7) func &st_t_buf_normal 
+[144] SUBSUBSUBPROCESS(7) func<end> ); 
+[145] SUBSUBSUBPROCESS(7) if if( 
+[146] SUBSUBSUBPROCESS(7) if u1_make_pair_result == CU1_TRUE 
+[147] SUBSUBSUBPROCESS(7) if ) 
+[148] SUBSUBSUBPROCESS(7) subproc SUBSUBSUBSUBPROCESS(1) 
+[149] SUBSUBSUBSUBPROCESS(1) equal ast_t_normal[s4_t_normal_num] st_t_buf_normal;
+[150] SUBSUBSUBSUBPROCESS(1) equal as4_t_prev_index[s4_t_normal_num] s4_t_lp_i;
+[151] SUBSUBSUBSUBPROCESS(1) proc s4_t_normal_num++; 
+[152] MAINPROCESS(5) func<start> fn_bsm_prior_delete_same_object( 
+[153] MAINPROCESS(5) func (const NORMAL_BSM *)ast_t_ast_normal_copy 
+[154] MAINPROCESS(5) func<end> ); 
+[155] MAINPROCESS(5) func<start> fn_bsm_prior_set_object( 
+[156] MAINPROCESS(5) func (const NORMAL_BSM *)ast_t_normal 
+[157] MAINPROCESS(5) func<end> ); 
+[158] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 158 lines
 --------------------------
 [Function Name] : fn_bsm_prior_init_data 
 -Return type : VD 
@@ -260,12 +179,12 @@ Total functions : 14
 [1] MAINPROCESS(1) proc S4 s4_t_lp_i; 
 [2] MAINPROCESS(1) proc S4 s4_t_lp_j; 
 [3] MAINPROCESS(1) equal *ps4_a_peak_num_prior 0;
-[4] MAINPROCESS(1) for <start> for ( 
+[4] MAINPROCESS(1) for  for ( 
 [5] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [6] MAINPROCESS(1) for  s4_t_lp_i < (S4)PRIOR_RANGE; 
 [7] MAINPROCESS(1) for  s4_t_lp_i++ ) 
 [8] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[9] SUBPROCESS(1) for<start> for( 
+[9] SUBPROCESS(1) for for( 
 [10] SUBPROCESS(1) for s4_t_lp_j = 0; 
 [11] SUBPROCESS(1) for s4_t_lp_j < (S4)2; 
 [12] SUBPROCESS(1) for s4_t_lp_j++ ) 
@@ -285,53 +204,53 @@ Total functions : 14
      [2] : U2   u2_a_flg_undn 
      [3] : S4   *ps4_a_start_bin 
 ----- Codes -----
-[1] MAINPROCESS(1) if<start> if( 
+[1] MAINPROCESS(1) if if( 
 [2] MAINPROCESS(1) if u2_a_flg_undn == CU2_LFM_MOD_UP 
 [3] MAINPROCESS(1) if ) 
 [4] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[5] SUBPROCESS(1) if <start> if ( 
+[5] SUBPROCESS(1) if  if ( 
 [6] SUBPROCESS(1) if  fl_a_Ayfil > AY_TH_NT 
 [7] SUBPROCESS(1) if  ) 
 [8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [9] SUBSUBPROCESS(1) func<start> *ps4_a_start_bin = s4_a_focus_bin - (PRIOR_RANGE - 2 
 [10] SUBSUBPROCESS(1) func<end> ); 
-[11] SUBPROCESS(2) else if <start> else if ( 
+[11] SUBPROCESS(2) else if  else if ( 
 [12] SUBPROCESS(2) else if  fl_a_Ayfil < -AY_TH_NT 
 [13] SUBPROCESS(2) else if  ) 
 [14] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
 [15] SUBSUBPROCESS(1) equal *ps4_a_start_bin s4_a_focus_bin - 1;
-[16] SUBPROCESS(3) else<start> else 
+[16] SUBPROCESS(3) else else 
 [17] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
 [18] SUBSUBPROCESS(1) func<start> *ps4_a_start_bin = s4_a_focus_bin - ((((S4)PRIOR_RANGE + (S4)1) / (S4)2) - (S4)1 
 [19] SUBSUBPROCESS(1) func<end> ); 
-[20] MAINPROCESS(2) else<start> else 
+[20] MAINPROCESS(2) else else 
 [21] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[22] SUBPROCESS(1) if<start> if( 
+[22] SUBPROCESS(1) if if( 
 [23] SUBPROCESS(1) if fl_a_Ayfil > AY_TH_NT 
 [24] SUBPROCESS(1) if ) 
 [25] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [26] SUBSUBPROCESS(1) equal *ps4_a_start_bin s4_a_focus_bin - 1;
-[27] SUBPROCESS(2) else if<start> else if( 
+[27] SUBPROCESS(2) else if else if( 
 [28] SUBPROCESS(2) else if fl_a_Ayfil < -AY_TH_NT 
 [29] SUBPROCESS(2) else if ) 
 [30] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
 [31] SUBSUBPROCESS(1) func<start> *ps4_a_start_bin = s4_a_focus_bin - (PRIOR_RANGE - 2 
 [32] SUBSUBPROCESS(1) func<end> ); 
-[33] SUBPROCESS(3) else<start> else 
+[33] SUBPROCESS(3) else else 
 [34] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
 [35] SUBSUBPROCESS(1) func<start> *ps4_a_start_bin = s4_a_focus_bin - ((((S4)PRIOR_RANGE + (S4)1) / (S4)2) - (S4)1 
 [36] SUBSUBPROCESS(1) func<end> ); 
-[37] MAINPROCESS(3) if <start> if ( 
+[37] MAINPROCESS(3) if  if ( 
 [38] MAINPROCESS(3) if  *ps4_a_start_bin < ((NB_FFT_PT / 2) + CENTER_FREQ_RANGE + 1) 
 [39] MAINPROCESS(3) if  ) 
 [40] MAINPROCESS(3) subproc SUBPROCESS(1) 
 [41] SUBPROCESS(1) equal *ps4_a_start_bin (NB_FFT_PT / 2) + CENTER_FREQ_RANGE + 1;
-[42] MAINPROCESS(4) if <start> if ( 
+[42] MAINPROCESS(4) if  if ( 
 [43] MAINPROCESS(4) if  *ps4_a_start_bin < ((NB_FFT_PT / 2) + CENTER_FREQ_RANGE + 1) 
 [44] MAINPROCESS(4) if  ) 
 [45] MAINPROCESS(4) subproc SUBPROCESS(1) 
 [46] SUBPROCESS(1) equal *ps4_a_start_bin NB_FFT_PT/2+CENTER_FREQ_RANGE+1;
-[47] MAINPROCESS(5) if <start> if ( 
+[47] MAINPROCESS(5) if  if ( 
 [48] MAINPROCESS(5) if  (*ps4_a_start_bin + (PRIOR_RANGE - 1)) > (NB_FFT_PT - 1) 
 [49] MAINPROCESS(5) if  ) 
 [50] MAINPROCESS(5) subproc SUBPROCESS(1) 
@@ -364,13 +283,13 @@ Total functions : 14
 [8] MAINPROCESS(1) proc FL afl_t_selected_bins_intpl[PRIOR_RANGE][2]; 
 [9] MAINPROCESS(1) proc S4 s4_t_doa_diff; 
 [10] MAINPROCESS(1) equal s4_t_doa_diff N_DOA;
-[11] MAINPROCESS(1) for <start> for ( 
+[11] MAINPROCESS(1) for  for ( 
 [12] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [13] MAINPROCESS(1) for  s4_t_lp_i < PRIOR_RANGE; 
 [14] MAINPROCESS(1) for  s4_t_lp_i++) 
 [15] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [16] SUBPROCESS(1) equal as4_t_doa_num[s4_t_lp_i] 0;
-[17] SUBPROCESS(1) for <start> for ( 
+[17] SUBPROCESS(1) for  for ( 
 [18] SUBPROCESS(1) for  s4_t_lp_j = 0; 
 [19] SUBPROCESS(1) for  s4_t_lp_j < 2; 
 [20] SUBPROCESS(1) for  s4_t_lp_j++) 
@@ -378,7 +297,7 @@ Total functions : 14
 [22] SUBSUBPROCESS(1) equal afl_t_selected_doa_bins_intpl[s4_t_lp_i][s4_t_lp_j] 0.0F;
 [23] SUBSUBPROCESS(1) equal afl_t_selected_doa_powers[s4_t_lp_i][s4_t_lp_j] 0.0F;
 [24] SUBSUBPROCESS(1) equal afl_t_selected_bins_intpl[s4_t_lp_i][s4_t_lp_j] 0.0F;
-[25] MAINPROCESS(2) for <start> for ( 
+[25] MAINPROCESS(2) for  for ( 
 [26] MAINPROCESS(2) for  s4_t_lp_i = 0; 
 [27] MAINPROCESS(2) for  s4_t_lp_i < PRIOR_RANGE; 
 [28] MAINPROCESS(2) for  s4_t_lp_i++) 
@@ -386,32 +305,13 @@ Total functions : 14
 [30] SUBPROCESS(1) equal as4_t_focus_bin[s4_t_lp_i] s4_a_start_bin + s4_t_lp_i;
 [31] SUBPROCESS(1) equal afl_t_focus_power[s4_t_lp_i] afl_a_power[ as4_t_focus_bin[s4_t_lp_i] ];
 [32] SUBPROCESS(1) func<start> fn_bsm_prior_cal_doa( 
-[33] SUBPROCESS(1) func s4_a_flg_updn, 
-[34] SUBPROCESS(1) func (const FL (*)[CORRE_SIZE_4CH])afl_a_Ryy, 
-[35] SUBPROCESS(1) func (const FL *)afl_a_power, 
-[36] SUBPROCESS(1) func as4_t_focus_bin[s4_t_lp_i], 
-[37] SUBPROCESS(1) func fl_a_focus_power, 
-[38] SUBPROCESS(1) func fl_a_focus_doa_bin_intpl, 
-[39] SUBPROCESS(1) func &s4_t_doa_diff, 
-[40] SUBPROCESS(1) func &as4_t_doa_num[s4_t_lp_i], 
-[41] SUBPROCESS(1) func afl_t_selected_doa_bins_intpl[s4_t_lp_i], 
-[42] SUBPROCESS(1) func afl_t_selected_doa_powers[s4_t_lp_i], 
-[43] SUBPROCESS(1) func afl_t_selected_bins_intpl[s4_t_lp_i] 
-[44] SUBPROCESS(1) func<end> ); 
-[45] MAINPROCESS(3) func<start> fn_bsm_prior_store_doa( 
-[46] MAINPROCESS(3) func (const FL *)afl_t_focus_power, 
-[47] MAINPROCESS(3) func (const S4 *)as4_t_doa_num, 
-[48] MAINPROCESS(3) func (const FL (*)[2])afl_t_selected_doa_bins_intpl, 
-[49] MAINPROCESS(3) func (const FL (*)[2])afl_t_selected_doa_powers, 
-[50] MAINPROCESS(3) func (const FL (*)[2])afl_t_selected_bins_intpl, 
-[51] MAINPROCESS(3) func ps4_a_doa_peak_num, 
-[52] MAINPROCESS(3) func afl_a_peak_bins_intpl, 
-[53] MAINPROCESS(3) func afl_a_peak_powers, 
-[54] MAINPROCESS(3) func afl_a_peak_doa_bins_intpl, 
-[55] MAINPROCESS(3) func afl_a_peak_doa_powers 
-[56] MAINPROCESS(3) func<end> ); 
-[57] MAINPROCESS(3) proc return; 
------------------ Total Codes : 57 lines
+[33] SUBPROCESS(1) func afl_t_selected_bins_intpl[s4_t_lp_i] 
+[34] SUBPROCESS(1) func<end> ); 
+[35] MAINPROCESS(3) func<start> fn_bsm_prior_store_doa( 
+[36] MAINPROCESS(3) func afl_a_peak_doa_powers 
+[37] MAINPROCESS(3) func<end> ); 
+[38] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 38 lines
 --------------------------
 [Function Name] : fn_bsm_prior_cal_doa 
 -Return type : VD 
@@ -438,162 +338,137 @@ Total functions : 14
 [8] MAINPROCESS(1) equal S4 s4_t_tmp_doa_num 0;
 [9] MAINPROCESS(1) equal as4_t_selected_doa_bins[0] (S4)0;
 [10] MAINPROCESS(1) equal as4_t_selected_doa_bins[1] (S4)0;
-[11] MAINPROCESS(1) if<start> if( 
+[11] MAINPROCESS(1) if if( 
 [12] MAINPROCESS(1) if st_g_bsm_loop_data.afl_wall_width[0] == WALL_MAX 
 [13] MAINPROCESS(1) if ) 
 [14] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [15] SUBPROCESS(1) equal s4_t_wall_bin -1;
-[16] MAINPROCESS(2) else<start> else 
+[16] MAINPROCESS(2) else else 
 [17] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [18] SUBPROCESS(1) equal s4_t_wall_bin (S4)(st_g_bsm_loop_data.afl_wall_width[0] / RCOF * 0.5F) + NB_FFT_PT / 2 -1;
-[19] MAINPROCESS(3) if <start> if ( 
+[19] MAINPROCESS(3) if  if ( 
 [20] MAINPROCESS(3) if  s4_a_flg_updn == 0 
 [21] MAINPROCESS(3) if  ) 
 [22] MAINPROCESS(3) subproc SUBPROCESS(1) 
 [23] SUBPROCESS(1) equal s4_a_exceptional_bin (S4)(NB_FFT_PT * 0.5F + fl_g_v_self_bsm_for_base / 3.6F / VCOF * 0.5F) + ROAD_REF_FREQ_BIN_OFFSET;
-[24] MAINPROCESS(4) else<start> else 
+[24] MAINPROCESS(4) else else 
 [25] MAINPROCESS(4) subproc SUBPROCESS(1) 
 [26] SUBPROCESS(1) equal s4_a_exceptional_bin (S4)(NB_FFT_PT * 0.5F - fl_g_v_self_bsm_for_base / 3.6F / VCOF * 0.5F) + ROAD_REF_FREQ_BIN_OFFSET;
-[27] MAINPROCESS(5) if <start> if ( 
+[27] MAINPROCESS(5) if  if ( 
 [28] MAINPROCESS(5) if  (s4_t_wall_bin != -1 
 [29] MAINPROCESS(5) if  ) 
 [30] MAINPROCESS(5) if  &&  (( fl_abs( (FL)(s4_a_focus_bin - s4_t_wall_bin) )) < 3)) 
 [31] MAINPROCESS(5) subproc SUBPROCESS(1) 
 [32] SUBPROCESS(1) func<start> s4_t_wave_num = s4_calc_spec_music_4ch_all_2wavefix( 
-[33] SUBPROCESS(1) func afl_a_Ryy[s4_a_focus_bin], 
-[34] SUBPROCESS(1) func afl_t_spec_doa, 
-[35] SUBPROCESS(1) func s4_a_flg_updn 
-[36] SUBPROCESS(1) func<end> ); 
-[37] SUBPROCESS(1) func<start> *ps4_a_doa_num = s4_search_peak_music( 
-[38] SUBPROCESS(1) func (const FL *)afl_t_spec_doa, 
-[39] SUBPROCESS(1) func as4_t_selected_doa_bins, 
-[40] SUBPROCESS(1) func afl_a_selected_doa_powers, 
-[41] SUBPROCESS(1) func s4_t_wave_num 
-[42] SUBPROCESS(1) func<end> ); 
-[43] SUBPROCESS(1) for <start> for ( 
-[44] SUBPROCESS(1) for  s4_t_lp_i = 0; 
-[45] SUBPROCESS(1) for  s4_t_lp_i < 2; 
-[46] SUBPROCESS(1) for  s4_t_lp_i++) 
-[47] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[48] SUBSUBPROCESS(1) if <start> if ( 
-[49] SUBSUBPROCESS(1) if  as4_t_selected_doa_bins[s4_t_lp_i]>0 
-[50] SUBSUBPROCESS(1) if  ) 
-[51] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[52] SUBSUBSUBPROCESS(1) func<start> afl_a_selected_doa_powers[s4_t_lp_i] = fl_calc_spec_bf_4ch_fm_of_specified_doa( 
-[53] SUBSUBSUBPROCESS(1) func afl_a_Ryy[s4_a_focus_bin], 
-[54] SUBSUBSUBPROCESS(1) func s4_a_flg_updn, 
-[55] SUBSUBSUBPROCESS(1) func s4_a_focus_bin, 
-[56] SUBSUBSUBPROCESS(1) func as4_t_selected_doa_bins[s4_t_lp_i] 
-[57] SUBSUBSUBPROCESS(1) func<end> ); 
-[58] SUBPROCESS(2) equal s4_t_tmp_doa_num *ps4_a_doa_num;
-[59] SUBPROCESS(2) if<start> if( 
-[60] SUBPROCESS(2) if *ps4_a_doa_num > 1 
-[61] SUBPROCESS(2) if ) 
-[62] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[63] SUBSUBPROCESS(1) for<start> for( 
-[64] SUBSUBPROCESS(1) for s4_t_lp_k=0; 
-[65] SUBSUBPROCESS(1) for s4_t_lp_k<*ps4_a_doa_num; 
-[66] SUBSUBPROCESS(1) for s4_t_lp_k++) 
-[67] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[68] SUBSUBSUBPROCESS(1) if <start> if ( 
-[69] SUBSUBSUBPROCESS(1) if  (as4_t_selected_doa_bins[s4_t_lp_k] < (N_DOA - (S4)st_g_bsm_loop_data.afl_installed_angle[0] - DOA_RANGE_FORWARD) 
-[70] SUBSUBSUBPROCESS(1) if  ) 
-[71] SUBSUBSUBPROCESS(1) if  &&  (as4_t_selected_doa_bins[s4_t_lp_k] > (N_DOA - (S4)st_g_bsm_loop_data.afl_installed_angle[0] - (S4)CU1_DOA_RANGE_BACKWARD)) 
-[72] SUBSUBSUBPROCESS(1) if  &&  (*ps4_a_doa_diff > fl_abs((FL)as4_t_selected_doa_bins[s4_t_lp_k] - (FL)fl_a_focus_doa_bin_intpl))) 
-[73] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[74] SUBSUBSUBSUBPROCESS(1) func<start> *ps4_a_doa_diff = (S4)fl_abs(as4_t_selected_doa_bins[s4_t_lp_k]-fl_a_focus_doa_bin_intpl 
-[75] SUBSUBSUBSUBPROCESS(1) func<end> ); 
-[76] SUBSUBSUBPROCESS(2) else<start> else 
-[77] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[78] SUBSUBSUBSUBPROCESS(1) equal as4_t_selected_doa_bins[s4_t_lp_k] 0;
-[79] SUBSUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[s4_t_lp_k] 0.0F;
-[80] SUBSUBSUBSUBPROCESS(1) if <start> if ( 
-[81] SUBSUBSUBSUBPROCESS(1) if  (s4_t_lp_k==0 
-[82] SUBSUBSUBSUBPROCESS(1) if  ) 
-[83] SUBSUBSUBSUBPROCESS(1) if  &&  (*ps4_a_doa_num==2)) 
-[84] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[85] SUBSUBSUBSUBSUBPROCESS(1) equal as4_t_selected_doa_bins[0] as4_t_selected_doa_bins[1];
-[86] SUBSUBSUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[0] afl_a_selected_doa_powers[1];
-[87] SUBSUBSUBSUBSUBPROCESS(1) equal as4_t_selected_doa_bins[1] 0;
-[88] SUBSUBSUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[1] 0.0F;
-[89] SUBSUBSUBSUBPROCESS(2) proc s4_t_tmp_doa_num--; 
-[90] MAINPROCESS(6) else<start> else 
-[91] MAINPROCESS(6) subproc SUBPROCESS(1) 
-[92] SUBPROCESS(1) func<start> s4_t_wave_num = s4_calc_spec_music_4ch_all( 
-[93] SUBPROCESS(1) func afl_a_Ryy[s4_a_focus_bin], 
-[94] SUBPROCESS(1) func afl_t_spec_doa, 
-[95] SUBPROCESS(1) func 2, 
-[96] SUBPROCESS(1) func s4_a_flg_updn 
-[97] SUBPROCESS(1) func<end> ); 
-[98] SUBPROCESS(1) func<start> *ps4_a_doa_num = s4_search_peak_music( 
-[99] SUBPROCESS(1) func (const FL *)afl_t_spec_doa, 
-[100] SUBPROCESS(1) func as4_t_selected_doa_bins, 
-[101] SUBPROCESS(1) func afl_a_selected_doa_powers, 
-[102] SUBPROCESS(1) func s4_t_wave_num 
-[103] SUBPROCESS(1) func<end> ); 
-[104] SUBPROCESS(1) for<start> for( 
-[105] SUBPROCESS(1) for s4_t_lp_k=0; 
-[106] SUBPROCESS(1) for s4_t_lp_k<2; 
-[107] SUBPROCESS(1) for s4_t_lp_k++) 
-[108] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[109] SUBSUBPROCESS(1) if<start> if( 
-[110] SUBSUBPROCESS(1) if as4_t_selected_doa_bins[s4_t_lp_k]>0 
-[111] SUBSUBPROCESS(1) if ) 
-[112] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[113] SUBSUBSUBPROCESS(1) func<start> afl_a_selected_doa_powers[s4_t_lp_k] = fl_calc_spec_bf_4ch_fm_of_specified_doa( 
-[114] SUBSUBSUBPROCESS(1) func afl_a_Ryy[s4_a_focus_bin], 
-[115] SUBSUBSUBPROCESS(1) func s4_a_flg_updn, 
-[116] SUBSUBSUBPROCESS(1) func s4_a_focus_bin, 
-[117] SUBSUBSUBPROCESS(1) func as4_t_selected_doa_bins[s4_t_lp_k] 
-[118] SUBSUBSUBPROCESS(1) func<end> ); 
-[119] MAINPROCESS(7) for<start> for( 
-[120] MAINPROCESS(7) for s4_t_lp_k=0; 
-[121] MAINPROCESS(7) for s4_t_lp_k<2; 
-[122] MAINPROCESS(7) for s4_t_lp_k++) 
-[123] MAINPROCESS(7) subproc SUBPROCESS(1) 
-[124] SUBPROCESS(1) if<start> if( 
-[125] SUBPROCESS(1) if as4_t_selected_doa_bins[s4_t_lp_k]>0 
-[126] SUBPROCESS(1) if ) 
-[127] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[128] SUBSUBPROCESS(1) func<start> afl_a_selected_doa_bins_intpl[s4_t_lp_k] = fl_interpolate_music_peak( 
-[129] SUBSUBPROCESS(1) func (const FL *)afl_t_spec_doa, 
-[130] SUBSUBPROCESS(1) func as4_t_selected_doa_bins[s4_t_lp_k], 
-[131] SUBSUBPROCESS(1) func (const FL *)FL_BSM_FLSH_YOMIKAE_TBL_FM 
-[132] SUBSUBPROCESS(1) func<end> ); 
-[133] SUBSUBPROCESS(1) func<start> afl_a_selected_bins_intpl[s4_t_lp_k] = fl_interpolate_freq_peak( 
-[134] SUBSUBPROCESS(1) func (const FL *)afl_a_power, 
-[135] SUBSUBPROCESS(1) func s4_a_focus_bin 
-[136] SUBSUBPROCESS(1) func<end> ); 
-[137] MAINPROCESS(8) func<start> fn_cmn_shareMUSIC_set_finished_music_data_main( (U1)s4_a_flg_updn, 
-[138] MAINPROCESS(8) func (U1)*ps4_a_doa_num, 
-[139] MAINPROCESS(8) func (U2)s4_a_focus_bin, 
-[140] MAINPROCESS(8) func afl_a_selected_bins_intpl[0], 
-[141] MAINPROCESS(8) func afl_a_selected_doa_bins_intpl, 
-[142] MAINPROCESS(8) func afl_a_selected_doa_powers 
-[143] MAINPROCESS(8) func<end> ); 
-[144] MAINPROCESS(8) if <start> if ( 
-[145] MAINPROCESS(8) if  (s4_a_focus_bin > (s4_a_exceptional_bin - ROAD_REF_FREQ_BIN_RANGE)) 
-[146] MAINPROCESS(8) if  && (s4_a_focus_bin < (s4_a_exceptional_bin + ROAD_REF_FREQ_BIN_RANGE)) 
-[147] MAINPROCESS(8) if  ) 
-[148] MAINPROCESS(8) subproc SUBPROCESS(1) 
-[149] SUBPROCESS(1) for <start> for ( 
-[150] SUBPROCESS(1) for  s4_t_lp_i = 0; 
-[151] SUBPROCESS(1) for  s4_t_lp_i < 2; 
-[152] SUBPROCESS(1) for  s4_t_lp_i++) 
-[153] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[154] SUBSUBPROCESS(1) if <start> if ( 
-[155] SUBSUBPROCESS(1) if  (afl_a_selected_doa_bins_intpl[s4_t_lp_i] > ((((FL)N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0]) - (FL)ROAD_REF_DOA_BIN_RANGE)) 
-[156] SUBSUBPROCESS(1) if  && (afl_a_selected_doa_bins_intpl[s4_t_lp_i] < ((((FL)N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0]) + (FL)ROAD_REF_DOA_BIN_RANGE)) 
-[157] SUBSUBPROCESS(1) if  && (fl_a_focus_doa_bin_intpl > ((((FL)N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0]) + (FL)ROAD_REF_DOA_BIN_RANGE)) 
-[158] SUBSUBPROCESS(1) if  ) 
-[159] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[160] SUBSUBSUBPROCESS(1) equal *ps4_a_doa_num 1;
-[161] SUBSUBSUBPROCESS(1) equal afl_a_selected_doa_bins_intpl[0] fl_a_focus_doa_bin_intpl;
-[162] SUBSUBSUBPROCESS(1) equal afl_a_selected_doa_bins_intpl[1] 0;
-[163] SUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[0] fl_a_focus_power;
-[164] SUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[1] 0.0F;
-[165] MAINPROCESS(9) proc return; 
------------------ Total Codes : 165 lines
+[33] SUBPROCESS(1) func s4_a_flg_updn 
+[34] SUBPROCESS(1) func<end> ); 
+[35] SUBPROCESS(1) func<start> *ps4_a_doa_num = s4_search_peak_music( 
+[36] SUBPROCESS(1) func s4_t_wave_num 
+[37] SUBPROCESS(1) func<end> ); 
+[38] SUBPROCESS(1) for  for ( 
+[39] SUBPROCESS(1) for  s4_t_lp_i = 0; 
+[40] SUBPROCESS(1) for  s4_t_lp_i < 2; 
+[41] SUBPROCESS(1) for  s4_t_lp_i++) 
+[42] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[43] SUBSUBPROCESS(1) if  if ( 
+[44] SUBSUBPROCESS(1) if  as4_t_selected_doa_bins[s4_t_lp_i]>0 
+[45] SUBSUBPROCESS(1) if  ) 
+[46] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[47] SUBSUBSUBPROCESS(1) func<start> afl_a_selected_doa_powers[s4_t_lp_i] = fl_calc_spec_bf_4ch_fm_of_specified_doa( 
+[48] SUBSUBSUBPROCESS(1) func as4_t_selected_doa_bins[s4_t_lp_i] 
+[49] SUBSUBSUBPROCESS(1) func<end> ); 
+[50] SUBPROCESS(2) equal s4_t_tmp_doa_num *ps4_a_doa_num;
+[51] SUBPROCESS(2) if if( 
+[52] SUBPROCESS(2) if *ps4_a_doa_num > 1 
+[53] SUBPROCESS(2) if ) 
+[54] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[55] SUBSUBPROCESS(1) for for( 
+[56] SUBSUBPROCESS(1) for s4_t_lp_k=0; 
+[57] SUBSUBPROCESS(1) for s4_t_lp_k<*ps4_a_doa_num; 
+[58] SUBSUBPROCESS(1) for s4_t_lp_k++) 
+[59] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[60] SUBSUBSUBPROCESS(1) if  if ( 
+[61] SUBSUBSUBPROCESS(1) if  (as4_t_selected_doa_bins[s4_t_lp_k] < (N_DOA - (S4)st_g_bsm_loop_data.afl_installed_angle[0] - DOA_RANGE_FORWARD) 
+[62] SUBSUBSUBPROCESS(1) if  ) 
+[63] SUBSUBSUBPROCESS(1) if  &&  (as4_t_selected_doa_bins[s4_t_lp_k] > (N_DOA - (S4)st_g_bsm_loop_data.afl_installed_angle[0] - (S4)CU1_DOA_RANGE_BACKWARD)) 
+[64] SUBSUBSUBPROCESS(1) if  &&  (*ps4_a_doa_diff > fl_abs((FL)as4_t_selected_doa_bins[s4_t_lp_k] - (FL)fl_a_focus_doa_bin_intpl))) 
+[65] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[66] SUBSUBSUBSUBPROCESS(1) func<start> *ps4_a_doa_diff = (S4)fl_abs(as4_t_selected_doa_bins[s4_t_lp_k]-fl_a_focus_doa_bin_intpl 
+[67] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[68] SUBSUBSUBPROCESS(2) else else 
+[69] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[70] SUBSUBSUBSUBPROCESS(1) equal as4_t_selected_doa_bins[s4_t_lp_k] 0;
+[71] SUBSUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[s4_t_lp_k] 0.0F;
+[72] SUBSUBSUBSUBPROCESS(1) if  if ( 
+[73] SUBSUBSUBSUBPROCESS(1) if  (s4_t_lp_k==0 
+[74] SUBSUBSUBSUBPROCESS(1) if  ) 
+[75] SUBSUBSUBSUBPROCESS(1) if  &&  (*ps4_a_doa_num==2)) 
+[76] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[77] SUBSUBSUBSUBSUBPROCESS(1) equal as4_t_selected_doa_bins[0] as4_t_selected_doa_bins[1];
+[78] SUBSUBSUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[0] afl_a_selected_doa_powers[1];
+[79] SUBSUBSUBSUBSUBPROCESS(1) equal as4_t_selected_doa_bins[1] 0;
+[80] SUBSUBSUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[1] 0.0F;
+[81] SUBSUBSUBSUBPROCESS(2) proc s4_t_tmp_doa_num--; 
+[82] MAINPROCESS(6) else else 
+[83] MAINPROCESS(6) subproc SUBPROCESS(1) 
+[84] SUBPROCESS(1) func<start> s4_t_wave_num = s4_calc_spec_music_4ch_all( 
+[85] SUBPROCESS(1) func s4_a_flg_updn 
+[86] SUBPROCESS(1) func<end> ); 
+[87] SUBPROCESS(1) func<start> *ps4_a_doa_num = s4_search_peak_music( 
+[88] SUBPROCESS(1) func s4_t_wave_num 
+[89] SUBPROCESS(1) func<end> ); 
+[90] SUBPROCESS(1) for for( 
+[91] SUBPROCESS(1) for s4_t_lp_k=0; 
+[92] SUBPROCESS(1) for s4_t_lp_k<2; 
+[93] SUBPROCESS(1) for s4_t_lp_k++) 
+[94] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[95] SUBSUBPROCESS(1) if if( 
+[96] SUBSUBPROCESS(1) if as4_t_selected_doa_bins[s4_t_lp_k]>0 
+[97] SUBSUBPROCESS(1) if ) 
+[98] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[99] SUBSUBSUBPROCESS(1) func<start> afl_a_selected_doa_powers[s4_t_lp_k] = fl_calc_spec_bf_4ch_fm_of_specified_doa( 
+[100] SUBSUBSUBPROCESS(1) func as4_t_selected_doa_bins[s4_t_lp_k] 
+[101] SUBSUBSUBPROCESS(1) func<end> ); 
+[102] MAINPROCESS(7) for for( 
+[103] MAINPROCESS(7) for s4_t_lp_k=0; 
+[104] MAINPROCESS(7) for s4_t_lp_k<2; 
+[105] MAINPROCESS(7) for s4_t_lp_k++) 
+[106] MAINPROCESS(7) subproc SUBPROCESS(1) 
+[107] SUBPROCESS(1) if if( 
+[108] SUBPROCESS(1) if as4_t_selected_doa_bins[s4_t_lp_k]>0 
+[109] SUBPROCESS(1) if ) 
+[110] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[111] SUBSUBPROCESS(1) func<start> afl_a_selected_doa_bins_intpl[s4_t_lp_k] = fl_interpolate_music_peak( 
+[112] SUBSUBPROCESS(1) func (const FL *)FL_BSM_FLSH_YOMIKAE_TBL_FM 
+[113] SUBSUBPROCESS(1) func<end> ); 
+[114] SUBSUBPROCESS(1) func<start> afl_a_selected_bins_intpl[s4_t_lp_k] = fl_interpolate_freq_peak( 
+[115] SUBSUBPROCESS(1) func s4_a_focus_bin 
+[116] SUBSUBPROCESS(1) func<end> ); 
+[117] MAINPROCESS(8) func afl_a_selected_doa_powers 
+[118] MAINPROCESS(8) func<end> ); 
+[119] MAINPROCESS(8) if  if ( 
+[120] MAINPROCESS(8) if  (s4_a_focus_bin > (s4_a_exceptional_bin - ROAD_REF_FREQ_BIN_RANGE)) 
+[121] MAINPROCESS(8) if  && (s4_a_focus_bin < (s4_a_exceptional_bin + ROAD_REF_FREQ_BIN_RANGE)) 
+[122] MAINPROCESS(8) if  ) 
+[123] MAINPROCESS(8) subproc SUBPROCESS(1) 
+[124] SUBPROCESS(1) for  for ( 
+[125] SUBPROCESS(1) for  s4_t_lp_i = 0; 
+[126] SUBPROCESS(1) for  s4_t_lp_i < 2; 
+[127] SUBPROCESS(1) for  s4_t_lp_i++) 
+[128] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[129] SUBSUBPROCESS(1) if  if ( 
+[130] SUBSUBPROCESS(1) if  (afl_a_selected_doa_bins_intpl[s4_t_lp_i] > ((((FL)N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0]) - (FL)ROAD_REF_DOA_BIN_RANGE)) 
+[131] SUBSUBPROCESS(1) if  && (afl_a_selected_doa_bins_intpl[s4_t_lp_i] < ((((FL)N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0]) + (FL)ROAD_REF_DOA_BIN_RANGE)) 
+[132] SUBSUBPROCESS(1) if  && (fl_a_focus_doa_bin_intpl > ((((FL)N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0]) + (FL)ROAD_REF_DOA_BIN_RANGE)) 
+[133] SUBSUBPROCESS(1) if  ) 
+[134] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[135] SUBSUBSUBPROCESS(1) equal *ps4_a_doa_num 1;
+[136] SUBSUBSUBPROCESS(1) equal afl_a_selected_doa_bins_intpl[0] fl_a_focus_doa_bin_intpl;
+[137] SUBSUBSUBPROCESS(1) equal afl_a_selected_doa_bins_intpl[1] 0;
+[138] SUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[0] fl_a_focus_power;
+[139] SUBSUBSUBPROCESS(1) equal afl_a_selected_doa_powers[1] 0.0F;
+[140] MAINPROCESS(9) proc return; 
+----------------- Total Codes : 140 lines
 --------------------------
 [Function Name] : fn_bsm_prior_store_doa 
 -Return type : VD 
@@ -617,12 +492,12 @@ Total functions : 14
 [6] MAINPROCESS(1) proc FL afl_t_peak_powers[PRIOR_RANGE][2]; 
 [7] MAINPROCESS(1) proc FL afl_t_peak_doa_bins_intpl[PRIOR_RANGE][2]; 
 [8] MAINPROCESS(1) proc FL afl_t_peak_doa_powers[PRIOR_RANGE][2]; 
-[9] MAINPROCESS(1) for <start> for ( 
+[9] MAINPROCESS(1) for  for ( 
 [10] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [11] MAINPROCESS(1) for  s4_t_lp_i < PRIOR_RANGE; 
 [12] MAINPROCESS(1) for  s4_t_lp_i++) 
 [13] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[14] SUBPROCESS(1) for <start> for ( 
+[14] SUBPROCESS(1) for  for ( 
 [15] SUBPROCESS(1) for  s4_t_lp_k = 0; 
 [16] SUBPROCESS(1) for  s4_t_lp_k < 2; 
 [17] SUBPROCESS(1) for  s4_t_lp_k++) 
@@ -632,17 +507,17 @@ Total functions : 14
 [21] SUBSUBPROCESS(1) equal afl_t_peak_powers[s4_t_lp_i][s4_t_lp_k] 0.0F;
 [22] SUBSUBPROCESS(1) equal afl_t_peak_doa_bins_intpl[s4_t_lp_i][s4_t_lp_k] 0.0F;
 [23] SUBSUBPROCESS(1) equal afl_t_peak_doa_powers[s4_t_lp_i][s4_t_lp_k] 0.0F;
-[24] MAINPROCESS(2) for <start> for ( 
+[24] MAINPROCESS(2) for  for ( 
 [25] MAINPROCESS(2) for  s4_t_lp_i = 0; 
 [26] MAINPROCESS(2) for  s4_t_lp_i < PRIOR_RANGE; 
 [27] MAINPROCESS(2) for  s4_t_lp_i++) 
 [28] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[29] SUBPROCESS(1) for <start> for ( 
+[29] SUBPROCESS(1) for  for ( 
 [30] SUBPROCESS(1) for  s4_t_lp_k = 0; 
 [31] SUBPROCESS(1) for  s4_t_lp_k < as4_a_doa_num[s4_t_lp_i]; 
 [32] SUBPROCESS(1) for  s4_t_lp_k++) 
 [33] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[34] SUBSUBPROCESS(1) if <start> if ( 
+[34] SUBSUBPROCESS(1) if  if ( 
 [35] SUBSUBPROCESS(1) if  (afl_a_selected_doa_powers[s4_t_lp_i][s4_t_lp_k] > DOA_POW_THRESHOLD_BF) 
 [36] SUBSUBPROCESS(1) if  && (afl_a_selected_doa_bins_intpl[s4_t_lp_i][s4_t_lp_k] < ((FL)N_DOA - st_g_bsm_loop_data.afl_installed_angle[0] - (FL)DOA_RANGE_FORWARD)) 
 [37] SUBSUBPROCESS(1) if  ) 
@@ -653,21 +528,21 @@ Total functions : 14
 [42] SUBSUBSUBPROCESS(1) equal afl_t_peak_doa_bins_intpl[s4_t_lp_i][s4_t_lp_k] afl_a_selected_doa_bins_intpl[s4_t_lp_i][s4_t_lp_k];
 [43] SUBSUBSUBPROCESS(1) equal afl_t_peak_doa_powers[s4_t_lp_i][s4_t_lp_k] afl_a_selected_doa_powers[s4_t_lp_i][s4_t_lp_k];
 [44] MAINPROCESS(3) equal s4_t_iRet 0;
-[45] MAINPROCESS(3) for <start> for ( 
+[45] MAINPROCESS(3) for  for ( 
 [46] MAINPROCESS(3) for  s4_t_lp_i = 0; 
 [47] MAINPROCESS(3) for  s4_t_lp_i < PRIOR_RANGE; 
 [48] MAINPROCESS(3) for  s4_t_lp_i++) 
 [49] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[50] SUBPROCESS(1) if <start> if ( 
+[50] SUBPROCESS(1) if  if ( 
 [51] SUBPROCESS(1) if  au1_t_copy[s4_t_lp_i][0] == CU1_DF_OK 
 [52] SUBPROCESS(1) if  ) 
 [53] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[54] SUBSUBPROCESS(1) for <start> for ( 
+[54] SUBSUBPROCESS(1) for  for ( 
 [55] SUBSUBPROCESS(1) for  s4_t_lp_k = 0; 
 [56] SUBSUBPROCESS(1) for  s4_t_lp_k < 2; 
 [57] SUBSUBPROCESS(1) for  s4_t_lp_k++) 
 [58] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[59] SUBSUBSUBPROCESS(1) if<start> if( 
+[59] SUBSUBSUBPROCESS(1) if if( 
 [60] SUBSUBSUBPROCESS(1) if afl_t_peak_bins_intpl[s4_t_lp_i][s4_t_lp_k] != 0.0F 
 [61] SUBSUBSUBPROCESS(1) if ) 
 [62] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
@@ -701,7 +576,7 @@ Total functions : 14
 [2] MAINPROCESS(1) proc S4 s4_t_doa[1]; 
 [3] MAINPROCESS(1) proc FL fl_t_peak_power[1]; 
 [4] MAINPROCESS(1) proc U1 u1_t_lp_n_doa; 
-[5] MAINPROCESS(1) for <start> for ( 
+[5] MAINPROCESS(1) for  for ( 
 [6] MAINPROCESS(1) for  u1_t_lp_n_doa = (U1)0; 
 [7] MAINPROCESS(1) for  u1_t_lp_n_doa < (U1)N_DOA; 
 [8] MAINPROCESS(1) for  u1_t_lp_n_doa++) 
@@ -710,29 +585,23 @@ Total functions : 14
 [11] MAINPROCESS(2) equal s4_t_doa[0] (S4)0;
 [12] MAINPROCESS(2) equal fl_t_peak_power[0] (FL)0.0F;
 [13] MAINPROCESS(2) func<start> fn_calc_spec_bf_4ch_fm( 
-[14] MAINPROCESS(2) func (const FL *)(afl_a_Ryy[s4_a_focus_bin]), 
-[15] MAINPROCESS(2) func afl_t_doa_spec, 
-[16] MAINPROCESS(2) func s4_a_flg_updn, 
-[17] MAINPROCESS(2) func s4_a_focus_bin 
+[14] MAINPROCESS(2) func s4_a_focus_bin 
+[15] MAINPROCESS(2) func<end> ); 
+[16] MAINPROCESS(2) func<start> s4_search_peak_bf( 
+[17] MAINPROCESS(2) func 1 
 [18] MAINPROCESS(2) func<end> ); 
-[19] MAINPROCESS(2) func<start> s4_search_peak_bf( 
-[20] MAINPROCESS(2) func (const FL *)afl_t_doa_spec, 
-[21] MAINPROCESS(2) func s4_t_doa, 
-[22] MAINPROCESS(2) func fl_t_peak_power, 
-[23] MAINPROCESS(2) func 1 
-[24] MAINPROCESS(2) func<end> ); 
-[25] MAINPROCESS(2) if <start> if ( 
-[26] MAINPROCESS(2) if  (!( s4_abs(s4_t_doa[0] - (N_DOA-AXIS_DEFAULT)) < PRIOR_WALL_DOA_DIFF_TH ) 
-[27] MAINPROCESS(2) if  ) 
-[28] MAINPROCESS(2) if  &&  (s4_abs( s4_t_doa[0] - s4_a_bin_music_pred ) < DOA_DIFF_FM_SINGLEPEAK)) 
-[29] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[30] SUBPROCESS(1) equal *ps4_a_doa_peak_num 1;
-[31] SUBPROCESS(1) equal afl_a_peak_bins_intpl[0][0] fl_a_bin_interpolate_pred;
-[32] SUBPROCESS(1) equal afl_a_peak_powers[0][0] afl_a_power[s4_a_focus_bin];
-[33] SUBPROCESS(1) equal afl_a_peak_doa_bins_intpl[0][0] fl_a_doa_interpolate_pred;
-[34] SUBPROCESS(1) equal afl_a_peak_doa_powers[0][0] fl_t_peak_power[0];
-[35] MAINPROCESS(3) proc return; 
------------------ Total Codes : 35 lines
+[19] MAINPROCESS(2) if  if ( 
+[20] MAINPROCESS(2) if  (!( s4_abs(s4_t_doa[0] - (N_DOA-AXIS_DEFAULT)) < PRIOR_WALL_DOA_DIFF_TH ) 
+[21] MAINPROCESS(2) if  ) 
+[22] MAINPROCESS(2) if  &&  (s4_abs( s4_t_doa[0] - s4_a_bin_music_pred ) < DOA_DIFF_FM_SINGLEPEAK)) 
+[23] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[24] SUBPROCESS(1) equal *ps4_a_doa_peak_num 1;
+[25] SUBPROCESS(1) equal afl_a_peak_bins_intpl[0][0] fl_a_bin_interpolate_pred;
+[26] SUBPROCESS(1) equal afl_a_peak_powers[0][0] afl_a_power[s4_a_focus_bin];
+[27] SUBPROCESS(1) equal afl_a_peak_doa_bins_intpl[0][0] fl_a_doa_interpolate_pred;
+[28] SUBPROCESS(1) equal afl_a_peak_doa_powers[0][0] fl_t_peak_power[0];
+[29] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 29 lines
 --------------------------
 [Function Name] : u1_bsm_prior_make_pair 
 -Return type : U1 
@@ -773,30 +642,30 @@ Total functions : 14
 [17] MAINPROCESS(1) equal s4_t_index_up2 -1;
 [18] MAINPROCESS(1) equal s4_t_index_dn2 -1;
 [19] MAINPROCESS(1) equal s4_t_doa_diff_predict (S4)DOA_DIFF_PREDICT;
-[20] MAINPROCESS(1) if <start> if ( 
+[20] MAINPROCESS(1) if  if ( 
 [21] MAINPROCESS(1) if  fl_g_v_self_bsm_for_base < (FL)CANOUT_VSELF_SLOW 
 [22] MAINPROCESS(1) if  ) 
 [23] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [24] SUBPROCESS(1) equal s4_t_doa_diff_predict (S4)DOA_DIFF_PREDICT - (S4)2;
-[25] MAINPROCESS(2) if <start> if ( 
+[25] MAINPROCESS(2) if  if ( 
 [26] MAINPROCESS(2) if  st_g_bsm_loop_data.s4_flg_alarm == (S4)1 
 [27] MAINPROCESS(2) if  ) 
 [28] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [29] SUBPROCESS(1) equal s4_t_doa_diff_predict (S4)DOA_DIFF_PREDICT + (S4)2;
 [30] MAINPROCESS(3) equal fl_t_buf_comp 0.0F;
-[31] MAINPROCESS(3) for <start> for ( 
+[31] MAINPROCESS(3) for  for ( 
 [32] MAINPROCESS(3) for  s4_t_lp_i = 0; 
 [33] MAINPROCESS(3) for  s4_t_lp_i < s4_a_peak_num_prior_up; 
 [34] MAINPROCESS(3) for  s4_t_lp_i++) 
 [35] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[36] SUBPROCESS(1) for <start> for ( 
+[36] SUBPROCESS(1) for  for ( 
 [37] SUBPROCESS(1) for  s4_t_lp_j = 0; 
 [38] SUBPROCESS(1) for  s4_t_lp_j < 2; 
 [39] SUBPROCESS(1) for  s4_t_lp_j++) 
 [40] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [41] SUBSUBPROCESS(1) func<start> u1_t_jdg_a2_flg = u1_bsm_prior_make_pair_a2(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i][s4_t_lp_j], fl_a_focus_doa_bin_intpl_up, (FL)s4_t_doa_diff_predict 
 [42] SUBSUBPROCESS(1) func<end> ); 
-[43] SUBSUBPROCESS(1) if <start> if ( 
+[43] SUBSUBPROCESS(1) if  if ( 
 [44] SUBSUBPROCESS(1) if  (afl_a_peak_doa_bins_intpl_up[s4_t_lp_i][s4_t_lp_j] != 0.0F) 
 [45] SUBSUBPROCESS(1) if  && (u1_t_jdg_a2_flg == CU1_TRUE) 
 [46] SUBSUBPROCESS(1) if  && (afl_a_peak_doa_powers_up[s4_t_lp_i][s4_t_lp_j] > fl_t_buf_comp) 
@@ -805,40 +674,40 @@ Total functions : 14
 [49] SUBSUBSUBPROCESS(1) equal fl_t_buf_comp afl_a_peak_doa_powers_up[s4_t_lp_i][s4_t_lp_j];
 [50] SUBSUBSUBPROCESS(1) equal s4_t_index_up1 s4_t_lp_i;
 [51] SUBSUBSUBPROCESS(1) equal s4_t_index_up2 s4_t_lp_j;
-[52] MAINPROCESS(4) if <start> if ( 
+[52] MAINPROCESS(4) if  if ( 
 [53] MAINPROCESS(4) if  (s4_t_index_up1 >= (S4)0 
 [54] MAINPROCESS(4) if  ) 
 [55] MAINPROCESS(4) if  &&  (s4_t_index_up2 >= (S4)0)) 
 [56] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[57] SUBPROCESS(1) if <start> if ( 
+[57] SUBPROCESS(1) if  if ( 
 [58] SUBPROCESS(1) if  (afl_a_peak_powers_up[s4_t_index_up1][s4_t_index_up2] < (FL)50.0F 
 [59] SUBPROCESS(1) if  ) 
 [60] SUBPROCESS(1) if  &&  (!(st_g_bsm_loop_data.s4_flg_alarm == (U1)1))) 
 [61] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [62] SUBSUBPROCESS(1) equal s4_t_index_up1 (S4)-1;
 [63] SUBSUBPROCESS(1) equal s4_t_index_up2 (S4)-1;
-[64] MAINPROCESS(5) else<start> else 
+[64] MAINPROCESS(5) else else 
 [65] MAINPROCESS(5) subproc SUBPROCESS(1) 
-[66] SUBPROCESS(1) if <start> if ( 
+[66] SUBPROCESS(1) if  if ( 
 [67] SUBPROCESS(1) if  !(st_g_bsm_loop_data.s4_flg_alarm == (U1)1) 
 [68] SUBPROCESS(1) if  ) 
 [69] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [70] SUBSUBPROCESS(1) equal s4_t_index_up1 (S4)-1;
 [71] SUBSUBPROCESS(1) equal s4_t_index_up2 (S4)-1;
 [72] MAINPROCESS(6) equal fl_t_buf_comp 0.0F;
-[73] MAINPROCESS(6) for <start> for ( 
+[73] MAINPROCESS(6) for  for ( 
 [74] MAINPROCESS(6) for  s4_t_lp_i = 0; 
 [75] MAINPROCESS(6) for  s4_t_lp_i < s4_a_peak_num_prior_dn; 
 [76] MAINPROCESS(6) for  s4_t_lp_i++) 
 [77] MAINPROCESS(6) subproc SUBPROCESS(1) 
-[78] SUBPROCESS(1) for <start> for ( 
+[78] SUBPROCESS(1) for  for ( 
 [79] SUBPROCESS(1) for  s4_t_lp_j = 0; 
 [80] SUBPROCESS(1) for  s4_t_lp_j < 2; 
 [81] SUBPROCESS(1) for  s4_t_lp_j++) 
 [82] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [83] SUBSUBPROCESS(1) func<start> u1_t_jdg_a2_flg = u1_bsm_prior_make_pair_a2(afl_a_peak_doa_bins_intpl_dn[s4_t_lp_i][s4_t_lp_j], fl_a_focus_doa_bin_intpl_dn, (FL)s4_t_doa_diff_predict 
 [84] SUBSUBPROCESS(1) func<end> ); 
-[85] SUBSUBPROCESS(1) if <start> if ( 
+[85] SUBSUBPROCESS(1) if  if ( 
 [86] SUBSUBPROCESS(1) if  (afl_a_peak_doa_bins_intpl_dn[s4_t_lp_i][s4_t_lp_j] != 0.0F) 
 [87] SUBSUBPROCESS(1) if  && (fl_t_buf_comp < afl_a_peak_doa_powers_dn[s4_t_lp_i][s4_t_lp_j]) 
 [88] SUBSUBPROCESS(1) if  && (u1_t_jdg_a2_flg == CU1_TRUE) 
@@ -847,21 +716,21 @@ Total functions : 14
 [91] SUBSUBSUBPROCESS(1) equal fl_t_buf_comp afl_a_peak_doa_powers_dn[s4_t_lp_i][s4_t_lp_j];
 [92] SUBSUBSUBPROCESS(1) equal s4_t_index_dn1 s4_t_lp_i;
 [93] SUBSUBSUBPROCESS(1) equal s4_t_index_dn2 s4_t_lp_j;
-[94] MAINPROCESS(7) if <start> if ( 
+[94] MAINPROCESS(7) if  if ( 
 [95] MAINPROCESS(7) if  (s4_t_index_dn1 >= (S4)0 
 [96] MAINPROCESS(7) if  ) 
 [97] MAINPROCESS(7) if  &&  (s4_t_index_dn2 >= (S4)0)) 
 [98] MAINPROCESS(7) subproc SUBPROCESS(1) 
-[99] SUBPROCESS(1) if <start> if ( 
+[99] SUBPROCESS(1) if  if ( 
 [100] SUBPROCESS(1) if  (afl_a_peak_powers_dn[s4_t_index_dn1][s4_t_index_dn2] < (FL)50.0F 
 [101] SUBPROCESS(1) if  ) 
 [102] SUBPROCESS(1) if  &&  (!(st_g_bsm_loop_data.s4_flg_alarm == (U1)1))) 
 [103] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [104] SUBSUBPROCESS(1) equal s4_t_index_dn1 (S4)-1;
 [105] SUBSUBPROCESS(1) equal s4_t_index_dn2 (S4)-1;
-[106] MAINPROCESS(8) else<start> else 
+[106] MAINPROCESS(8) else else 
 [107] MAINPROCESS(8) subproc SUBPROCESS(1) 
-[108] SUBPROCESS(1) if <start> if ( 
+[108] SUBPROCESS(1) if  if ( 
 [109] SUBPROCESS(1) if  !(st_g_bsm_loop_data.s4_flg_alarm == (U1)1) 
 [110] SUBPROCESS(1) if  ) 
 [111] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
@@ -870,7 +739,7 @@ Total functions : 14
 [114] MAINPROCESS(9) equal u1_make_pair_result CU1_FALSE;
 [115] MAINPROCESS(9) func<start> s4_t_shift = (S4)((fl_g_v_self_bsm_for_base / 3.60F / VCOF) + 0.50F 
 [116] MAINPROCESS(9) func<end> ); 
-[117] MAINPROCESS(9) if <start> if ( 
+[117] MAINPROCESS(9) if  if ( 
 [118] MAINPROCESS(9) if  (s4_t_index_up1 >= 0 
 [119] MAINPROCESS(9) if  ) 
 [120] MAINPROCESS(9) if  &&  (s4_t_index_up2 >= 0) 
@@ -883,46 +752,36 @@ Total functions : 14
 [127] SUBPROCESS(1) func<end> ); 
 [128] SUBPROCESS(1) func<start> u1_t_jdg_a8_flg = u1_bsm_prior_make_pair_a8(afl_a_peak_bins_intpl_up[s4_t_index_up1][s4_t_index_up2], afl_a_peak_bins_intpl_dn[s4_t_index_dn1][s4_t_index_dn2] 
 [129] SUBPROCESS(1) func<end> ); 
-[130] SUBPROCESS(1) if <start> if ( 
+[130] SUBPROCESS(1) if  if ( 
 [131] SUBPROCESS(1) if  ((afl_a_peak_bins_intpl_up[s4_t_index_up1][s4_t_index_up2] - afl_a_peak_bins_intpl_dn[s4_t_index_dn1][s4_t_index_dn2])  < (FL)(s4_t_shift - 3) 
 [132] SUBPROCESS(1) if  ) 
 [133] SUBPROCESS(1) if  &&  (u1_t_jdg_a6_flg == CU1_TRUE) 
 [134] SUBPROCESS(1) if  &&  (u1_t_jdg_a7_flg == CU1_TRUE)) 
 [135] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [136] SUBSUBPROCESS(1) equal S4 s4_t_doa_diff_up_down (S4)CU1_DOA_DIFF_UP_DOWN_PRIOR;
-[137] SUBSUBPROCESS(1) if <start> if ( 
+[137] SUBSUBPROCESS(1) if  if ( 
 [138] SUBSUBPROCESS(1) if  (fl_g_v_self_bsm_for_base < CANOUT_VSELF_SLOW 
 [139] SUBSUBPROCESS(1) if  ) 
 [140] SUBSUBPROCESS(1) if  &&  (u1_t_jdg_a8_flg == CU1_TRUE)) 
 [141] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
 [142] SUBSUBSUBPROCESS(1) equal s4_t_doa_diff_up_down DOA_DIFF_UP_DOWN_SLOW;
-[143] SUBSUBPROCESS(2) if <start> if ( 
+[143] SUBSUBPROCESS(2) if  if ( 
 [144] SUBSUBPROCESS(2) if  st_g_bsm_loop_data.u1_truck_flg != (U1)0 
 [145] SUBSUBPROCESS(2) if  ) 
 [146] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
 [147] SUBSUBSUBPROCESS(1) equal s4_t_doa_diff_up_down + (S4)2;
-[148] SUBSUBPROCESS(3) if <start> if ( 
+[148] SUBSUBPROCESS(3) if  if ( 
 [149] SUBSUBPROCESS(3) if  (s4_a_normal_prior_num < (S4)PRIOR_BUFFSIZE 
 [150] SUBSUBPROCESS(3) if  ) 
 [151] SUBSUBPROCESS(3) if  &&  (s4_abs((S4)(afl_a_peak_doa_bins_intpl_up[s4_t_index_up1][s4_t_index_up2] - afl_a_peak_doa_bins_intpl_dn[s4_t_index_dn1][s4_t_index_dn2])) < s4_t_doa_diff_up_down)) 
 [152] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
 [153] SUBSUBSUBPROCESS(1) func<start> fn_set_normal_data( 
-[154] SUBSUBSUBPROCESS(1) func pst_a_normal_prior, 
-[155] SUBSUBSUBPROCESS(1) func afl_a_peak_bins_intpl_up[s4_t_index_up1][s4_t_index_up2], 
-[156] SUBSUBSUBPROCESS(1) func afl_a_peak_bins_intpl_dn[s4_t_index_dn1][s4_t_index_dn2], 
-[157] SUBSUBSUBPROCESS(1) func afl_a_peak_doa_bins_intpl_up[s4_t_index_up1][s4_t_index_up2], 
-[158] SUBSUBSUBPROCESS(1) func afl_a_peak_doa_bins_intpl_dn[s4_t_index_dn1][s4_t_index_dn2], 
-[159] SUBSUBSUBPROCESS(1) func afl_a_peak_powers_up[s4_t_index_up1][s4_t_index_up2], 
-[160] SUBSUBSUBPROCESS(1) func afl_a_peak_powers_dn[s4_t_index_dn1][s4_t_index_dn2], 
-[161] SUBSUBSUBPROCESS(1) func afl_a_peak_doa_powers_up[s4_t_index_up1][s4_t_index_up2], 
-[162] SUBSUBSUBPROCESS(1) func afl_a_peak_doa_powers_dn[s4_t_index_dn1][s4_t_index_dn2], 
-[163] SUBSUBSUBPROCESS(1) func 0, 
-[164] SUBSUBSUBPROCESS(1) func 0 
-[165] SUBSUBSUBPROCESS(1) func<end> ); 
-[166] SUBSUBSUBPROCESS(1) equal u1_make_pair_result CU1_TRUE;
-[167] MAINPROCESS(10) func<start> return (u1_make_pair_result 
-[168] MAINPROCESS(10) func<end> ); 
------------------ Total Codes : 168 lines
+[154] SUBSUBSUBPROCESS(1) func 0 
+[155] SUBSUBSUBPROCESS(1) func<end> ); 
+[156] SUBSUBSUBPROCESS(1) equal u1_make_pair_result CU1_TRUE;
+[157] MAINPROCESS(10) func<start> return (u1_make_pair_result 
+[158] MAINPROCESS(10) func<end> ); 
+----------------- Total Codes : 158 lines
 --------------------------
 [Function Name] : u1_bsm_prior_make_pair_a2 
 -Return type : static U1 
@@ -936,12 +795,12 @@ Total functions : 14
 [3] MAINPROCESS(1) equal u1_t_jdg_a2_flag CU1_FALSE;
 [4] MAINPROCESS(1) func<start> fl_t_diff_doa_bin_intpl_abs = fl_abs(fl_a_peak_doa_bins_intpl - fl_a_focus_doa_bin_intpl 
 [5] MAINPROCESS(1) func<end> ); 
-[6] MAINPROCESS(1) if <start> if ( 
+[6] MAINPROCESS(1) if  if ( 
 [7] MAINPROCESS(1) if  fl_t_diff_doa_bin_intpl_abs < fl_a_doa_diff_predict 
 [8] MAINPROCESS(1) if  ) 
 [9] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [10] SUBPROCESS(1) equal u1_t_jdg_a2_flag CU1_TRUE;
-[11] MAINPROCESS(2) else<start> else 
+[11] MAINPROCESS(2) else else 
 [12] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [13] SUBPROCESS(1) equal u1_t_jdg_a2_flag CU1_FALSE;
 [14] MAINPROCESS(3) proc return u1_t_jdg_a2_flag; 
@@ -958,12 +817,12 @@ Total functions : 14
 [3] MAINPROCESS(1) equal u1_t_jdg_a6_flag CU1_FALSE;
 [4] MAINPROCESS(1) func<start> fl_t_diff_doa_power_up_abs = fl_abs(fl_a_peak_doa_powers_up - fl_a_power_up_music 
 [5] MAINPROCESS(1) func<end> ); 
-[6] MAINPROCESS(1) if <start> if ( 
+[6] MAINPROCESS(1) if  if ( 
 [7] MAINPROCESS(1) if  fl_t_diff_doa_power_up_abs < PRIOR_PEAK_POW_DIFF_TH 
 [8] MAINPROCESS(1) if  ) 
 [9] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [10] SUBPROCESS(1) equal u1_t_jdg_a6_flag CU1_TRUE;
-[11] MAINPROCESS(2) else<start> else 
+[11] MAINPROCESS(2) else else 
 [12] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [13] SUBPROCESS(1) equal u1_t_jdg_a6_flag CU1_FALSE;
 [14] MAINPROCESS(3) proc return u1_t_jdg_a6_flag; 
@@ -980,12 +839,12 @@ Total functions : 14
 [3] MAINPROCESS(1) equal u1_t_jdg_a7_flag CU1_FALSE;
 [4] MAINPROCESS(1) func<start> fl_t_diff_doa_power_dn_abs = fl_abs(fl_a_peak_doa_powers_dn - fl_a_power_dn_music 
 [5] MAINPROCESS(1) func<end> ); 
-[6] MAINPROCESS(1) if <start> if ( 
+[6] MAINPROCESS(1) if  if ( 
 [7] MAINPROCESS(1) if  fl_t_diff_doa_power_dn_abs < PRIOR_PEAK_POW_DIFF_TH 
 [8] MAINPROCESS(1) if  ) 
 [9] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [10] SUBPROCESS(1) equal u1_t_jdg_a7_flag CU1_TRUE;
-[11] MAINPROCESS(2) else<start> else 
+[11] MAINPROCESS(2) else else 
 [12] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [13] SUBPROCESS(1) equal u1_t_jdg_a7_flag CU1_FALSE;
 [14] MAINPROCESS(3) proc return u1_t_jdg_a7_flag; 
@@ -1002,12 +861,12 @@ Total functions : 14
 [3] MAINPROCESS(1) equal u1_t_jdg_a8_flag CU1_FALSE;
 [4] MAINPROCESS(1) func<start> fl_t_diff_peak_bin_intpl_abs = fl_abs(fl_a_peak_bins_intpl_up - fl_a_peak_bins_intpl_dn 
 [5] MAINPROCESS(1) func<end> ); 
-[6] MAINPROCESS(1) if <start> if ( 
+[6] MAINPROCESS(1) if  if ( 
 [7] MAINPROCESS(1) if  fl_t_diff_peak_bin_intpl_abs > (FL)1.0F 
 [8] MAINPROCESS(1) if  ) 
 [9] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [10] SUBPROCESS(1) equal u1_t_jdg_a8_flag CU1_TRUE;
-[11] MAINPROCESS(2) else<start> else 
+[11] MAINPROCESS(2) else else 
 [12] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [13] SUBPROCESS(1) equal u1_t_jdg_a8_flag CU1_FALSE;
 [14] MAINPROCESS(3) proc return u1_t_jdg_a8_flag; 
@@ -1033,17 +892,17 @@ Total functions : 14
 [10] MAINPROCESS(1) equal fl_t_ry_diff CFL_UNKNOWN_VALUE;
 [11] MAINPROCESS(1) equal fl_t_vx_diff CFL_UNKNOWN_VALUE;
 [12] MAINPROCESS(1) equal fl_t_vy_diff CFL_UNKNOWN_VALUE;
-[13] MAINPROCESS(1) for <start> for ( 
+[13] MAINPROCESS(1) for  for ( 
 [14] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [15] MAINPROCESS(1) for  s4_t_lp_i < s4_a_pair_num_prior; 
 [16] MAINPROCESS(1) for  s4_t_lp_i++) 
 [17] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[18] SUBPROCESS(1) for <start> for ( 
+[18] SUBPROCESS(1) for  for ( 
 [19] SUBPROCESS(1) for  s4_t_lp_j = 0; 
 [20] SUBPROCESS(1) for  s4_t_lp_j < s4_a_pair_num_prior; 
 [21] SUBPROCESS(1) for  s4_t_lp_j++) 
 [22] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[23] SUBSUBPROCESS(1) if <start> if ( 
+[23] SUBSUBPROCESS(1) if  if ( 
 [24] SUBSUBPROCESS(1) if  (s4_t_lp_i != s4_t_lp_j) 
 [25] SUBSUBPROCESS(1) if  && (ast_a_normal[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE) 
 [26] SUBSUBPROCESS(1) if  && (ast_a_normal[s4_t_lp_j].fl_Robs != CFL_UNKNOWN_VALUE) 
@@ -1059,12 +918,12 @@ Total functions : 14
 [36] SUBSUBSUBPROCESS(1) func<end> ); 
 [37] SUBSUBSUBPROCESS(1) func<start> fl_t_vy_diff = fl_abs(ast_a_normal[s4_t_lp_i].fl_Vyobs - ast_a_ast_normal_copy[as4_a_prev_index[s4_t_lp_i]].fl_Vypred 
 [38] SUBSUBSUBPROCESS(1) func<end> ); 
-[39] SUBSUBSUBPROCESS(1) if <start> if ( 
+[39] SUBSUBSUBPROCESS(1) if  if ( 
 [40] SUBSUBSUBPROCESS(1) if  fl_t_buf_comp > (fl_t_rx_diff + fl_t_ry_diff + fl_t_vx_diff + fl_t_vy_diff) 
 [41] SUBSUBSUBPROCESS(1) if  ) 
 [42] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
 [43] SUBSUBSUBSUBPROCESS(1) equal fl_t_buf_comp fl_t_rx_diff + fl_t_ry_diff + fl_t_vx_diff + fl_t_vy_diff;
-[44] SUBSUBSUBPROCESS(2) else<start> else 
+[44] SUBSUBSUBPROCESS(2) else else 
 [45] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
 [46] SUBSUBSUBSUBPROCESS(1) func<start> fn_init(&ast_a_normal[s4_t_lp_i], 1 
 [47] SUBSUBSUBSUBPROCESS(1) func<end> ); 
@@ -1082,12 +941,12 @@ Total functions : 14
 [1] MAINPROCESS(1) proc S4 s4_t_lp_i; 
 [2] MAINPROCESS(1) proc S4 s4_t_pair_num_prior; 
 [3] MAINPROCESS(1) equal s4_t_pair_num_prior 0;
-[4] MAINPROCESS(1) for <start> for ( 
+[4] MAINPROCESS(1) for  for ( 
 [5] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [6] MAINPROCESS(1) for  s4_t_lp_i < s4_a_buf_normal_num; 
 [7] MAINPROCESS(1) for  s4_t_lp_i++) 
 [8] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[9] SUBPROCESS(1) if <start> if ( 
+[9] SUBPROCESS(1) if  if ( 
 [10] SUBPROCESS(1) if  ast_a_buf_normal[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE 
 [11] SUBPROCESS(1) if  ) 
 [12] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 

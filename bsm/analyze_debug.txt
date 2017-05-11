@@ -16,62 +16,48 @@ Total functions : 1
 [7] MAINPROCESS(1) ??? const FL CFL_D_MAP_EXOBJ_POWER[CU2_MAP_EXOBJ_POWER_INDEX][2] = 
 [8] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [9] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[10] SUBSUBPROCESS(1) ??? ( 
-[11] SUBSUBPROCESS(1) ??? FL)1.0,		(FL)72.0 
-[12] SUBPROCESS(2) ??? , 
-[13] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[14] SUBSUBPROCESS(1) ??? ( 
-[15] SUBSUBPROCESS(1) ??? FL)2.0,		(FL)65.0 
-[16] SUBPROCESS(3) ??? , 
-[17] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[18] SUBSUBPROCESS(1) ??? ( 
-[19] SUBSUBPROCESS(1) ??? FL)2.5,		(FL)62.5 
-[20] SUBPROCESS(4) ??? , 
-[21] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[22] SUBSUBPROCESS(1) ??? ( 
-[23] SUBSUBPROCESS(1) ??? FL)3.0,		(FL)57.7 
-[24] SUBPROCESS(5) ??? , 
-[25] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
-[26] SUBSUBPROCESS(1) ??? ( 
-[27] SUBSUBPROCESS(1) ??? FL)4.0,		(FL)52.7 
-[28] SUBPROCESS(6) ??? , 
-[29] SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
-[30] SUBSUBPROCESS(1) ??? ( 
-[31] SUBSUBPROCESS(1) ??? FL)5.0,		(FL)48.9 
-[32] SUBPROCESS(7) ??? , 
-[33] SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
-[34] SUBSUBPROCESS(1) ??? ( 
-[35] SUBSUBPROCESS(1) ??? FL)6.0,		(FL)45.7 
-[36] SUBPROCESS(8) ??? , 
-[37] SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
-[38] SUBSUBPROCESS(1) ??? (FL)9.0,		(FL)38.6 
-[39] MAINPROCESS(2) ??? ; 
-[40] MAINPROCESS(2) ??? for ( 
-[41] MAINPROCESS(2) ??? s4_t_lp_normal = (S4)0; 
-[42] MAINPROCESS(2) ??? s4_t_lp_normal < s4_a_pair_num_current; 
-[43] MAINPROCESS(2) ??? s4_t_lp_normal++) 
-[44] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[45] SUBPROCESS(1) ??? if ( 
-[46] SUBPROCESS(1) ??? ast_a_normal_current[s4_t_lp_normal].fl_Robs != CFL_UNKNOWN_VALUE 
-[47] SUBPROCESS(1) ??? ) 
-[48] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[49] SUBSUBPROCESS(1) equal fl_t_obj_power (ast_a_normal_current[s4_t_lp_normal].fl_power_up_music + ast_a_normal_current[s4_t_lp_normal].fl_power_dn_music) * (FL)0.5;
-[50] SUBSUBPROCESS(1) func<start> fl_t_abs_robs = fl_abs(ast_a_normal_current[s4_t_lp_normal].fl_Robs 
-[51] SUBSUBPROCESS(1) func<end> ); 
-[52] SUBSUBPROCESS(1) func<start> fl_t_abs_vobs = fl_abs(ast_a_normal_current[s4_t_lp_normal].fl_Vobs 
-[53] SUBSUBPROCESS(1) func<end> ); 
-[54] SUBSUBPROCESS(1) equal fl_t_thd_exobj_range (FL)9.0;
-[55] SUBSUBPROCESS(1) func<start> fl_t_thd_exobj_power = fl_smap_new(CFL_D_MAP_EXOBJ_POWER, CU2_MAP_EXOBJ_POWER_INDEX, fl_t_abs_robs 
-[56] SUBSUBPROCESS(1) func<end> ); 
-[57] SUBSUBPROCESS(1) ??? if ( 
-[58] SUBSUBPROCESS(1) ??? (ast_a_normal_current[s4_t_lp_normal].s4_flg_dc != (S4)OBJECT_TYPE_2F 
-[59] SUBSUBPROCESS(1) ??? ) 
-[60] SUBSUBPROCESS(1) ??? &&	(fl_t_abs_robs < fl_t_thd_exobj_range) 
-[61] SUBSUBPROCESS(1) ??? &&	(ast_a_normal_current[s4_t_lp_normal].fl_Ryobs < (FL)-EKF_RY_SIDE) 
-[62] SUBSUBPROCESS(1) ??? &&	(fl_t_abs_vobs < ((FL)5.0 * (FL)VCOF)) 
-[63] SUBSUBPROCESS(1) ??? &&	(fl_t_obj_power < fl_t_thd_exobj_power)) 
-[64] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[65] SUBSUBSUBPROCESS(1) func<start> fn_init(&ast_a_normal_current[s4_t_lp_normal], (S4)1 
-[66] SUBSUBSUBPROCESS(1) func<end> ); 
-[67] MAINPROCESS(3) proc return; 
------------------ Total Codes : 67 lines
+[10] SUBSUBPROCESS(1) ??? (FL)1.0,		(FL)72.0 
+[11] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[12] SUBSUBPROCESS(1) ??? (FL)2.0,		(FL)65.0 
+[13] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[14] SUBSUBPROCESS(1) ??? (FL)2.5,		(FL)62.5 
+[15] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[16] SUBSUBPROCESS(1) ??? (FL)3.0,		(FL)57.7 
+[17] SUBPROCESS(5) subproc SUBSUBPROCESS(1) 
+[18] SUBSUBPROCESS(1) ??? (FL)4.0,		(FL)52.7 
+[19] SUBPROCESS(6) subproc SUBSUBPROCESS(1) 
+[20] SUBSUBPROCESS(1) ??? (FL)5.0,		(FL)48.9 
+[21] SUBPROCESS(7) subproc SUBSUBPROCESS(1) 
+[22] SUBSUBPROCESS(1) ??? (FL)6.0,		(FL)45.7 
+[23] SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
+[24] SUBSUBPROCESS(1) ??? (FL)9.0,		(FL)38.6 
+[25] MAINPROCESS(2) ??? ; 
+[26] MAINPROCESS(2) for  for ( 
+[27] MAINPROCESS(2) for  s4_t_lp_normal = (S4)0; 
+[28] MAINPROCESS(2) for  s4_t_lp_normal < s4_a_pair_num_current; 
+[29] MAINPROCESS(2) for  s4_t_lp_normal++) 
+[30] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[31] SUBPROCESS(1) if  if ( 
+[32] SUBPROCESS(1) if  ast_a_normal_current[s4_t_lp_normal].fl_Robs != CFL_UNKNOWN_VALUE 
+[33] SUBPROCESS(1) if  ) 
+[34] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[35] SUBSUBPROCESS(1) equal fl_t_obj_power (ast_a_normal_current[s4_t_lp_normal].fl_power_up_music + ast_a_normal_current[s4_t_lp_normal].fl_power_dn_music) * (FL)0.5;
+[36] SUBSUBPROCESS(1) func<start> fl_t_abs_robs = fl_abs(ast_a_normal_current[s4_t_lp_normal].fl_Robs 
+[37] SUBSUBPROCESS(1) func<end> ); 
+[38] SUBSUBPROCESS(1) func<start> fl_t_abs_vobs = fl_abs(ast_a_normal_current[s4_t_lp_normal].fl_Vobs 
+[39] SUBSUBPROCESS(1) func<end> ); 
+[40] SUBSUBPROCESS(1) equal fl_t_thd_exobj_range (FL)9.0;
+[41] SUBSUBPROCESS(1) func<start> fl_t_thd_exobj_power = fl_smap_new(CFL_D_MAP_EXOBJ_POWER, CU2_MAP_EXOBJ_POWER_INDEX, fl_t_abs_robs 
+[42] SUBSUBPROCESS(1) func<end> ); 
+[43] SUBSUBPROCESS(1) if  if ( 
+[44] SUBSUBPROCESS(1) if  (ast_a_normal_current[s4_t_lp_normal].s4_flg_dc != (S4)OBJECT_TYPE_2F 
+[45] SUBSUBPROCESS(1) if  ) 
+[46] SUBSUBPROCESS(1) if  &&	(fl_t_abs_robs < fl_t_thd_exobj_range) 
+[47] SUBSUBPROCESS(1) if  &&	(ast_a_normal_current[s4_t_lp_normal].fl_Ryobs < (FL)-EKF_RY_SIDE) 
+[48] SUBSUBPROCESS(1) if  &&	(fl_t_abs_vobs < ((FL)5.0 * (FL)VCOF)) 
+[49] SUBSUBPROCESS(1) if  &&	(fl_t_obj_power < fl_t_thd_exobj_power)) 
+[50] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[51] SUBSUBSUBPROCESS(1) func<start> fn_init(&ast_a_normal_current[s4_t_lp_normal], (S4)1 
+[52] SUBSUBSUBPROCESS(1) func<end> ); 
+[53] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 53 lines

@@ -1,0 +1,146 @@
+Total lines: 99 
+Total functions : 2 
+--------------------------
+[Function Name] : fn_lca_main 
+-Return type : VD 
+-Argument : 0 
+----- Codes -----
+[1] MAINPROCESS(1) func<start> fn_lca_core_main( 
+[2] MAINPROCESS(1) func<end> ); 
+[3] MAINPROCESS(1) proc return; 
+----------------- Total Codes : 3 lines
+--------------------------
+[Function Name] : fn_lca_cmn_initialize_loop_data 
+-Return type : VD 
+-Argument : 0 
+----- Codes -----
+[1] MAINPROCESS(1) proc S4	s4_t_i; 
+[2] MAINPROCESS(1) proc S4	s4_t_m; 
+[3] MAINPROCESS(1) proc S4	s4_t_k; 
+[4] MAINPROCESS(1) equal st_g_lca_ecu_loop_data.u1_alm_flg CU1_DF_OFF;
+[5] MAINPROCESS(1) equal st_g_lca_ecu_loop_data.u1_hazard_flg CU1_DF_OFF;
+[6] MAINPROCESS(1) for  for ( 
+[7] MAINPROCESS(1) for  s4_t_i = (S4)0; 
+[8] MAINPROCESS(1) for  s4_t_i < (S4)CS1_LCA_MAP_CURVR_BUFF; 
+[9] MAINPROCESS(1) for  s4_t_i++) 
+[10] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[11] SUBPROCESS(1) equal st_g_lca_ecu_loop_data.s4_yaw_curv_r_archives[s4_t_i] CS4_LCA_MAP_CURVR_MAX;
+[12] MAINPROCESS(2) equal st_g_lca_ecu_loop_data.u1_decimation_ctr (U1)0;
+[13] MAINPROCESS(2) equal st_g_lca_ecu_loop_data.fl_sum_speed_during_decimation (FL)0;
+[14] MAINPROCESS(2) for  for ( 
+[15] MAINPROCESS(2) for  s4_t_i = (S4)0; 
+[16] MAINPROCESS(2) for  s4_t_i < (S4)2; 
+[17] MAINPROCESS(2) for  s4_t_i++) 
+[18] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[19] SUBPROCESS(1) for  for ( 
+[20] SUBPROCESS(1) for  s4_t_m = (S4)0; 
+[21] SUBPROCESS(1) for  s4_t_m < (S4)CU1_LCA_CMN_APPROXIMATE_BOX; 
+[22] SUBPROCESS(1) for  s4_t_m++) 
+[23] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[24] SUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_x_out[s4_t_i][s4_t_m] (FL)0;
+[25] SUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_ne_out[s4_t_i][s4_t_m] (FL)0;
+[26] SUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_road_edge_archives_for_fhl[s4_t_i][s4_t_m] (FL)0;
+[27] SUBPROCESS(2) for  for ( 
+[28] SUBPROCESS(2) for  s4_t_m = (S4)0; 
+[29] SUBPROCESS(2) for  s4_t_m < (S4)2; 
+[30] SUBPROCESS(2) for  s4_t_m++) 
+[31] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[32] SUBSUBPROCESS(1) for  for ( 
+[33] SUBSUBPROCESS(1) for  s4_t_k = (S4)0; 
+[34] SUBSUBPROCESS(1) for  s4_t_k < (S4)CU1_LCA_CMN_APPROXIMATE_BOX; 
+[35] SUBSUBPROCESS(1) for  s4_t_k++) 
+[36] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[37] SUBSUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_P_out[s4_t_i][s4_t_m][s4_t_k] (FL)0;
+[38] SUBSUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_road_edge_archives[s4_t_i][s4_t_m][s4_t_k] (FL)0;
+[39] SUBSUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_x997[s4_t_i][s4_t_m][s4_t_k] (FL)0;
+[40] SUBSUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_x955[s4_t_i][s4_t_m][s4_t_k] (FL)0;
+[41] SUBSUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_x683[s4_t_i][s4_t_m][s4_t_k] (FL)0;
+[42] SUBSUBSUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_x380[s4_t_i][s4_t_m][s4_t_k] (FL)0;
+[43] MAINPROCESS(3) for  for ( 
+[44] MAINPROCESS(3) for  s4_t_i = (S4)0; 
+[45] MAINPROCESS(3) for  s4_t_i < (S4)CU1_LCA_CMN_APPROXIMATE_BOX; 
+[46] MAINPROCESS(3) for  s4_t_i++) 
+[47] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[48] SUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_kyori_archives[s4_t_i] (FL)0;
+[49] SUBPROCESS(1) equal st_g_lca_ecu_loop_data.afl_wall_archives[s4_t_i] (FL)0;
+[50] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_nml_pre_num (U1)0;
+[51] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_tgt_pre_num (U1)0;
+[52] MAINPROCESS(4) func<start> fn_lca_cmn_init( 
+[53] MAINPROCESS(4) func CU1_LCA_CMN_NORMAL_BUFFSIZE 
+[54] MAINPROCESS(4) func<end> ); 
+[55] MAINPROCESS(4) func<start> fn_lca_cmn_init( 
+[56] MAINPROCESS(4) func CU1_LCA_CMN_TGT_BUFFSIZE 
+[57] MAINPROCESS(4) func<end> ); 
+[58] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_up_useless_flg CU1_DF_OFF;
+[59] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_dn_useless_flg CU1_DF_OFF;
+[60] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_2f_useless_flg CU1_DF_OFF;
+[61] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.fl_wall_dist CFL_LCA_WALL_WALL_MAX_DIST_X;
+[62] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_cal_wall_flg CU1_DF_ON;
+[63] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_cal_wall_ctr CU1_LCA_CMN_ZERO_VALUE;
+[64] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_past_wall_ext_ctr CU1_LCA_CMN_ZERO_VALUE;
+[65] MAINPROCESS(4) equal st_g_lca_ecu_loop_data.u1_use_prev_wall_dist_ctr CU1_LCA_CMN_ZERO_VALUE;
+[66] MAINPROCESS(4) for  for ( 
+[67] MAINPROCESS(4) for  s4_t_i = (S4)0; 
+[68] MAINPROCESS(4) for  s4_t_i < (S4)CU2_LCA_WALL_PEAK_SEARCH_DFT_BIN_NUM; 
+[69] MAINPROCESS(4) for  s4_t_i++) 
+[70] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[71] SUBPROCESS(1) equal afl_g_lca_ecu_lfm_up_side_dft_pow[s4_t_i] (FL)0;
+[72] SUBPROCESS(1) equal afl_g_lca_ecu_lfm_dn_side_dft_pow[s4_t_i] (FL)0;
+[73] MAINPROCESS(5) equal u1_g_lca_ecu_yaw_rate_id (U1)0;
+[74] MAINPROCESS(5) equal u1_g_lca_ecu_yaw_rate_zero_point_error (U1)0;
+[75] MAINPROCESS(5) equal s2_g_lca_ecu_yaw_rate_1_zero_point (S2)0;
+[76] MAINPROCESS(5) equal s2_g_lca_ecu_yaw_rate_2_zero_point (S2)0;
+[77] MAINPROCESS(5) equal u1_g_lca_ecu_yaw_rate_zero_point_update_info (U1)0;
+[78] MAINPROCESS(5) equal u1_g_lca_ecu_yaw_rate_sensor_1_validation (U1)0;
+[79] MAINPROCESS(5) equal u1_g_lca_ecu_yaw_rate_sensor_2_validation (U1)0;
+[80] MAINPROCESS(5) equal u1_g_lca_ecu_sensor_pow_supply_voltage_validation (U1)0;
+[81] MAINPROCESS(5) equal u2_g_lca_ecu_yaw_rate_sensor_signal (U2)0;
+[82] MAINPROCESS(5) equal u1_g_lca_ecu_yaw_diff_value (U1)0;
+[83] MAINPROCESS(5) equal s2_g_lca_ecu_curv_r (S2)0;
+[84] MAINPROCESS(5) equal fl_g_2f_noise_floor_for_lca (FL)0;
+[85] MAINPROCESS(5) equal fl_g_lca_ecu_2f_ave_standard_pow (FL)0;
+[86] MAINPROCESS(5) equal u1_g_lca_ecu_2f_peak_num (U1)0;
+[87] MAINPROCESS(5) for  for ( 
+[88] MAINPROCESS(5) for  s4_t_i = (S4)0; 
+[89] MAINPROCESS(5) for  s4_t_i < (S4)CU2_PCS_FCW_FFT_DATA; 
+[90] MAINPROCESS(5) for  s4_t_i++) 
+[91] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[92] SUBPROCESS(1) equal afl_g_lca_ecu_2f_thre[s4_t_i] (FL)0;
+[93] SUBPROCESS(1) equal afl_g_lca_ecu_2f_rear_dft_pow[s4_t_i] (FL)0;
+[94] MAINPROCESS(6) for  for ( 
+[95] MAINPROCESS(6) for  s4_t_i = (S4)0; 
+[96] MAINPROCESS(6) for  s4_t_i < (S4)CU1_LCA_CMN_FSK_PEAK_BUFFSIZE; 
+[97] MAINPROCESS(6) for  s4_t_i++) 
+[98] MAINPROCESS(6) subproc SUBPROCESS(1) 
+[99] SUBPROCESS(1) equal au2_g_lca_ecu_2f_peak_bin[s4_t_i] (U2)0;
+[100] SUBPROCESS(1) equal afl_g_lca_ecu_2f_peak_pow[s4_t_i] (FL)0;
+[101] MAINPROCESS(7) for  for ( 
+[102] MAINPROCESS(7) for  s4_t_i = (S4)0; 
+[103] MAINPROCESS(7) for  s4_t_i < (S4)(CU2_PCS_FCW_FFT_DATA / (U2)2 
+[104] MAINPROCESS(7) for  ); 
+[105] MAINPROCESS(7) for  s4_t_i++) 
+[106] MAINPROCESS(7) subproc SUBPROCESS(1) 
+[107] SUBPROCESS(1) for  for ( 
+[108] SUBPROCESS(1) for  s4_t_m = (S4)0; 
+[109] SUBPROCESS(1) for  s4_t_m < (S4)CU2_PCS_FCW_RYY_MATRIX_2F; 
+[110] SUBPROCESS(1) for  s4_t_m++) 
+[111] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[112] SUBSUBPROCESS(1) equal afl_g_lca_ecu_2f_rear_dft_ryy_matrix[s4_t_i][s4_t_m] (FL)0;
+[113] MAINPROCESS(8) equal fl_g_lca_ecu_fm_noise_floor (FL)0;
+[114] MAINPROCESS(8) equal fl_g_lca_ecu_noise_floor_fm (FL)0;
+[115] MAINPROCESS(8) for  for ( 
+[116] MAINPROCESS(8) for  s4_t_i = (S4)0; 
+[117] MAINPROCESS(8) for  s4_t_i < (S4)CU2_PCS_LFM_FFT_DATA; 
+[118] MAINPROCESS(8) for  s4_t_i++) 
+[119] MAINPROCESS(8) subproc SUBPROCESS(1) 
+[120] SUBPROCESS(1) equal afl_g_lca_ecu_up_rear_dft_pow[s4_t_i] (FL)0;
+[121] MAINPROCESS(9) for  for ( 
+[122] MAINPROCESS(9) for  s4_t_i = (S4)0; 
+[123] MAINPROCESS(9) for  s4_t_i < (S4)3; 
+[124] MAINPROCESS(9) for  s4_t_i++) 
+[125] MAINPROCESS(9) subproc SUBPROCESS(1) 
+[126] SUBPROCESS(1) equal au1_g_lca_ecu_env_recog_peak_num[s4_t_i] (U1)0;
+[127] SUBPROCESS(1) equal afl_g_lca_ecu_env_recog_ave_pow[s4_t_i] (FL)0;
+[128] MAINPROCESS(10) equal fl_g_lca_ecu_ttc_thre (FL)5;
+[129] MAINPROCESS(10) proc return; 
+----------------- Total Codes : 129 lines

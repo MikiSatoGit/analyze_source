@@ -43,165 +43,95 @@ Total functions : 15
 [28] MAINPROCESS(1) proc S4 s4_t_trailer_bin_range; 
 [29] MAINPROCESS(1) equal S4 s4_t_ordinary_trailer_num 0;
 [30] MAINPROCESS(1) func<start> fn_bsm_trailer_init_data( 
-[31] MAINPROCESS(1) func &s4_t_peak_num_trailer_up, 
-[32] MAINPROCESS(1) func as4_t_peak_bin_up, 
-[33] MAINPROCESS(1) func afl_t_peak_bin_intpl_up, 
-[34] MAINPROCESS(1) func afl_t_peak_power_up, 
-[35] MAINPROCESS(1) func as4_t_peak_bin_up_trailer, 
-[36] MAINPROCESS(1) func afl_t_peak_bin_intpl_up_trailer, 
-[37] MAINPROCESS(1) func afl_t_peak_power_up_trailer, 
-[38] MAINPROCESS(1) func &s4_t_peak_num_up_music, 
-[39] MAINPROCESS(1) func afl_t_peak_bins_intpl_up, 
-[40] MAINPROCESS(1) func afl_t_peak_powers_up, 
-[41] MAINPROCESS(1) func afl_t_peak_doa_bins_intpl_up, 
-[42] MAINPROCESS(1) func afl_t_peak_doa_powers_up 
-[43] MAINPROCESS(1) func<end> ); 
-[44] MAINPROCESS(1) func<start> fn_bsm_trailer_init_data( 
-[45] MAINPROCESS(1) func &s4_t_peak_num_trailer_dn, 
-[46] MAINPROCESS(1) func as4_t_peak_bin_dn, 
-[47] MAINPROCESS(1) func afl_t_peak_bin_intpl_dn, 
-[48] MAINPROCESS(1) func afl_t_peak_power_dn, 
-[49] MAINPROCESS(1) func as4_t_peak_bin_dn_trailer, 
-[50] MAINPROCESS(1) func afl_t_peak_bin_intpl_dn_trailer, 
-[51] MAINPROCESS(1) func afl_t_peak_power_dn_trailer, 
-[52] MAINPROCESS(1) func &s4_t_peak_num_dn_music, 
-[53] MAINPROCESS(1) func afl_t_peak_bins_intpl_dn, 
-[54] MAINPROCESS(1) func afl_t_peak_powers_dn, 
-[55] MAINPROCESS(1) func afl_t_peak_doa_bins_intpl_dn, 
-[56] MAINPROCESS(1) func afl_t_peak_doa_powers_dn 
-[57] MAINPROCESS(1) func<end> ); 
-[58] MAINPROCESS(1) func<start> fn_bsm_trailer_init_thres( 
-[59] MAINPROCESS(1) func afl_t_thres_trailer 
-[60] MAINPROCESS(1) func<end> ); 
-[61] MAINPROCESS(1) func<start> fn_set_freq_threshold( 
-[62] MAINPROCESS(1) func (const FL *)afl_g_cvw_lfm_ftt_power[0], 
-[63] MAINPROCESS(1) func afl_t_thres_trailer 
-[64] MAINPROCESS(1) func ,OBJECT_TYPE_TRAILER 
-[65] MAINPROCESS(1) func<end> ); 
-[66] MAINPROCESS(1) equal afl_g_btt_atd_doa_pow_ave[0] (FL)0;
-[67] MAINPROCESS(1) equal afl_g_btt_atd_doa_pow_ave[1] (FL)0;
-[68] MAINPROCESS(1) for <start> for ( 
-[69] MAINPROCESS(1) for  s4_t_lp_peakbuff = (S4)0; 
-[70] MAINPROCESS(1) for  s4_t_lp_peakbuff < TRAILER_RANGE; 
-[71] MAINPROCESS(1) for  s4_t_lp_peakbuff++) 
-[72] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[73] SUBPROCESS(1) if<start> if( 
-[74] SUBPROCESS(1) if s4_t_peak_num_trailer_up < PEAK_BUFFSIZE 
-[75] SUBPROCESS(1) if &&  afl_g_cvw_lfm_ftt_power[0][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] > afl_t_thres_trailer[FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] 
-[76] SUBPROCESS(1) if ) 
-[77] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[78] SUBSUBPROCESS(1) equal as4_t_peak_bin_up[s4_t_peak_num_trailer_up] FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff;
-[79] SUBSUBPROCESS(1) func<start> afl_t_peak_bin_intpl_up[s4_t_peak_num_trailer_up] = (FL)(FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff 
-[80] SUBSUBPROCESS(1) func<end> ); 
-[81] SUBSUBPROCESS(1) equal afl_t_peak_power_up[s4_t_peak_num_trailer_up] afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
-[82] SUBSUBPROCESS(1) proc s4_t_peak_num_trailer_up++; 
-[83] SUBPROCESS(2) equal afl_g_btt_atd_doa_pow_ave[0] + afl_g_cvw_lfm_ftt_power[0][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
-[84] MAINPROCESS(2) equal afl_g_btt_atd_doa_pow_ave[0] afl_g_btt_atd_doa_pow_ave[0] / (FL)TRAILER_RANGE;
-[85] MAINPROCESS(2) for <start> for ( 
-[86] MAINPROCESS(2) for  s4_t_lp_peakbuff = (S4)0; 
-[87] MAINPROCESS(2) for  s4_t_lp_peakbuff < TRAILER_RANGE; 
-[88] MAINPROCESS(2) for  s4_t_lp_peakbuff++) 
-[89] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[90] SUBPROCESS(1) if<start> if( 
-[91] SUBPROCESS(1) if s4_t_peak_num_trailer_dn < PEAK_BUFFSIZE 
-[92] SUBPROCESS(1) if && afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] > afl_t_thres_trailer[FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] 
-[93] SUBPROCESS(1) if ) 
-[94] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[95] SUBSUBPROCESS(1) equal as4_t_peak_bin_dn[s4_t_peak_num_trailer_dn] FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff;
-[96] SUBSUBPROCESS(1) func<start> afl_t_peak_bin_intpl_dn[s4_t_peak_num_trailer_dn] = (FL)(FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff 
-[97] SUBSUBPROCESS(1) func<end> ); 
-[98] SUBSUBPROCESS(1) equal afl_t_peak_power_dn[s4_t_peak_num_trailer_dn] afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
-[99] SUBSUBPROCESS(1) proc s4_t_peak_num_trailer_dn++; 
-[100] SUBPROCESS(2) equal afl_g_btt_atd_doa_pow_ave[1] + afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
-[101] MAINPROCESS(3) equal afl_g_btt_atd_doa_pow_ave[1] afl_g_btt_atd_doa_pow_ave[1] / (FL)TRAILER_RANGE;
-[102] MAINPROCESS(3) func<start> fn_sort_peak_by_power_trailer( 
-[103] MAINPROCESS(3) func as4_t_peak_bin_up, 
-[104] MAINPROCESS(3) func afl_t_peak_bin_intpl_up, 
-[105] MAINPROCESS(3) func afl_t_peak_power_up, 
-[106] MAINPROCESS(3) func as4_t_peak_bin_up_trailer, 
-[107] MAINPROCESS(3) func afl_t_peak_bin_intpl_up_trailer, 
-[108] MAINPROCESS(3) func afl_t_peak_power_up_trailer 
-[109] MAINPROCESS(3) func<end> ); 
-[110] MAINPROCESS(3) func<start> fn_sort_peak_by_power_trailer( 
-[111] MAINPROCESS(3) func as4_t_peak_bin_dn, 
-[112] MAINPROCESS(3) func afl_t_peak_bin_intpl_dn, 
-[113] MAINPROCESS(3) func afl_t_peak_power_dn, 
-[114] MAINPROCESS(3) func as4_t_peak_bin_dn_trailer, 
-[115] MAINPROCESS(3) func afl_t_peak_bin_intpl_dn_trailer, 
-[116] MAINPROCESS(3) func afl_t_peak_power_dn_trailer 
-[117] MAINPROCESS(3) func<end> ); 
-[118] MAINPROCESS(3) if <start> if ( 
-[119] MAINPROCESS(3) if  s4_t_peak_num_trailer_up > TRAILER_BUFFSIZE 
-[120] MAINPROCESS(3) if  ) 
-[121] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[122] SUBPROCESS(1) equal s4_t_peak_num_trailer_up TRAILER_BUFFSIZE;
-[123] MAINPROCESS(4) if <start> if ( 
-[124] MAINPROCESS(4) if  s4_t_peak_num_trailer_dn > TRAILER_BUFFSIZE 
-[125] MAINPROCESS(4) if  ) 
-[126] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[127] SUBPROCESS(1) equal s4_t_peak_num_trailer_dn TRAILER_BUFFSIZE;
-[128] MAINPROCESS(5) func<start> fn_bsm_trailer_estimate_doa( 
-[129] MAINPROCESS(5) func 0, 
-[130] MAINPROCESS(5) func afl_g_cvw_lfm_ryy_matrix[0], 
-[131] MAINPROCESS(5) func s4_t_peak_num_trailer_up, 
-[132] MAINPROCESS(5) func (const S4 *)as4_t_peak_bin_up_trailer, 
-[133] MAINPROCESS(5) func (const FL *)afl_t_peak_bin_intpl_up_trailer, 
-[134] MAINPROCESS(5) func (const FL *)afl_t_peak_power_up_trailer, 
-[135] MAINPROCESS(5) func &s4_t_peak_num_up_music, 
-[136] MAINPROCESS(5) func afl_t_peak_bins_intpl_up, 
-[137] MAINPROCESS(5) func afl_t_peak_powers_up, 
-[138] MAINPROCESS(5) func afl_t_peak_doa_bins_intpl_up, 
-[139] MAINPROCESS(5) func afl_t_peak_doa_powers_up 
-[140] MAINPROCESS(5) func ,afl_t_doa_pow_ave[0] 
-[141] MAINPROCESS(5) func ,afl_t_doa_pow_dev[0] 
-[142] MAINPROCESS(5) func<end> ); 
-[143] MAINPROCESS(5) func<start> fn_bsm_trailer_estimate_doa( 
-[144] MAINPROCESS(5) func 1, 
-[145] MAINPROCESS(5) func afl_g_cvw_lfm_ryy_matrix[1], 
-[146] MAINPROCESS(5) func s4_t_peak_num_trailer_dn, 
-[147] MAINPROCESS(5) func (const S4 *)as4_t_peak_bin_dn_trailer, 
-[148] MAINPROCESS(5) func (const FL *)afl_t_peak_bin_intpl_dn_trailer, 
-[149] MAINPROCESS(5) func (const FL *)afl_t_peak_power_dn_trailer, 
-[150] MAINPROCESS(5) func &s4_t_peak_num_dn_music, 
-[151] MAINPROCESS(5) func afl_t_peak_bins_intpl_dn, 
-[152] MAINPROCESS(5) func afl_t_peak_powers_dn, 
-[153] MAINPROCESS(5) func afl_t_peak_doa_bins_intpl_dn, 
-[154] MAINPROCESS(5) func afl_t_peak_doa_powers_dn 
-[155] MAINPROCESS(5) func ,afl_t_doa_pow_ave[1] 
-[156] MAINPROCESS(5) func ,afl_t_doa_pow_dev[1] 
-[157] MAINPROCESS(5) func<end> ); 
-[158] MAINPROCESS(5) func<start> fn_bsm_trailer_make_pair( 
-[159] MAINPROCESS(5) func s4_t_peak_num_up_music, 
-[160] MAINPROCESS(5) func (const FL *)afl_t_peak_bins_intpl_up, 
-[161] MAINPROCESS(5) func afl_t_peak_powers_up, 
-[162] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_bins_intpl_up, 
-[163] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_powers_up, 
-[164] MAINPROCESS(5) func s4_t_peak_num_dn_music, 
-[165] MAINPROCESS(5) func (const FL *)afl_t_peak_bins_intpl_dn, 
-[166] MAINPROCESS(5) func afl_t_peak_powers_dn, 
-[167] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_bins_intpl_dn, 
-[168] MAINPROCESS(5) func (const FL *)afl_t_peak_doa_powers_dn, 
-[169] MAINPROCESS(5) func ps4_a_pair_num_trailer, 
-[170] MAINPROCESS(5) func ast_a_normaltrailer 
-[171] MAINPROCESS(5) func<end> ); 
-[172] MAINPROCESS(5) func<start> fn_check_ordinary_trailer_obj( 
-[173] MAINPROCESS(5) func ps4_a_pair_num_ordinary, 
-[174] MAINPROCESS(5) func ast_a_normalordinary, 
-[175] MAINPROCESS(5) func ps4_a_pair_num_trailer, 
-[176] MAINPROCESS(5) func ast_a_normaltrailer, 
-[177] MAINPROCESS(5) func afl_t_thres_trailer 
-[178] MAINPROCESS(5) func<end> ); 
-[179] MAINPROCESS(5) func<start> fn_check_bf_doa_power( 
-[180] MAINPROCESS(5) func s4_a_doa_bf_peak_bin, 
-[181] MAINPROCESS(5) func fl_a_doa_bf_peak_pow 
-[182] MAINPROCESS(5) func<end> ); 
-[183] MAINPROCESS(5) equal afl_g_btt_atd_doa_pow_ave[0] *fl_a_doa_bf_peak_pow-afl_t_doa_pow_ave[0][1];
-[184] MAINPROCESS(5) equal afl_g_btt_atd_doa_pow_ave[1] *fl_a_doa_bf_peak_pow;
-[185] MAINPROCESS(5) func<start> fn_bsm_trailer_set_object( 
-[186] MAINPROCESS(5) func (const S4 *)ps4_a_pair_num_trailer, 
-[187] MAINPROCESS(5) func ast_a_normaltrailer 
-[188] MAINPROCESS(5) func<end> ); 
------------------ Total Codes : 188 lines
+[31] MAINPROCESS(1) func afl_t_peak_doa_powers_up 
+[32] MAINPROCESS(1) func<end> ); 
+[33] MAINPROCESS(1) func<start> fn_bsm_trailer_init_data( 
+[34] MAINPROCESS(1) func afl_t_peak_doa_powers_dn 
+[35] MAINPROCESS(1) func<end> ); 
+[36] MAINPROCESS(1) func<start> fn_bsm_trailer_init_thres( 
+[37] MAINPROCESS(1) func afl_t_thres_trailer 
+[38] MAINPROCESS(1) func<end> ); 
+[39] MAINPROCESS(1) func<start> fn_set_freq_threshold( 
+[40] MAINPROCESS(1) func afl_t_thres_trailer 
+[41] MAINPROCESS(1) func ,OBJECT_TYPE_TRAILER 
+[42] MAINPROCESS(1) func<end> ); 
+[43] MAINPROCESS(1) equal afl_g_btt_atd_doa_pow_ave[0] (FL)0;
+[44] MAINPROCESS(1) equal afl_g_btt_atd_doa_pow_ave[1] (FL)0;
+[45] MAINPROCESS(1) for  for ( 
+[46] MAINPROCESS(1) for  s4_t_lp_peakbuff = (S4)0; 
+[47] MAINPROCESS(1) for  s4_t_lp_peakbuff < TRAILER_RANGE; 
+[48] MAINPROCESS(1) for  s4_t_lp_peakbuff++) 
+[49] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[50] SUBPROCESS(1) if if( 
+[51] SUBPROCESS(1) if s4_t_peak_num_trailer_up < PEAK_BUFFSIZE 
+[52] SUBPROCESS(1) if &&  afl_g_cvw_lfm_ftt_power[0][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] > afl_t_thres_trailer[FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] 
+[53] SUBPROCESS(1) if ) 
+[54] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[55] SUBSUBPROCESS(1) equal as4_t_peak_bin_up[s4_t_peak_num_trailer_up] FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff;
+[56] SUBSUBPROCESS(1) func<start> afl_t_peak_bin_intpl_up[s4_t_peak_num_trailer_up] = (FL)(FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff 
+[57] SUBSUBPROCESS(1) func<end> ); 
+[58] SUBSUBPROCESS(1) equal afl_t_peak_power_up[s4_t_peak_num_trailer_up] afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
+[59] SUBSUBPROCESS(1) proc s4_t_peak_num_trailer_up++; 
+[60] SUBPROCESS(2) equal afl_g_btt_atd_doa_pow_ave[0] + afl_g_cvw_lfm_ftt_power[0][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
+[61] MAINPROCESS(2) equal afl_g_btt_atd_doa_pow_ave[0] afl_g_btt_atd_doa_pow_ave[0] / (FL)TRAILER_RANGE;
+[62] MAINPROCESS(2) for  for ( 
+[63] MAINPROCESS(2) for  s4_t_lp_peakbuff = (S4)0; 
+[64] MAINPROCESS(2) for  s4_t_lp_peakbuff < TRAILER_RANGE; 
+[65] MAINPROCESS(2) for  s4_t_lp_peakbuff++) 
+[66] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[67] SUBPROCESS(1) if if( 
+[68] SUBPROCESS(1) if s4_t_peak_num_trailer_dn < PEAK_BUFFSIZE 
+[69] SUBPROCESS(1) if && afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] > afl_t_thres_trailer[FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff] 
+[70] SUBPROCESS(1) if ) 
+[71] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[72] SUBSUBPROCESS(1) equal as4_t_peak_bin_dn[s4_t_peak_num_trailer_dn] FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff;
+[73] SUBSUBPROCESS(1) func<start> afl_t_peak_bin_intpl_dn[s4_t_peak_num_trailer_dn] = (FL)(FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff 
+[74] SUBSUBPROCESS(1) func<end> ); 
+[75] SUBSUBPROCESS(1) equal afl_t_peak_power_dn[s4_t_peak_num_trailer_dn] afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
+[76] SUBSUBPROCESS(1) proc s4_t_peak_num_trailer_dn++; 
+[77] SUBPROCESS(2) equal afl_g_btt_atd_doa_pow_ave[1] + afl_g_cvw_lfm_ftt_power[1][FREQ_BIN_LOWER_LIMIT_T+s4_t_lp_peakbuff];
+[78] MAINPROCESS(3) equal afl_g_btt_atd_doa_pow_ave[1] afl_g_btt_atd_doa_pow_ave[1] / (FL)TRAILER_RANGE;
+[79] MAINPROCESS(3) func<start> fn_sort_peak_by_power_trailer( 
+[80] MAINPROCESS(3) func afl_t_peak_power_up_trailer 
+[81] MAINPROCESS(3) func<end> ); 
+[82] MAINPROCESS(3) func<start> fn_sort_peak_by_power_trailer( 
+[83] MAINPROCESS(3) func afl_t_peak_power_dn_trailer 
+[84] MAINPROCESS(3) func<end> ); 
+[85] MAINPROCESS(3) if  if ( 
+[86] MAINPROCESS(3) if  s4_t_peak_num_trailer_up > TRAILER_BUFFSIZE 
+[87] MAINPROCESS(3) if  ) 
+[88] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[89] SUBPROCESS(1) equal s4_t_peak_num_trailer_up TRAILER_BUFFSIZE;
+[90] MAINPROCESS(4) if  if ( 
+[91] MAINPROCESS(4) if  s4_t_peak_num_trailer_dn > TRAILER_BUFFSIZE 
+[92] MAINPROCESS(4) if  ) 
+[93] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[94] SUBPROCESS(1) equal s4_t_peak_num_trailer_dn TRAILER_BUFFSIZE;
+[95] MAINPROCESS(5) func<start> fn_bsm_trailer_estimate_doa( 
+[96] MAINPROCESS(5) func afl_t_peak_doa_powers_up 
+[97] MAINPROCESS(5) func ,afl_t_doa_pow_ave[0] 
+[98] MAINPROCESS(5) func ,afl_t_doa_pow_dev[0] 
+[99] MAINPROCESS(5) func<end> ); 
+[100] MAINPROCESS(5) func<start> fn_bsm_trailer_estimate_doa( 
+[101] MAINPROCESS(5) func afl_t_peak_doa_powers_dn 
+[102] MAINPROCESS(5) func ,afl_t_doa_pow_ave[1] 
+[103] MAINPROCESS(5) func ,afl_t_doa_pow_dev[1] 
+[104] MAINPROCESS(5) func<end> ); 
+[105] MAINPROCESS(5) func<start> fn_bsm_trailer_make_pair( 
+[106] MAINPROCESS(5) func ast_a_normaltrailer 
+[107] MAINPROCESS(5) func<end> ); 
+[108] MAINPROCESS(5) func<start> fn_check_ordinary_trailer_obj( 
+[109] MAINPROCESS(5) func afl_t_thres_trailer 
+[110] MAINPROCESS(5) func<end> ); 
+[111] MAINPROCESS(5) func<start> fn_check_bf_doa_power( 
+[112] MAINPROCESS(5) func fl_a_doa_bf_peak_pow 
+[113] MAINPROCESS(5) func<end> ); 
+[114] MAINPROCESS(5) equal afl_g_btt_atd_doa_pow_ave[0] *fl_a_doa_bf_peak_pow-afl_t_doa_pow_ave[0][1];
+[115] MAINPROCESS(5) equal afl_g_btt_atd_doa_pow_ave[1] *fl_a_doa_bf_peak_pow;
+[116] MAINPROCESS(5) func<start> fn_bsm_trailer_set_object( 
+[117] MAINPROCESS(5) func ast_a_normaltrailer 
+[118] MAINPROCESS(5) func<end> ); 
+----------------- Total Codes : 118 lines
 --------------------------
 [Function Name] : fn_bsm_trailer_init_data 
 -Return type : VD 
@@ -221,7 +151,7 @@ Total functions : 15
 ----- Codes -----
 [1] MAINPROCESS(1) proc S4 s4_t_lp_i; 
 [2] MAINPROCESS(1) equal *ps4_a_peak_num_trailer 0;
-[3] MAINPROCESS(1) for <start> for ( 
+[3] MAINPROCESS(1) for  for ( 
 [4] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [5] MAINPROCESS(1) for  s4_t_lp_i < PEAK_BUFFSIZE; 
 [6] MAINPROCESS(1) for  s4_t_lp_i++) 
@@ -229,7 +159,7 @@ Total functions : 15
 [8] SUBPROCESS(1) equal as4_a_peak_bin[s4_t_lp_i] 0;
 [9] SUBPROCESS(1) equal afl_a_peak_bin_intpl[s4_t_lp_i] 0.0F;
 [10] SUBPROCESS(1) equal afl_a_peak_power[s4_t_lp_i] 0.0F;
-[11] MAINPROCESS(2) for <start> for ( 
+[11] MAINPROCESS(2) for  for ( 
 [12] MAINPROCESS(2) for  s4_t_lp_i = 0; 
 [13] MAINPROCESS(2) for  s4_t_lp_i < TRAILER_BUFFSIZE; 
 [14] MAINPROCESS(2) for  s4_t_lp_i++) 
@@ -237,7 +167,7 @@ Total functions : 15
 [16] SUBPROCESS(1) equal as4_a_peak_bin_trailer[s4_t_lp_i] (S4)0;
 [17] SUBPROCESS(1) equal afl_a_peak_bin_intpl_trailer[s4_t_lp_i] (FL)0.0F;
 [18] SUBPROCESS(1) equal afl_a_peak_power_trailer[s4_t_lp_i] (FL)0.0F;
-[19] MAINPROCESS(3) for <start> for ( 
+[19] MAINPROCESS(3) for  for ( 
 [20] MAINPROCESS(3) for  s4_t_lp_i = 0; 
 [21] MAINPROCESS(3) for  s4_t_lp_i < (TRAILER_BUFFSIZE * 2 
 [22] MAINPROCESS(3) for  ); 
@@ -256,7 +186,7 @@ Total functions : 15
      [0] : FL   afl_a_thres[NB_FFT_PT] 
 ----- Codes -----
 [1] MAINPROCESS(1) proc S4 s4_t_lp_i; 
-[2] MAINPROCESS(1) for <start> for ( 
+[2] MAINPROCESS(1) for  for ( 
 [3] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [4] MAINPROCESS(1) for  s4_t_lp_i < NB_FFT_PT; 
 [5] MAINPROCESS(1) for  s4_t_lp_i++) 
@@ -292,14 +222,14 @@ Total functions : 15
 [8] MAINPROCESS(1) proc FL afl_t_selected_doa_bins_intpl_copy[TRAILER_BUFFSIZE][2]; 
 [9] MAINPROCESS(1) proc FL afl_t_selected_doa_powers_copy[TRAILER_BUFFSIZE][2]; 
 [10] MAINPROCESS(1) proc FL afl_t_selected_bins_intpl_copy[TRAILER_BUFFSIZE]; 
-[11] MAINPROCESS(1) for <start> for ( 
+[11] MAINPROCESS(1) for  for ( 
 [12] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [13] MAINPROCESS(1) for  s4_t_lp_i < TRAILER_BUFFSIZE; 
 [14] MAINPROCESS(1) for  s4_t_lp_i++) 
 [15] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [16] SUBPROCESS(1) equal as4_t_doa_num[s4_t_lp_i] 0;
 [17] SUBPROCESS(1) equal afl_t_selected_bins_intpl_copy[s4_t_lp_i] (FL)0.0F;
-[18] SUBPROCESS(1) for <start> for ( 
+[18] SUBPROCESS(1) for  for ( 
 [19] SUBPROCESS(1) for  s4_t_lp_k = 0; 
 [20] SUBPROCESS(1) for  s4_t_lp_k < 2; 
 [21] SUBPROCESS(1) for  s4_t_lp_k++) 
@@ -310,52 +240,32 @@ Total functions : 15
 [26] SUBSUBPROCESS(1) equal afl_t_selected_doa_bins_intpl_copy[s4_t_lp_i][s4_t_lp_k] (FL)0.0F;
 [27] SUBSUBPROCESS(1) equal afl_t_selected_doa_powers_copy[s4_t_lp_i][s4_t_lp_k] (FL)0.0F;
 [28] MAINPROCESS(2) equal s4_t_doa_calc_num (S4)0;
-[29] MAINPROCESS(2) for <start> for ( 
+[29] MAINPROCESS(2) for  for ( 
 [30] MAINPROCESS(2) for  s4_t_lp_i = 0; 
 [31] MAINPROCESS(2) for  s4_t_lp_i < s4_a_peak_num; 
 [32] MAINPROCESS(2) for  s4_t_lp_i++ ) 
 [33] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[34] SUBPROCESS(1) if <start> if ( 
+[34] SUBPROCESS(1) if  if ( 
 [35] SUBPROCESS(1) if  s4_t_doa_calc_num < TRAILER_BUFFSIZE-1 
 [36] SUBPROCESS(1) if  ) 
 [37] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [38] SUBSUBPROCESS(1) proc s4_t_doa_calc_num++; 
 [39] SUBSUBPROCESS(1) func<start> fn_bsm_trailer_cal_doa( 
-[40] SUBSUBPROCESS(1) func s4_a_flg_updn, 
-[41] SUBSUBPROCESS(1) func (const FL (*)[10])afl_a_Ryy, 
-[42] SUBSUBPROCESS(1) func as4_a_peak_bin[s4_t_lp_i], 
-[43] SUBSUBPROCESS(1) func afl_a_peak_bin_intpl[s4_t_lp_i], 
-[44] SUBSUBPROCESS(1) func &as4_t_doa_num[s4_t_lp_i], 
-[45] SUBSUBPROCESS(1) func afl_t_selected_doa_bins_intpl[s4_t_lp_i], 
-[46] SUBSUBPROCESS(1) func afl_t_selected_doa_powers[s4_t_lp_i], 
-[47] SUBSUBPROCESS(1) func afl_t_selected_bins_intpl[s4_t_lp_i] 
-[48] SUBSUBPROCESS(1) func<end> ); 
-[49] MAINPROCESS(3) for <start> for ( 
-[50] MAINPROCESS(3) for  s4_t_lp_i = 0; 
-[51] MAINPROCESS(3) for  s4_t_lp_i < 3; 
-[52] MAINPROCESS(3) for  s4_t_lp_i++ ) 
-[53] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[54] SUBPROCESS(1) func<start> fn_bsm_cal_trailer_range_doa_ave( 
-[55] SUBPROCESS(1) func s4_a_flg_updn, 
-[56] SUBPROCESS(1) func (const FL (*)[10])afl_a_Ryy, 
-[57] SUBPROCESS(1) func (260+s4_t_lp_i), 
-[58] SUBPROCESS(1) func &afl_a_doa_pow_ave[s4_t_lp_i], 
-[59] SUBPROCESS(1) func &afl_a_doa_pow_dev[s4_t_lp_i] 
-[60] SUBPROCESS(1) func<end> ); 
-[61] MAINPROCESS(4) func<start> fn_bsm_trailer_store_doa( 
-[62] MAINPROCESS(4) func (const FL *)afl_a_peak_power, 
-[63] MAINPROCESS(4) func (const S4 *)as4_t_doa_num, 
-[64] MAINPROCESS(4) func afl_t_selected_doa_bins_intpl, 
-[65] MAINPROCESS(4) func afl_t_selected_doa_powers, 
-[66] MAINPROCESS(4) func afl_t_selected_bins_intpl, 
-[67] MAINPROCESS(4) func ps4_a_doa_peak_num, 
-[68] MAINPROCESS(4) func afl_a_peak_bins_intpl, 
-[69] MAINPROCESS(4) func afl_a_peak_powers, 
-[70] MAINPROCESS(4) func afl_a_peak_doa_bins_intpl, 
-[71] MAINPROCESS(4) func afl_a_peak_doa_powers 
-[72] MAINPROCESS(4) func<end> ); 
-[73] MAINPROCESS(4) proc return; 
------------------ Total Codes : 73 lines
+[40] SUBSUBPROCESS(1) func afl_t_selected_bins_intpl[s4_t_lp_i] 
+[41] SUBSUBPROCESS(1) func<end> ); 
+[42] MAINPROCESS(3) for  for ( 
+[43] MAINPROCESS(3) for  s4_t_lp_i = 0; 
+[44] MAINPROCESS(3) for  s4_t_lp_i < 3; 
+[45] MAINPROCESS(3) for  s4_t_lp_i++ ) 
+[46] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[47] SUBPROCESS(1) func<start> fn_bsm_cal_trailer_range_doa_ave( 
+[48] SUBPROCESS(1) func &afl_a_doa_pow_dev[s4_t_lp_i] 
+[49] SUBPROCESS(1) func<end> ); 
+[50] MAINPROCESS(4) func<start> fn_bsm_trailer_store_doa( 
+[51] MAINPROCESS(4) func afl_a_peak_doa_powers 
+[52] MAINPROCESS(4) func<end> ); 
+[53] MAINPROCESS(4) proc return; 
+----------------- Total Codes : 53 lines
 --------------------------
 [Function Name] : fn_bsm_trailer_cal_doa 
 -Return type : VD 
@@ -376,68 +286,57 @@ Total functions : 15
 [5] MAINPROCESS(1) equal S4 s4_t_temp_wave_num WAVE_NUMBER;
 [6] MAINPROCESS(1) proc U1 u1_t_lp_doa_num; 
 [7] MAINPROCESS(1) equal S4 s4_t_tmp_doa_num 0;
-[8] MAINPROCESS(1) for <start> for ( 
+[8] MAINPROCESS(1) for  for ( 
 [9] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [10] MAINPROCESS(1) for  s4_t_lp_i < N_DOA; 
 [11] MAINPROCESS(1) for  s4_t_lp_i++ ) 
 [12] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [13] SUBPROCESS(1) equal afl_t_spec[s4_t_lp_i] 0;
-[14] MAINPROCESS(2) for <start> for ( 
+[14] MAINPROCESS(2) for  for ( 
 [15] MAINPROCESS(2) for  u1_t_lp_doa_num = (U1)0; 
 [16] MAINPROCESS(2) for  u1_t_lp_doa_num < (U1)2; 
 [17] MAINPROCESS(2) for  u1_t_lp_doa_num++) 
 [18] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [19] SUBPROCESS(1) equal as4_t_selected_doa_bins[u1_t_lp_doa_num] (S4)0;
 [20] MAINPROCESS(3) func<start> s4_t_temp_wave_num = s4_calc_spec_music_4ch_all( 
-[21] MAINPROCESS(3) func afl_a_Ryy[s4_a_peak_bin], 
-[22] MAINPROCESS(3) func afl_t_spec, 
-[23] MAINPROCESS(3) func 2, 
-[24] MAINPROCESS(3) func s4_a_updn_flg 
-[25] MAINPROCESS(3) func<end> ); 
-[26] MAINPROCESS(3) equal *ps4_a_doa_num 0;
-[27] MAINPROCESS(3) func<start> *ps4_a_doa_num = s4_search_peak_music( 
-[28] MAINPROCESS(3) func (const FL *)afl_t_spec, 
-[29] MAINPROCESS(3) func as4_t_selected_doa_bins, 
-[30] MAINPROCESS(3) func afl_a_selected_doa_powers, 
-[31] MAINPROCESS(3) func s4_t_temp_wave_num 
-[32] MAINPROCESS(3) func ,OBJECT_TYPE_TRAILER 
-[33] MAINPROCESS(3) func<end> ); 
-[34] MAINPROCESS(3) for <start> for ( 
-[35] MAINPROCESS(3) for  s4_t_lp_i = 0; 
-[36] MAINPROCESS(3) for  s4_t_lp_i < 2; 
-[37] MAINPROCESS(3) for  s4_t_lp_i++) 
-[38] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[39] SUBPROCESS(1) if <start> if ( 
-[40] SUBPROCESS(1) if  as4_t_selected_doa_bins[s4_t_lp_i] > 0 
-[41] SUBPROCESS(1) if  ) 
-[42] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[43] SUBSUBPROCESS(1) func<start> afl_a_selected_doa_powers[s4_t_lp_i] = fl_calc_spec_bf_4ch_fm_of_specified_doa( 
-[44] SUBSUBPROCESS(1) func afl_a_Ryy[s4_a_peak_bin], 
-[45] SUBSUBPROCESS(1) func s4_a_updn_flg, 
-[46] SUBSUBPROCESS(1) func s4_a_peak_bin, 
-[47] SUBSUBPROCESS(1) func as4_t_selected_doa_bins[s4_t_lp_i] 
-[48] SUBSUBPROCESS(1) func<end> ); 
-[49] MAINPROCESS(4) for<start> for( 
-[50] MAINPROCESS(4) for s4_t_lp_i=0; 
-[51] MAINPROCESS(4) for s4_t_lp_i<2; 
-[52] MAINPROCESS(4) for s4_t_lp_i++) 
-[53] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[54] SUBPROCESS(1) if<start> if( 
-[55] SUBPROCESS(1) if as4_t_selected_doa_bins[s4_t_lp_i]>0 
-[56] SUBPROCESS(1) if ) 
-[57] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[58] SUBSUBPROCESS(1) func<start> afl_a_selected_doa_bins_intpl[s4_t_lp_i] = fl_interpolate_music_peak( 
-[59] SUBSUBPROCESS(1) func (const FL *)afl_t_spec, 
-[60] SUBSUBPROCESS(1) func as4_t_selected_doa_bins[s4_t_lp_i], 
-[61] SUBSUBPROCESS(1) func (const FL *)FL_BSM_FLSH_YOMIKAE_TBL_FM 
-[62] SUBSUBPROCESS(1) func<end> ); 
-[63] SUBSUBPROCESS(1) equal afl_a_selected_bins_intpl[s4_t_lp_i] fl_a_peak_bin_intpl;
-[64] SUBPROCESS(2) else<start> else 
-[65] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[66] SUBSUBPROCESS(1) equal afl_a_selected_doa_bins_intpl[s4_t_lp_i] 0.0F;
-[67] SUBSUBPROCESS(1) equal afl_a_selected_bins_intpl[s4_t_lp_i] 0.0F;
-[68] MAINPROCESS(5) proc return; 
------------------ Total Codes : 68 lines
+[21] MAINPROCESS(3) func s4_a_updn_flg 
+[22] MAINPROCESS(3) func<end> ); 
+[23] MAINPROCESS(3) equal *ps4_a_doa_num 0;
+[24] MAINPROCESS(3) func<start> *ps4_a_doa_num = s4_search_peak_music( 
+[25] MAINPROCESS(3) func s4_t_temp_wave_num 
+[26] MAINPROCESS(3) func ,OBJECT_TYPE_TRAILER 
+[27] MAINPROCESS(3) func<end> ); 
+[28] MAINPROCESS(3) for  for ( 
+[29] MAINPROCESS(3) for  s4_t_lp_i = 0; 
+[30] MAINPROCESS(3) for  s4_t_lp_i < 2; 
+[31] MAINPROCESS(3) for  s4_t_lp_i++) 
+[32] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[33] SUBPROCESS(1) if  if ( 
+[34] SUBPROCESS(1) if  as4_t_selected_doa_bins[s4_t_lp_i] > 0 
+[35] SUBPROCESS(1) if  ) 
+[36] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[37] SUBSUBPROCESS(1) func<start> afl_a_selected_doa_powers[s4_t_lp_i] = fl_calc_spec_bf_4ch_fm_of_specified_doa( 
+[38] SUBSUBPROCESS(1) func as4_t_selected_doa_bins[s4_t_lp_i] 
+[39] SUBSUBPROCESS(1) func<end> ); 
+[40] MAINPROCESS(4) for for( 
+[41] MAINPROCESS(4) for s4_t_lp_i=0; 
+[42] MAINPROCESS(4) for s4_t_lp_i<2; 
+[43] MAINPROCESS(4) for s4_t_lp_i++) 
+[44] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[45] SUBPROCESS(1) if if( 
+[46] SUBPROCESS(1) if as4_t_selected_doa_bins[s4_t_lp_i]>0 
+[47] SUBPROCESS(1) if ) 
+[48] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[49] SUBSUBPROCESS(1) func<start> afl_a_selected_doa_bins_intpl[s4_t_lp_i] = fl_interpolate_music_peak( 
+[50] SUBSUBPROCESS(1) func (const FL *)FL_BSM_FLSH_YOMIKAE_TBL_FM 
+[51] SUBSUBPROCESS(1) func<end> ); 
+[52] SUBSUBPROCESS(1) equal afl_a_selected_bins_intpl[s4_t_lp_i] fl_a_peak_bin_intpl;
+[53] SUBPROCESS(2) else else 
+[54] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[55] SUBSUBPROCESS(1) equal afl_a_selected_doa_bins_intpl[s4_t_lp_i] 0.0F;
+[56] SUBSUBPROCESS(1) equal afl_a_selected_bins_intpl[s4_t_lp_i] 0.0F;
+[57] MAINPROCESS(5) proc return; 
+----------------- Total Codes : 57 lines
 --------------------------
 [Function Name] : fn_bsm_cal_trailer_range_doa_ave 
 -Return type : VD 
@@ -456,26 +355,23 @@ Total functions : 15
 [6] MAINPROCESS(1) equal FL fl_t_tmp_doa_power_sum2 (FL)0;
 [7] MAINPROCESS(1) func<start> S4 s4_t_doa_range = (S4)((FL)(N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0] - (FL)CU1_DOA_BIN_LOWER_LIMIT_T + (FL)CU1_DOA_BIN_UPPER_LIMIT_T 
 [8] MAINPROCESS(1) func<end> ); 
-[9] MAINPROCESS(1) for <start> for ( 
+[9] MAINPROCESS(1) for  for ( 
 [10] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [11] MAINPROCESS(1) for  s4_t_lp_i < s4_t_doa_range; 
 [12] MAINPROCESS(1) for  s4_t_lp_i++) 
 [13] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [14] SUBPROCESS(1) func<start> fl_t_tmp_doa_power = fl_calc_spec_bf_4ch_fm_of_specified_doa( 
-[15] SUBPROCESS(1) func afl_a_Ryy[s4_a_peak_bin], 
-[16] SUBPROCESS(1) func s4_a_updn_flg, 
-[17] SUBPROCESS(1) func s4_a_peak_bin, 
-[18] SUBPROCESS(1) func (0 + s4_t_lp_i) 
-[19] SUBPROCESS(1) func<end> ); 
-[20] SUBPROCESS(1) equal fl_t_tmp_doa_power_sum1 + fl_t_tmp_doa_power;
-[21] SUBPROCESS(1) equal fl_t_tmp_doa_power_sum2 + fl_t_tmp_doa_power * fl_t_tmp_doa_power;
-[22] MAINPROCESS(2) equal fl_t_tmp_doa_power_ave fl_t_tmp_doa_power_sum1 / (FL)s4_t_doa_range;
-[23] MAINPROCESS(2) func<start> fl_t_tmp_doa_power_dev = (fl_t_tmp_doa_power_sum2 / (FL)s4_t_doa_range) - (fl_t_tmp_doa_power_ave * fl_t_tmp_doa_power_ave 
-[24] MAINPROCESS(2) func<end> ); 
-[25] MAINPROCESS(2) equal *afl_t_doa_pow_ave fl_t_tmp_doa_power_ave;
-[26] MAINPROCESS(2) equal *afl_t_doa_pow_dev fl_t_tmp_doa_power_dev;
-[27] MAINPROCESS(2) proc return; 
------------------ Total Codes : 27 lines
+[15] SUBPROCESS(1) func (0 + s4_t_lp_i) 
+[16] SUBPROCESS(1) func<end> ); 
+[17] SUBPROCESS(1) equal fl_t_tmp_doa_power_sum1 + fl_t_tmp_doa_power;
+[18] SUBPROCESS(1) equal fl_t_tmp_doa_power_sum2 + fl_t_tmp_doa_power * fl_t_tmp_doa_power;
+[19] MAINPROCESS(2) equal fl_t_tmp_doa_power_ave fl_t_tmp_doa_power_sum1 / (FL)s4_t_doa_range;
+[20] MAINPROCESS(2) func<start> fl_t_tmp_doa_power_dev = (fl_t_tmp_doa_power_sum2 / (FL)s4_t_doa_range) - (fl_t_tmp_doa_power_ave * fl_t_tmp_doa_power_ave 
+[21] MAINPROCESS(2) func<end> ); 
+[22] MAINPROCESS(2) equal *afl_t_doa_pow_ave fl_t_tmp_doa_power_ave;
+[23] MAINPROCESS(2) equal *afl_t_doa_pow_dev fl_t_tmp_doa_power_dev;
+[24] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 24 lines
 --------------------------
 [Function Name] : fn_bsm_trailer_store_doa 
 -Return type : VD 
@@ -495,17 +391,17 @@ Total functions : 15
 [2] MAINPROCESS(1) proc S4 s4_t_lp_i; 
 [3] MAINPROCESS(1) proc S4 s4_t_lp_k; 
 [4] MAINPROCESS(1) equal s4_t_iRet 0;
-[5] MAINPROCESS(1) for <start> for ( 
+[5] MAINPROCESS(1) for  for ( 
 [6] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [7] MAINPROCESS(1) for  s4_t_lp_i < TRAILER_BUFFSIZE; 
 [8] MAINPROCESS(1) for  s4_t_lp_i++) 
 [9] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[10] SUBPROCESS(1) for <start> for ( 
+[10] SUBPROCESS(1) for  for ( 
 [11] SUBPROCESS(1) for  s4_t_lp_k = 0; 
 [12] SUBPROCESS(1) for  s4_t_lp_k < as4_a_doa_num[s4_t_lp_i]; 
 [13] SUBPROCESS(1) for  s4_t_lp_k++) 
 [14] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[15] SUBSUBPROCESS(1) if<start> if( 
+[15] SUBSUBPROCESS(1) if if( 
 [16] SUBSUBPROCESS(1) if afl_a_selected_doa_bins_intpl[s4_t_lp_i][s4_t_lp_k] > 0 
 [17] SUBSUBPROCESS(1) if ) 
 [18] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
@@ -532,7 +428,7 @@ Total functions : 15
 [8] MAINPROCESS(1) proc S4 s4_t_focus_bin; 
 [9] MAINPROCESS(1) proc S4 s4_t_focus_doa; 
 [10] MAINPROCESS(1) proc S4 s4_t_doa_range; 
-[11] MAINPROCESS(1) for <start> for ( 
+[11] MAINPROCESS(1) for  for ( 
 [12] MAINPROCESS(1) for  u1_t_lp_n_doa = (U1)0; 
 [13] MAINPROCESS(1) for  u1_t_lp_n_doa < (U1)N_DOA; 
 [14] MAINPROCESS(1) for  u1_t_lp_n_doa++) 
@@ -546,30 +442,24 @@ Total functions : 15
 [22] MAINPROCESS(2) func<start> s4_t_doa_range = (S4)((FL)(N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0] + BTT_DBF_DOA_RANGE 
 [23] MAINPROCESS(2) func<end> ); 
 [24] MAINPROCESS(2) func<start> fn_calc_spec_bf_4ch_fm( 
-[25] MAINPROCESS(2) func afl_g_cvw_lfm_ryy_matrix[0][s4_t_focus_bin], 
-[26] MAINPROCESS(2) func tmp_doa_spec_up, 
-[27] MAINPROCESS(2) func 0, 
-[28] MAINPROCESS(2) func s4_t_focus_bin 
-[29] MAINPROCESS(2) func<end> ); 
-[30] MAINPROCESS(2) for <start> for ( 
-[31] MAINPROCESS(2) for  u1_t_lp_n_doa = (U1)s4_t_doa_range; 
-[32] MAINPROCESS(2) for  u1_t_lp_n_doa < (U1)N_DOA; 
-[33] MAINPROCESS(2) for  u1_t_lp_n_doa++) 
-[34] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[35] SUBPROCESS(1) equal tmp_doa_spec_up[u1_t_lp_n_doa] (FL)0.0F;
-[36] MAINPROCESS(3) func<start> s4_search_peak_bf( 
-[37] MAINPROCESS(3) func (const FL *)tmp_doa_spec_up, 
-[38] MAINPROCESS(3) func tmp_doa_peak_bin_up, 
-[39] MAINPROCESS(3) func tmp_doa_peak_pow_up, 
-[40] MAINPROCESS(3) func 1 
-[41] MAINPROCESS(3) func<end> ); 
-[42] MAINPROCESS(3) if<start> if( 
-[43] MAINPROCESS(3) if tmp_doa_peak_bin_up[0] != (S4)-1 
-[44] MAINPROCESS(3) if ) 
-[45] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[46] SUBPROCESS(1) equal *s4_a_doa_bf_peak_bin tmp_doa_peak_bin_up[0];
-[47] SUBPROCESS(1) equal *fl_a_doa_bf_peak_pow tmp_doa_peak_pow_up[0];
------------------ Total Codes : 47 lines
+[25] MAINPROCESS(2) func s4_t_focus_bin 
+[26] MAINPROCESS(2) func<end> ); 
+[27] MAINPROCESS(2) for  for ( 
+[28] MAINPROCESS(2) for  u1_t_lp_n_doa = (U1)s4_t_doa_range; 
+[29] MAINPROCESS(2) for  u1_t_lp_n_doa < (U1)N_DOA; 
+[30] MAINPROCESS(2) for  u1_t_lp_n_doa++) 
+[31] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[32] SUBPROCESS(1) equal tmp_doa_spec_up[u1_t_lp_n_doa] (FL)0.0F;
+[33] MAINPROCESS(3) func<start> s4_search_peak_bf( 
+[34] MAINPROCESS(3) func 1 
+[35] MAINPROCESS(3) func<end> ); 
+[36] MAINPROCESS(3) if if( 
+[37] MAINPROCESS(3) if tmp_doa_peak_bin_up[0] != (S4)-1 
+[38] MAINPROCESS(3) if ) 
+[39] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[40] SUBPROCESS(1) equal *s4_a_doa_bf_peak_bin tmp_doa_peak_bin_up[0];
+[41] SUBPROCESS(1) equal *fl_a_doa_bf_peak_pow tmp_doa_peak_pow_up[0];
+----------------- Total Codes : 41 lines
 --------------------------
 [Function Name] : fn_bsm_trailer_make_pair 
 -Return type : VD 
@@ -592,7 +482,7 @@ Total functions : 15
 [3] MAINPROCESS(1) proc S4 as4_t_used_peak_dn[TRAILER_BUFFSIZE * 2]; 
 [4] MAINPROCESS(1) proc S4 as4_t_pair_index_up[TRAILER_BUFFSIZE * 2]; 
 [5] MAINPROCESS(1) proc S4 as4_t_pair_index_dn[TRAILER_BUFFSIZE * 2]; 
-[6] MAINPROCESS(1) for <start> for ( 
+[6] MAINPROCESS(1) for  for ( 
 [7] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [8] MAINPROCESS(1) for  s4_t_lp_i < (TRAILER_BUFFSIZE * 2 
 [9] MAINPROCESS(1) for  ); 
@@ -603,25 +493,10 @@ Total functions : 15
 [14] SUBPROCESS(1) equal as4_t_pair_index_up[s4_t_lp_i] 0;
 [15] SUBPROCESS(1) equal as4_t_pair_index_dn[s4_t_lp_i] 0;
 [16] MAINPROCESS(2) func<start> fn_bsm_trailer_make_pair_moving( 
-[17] MAINPROCESS(2) func s4_a_peak_num_up_music, 
-[18] MAINPROCESS(2) func (const FL *)afl_a_peak_bins_intpl_up, 
-[19] MAINPROCESS(2) func afl_a_peak_powers_up, 
-[20] MAINPROCESS(2) func (const FL *)afl_a_peak_doa_bins_intpl_up, 
-[21] MAINPROCESS(2) func (const FL *)afl_a_peak_doa_powers_up, 
-[22] MAINPROCESS(2) func s4_a_peak_num_dn_music, 
-[23] MAINPROCESS(2) func (const FL *)afl_a_peak_bins_intpl_dn, 
-[24] MAINPROCESS(2) func afl_a_peak_powers_dn, 
-[25] MAINPROCESS(2) func (const FL *)afl_a_peak_doa_bins_intpl_dn, 
-[26] MAINPROCESS(2) func (const FL *)afl_a_peak_doa_powers_dn, 
-[27] MAINPROCESS(2) func as4_t_used_peak_up, 
-[28] MAINPROCESS(2) func as4_t_used_peak_dn, 
-[29] MAINPROCESS(2) func as4_t_pair_index_up, 
-[30] MAINPROCESS(2) func as4_t_pair_index_dn, 
-[31] MAINPROCESS(2) func ps4_a_pair_num_trailer, 
-[32] MAINPROCESS(2) func ast_a_normal_trailer 
-[33] MAINPROCESS(2) func<end> ); 
-[34] MAINPROCESS(2) proc return; 
------------------ Total Codes : 34 lines
+[17] MAINPROCESS(2) func ast_a_normal_trailer 
+[18] MAINPROCESS(2) func<end> ); 
+[19] MAINPROCESS(2) proc return; 
+----------------- Total Codes : 19 lines
 --------------------------
 [Function Name] : fn_bsm_trailer_make_pair_moving 
 -Return type : VD 
@@ -657,41 +532,41 @@ Total functions : 15
 [12] MAINPROCESS(1) proc S4 s4_t_tmp_pair_num; 
 [13] MAINPROCESS(1) equal fl_t_tmp_pow_diff_up_down POW_DIFF_UP_DOWN_DOA;
 [14] MAINPROCESS(1) equal u2_t_tmp_freq_diff_up_down NB_FFT_PT;
-[15] MAINPROCESS(1) for <start> for ( 
+[15] MAINPROCESS(1) for  for ( 
 [16] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [17] MAINPROCESS(1) for  s4_t_lp_i < (TRAILER_BUFFSIZE * 2 
 [18] MAINPROCESS(1) for  ); 
 [19] MAINPROCESS(1) for  s4_t_lp_i++) 
 [20] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[21] SUBPROCESS(1) for <start> for ( 
+[21] SUBPROCESS(1) for  for ( 
 [22] SUBPROCESS(1) for  s4_t_lp_k = 0; 
 [23] SUBPROCESS(1) for  s4_t_lp_k < (TRAILER_BUFFSIZE * 2 
 [24] SUBPROCESS(1) for  ); 
 [25] SUBPROCESS(1) for  s4_t_lp_k++) 
 [26] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [27] SUBSUBPROCESS(1) equal afl_t_compare[s4_t_lp_i][s4_t_lp_k] 1000.0;
-[28] MAINPROCESS(2) for <start> for ( 
+[28] MAINPROCESS(2) for  for ( 
 [29] MAINPROCESS(2) for  s4_t_lp_i = 0; 
 [30] MAINPROCESS(2) for  s4_t_lp_i < s4_a_peak_num_up; 
 [31] MAINPROCESS(2) for  s4_t_lp_i++) 
 [32] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[33] SUBPROCESS(1) if <start> if ( 
+[33] SUBPROCESS(1) if  if ( 
 [34] SUBPROCESS(1) if  as4_a_used_peak_up[s4_t_lp_i] == 0 
 [35] SUBPROCESS(1) if  ) 
 [36] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[37] SUBSUBPROCESS(1) for <start> for ( 
+[37] SUBSUBPROCESS(1) for  for ( 
 [38] SUBSUBPROCESS(1) for  s4_t_lp_k = 0; 
 [39] SUBSUBPROCESS(1) for  s4_t_lp_k < s4_a_peak_num_dn; 
 [40] SUBSUBPROCESS(1) for  s4_t_lp_k++) 
 [41] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[42] SUBSUBSUBPROCESS(1) if <start> if ( 
+[42] SUBSUBSUBPROCESS(1) if  if ( 
 [43] SUBSUBSUBPROCESS(1) if  as4_a_used_peak_dn[s4_t_lp_k] == 0 
 [44] SUBSUBSUBPROCESS(1) if  ) 
 [45] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
 [46] SUBSUBSUBSUBPROCESS(1) equal s4_t_tmp_doa_diff_up_down (S4)CU1_DOA_DIFF_UP_DOWN_VERYNEAR;
 [47] SUBSUBSUBSUBPROCESS(1) equal fl_t_tmp_pow_diff_up_down POW_DIFF_UP_DOWN_DOA;
 [48] SUBSUBSUBSUBPROCESS(1) equal u2_t_tmp_freq_diff_up_down (U2)2;
-[49] SUBSUBSUBSUBPROCESS(1) if <start> if ( 
+[49] SUBSUBSUBSUBPROCESS(1) if  if ( 
 [50] SUBSUBSUBSUBPROCESS(1) if  (fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]) < fl_t_tmp_pow_diff_up_down 
 [51] SUBSUBSUBSUBPROCESS(1) if  ) 
 [52] SUBSUBSUBSUBPROCESS(1) if  &&  ((S4)fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k])) < s4_t_tmp_doa_diff_up_down) 
@@ -700,71 +575,50 @@ Total functions : 15
 [55] SUBSUBSUBSUBSUBPROCESS(1) func<start> afl_t_compare[s4_t_lp_i][s4_t_lp_k] = (0.5F * fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k])) + (1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]))) + (0.5F * fl_abs(afl_a_peak_powers_up[s4_t_lp_i] - afl_a_peak_powers_dn[s4_t_lp_k]) 
 [56] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
 [57] MAINPROCESS(3) equal s4_t_pair_num *ps4_a_pair_num;
-[58] MAINPROCESS(3) for <start> for ( 
+[58] MAINPROCESS(3) for  for ( 
 [59] MAINPROCESS(3) for  s4_t_lp_i = 0; 
 [60] MAINPROCESS(3) for  s4_t_lp_i < s4_a_peak_num_up; 
 [61] MAINPROCESS(3) for  s4_t_lp_i++) 
 [62] MAINPROCESS(3) subproc SUBPROCESS(1) 
 [63] SUBPROCESS(1) equal fl_t_min_comp 1000.0;
 [64] SUBPROCESS(1) equal s4_t_found 0;
-[65] SUBPROCESS(1) for <start> for ( 
+[65] SUBPROCESS(1) for  for ( 
 [66] SUBPROCESS(1) for  s4_t_lp_k = 0; 
 [67] SUBPROCESS(1) for  s4_t_lp_k < s4_a_peak_num_dn; 
 [68] SUBPROCESS(1) for  s4_t_lp_k++) 
 [69] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [70] SUBSUBPROCESS(1) func<start> fn_bsm_trailer_check_minimum_pair( 
-[71] SUBSUBPROCESS(1) func s4_t_lp_i, 
-[72] SUBSUBPROCESS(1) func s4_t_lp_k, 
-[73] SUBSUBPROCESS(1) func afl_t_compare, 
-[74] SUBSUBPROCESS(1) func as4_a_used_peak_up, 
-[75] SUBSUBPROCESS(1) func as4_a_used_peak_dn, 
-[76] SUBSUBPROCESS(1) func as4_a_pair_index_up, 
-[77] SUBSUBPROCESS(1) func as4_a_pair_index_dn, 
-[78] SUBSUBPROCESS(1) func &fl_t_min_comp, 
-[79] SUBSUBPROCESS(1) func &s4_t_found, 
-[80] SUBSUBPROCESS(1) func &as4_t_tmp_pair_index_up, 
-[81] SUBSUBPROCESS(1) func &as4_t_tmp_pair_index_dn, 
-[82] SUBSUBPROCESS(1) func &s4_t_pair_num 
-[83] SUBSUBPROCESS(1) func<end> ); 
-[84] SUBPROCESS(2) if <start> if ( 
-[85] SUBPROCESS(2) if  s4_t_found == 1 
-[86] SUBPROCESS(2) if  ) 
-[87] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[88] SUBSUBPROCESS(1) equal as4_a_used_peak_up[as4_t_tmp_pair_index_up] 1;
-[89] SUBSUBPROCESS(1) equal as4_a_used_peak_dn[as4_t_tmp_pair_index_dn] 1;
-[90] SUBSUBPROCESS(1) equal as4_a_pair_index_up[s4_t_pair_num] as4_t_tmp_pair_index_up;
-[91] SUBSUBPROCESS(1) equal as4_a_pair_index_dn[s4_t_pair_num] as4_t_tmp_pair_index_dn;
-[92] SUBSUBPROCESS(1) proc s4_t_pair_num++; 
-[93] MAINPROCESS(4) equal s4_t_tmp_pair_num *ps4_a_pair_num;
-[94] MAINPROCESS(4) for <start> for ( 
-[95] MAINPROCESS(4) for  s4_t_lp_i = s4_t_tmp_pair_num; 
-[96] MAINPROCESS(4) for  s4_t_lp_i < s4_t_pair_num; 
-[97] MAINPROCESS(4) for  s4_t_lp_i++) 
-[98] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[99] SUBPROCESS(1) if <start> if ( 
-[100] SUBPROCESS(1) if  (s4_t_lp_i) < TRAILER_BUFFSIZE 
-[101] SUBPROCESS(1) if  ) 
-[102] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[103] SUBSUBPROCESS(1) func<start> fn_set_normal_data( 
-[104] SUBSUBPROCESS(1) func &ast_a_normal_trailer[s4_t_lp_i], 
-[105] SUBSUBPROCESS(1) func afl_a_peak_bins_intpl_up[as4_a_pair_index_up[s4_t_lp_i]], 
-[106] SUBSUBPROCESS(1) func afl_a_peak_bins_intpl_dn[as4_a_pair_index_dn[s4_t_lp_i]], 
-[107] SUBSUBPROCESS(1) func afl_a_peak_doa_bins_intpl_up[as4_a_pair_index_up[s4_t_lp_i]], 
-[108] SUBSUBPROCESS(1) func afl_a_peak_doa_bins_intpl_dn[as4_a_pair_index_dn[s4_t_lp_i]], 
-[109] SUBSUBPROCESS(1) func afl_a_peak_powers_up[as4_a_pair_index_up[s4_t_lp_i]], 
-[110] SUBSUBPROCESS(1) func afl_a_peak_powers_dn[as4_a_pair_index_dn[s4_t_lp_i]], 
-[111] SUBSUBPROCESS(1) func afl_a_peak_doa_powers_up[as4_a_pair_index_up[s4_t_lp_i]], 
-[112] SUBSUBPROCESS(1) func afl_a_peak_doa_powers_dn[as4_a_pair_index_dn[s4_t_lp_i]], 
-[113] SUBSUBPROCESS(1) func 0, 
-[114] SUBSUBPROCESS(1) func 0 
-[115] SUBSUBPROCESS(1) func<end> ); 
-[116] MAINPROCESS(5) if <start> if ( 
-[117] MAINPROCESS(5) if  *ps4_a_pair_num > TRAILER_BUFFSIZE 
-[118] MAINPROCESS(5) if  ) 
-[119] MAINPROCESS(5) subproc SUBPROCESS(1) 
-[120] SUBPROCESS(1) equal *ps4_a_pair_num TRAILER_BUFFSIZE;
-[121] MAINPROCESS(6) proc return; 
------------------ Total Codes : 121 lines
+[71] SUBSUBPROCESS(1) func &s4_t_pair_num 
+[72] SUBSUBPROCESS(1) func<end> ); 
+[73] SUBPROCESS(2) if  if ( 
+[74] SUBPROCESS(2) if  s4_t_found == 1 
+[75] SUBPROCESS(2) if  ) 
+[76] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[77] SUBSUBPROCESS(1) equal as4_a_used_peak_up[as4_t_tmp_pair_index_up] 1;
+[78] SUBSUBPROCESS(1) equal as4_a_used_peak_dn[as4_t_tmp_pair_index_dn] 1;
+[79] SUBSUBPROCESS(1) equal as4_a_pair_index_up[s4_t_pair_num] as4_t_tmp_pair_index_up;
+[80] SUBSUBPROCESS(1) equal as4_a_pair_index_dn[s4_t_pair_num] as4_t_tmp_pair_index_dn;
+[81] SUBSUBPROCESS(1) proc s4_t_pair_num++; 
+[82] MAINPROCESS(4) equal s4_t_tmp_pair_num *ps4_a_pair_num;
+[83] MAINPROCESS(4) for  for ( 
+[84] MAINPROCESS(4) for  s4_t_lp_i = s4_t_tmp_pair_num; 
+[85] MAINPROCESS(4) for  s4_t_lp_i < s4_t_pair_num; 
+[86] MAINPROCESS(4) for  s4_t_lp_i++) 
+[87] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[88] SUBPROCESS(1) if  if ( 
+[89] SUBPROCESS(1) if  (s4_t_lp_i) < TRAILER_BUFFSIZE 
+[90] SUBPROCESS(1) if  ) 
+[91] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[92] SUBSUBPROCESS(1) func<start> fn_set_normal_data( 
+[93] SUBSUBPROCESS(1) func 0 
+[94] SUBSUBPROCESS(1) func<end> ); 
+[95] MAINPROCESS(5) if  if ( 
+[96] MAINPROCESS(5) if  *ps4_a_pair_num > TRAILER_BUFFSIZE 
+[97] MAINPROCESS(5) if  ) 
+[98] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[99] SUBPROCESS(1) equal *ps4_a_pair_num TRAILER_BUFFSIZE;
+[100] MAINPROCESS(6) proc return; 
+----------------- Total Codes : 100 lines
 --------------------------
 [Function Name] : fn_bsm_trailer_check_minimum_pair 
 -Return type : static VD 
@@ -789,7 +643,7 @@ Total functions : 15
 [5] MAINPROCESS(1) proc S4 as4_t_pair_index_dn[TRAILER_BUFFSIZE * 2]; 
 [6] MAINPROCESS(1) proc S4 s4_t_lp_pair_num; 
 [7] MAINPROCESS(1) proc S4 s4_t_lp_num_ordi_2; 
-[8] MAINPROCESS(1) for <start> for ( 
+[8] MAINPROCESS(1) for  for ( 
 [9] MAINPROCESS(1) for  s4_t_lp_num_ordi_2 = (S4)0; 
 [10] MAINPROCESS(1) for  s4_t_lp_num_ordi_2 < ((S4)TRAILER_BUFFSIZE * (S4)2 
 [11] MAINPROCESS(1) for  ); 
@@ -797,11 +651,11 @@ Total functions : 15
 [13] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [14] SUBPROCESS(1) equal as4_t_pair_index_up[s4_t_lp_num_ordi_2] (S4)0;
 [15] SUBPROCESS(1) equal as4_t_pair_index_dn[s4_t_lp_num_ordi_2] (S4)0;
-[16] MAINPROCESS(2) if <start> if ( 
+[16] MAINPROCESS(2) if  if ( 
 [17] MAINPROCESS(2) if  afl_a_compare[s4_a_lp_peak_num_up][s4_a_lp_peak_num_dn] < *pfl_a_min_comp 
 [18] MAINPROCESS(2) if  ) 
 [19] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[20] SUBPROCESS(1) if <start> if ( 
+[20] SUBPROCESS(1) if  if ( 
 [21] SUBPROCESS(1) if  (as4_a_used_peak_up[s4_a_lp_peak_num_up] == (S4)0 
 [22] SUBPROCESS(1) if  ) 
 [23] SUBPROCESS(1) if  &&  (as4_a_used_peak_dn[s4_a_lp_peak_num_dn] == (S4)0)) 
@@ -810,14 +664,14 @@ Total functions : 15
 [26] SUBSUBPROCESS(1) equal *ps4_a_found (S4)1;
 [27] SUBSUBPROCESS(1) equal *ps4_a_pair_index_up s4_a_lp_peak_num_up;
 [28] SUBSUBPROCESS(1) equal *ps4_a_pair_index_dn s4_a_lp_peak_num_dn;
-[29] SUBPROCESS(2) else<start> else 
+[29] SUBPROCESS(2) else else 
 [30] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[31] SUBSUBPROCESS(1) for <start> for ( 
+[31] SUBSUBPROCESS(1) for  for ( 
 [32] SUBSUBPROCESS(1) for  s4_t_lp_pair_num = (S4)0; 
 [33] SUBSUBPROCESS(1) for  s4_t_lp_pair_num < *ps4_a_pair_num; 
 [34] SUBSUBPROCESS(1) for  s4_t_lp_pair_num++) 
 [35] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[36] SUBSUBSUBPROCESS(1) if <start> if ( 
+[36] SUBSUBSUBPROCESS(1) if  if ( 
 [37] SUBSUBSUBPROCESS(1) if  ((!(as4_a_used_peak_up[s4_a_lp_peak_num_up] == (S4)0) 
 [38] SUBSUBSUBPROCESS(1) if  ) 
 [39] SUBSUBSUBPROCESS(1) if  &&   (as4_a_pair_index_up[s4_t_lp_pair_num] == s4_a_lp_peak_num_up)) 
@@ -827,7 +681,7 @@ Total functions : 15
 [43] SUBSUBSUBSUBPROCESS(1) equal fl_t_min_comp_temp *pfl_a_min_comp;
 [44] SUBSUBSUBSUBPROCESS(1) equal *pfl_a_min_comp afl_a_compare[s4_a_lp_peak_num_up][s4_a_lp_peak_num_dn];
 [45] SUBSUBSUBSUBPROCESS(1) equal fl_t_min_comp_prev afl_a_compare[as4_a_pair_index_up[s4_t_lp_pair_num]][as4_a_pair_index_dn[s4_t_lp_pair_num]];
-[46] SUBSUBSUBSUBPROCESS(1) if <start> if ( 
+[46] SUBSUBSUBSUBPROCESS(1) if  if ( 
 [47] SUBSUBSUBSUBPROCESS(1) if  *pfl_a_min_comp < fl_t_min_comp_prev 
 [48] SUBSUBSUBSUBPROCESS(1) if  ) 
 [49] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
@@ -838,27 +692,27 @@ Total functions : 15
 [54] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_found (S4)1;
 [55] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_pair_index_up s4_a_lp_peak_num_up;
 [56] SUBSUBSUBSUBSUBPROCESS(1) equal *ps4_a_pair_index_dn s4_a_lp_peak_num_dn;
-[57] SUBSUBSUBSUBPROCESS(2) else<start> else 
+[57] SUBSUBSUBSUBPROCESS(2) else else 
 [58] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
 [59] SUBSUBSUBSUBSUBPROCESS(1) equal *pfl_a_min_comp fl_t_min_comp_temp;
 [60] SUBPROCESS(3) equal s4_t_pair_num_tmp (S4)0;
-[61] SUBPROCESS(3) for <start> for ( 
+[61] SUBPROCESS(3) for  for ( 
 [62] SUBPROCESS(3) for  s4_t_lp_pair_num = (S4)0; 
 [63] SUBPROCESS(3) for  s4_t_lp_pair_num < *ps4_a_pair_num; 
 [64] SUBPROCESS(3) for  s4_t_lp_pair_num++) 
 [65] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[66] SUBSUBPROCESS(1) if <start> if ( 
+[66] SUBSUBPROCESS(1) if  if ( 
 [67] SUBSUBPROCESS(1) if  as4_a_pair_index_up[s4_t_lp_pair_num] != (S4)-1 
 [68] SUBSUBPROCESS(1) if  ) 
 [69] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
 [70] SUBSUBSUBPROCESS(1) equal as4_t_pair_index_up[s4_t_pair_num_tmp] as4_a_pair_index_up[s4_t_lp_pair_num];
 [71] SUBSUBSUBPROCESS(1) equal as4_t_pair_index_dn[s4_t_pair_num_tmp] as4_a_pair_index_dn[s4_t_lp_pair_num];
 [72] SUBSUBSUBPROCESS(1) proc s4_t_pair_num_tmp++; 
-[73] SUBPROCESS(4) if <start> if ( 
+[73] SUBPROCESS(4) if  if ( 
 [74] SUBPROCESS(4) if  s4_t_pair_num_tmp > (S4)0 
 [75] SUBPROCESS(4) if  ) 
 [76] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[77] SUBSUBPROCESS(1) for <start> for ( 
+[77] SUBSUBPROCESS(1) for  for ( 
 [78] SUBSUBPROCESS(1) for  s4_t_lp_pair_num = (S4)0; 
 [79] SUBSUBPROCESS(1) for  s4_t_lp_pair_num < s4_t_pair_num_tmp; 
 [80] SUBSUBPROCESS(1) for  s4_t_lp_pair_num++) 
@@ -875,7 +729,7 @@ Total functions : 15
      [1] : NORMAL_BSM   ast_a_normal_trailer[TRAILER_BUFFSIZE] 
 ----- Codes -----
 [1] MAINPROCESS(1) proc S4 s4_t_lp_i; 
-[2] MAINPROCESS(1) for <start> for ( 
+[2] MAINPROCESS(1) for  for ( 
 [3] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [4] MAINPROCESS(1) for  s4_t_lp_i < *ps4_a_pair_num; 
 [5] MAINPROCESS(1) for  s4_t_lp_i++) 
@@ -908,14 +762,14 @@ Total functions : 15
 [13] MAINPROCESS(1) equal s4_t_pair_num_trailer *as4_pair_num_trailer;
 [14] MAINPROCESS(1) func<start> fl_t_doa_upper_limit = ((FL)(N_DOA * 0.5F) - st_g_bsm_loop_data.afl_installed_angle[0]  - (FL)CU1_DOA_BIN_LOWER_LIMIT_T + (FL)CU1_DOA_BIN_UPPER_LIMIT_T 
 [15] MAINPROCESS(1) func<end> ); 
-[16] MAINPROCESS(1) for<start> for( 
+[16] MAINPROCESS(1) for for( 
 [17] MAINPROCESS(1) for s4_t_lp_i = 0; 
 [18] MAINPROCESS(1) for s4_t_lp_i < *as4_pair_num_ordinary; 
 [19] MAINPROCESS(1) for s4_t_lp_i++) 
 [20] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [21] SUBPROCESS(1) equal s4_trailer_bin ast_a_normal_ordinary[s4_t_lp_i].s4_bin_up;
 [22] SUBPROCESS(1) equal fl_power_thres afl_t_thres_trailer[s4_trailer_bin];
-[23] SUBPROCESS(1) if<start> if( 
+[23] SUBPROCESS(1) if if( 
 [24] SUBPROCESS(1) if ast_a_normal_ordinary[s4_t_lp_i].s4_bin_up < FREQ_BIN_UPPER_LIMIT_DN_T 
 [25] SUBPROCESS(1) if && ast_a_normal_ordinary[s4_t_lp_i].s4_bin_dn < FREQ_BIN_UPPER_LIMIT_DN_T 
 [26] SUBPROCESS(1) if && ast_a_normal_ordinary[s4_t_lp_i].fl_doa_up_interpolate < fl_t_doa_upper_limit 
@@ -925,12 +779,12 @@ Total functions : 15
 [30] SUBPROCESS(1) if ) 
 [31] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [32] SUBSUBPROCESS(1) equal s4_t_erase_ordinary_flag (S4)0;
-[33] SUBSUBPROCESS(1) for<start> for( 
+[33] SUBSUBPROCESS(1) for for( 
 [34] SUBSUBPROCESS(1) for s4_t_lp_j = 0; 
 [35] SUBSUBPROCESS(1) for s4_t_lp_j < *as4_pair_num_trailer; 
 [36] SUBSUBPROCESS(1) for s4_t_lp_j++) 
 [37] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[38] SUBSUBSUBPROCESS(1) if<start> if( 
+[38] SUBSUBSUBPROCESS(1) if if( 
 [39] SUBSUBSUBPROCESS(1) if ast_a_normal_ordinary[s4_t_lp_i].s4_bin_up == ast_a_normal_trailer[s4_t_lp_j].s4_bin_up 
 [40] SUBSUBSUBPROCESS(1) if && ast_a_normal_ordinary[s4_t_lp_i].s4_bin_dn == ast_a_normal_trailer[s4_t_lp_j].s4_bin_dn 
 [41] SUBSUBSUBPROCESS(1) if && ast_a_normal_ordinary[s4_t_lp_i].fl_power_up == ast_a_normal_trailer[s4_t_lp_j].fl_power_up 
@@ -938,7 +792,7 @@ Total functions : 15
 [43] SUBSUBSUBPROCESS(1) if ) 
 [44] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
 [45] SUBSUBSUBSUBPROCESS(1) equal s4_t_erase_ordinary_flag (S4)1;
-[46] SUBSUBPROCESS(2) if<start> if( 
+[46] SUBSUBPROCESS(2) if if( 
 [47] SUBSUBPROCESS(2) if s4_t_erase_ordinary_flag == (S4)0 
 [48] SUBSUBPROCESS(2) if ) 
 [49] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
@@ -947,11 +801,11 @@ Total functions : 15
 [52] SUBSUBSUBPROCESS(1) func<start> fn_init(&ast_a_normal_ordinary[s4_t_lp_i], 1 
 [53] SUBSUBSUBPROCESS(1) func<end> ); 
 [54] SUBSUBSUBPROCESS(1) proc s4_t_pair_num_trailer ++; 
-[55] SUBSUBPROCESS(3) else<start> else 
+[55] SUBSUBPROCESS(3) else else 
 [56] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
 [57] SUBSUBSUBPROCESS(1) func<start> fn_init(&ast_a_normal_ordinary[s4_t_lp_i], 1 
 [58] SUBSUBSUBPROCESS(1) func<end> ); 
-[59] MAINPROCESS(2) if<start> if( 
+[59] MAINPROCESS(2) if if( 
 [60] MAINPROCESS(2) if s4_t_pair_num_trailer > TRAILER_BUFFSIZE 
 [61] MAINPROCESS(2) if ) 
 [62] MAINPROCESS(2) subproc SUBPROCESS(1) 
@@ -978,28 +832,28 @@ Total functions : 15
 [7] MAINPROCESS(1) func<end> ); 
 [8] MAINPROCESS(1) func<start> fn_move(ast_t_buf_normal, ast_a_copy_normal_trailer, TRAILER_BUFFSIZE 
 [9] MAINPROCESS(1) func<end> ); 
-[10] MAINPROCESS(1) for <start> for ( 
+[10] MAINPROCESS(1) for  for ( 
 [11] MAINPROCESS(1) for  s4_t_lp_i = 0; 
 [12] MAINPROCESS(1) for  s4_t_lp_i < TRAILER_BUFFSIZE; 
 [13] MAINPROCESS(1) for  s4_t_lp_i++) 
 [14] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[15] SUBPROCESS(1) for <start> for ( 
+[15] SUBPROCESS(1) for  for ( 
 [16] SUBPROCESS(1) for  s4_t_lp_j = 0; 
 [17] SUBPROCESS(1) for  s4_t_lp_j < TRAILER_BUFFSIZE; 
 [18] SUBPROCESS(1) for  s4_t_lp_j++) 
 [19] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[20] SUBSUBPROCESS(1) if <start> if ( 
+[20] SUBSUBPROCESS(1) if  if ( 
 [21] SUBSUBPROCESS(1) if  s4_t_lp_i < s4_t_lp_j 
 [22] SUBSUBPROCESS(1) if  ) 
 [23] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[24] SUBSUBSUBPROCESS(1) if <start> if ( 
+[24] SUBSUBSUBPROCESS(1) if  if ( 
 [25] SUBSUBSUBPROCESS(1) if  (ast_a_copy_normal_trailer[s4_t_lp_i].fl_Ryobs != CFL_UNKNOWN_VALUE) 
 [26] SUBSUBSUBPROCESS(1) if  && (ast_a_copy_normal_trailer[s4_t_lp_j].fl_Ryobs != CFL_UNKNOWN_VALUE) 
 [27] SUBSUBSUBPROCESS(1) if  ) 
 [28] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
 [29] SUBSUBSUBSUBPROCESS(1) equal fl_a_range_1 ast_a_copy_normal_trailer[s4_t_lp_i].fl_Ryobs;
 [30] SUBSUBSUBSUBPROCESS(1) equal fl_a_range_2 ast_a_copy_normal_trailer[s4_t_lp_j].fl_Ryobs;
-[31] SUBSUBSUBSUBPROCESS(1) if <start> if ( 
+[31] SUBSUBSUBSUBPROCESS(1) if  if ( 
 [32] SUBSUBSUBSUBPROCESS(1) if  fl_a_range_1 < fl_a_range_2 
 [33] SUBSUBSUBSUBPROCESS(1) if  ) 
 [34] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
@@ -1020,7 +874,7 @@ Total functions : 15
      [2] : S4   size 
 ----- Codes -----
 [1] MAINPROCESS(1) proc S4 i; 
-[2] MAINPROCESS(1) for<start> for( 
+[2] MAINPROCESS(1) for for( 
 [3] MAINPROCESS(1) for i=0; 
 [4] MAINPROCESS(1) for i<size; 
 [5] MAINPROCESS(1) for i++) 
