@@ -105,8 +105,8 @@ func_source_analyze.print_out(fout, "Total functions : %d "  % func_list.func_nu
 for index1 in range(0, func_list.func_num):
 	func_source_analyze.print_out(fout, "--------------------------", 1)
 
-#0422	if debug_out:
-	print '====== %s ======' % func_list.function_data[index1].name
+	if debug_out:
+		print '====== %s ======' % func_list.function_data[index1].name
 
 	# FUNCTION
 	func_source_analyze.print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
@@ -124,13 +124,6 @@ for index1 in range(0, func_list.func_num):
 		func_source_analyze.print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
 		for index2 in range(0, len(func_list.function_data[index1].codes)):
 			func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
-
-
-
-
-
-
-
 
 
 ###### call function (analyze_process_code) ######

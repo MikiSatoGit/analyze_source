@@ -457,12 +457,12 @@ def remove_undefined_codes(lines):
 # [in] lines : List
 # [return] cnt : number of List items
 # [return] valid_lines : List
-	########## VARID PREPROCESSOR (only for #if) #################
+########## VARID PREPROCESSOR (only for #if) #################
 #	valid_preprocessor_code = []
 #	valid_preprocessor_code.append('SIM_MODE')
 #	valid_preprocessor_code.append('TYPE_B')
 #	valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
-	##############################################################
+##############################################################
 
 	cnt = 0
 	tmp_lines = []
@@ -560,9 +560,9 @@ def load_valid_source_code(source_file):
 	cnt, valid_lines = remove_undefined_codes(lines)
 	cnt, valid_lines = remove_comment_codes(valid_lines)
 
-#0508	if debug_out:
-	for line in valid_lines:
-		print '<load_valid_source_code> %s' % line,
+	if debug_out:
+		for line in valid_lines:
+			print '<load_valid_source_code> %s' % line,
 
 	return cnt, valid_lines
 
@@ -579,7 +579,6 @@ def find_functions(valid_lines):
 
 	#change line after {
 	valid_lines = change_line_after_bracket(valid_lines, '{')
-
 
 	#delete LF before operator (top of the line) / after operator (end of the line)
 	valid_lines = delete_change_line_around_operator(valid_lines, '=')
@@ -651,16 +650,17 @@ def find_functions(valid_lines):
 					del func_content_lines[:]
 					del func_def_lines[:]
 
-#0508	if debug_out:
-	for debug_func_data in func_list.function_data:
-		print '<find_functions> Func Name %s' % debug_func_data.name
-		for debug_code in debug_func_data.codes:
-			print '<find_functions>  --> %s' % debug_code
+	if debug_out:
+		for debug_func_data in func_list.function_data:
+			print '<find_functions> Func Name %s' % debug_func_data.name
+			for debug_code in debug_func_data.codes:
+				print '<find_functions>  --> %s' % debug_code
 
 	if debug_out:
 		print '<find_functions> END of find_functions'
 
 	return func_list
+
 
 def change_line_after_bracket(valid_lines, bracket):
 	tmp_valid_lines =[]
@@ -677,6 +677,7 @@ def change_line_after_bracket(valid_lines, bracket):
 			tmp_valid_lines.append(remove_comment_line(tmp_line))
 	valid_lines = copy.deepcopy(tmp_valid_lines)
 	return valid_lines
+
 
 def delete_change_line_around_operator(valid_lines, operator):
 	tmp_valid_lines =[]
@@ -703,7 +704,6 @@ def delete_change_line_around_operator(valid_lines, operator):
 	return valid_lines
 
 
-
 def analyze_function_list(FunctionData):
 # [in] FunctionData : FunctionData (FunctionList.function_data)
 # [out] FunctionData.process_code_list : ProcessCodes (FunctionList.function_data.process_code_list)
@@ -717,9 +717,9 @@ def analyze_function_list(FunctionData):
 	# [out] proc_list: ProcessCodes
 	FunctionData.process_code_list = proc_list
 
-#0508	if debug_out:
-	for debug_index in range(0, FunctionData.process_code_list.get_main_size()) :
-		print '<analyze_function_list> %s : ' % (FunctionData.process_code_list.main[debug_index])
+	if debug_out:
+		for debug_index in range(0, FunctionData.process_code_list.get_main_size()) :
+			print '<analyze_function_list> %s : ' % (FunctionData.process_code_list.main[debug_index])
 
 	if debug_out:
 		print '<analyze_function_list> END of analyze_function_list'
@@ -835,12 +835,12 @@ def analyze_function_codes(function_codes):
 		 proc_levels_2nd[index1], \
 		 proc_ids_2nd[index1] )
 
-#0508		if debug_out:
-		print '<analyze_function_codes>  ----> ',
-		print proc_titles_2nd[index1],
-		print '[%d]' % proc_levels_2nd[index1] ,	
-		print '(%d)' % proc_ids_2nd[index1] ,
-		print proc_codes_2nd[index1]
+		if debug_out:
+			print '<analyze_function_codes>  ----> ',
+			print proc_titles_2nd[index1],
+			print '[%d]' % proc_levels_2nd[index1] ,	
+			print '(%d)' % proc_ids_2nd[index1] ,
+			print proc_codes_2nd[index1]
 
 	if debug_out:
 		print '<analyze_function_codes> END of analyze_function_codes'
@@ -1050,9 +1050,7 @@ def check_end_bracket_in_code(line):
 				code_remain = ''
 				line = code_remain
 
-#0508
 # do not append if only ','
-#	if len(line)!=0:
 	if len(line)!=0 and line.strip().find(',')!=1 and line.strip().find(',')!=len(line.strip())-1:
 		out_lines.append(copy.deepcopy(line))
 
@@ -1079,14 +1077,13 @@ def analyze_process_code(proc_codes):
 	# [in] proc_codes : ProcessCodes (main)
 	# [out] proc_codes : ProcessCodes (proc_data_list)
 
-#0508	if debug_out:
-	for debug_index in range (0, proc_codes.get_proc_data_size()):
-		for debug_index2 in range (0, proc_codes.proc_data_list[debug_index].get_main_size()):
-			print '<analyze_process_code> [%s] %s / %s' % \
-			( proc_codes.proc_data_list[debug_index].type[debug_index2], \
-			  proc_codes.proc_data_list[debug_index].left[debug_index2], \
-			  proc_codes.proc_data_list[debug_index].right[debug_index2] )
-
+	if debug_out:
+		for debug_index in range (0, proc_codes.get_proc_data_size()):
+			for debug_index2 in range (0, proc_codes.proc_data_list[debug_index].get_main_size()):
+				print '<analyze_process_code> [%s] %s / %s' % \
+				( proc_codes.proc_data_list[debug_index].type[debug_index2], \
+				  proc_codes.proc_data_list[debug_index].left[debug_index2], \
+				  proc_codes.proc_data_list[debug_index].right[debug_index2] )
 
 ########## analyze control statement ##########
 	ctrl_stat_list = analyze_control_statement(proc_codes)
@@ -1120,8 +1117,8 @@ def analyze_sub_process_code(proc_codes):
 		tmp_title = proc_codes.title[index]
 		tmp_code = proc_codes.main[index]
 
-#0508		if debug_out:
-		print '<analyze_sub_process_code> checking %s' % tmp_code
+		if debug_out:
+			print '<analyze_sub_process_code> checking %s' % tmp_code
 
 		if is_for > 0:
 			if tmp_code.count('(')!=-1:
@@ -1273,7 +1270,6 @@ def analyze_sub_process_code(proc_codes):
 									print '<analyze_sub_process_code>   -> append(6) %s %s' % (tmp_left.strip(), tmp_right.strip())
 
 							else:
-								#0508
 								# do not append if only ';'
 								if tmp_left.strip().find(';')==0 and tmp_left.strip().find(';')==len(tmp_left.strip())-1:
 									break
@@ -1363,8 +1359,6 @@ def analyze_control_statement(proc_codes):
 #	break 					exit loop
 #	continue				skip remaining process in loop
 #	goto 					jump
-
-	debug_out = True #0508
 
 	if debug_out:
 		print '<analyze_control_statement> START of analyze_control_statement'
@@ -1456,10 +1450,6 @@ def analyze_control_statement(proc_codes):
 							if debug_out:
 								print '<analyze_control_statement> Type is ??? Lv%d' % bracket_level
 
-
-
-
-
 ###### find ')' of condition
 							if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')!=-1:
 							 	if bracket_level==0 and condition_end_index1==-1:
@@ -1492,7 +1482,6 @@ def analyze_control_statement(proc_codes):
 										  proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('), \
 										  bracket_level )
 
-#0508
 # divide by ( and ) if there is some ctrl_stat before (
 									if proc_codes.proc_data_list[index1_r].left[index2_r].strip().find('(')!=0:
 										tmp_left_split = [ \
@@ -1578,7 +1567,6 @@ def analyze_control_statement(proc_codes):
 										print '<analyze_control_statement>    condition_start_index2 %s' % condition_start_index2
 										print '<analyze_control_statement>    condition_end_index1 %s' % condition_end_index1
 										print '<analyze_control_statement>    condition_end_index2 %s' % condition_end_index2
-
 							else:
 
 								if debug_out:
@@ -1632,7 +1620,6 @@ def analyze_control_statement(proc_codes):
 									break
 								if proc_codes.proc_data_list[index1_r].type[index2_r].find('???')!=-1:
 									if proc_codes.proc_data_list[index1_r].left[index2_r].find('(')!=-1:
-#0508
 # divide by ( and ) if there is some ctrl_stat before (
 										if proc_codes.proc_data_list[index1_r].left[index2_r].strip().find('(')!=0:
 											tmp_ctrl = proc_codes.proc_data_list[index1_r].left[index2_r][0:proc_codes.proc_data_list[index1_r].left[index2_r].find('(')]
@@ -1661,7 +1648,6 @@ def analyze_control_statement(proc_codes):
 				if debug_out:
 					print '<analyze_control_statement> ->ctrl stat %s / %d [%d][%d]' %  (tmp_ctrl, ctrl_proc_num, previous_end_index1, previous_end_index2)
 
-
 	if debug_out:
 		for debug_index in range(0, proc_codes.get_proc_data_size()):
 			for debug_index2 in range(0, proc_codes.proc_data_list[debug_index].get_main_size()):
@@ -1673,8 +1659,9 @@ def analyze_control_statement(proc_codes):
 	debug_num = 0
 	for debug_ctrl_stat in ctrl_stat_list:
 		debug_num += 1
-		print '<analyze_control_statement> ctrl_stat list[%d] %s' % (debug_num, debug_ctrl_stat)
 
+		if debug_out:
+			print '<analyze_control_statement> ctrl_stat list[%d] %s' % (debug_num, debug_ctrl_stat)
 
 # set type in ProcessData
 	tmp_ctrl_stat = '???'
@@ -1697,8 +1684,6 @@ def analyze_control_statement(proc_codes):
 						ctrl_stat_id = len(ctrl_stat_list)-1
 						break
 
-
-				#0508 
 				# skip if only ';'
 				if proc_codes.proc_data_list[index].left[index2].strip().find(';')==0 and proc_codes.proc_data_list[index].left[index2].strip().find(';')==len(proc_codes.proc_data_list[index].left[index2].strip())-1:
 					break
@@ -1720,16 +1705,6 @@ def analyze_control_statement(proc_codes):
 
 					if ctrl_stat_id > len(ctrl_stat_list)-1:
 						ctrl_stat_id = len(ctrl_stat_list)-1
-
-#skip 'noctrl' in ctrl_stat_list
-#					while ctrl_stat_list[ctrl_stat_id].find('noctrl')!=-1:
-#						ctrl_stat_id += 1
-#						if ctrl_stat_id > len(ctrl_stat_list)-1:
-#							ctrl_stat_id = len(ctrl_stat_list)-1
-#							break
-#					continue
-
-
 
 # keep setting type until type = subproc
 			if proc_codes.proc_data_list[index].type[index2].find('subproc')!=-1:
