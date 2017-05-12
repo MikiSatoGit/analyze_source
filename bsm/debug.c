@@ -1,6 +1,6 @@
-static VD fn_bsm_sel_exobj_bumper_reflection(
-	S4 s4_a_pair_num_current,
-	NORMAL_BSM ast_a_normal_current[NORMAL_BUFFSIZE]
+VD fn_miki_test4(
+	type1 arg1
+	,type2 arg2
 )
 {
 	S4 s4_t_lp_normal;			/* NORMAL物標のループ変数 仕様書ではi */
@@ -22,28 +22,63 @@ static VD fn_bsm_sel_exobj_bumper_reflection(
 		{(FL)9.0,		(FL)38.6}
 	};
 
-	for (s4_t_lp_normal = (S4)0; s4_t_lp_normal < s4_a_pair_num_current; s4_t_lp_normal++) {
-		if (ast_a_normal_current[s4_t_lp_normal].fl_Robs != CFL_UNKNOWN_VALUE) {			/* COND.b2 */
-			/* 条件チェック用に各情報を変換 */
-			fl_t_obj_power = (ast_a_normal_current[s4_t_lp_normal].fl_power_up_music + ast_a_normal_current[s4_t_lp_normal].fl_power_dn_music) * (FL)0.5;
-			fl_t_abs_robs = fl_abs(ast_a_normal_current[s4_t_lp_normal].fl_Robs);
-			fl_t_abs_vobs = fl_abs(ast_a_normal_current[s4_t_lp_normal].fl_Vobs);
 
-			/* 閾値を設定 */
-			fl_t_thd_exobj_range = (FL)9.0;
-			fl_t_thd_exobj_power = fl_smap_new(CFL_D_MAP_EXOBJ_POWER, CU2_MAP_EXOBJ_POWER_INDEX, fl_t_abs_robs);
+	miki2_1 = subsub_1(
+		(S1)arg2_1_1,
+		arg2_1_2 );
+	miki2_2 
+	= subsub_2(
+		(S1)arg2_2_1,
+		arg2_2_2
+	);
+	miki2_3 = 
+	subsub_3(
+		(S1)arg2_3_1,
+		arg2_3_2
+	);
 
-			/* 不要物標を削除 */
-			if ((ast_a_normal_current[s4_t_lp_normal].s4_flg_dc != (S4)OBJECT_TYPE_2F)		/* COND.n2 */
-			&&	(fl_t_abs_robs < fl_t_thd_exobj_range)										/* COND.n3 */
-			&&	(ast_a_normal_current[s4_t_lp_normal].fl_Ryobs < (FL)-EKF_RY_SIDE)			/* COND.n4 */
-			&&	(fl_t_abs_vobs < ((FL)5.0 * (FL)VCOF))										/* COND.n5 */
-			&&	(fl_t_obj_power < fl_t_thd_exobj_power)) {									/* COND.n6 */
-				fn_init(&ast_a_normal_current[s4_t_lp_normal], (S4)1);
+
+	switch (hogehoge3_2){									/* SUBSUBSUBSUBPROCESS(2) ↓ */
+	case mode1:
+		miki4_2_1 = subsubsubsub_mode_1;
+		break;
+	case mode1:
+		miki4_2_2 = subsubsubsub_mode_2;
+		break;
+	default:
+		miki4_2_3 = subsubsubsub_mode_default;
+		break;
+	}														/* SUBSUBSUBSUBPROCESS(2) ↑ */
+
+	if(lv1_1 == 11)
+	{
+		if(lv1_1_1 == 111)
+		{
+			level1_1_1_1 = hoge1_1_1_1;
+			if(hogehoge_1)
+			{
+				if(hogehoge_2){ level1_1_1_1 = hoge1_1_1_1; level1_1_1_2 = hoge1_1_1_2; }
 			}
 		}
+		else if(lv1_1_2 == 112)
+		{
+			level1_1_2_1 = hoge1_1_2_1;
+		}
+		else
+		{
+			level1_1_3_1 = hoge1_1_3_1;
+		}
+	}
+	else if(lv1_2 == 12)
+	{
+		level1_2_1 = hoge1_2_1;
+	}
+	else
+	{
+		level1_3_1 = hoge1_3_1;
 	}
 
 	return;
+
 }
 

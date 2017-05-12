@@ -16,6 +16,7 @@ import csv
 import operator
 import copy
 import func_source_analyze
+import func_blockdiag
 
 ############################################################################################
 debug_out = False
@@ -139,6 +140,14 @@ for index1 in range(0, func_list.func_num):
 	func_source_analyze.print_out(fout, "----------------- Total Codes : %d lines" % total_lines, 1)
 
 
+
+
+
+	func_blockdiag.draw_diag( \
+		str_filename1, \
+		func_list.function_data[index1].name, \
+		func_list.function_data[index1].process_code_list \
+	)
 
 
 

@@ -1066,8 +1066,8 @@ def check_end_bracket_in_code(line):
 
 
 def analyze_process_code(proc_codes):
-# [in] proc_codes : 
-# [out] proc_codes : 
+# [in] proc_codes : ProcessCodes
+# [out] proc_codes : ProcessCodes
 
 	if debug_out:
 		print '<analyze_process_code> START of analyze_process_code'
