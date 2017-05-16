@@ -38,6 +38,7 @@ VD fn_miki_test4(
 	);
 
 
+
 	switch (hogehoge3_2){									/* SUBSUBSUBSUBPROCESS(2) Å´ */
 	case mode1:
 		miki4_2_1 = subsubsubsub_mode_1;
@@ -49,6 +50,32 @@ VD fn_miki_test4(
 		miki4_2_3 = subsubsubsub_mode_default;
 		break;
 	}														/* SUBSUBSUBSUBPROCESS(2) Å™ */
+
+
+	for(i=0; i<n; i++)
+	{
+		test1 += 1;
+	}
+
+	while(test1==1)
+	{
+		test1 = 2;
+	}
+
+	if(test1==1)
+	{
+		test1 = 1;
+	}
+
+
+	if(test2==1)
+	{
+		test2 = 1;
+	}
+	else
+	{
+		test2 = 0;
+	}
 
 	if(lv1_1 == 11)
 	{
