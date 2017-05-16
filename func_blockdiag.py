@@ -11,6 +11,7 @@
 from blockdiag import parser, builder, drawer 
 import func_source_analyze
 import copy
+import re
 
 class BlockDataList:
 	def __init__(self):
@@ -57,15 +58,12 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 #	source += 'class else [shape = diamond];\n'
 	source += 'class for [shape = flowchart.loopin];\n'
 	source += 'class forend [shape = flowchart.loopout];\n'
-	source += 'class while [shape = flowchart.loopin, color = pink];\n'
-	source += 'class whileend [shape = flowchart.loopout, color = pink];\n'
-	source += 'class switch [shape = diamond, color = pink];\n'
+	source += 'class while [shape = flowchart.loopin, color = gray];\n'
+	source += 'class whileend [shape = flowchart.loopout, color = gray];\n'
+	source += 'class switch [shape = diamond, color = gray];\n'
 	source += 'class pt [shape = minidiamond];\n'
-	source += 'class state [color = pink];\n'
+	source += 'class subproc [color = pink];\n'
 	source += 'START -> '
-
-
-
 
 
 
@@ -73,33 +71,37 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 	block_data_list = BlockDataList()
 	block_data = BlockData()
 	current_title = ''
+	proc_id = 0
+	cond_proc_id = 0
 
 	for index1 in range(0, proc_codes.get_proc_data_size()):
 		for index2 in range(0,proc_codes.proc_data_list[index1].get_main_size()):
 			proc_title = proc_codes.proc_data_list[index1].title[index2].strip()
 			proc_type = proc_codes.proc_data_list[index1].type[index2].strip()
+			proc_left = proc_codes.proc_data_list[index1].left[index2]
 
-# MAIN process
+### MAIN process
 			if proc_title.find(level_title)!=-1:
 
-# Skip ";" only
+				# Skip ";" only
 				if proc_codes.proc_data_list[index1].left[0].find(';')!=-1 and len(proc_codes.proc_data_list[index1].left[0])==1:
 					print '<draw_diag> Skip ";" only'
 					continue
 
 
 				if func_source_analyze.is_ctrl_stat(proc_type)==True:
-					print proc_title,
+					cond_proc_id = int( proc_title[proc_title.find('(')+1:proc_title.find(')')] )
 					proc_title = find_ctrl_stat_in_title(proc_title, proc_type, level_title)
-					print '-> %s' % proc_title
 				else:
+					proc_id = int( proc_title[proc_title.find('(')+1:proc_title.find(')')] )
 					proc_title = proc_title.replace('PROCESS', '')
 					proc_title = proc_title.replace('(', '')
 					proc_title = proc_title.replace(')', '')
 
-# level title is chaged
+
+				# level title is chaged
 				if proc_title != current_title:
-# condition
+### condition
 # if, else if, else
 # for
 # while
@@ -116,26 +118,31 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 						block_data.type = proc_type
 						block_data.procs.append(proc_codes.proc_data_list[index1])
 
-# not condition
+### not condition
 					else:
 						if block_data.proc_size() != 0:
 							block_data_list.blockdata.append(copy.deepcopy(block_data))
 						block_data.clear()
+
+
+						# subprocess of condition 
+						if proc_id==cond_proc_id and proc_type.find('subproc')!=-1:
+							proc_title = current_title[:current_title.find('_')] + '_' + proc_left.replace('PROCESS', '')
+							proc_title = proc_title.replace('(', '')
+							proc_title = proc_title.replace(')', '')
+
 						current_title = proc_title
 
 						block_data.title = current_title
-#						block_data.title = block_data.title.replace('PROCESS', '')
-#						block_data.title = block_data.title.replace('(', '')
-#						block_data.title = block_data.title.replace(')', '')
 						print block_data.title
 						block_data.procs.append(proc_codes.proc_data_list[index1])
 
-# level title is not chaged
+				# level title is not chaged
 				else:
 					block_data.procs.append(proc_codes.proc_data_list[index1])
 					print '<draw_diag> No diagram'
 
-# SUB process
+#### SUB process
 			else:
 				print '<draw_diag> Skip sub proc'
 
@@ -144,6 +151,8 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 
 
 
+
+	print '----------------------------------------'
 	print block_data_list.size()
 	for index in range(0, block_data_list.size()):
 		blockdata = block_data_list.blockdata[index]
@@ -153,79 +162,105 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 
 
 
-
-
 #################### Create Block diag code ####################
 	print '----------------------------------------'
 	block_code =''
 	block_code_cond_list = []
-	condition_prev = ''
+	condition_if_prev = ''
+	sub_proc_list = []
+
+# main flow
 	for index in range(0, len(block_data_list.blockdata)):
 		tmp_blockdata = block_data_list.blockdata[index]
 		tmp_str = tmp_blockdata.title
+
 		print tmp_str
 		if tmp_str.find('_else')!=-1:
-			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_prev)
-			condition_prev = ''
+			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev)
+			condition_if_prev = ''
 
 		elif tmp_str.find('_elif')!=-1:
-			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_prev)
-			condition_prev = tmp_str
+			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_if_prev)
+			condition_if_prev = tmp_str
 
 		elif tmp_str.find('_if')!=-1:
-			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_prev)
-			condition_prev = tmp_str
+			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_if_prev)
+			condition_if_prev = tmp_str
 
 			block_code += tmp_str
 			block_code += ' -> '
 			block_code += tmp_str.replace('_if', '_yes_pt')
-			block_code += ' -> '
+			block_code += ';\n'
+#			block_code += ' -> '
 			block_code += tmp_str.replace('_if', '_end_pt')
 			block_code += ' -> '
 
 		elif tmp_str.find('_switch')!=-1:
 			blockdata = block_data_list.blockdata[index]
-			print ' proc size(%d)' % blockdata.proc_size()
-			for index2 in range(0, blockdata.proc_size()):
-				print ' %s' % blockdata.procs[index2].left[0]
-
-
-
-			condition_prev = ''
-
 			block_code += tmp_str
-			block_code += ' -> '
-			block_code += tmp_str.replace('_switch', '_default_pt')
-			block_code += ' -> '
+			block_code += ';\n'
 			block_code += tmp_str.replace('_switch', '_end_pt')
 			block_code += ' -> '
 
-
-
-
 		elif tmp_str.find('_for')!=-1:
 			block_code += tmp_str
-			block_code += ' -> '
+			block_code += ';\n'
 			block_code += tmp_str.replace('_for', '_END_forend')
 			block_code += ' -> '
 
 		elif tmp_str.find('_while')!=-1:
 			block_code += tmp_str
-			block_code += ' -> '
+			block_code += ';\n'
 			block_code += tmp_str.replace('_while', '_END_whileend')
 			block_code += ' -> '
 
 		else:
-			block_code += tmp_str
-			block_code += ' -> '
-
-
-
-
+			if tmp_str.find('_SUB')==-1:
+				block_code += tmp_str
+				block_code += ' -> '
+			else:
+				sub_proc_list.append(tmp_str)
 
 	block_code += 'END;\n'
-	for blocl_code_cond in block_code_cond_list:
-		block_code += blocl_code_cond
+
+
+# add sub flow
+	for block_code_sub in sub_proc_list:
+		print block_code_sub
+
+		tmp_pt_start = ''
+		tmp_pt_end = '' 
+		if block_code_sub.find('ELSE')!=-1:
+			tmp_pt_start = '_else'
+			tmp_pt_end = '_end_pt'
+		elif block_code_sub.find('ELIF')!=-1:
+			tmp_pt_start = '_yes_pt'
+			tmp_pt_end = '_end_pt'
+		elif block_code_sub.find('IF')!=-1:
+			tmp_pt_start = '_yes_pt'
+			tmp_pt_end = '_end_pt'
+		elif block_code_sub.find('SWITCH')!=-1:
+			tmp_pt_start = '_switch'
+			tmp_pt_end = '_end_pt'
+		elif block_code_sub.find('FOR')!=-1:
+			tmp_pt_start = '_for'
+			tmp_pt_end = '_END_forend'
+		elif block_code_sub.find('WHILE')!=-1:
+			tmp_pt_start = '_while'
+			tmp_pt_end = '_END_whileend'
+
+
+		block_code += block_code_sub[:block_code_sub.find('_')] + tmp_pt_start
+		block_code += ' -> '
+		block_code += block_code_sub + '_subproc'
+		block_code += ' -> '
+		block_code += block_code_sub[:block_code_sub.find('_')] + tmp_pt_end
+		block_code += ';\n'
+
+
+# add condition flow
+	for block_code_cond in block_code_cond_list:
+		block_code += block_code_cond
 
 
 	source += block_code
@@ -281,10 +316,10 @@ def find_ctrl_stat_in_title(title, type, level_title):
 		title = title.replace(level_title, 'IF')
 		title += '_if'
 	elif type.find('for')!=-1:
-		title = title.replace(level_title, 'FOR_LOOP')
+		title = title.replace(level_title, 'FORLOOP')
 		title += '_for'
 	elif type.find('while')!=-1:
-		title = title.replace(level_title, 'WHILE_LOOP')
+		title = title.replace(level_title, 'WHILELOOP')
 		title += '_while'
 	elif type.find('switch')!=-1:
 		title = title.replace(level_title, 'SWITCH')
@@ -315,15 +350,21 @@ def create_if_blocks(condition_str, code, condition_prev):
 			parent_condition = '_if'
 
 	if parent_condition!='':
+		# no_pt -> code
 		block_code_cond = condition_prev
 		block_code_cond += ' -> '
 		block_code_cond += condition_prev.replace(parent_condition, '_no_pt')
 		block_code_cond += ' -> '
 		block_code_cond += code
-		block_code_cond += ' -> '
-		if condition_str.find('_else')==-1:
-			block_code_cond += code.replace(condition_str, '_yes_pt')
-			block_code_cond += ' -> '
+		block_code_cond += ';\n'
+
+
+		# -> yes_pt
+#		if condition_str.find('_else')==-1:
+#			block_code_cond += code.replace(condition_str, '_yes_pt')
+#				block_code_cond += ';\n'
+
+		# end_pt -> end_pt(parent)
 		block_code_cond += code.replace(condition_str, '_end_pt')
 		block_code_cond += ' -> '
 		block_code_cond += condition_prev.replace(parent_condition, '_end_pt')
@@ -335,17 +376,16 @@ def create_if_blocks(condition_str, code, condition_prev):
 
 
 	if condition_str.find('_else')==-1:
+		# code -> yes_pt
 		block_code_cond = code
 		block_code_cond += ' -> '
 		block_code_cond += code.replace(condition_str, '_yes_pt')
 		block_code_cond += ';\n'
 		block_code_cond_list.append(block_code_cond)
 
-		block_code_cond = code.replace(condition_str, '_yes_pt')
-		block_code_cond += ' -> '
-		block_code_cond += code.replace(condition_str, '_end_pt')
-		block_code_cond += ';\n'
-		block_code_cond_list.append(block_code_cond)
+#		block_code_cond += code.replace(condition_str, '_end_pt')
+#		block_code_cond += ';\n'
+#		block_code_cond_list.append(block_code_cond)
 
 		block_code_cond = code.replace(condition_str, '_yes_pt') + '[label = "yes"];\n'
 		block_code_cond_list.append(block_code_cond)
