@@ -52,11 +52,6 @@ VD fn_miki_test4(
 	}														/* SUBSUBSUBSUBPROCESS(2) Å™ */
 
 
-	for(i=0; i<n; i++)
-	{
-		test1 += 1;
-	}
-
 	while(test1==1)
 	{
 		test1 = 2;
@@ -103,6 +98,11 @@ VD fn_miki_test4(
 	else
 	{
 		level1_3_1 = hoge1_3_1;
+	}
+
+	for(i=0; i<n; i++)
+	{
+		test1 += 1;
 	}
 
 	return;

@@ -76,9 +76,8 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 
 	for index1 in range(0, proc_codes.get_proc_data_size()):
 		for index2 in range(0,proc_codes.proc_data_list[index1].get_main_size()):
-			proc_title = proc_codes.proc_data_list[index1].title[index2]
-			proc_type = proc_codes.proc_data_list[index1].type[index2]
-
+			proc_title = proc_codes.proc_data_list[index1].title[index2].strip()
+			proc_type = proc_codes.proc_data_list[index1].type[index2].strip()
 
 # MAIN process
 			if proc_title.find(level_title)!=-1:
@@ -89,6 +88,15 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 					continue
 
 
+				if func_source_analyze.is_ctrl_stat(proc_type)==True:
+					print proc_title,
+					proc_title = find_ctrl_stat_in_title(proc_title, proc_type, level_title)
+					print '-> %s' % proc_title
+				else:
+					proc_title = proc_title.replace('PROCESS', '')
+					proc_title = proc_title.replace('(', '')
+					proc_title = proc_title.replace(')', '')
+
 # level title is chaged
 				if proc_title != current_title:
 # condition
@@ -96,7 +104,7 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 # for
 # while
 # switch, case, default
-					if func_source_analyze.is_ctrl_stat(proc_codes.proc_data_list[index1].type[index2].strip())==True:
+					if func_source_analyze.is_ctrl_stat(proc_type)==True:
 						if block_data.proc_size() != 0:
 							block_data_list.blockdata.append(copy.deepcopy(block_data))
 						block_data.clear()
@@ -104,7 +112,7 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 						current_title = proc_title
 
 						# convert title
-						block_data.title = find_ctrl_stat_in_title(proc_title, proc_type, level_title)
+						block_data.title = proc_title
 						block_data.type = proc_type
 						block_data.procs.append(proc_codes.proc_data_list[index1])
 
@@ -116,25 +124,16 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 						current_title = proc_title
 
 						block_data.title = current_title
-						block_data.title = block_data.title.replace('PROCESS', '')
-						block_data.title = block_data.title.replace('(', '')
-						block_data.title = block_data.title.replace(')', '')
+#						block_data.title = block_data.title.replace('PROCESS', '')
+#						block_data.title = block_data.title.replace('(', '')
+#						block_data.title = block_data.title.replace(')', '')
 						print block_data.title
 						block_data.procs.append(proc_codes.proc_data_list[index1])
 
 # level title is not chaged
 				else:
-					if func_source_analyze.is_ctrl_stat(proc_codes.proc_data_list[index1].type[index2].strip())==True:
-						if block_data.proc_size() != 0:
-							block_data_list.blockdata.append(copy.deepcopy(block_data))
-						block_data.clear()
-						# convert title
-						tmp_title = find_ctrl_stat_in_title(proc_title, proc_type, level_title)
-						block_data.type = proc_type
-						block_data.procs.append(proc_codes.proc_data_list[index1])
-					else:
-						block_data.procs.append(proc_codes.proc_data_list[index1])
-						print '<draw_diag> No diagram'
+					block_data.procs.append(proc_codes.proc_data_list[index1])
+					print '<draw_diag> No diagram'
 
 # SUB process
 			else:
@@ -185,12 +184,24 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 			block_code += ' -> '
 
 		elif tmp_str.find('_switch')!=-1:
-			case_num = 0
-			for index1 in range(0, block_data_list.size()):
-				blockdata = block_data_list.blockdata[index1]
-				print 'proc size(%d)' % blockdata.proc_size()
-				for index2 in range(0, blockdata.proc_size()):
-					print blockdata.procs[index2].left[0]
+			blockdata = block_data_list.blockdata[index]
+			print ' proc size(%d)' % blockdata.proc_size()
+			for index2 in range(0, blockdata.proc_size()):
+				print ' %s' % blockdata.procs[index2].left[0]
+
+
+
+			condition_prev = ''
+
+			block_code += tmp_str
+			block_code += ' -> '
+			block_code += tmp_str.replace('_switch', '_default_pt')
+			block_code += ' -> '
+			block_code += tmp_str.replace('_switch', '_end_pt')
+			block_code += ' -> '
+
+
+
 
 		elif tmp_str.find('_for')!=-1:
 			block_code += tmp_str
