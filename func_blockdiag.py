@@ -36,13 +36,11 @@ class BlockData:
 		return
 
 
-debug_out = False
+debug_out = True
 
-def draw_diag(sourcefilename, funcname, proc_codes):
+def draw_diag(sourcefilename, funcname, proc_codes, level_title):
 # [in] funcname : FunctionList.FunctionData.name (str)
 # [in] proc_codes : FunctionList.FunctionData.process_code_list (ProcessCodes)
-	level_title = 'MAINPROCESS'
-
 	outfile = ''
 	if len(sourcefilename)>1:
 		outfile = sourcefilename[0] + '\\figs\\' + sourcefilename[1]
@@ -104,7 +102,58 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 	draw.draw() 
 	draw.save() 
 
-	return
+
+
+
+
+
+
+
+	print	'============================'
+	out_proc_codes = func_source_analyze.ProcessCodes()
+	tmp_proc_data = func_source_analyze.ProcessData()
+	header_title = ''
+	for index1 in range (0, proc_codes.get_main_size() ):
+
+
+
+
+		if proc_codes.title[index1].find(level_title)==-1:
+#			print	proc_codes.main[index1], 
+			print	proc_codes.title[index1], 
+#			print	proc_codes.level[index1], 
+#			print	proc_codes.id[index1],
+			print	proc_codes.proc_data_list[index1].get_main_size()
+			out_proc_codes.append_code( \
+				proc_codes.main[index1], \
+				proc_codes.title[index1], \
+				proc_codes.level[index1], \
+				proc_codes.id[index1], \
+			)
+
+			tmp_proc_data.clear() 
+			for index2 in range(0,proc_codes.proc_data_list[index1].get_main_size()):
+				if proc_codes.proc_data_list[index1].title[index2].find(level_title)==-1:
+					print	' -> %s' % proc_codes.proc_data_list[index1].title[index2],
+					print	' -> %s' % proc_codes.proc_data_list[index1].type[index2],
+					print	' -> %s' % proc_codes.proc_data_list[index1].left[index2],
+					print	' -> %s' % proc_codes.proc_data_list[index1].right[index2] 
+
+					tmp_proc_data.append_data( \
+							proc_codes.proc_data_list[index1].title[index2], \
+							proc_codes.proc_data_list[index1].type[index2], \
+							proc_codes.proc_data_list[index1].left[index2], \
+							proc_codes.proc_data_list[index1].right[index2] \
+						)
+			out_proc_codes.proc_data_list.append( copy.deepcopy(tmp_proc_data) )
+
+
+
+
+
+
+
+	return out_proc_codes
 
 
 def check_proc_codes(proc_codes, level_title):

@@ -111,7 +111,6 @@ for index1 in range(0, func_list.func_num):
 
 	# FUNCTION
 	func_source_analyze.print_out(fout, "[Function Name] : %s "  % func_list.function_data[index1].name, 1)
-	#func_source_analyze.print_out(fout, "-Code size : %s lines"  % len(func_list.function_data[index1].func_def), 1)
 	func_source_analyze.print_out(fout, "-Return type : %s "  % func_list.function_data[index1].return_type, 1)
 	func_source_analyze.print_out(fout, "-Argument : %s "  % func_list.function_data[index1].argument_num, 1)
 
@@ -141,13 +140,32 @@ for index1 in range(0, func_list.func_num):
 
 
 
-
-
-	func_blockdiag.draw_diag( \
+##################################################
+# drawing
+##################################################
+###### call function (draw_diag) ######
+	tmp_proc_codes = func_blockdiag.draw_diag( \
 		str_filename1, \
 		func_list.function_data[index1].name, \
-		func_list.function_data[index1].process_code_list \
+		func_list.function_data[index1].process_code_list, \
+		'MAINPROCESS'
 	)
+
+
+
+	tmp_proc_codes = func_blockdiag.draw_diag( \
+		str_filename1, \
+		func_list.function_data[index1].name, \
+		tmp_proc_codes, \
+		'SUBPROCESS'
+	)
+
+
+	print '--------------------'
+
+
+	total_lines = tmp_proc_codes.file_print_proc_data_list(fout)
+
 
 
 
