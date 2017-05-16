@@ -36,6 +36,8 @@ class BlockData:
 		return
 
 
+debug_out = False
+
 def draw_diag(sourcefilename, funcname, proc_codes):
 # [in] funcname : FunctionList.FunctionData.name (str)
 # [in] proc_codes : FunctionList.FunctionData.process_code_list (ProcessCodes)
@@ -66,8 +68,46 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 	source += 'START -> '
 
 
-
 #################### Check process ####################
+	block_data_list = check_proc_codes(proc_codes, level_title)
+
+	if debug_out:
+		print '<draw_diag>----------------------------------------'
+		print block_data_list.size()
+		for index in range(0, block_data_list.size()):
+			blockdata = block_data_list.blockdata[index]
+			print '[%d]%s(%s) %d' % ( index, blockdata.title, blockdata.type, blockdata.proc_size() )
+
+
+#################### Create Block diag code ####################
+# add main flow
+	block_code, sub_proc_list, block_code_cond_list = create_blocks(block_data_list)
+
+# add sub flow
+	block_code += create_subproc_blocks(sub_proc_list)
+
+# add condition flow
+	for block_code_cond in block_code_cond_list:
+		block_code += block_code_cond
+
+	source += block_code
+	source += ' }'
+
+
+#################### Draw Block diag ####################
+	print '----------<%s>----------' % funcname
+	print source
+
+	tree = parser.parse_string(source) 
+	diagram = builder.ScreenNodeBuilder.build(tree) 
+	draw = drawer.DiagramDraw('PNG', diagram, filename=outfile) 
+	draw.draw() 
+	draw.save() 
+
+	return
+
+
+def check_proc_codes(proc_codes, level_title):
 	block_data_list = BlockDataList()
 	block_data = BlockData()
 	current_title = ''
@@ -85,7 +125,8 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 
 				# Skip ";" only
 				if proc_codes.proc_data_list[index1].left[0].find(';')!=-1 and len(proc_codes.proc_data_list[index1].left[0])==1:
-					print '<draw_diag> Skip ";" only'
+					if debug_out:
+						print '<check_proc_codes> Skip ";" only'
 					continue
 
 
@@ -134,173 +175,25 @@ def draw_diag(sourcefilename, funcname, proc_codes):
 						current_title = proc_title
 
 						block_data.title = current_title
-						print block_data.title
+						if debug_out:
+							print block_data.title
 						block_data.procs.append(proc_codes.proc_data_list[index1])
 
 				# level title is not chaged
 				else:
 					block_data.procs.append(proc_codes.proc_data_list[index1])
-					print '<draw_diag> No diagram'
+					if debug_out:
+						print '<check_proc_codes> No diagram'
 
 #### SUB process
 			else:
-				print '<draw_diag> Skip sub proc'
+				if debug_out:
+					print '<check_proc_codes> Skip sub proc'
 
 	if block_data.proc_size() != 0:
 		block_data_list.blockdata.append(copy.deepcopy(block_data))
 
-
-
-
-	print '----------------------------------------'
-	print block_data_list.size()
-	for index in range(0, block_data_list.size()):
-		blockdata = block_data_list.blockdata[index]
-		print '[%d]%s(%s) %d' % ( index, blockdata.title, blockdata.type, blockdata.proc_size() )
-
-
-
-
-
-#################### Create Block diag code ####################
-	print '----------------------------------------'
-	block_code =''
-	block_code_cond_list = []
-	condition_if_prev = ''
-	sub_proc_list = []
-
-# main flow
-	for index in range(0, len(block_data_list.blockdata)):
-		tmp_blockdata = block_data_list.blockdata[index]
-		tmp_str = tmp_blockdata.title
-
-		print tmp_str
-		if tmp_str.find('_else')!=-1:
-			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev)
-			condition_if_prev = ''
-
-		elif tmp_str.find('_elif')!=-1:
-			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_if_prev)
-			condition_if_prev = tmp_str
-
-		elif tmp_str.find('_if')!=-1:
-			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_if_prev)
-			condition_if_prev = tmp_str
-
-			block_code += tmp_str
-			block_code += ' -> '
-			block_code += tmp_str.replace('_if', '_yes_pt')
-			block_code += ';\n'
-#			block_code += ' -> '
-			block_code += tmp_str.replace('_if', '_end_pt')
-			block_code += ' -> '
-
-		elif tmp_str.find('_switch')!=-1:
-			blockdata = block_data_list.blockdata[index]
-			block_code += tmp_str
-			block_code += ';\n'
-			block_code += tmp_str.replace('_switch', '_end_pt')
-			block_code += ' -> '
-
-		elif tmp_str.find('_for')!=-1:
-			block_code += tmp_str
-			block_code += ';\n'
-			block_code += tmp_str.replace('_for', '_END_forend')
-			block_code += ' -> '
-
-		elif tmp_str.find('_while')!=-1:
-			block_code += tmp_str
-			block_code += ';\n'
-			block_code += tmp_str.replace('_while', '_END_whileend')
-			block_code += ' -> '
-
-		else:
-			if tmp_str.find('_SUB')==-1:
-				block_code += tmp_str
-				block_code += ' -> '
-			else:
-				sub_proc_list.append(tmp_str)
-
-	block_code += 'END;\n'
-
-
-# add sub flow
-	for block_code_sub in sub_proc_list:
-		print block_code_sub
-
-		tmp_pt_start = ''
-		tmp_pt_end = '' 
-		if block_code_sub.find('ELSE')!=-1:
-			tmp_pt_start = '_else'
-			tmp_pt_end = '_end_pt'
-		elif block_code_sub.find('ELIF')!=-1:
-			tmp_pt_start = '_yes_pt'
-			tmp_pt_end = '_end_pt'
-		elif block_code_sub.find('IF')!=-1:
-			tmp_pt_start = '_yes_pt'
-			tmp_pt_end = '_end_pt'
-		elif block_code_sub.find('SWITCH')!=-1:
-			tmp_pt_start = '_switch'
-			tmp_pt_end = '_end_pt'
-		elif block_code_sub.find('FOR')!=-1:
-			tmp_pt_start = '_for'
-			tmp_pt_end = '_END_forend'
-		elif block_code_sub.find('WHILE')!=-1:
-			tmp_pt_start = '_while'
-			tmp_pt_end = '_END_whileend'
-
-
-		block_code += block_code_sub[:block_code_sub.find('_')] + tmp_pt_start
-		block_code += ' -> '
-		block_code += block_code_sub + '_subproc'
-		block_code += ' -> '
-		block_code += block_code_sub[:block_code_sub.find('_')] + tmp_pt_end
-		block_code += ';\n'
-
-
-# add condition flow
-	for block_code_cond in block_code_cond_list:
-		block_code += block_code_cond
-
-
-	source += block_code
-	source += ' }'
-
-
-#################### Draw Block diag ####################
-	print '----------------------------------------'
-	print source
-
-#	source = ' \
-#	blockdiag { \
-#		orientation = portrait; \
-#		plugin autoclass; \
-#		class if [shape = diamond]; \
-#		class pt [shape = minidiamond]; \
-#		class state [color = pink]; \
-#		START -> \
-#		A -> B -> C_if -> if1, if2, if3, if4; \
-#			if1 ->a -> a1 -> D_if; \
-#			if2 -> b1 -> D_if; \
-#			if3 -> c1 -> D_if; \
-#			if4 -> error_state; \
-#		D_if -> E_state, F_state; \
-#		if1[label = "if(cond 1)"]; \
-#		if2[label = "elif(cond 2)"]; \
-#		if3[label = "elif(cond 3)"]; \
-#		if4[label = "else"]; \
-#	} \
-#	'
-
-	tree = parser.parse_string(source) 
-	diagram = builder.ScreenNodeBuilder.build(tree) 
-	draw = drawer.DiagramDraw('PNG', diagram, filename=outfile) 
-	draw.draw() 
-	draw.save() 
-
-	return
-
-
+	return block_data_list
 
 
 def find_ctrl_stat_in_title(title, type, level_title):
@@ -332,6 +225,69 @@ def find_ctrl_stat_in_title(title, type, level_title):
 
 
 
+def create_blocks(block_data_list):
+	if debug_out:
+		print '<create_blocks> ----------------------------------------'
+	block_code =''
+	block_code_cond_list = []
+	condition_if_prev = ''
+	sub_proc_list = []
+
+# main flow
+	for index in range(0, len(block_data_list.blockdata)):
+		tmp_blockdata = block_data_list.blockdata[index]
+		tmp_str = tmp_blockdata.title
+
+		if debug_out:
+			print '<create_blocks> %s' % tmp_str
+		if tmp_str.find('_else')!=-1:
+			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev)
+			condition_if_prev = ''
+
+		elif tmp_str.find('_elif')!=-1:
+			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_if_prev)
+			condition_if_prev = tmp_str
+
+		elif tmp_str.find('_if')!=-1:
+			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_if_prev)
+			condition_if_prev = tmp_str
+
+			block_code += tmp_str
+			block_code += ' -> '
+			block_code += tmp_str.replace('_if', '_yes_pt')
+			block_code += ';\n'
+#			block_code += ' -> '
+			block_code += tmp_str.replace('_if', '_end_pt')
+			block_code += ' -> '
+
+		elif tmp_str.find('_switch')!=-1:
+			block_code += tmp_str
+			block_code += ';\n'
+			block_code += tmp_str.replace('_switch', '_end_pt')
+			block_code += ' -> '
+
+		elif tmp_str.find('_for')!=-1:
+			block_code += tmp_str
+			block_code += ';\n'
+			block_code += tmp_str.replace('_for', '_END_forend')
+			block_code += ' -> '
+
+		elif tmp_str.find('_while')!=-1:
+			block_code += tmp_str
+			block_code += ';\n'
+			block_code += tmp_str.replace('_while', '_END_whileend')
+			block_code += ' -> '
+
+		else:
+			if tmp_str.find('_SUB')==-1:
+				block_code += tmp_str
+				block_code += ' -> '
+			else:
+				sub_proc_list.append(tmp_str)
+
+	block_code += 'END;\n'
+	return block_code, sub_proc_list, block_code_cond_list
+
 
 def create_if_blocks(condition_str, code, condition_prev):
 	block_code_cond_list = []
@@ -358,12 +314,6 @@ def create_if_blocks(condition_str, code, condition_prev):
 		block_code_cond += code
 		block_code_cond += ';\n'
 
-
-		# -> yes_pt
-#		if condition_str.find('_else')==-1:
-#			block_code_cond += code.replace(condition_str, '_yes_pt')
-#				block_code_cond += ';\n'
-
 		# end_pt -> end_pt(parent)
 		block_code_cond += code.replace(condition_str, '_end_pt')
 		block_code_cond += ' -> '
@@ -374,7 +324,6 @@ def create_if_blocks(condition_str, code, condition_prev):
 		block_code_cond = condition_prev.replace(parent_condition, '_no_pt') + '[label = "No"];\n'
 		block_code_cond_list.append(block_code_cond)
 
-
 	if condition_str.find('_else')==-1:
 		# code -> yes_pt
 		block_code_cond = code
@@ -383,26 +332,41 @@ def create_if_blocks(condition_str, code, condition_prev):
 		block_code_cond += ';\n'
 		block_code_cond_list.append(block_code_cond)
 
-#		block_code_cond += code.replace(condition_str, '_end_pt')
-#		block_code_cond += ';\n'
-#		block_code_cond_list.append(block_code_cond)
-
 		block_code_cond = code.replace(condition_str, '_yes_pt') + '[label = "yes"];\n'
 		block_code_cond_list.append(block_code_cond)
 
-#		block_code_cond = code
-#		block_code_cond += ' -> '
-#		block_code_cond += code.replace(condition_str, '_no_pt')
-#		block_code_cond += ';\n'
-#		block_code_cond_list.append(block_code_cond)
-
-#		block_code_cond = code.replace(condition_str, '_no_pt')
-#		block_code_cond += ' -> '
-#		block_code_cond += code.replace(condition_str, '_end_pt')
-#		block_code_cond += ';\n'
-#		block_code_cond_list.append(block_code_cond)
-
-#		block_code_cond = code.replace(condition_str, '_no_pt') + '[label = "No"];\n'
-#		block_code_cond_list.append(block_code_cond)
-
 	return block_code_cond_list
+
+
+def create_subproc_blocks(sub_proc_list):
+	block_code = ''
+	for block_code_sub in sub_proc_list:
+		tmp_pt_start = ''
+		tmp_pt_end = '' 
+		if block_code_sub.find('ELSE')!=-1:
+			tmp_pt_start = '_else'
+			tmp_pt_end = '_end_pt'
+		elif block_code_sub.find('ELIF')!=-1:
+			tmp_pt_start = '_yes_pt'
+			tmp_pt_end = '_end_pt'
+		elif block_code_sub.find('IF')!=-1:
+			tmp_pt_start = '_yes_pt'
+			tmp_pt_end = '_end_pt'
+		elif block_code_sub.find('SWITCH')!=-1:
+			tmp_pt_start = '_switch'
+			tmp_pt_end = '_end_pt'
+		elif block_code_sub.find('FOR')!=-1:
+			tmp_pt_start = '_for'
+			tmp_pt_end = '_END_forend'
+		elif block_code_sub.find('WHILE')!=-1:
+			tmp_pt_start = '_while'
+			tmp_pt_end = '_END_whileend'
+
+		block_code += block_code_sub[:block_code_sub.find('_')] + tmp_pt_start
+		block_code += ' -> '
+		block_code += block_code_sub + '_subproc'
+		block_code += ' -> '
+		block_code += block_code_sub[:block_code_sub.find('_')] + tmp_pt_end
+		block_code += ';\n'
+
+	return block_code
