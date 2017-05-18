@@ -144,27 +144,54 @@ for index1 in range(0, func_list.func_num):
 # drawing
 ##################################################
 ###### call function (draw_diag) ######
-	tmp_proc_codes = func_blockdiag.draw_diag( \
+	sub_proc_codes_list, header_list = func_blockdiag.draw_diag( \
 		str_filename1, \
 		func_list.function_data[index1].name, \
 		func_list.function_data[index1].process_code_list, \
 		'MAINPROCESS'
 	)
 
+	#if debug_out:
+	for degug_proc_codes in sub_proc_codes_list:
+		total_lines = degug_proc_codes.file_print_proc_data_list(fout)
+
+#	loop_flg = True
+#	tmptmp_proc_codes_list = []
+#	while loop_flg:
+	func_source_analyze.print_out(fout, "---------------------------", 1)
+	print '<main>------------------------- sub proc list(%d)' % len(sub_proc_codes_list) 
+	print '<main>------------------------- header list(%d)' % len(header_list) 
+
+	sub_proc_num = 0
+	for index in range( 0, len(sub_proc_codes_list) ):
+		each_proc_codes = sub_proc_codes_list[index]
+		print '<%d>>>>>>>>>>>>>' % (index)
+#		for each_proc_codes in sub_proc_codes_list:
+		total_lines = each_proc_codes.file_print_proc_data_list(fout)
+
+		tmp_proc_codes_list, tmp_header_list = func_blockdiag.draw_diag( \
+			str_filename1, \
+			func_list.function_data[index1].name + '_' + header_list[index], \
+			each_proc_codes, \
+			'SUBPROCESS'
+		)
+
+		sub_proc_num += len(tmp_proc_codes_list)
+		print '<%d>------>%d/%d' % (index, len(tmp_proc_codes_list),sub_proc_num)
+
+	func_source_analyze.print_out(fout, "---------------------------", 1)
+	print '------------------------- remaining sub proc list(%d)' % sub_proc_num 
 
 
-	tmp_proc_codes = func_blockdiag.draw_diag( \
-		str_filename1, \
-		func_list.function_data[index1].name, \
-		tmp_proc_codes, \
-		'SUBPROCESS'
-	)
+#		if len(tmp_proc_codes_list)!=0:
+#			tmptmp_proc_codes_list.append(copy.deepcopy(tmp_proc_codes_list))
 
-
-	print '--------------------'
-
-
-	total_lines = tmp_proc_codes.file_print_proc_data_list(fout)
+#	if len(tmptmp_proc_codes_list)==0:
+#		loop_flg = False
+#	else:
+#		del sub_proc_codes_list [:]
+#		for copy_proc_code in tmptmp_proc_codes_list:
+#			sub_proc_codes_list.append(copy_proc_code)
 
 
 

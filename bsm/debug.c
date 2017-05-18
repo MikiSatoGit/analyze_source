@@ -3,6 +3,11 @@ VD fn_miki_test4(
 	,type2 arg2
 )
 {
+	if(test2==1)
+	{
+		test2 = 1;
+	}
+
 	S4 s4_t_lp_normal;			/* NORMAL物標のループ変数 仕様書ではi */
 	FL fl_t_thd_exobj_range;	/* 物標除去閾値（距離） [m] */
 	FL fl_t_thd_exobj_power;	/* 物標除去閾値（電力） [dB] */
