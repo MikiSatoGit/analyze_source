@@ -134,9 +134,7 @@ def check_proc_codes(proc_codes, level_title):
 			proc_left = proc_codes.proc_data_list[index1].left[index2]
 
 ### MAIN process
-			tmp_proc_title = proc_title
-			tmp_proc_title = tmp_proc_title[:tmp_proc_title.find('(')]
-			if tmp_proc_title==level_title:
+			if is_level_title(proc_title, level_title):
 
 				# Skip ";" only
 				if proc_codes.proc_data_list[index1].left[0].find(';')!=-1 and len(proc_codes.proc_data_list[index1].left[0])==1:
@@ -203,6 +201,15 @@ def check_proc_codes(proc_codes, level_title):
 	return block_data_list
 
 
+def is_level_title(proc_title, level_title):
+	bret = False
+	tmp_proc_title = proc_title
+	tmp_proc_title = tmp_proc_title[:tmp_proc_title.find('(')]
+	if tmp_proc_title==level_title:
+		bret = True
+	return bret
+
+
 def rename_title(proc_type, proc_title, cond_proc_id, proc_id, level_title):
 	if func_source_analyze.is_ctrl_stat(proc_type)==True:
 		cond_proc_id = int( proc_title[proc_title.find('(')+1:proc_title.find(')')] )
@@ -213,7 +220,6 @@ def rename_title(proc_type, proc_title, cond_proc_id, proc_id, level_title):
 		proc_title = proc_title.replace('(', '')
 		proc_title = proc_title.replace(')', '')
 	return proc_title, cond_proc_id, proc_id
-
 
 
 def find_ctrl_stat_in_title(title, type, level_title):
@@ -242,7 +248,6 @@ def find_ctrl_stat_in_title(title, type, level_title):
 		title += '_cond'
 
 	return title
-
 
 
 def create_main_blocks(block_data_list):
@@ -412,7 +417,9 @@ def extract_sub_proc(proc_codes, level_title):
 	for tmp_index in range(0, target_level):
 		top_title = top_title.replace('MAIN','')
 		top_title += 'SUB'
-	print '[top] %s' %  top_title
+
+	if debug_out:
+		print '[top] %s' %  top_title
 
 	for index1 in range (0, proc_codes.get_main_size() ):
 		tmp_level_prev = tmp_level
@@ -432,7 +439,9 @@ def extract_sub_proc(proc_codes, level_title):
 			if tmp_proc_title.rfind('_')!=-1:
 				tmp_proc_title = tmp_proc_title[:tmp_proc_title.rfind('_')]
 
-			print '[prev] %s(lv%d) -> [curr] %s(lv%d) (proc %d)(cond %d)' % (proc_title, tmp_level_prev, tmp_proc_title, tmp_level, proc_id, cond_proc_id)
+			if debug_out:
+				print '[prev] %s(lv%d) -> [curr] %s(lv%d) (proc %d)(cond %d)' % (proc_title, tmp_level_prev, tmp_proc_title, tmp_level, proc_id, cond_proc_id)
+
 			if proc_title != tmp_proc_title:
 				proc_title = tmp_proc_title
 				if tmp_level==target_level:
@@ -441,26 +450,33 @@ def extract_sub_proc(proc_codes, level_title):
 					and cond_proc_id != 0 \
 					and proc_id == cond_proc_id \
 					and proc_title.count(top_title)==1:
-						print '[header] skip',
+						if debug_out:
+							print '[header] skip',
 					else:
 						header_title = proc_title
 						header_list.append(header_title)
 						block_flag = True
 						block_num += 1
-						print '[header] %s(%d)' % (header_title, block_num)
+
+						if debug_out:
+							print '[header] %s(%d)' % (header_title, block_num)
 
 				else:
 					if tmp_level_prev < tmp_level:
 						header_title +=	proc_title
-						print '[header] %s' % (header_title)
+
+						if debug_out:
+							print '[header] %s' % (header_title)
 
 		# copy sub process
 		else:
-#			print	proc_codes.main[index1], 
-			print	proc_codes.title[index1], 
-#			print	proc_codes.level[index1], 
-#			print	proc_codes.id[index1],
-			print	proc_codes.proc_data_list[index1].get_main_size()
+			if debug_out:
+				#print	proc_codes.main[index1], 
+				print	proc_codes.title[index1], 
+				#print	proc_codes.level[index1], 
+				#print	proc_codes.id[index1],
+				print	proc_codes.proc_data_list[index1].get_main_size()
+
 			out_proc_codes.append_code( \
 				proc_codes.main[index1], \
 				proc_codes.title[index1], \
@@ -469,11 +485,12 @@ def extract_sub_proc(proc_codes, level_title):
 			)
 			tmp_proc_data.clear() 
 			for index2 in range(0,proc_codes.proc_data_list[index1].get_main_size()):
-				if proc_codes.proc_data_list[index1].title[index2].find(level_title)==-1:
-#					print	' -> %s' % proc_codes.proc_data_list[index1].title[index2],
-#					print	' -> %s' % proc_codes.proc_data_list[index1].type[index2],
-#					print	' -> %s' % proc_codes.proc_data_list[index1].left[index2],
-#					print	' -> %s' % proc_codes.proc_data_list[index1].right[index2] 
+				if is_level_title(proc_codes.proc_data_list[index1].title[index2], level_title) ==False:
+					if debug_out:
+						#print	' -> %s' % proc_codes.proc_data_list[index1].title[index2],
+						print	' -> %s' % proc_codes.proc_data_list[index1].type[index2],
+						#print	' -> %s' % proc_codes.proc_data_list[index1].left[index2],
+						#print	' -> %s' % proc_codes.proc_data_list[index1].right[index2] 
 
 					tmp_proc_data.append_data( \
 						proc_codes.proc_data_list[index1].title[index2], \
@@ -483,22 +500,29 @@ def extract_sub_proc(proc_codes, level_title):
 					)
 			out_proc_codes.proc_data_list.append( copy.deepcopy(tmp_proc_data) )
 
-
 		# save sub proc
 		if block_flag==True and len(header_list)>1: #save after 2nd header
 			if out_proc_codes.get_main_size()!=0:
 				out_proc_codes_list.append( copy.deepcopy(out_proc_codes) )
-				print '[saved 1] %s(%d)' % (header_list[len(header_list)-2], out_proc_codes.get_main_size() )
+
+				if debug_out:
+					print '[saved 1] %s(%d)' % (header_list[len(header_list)-2], out_proc_codes.get_main_size() )
+
 				out_proc_codes.clear()
 			else:
-				print 'erase:%s' % header_list[len(header_list)-2]
+				if debug_out:
+					print 'erase:%s' % header_list[len(header_list)-2]
+
 				header_list.pop(len(header_list)-2)
 			block_flag = False
 
 	# save sub proc
 	if out_proc_codes.get_main_size()!=0:
 		out_proc_codes_list.append( copy.deepcopy(out_proc_codes) )
-		print '[saved 2] %s(%d)' % (header_list[-1], out_proc_codes.get_main_size() )
+
+		if debug_out:
+			print '[saved 2] %s(%d)' % (header_list[-1], out_proc_codes.get_main_size() )
+
 	else:
 		if len(header_list)>0:
 			header_list.pop()

@@ -141,10 +141,11 @@ for index1 in range(0, func_list.func_num):
 
 
 ##################################################
-# drawing
+# drawing flow chart
 ##################################################
 ###### call function (draw_diag) ######
-	sub_proc_codes_list, header_list = func_blockdiag.draw_diag( \
+##### main
+	sub_proc_codes_list, sub_header_list = func_blockdiag.draw_diag( \
 		str_filename1, \
 		func_list.function_data[index1].name, \
 		func_list.function_data[index1].process_code_list, \
@@ -154,44 +155,68 @@ for index1 in range(0, func_list.func_num):
 	#if debug_out:
 	for degug_proc_codes in sub_proc_codes_list:
 		total_lines = degug_proc_codes.file_print_proc_data_list(fout)
-
-#	loop_flg = True
-#	tmptmp_proc_codes_list = []
-#	while loop_flg:
 	func_source_analyze.print_out(fout, "---------------------------", 1)
 	print '<main>------------------------- sub proc list(%d)' % len(sub_proc_codes_list) 
-	print '<main>------------------------- header list(%d)' % len(header_list) 
+	print '<main>------------------------- header list(%d)' % len(sub_header_list) 
 
-	sub_proc_num = 0
-	for index in range( 0, len(sub_proc_codes_list) ):
-		each_proc_codes = sub_proc_codes_list[index]
-		print '<%d>>>>>>>>>>>>>' % (index)
-#		for each_proc_codes in sub_proc_codes_list:
-		total_lines = each_proc_codes.file_print_proc_data_list(fout)
-
-		tmp_proc_codes_list, tmp_header_list = func_blockdiag.draw_diag( \
-			str_filename1, \
-			func_list.function_data[index1].name + '_' + header_list[index], \
-			each_proc_codes, \
-			'SUBPROCESS'
-		)
-
-		sub_proc_num += len(tmp_proc_codes_list)
-		print '<<<<<<<<<<<<<%d> %d/%d' % (index, len(tmp_proc_codes_list),sub_proc_num)
-
-	func_source_analyze.print_out(fout, "---------------------------", 1)
-	print '------------------------- remaining sub proc list(%d)' % sub_proc_num 
+##### sub
+	loop_flg = True
+	level_title = 'PROCESS'
+	next_header_list = []
+	next_proc_list = []
+	while loop_flg:
+		level_title = 'SUB' + level_title
+		sub_proc_num = 0
+#		print '<main>Start cheking [%s]' % level_title
 
 
-#		if len(tmp_proc_codes_list)!=0:
-#			tmptmp_proc_codes_list.append(copy.deepcopy(tmp_proc_codes_list))
+		if debug_out:
+			for i in range(0, len(sub_proc_codes_list)):
+				print sub_header_list[i]
+				for j in range(0, sub_proc_codes_list[i].get_main_size()):
+					print sub_proc_codes_list[i].title[j],
+					print sub_proc_codes_list[i].main[j],
+					print sub_proc_codes_list[i].get_proc_data_size(),
+					print sub_proc_codes_list[i].proc_data_list[j].type
 
-#	if len(tmptmp_proc_codes_list)==0:
-#		loop_flg = False
-#	else:
-#		del sub_proc_codes_list [:]
-#		for copy_proc_code in tmptmp_proc_codes_list:
-#			sub_proc_codes_list.append(copy_proc_code)
+
+		for index in range( 0, len(sub_proc_codes_list) ):
+			each_proc_codes = sub_proc_codes_list[index]
+			tmp_header = sub_header_list[index]
+			total_lines = each_proc_codes.file_print_proc_data_list(fout)
+
+#			print '<%d>>>>>>>>>>>>>%s' % (index, tmp_header)
+			tmp_proc_codes_list, tmp_header_list = func_blockdiag.draw_diag( \
+				str_filename1, \
+				func_list.function_data[index1].name + '_'+ tmp_header, \
+				each_proc_codes, \
+				level_title
+			)
+			if len(tmp_header_list)!=0:
+				for i in range(0, len(tmp_header_list)):
+					tmp_header_list[i] = tmp_header + '_' + tmp_header_list[i]
+			sub_proc_num += len(tmp_proc_codes_list)
+#			print '<<<<<<<<<<<<<%d> %d/%d' % (index, len(tmp_proc_codes_list),sub_proc_num)
+
+			if len(tmp_header_list)!=0:
+				next_header_list += tmp_header_list
+			if len(tmp_proc_codes_list)!=0:
+				next_proc_list += tmp_proc_codes_list
+
+
+		func_source_analyze.print_out(fout, "---------------------------", 1)
+#		print '------------------------- remaining sub proc list(%d)' % sub_proc_num
+
+		if len(next_proc_list)==0:
+			loop_flg = False
+		else:
+			del sub_header_list[:]
+			del sub_proc_codes_list[:]
+			sub_header_list = copy.deepcopy(next_header_list)
+			sub_proc_codes_list = copy.deepcopy(next_proc_list)
+			del next_header_list[:]
+			del next_proc_list[:]
+
 
 
 
