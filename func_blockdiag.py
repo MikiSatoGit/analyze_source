@@ -79,7 +79,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title):
 
 #################### Create Block diag code ####################
 # add main flow
-	block_code, sub_proc_list, block_code_cond_list = create_blocks(block_data_list)
+	block_code, sub_proc_list, block_code_cond_list = create_main_blocks(block_data_list)
 
 # add sub flow
 	block_code += create_subproc_blocks(sub_proc_list)
@@ -134,7 +134,9 @@ def check_proc_codes(proc_codes, level_title):
 			proc_left = proc_codes.proc_data_list[index1].left[index2]
 
 ### MAIN process
-			if proc_title.find(level_title)!=-1:
+			tmp_proc_title = proc_title
+			tmp_proc_title = tmp_proc_title[:tmp_proc_title.find('(')]
+			if tmp_proc_title==level_title:
 
 				# Skip ";" only
 				if proc_codes.proc_data_list[index1].left[0].find(';')!=-1 and len(proc_codes.proc_data_list[index1].left[0])==1:
@@ -243,9 +245,9 @@ def find_ctrl_stat_in_title(title, type, level_title):
 
 
 
-def create_blocks(block_data_list):
+def create_main_blocks(block_data_list):
 	if debug_out:
-		print '<create_blocks> ----------------------------------------'
+		print '<create_main_blocks> ----------------------------------------'
 	block_code =''
 	block_code_cond_list = []
 	condition_if_prev = ''
@@ -257,7 +259,7 @@ def create_blocks(block_data_list):
 		tmp_str = tmp_blockdata.title
 
 		if debug_out:
-			print '<create_blocks> %s' % tmp_str
+			print '<create_main_blocks> %s' % tmp_str
 		if tmp_str.find('_else')!=-1:
 			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev)
 			condition_if_prev = ''

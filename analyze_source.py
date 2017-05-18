@@ -177,7 +177,7 @@ for index1 in range(0, func_list.func_num):
 		)
 
 		sub_proc_num += len(tmp_proc_codes_list)
-		print '<%d>------>%d/%d' % (index, len(tmp_proc_codes_list),sub_proc_num)
+		print '<<<<<<<<<<<<<%d> %d/%d' % (index, len(tmp_proc_codes_list),sub_proc_num)
 
 	func_source_analyze.print_out(fout, "---------------------------", 1)
 	print '------------------------- remaining sub proc list(%d)' % sub_proc_num 
