@@ -47,6 +47,26 @@ Total functions : 40
 [36] MAINPROCESS(4) equal pst_a_hitch_angle->dummy CFL_UNKNOWN_VALUE;
 [37] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 37 lines
+[1] SUBPROCESS(1) equal for_test True;
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) equal miki done;
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if a==0 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) equal miki next;
+---------------------------
+[1] SUBPROCESS(1) equal for_test True;
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) equal miki done;
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if a==0 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) equal miki next;
+---------------------------
+[1] SUBSUBPROCESS(1) equal miki next;
+---------------------------
 --------------------------
 [Function Name] : enter_btt_dummy 
 -Return type : VD 
@@ -82,6 +102,8 @@ Total functions : 40
 [11] MAINPROCESS(1) equal au1_g_btt_fin_stat st_g_btt_stat.BTT_final;
 [12] MAINPROCESS(1) proc return; 
 ----------------- Total Codes : 12 lines
+---------------------------
+---------------------------
 --------------------------
 [Function Name] : fn_btt_initialize 
 -Return type : VD 
@@ -148,6 +170,39 @@ Total functions : 40
 [54] MAINPROCESS(5) equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.INITIALIZED;
 [55] MAINPROCESS(5) proc return; 
 ----------------- Total Codes : 55 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_TRUE;
+[1] SUBPROCESS(1) proc st_g_btt_stat.BTT_timer ++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_g_btt_stat.BTT_timer > (S4)150 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.UNINITIALIZED;
+[7] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_FALSE;
+[8] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_timer (S4)0;
+[9] SUBSUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) func<start> fn_btt_aaz_activate( 
+[2] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_TRUE;
+[1] SUBPROCESS(1) proc st_g_btt_stat.BTT_timer ++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_g_btt_stat.BTT_timer > (S4)150 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.UNINITIALIZED;
+[7] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_FALSE;
+[8] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_timer (S4)0;
+[9] SUBSUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) func<start> fn_btt_aaz_activate( 
+[2] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_initialized BTT_RET_t.Init_Stat.UNINITIALIZED;
+[2] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_RESET BTT_FALSE;
+[3] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_timer (S4)0;
+[4] SUBSUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ENABLE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_set_bsm_final_state 
 -Return type : VD 
@@ -168,6 +223,12 @@ Total functions : 40
 [11] SUBPROCESS(1) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.OFF;
 [12] MAINPROCESS(3) proc return; 
 ----------------- Total Codes : 12 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.DISABLE;
+[1] SUBPROCESS(1) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.OFF;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.DISABLE;
+[1] SUBPROCESS(1) equal st_g_btt_stat.BSM_final BTT_RET_t.Final_stat.OFF;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_set_btt_final_state 
 -Return type : VD 
@@ -224,6 +285,145 @@ Total functions : 40
 [46] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
 [47] MAINPROCESS(3) proc return; 
 ----------------- Total Codes : 47 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if u1_a_btt_configuration == BTT_RET_t.CAN_Config.DISABLE 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
+[6] SUBPROCESS(2) else else 
+[7] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.OFF 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[13] SUBSUBPROCESS(2) else if else if( 
+[14] SUBSUBPROCESS(2) else if u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON 
+[15] SUBSUBPROCESS(2) else if ) 
+[16] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[17] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_btt_drv_state( 
+[18] SUBSUBSUBPROCESS(1) func st_g_btt_result 
+[19] SUBSUBSUBPROCESS(1) func<end> ); 
+[20] SUBSUBSUBPROCESS(1) if if( 
+[21] SUBSUBSUBPROCESS(1) if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.CONNECT 
+[22] SUBSUBSUBPROCESS(1) if ) 
+[23] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[24] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.ON;
+[25] SUBSUBSUBPROCESS(2) else if else if( 
+[26] SUBSUBSUBPROCESS(2) else if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.OFFTEMP 
+[27] SUBSUBSUBPROCESS(2) else if ) 
+[28] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[29] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFFTEMP;
+[30] SUBSUBSUBPROCESS(3) else if else if( 
+[31] SUBSUBSUBPROCESS(3) else if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.NOTCONNECT 
+[32] SUBSUBSUBPROCESS(3) else if ) 
+[33] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[34] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[35] SUBSUBSUBPROCESS(4) else else 
+[36] SUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBPROCESS(1) 
+[37] SUBSUBPROCESS(3) else else 
+[38] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if u1_a_btt_configuration == BTT_RET_t.CAN_Config.DISABLE 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
+[6] SUBPROCESS(2) else else 
+[7] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.OFF 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[13] SUBSUBPROCESS(2) else if else if( 
+[14] SUBSUBPROCESS(2) else if u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON 
+[15] SUBSUBPROCESS(2) else if ) 
+[16] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[17] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_btt_drv_state( 
+[18] SUBSUBSUBPROCESS(1) func st_g_btt_result 
+[19] SUBSUBSUBPROCESS(1) func<end> ); 
+[20] SUBSUBSUBPROCESS(1) if if( 
+[21] SUBSUBSUBPROCESS(1) if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.CONNECT 
+[22] SUBSUBSUBPROCESS(1) if ) 
+[23] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[24] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.ON;
+[25] SUBSUBSUBPROCESS(2) else if else if( 
+[26] SUBSUBSUBPROCESS(2) else if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.OFFTEMP 
+[27] SUBSUBSUBPROCESS(2) else if ) 
+[28] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[29] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFFTEMP;
+[30] SUBSUBSUBPROCESS(3) else if else if( 
+[31] SUBSUBSUBPROCESS(3) else if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.NOTCONNECT 
+[32] SUBSUBSUBPROCESS(3) else if ) 
+[33] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[34] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[35] SUBSUBSUBPROCESS(4) else else 
+[36] SUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBPROCESS(1) 
+[37] SUBSUBPROCESS(3) else else 
+[38] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+---------------------------
+[1] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.DISABLE;
+[1] SUBSUBPROCESS(1) if if( 
+[2] SUBSUBPROCESS(1) if u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.OFF 
+[3] SUBSUBPROCESS(1) if ) 
+[4] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[5] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[6] SUBSUBPROCESS(2) else if else if( 
+[7] SUBSUBPROCESS(2) else if u1_a_btt_drv_cmd == BTT_RET_t.Drv_SW.ON 
+[8] SUBSUBPROCESS(2) else if ) 
+[9] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[10] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_btt_drv_state( 
+[11] SUBSUBSUBPROCESS(1) func st_g_btt_result 
+[12] SUBSUBSUBPROCESS(1) func<end> ); 
+[13] SUBSUBSUBPROCESS(1) if if( 
+[14] SUBSUBSUBPROCESS(1) if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.CONNECT 
+[15] SUBSUBSUBPROCESS(1) if ) 
+[16] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[17] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.ON;
+[18] SUBSUBSUBPROCESS(2) else if else if( 
+[19] SUBSUBSUBPROCESS(2) else if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.OFFTEMP 
+[20] SUBSUBSUBPROCESS(2) else if ) 
+[21] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[22] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFFTEMP;
+[23] SUBSUBSUBPROCESS(3) else if else if( 
+[24] SUBSUBSUBPROCESS(3) else if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.NOTCONNECT 
+[25] SUBSUBSUBPROCESS(3) else if ) 
+[26] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[27] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[28] SUBSUBSUBPROCESS(4) else else 
+[29] SUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBPROCESS(1) 
+[30] SUBSUBPROCESS(3) else else 
+[31] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+---------------------------
+[1] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[1] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_btt_drv_state( 
+[2] SUBSUBSUBPROCESS(1) func st_g_btt_result 
+[3] SUBSUBSUBPROCESS(1) func<end> ); 
+[4] SUBSUBSUBPROCESS(1) if if( 
+[5] SUBSUBSUBPROCESS(1) if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.CONNECT 
+[6] SUBSUBSUBPROCESS(1) if ) 
+[7] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[8] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.ON;
+[9] SUBSUBSUBPROCESS(2) else if else if( 
+[10] SUBSUBSUBPROCESS(2) else if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.OFFTEMP 
+[11] SUBSUBSUBPROCESS(2) else if ) 
+[12] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[13] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFFTEMP;
+[14] SUBSUBSUBPROCESS(3) else if else if( 
+[15] SUBSUBSUBPROCESS(3) else if st_g_btt_stat.BTT_drv == BTT_RET_t.Drv_Stat.NOTCONNECT 
+[16] SUBSUBSUBPROCESS(3) else if ) 
+[17] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+[19] SUBSUBSUBPROCESS(4) else else 
+[20] SUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBPROCESS(1) 
+---------------------------
+[1] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.ON;
+[1] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFFTEMP;
+[1] SUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_final BTT_RET_t.Final_stat.OFF;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_set_btt_drv_state 
 -Return type : VD 
@@ -308,6 +508,201 @@ Total functions : 40
 [75] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
 [76] MAINPROCESS(7) proc return; 
 ----------------- Total Codes : 76 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.DISABLE;
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFF;
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_a_btt_stat.ATD == BTT_RET_t.Func_Stat.ACTIVE 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
+[6] SUBPROCESS(2) else if else if( 
+[7] SUBPROCESS(2) else if st_a_btt_stat.ATD == BTT_RET_t.Func_Stat.DEACTIVE 
+[8] SUBPROCESS(2) else if ) 
+[9] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[10] SUBSUBPROCESS(1) if if( 
+[11] SUBSUBPROCESS(1) if st_a_btt_result.TFlag == BTT_RET_t.TFlag.CONNECT 
+[12] SUBSUBPROCESS(1) if ) 
+[13] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[14] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[15] SUBSUBSUBPROCESS(1) if if( 
+[16] SUBSUBSUBPROCESS(1) if st_a_btt_stat.TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[17] SUBSUBSUBPROCESS(1) if ) 
+[18] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[19] SUBSUBSUBSUBPROCESS(1) if if( 
+[20] SUBSUBSUBSUBPROCESS(1) if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.VALID 
+[21] SUBSUBSUBSUBPROCESS(1) if ) 
+[22] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[24] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[25] SUBSUBSUBSUBPROCESS(2) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.INVALID 
+[26] SUBSUBSUBSUBPROCESS(2) else if ) 
+[27] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[29] SUBSUBSUBSUBPROCESS(3) else if else if( 
+[30] SUBSUBSUBSUBPROCESS(3) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.UNKNOWN 
+[31] SUBSUBSUBSUBPROCESS(3) else if ) 
+[32] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[33] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[34] SUBSUBSUBSUBPROCESS(4) else else 
+[35] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[36] SUBSUBPROCESS(2) else if else if( 
+[37] SUBSUBPROCESS(2) else if st_a_btt_result.TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[38] SUBSUBPROCESS(2) else if ) 
+[39] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[40] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.NOTCONNECT;
+[41] SUBSUBPROCESS(3) else if else if( 
+[42] SUBSUBPROCESS(3) else if st_a_btt_result.TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[43] SUBSUBPROCESS(3) else if ) 
+[44] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+[45] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[46] SUBSUBPROCESS(4) else else 
+[47] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
+[48] SUBPROCESS(3) else else 
+[49] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.DISABLE;
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFF;
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
+[1] SUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_a_btt_stat.ATD == BTT_RET_t.Func_Stat.ACTIVE 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
+[6] SUBPROCESS(2) else if else if( 
+[7] SUBPROCESS(2) else if st_a_btt_stat.ATD == BTT_RET_t.Func_Stat.DEACTIVE 
+[8] SUBPROCESS(2) else if ) 
+[9] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[10] SUBSUBPROCESS(1) if if( 
+[11] SUBSUBPROCESS(1) if st_a_btt_result.TFlag == BTT_RET_t.TFlag.CONNECT 
+[12] SUBSUBPROCESS(1) if ) 
+[13] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[14] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[15] SUBSUBSUBPROCESS(1) if if( 
+[16] SUBSUBSUBPROCESS(1) if st_a_btt_stat.TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[17] SUBSUBSUBPROCESS(1) if ) 
+[18] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[19] SUBSUBSUBSUBPROCESS(1) if if( 
+[20] SUBSUBSUBSUBPROCESS(1) if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.VALID 
+[21] SUBSUBSUBSUBPROCESS(1) if ) 
+[22] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[24] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[25] SUBSUBSUBSUBPROCESS(2) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.INVALID 
+[26] SUBSUBSUBSUBPROCESS(2) else if ) 
+[27] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[29] SUBSUBSUBSUBPROCESS(3) else if else if( 
+[30] SUBSUBSUBSUBPROCESS(3) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.UNKNOWN 
+[31] SUBSUBSUBSUBPROCESS(3) else if ) 
+[32] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[33] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[34] SUBSUBSUBSUBPROCESS(4) else else 
+[35] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[36] SUBSUBPROCESS(2) else if else if( 
+[37] SUBSUBPROCESS(2) else if st_a_btt_result.TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[38] SUBSUBPROCESS(2) else if ) 
+[39] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[40] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.NOTCONNECT;
+[41] SUBSUBPROCESS(3) else if else if( 
+[42] SUBSUBPROCESS(3) else if st_a_btt_result.TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[43] SUBSUBPROCESS(3) else if ) 
+[44] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+[45] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[46] SUBSUBPROCESS(4) else else 
+[47] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
+[48] SUBPROCESS(3) else else 
+[49] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+---------------------------
+[1] SUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.PENDING;
+[1] SUBSUBPROCESS(1) if if( 
+[2] SUBSUBPROCESS(1) if st_a_btt_result.TFlag == BTT_RET_t.TFlag.CONNECT 
+[3] SUBSUBPROCESS(1) if ) 
+[4] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[5] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[6] SUBSUBSUBPROCESS(1) if if( 
+[7] SUBSUBSUBPROCESS(1) if st_a_btt_stat.TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[8] SUBSUBSUBPROCESS(1) if ) 
+[9] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[10] SUBSUBSUBSUBPROCESS(1) if if( 
+[11] SUBSUBSUBSUBPROCESS(1) if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.VALID 
+[12] SUBSUBSUBSUBPROCESS(1) if ) 
+[13] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[14] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[15] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[16] SUBSUBSUBSUBPROCESS(2) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.INVALID 
+[17] SUBSUBSUBSUBPROCESS(2) else if ) 
+[18] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[19] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[20] SUBSUBSUBSUBPROCESS(3) else if else if( 
+[21] SUBSUBSUBSUBPROCESS(3) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.UNKNOWN 
+[22] SUBSUBSUBSUBPROCESS(3) else if ) 
+[23] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[24] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[25] SUBSUBSUBSUBPROCESS(4) else else 
+[26] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[27] SUBSUBPROCESS(2) else if else if( 
+[28] SUBSUBPROCESS(2) else if st_a_btt_result.TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[29] SUBSUBPROCESS(2) else if ) 
+[30] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[31] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.NOTCONNECT;
+[32] SUBSUBPROCESS(3) else if else if( 
+[33] SUBSUBPROCESS(3) else if st_a_btt_result.TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[34] SUBSUBPROCESS(3) else if ) 
+[35] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+[36] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[37] SUBSUBPROCESS(4) else else 
+[38] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
+---------------------------
+[1] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[2] SUBSUBSUBPROCESS(1) if if( 
+[3] SUBSUBSUBPROCESS(1) if st_a_btt_stat.TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[4] SUBSUBSUBPROCESS(1) if ) 
+[5] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[6] SUBSUBSUBSUBPROCESS(1) if if( 
+[7] SUBSUBSUBSUBPROCESS(1) if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.VALID 
+[8] SUBSUBSUBSUBPROCESS(1) if ) 
+[9] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[10] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[11] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[12] SUBSUBSUBSUBPROCESS(2) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.INVALID 
+[13] SUBSUBSUBSUBPROCESS(2) else if ) 
+[14] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[15] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[16] SUBSUBSUBSUBPROCESS(3) else if else if( 
+[17] SUBSUBSUBSUBPROCESS(3) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.UNKNOWN 
+[18] SUBSUBSUBSUBPROCESS(3) else if ) 
+[19] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[20] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[21] SUBSUBSUBSUBPROCESS(4) else else 
+[22] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[1] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.NOTCONNECT;
+[1] SUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+---------------------------
+[1] SUBSUBSUBSUBPROCESS(1) if if( 
+[2] SUBSUBSUBSUBPROCESS(1) if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.VALID 
+[3] SUBSUBSUBSUBPROCESS(1) if ) 
+[4] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[5] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[6] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[7] SUBSUBSUBSUBPROCESS(2) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.INVALID 
+[8] SUBSUBSUBSUBPROCESS(2) else if ) 
+[9] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[10] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[11] SUBSUBSUBSUBPROCESS(3) else if else if( 
+[12] SUBSUBSUBSUBPROCESS(3) else if st_a_btt_result.TLength_stat == BTT_RET_t.TSize_Stat.UNKNOWN 
+[13] SUBSUBSUBSUBPROCESS(3) else if ) 
+[14] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[15] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[16] SUBSUBSUBSUBPROCESS(4) else else 
+[17] SUBSUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+---------------------------
+[1] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.CONNECT;
+[1] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+[1] SUBSUBSUBSUBSUBPROCESS(1) equal st_g_btt_stat.BTT_drv BTT_RET_t.Drv_Stat.OFFTEMP;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_set_trailer_length 
 -Return type : VD 
@@ -330,6 +725,14 @@ Total functions : 40
 [14] SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.VALID;
 [15] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 15 lines
+[1] SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.UNKNOWN;
+[1] SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.INVALID;
+[1] SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.VALID;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.UNKNOWN;
+[1] SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.INVALID;
+[1] SUBPROCESS(1) equal st_g_btt_result.TLength_stat BTT_RET_t.TSize_Stat.VALID;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_set_range_rear 
 -Return type : ;VD 
@@ -369,6 +772,53 @@ Total functions : 40
 [31] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY st_g_btt_alertarea.rear.VarYmax;
 [32] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 32 lines
+[1] SUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_UNKNOWN;
+[1] SUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_INVALID;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_SHORT 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_SHORT;
+[6] SUBPROCESS(2) else if else if( 
+[7] SUBPROCESS(2) else if st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_MID 
+[8] SUBPROCESS(2) else if ) 
+[9] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[10] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_MID;
+[11] SUBPROCESS(3) else if else if( 
+[12] SUBPROCESS(3) else if st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_LONG 
+[13] SUBPROCESS(3) else if ) 
+[14] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[15] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_LONG;
+[16] SUBPROCESS(4) else else 
+[17] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[18] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY st_g_btt_alertarea.rear.VarYmax;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_UNKNOWN;
+[1] SUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_INVALID;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_SHORT 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_SHORT;
+[6] SUBPROCESS(2) else if else if( 
+[7] SUBPROCESS(2) else if st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_MID 
+[8] SUBPROCESS(2) else if ) 
+[9] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[10] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_MID;
+[11] SUBPROCESS(3) else if else if( 
+[12] SUBPROCESS(3) else if st_aaz_params.TLength_AAZ < BTT_REAR_RANGE_LONG 
+[13] SUBPROCESS(3) else if ) 
+[14] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[15] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_LONG;
+[16] SUBPROCESS(4) else else 
+[17] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
+[18] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY st_g_btt_alertarea.rear.VarYmax;
+---------------------------
+[1] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_SHORT;
+[1] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_MID;
+[1] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY BTT_REAR_LONG;
+[1] SUBSUBPROCESS(1) equal st_g_btt_alertarea.rear.VarY st_g_btt_alertarea.rear.VarYmax;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_set_trailer_width 
 -Return type : ;VD 
@@ -391,6 +841,14 @@ Total functions : 40
 [14] SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.VALID;
 [15] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 15 lines
+[1] SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.UNKNOWN;
+[1] SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.INVALID;
+[1] SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.VALID;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.UNKNOWN;
+[1] SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.INVALID;
+[1] SUBPROCESS(1) equal st_g_btt_result.TWidth_stat BTT_RET_t.TSize_Stat.VALID;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_set_range_side 
 -Return type : ;VD 
@@ -424,6 +882,41 @@ Total functions : 40
 [25] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
 [26] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 26 lines
+[1] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin BTT_SIDE_RANGE_UNKNOWN;
+[2] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout BTT_SIDE_RANGE_UNKNOWN;
+[1] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin BTT_SIDE_RANGE_INVALID;
+[2] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout BTT_SIDE_RANGE_INVALID;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_aaz_params.TWidth_AAZ <= BTT_SV_WIDTH 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin st_aaz_params.TWidth_AAZ * (FL)0.25;
+[6] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout st_aaz_params.TWidth_AAZ * (FL)0.25;
+[7] SUBPROCESS(2) else else 
+[8] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
+[10] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin BTT_SIDE_RANGE_UNKNOWN;
+[2] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout BTT_SIDE_RANGE_UNKNOWN;
+[1] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin BTT_SIDE_RANGE_INVALID;
+[2] SUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout BTT_SIDE_RANGE_INVALID;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_aaz_params.TWidth_AAZ <= BTT_SV_WIDTH 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin st_aaz_params.TWidth_AAZ * (FL)0.25;
+[6] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout st_aaz_params.TWidth_AAZ * (FL)0.25;
+[7] SUBPROCESS(2) else else 
+[8] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
+[10] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
+---------------------------
+[1] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin st_aaz_params.TWidth_AAZ * (FL)0.25;
+[2] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout st_aaz_params.TWidth_AAZ * (FL)0.25;
+[1] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXin (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
+[2] SUBSUBPROCESS(1) equal st_g_btt_alertarea.side.VarXout (st_aaz_params.TWidth_AAZ - BTT_SV_WIDTH) * (FL)0.5;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_atd_activate 
 -Return type : ;VD 
@@ -436,6 +929,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.ACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_atd_initialize 
 -Return type : VD 
@@ -453,6 +950,8 @@ Total functions : 40
 [10] MAINPROCESS(1) equal st_atd_params.trailer_object_num 0;
 [11] MAINPROCESS(1) proc return; 
 ----------------- Total Codes : 11 lines
+---------------------------
+---------------------------
 --------------------------
 [Function Name] : fn_btt_atd_deactivate 
 -Return type : VD 
@@ -465,6 +964,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.DEACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.ATD BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_tle_activate 
 -Return type : VD 
@@ -477,6 +980,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.ACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_tle_initialize 
 -Return type : VD 
@@ -487,6 +994,8 @@ Total functions : 40
 [3] MAINPROCESS(1) func<end> ); 
 [4] MAINPROCESS(1) proc return; 
 ----------------- Total Codes : 4 lines
+---------------------------
+---------------------------
 --------------------------
 [Function Name] : fn_btt_tle_deactivate 
 -Return type : VD 
@@ -499,6 +1008,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.DEACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.TLE BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_twe_activate 
 -Return type : VD 
@@ -511,6 +1024,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.ACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_twe_initialize 
 -Return type : VD 
@@ -523,6 +1040,8 @@ Total functions : 40
 [5] MAINPROCESS(1) equal st_twe_params.twe_final (FL)0.0;
 [6] MAINPROCESS(1) proc return; 
 ----------------- Total Codes : 6 lines
+---------------------------
+---------------------------
 --------------------------
 [Function Name] : fn_btt_twe_deactivate 
 -Return type : VD 
@@ -535,6 +1054,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DEACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.TWE BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_ttm_activate 
 -Return type : VD 
@@ -547,6 +1070,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.ACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.ACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.ACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_ttm_deactivate 
 -Return type : VD 
@@ -559,6 +1086,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DEACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.TTM BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_aaz_activate 
 -Return type : VD 
@@ -581,6 +1112,30 @@ Total functions : 40
 [15] SUBPROCESS(1) equal st_aaz_params.TWidth_unknown_count (S4) 0;
 [16] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 16 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ACTIVE;
+[2] SUBPROCESS(1) equal st_aaz_params.VarY (FL) 0.0;
+[3] SUBPROCESS(1) equal st_aaz_params.First BTT_RET_t.Bool.TRUE;
+[4] SUBPROCESS(1) equal st_aaz_params.TLength_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[5] SUBPROCESS(1) equal st_aaz_params.TLength_valid_count (S4) 0;
+[6] SUBPROCESS(1) equal st_aaz_params.TLength_invalid_count (S4) 0;
+[7] SUBPROCESS(1) equal st_aaz_params.TLength_unknown_count (S4) 0;
+[8] SUBPROCESS(1) equal st_aaz_params.TWidth_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[9] SUBPROCESS(1) equal st_aaz_params.TWidth_valid_count (S4) 0;
+[10] SUBPROCESS(1) equal st_aaz_params.TWidth_invalid_count (S4) 0;
+[11] SUBPROCESS(1) equal st_aaz_params.TWidth_unknown_count (S4) 0;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ACTIVE;
+[2] SUBPROCESS(1) equal st_aaz_params.VarY (FL) 0.0;
+[3] SUBPROCESS(1) equal st_aaz_params.First BTT_RET_t.Bool.TRUE;
+[4] SUBPROCESS(1) equal st_aaz_params.TLength_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[5] SUBPROCESS(1) equal st_aaz_params.TLength_valid_count (S4) 0;
+[6] SUBPROCESS(1) equal st_aaz_params.TLength_invalid_count (S4) 0;
+[7] SUBPROCESS(1) equal st_aaz_params.TLength_unknown_count (S4) 0;
+[8] SUBPROCESS(1) equal st_aaz_params.TWidth_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[9] SUBPROCESS(1) equal st_aaz_params.TWidth_valid_count (S4) 0;
+[10] SUBPROCESS(1) equal st_aaz_params.TWidth_invalid_count (S4) 0;
+[11] SUBPROCESS(1) equal st_aaz_params.TWidth_unknown_count (S4) 0;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_aaz_initialize 
 -Return type : VD 
@@ -605,6 +1160,10 @@ Total functions : 40
 [15] MAINPROCESS(2) equal st_aaz_params.TWidth_unknown_count (S4) 0;
 [16] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 16 lines
+[1] SUBPROCESS(1) proc return; 
+---------------------------
+[1] SUBPROCESS(1) proc return; 
+---------------------------
 --------------------------
 [Function Name] : fn_btt_aaz_deactivate 
 -Return type : VD 
@@ -617,6 +1176,10 @@ Total functions : 40
 [5] SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.DEACTIVE;
 [6] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 6 lines
+[1] SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
+[1] SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.DEACTIVE;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_main 
 -Return type : VD 
@@ -719,6 +1282,155 @@ Total functions : 40
 [77] MAINPROCESS(3) equal as4_g_btt_atd_timer[2] st_twe_params.timer;
 [78] MAINPROCESS(3) proc return; 
 ----------------- Total Codes : 78 lines
+[1] SUBPROCESS(1) func<start> fn_btt_set_btt_drv_state( *pst_a_btt_stat, *pst_a_btt_result 
+[2] SUBPROCESS(1) func<end> ); 
+[3] SUBPROCESS(1) if if( 
+[4] SUBPROCESS(1) if pst_a_btt_stat->BTT_drv == BTT_RET_t.Drv_Stat.CONNECT 
+[5] SUBPROCESS(1) if ) 
+[6] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[7] SUBSUBPROCESS(1) func<start> fn_btt_tle_activate( 
+[8] SUBSUBPROCESS(1) func<end> ); 
+[9] SUBSUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_main( 
+[10] SUBSUBPROCESS(1) func pst_a_btt_stat 
+[11] SUBSUBPROCESS(1) func<end> ); 
+[12] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[0] fl_t_length;
+[13] SUBSUBPROCESS(1) func<start> fn_btt_twe_activate( 
+[14] SUBSUBPROCESS(1) func<end> ); 
+[15] SUBSUBPROCESS(1) func<start> fl_t_width = fn_btt_twe_main( 
+[16] SUBSUBPROCESS(1) func pst_a_btt_stat 
+[17] SUBSUBPROCESS(1) func<end> ); 
+[18] SUBSUBPROCESS(1) if if( 
+[19] SUBSUBPROCESS(1) if fl_t_width != BTT_TRAILER_SIZE_UNKNOWN 
+[20] SUBSUBPROCESS(1) if ) 
+[21] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[22] SUBSUBSUBPROCESS(1) equal st_twe_params.twe_final + fl_t_width;
+[23] SUBSUBSUBPROCESS(1) proc st_twe_params.twe_cycle ++; 
+[24] SUBSUBPROCESS(2) if if( 
+[25] SUBSUBPROCESS(2) if st_g_btt_stat.TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[26] SUBSUBPROCESS(2) if &&	st_twe_params.twe_cycle > (S4)((FL)BTT_TWE_MAX_TIME * (FL)0.6)) 
+[27] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBPROCESS(1) equal fl_t_width st_twe_params.twe_final / (FL)st_twe_params.twe_cycle;
+[29] SUBSUBPROCESS(3) equal afl_g_btt_aaz_area[1] fl_t_width;
+[30] SUBSUBPROCESS(3) func<start> fn_btt_set_btt_drv_state( *pst_a_btt_stat, *pst_a_btt_result 
+[31] SUBSUBPROCESS(3) func<end> ); 
+[32] SUBPROCESS(2) if if( 
+[33] SUBPROCESS(2) if pst_a_btt_result->TFlag ==  BTT_RET_t.TFlag.CONNECT 
+[34] SUBPROCESS(2) if ) 
+[35] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[36] SUBSUBPROCESS(1) func<start> fn_btt_set_trailer_length( fl_t_length 
+[37] SUBSUBPROCESS(1) func<end> ); 
+[38] SUBSUBPROCESS(1) func<start> fn_btt_set_trailer_width( fl_t_width 
+[39] SUBSUBPROCESS(1) func<end> ); 
+[40] SUBSUBPROCESS(1) func<start> fn_btt_aaz_initialize( 
+[41] SUBSUBPROCESS(1) func pst_a_btt_result->TWidth 
+[42] SUBSUBPROCESS(1) func<end> ); 
+[43] SUBSUBPROCESS(1) func<start> fn_btt_aaz_main( 
+[44] SUBSUBPROCESS(1) func pst_a_hitch_angle 
+[45] SUBSUBPROCESS(1) func<end> ); 
+[46] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[2] pst_a_btt_alertarea->rear.VarY;
+[47] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[3] pst_a_btt_alertarea->side.VarXin;
+[48] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[4] pst_a_btt_alertarea->side.VarXout;
+[1] SUBPROCESS(1) func<start> fn_btt_tle_initialize( 
+[2] SUBPROCESS(1) func<end> ); 
+[3] SUBPROCESS(1) func<start> fn_btt_twe_initialize( 
+[4] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBPROCESS(1) func<start> fn_btt_set_btt_drv_state( *pst_a_btt_stat, *pst_a_btt_result 
+[2] SUBPROCESS(1) func<end> ); 
+[3] SUBPROCESS(1) if if( 
+[4] SUBPROCESS(1) if pst_a_btt_stat->BTT_drv == BTT_RET_t.Drv_Stat.CONNECT 
+[5] SUBPROCESS(1) if ) 
+[6] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[7] SUBSUBPROCESS(1) func<start> fn_btt_tle_activate( 
+[8] SUBSUBPROCESS(1) func<end> ); 
+[9] SUBSUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_main( 
+[10] SUBSUBPROCESS(1) func pst_a_btt_stat 
+[11] SUBSUBPROCESS(1) func<end> ); 
+[12] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[0] fl_t_length;
+[13] SUBSUBPROCESS(1) func<start> fn_btt_twe_activate( 
+[14] SUBSUBPROCESS(1) func<end> ); 
+[15] SUBSUBPROCESS(1) func<start> fl_t_width = fn_btt_twe_main( 
+[16] SUBSUBPROCESS(1) func pst_a_btt_stat 
+[17] SUBSUBPROCESS(1) func<end> ); 
+[18] SUBSUBPROCESS(1) if if( 
+[19] SUBSUBPROCESS(1) if fl_t_width != BTT_TRAILER_SIZE_UNKNOWN 
+[20] SUBSUBPROCESS(1) if ) 
+[21] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[22] SUBSUBSUBPROCESS(1) equal st_twe_params.twe_final + fl_t_width;
+[23] SUBSUBSUBPROCESS(1) proc st_twe_params.twe_cycle ++; 
+[24] SUBSUBPROCESS(2) if if( 
+[25] SUBSUBPROCESS(2) if st_g_btt_stat.TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[26] SUBSUBPROCESS(2) if &&	st_twe_params.twe_cycle > (S4)((FL)BTT_TWE_MAX_TIME * (FL)0.6)) 
+[27] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBPROCESS(1) equal fl_t_width st_twe_params.twe_final / (FL)st_twe_params.twe_cycle;
+[29] SUBSUBPROCESS(3) equal afl_g_btt_aaz_area[1] fl_t_width;
+[30] SUBSUBPROCESS(3) func<start> fn_btt_set_btt_drv_state( *pst_a_btt_stat, *pst_a_btt_result 
+[31] SUBSUBPROCESS(3) func<end> ); 
+[32] SUBPROCESS(2) if if( 
+[33] SUBPROCESS(2) if pst_a_btt_result->TFlag ==  BTT_RET_t.TFlag.CONNECT 
+[34] SUBPROCESS(2) if ) 
+[35] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[36] SUBSUBPROCESS(1) func<start> fn_btt_set_trailer_length( fl_t_length 
+[37] SUBSUBPROCESS(1) func<end> ); 
+[38] SUBSUBPROCESS(1) func<start> fn_btt_set_trailer_width( fl_t_width 
+[39] SUBSUBPROCESS(1) func<end> ); 
+[40] SUBSUBPROCESS(1) func<start> fn_btt_aaz_initialize( 
+[41] SUBSUBPROCESS(1) func pst_a_btt_result->TWidth 
+[42] SUBSUBPROCESS(1) func<end> ); 
+[43] SUBSUBPROCESS(1) func<start> fn_btt_aaz_main( 
+[44] SUBSUBPROCESS(1) func pst_a_hitch_angle 
+[45] SUBSUBPROCESS(1) func<end> ); 
+[46] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[2] pst_a_btt_alertarea->rear.VarY;
+[47] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[3] pst_a_btt_alertarea->side.VarXin;
+[48] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[4] pst_a_btt_alertarea->side.VarXout;
+[1] SUBPROCESS(1) func<start> fn_btt_tle_initialize( 
+[2] SUBPROCESS(1) func<end> ); 
+[3] SUBPROCESS(1) func<start> fn_btt_twe_initialize( 
+[4] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBSUBPROCESS(1) func<start> fn_btt_tle_activate( 
+[2] SUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_main( 
+[4] SUBSUBPROCESS(1) func pst_a_btt_stat 
+[5] SUBSUBPROCESS(1) func<end> ); 
+[6] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[0] fl_t_length;
+[7] SUBSUBPROCESS(1) func<start> fn_btt_twe_activate( 
+[8] SUBSUBPROCESS(1) func<end> ); 
+[9] SUBSUBPROCESS(1) func<start> fl_t_width = fn_btt_twe_main( 
+[10] SUBSUBPROCESS(1) func pst_a_btt_stat 
+[11] SUBSUBPROCESS(1) func<end> ); 
+[12] SUBSUBPROCESS(1) if if( 
+[13] SUBSUBPROCESS(1) if fl_t_width != BTT_TRAILER_SIZE_UNKNOWN 
+[14] SUBSUBPROCESS(1) if ) 
+[15] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[16] SUBSUBSUBPROCESS(1) equal st_twe_params.twe_final + fl_t_width;
+[17] SUBSUBSUBPROCESS(1) proc st_twe_params.twe_cycle ++; 
+[18] SUBSUBPROCESS(2) if if( 
+[19] SUBSUBPROCESS(2) if st_g_btt_stat.TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[20] SUBSUBPROCESS(2) if &&	st_twe_params.twe_cycle > (S4)((FL)BTT_TWE_MAX_TIME * (FL)0.6)) 
+[21] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[22] SUBSUBSUBPROCESS(1) equal fl_t_width st_twe_params.twe_final / (FL)st_twe_params.twe_cycle;
+[23] SUBSUBPROCESS(3) equal afl_g_btt_aaz_area[1] fl_t_width;
+[24] SUBSUBPROCESS(3) func<start> fn_btt_set_btt_drv_state( *pst_a_btt_stat, *pst_a_btt_result 
+[25] SUBSUBPROCESS(3) func<end> ); 
+[1] SUBSUBPROCESS(1) func<start> fn_btt_set_trailer_length( fl_t_length 
+[2] SUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBPROCESS(1) func<start> fn_btt_set_trailer_width( fl_t_width 
+[4] SUBSUBPROCESS(1) func<end> ); 
+[5] SUBSUBPROCESS(1) func<start> fn_btt_aaz_initialize( 
+[6] SUBSUBPROCESS(1) func pst_a_btt_result->TWidth 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) func<start> fn_btt_aaz_main( 
+[9] SUBSUBPROCESS(1) func pst_a_hitch_angle 
+[10] SUBSUBPROCESS(1) func<end> ); 
+[11] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[2] pst_a_btt_alertarea->rear.VarY;
+[12] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[3] pst_a_btt_alertarea->side.VarXin;
+[13] SUBSUBPROCESS(1) equal afl_g_btt_aaz_area[4] pst_a_btt_alertarea->side.VarXout;
+---------------------------
+[1] SUBSUBSUBPROCESS(1) equal st_twe_params.twe_final + fl_t_width;
+[2] SUBSUBSUBPROCESS(1) proc st_twe_params.twe_cycle ++; 
+[1] SUBSUBSUBPROCESS(1) equal fl_t_width st_twe_params.twe_final / (FL)st_twe_params.twe_cycle;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_atd_main 
 -Return type : VD 
@@ -788,6 +1500,168 @@ Total functions : 40
 [50] SUBPROCESS(1) func<end> ); 
 [51] MAINPROCESS(4) proc return; 
 ----------------- Total Codes : 51 lines
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if fl_a_self_v > BTT_ACTIVE_SPEED_TH 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) if if( 
+[6] SUBSUBPROCESS(1) if st_atd_params.timer < BTT_ATD_MAX_TIME 
+[7] SUBSUBPROCESS(1) if ) 
+[8] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[9] SUBSUBSUBPROCESS(1) if if( 
+[10] SUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[11] SUBSUBSUBPROCESS(1) if ) 
+[12] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[13] SUBSUBSUBSUBPROCESS(1) func<start> pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer( 
+[14] SUBSUBSUBSUBPROCESS(1) func pst_a_aux_trailer_info 
+[15] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[16] SUBSUBSUBSUBPROCESS(1) if if( 
+[17] SUBSUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT 
+[18] SUBSUBSUBSUBPROCESS(1) if ) 
+[19] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[20] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[21] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[22] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[23] SUBSUBSUBSUBPROCESS(2) else if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[24] SUBSUBSUBSUBPROCESS(2) else if ) 
+[25] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[26] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[27] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[28] SUBSUBSUBSUBPROCESS(3) else else 
+[29] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[30] SUBSUBPROCESS(2) else else 
+[31] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[32] SUBSUBSUBPROCESS(1) equal pst_a_btt_result->TFlag BTT_RET_t.TFlag.UNKNOWN;
+[33] SUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[34] SUBSUBSUBPROCESS(1) func<end> ); 
+[35] SUBSUBPROCESS(3) proc st_atd_params.timer++; 
+[36] SUBPROCESS(2) else else 
+[37] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1] SUBPROCESS(1) func<start> fn_btt_atd_initialize( 
+[2] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if fl_a_self_v > BTT_ACTIVE_SPEED_TH 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) if if( 
+[6] SUBSUBPROCESS(1) if st_atd_params.timer < BTT_ATD_MAX_TIME 
+[7] SUBSUBPROCESS(1) if ) 
+[8] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[9] SUBSUBSUBPROCESS(1) if if( 
+[10] SUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[11] SUBSUBSUBPROCESS(1) if ) 
+[12] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[13] SUBSUBSUBSUBPROCESS(1) func<start> pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer( 
+[14] SUBSUBSUBSUBPROCESS(1) func pst_a_aux_trailer_info 
+[15] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[16] SUBSUBSUBSUBPROCESS(1) if if( 
+[17] SUBSUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT 
+[18] SUBSUBSUBSUBPROCESS(1) if ) 
+[19] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[20] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[21] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[22] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[23] SUBSUBSUBSUBPROCESS(2) else if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[24] SUBSUBSUBSUBPROCESS(2) else if ) 
+[25] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[26] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[27] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[28] SUBSUBSUBSUBPROCESS(3) else else 
+[29] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[30] SUBSUBPROCESS(2) else else 
+[31] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[32] SUBSUBSUBPROCESS(1) equal pst_a_btt_result->TFlag BTT_RET_t.TFlag.UNKNOWN;
+[33] SUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[34] SUBSUBSUBPROCESS(1) func<end> ); 
+[35] SUBSUBPROCESS(3) proc st_atd_params.timer++; 
+[36] SUBPROCESS(2) else else 
+[37] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1] SUBPROCESS(1) func<start> fn_btt_atd_initialize( 
+[2] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBSUBPROCESS(1) if if( 
+[2] SUBSUBPROCESS(1) if st_atd_params.timer < BTT_ATD_MAX_TIME 
+[3] SUBSUBPROCESS(1) if ) 
+[4] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[5] SUBSUBSUBPROCESS(1) if if( 
+[6] SUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[7] SUBSUBSUBPROCESS(1) if ) 
+[8] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[9] SUBSUBSUBSUBPROCESS(1) func<start> pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer( 
+[10] SUBSUBSUBSUBPROCESS(1) func pst_a_aux_trailer_info 
+[11] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[12] SUBSUBSUBSUBPROCESS(1) if if( 
+[13] SUBSUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT 
+[14] SUBSUBSUBSUBPROCESS(1) if ) 
+[15] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[16] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[17] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[18] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[19] SUBSUBSUBSUBPROCESS(2) else if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[20] SUBSUBSUBSUBPROCESS(2) else if ) 
+[21] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[22] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[23] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[24] SUBSUBSUBSUBPROCESS(3) else else 
+[25] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[26] SUBSUBPROCESS(2) else else 
+[27] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[28] SUBSUBSUBPROCESS(1) equal pst_a_btt_result->TFlag BTT_RET_t.TFlag.UNKNOWN;
+[29] SUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[30] SUBSUBSUBPROCESS(1) func<end> ); 
+[31] SUBSUBPROCESS(3) proc st_atd_params.timer++; 
+---------------------------
+[1] SUBSUBSUBPROCESS(1) if if( 
+[2] SUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[3] SUBSUBSUBPROCESS(1) if ) 
+[4] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[5] SUBSUBSUBSUBPROCESS(1) func<start> pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer( 
+[6] SUBSUBSUBSUBPROCESS(1) func pst_a_aux_trailer_info 
+[7] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBSUBSUBPROCESS(1) if if( 
+[9] SUBSUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT 
+[10] SUBSUBSUBSUBPROCESS(1) if ) 
+[11] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[13] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[15] SUBSUBSUBSUBPROCESS(2) else if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[16] SUBSUBSUBSUBPROCESS(2) else if ) 
+[17] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[19] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[20] SUBSUBSUBSUBPROCESS(3) else else 
+[21] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[1] SUBSUBSUBPROCESS(1) equal pst_a_btt_result->TFlag BTT_RET_t.TFlag.UNKNOWN;
+[2] SUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[3] SUBSUBSUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBSUBSUBSUBPROCESS(1) func<start> pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer( 
+[2] SUBSUBSUBSUBPROCESS(1) func pst_a_aux_trailer_info 
+[3] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[4] SUBSUBSUBSUBPROCESS(1) if if( 
+[5] SUBSUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT 
+[6] SUBSUBSUBSUBPROCESS(1) if ) 
+[7] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[8] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[9] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[10] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[11] SUBSUBSUBSUBPROCESS(2) else if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[12] SUBSUBSUBSUBPROCESS(2) else if ) 
+[13] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[14] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[15] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[16] SUBSUBSUBSUBPROCESS(3) else else 
+[17] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+---------------------------
+[1] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[2] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[2] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+---------------------------
 --------------------------
 [Function Name] : fn_btt_tle_main 
 -Return type : FL 
@@ -856,6 +1730,45 @@ Total functions : 40
 [54] MAINPROCESS(7) equal fl_t_length (FL)4;
 [55] MAINPROCESS(7) proc return fl_t_length; 
 ----------------- Total Codes : 55 lines
+[1] SUBPROCESS(1) equal fl_a_tle_bf_peak[s4_t_lp_i] (FL)0;
+[1] SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] (FL)0;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_g_btt_result.TLength != BTT_TRAILER_SIZE_UNKNOWN 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) proc return st_g_btt_result.TLength; 
+[6] SUBPROCESS(2) else else 
+[7] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[8] SUBSUBPROCESS(1) proc return fl_t_length; 
+[1] SUBPROCESS(1) func<start> fn_bsm_cal_trailer_range_doa_ave( 
+[2] SUBPROCESS(1) func &afl_a_doa_pow_dev[s4_t_lp_i] 
+[3] SUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_estimate_trailer_length( 
+[2] SUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
+[2] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBPROCESS(1) equal fl_a_tle_bf_peak[s4_t_lp_i] (FL)0;
+[1] SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] (FL)0;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_g_btt_result.TLength != BTT_TRAILER_SIZE_UNKNOWN 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) proc return st_g_btt_result.TLength; 
+[6] SUBPROCESS(2) else else 
+[7] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[8] SUBSUBPROCESS(1) proc return fl_t_length; 
+[1] SUBPROCESS(1) func<start> fn_bsm_cal_trailer_range_doa_ave( 
+[2] SUBPROCESS(1) func &afl_a_doa_pow_dev[s4_t_lp_i] 
+[3] SUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) func<start> fl_t_length = fn_btt_tle_estimate_trailer_length( 
+[2] SUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
+[2] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBSUBPROCESS(1) proc return st_g_btt_result.TLength; 
+[1] SUBSUBPROCESS(1) proc return fl_t_length; 
+---------------------------
 --------------------------
 [Function Name] : fn_btt_twe_main 
 -Return type : FL 
@@ -889,6 +1802,20 @@ Total functions : 40
 [18] MAINPROCESS(4) proc st_twe_params.timer++; 
 [19] MAINPROCESS(4) proc return fl_t_width; 
 ----------------- Total Codes : 19 lines
+[1] SUBPROCESS(1) proc return fl_t_width; 
+[1] SUBPROCESS(1) func<start> fl_t_width = fn_btt_twe_estimate_trailer_width( 
+[2] SUBPROCESS(1) func s4_a_object_size 
+[3] SUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) func<start> fn_btt_twe_deactivate( 
+[2] SUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBPROCESS(1) proc return fl_t_width; 
+[1] SUBPROCESS(1) func<start> fl_t_width = fn_btt_twe_estimate_trailer_width( 
+[2] SUBPROCESS(1) func s4_a_object_size 
+[3] SUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) func<start> fn_btt_twe_deactivate( 
+[2] SUBPROCESS(1) func<end> ); 
+---------------------------
 --------------------------
 [Function Name] : fn_btt_aaz_main 
 -Return type : VD 
@@ -1033,6 +1960,269 @@ Total functions : 40
 [128] MAINPROCESS(10) subproc SUBPROCESS(1) 
 [129] MAINPROCESS(11) proc return; 
 ----------------- Total Codes : 129 lines
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) proc st_aaz_params.TLength_unknown_count++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_aaz_params.TLength_unknown_count > BTT_AAZ_TH_OFF 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if pst_a_btt_stat->TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[13] SUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBPROCESS(2) else else 
+[15] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if *pu1_alarm_flg == BTT_RET_t.Bool.TRUE 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBPROCESS(2) else else 
+[6] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[7] SUBSUBPROCESS(1) proc st_aaz_params.TLength_valid_count++; 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if st_aaz_params.TLength_valid_count > BTT_AAZ_TH_ON 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[13] SUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBSUBSUBPROCESS(1) if if( 
+[15] SUBSUBSUBPROCESS(1) if pst_a_btt_stat->TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[16] SUBSUBSUBPROCESS(1) if ) 
+[17] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[19] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) proc st_aaz_params.TLength_invalid_count++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_aaz_params.TLength_invalid_count > BTT_AAZ_TH_OFF 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
+[9] SUBSUBPROCESS(1) func<end> ); 
+[10] SUBPROCESS(2) else else 
+[11] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1] SUBPROCESS(1) proc st_aaz_params.TWidth_unknown_count++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_aaz_params.TWidth_unknown_count > BTT_AAZ_TH_OFF 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if pst_a_btt_stat->TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[13] SUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBPROCESS(2) else else 
+[15] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if *pu1_alarm_flg == BTT_RET_t.Bool.TRUE 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBPROCESS(2) else else 
+[6] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[7] SUBSUBPROCESS(1) proc st_aaz_params.TWidth_valid_count++; 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if st_aaz_params.TWidth_valid_count > BTT_AAZ_TH_ON 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[13] SUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBSUBSUBPROCESS(1) if if( 
+[15] SUBSUBSUBPROCESS(1) if pst_a_btt_stat->TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[16] SUBSUBSUBPROCESS(1) if ) 
+[17] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[19] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) proc st_aaz_params.TWidth_invalid_count++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_aaz_params.TWidth_invalid_count > BTT_AAZ_TH_OFF 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) func<start> fn_btt_twe_deactivate( 
+[9] SUBSUBPROCESS(1) func<end> ); 
+[10] SUBPROCESS(2) else else 
+[11] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+---------------------------
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) proc return; 
+[1] SUBPROCESS(1) proc st_aaz_params.TLength_unknown_count++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_aaz_params.TLength_unknown_count > BTT_AAZ_TH_OFF 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if pst_a_btt_stat->TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[13] SUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBPROCESS(2) else else 
+[15] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if *pu1_alarm_flg == BTT_RET_t.Bool.TRUE 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBPROCESS(2) else else 
+[6] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[7] SUBSUBPROCESS(1) proc st_aaz_params.TLength_valid_count++; 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if st_aaz_params.TLength_valid_count > BTT_AAZ_TH_ON 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[13] SUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBSUBSUBPROCESS(1) if if( 
+[15] SUBSUBSUBPROCESS(1) if pst_a_btt_stat->TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[16] SUBSUBSUBPROCESS(1) if ) 
+[17] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[19] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) proc st_aaz_params.TLength_invalid_count++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_aaz_params.TLength_invalid_count > BTT_AAZ_TH_OFF 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
+[9] SUBSUBPROCESS(1) func<end> ); 
+[10] SUBPROCESS(2) else else 
+[11] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1] SUBPROCESS(1) proc st_aaz_params.TWidth_unknown_count++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_aaz_params.TWidth_unknown_count > BTT_AAZ_TH_OFF 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if pst_a_btt_stat->TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[13] SUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBPROCESS(2) else else 
+[15] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if *pu1_alarm_flg == BTT_RET_t.Bool.TRUE 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBPROCESS(2) else else 
+[6] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[7] SUBSUBPROCESS(1) proc st_aaz_params.TWidth_valid_count++; 
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if st_aaz_params.TWidth_valid_count > BTT_AAZ_TH_ON 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[13] SUBSUBSUBPROCESS(1) func<end> ); 
+[14] SUBSUBSUBPROCESS(1) if if( 
+[15] SUBSUBSUBPROCESS(1) if pst_a_btt_stat->TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[16] SUBSUBSUBPROCESS(1) if ) 
+[17] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[19] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) proc st_aaz_params.TWidth_invalid_count++; 
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if st_aaz_params.TWidth_invalid_count > BTT_AAZ_TH_OFF 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) func<start> fn_btt_twe_deactivate( 
+[9] SUBSUBPROCESS(1) func<end> ); 
+[10] SUBPROCESS(2) else else 
+[11] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+---------------------------
+[1] SUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[2] SUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBPROCESS(1) if if( 
+[4] SUBSUBPROCESS(1) if pst_a_btt_stat->TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[5] SUBSUBPROCESS(1) if ) 
+[6] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[7] SUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[8] SUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBPROCESS(1) proc st_aaz_params.TLength_valid_count++; 
+[2] SUBSUBPROCESS(1) if if( 
+[3] SUBSUBPROCESS(1) if st_aaz_params.TLength_valid_count > BTT_AAZ_TH_ON 
+[4] SUBSUBPROCESS(1) if ) 
+[5] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[6] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[7] SUBSUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBSUBPROCESS(1) if if( 
+[9] SUBSUBSUBPROCESS(1) if pst_a_btt_stat->TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[10] SUBSUBSUBPROCESS(1) if ) 
+[11] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[13] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[2] SUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBPROCESS(1) func<start> fn_btt_tle_deactivate( 
+[4] SUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[2] SUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBPROCESS(1) if if( 
+[4] SUBSUBPROCESS(1) if pst_a_btt_stat->TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[5] SUBSUBPROCESS(1) if ) 
+[6] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[7] SUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[8] SUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBPROCESS(1) proc st_aaz_params.TWidth_valid_count++; 
+[2] SUBSUBPROCESS(1) if if( 
+[3] SUBSUBPROCESS(1) if st_aaz_params.TWidth_valid_count > BTT_AAZ_TH_ON 
+[4] SUBSUBPROCESS(1) if ) 
+[5] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[6] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[7] SUBSUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBSUBPROCESS(1) if if( 
+[9] SUBSUBSUBPROCESS(1) if pst_a_btt_stat->TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[10] SUBSUBSUBPROCESS(1) if ) 
+[11] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[13] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[2] SUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBPROCESS(1) func<start> fn_btt_twe_deactivate( 
+[4] SUBSUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[2] SUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_range_rear( pst_a_btt_result->TLength 
+[2] SUBSUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBSUBPROCESS(1) if if( 
+[4] SUBSUBSUBPROCESS(1) if pst_a_btt_stat->TLE == BTT_RET_t.Func_Stat.DEACTIVE 
+[5] SUBSUBSUBPROCESS(1) if ) 
+[6] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[7] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[8] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[2] SUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBSUBPROCESS(1) func<start> fn_btt_set_range_side( pst_a_btt_result->TWidth 
+[2] SUBSUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBSUBPROCESS(1) if if( 
+[4] SUBSUBSUBPROCESS(1) if pst_a_btt_stat->TWE == BTT_RET_t.Func_Stat.DEACTIVE 
+[5] SUBSUBSUBPROCESS(1) if ) 
+[6] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[7] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[8] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[2] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[1] SUBSUBSUBSUBPROCESS(1) func<start> fn_btt_aaz_deactivate( 
+[2] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+---------------------------
 --------------------------
 [Function Name] : fn_btt_atd_detect_trailer 
 -Return type : U1 
@@ -1076,6 +2266,26 @@ Total functions : 40
 [26] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
 [27] MAINPROCESS(3) proc return u1_t_btt_trailer_flg; 
 ----------------- Total Codes : 27 lines
+[1] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.CONNECT;
+[1] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.NOTCONNECT;
+[2] SUBPROCESS(1) for for( 
+[3] SUBPROCESS(1) for s4_t_lp_i=0; 
+[4] SUBPROCESS(1) for s4_t_lp_i<6; 
+[5] SUBPROCESS(1) for s4_t_lp_i++) 
+[6] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[7] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
+---------------------------
+[1] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.CONNECT;
+[1] SUBPROCESS(1) equal u1_t_btt_trailer_flg BTT_RET_t.TFlag.NOTCONNECT;
+[2] SUBPROCESS(1) for for( 
+[3] SUBPROCESS(1) for s4_t_lp_i=0; 
+[4] SUBPROCESS(1) for s4_t_lp_i<6; 
+[5] SUBPROCESS(1) for s4_t_lp_i++) 
+[6] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[7] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
+---------------------------
+[1] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_tracking[s4_t_lp_i] (FL)-120;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_tle_estimate_trailer_length 
 -Return type : FL 
@@ -1084,6 +2294,8 @@ Total functions : 40
 [1] MAINPROCESS(1) equal FL fl_t_length BTT_TRAILER_SIZE_UNKNOWN;
 [2] MAINPROCESS(1) proc return fl_t_length; 
 ----------------- Total Codes : 2 lines
+---------------------------
+---------------------------
 --------------------------
 [Function Name] : fn_btt_twe_estimate_trailer_width 
 -Return type : FL 
@@ -1121,6 +2333,34 @@ Total functions : 40
 [27] SUBPROCESS(1) equal fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
 [28] MAINPROCESS(4) proc return fl_t_width; 
 ----------------- Total Codes : 28 lines
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Rxobs != CFL_UNKNOWN_VALUE 
+[3] SUBPROCESS(1) if &&  st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Ryobs < (FL)-0.5 
+[4] SUBPROCESS(1) if &&  st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Ryobs > (FL)-2.0 ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fl_t_rx_ave += fl_abs(st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Rxobs 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) proc s4_t_cycle ++; 
+[1] SUBPROCESS(1) equal fl_t_rx_ave fl_t_rx_ave / (FL)s4_t_cycle;
+[2] SUBPROCESS(1) equal fl_t_width (FL)2.0 * fl_t_rx_ave;
+[1] SUBPROCESS(1) equal fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
+---------------------------
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Rxobs != CFL_UNKNOWN_VALUE 
+[3] SUBPROCESS(1) if &&  st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Ryobs < (FL)-0.5 
+[4] SUBPROCESS(1) if &&  st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Ryobs > (FL)-2.0 ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> fl_t_rx_ave += fl_abs(st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Rxobs 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) proc s4_t_cycle ++; 
+[1] SUBPROCESS(1) equal fl_t_rx_ave fl_t_rx_ave / (FL)s4_t_cycle;
+[2] SUBPROCESS(1) equal fl_t_width (FL)2.0 * fl_t_rx_ave;
+[1] SUBPROCESS(1) equal fl_t_width BTT_TRAILER_SIZE_UNKNOWN;
+---------------------------
+[1] SUBSUBPROCESS(1) func<start> fl_t_rx_ave += fl_abs(st_atd_params.trailer_object_total[s4_t_lp_i][0].fl_Rxobs 
+[2] SUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBPROCESS(1) proc s4_t_cycle ++; 
+---------------------------
 --------------------------
 [Function Name] : fn_check_front_trailer_line 
 -Return type : VD 
@@ -1165,6 +2405,39 @@ Total functions : 40
 [37] SUBSUBPROCESS(1) equal afl_g_btt_nearfield_line_dn[i][j] afl_a_trailerline_dn[i][j];
 [38] MAINPROCESS(3) proc return; 
 ----------------- Total Codes : 38 lines
+[1] SUBPROCESS(1) equal as4_a_trailerline_doa_dn[i][0] (S4)0;
+[2] SUBPROCESS(1) equal as4_a_trailerline_doa_peak_num_dn[i] (S4)0;
+[3] SUBPROCESS(1) for for( 
+[4] SUBPROCESS(1) for j=0; 
+[5] SUBPROCESS(1) for j<2; 
+[6] SUBPROCESS(1) for j++) 
+[7] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[8] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][j] CFL_UNKNOWN_VALUE;
+[1] SUBPROCESS(1) for for( 
+[2] SUBPROCESS(1) for j=0; 
+[3] SUBPROCESS(1) for j<2; 
+[4] SUBPROCESS(1) for j++) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) equal afl_g_btt_nearfield_line_dn[i][j] afl_a_trailerline_dn[i][j];
+---------------------------
+[1] SUBPROCESS(1) equal as4_a_trailerline_doa_dn[i][0] (S4)0;
+[2] SUBPROCESS(1) equal as4_a_trailerline_doa_peak_num_dn[i] (S4)0;
+[3] SUBPROCESS(1) for for( 
+[4] SUBPROCESS(1) for j=0; 
+[5] SUBPROCESS(1) for j<2; 
+[6] SUBPROCESS(1) for j++) 
+[7] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[8] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][j] CFL_UNKNOWN_VALUE;
+[1] SUBPROCESS(1) for for( 
+[2] SUBPROCESS(1) for j=0; 
+[3] SUBPROCESS(1) for j<2; 
+[4] SUBPROCESS(1) for j++) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) equal afl_g_btt_nearfield_line_dn[i][j] afl_a_trailerline_dn[i][j];
+---------------------------
+[1] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][j] CFL_UNKNOWN_VALUE;
+[1] SUBSUBPROCESS(1) equal afl_g_btt_nearfield_line_dn[i][j] afl_a_trailerline_dn[i][j];
+---------------------------
 --------------------------
 [Function Name] : fn_btt_atd_check_detect_trailerobjs 
 -Return type : VD 
@@ -1202,6 +2475,49 @@ Total functions : 40
 [26] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][1] tmp_ry;
 [27] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 27 lines
+[1] SUBPROCESS(1) for for( 
+[2] SUBPROCESS(1) for j=0; 
+[3] SUBPROCESS(1) for j<as4_a_trailerline_doa_peak_num_dn[i]; 
+[4] SUBPROCESS(1) for j++) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> tmp_r = - RCOF * 2.0F * (FL)((as4_a_trailerline_start_bin + i) - (FL)NB_FFT_PT * 0.5F 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) func<start> tmp_theta = fl_transform_doabin_to_rad( 
+[9] SUBSUBPROCESS(1) func 1 
+[10] SUBSUBPROCESS(1) func<end> ); 
+[11] SUBSUBPROCESS(1) equal tmp_rx tmp_r * fl_sin( tmp_theta ) + st_g_bsm_loop_data.afl_installed_angle[1];
+[12] SUBSUBPROCESS(1) func<start> tmp_ry = tmp_r * fl_cos( tmp_theta 
+[13] SUBSUBPROCESS(1) func<end> ); 
+[14] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][0] tmp_rx;
+[15] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][1] tmp_ry;
+---------------------------
+[1] SUBPROCESS(1) for for( 
+[2] SUBPROCESS(1) for j=0; 
+[3] SUBPROCESS(1) for j<as4_a_trailerline_doa_peak_num_dn[i]; 
+[4] SUBPROCESS(1) for j++) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) func<start> tmp_r = - RCOF * 2.0F * (FL)((as4_a_trailerline_start_bin + i) - (FL)NB_FFT_PT * 0.5F 
+[7] SUBSUBPROCESS(1) func<end> ); 
+[8] SUBSUBPROCESS(1) func<start> tmp_theta = fl_transform_doabin_to_rad( 
+[9] SUBSUBPROCESS(1) func 1 
+[10] SUBSUBPROCESS(1) func<end> ); 
+[11] SUBSUBPROCESS(1) equal tmp_rx tmp_r * fl_sin( tmp_theta ) + st_g_bsm_loop_data.afl_installed_angle[1];
+[12] SUBSUBPROCESS(1) func<start> tmp_ry = tmp_r * fl_cos( tmp_theta 
+[13] SUBSUBPROCESS(1) func<end> ); 
+[14] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][0] tmp_rx;
+[15] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][1] tmp_ry;
+---------------------------
+[1] SUBSUBPROCESS(1) func<start> tmp_r = - RCOF * 2.0F * (FL)((as4_a_trailerline_start_bin + i) - (FL)NB_FFT_PT * 0.5F 
+[2] SUBSUBPROCESS(1) func<end> ); 
+[3] SUBSUBPROCESS(1) func<start> tmp_theta = fl_transform_doabin_to_rad( 
+[4] SUBSUBPROCESS(1) func 1 
+[5] SUBSUBPROCESS(1) func<end> ); 
+[6] SUBSUBPROCESS(1) equal tmp_rx tmp_r * fl_sin( tmp_theta ) + st_g_bsm_loop_data.afl_installed_angle[1];
+[7] SUBSUBPROCESS(1) func<start> tmp_ry = tmp_r * fl_cos( tmp_theta 
+[8] SUBSUBPROCESS(1) func<end> ); 
+[9] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][0] tmp_rx;
+[10] SUBSUBPROCESS(1) equal afl_a_trailerline_dn[i][1] tmp_ry;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_atd_trailerobj_tracking 
 -Return type : VD 
@@ -1385,6 +2701,342 @@ Total functions : 40
 [170] MAINPROCESS(9) equal afl_g_btt_atd_doa_pow_ave[1] afl_a_db_doa_peak_ave_diff;
 [171] MAINPROCESS(9) proc return; 
 ----------------- Total Codes : 171 lines
+[1] SUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
+[1] SUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)55;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if s2_g_curvr_for_base < 0 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)45;
+[6] SUBPROCESS(2) else else 
+[7] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[8] SUBSUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
+[1] SUBPROCESS(1) equal as4_a_tmp_trailer_obj_num st_atd_params.trailer_object_num_total[s4_t_lp_i];
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if as4_a_tmp_trailer_obj_num != (S4)0 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) proc as4_a_trk_num ++; 
+[7] SUBSUBPROCESS(1) for for( 
+[8] SUBSUBPROCESS(1) for s4_t_lp_j = 0; 
+[9] SUBSUBPROCESS(1) for s4_t_lp_j < as4_a_tmp_trailer_obj_num; 
+[10] SUBSUBPROCESS(1) for s4_t_lp_j++ ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_rx_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[13] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_rx_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs 
+[14] SUBSUBSUBPROCESS(1) func<end> ); 
+[15] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_ry_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[16] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_ry_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs 
+[17] SUBSUBSUBPROCESS(1) func<end> ); 
+[18] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_vy_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs;
+[19] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_vy_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs 
+[20] SUBSUBSUBPROCESS(1) func<end> ); 
+[21] SUBSUBSUBPROCESS(1) proc as4_a_trk_num2 ++; 
+[1] SUBPROCESS(1) equal afl_a_trailer_obj_rx_ave afl_a_trailer_obj_rx_ave / (FL)as4_a_trk_num2;
+[2] SUBPROCESS(1) equal afl_a_trailer_obj_ry_ave afl_a_trailer_obj_ry_ave / (FL)as4_a_trk_num2;
+[3] SUBPROCESS(1) equal afl_a_trailer_obj_vy_ave afl_a_trailer_obj_vy_ave / (FL)as4_a_trk_num2;
+[4] SUBPROCESS(1) func<start> afl_a_trailer_obj_rx_dev = fl_abs((afl_a_trailer_obj_rx_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_rx_ave * afl_a_trailer_obj_rx_ave 
+[5] SUBPROCESS(1) func<end> ); 
+[6] SUBPROCESS(1) equal afl_a_trailer_obj_ry_dev (afl_a_trailer_obj_ry_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_ry_ave * afl_a_trailer_obj_ry_ave;
+[7] SUBPROCESS(1) func<start> afl_a_trailer_obj_vy_dev = fl_abs((afl_a_trailer_obj_vy_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_vy_ave * afl_a_trailer_obj_vy_ave 
+[8] SUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
+[3] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
+[4] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
+[5] SUBPROCESS(1) if &&  fl_abs(afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
+[6] SUBPROCESS(1) if &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
+[7] SUBPROCESS(1) if &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
+[8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) if if( 
+[10] SUBSUBPROCESS(1) if s4_abs(s2_g_curvr_for_base) > (S2)CU1_CANOUT_CURVER_MIN_SOT 
+[11] SUBSUBPROCESS(1) if ) 
+[12] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[13] SUBSUBSUBPROCESS(1) if if( 
+[14] SUBSUBSUBPROCESS(1) if afl_a_db_doa_peak_ave_diff > (FL)5.0 
+[15] SUBSUBSUBPROCESS(1) if ||  fl_a_doa_pow_ave[0][1] < afl_a_trailer_doa_pow_th 
+[16] SUBSUBSUBPROCESS(1) if ) 
+[17] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[19] SUBSUBSUBPROCESS(2) else if else if( 
+[20] SUBSUBSUBPROCESS(2) else if as4_a_trk_num2 < (S4)10 
+[21] SUBSUBSUBPROCESS(2) else if ) 
+[22] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[24] SUBSUBSUBPROCESS(3) else else 
+[25] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[26] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[27] SUBSUBPROCESS(2) else if else if( 
+[28] SUBSUBPROCESS(2) else if s4_abs(s2_g_curvr_for_base) >= (S2)10 
+[29] SUBSUBPROCESS(2) else if ) 
+[30] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[31] SUBSUBSUBPROCESS(1) if if( 
+[32] SUBSUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[33] SUBSUBSUBPROCESS(1) if ) 
+[34] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[35] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[36] SUBSUBSUBPROCESS(2) else else 
+[37] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[38] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[39] SUBPROCESS(2) else else 
+[40] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[41] SUBSUBPROCESS(1) if if( 
+[42] SUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[43] SUBSUBPROCESS(1) if &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[44] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[45] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[46] SUBSUBPROCESS(2) else else 
+[47] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[48] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if as4_a_trk_num2 > (S4)10 
+[3] SUBPROCESS(1) if &&  fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[4] SUBPROCESS(1) if &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[7] SUBPROCESS(2) else else 
+[8] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBPROCESS(1) for for( 
+[2] SUBPROCESS(1) for s4_t_lp_j = 0; 
+[3] SUBPROCESS(1) for s4_t_lp_j < TRAILER_BUFFSIZE; 
+[4] SUBPROCESS(1) for s4_t_lp_j ++ ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[0][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[7] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[1][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs == (FL)0 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] (FL)-120;
+[13] SUBSUBPROCESS(2) else else 
+[14] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[15] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * (FL)3.6;
+---------------------------
+[1] SUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
+[1] SUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)55;
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if s2_g_curvr_for_base < 0 
+[3] SUBPROCESS(1) if ) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)45;
+[6] SUBPROCESS(2) else else 
+[7] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[8] SUBSUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
+[1] SUBPROCESS(1) equal as4_a_tmp_trailer_obj_num st_atd_params.trailer_object_num_total[s4_t_lp_i];
+[2] SUBPROCESS(1) if if( 
+[3] SUBPROCESS(1) if as4_a_tmp_trailer_obj_num != (S4)0 
+[4] SUBPROCESS(1) if ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) proc as4_a_trk_num ++; 
+[7] SUBSUBPROCESS(1) for for( 
+[8] SUBSUBPROCESS(1) for s4_t_lp_j = 0; 
+[9] SUBSUBPROCESS(1) for s4_t_lp_j < as4_a_tmp_trailer_obj_num; 
+[10] SUBSUBPROCESS(1) for s4_t_lp_j++ ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_rx_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[13] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_rx_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs 
+[14] SUBSUBSUBPROCESS(1) func<end> ); 
+[15] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_ry_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[16] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_ry_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs 
+[17] SUBSUBSUBPROCESS(1) func<end> ); 
+[18] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_vy_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs;
+[19] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_vy_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs 
+[20] SUBSUBSUBPROCESS(1) func<end> ); 
+[21] SUBSUBSUBPROCESS(1) proc as4_a_trk_num2 ++; 
+[1] SUBPROCESS(1) equal afl_a_trailer_obj_rx_ave afl_a_trailer_obj_rx_ave / (FL)as4_a_trk_num2;
+[2] SUBPROCESS(1) equal afl_a_trailer_obj_ry_ave afl_a_trailer_obj_ry_ave / (FL)as4_a_trk_num2;
+[3] SUBPROCESS(1) equal afl_a_trailer_obj_vy_ave afl_a_trailer_obj_vy_ave / (FL)as4_a_trk_num2;
+[4] SUBPROCESS(1) func<start> afl_a_trailer_obj_rx_dev = fl_abs((afl_a_trailer_obj_rx_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_rx_ave * afl_a_trailer_obj_rx_ave 
+[5] SUBPROCESS(1) func<end> ); 
+[6] SUBPROCESS(1) equal afl_a_trailer_obj_ry_dev (afl_a_trailer_obj_ry_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_ry_ave * afl_a_trailer_obj_ry_ave;
+[7] SUBPROCESS(1) func<start> afl_a_trailer_obj_vy_dev = fl_abs((afl_a_trailer_obj_vy_dev / (FL)as4_a_trk_num2) - afl_a_trailer_obj_vy_ave * afl_a_trailer_obj_vy_ave 
+[8] SUBPROCESS(1) func<end> ); 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if fl_abs(afl_a_trailer_obj_rx_ave) < BTT_OBJ_X_RANGE 
+[3] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave < BTT_OBJ_Y_RANGE_FORWARD 
+[4] SUBPROCESS(1) if &&  afl_a_trailer_obj_ry_ave > BTT_OBJ_Y_RANGE_BACKWARD 
+[5] SUBPROCESS(1) if &&  fl_abs(afl_a_trailer_obj_vy_ave) < BTT_OBJ_VY 
+[6] SUBPROCESS(1) if &&  afl_a_trailer_obj_rx_dev < BTT_OBJ_DEV_TH 
+[7] SUBPROCESS(1) if &&  afl_a_trailer_obj_vy_dev < BTT_OBJ_DEV_TH ) 
+[8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) if if( 
+[10] SUBSUBPROCESS(1) if s4_abs(s2_g_curvr_for_base) > (S2)CU1_CANOUT_CURVER_MIN_SOT 
+[11] SUBSUBPROCESS(1) if ) 
+[12] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[13] SUBSUBSUBPROCESS(1) if if( 
+[14] SUBSUBSUBPROCESS(1) if afl_a_db_doa_peak_ave_diff > (FL)5.0 
+[15] SUBSUBSUBPROCESS(1) if ||  fl_a_doa_pow_ave[0][1] < afl_a_trailer_doa_pow_th 
+[16] SUBSUBSUBPROCESS(1) if ) 
+[17] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[19] SUBSUBSUBPROCESS(2) else if else if( 
+[20] SUBSUBSUBPROCESS(2) else if as4_a_trk_num2 < (S4)10 
+[21] SUBSUBSUBPROCESS(2) else if ) 
+[22] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[24] SUBSUBSUBPROCESS(3) else else 
+[25] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[26] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[27] SUBSUBPROCESS(2) else if else if( 
+[28] SUBSUBPROCESS(2) else if s4_abs(s2_g_curvr_for_base) >= (S2)10 
+[29] SUBSUBPROCESS(2) else if ) 
+[30] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[31] SUBSUBSUBPROCESS(1) if if( 
+[32] SUBSUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[33] SUBSUBSUBPROCESS(1) if ) 
+[34] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[35] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[36] SUBSUBSUBPROCESS(2) else else 
+[37] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[38] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[39] SUBPROCESS(2) else else 
+[40] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[41] SUBSUBPROCESS(1) if if( 
+[42] SUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[43] SUBSUBPROCESS(1) if &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[44] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[45] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[46] SUBSUBPROCESS(2) else else 
+[47] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[48] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if as4_a_trk_num2 > (S4)10 
+[3] SUBPROCESS(1) if &&  fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[4] SUBPROCESS(1) if &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[7] SUBPROCESS(2) else else 
+[8] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBPROCESS(1) for for( 
+[2] SUBPROCESS(1) for s4_t_lp_j = 0; 
+[3] SUBPROCESS(1) for s4_t_lp_j < TRAILER_BUFFSIZE; 
+[4] SUBPROCESS(1) for s4_t_lp_j ++ ) 
+[5] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[6] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[0][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[7] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[1][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[8] SUBSUBPROCESS(1) if if( 
+[9] SUBSUBPROCESS(1) if st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs == (FL)0 
+[10] SUBSUBPROCESS(1) if ) 
+[11] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[12] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] (FL)-120;
+[13] SUBSUBPROCESS(2) else else 
+[14] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[15] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * (FL)3.6;
+---------------------------
+[1] SUBSUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)45;
+[1] SUBSUBPROCESS(1) equal afl_a_trailer_doa_pow_th (FL)58;
+[1] SUBSUBPROCESS(1) proc as4_a_trk_num ++; 
+[2] SUBSUBPROCESS(1) for for( 
+[3] SUBSUBPROCESS(1) for s4_t_lp_j = 0; 
+[4] SUBSUBPROCESS(1) for s4_t_lp_j < as4_a_tmp_trailer_obj_num; 
+[5] SUBSUBPROCESS(1) for s4_t_lp_j++ ) 
+[6] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[7] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_rx_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[8] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_rx_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs 
+[9] SUBSUBSUBPROCESS(1) func<end> ); 
+[10] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_ry_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[11] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_ry_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs 
+[12] SUBSUBSUBPROCESS(1) func<end> ); 
+[13] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_vy_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs;
+[14] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_vy_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs 
+[15] SUBSUBSUBPROCESS(1) func<end> ); 
+[16] SUBSUBSUBPROCESS(1) proc as4_a_trk_num2 ++; 
+[1] SUBSUBPROCESS(1) if if( 
+[2] SUBSUBPROCESS(1) if s4_abs(s2_g_curvr_for_base) > (S2)CU1_CANOUT_CURVER_MIN_SOT 
+[3] SUBSUBPROCESS(1) if ) 
+[4] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[5] SUBSUBSUBPROCESS(1) if if( 
+[6] SUBSUBSUBPROCESS(1) if afl_a_db_doa_peak_ave_diff > (FL)5.0 
+[7] SUBSUBSUBPROCESS(1) if ||  fl_a_doa_pow_ave[0][1] < afl_a_trailer_doa_pow_th 
+[8] SUBSUBSUBPROCESS(1) if ) 
+[9] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[10] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[11] SUBSUBSUBPROCESS(2) else if else if( 
+[12] SUBSUBSUBPROCESS(2) else if as4_a_trk_num2 < (S4)10 
+[13] SUBSUBSUBPROCESS(2) else if ) 
+[14] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[15] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[16] SUBSUBSUBPROCESS(3) else else 
+[17] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[19] SUBSUBPROCESS(2) else if else if( 
+[20] SUBSUBPROCESS(2) else if s4_abs(s2_g_curvr_for_base) >= (S2)10 
+[21] SUBSUBPROCESS(2) else if ) 
+[22] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[23] SUBSUBSUBPROCESS(1) if if( 
+[24] SUBSUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[25] SUBSUBSUBPROCESS(1) if ) 
+[26] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[27] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[28] SUBSUBSUBPROCESS(2) else else 
+[29] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[30] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBSUBPROCESS(1) if if( 
+[2] SUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[3] SUBSUBPROCESS(1) if &&  afl_a_db_doa_peak_ave_diff < (FL)5.0 ) 
+[4] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[5] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[6] SUBSUBPROCESS(2) else else 
+[7] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[8] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[1] SUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[0][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[2] SUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[1][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[3] SUBSUBPROCESS(1) if if( 
+[4] SUBSUBPROCESS(1) if st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs == (FL)0 
+[5] SUBSUBPROCESS(1) if ) 
+[6] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[7] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] (FL)-120;
+[8] SUBSUBPROCESS(2) else else 
+[9] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[10] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * (FL)3.6;
+---------------------------
+[1] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_rx_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs;
+[2] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_rx_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Rxobs 
+[3] SUBSUBSUBPROCESS(1) func<end> ); 
+[4] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_ry_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs;
+[5] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_ry_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Ryobs 
+[6] SUBSUBSUBPROCESS(1) func<end> ); 
+[7] SUBSUBSUBPROCESS(1) equal afl_a_trailer_obj_vy_ave + st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs;
+[8] SUBSUBSUBPROCESS(1) func<start> afl_a_trailer_obj_vy_dev += (st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs 
+[9] SUBSUBSUBPROCESS(1) func<end> ); 
+[10] SUBSUBSUBPROCESS(1) proc as4_a_trk_num2 ++; 
+[1] SUBSUBSUBPROCESS(1) if if( 
+[2] SUBSUBSUBPROCESS(1) if afl_a_db_doa_peak_ave_diff > (FL)5.0 
+[3] SUBSUBSUBPROCESS(1) if ||  fl_a_doa_pow_ave[0][1] < afl_a_trailer_doa_pow_th 
+[4] SUBSUBSUBPROCESS(1) if ) 
+[5] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[6] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[7] SUBSUBSUBPROCESS(2) else if else if( 
+[8] SUBSUBSUBPROCESS(2) else if as4_a_trk_num2 < (S4)10 
+[9] SUBSUBSUBPROCESS(2) else if ) 
+[10] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[11] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[12] SUBSUBSUBPROCESS(3) else else 
+[13] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[14] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[1] SUBSUBSUBPROCESS(1) if if( 
+[2] SUBSUBSUBPROCESS(1) if fl_a_doa_pow_ave[0][1] > afl_a_trailer_doa_pow_th 
+[3] SUBSUBSUBPROCESS(1) if ) 
+[4] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[5] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[6] SUBSUBSUBPROCESS(2) else else 
+[7] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[8] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[1] SUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] (FL)-120;
+[1] SUBSUBSUBPROCESS(1) equal afl_g_btt_atd_obj_info[2][s4_t_lp_j][s4_t_lp_i] st_atd_params.trailer_object_total[s4_t_lp_i][s4_t_lp_j].fl_Vyobs * (FL)3.6;
+---------------------------
+[1] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+[1] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[1] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[0] ++; 
+[1] SUBSUBSUBSUBPROCESS(1) proc st_atd_params.atd_counter[1] ++; 
+---------------------------
 --------------------------
 [Function Name] : fn_btt_shift_trailerobj 
 -Return type : VD 
@@ -1406,6 +3058,14 @@ Total functions : 40
 [12] MAINPROCESS(2) equal st_atd_params.trailer_object_num_total[0] as4_a_trailer_obj_num;
 [13] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 13 lines
+[1] SUBPROCESS(1) func<start> fn_move(st_atd_params.trailer_object_total[s4_t_lp_i + (S4)1], st_atd_params.trailer_object_total[s4_t_lp_i], TRAILER_BUFFSIZE 
+[2] SUBPROCESS(1) func<end> ); 
+[3] SUBPROCESS(1) equal st_atd_params.trailer_object_num_total[s4_t_lp_i + (S4)1] st_atd_params.trailer_object_num_total[s4_t_lp_i];
+---------------------------
+[1] SUBPROCESS(1) func<start> fn_move(st_atd_params.trailer_object_total[s4_t_lp_i + (S4)1], st_atd_params.trailer_object_total[s4_t_lp_i], TRAILER_BUFFSIZE 
+[2] SUBPROCESS(1) func<end> ); 
+[3] SUBPROCESS(1) equal st_atd_params.trailer_object_num_total[s4_t_lp_i + (S4)1] st_atd_params.trailer_object_num_total[s4_t_lp_i];
+---------------------------
 --------------------------
 [Function Name] : fn_btt_sel_exclude_object 
 -Return type : VD 
@@ -1420,6 +3080,8 @@ Total functions : 40
 [5] MAINPROCESS(1) func<end> ); 
 [6] MAINPROCESS(1) proc return; 
 ----------------- Total Codes : 6 lines
+---------------------------
+---------------------------
 --------------------------
 [Function Name] : fn_btt_sel_exobj_outside_rx 
 -Return type : VD 
@@ -1441,6 +3103,23 @@ Total functions : 40
 [12] SUBSUBPROCESS(1) func<end> ); 
 [13] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 13 lines
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if pst_a_trailer_obj[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE 
+[3] SUBPROCESS(1) if &&  fl_abs(pst_a_trailer_obj[s4_t_lp_i].fl_Rxobs) > (FL)2.0) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) func<start> fn_init(&pst_a_trailer_obj[s4_t_lp_i], 1 
+[6] SUBSUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBPROCESS(1) if if( 
+[2] SUBPROCESS(1) if pst_a_trailer_obj[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE 
+[3] SUBPROCESS(1) if &&  fl_abs(pst_a_trailer_obj[s4_t_lp_i].fl_Rxobs) > (FL)2.0) 
+[4] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[5] SUBSUBPROCESS(1) func<start> fn_init(&pst_a_trailer_obj[s4_t_lp_i], 1 
+[6] SUBSUBPROCESS(1) func<end> ); 
+---------------------------
+[1] SUBSUBPROCESS(1) func<start> fn_init(&pst_a_trailer_obj[s4_t_lp_i], 1 
+[2] SUBSUBPROCESS(1) func<end> ); 
+---------------------------
 --------------------------
 [Function Name] : fn_btt_tle_search_peak_bf 
 -Return type : VD 
@@ -1482,6 +3161,40 @@ Total functions : 40
 [32] SUBPROCESS(2) func<end> ); 
 [33] MAINPROCESS(3) proc return; 
 ----------------- Total Codes : 33 lines
+[1] SUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_i] (FL)0;
+[1] SUBPROCESS(1) equal s4_t_doa[0] (S4)0;
+[2] SUBPROCESS(1) equal s4_t_focus_bin FREQ_BIN_LOWER_LIMIT_T + (S4)u1_t_lp_i;
+[3] SUBPROCESS(1) func<start> fn_calc_spec_bf_4ch_fm( 
+[4] SUBPROCESS(1) func s4_t_focus_bin 
+[5] SUBPROCESS(1) func<end> ); 
+[6] SUBPROCESS(1) for  for ( 
+[7] SUBPROCESS(1) for  u1_t_lp_n_doa = (U1)s4_t_doa_range; 
+[8] SUBPROCESS(1) for  u1_t_lp_n_doa < (U1)N_DOA; 
+[9] SUBPROCESS(1) for  u1_t_lp_n_doa++) 
+[10] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[11] SUBSUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_n_doa] (FL)0.0F;
+[12] SUBPROCESS(2) func<start> s4_search_peak_bf( 
+[13] SUBPROCESS(2) func 1 
+[14] SUBPROCESS(2) func<end> ); 
+---------------------------
+[1] SUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_i] (FL)0;
+[1] SUBPROCESS(1) equal s4_t_doa[0] (S4)0;
+[2] SUBPROCESS(1) equal s4_t_focus_bin FREQ_BIN_LOWER_LIMIT_T + (S4)u1_t_lp_i;
+[3] SUBPROCESS(1) func<start> fn_calc_spec_bf_4ch_fm( 
+[4] SUBPROCESS(1) func s4_t_focus_bin 
+[5] SUBPROCESS(1) func<end> ); 
+[6] SUBPROCESS(1) for  for ( 
+[7] SUBPROCESS(1) for  u1_t_lp_n_doa = (U1)s4_t_doa_range; 
+[8] SUBPROCESS(1) for  u1_t_lp_n_doa < (U1)N_DOA; 
+[9] SUBPROCESS(1) for  u1_t_lp_n_doa++) 
+[10] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[11] SUBSUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_n_doa] (FL)0.0F;
+[12] SUBPROCESS(2) func<start> s4_search_peak_bf( 
+[13] SUBPROCESS(2) func 1 
+[14] SUBPROCESS(2) func<end> ); 
+---------------------------
+[1] SUBSUBPROCESS(1) equal afl_t_doa_spec[u1_t_lp_n_doa] (FL)0.0F;
+---------------------------
 --------------------------
 [Function Name] : fn_btt_tle_calc_bf_power_diff 
 -Return type : VD 
@@ -1498,3 +3211,7 @@ Total functions : 40
 [7] SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] fl_a_tle_bf_peak[s4_t_lp_i] - fl_a_tle_bf_peak[s4_t_lp_i + 1];
 [8] MAINPROCESS(2) proc return; 
 ----------------- Total Codes : 8 lines
+[1] SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] fl_a_tle_bf_peak[s4_t_lp_i] - fl_a_tle_bf_peak[s4_t_lp_i + 1];
+---------------------------
+[1] SUBPROCESS(1) equal fl_a_tle_bf_pow_diff[s4_t_lp_i] fl_a_tle_bf_peak[s4_t_lp_i] - fl_a_tle_bf_peak[s4_t_lp_i + 1];
+---------------------------

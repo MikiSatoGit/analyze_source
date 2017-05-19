@@ -11,7 +11,6 @@
 from blockdiag import parser, builder, drawer 
 import func_source_analyze
 import copy
-import re
 
 class BlockDataList:
 	def __init__(self):
@@ -38,15 +37,30 @@ class BlockData:
 
 debug_out = False
 
-def draw_diag(sourcefilename, funcname, proc_codes, level_title):
+def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
+# [in] sourcefilename : C source file name(str)
 # [in] funcname : FunctionList.FunctionData.name (str)
 # [in] proc_codes : FunctionList.FunctionData.process_code_list (ProcessCodes)
+# [in] level_title : process level (str) : MAINPROCESS, SUBPROCESS,...
+# [in] outputmode : 0:png, 1:source txt, 2:both
+
 	outfile = ''
+	txtfile = ''
 	if len(sourcefilename)>1:
 		outfile = sourcefilename[0] + '\\figs\\' + sourcefilename[1]
+		txtfile = sourcefilename[0] + '\\figs\\' + sourcefilename[1]
 	else:
 		outfile = '\\figs\\' + sourcefilename[0]
-	outfile = outfile[0:outfile.rfind('.')] + '_' + funcname + '_' + level_title +'.png'
+		txtfile = '\\figs\\' + sourcefilename[0]
+	outfile = outfile[0:outfile.rfind('.')] + '_' + funcname + '_' + level_title +'.svg'
+	txtfile = txtfile[0:txtfile.rfind('.')] + '_' + funcname + '_' + level_title +'.diag'
+
+	save_png_flag = False
+	save_txt_flag = False
+	if outputmode==0 or outputmode==2:
+		save_png_flag = True
+	if outputmode==1 or outputmode==2:
+		save_txt_flag = True
 
 	source_header = 'blockdiag {\n'
 	source_header += 'orientation = portrait;\n'
@@ -97,12 +111,17 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title):
 	print '----------<%s>----------' % funcname
 	print source
 
-	tree = parser.parse_string(source) 
-	diagram = builder.ScreenNodeBuilder.build(tree) 
-	draw = drawer.DiagramDraw('PNG', diagram, filename=outfile) 
-	draw.draw() 
-	draw.save() 
+	if save_png_flag:
+		tree = parser.parse_string(source) 
+		diagram = builder.ScreenNodeBuilder.build(tree) 
+		draw = drawer.DiagramDraw('SVG', diagram, filename=outfile) 
+		draw.draw()
+		draw.save() 
 
+	if save_txt_flag:
+		fout = open(txtfile,'w')
+		fout.write(source)
+		fout.close()
 
 #################### Extract Sub Block ####################
 	out_proc_codes_list, header_list = extract_sub_proc(proc_codes, level_title)

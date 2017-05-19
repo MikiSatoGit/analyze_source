@@ -149,15 +149,16 @@ for index1 in range(0, func_list.func_num):
 		str_filename1, \
 		func_list.function_data[index1].name, \
 		func_list.function_data[index1].process_code_list, \
-		'MAINPROCESS'
+		'MAINPROCESS', \
+		2
 	)
 
-	#if debug_out:
-	for degug_proc_codes in sub_proc_codes_list:
-		total_lines = degug_proc_codes.file_print_proc_data_list(fout)
-	func_source_analyze.print_out(fout, "---------------------------", 1)
-	print '<main>------------------------- sub proc list(%d)' % len(sub_proc_codes_list) 
-	print '<main>------------------------- header list(%d)' % len(sub_header_list) 
+	if debug_out:
+		for degug_proc_codes in sub_proc_codes_list:
+			total_lines = degug_proc_codes.file_print_proc_data_list(fout)
+		func_source_analyze.print_out(fout, "---------------------------", 1)
+		print '<main>------------------------- sub proc list(%d)' % len(sub_proc_codes_list) 
+		print '<main>------------------------- header list(%d)' % len(sub_header_list) 
 
 ##### sub
 	loop_flg = True
@@ -167,8 +168,6 @@ for index1 in range(0, func_list.func_num):
 	while loop_flg:
 		level_title = 'SUB' + level_title
 		sub_proc_num = 0
-#		print '<main>Start cheking [%s]' % level_title
-
 
 		if debug_out:
 			for i in range(0, len(sub_proc_codes_list)):
@@ -183,29 +182,29 @@ for index1 in range(0, func_list.func_num):
 		for index in range( 0, len(sub_proc_codes_list) ):
 			each_proc_codes = sub_proc_codes_list[index]
 			tmp_header = sub_header_list[index]
-			total_lines = each_proc_codes.file_print_proc_data_list(fout)
 
-#			print '<%d>>>>>>>>>>>>>%s' % (index, tmp_header)
+			if debug_out:
+				print '<%d>>>>>>>>>>>>>%s' % (index, tmp_header)
+
 			tmp_proc_codes_list, tmp_header_list = func_blockdiag.draw_diag( \
 				str_filename1, \
 				func_list.function_data[index1].name + '_'+ tmp_header, \
 				each_proc_codes, \
-				level_title
+				level_title, \
+				2
 			)
 			if len(tmp_header_list)!=0:
 				for i in range(0, len(tmp_header_list)):
 					tmp_header_list[i] = tmp_header + '_' + tmp_header_list[i]
 			sub_proc_num += len(tmp_proc_codes_list)
-#			print '<<<<<<<<<<<<<%d> %d/%d' % (index, len(tmp_proc_codes_list),sub_proc_num)
+
+			if debug_out:
+				print '<<<<<<<<<<<<<%d> %d/%d' % (index, len(tmp_proc_codes_list),sub_proc_num)
 
 			if len(tmp_header_list)!=0:
 				next_header_list += tmp_header_list
 			if len(tmp_proc_codes_list)!=0:
 				next_proc_list += tmp_proc_codes_list
-
-
-		func_source_analyze.print_out(fout, "---------------------------", 1)
-#		print '------------------------- remaining sub proc list(%d)' % sub_proc_num
 
 		if len(next_proc_list)==0:
 			loop_flg = False
@@ -216,8 +215,6 @@ for index1 in range(0, func_list.func_num):
 			sub_proc_codes_list = copy.deepcopy(next_proc_list)
 			del next_header_list[:]
 			del next_proc_list[:]
-
-
 
 
 
