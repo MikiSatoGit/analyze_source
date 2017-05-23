@@ -8,7 +8,7 @@ Total functions : 1
      [1] : type2   arg2 
 ----- Codes -----
 [1] MAINPROCESS(1) if if( 
-[2] MAINPROCESS(1) if test2==1 
+[2] MAINPROCESS(1) if test2 ==1 
 [3] MAINPROCESS(1) if ) 
 [4] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [5] SUBPROCESS(1) equal test2 1;
@@ -113,10 +113,11 @@ Total functions : 1
 [104] MAINPROCESS(10) subproc SUBPROCESS(1) 
 [105] SUBPROCESS(1) equal level1_3_1 hoge1_3_1;
 [106] MAINPROCESS(11) for for( 
-[107] MAINPROCESS(11) for i=0; 
-[108] MAINPROCESS(11) for i<n; 
-[109] MAINPROCESS(11) for i++) 
-[110] MAINPROCESS(11) subproc SUBPROCESS(1) 
-[111] SUBPROCESS(1) equal test1 + 1;
-[112] MAINPROCESS(12) proc return; 
------------------ Total Codes : 112 lines
+[107] MAINPROCESS(11) for i=(S4)0; 
+[108] MAINPROCESS(11) for i<(S4)n; 
+[109] MAINPROCESS(11) for i++ 
+[110] MAINPROCESS(11) for ) 
+[111] MAINPROCESS(11) subproc SUBPROCESS(1) 
+[112] SUBPROCESS(1) equal test1 + 1;
+[113] MAINPROCESS(12) proc return; 
+----------------- Total Codes : 113 lines

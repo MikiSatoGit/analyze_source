@@ -3,7 +3,7 @@ VD fn_miki_test4(
 	,type2 arg2
 )
 {
-	if(test2==1)
+	if(test2 ==1)
 	{
 		test2 = 1;
 	}
@@ -105,7 +105,7 @@ VD fn_miki_test4(
 		level1_3_1 = hoge1_3_1;
 	}
 
-	for(i=0; i<n; i++)
+	for(i=(S4)0; i<(S4)n; i++)
 	{
 		test1 += 1;
 	}

@@ -570,7 +570,6 @@ def load_valid_source_code(source_file):
 def find_functions(valid_lines):
 # [in] valid_lines : List
 # [return] func_list : FunctionList
-
 	if debug_out:
 		print '<find_functions> START of find_functions'
 
@@ -707,7 +706,6 @@ def delete_change_line_around_operator(valid_lines, operator):
 def analyze_function_list(FunctionData):
 # [in] FunctionData : FunctionData (FunctionList.function_data)
 # [out] FunctionData.process_code_list : ProcessCodes (FunctionList.function_data.process_code_list)
-
 	if debug_out:
 		print '<analyze_function_list> START of analyze_function_list'
 
@@ -730,7 +728,6 @@ def analyze_function_list(FunctionData):
 def analyze_function_codes(function_codes):
 # [in] List
 # [return] ProcessCodes
-
 	if debug_out:
 		print '<analyze_function_codes> START of analyze_function_codes'
 
@@ -1068,7 +1065,6 @@ def check_end_bracket_in_code(line):
 def analyze_process_code(proc_codes):
 # [in] proc_codes : ProcessCodes
 # [out] proc_codes : ProcessCodes
-
 	if debug_out:
 		print '<analyze_process_code> START of analyze_process_code'
 
@@ -1170,6 +1166,8 @@ def analyze_sub_process_code(proc_codes):
 
 							if debug_out:
 								print '<analyze_sub_process_code>  find )'
+
+
 
 							tmp_bracket_to_end = tmp_left[tmp_left.rfind(')')+1:tmp_left.find(';')].strip()
 							if len(tmp_bracket_to_end)==0:
@@ -1360,6 +1358,7 @@ def analyze_control_statement(proc_codes):
 #	continue				skip remaining process in loop
 #	goto 					jump
 
+
 	if debug_out:
 		print '<analyze_control_statement> START of analyze_control_statement'
 
@@ -1460,8 +1459,12 @@ def analyze_control_statement(proc_codes):
 								bracket_level += proc_codes.proc_data_list[index1_r].left[index2_r].count(')')
 
 								if debug_out:
-									print '<analyze_control_statement> [%d][%d] Find ) @[%d] Lv%d' % \
-									(index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')'), bracket_level)
+									print '<analyze_control_statement> [%d][%d] Find ) @[%d] Lv%d in %s' % \
+									( index1_r, index2_r, \
+									  proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')'), \
+									  bracket_level, \
+									  proc_codes.proc_data_list[index1_r].left[index2_r] \
+									)
 									print 'END(%s)(%d)' % ( bracket_search, bracket_level)
 
 ###### find '(' of condition
@@ -1477,13 +1480,16 @@ def analyze_control_statement(proc_codes):
 									condition_start_index2 = index2_r
 
 									if debug_out:
-										print '<analyze_control_statement> [%d][%d] Find ( @[%d] Lv%d' % \
+										print '<analyze_control_statement> [%d][%d] Find ( @[%d] Lv%d in %s' % \
 										( index1_r, index2_r, \
 										  proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('), \
-										  bracket_level )
+										  bracket_level, \
+										  proc_codes.proc_data_list[index1_r].left[index2_r] \
+										  )
 
 # divide by ( and ) if there is some ctrl_stat before (
 									if proc_codes.proc_data_list[index1_r].left[index2_r].strip().find('(')!=0:
+										# ctrl_stat + (
 										tmp_left_split = [ \
 											proc_codes.proc_data_list[index1_r].left[index2_r][0:proc_codes.proc_data_list[index1_r].left[index2_r].find('(')+1].strip(), \
 											proc_codes.proc_data_list[index1_r].left[index2_r][proc_codes.proc_data_list[index1_r].left[index2_r].find('(')+1:].strip() \
@@ -1491,11 +1497,12 @@ def analyze_control_statement(proc_codes):
 
 										if debug_out:
 											print '<analyze_control_statement>  -> ( in %s' % tmp_left_split
+
+										# cond + )
 										if tmp_left_split[1].rfind(')')!=-1 \
 										 and len(tmp_left_split[1][tmp_left_split[1].rfind(')')+1:].strip())==0:
 											tmp_left_split[-1] = tmp_left_split[-1][0:tmp_left_split[-1].rfind(')')].strip()
 											tmp_left_split.append(')')
-
 										tmp_left_split_num = 0
 										tmptmp_left_split = []
 										for tmp_div in tmp_left_split:
@@ -1536,6 +1543,8 @@ def analyze_control_statement(proc_codes):
 									print '<analyze_control_statement> [%d][%d] NOT Find () @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('))
 
 
+
+##### TBD (case, default for switch)
 								if proc_codes.proc_data_list[index1_r].left[index2_r].find(':')!=-1:
 									if proc_codes.proc_data_list[index1_r].left[index2_r].find('case ')!=-1:
 										#subproc_reverse = False
@@ -1549,6 +1558,8 @@ def analyze_control_statement(proc_codes):
 									#subproc_reverse = False
 									if debug_out:
 										print '<analyze_control_statement> [%d][%d] Find init @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('))
+
+
 
 ###### find else
 							if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')==-1 \
@@ -1568,6 +1579,35 @@ def analyze_control_statement(proc_codes):
 										print '<analyze_control_statement>    condition_end_index1 %s' % condition_end_index1
 										print '<analyze_control_statement>    condition_end_index2 %s' % condition_end_index2
 							else:
+
+
+
+##### divide by ) in the end of line (for for()) 2017.05.22
+								if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')!=-1 \
+								and proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')==len(proc_codes.proc_data_list[index1_r].left[index2_r])-1:
+									tmp_title_add = []
+									tmp_type_add = []
+									tmp_left_add = []
+									tmp_right_add = []
+
+									tmp_title_add.append( proc_codes.proc_data_list[index1_r].title[index2_r] )
+									tmp_type_add.append( proc_codes.proc_data_list[index1_r].type[index2_r] )
+									tmp_left_add.append( proc_codes.proc_data_list[index1_r].left[index2_r][:len(proc_codes.proc_data_list[index1_r].left[index2_r])-1] )
+									tmp_right_add.append( proc_codes.proc_data_list[index1_r].right[index2_r] )
+
+									tmp_title_add.append( proc_codes.proc_data_list[index1_r].title[index2_r] )
+									tmp_type_add.append( proc_codes.proc_data_list[index1_r].type[index2_r] )
+									tmp_left_add.append( ')' )
+									tmp_right_add.append( '' )
+
+
+									proc_codes.proc_data_list[index1_r].title[index2_r : index2_r+1] = tmp_title_add
+									proc_codes.proc_data_list[index1_r].type[index2_r : index2_r+1] = tmp_type_add
+									proc_codes.proc_data_list[index1_r].left[index2_r : index2_r+1] = tmp_left_add
+									proc_codes.proc_data_list[index1_r].right[index2_r : index2_r+1] = tmp_right_add
+
+
+
 
 								if debug_out:
 									print '<analyze_control_statement>  -> NOTHING in %s' % proc_codes.proc_data_list[index1_r].left[index2_r]

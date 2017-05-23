@@ -11,6 +11,8 @@
 from blockdiag import parser, builder, drawer 
 import func_source_analyze
 import copy
+import os
+import glob
 
 class BlockDataList:
 	def __init__(self):
@@ -46,14 +48,18 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 
 	outfile = ''
 	txtfile = ''
+	csvfile_base = ''	
 	if len(sourcefilename)>1:
 		outfile = sourcefilename[0] + '\\figs\\' + sourcefilename[1]
 		txtfile = sourcefilename[0] + '\\figs\\' + sourcefilename[1]
+		csvfile_base = sourcefilename[0] + '\\csvs\\' + sourcefilename[1]
 	else:
 		outfile = '\\figs\\' + sourcefilename[0]
 		txtfile = '\\figs\\' + sourcefilename[0]
+		csvfile_base = '\\csvs\\' + sourcefilename[0]
 	outfile = outfile[0:outfile.rfind('.')] + '_' + funcname + '_' + level_title +'.svg'
 	txtfile = txtfile[0:txtfile.rfind('.')] + '_' + funcname + '_' + level_title +'.diag'
+	csvfile_base = csvfile_base[0:csvfile_base.rfind('.')] + '_' + funcname + '_' + level_title
 
 	save_png_flag = False
 	save_txt_flag = False
@@ -81,14 +87,79 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 
 
 #################### Check process ####################
-	block_data_list = check_proc_codes(proc_codes, level_title)
 
 	if debug_out:
-		print '<draw_diag>----------------------------------------'
-		print block_data_list.size()
-		for index in range(0, block_data_list.size()):
-			blockdata = block_data_list.blockdata[index]
-			print '[%d]%s(%s) %d' % ( index, blockdata.title, blockdata.type, blockdata.proc_size() )
+		print '<draw_diag> before ---------------------------------------'
+		for index1 in range (0, proc_codes.get_proc_data_size()):
+			for index2 in range(0, len(proc_codes.proc_data_list[index1].title)):
+				print '  [%d][%d](%s) %s %s' % ( \
+					index1, \
+					index2, \
+					proc_codes.proc_data_list[index1].type[index2], \
+					proc_codes.proc_data_list[index1].left[index2], \
+					proc_codes.proc_data_list[index1].right[index2] \
+				)
+		
+
+
+	block_data_list = check_proc_codes(proc_codes, level_title)
+
+
+
+#	if debug_out:
+	print '<draw_diag> after ---------------------------------------- %s' % csvfile_base
+	print block_data_list.size()
+	for index in range(0, block_data_list.size()):
+		blockdata = block_data_list.blockdata[index]
+		print '[%d]%s(%s) %d' % ( index, blockdata.title, blockdata.type, blockdata.proc_size() )
+		for index2 in range(0, blockdata.proc_size()):
+			for index3 in range(0, len(blockdata.procs[index2].title) ):
+				print '  [%s] %s %s' % ( \
+					blockdata.procs[index2].type[index3], \
+					blockdata.procs[index2].left[index3], \
+					blockdata.procs[index2].right[index3] \
+				)
+
+
+#################### Create csv file of cond & proc ####################
+	proc_id = 0
+	cond_id = 0
+	tmp_files = glob.glob(csvfile_base+'*.csv')
+	for tmp_file in tmp_files:
+		os.remove(tmp_file)
+
+	for index in range(0, block_data_list.size()):
+		blockdata = block_data_list.blockdata[index]
+		for index2 in range(0, blockdata.proc_size()):
+			for index3 in range(0, len(blockdata.procs[index2].title) ):
+				# COND
+				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3] ):
+					if index2==0 or blockdata.procs[index2].left[index3]==')':
+						continue
+					else:
+						csvfile = csvfile_base + '_' + blockdata.title + '_cond.csv'
+						fout_csv = open(csvfile,'a')
+						cond_id += 1
+						table = 'COND.' + str(cond_id) + ', ' + blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
+						fout_csv.write(table)
+						fout_csv.close()
+				# subproc
+				elif blockdata.procs[index2].type[index3].strip()=='subproc':
+					continue
+				# PROC
+				else:
+					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
+					fout_csv = open(csvfile,'a')
+					proc_id += 1
+					table = 'PROC.' + str(proc_id) + ', ' + blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
+					fout_csv.write(table)
+					fout_csv.close()
+
+
+
+
+
+
 
 
 #################### Create Block diag code ####################
@@ -140,6 +211,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 
 
 def check_proc_codes(proc_codes, level_title):
+# [in] proc_codes : FunctionList.FunctionData.process_code_list (ProcessCodes)
+# [in] level_title : process level (str) : MAINPROCESS, SUBPROCESS,...
+# [out] block_data_list : BlockDataList = List of [title, type, List of [ProcessData(title,type,left,right)] 
 	block_data_list = BlockDataList()
 	block_data = BlockData()
 	current_title = ''
@@ -147,6 +221,8 @@ def check_proc_codes(proc_codes, level_title):
 	cond_proc_id = 0
 
 	for index1 in range(0, proc_codes.get_proc_data_size()):
+
+
 		for index2 in range(0,proc_codes.proc_data_list[index1].get_main_size()):
 			proc_title = proc_codes.proc_data_list[index1].title[index2].strip()
 			proc_type = proc_codes.proc_data_list[index1].type[index2].strip()
@@ -181,14 +257,19 @@ def check_proc_codes(proc_codes, level_title):
 						# convert title
 						block_data.title = proc_title
 						block_data.type = proc_type
-						block_data.procs.append(proc_codes.proc_data_list[index1])
+
+						tmp_procdata = func_source_analyze.ProcessData()
+						tmp_procdata.title.append( proc_codes.proc_data_list[index1].title[index2] )
+						tmp_procdata.type.append( proc_codes.proc_data_list[index1].type[index2] )
+						tmp_procdata.left.append( proc_codes.proc_data_list[index1].left[index2] )
+						tmp_procdata.right.append( proc_codes.proc_data_list[index1].right[index2] )
+						block_data.procs.append(copy.deepcopy(tmp_procdata))
 
 ### not condition
 					else:
 						if block_data.proc_size() != 0:
 							block_data_list.blockdata.append(copy.deepcopy(block_data))
 						block_data.clear()
-
 
 						# subprocess of condition 
 						if proc_id==cond_proc_id and proc_type.find('subproc')!=-1:
@@ -201,11 +282,23 @@ def check_proc_codes(proc_codes, level_title):
 						block_data.title = current_title
 						if debug_out:
 							print block_data.title
-						block_data.procs.append(proc_codes.proc_data_list[index1])
+
+						tmp_procdata = func_source_analyze.ProcessData()
+						tmp_procdata.title.append( proc_codes.proc_data_list[index1].title[index2] )
+						tmp_procdata.type.append( proc_codes.proc_data_list[index1].type[index2] )
+						tmp_procdata.left.append( proc_codes.proc_data_list[index1].left[index2] )
+						tmp_procdata.right.append( proc_codes.proc_data_list[index1].right[index2] )
+						block_data.procs.append(copy.deepcopy(tmp_procdata))
 
 				# level title is not chaged
 				else:
-					block_data.procs.append(proc_codes.proc_data_list[index1])
+					tmp_procdata = func_source_analyze.ProcessData()
+					tmp_procdata.title.append( proc_codes.proc_data_list[index1].title[index2] )
+					tmp_procdata.type.append( proc_codes.proc_data_list[index1].type[index2] )
+					tmp_procdata.left.append( proc_codes.proc_data_list[index1].left[index2] )
+					tmp_procdata.right.append( proc_codes.proc_data_list[index1].right[index2] )
+					block_data.procs.append(copy.deepcopy(tmp_procdata))
+
 					if debug_out:
 						print '<check_proc_codes> No diagram'
 
@@ -270,6 +363,11 @@ def find_ctrl_stat_in_title(title, type, level_title):
 
 
 def create_main_blocks(block_data_list):
+# [in] block_data_list : BlockDataList = List of [title, type, List of [ProcessData(title,type,left,right)] 
+# [out] block_code : main block code
+# [out] sub_proc_list :  sub block code
+# [out] block_code_cond_list : if, elseif, else block code
+
 	if debug_out:
 		print '<create_main_blocks> ----------------------------------------'
 	block_code =''
@@ -383,6 +481,8 @@ def create_if_blocks(condition_str, code, condition_prev):
 
 
 def create_subproc_blocks(sub_proc_list):
+# [in] sub_proc_list :  sub block code
+# [out] block_code : main block code
 	block_code = ''
 	for block_code_sub in sub_proc_list:
 		tmp_pt_start = ''
