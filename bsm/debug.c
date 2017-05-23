@@ -1,3 +1,16 @@
+VD fn_btt_tle_initialize()
+{
+	/*! @note (1) initialize TLE internal parameters */
+	st_tle_params.timer = 0;
+	fn_btt_set_trailer_length(
+		hogege1,
+		hogege2,
+		(S4)BTT_TRAILER_SIZE_UNKNOWN
+	);
+	return;
+}
+
+
 VD fn_miki_test4(
 	type1 arg1
 	,type2 arg2
@@ -27,18 +40,13 @@ VD fn_miki_test4(
 		{(FL)9.0,		(FL)38.6}
 	};
 
-
-	miki2_1 = subsub_1(
-		(S1)arg2_1_1,
-		arg2_1_2 );
+	miki2_1 = subsub_1( (S4)arg2_1_1 );
 	miki2_2 
 	= subsub_2(
-		(S1)arg2_2_1,
-		arg2_2_2
+		(S1)arg2_2_1
 	);
 	miki2_3 = 
-	subsub_3(
-		(S1)arg2_3_1,
+	subsub_3( (S1)arg2_3_1,
 		arg2_3_2
 	);
 

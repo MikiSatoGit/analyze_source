@@ -50,13 +50,21 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	txtfile = ''
 	csvfile_base = ''	
 	if len(sourcefilename)>1:
-		outfile = sourcefilename[0] + '\\figs\\' + sourcefilename[1]
-		txtfile = sourcefilename[0] + '\\figs\\' + sourcefilename[1]
-		csvfile_base = sourcefilename[0] + '\\csvs\\' + sourcefilename[1]
+		if os.path.exists(sourcefilename[0] + '\\fig')==False:
+			os.makedirs(sourcefilename[0] + '\\fig')
+		if os.path.exists(sourcefilename[0] + '\\csv')==False:
+			os.makedirs(sourcefilename[0] + '\\csv')
+		outfile = sourcefilename[0] + '\\fig\\' + sourcefilename[1]
+		txtfile = sourcefilename[0] + '\\fig\\' + sourcefilename[1]
+		csvfile_base = sourcefilename[0] + '\\csv\\' + sourcefilename[1]
 	else:
-		outfile = '\\figs\\' + sourcefilename[0]
-		txtfile = '\\figs\\' + sourcefilename[0]
-		csvfile_base = '\\csvs\\' + sourcefilename[0]
+		if os.path.exists('\\fig')==False:
+			os.makedirs('\\fig')
+		if os.path.exists('\\csv')==False:
+			os.makedirs('\\csv')
+		outfile = '\\fig\\' + sourcefilename[0]
+		txtfile = '\\fig\\' + sourcefilename[0]
+		csvfile_base = '\\csv\\' + sourcefilename[0]
 	outfile = outfile[0:outfile.rfind('.')] + '_' + funcname + '_' + level_title +'.svg'
 	txtfile = txtfile[0:txtfile.rfind('.')] + '_' + funcname + '_' + level_title +'.diag'
 	csvfile_base = csvfile_base[0:csvfile_base.rfind('.')] + '_' + funcname + '_' + level_title
@@ -124,6 +132,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 #################### Create csv file of cond & proc ####################
 	proc_id = 0
 	cond_id = 0
+	arg_id = 0
 	tmp_files = glob.glob(csvfile_base+'*.csv')
 	for tmp_file in tmp_files:
 		os.remove(tmp_file)
@@ -132,34 +141,81 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 		blockdata = block_data_list.blockdata[index]
 		for index2 in range(0, blockdata.proc_size()):
 			for index3 in range(0, len(blockdata.procs[index2].title) ):
-				# COND
+
+				### COND
 				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3] ):
 					if index2==0 or blockdata.procs[index2].left[index3]==')':
 						continue
 					else:
 						csvfile = csvfile_base + '_' + blockdata.title + '_cond.csv'
-						fout_csv = open(csvfile,'a')
+						if os.path.exists(csvfile)==False:
+							fout_csv = open(csvfile,'a')
+							table = 'COND#' + ', ' + 'Data'  + ', ' + 'Condition' + '\n'
+							fout_csv.write(table)
+						else:
+							fout_csv = open(csvfile,'a')
 						cond_id += 1
 						table = 'COND.' + str(cond_id) + ', ' + blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
 						fout_csv.write(table)
 						fout_csv.close()
-				# subproc
+
+				### subproc
 				elif blockdata.procs[index2].type[index3].strip()=='subproc':
 					continue
-				# PROC
-				else:
+
+				### func
+				elif blockdata.procs[index2].type[index3].strip().find('func')!=-1:
 					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
-					fout_csv = open(csvfile,'a')
-					proc_id += 1
-					table = 'PROC.' + str(proc_id) + ', ' + blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
+					if os.path.exists(csvfile)==False:
+						fout_csv = open(csvfile,'a')
+						table = 'PROC#' + ', ' + 'Processing'  + ', ' + 'Description' + '\n'
+						fout_csv.write(table)
+					else:
+						fout_csv = open(csvfile,'a')
+
+					#########
+					if blockdata.procs[index2].type[index3].strip().find('<start>')!=-1:
+						proc_id += 1
+						arg_id = 0
+						table = 'PROC.' + str(proc_id) + ', ' \
+						+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3]  + '\n'
+						if blockdata.procs[index2].left[index3].find('=')!=-1:
+							func_name = blockdata.procs[index2].left[index3][blockdata.procs[index2].left[index3].find('='):blockdata.procs[index2].left[index3].find('(')]
+							func_name = func_name.strip()
+						else:
+							func_name = blockdata.procs[index2].left[index3][:blockdata.procs[index2].left[index3].find('(')]
+							func_name = func_name.strip()
+						print '<draw_diag> func name : %s' % func_name
+					elif blockdata.procs[index2].type[index3].strip().find('<end>')!=-1:
+						continue
+					else:
+						arg_id += 1
+						table = 'PROC.' + str(proc_id) + ', ' \
+						+ func_name + '(): arg.' + str(arg_id) \
+						+ ', ' + blockdata.procs[index2].left[index3]  + blockdata.procs[index2].right[index3] + '\n'
+
+					#########
 					fout_csv.write(table)
 					fout_csv.close()
 
-
-
-
-
-
+				### PROC
+				else:
+					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
+					if os.path.exists(csvfile)==False:
+						fout_csv = open(csvfile,'a')
+						table = 'PROC#' + ', ' + 'Processing'  + ', ' + 'Description' + '\n'
+						fout_csv.write(table)
+					else:
+						fout_csv = open(csvfile,'a')
+					proc_id += 1
+					if blockdata.procs[index2].type[index3].strip().find('equal')!=-1:
+						table = 'PROC.' + str(proc_id) + ', ' \
+						+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' + '\n'
+					else:
+						table = 'PROC.' + str(proc_id) + ', ' \
+						+ blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
+					fout_csv.write(table)
+					fout_csv.close()
 
 
 #################### Create Block diag code ####################

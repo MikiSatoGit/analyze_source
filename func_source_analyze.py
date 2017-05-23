@@ -9,8 +9,6 @@
 
 # coding: shift-JIS
 import copy
-import csv
-import numpy
 
 class ArgumentData:
 	def __init__(self):
@@ -553,6 +551,7 @@ def remove_undefined_codes(lines):
 
 
 def load_valid_source_code(source_file):
+
 	cnt = 0
 	valid_lines = []
 	lines = source_file.readlines()
@@ -570,6 +569,7 @@ def load_valid_source_code(source_file):
 def find_functions(valid_lines):
 # [in] valid_lines : List
 # [return] func_list : FunctionList
+
 	if debug_out:
 		print '<find_functions> START of find_functions'
 
@@ -589,7 +589,6 @@ def find_functions(valid_lines):
 	if debug_out:
 		for debug_line in valid_lines:
 			print '<find_functions> (pre) %s' % debug_line
-
 
 	func_list = FunctionList()
 	searching = 0
@@ -706,6 +705,7 @@ def delete_change_line_around_operator(valid_lines, operator):
 def analyze_function_list(FunctionData):
 # [in] FunctionData : FunctionData (FunctionList.function_data)
 # [out] FunctionData.process_code_list : ProcessCodes (FunctionList.function_data.process_code_list)
+
 	if debug_out:
 		print '<analyze_function_list> START of analyze_function_list'
 
@@ -752,8 +752,10 @@ def analyze_function_codes(function_codes):
 		del tmp_lines[:]
 		del tmptmp_lines [:]
 		tmp_lines = check_start_bracket_in_code(line)
+
 		for tmp_line in tmp_lines:
 			tmptmp_lines = check_end_bracket_in_code(tmp_line)
+
 			for tmptmp_line in tmptmp_lines:
 				proc_codes.append(tmptmp_line)
 
@@ -1047,15 +1049,24 @@ def check_end_bracket_in_code(line):
 				code_remain = ''
 				line = code_remain
 
+
 # do not append if only ','
-	if len(line)!=0 and line.strip().find(',')!=1 and line.strip().find(',')!=len(line.strip())-1:
-		out_lines.append(copy.deepcopy(line))
+	if len(line.strip())==1 and line.strip().find(',')==0:
+		if debug_out:
+			print 'only "," len[%d], find[%d], lenstrip[%d]' % ( len(line), line.strip().find(','), len(line.strip())-1 )
+	else:
+		if len(line.strip())!=0:
+			out_lines.append(copy.deepcopy(line))
+			if debug_out:
+				print 'not only "," in [%s]' % line
 
 	if debug_out:
 		print '<check_end_bracket_in_code> result'
 		if len(out_lines)!=0:
+			debug_cnt = 0
 			for tmp in out_lines:
-				print tmp
+				debug_cnt += 1
+				print '[%d/%d]%s' % (debug_cnt, len(out_lines), tmp)
 		else:
 			print line
 
@@ -1065,6 +1076,7 @@ def check_end_bracket_in_code(line):
 def analyze_process_code(proc_codes):
 # [in] proc_codes : ProcessCodes
 # [out] proc_codes : ProcessCodes
+
 	if debug_out:
 		print '<analyze_process_code> START of analyze_process_code'
 
@@ -1090,7 +1102,7 @@ def analyze_process_code(proc_codes):
 		if debug_out:
 			print '-->ctrl stat %s / %d' %  (ctrl, ctrl_proc_num)
 
-########## analyze condition of control statement ########## 
+########## <TBD> analyze condition of control statement ########## 
 ###### NEED TO CREATE #######
 
 ########## analyze call function ########## 
@@ -1107,6 +1119,7 @@ def analyze_process_code(proc_codes):
 def analyze_sub_process_code(proc_codes):
 # [in] proc_codes : ProcessCodes (main)
 # [out] proc_codes : ProcessCodes (proc_data_list)
+
 	proc_data = ProcessData()
 	is_for = 0
 	for index in range(0,proc_codes.get_main_size()):
@@ -1200,6 +1213,7 @@ def analyze_sub_process_code(proc_codes):
 								# count '(' level
 								tmp_find_start = tmp_left
 								tmp_find_start.strip()
+
 								while tmp_find_start.rfind('(')!=-1:
 									bracket_level -= 1
 									tmp_find_start = tmp_find_start[0:tmp_find_start.rfind('(')]
@@ -1213,6 +1227,7 @@ def analyze_sub_process_code(proc_codes):
 										if index2_r==-1:
 											bracket_search_flag=False
 											break
+
 										tmp_type_r = proc_codes.proc_data_list[index1_r].type[index2_r]
 										tmp_left_r = proc_codes.proc_data_list[index1_r].left[index2_r]
 # reached to previous subproc
@@ -1241,7 +1256,67 @@ def analyze_sub_process_code(proc_codes):
 											else:
 												proc_codes.proc_data_list[index1_r].type[index2_r] = 'func'
 											if bracket_level==0:
-												proc_codes.proc_data_list[index1_r].type[index2_r] += '<start>'
+
+
+
+##### divide by ( of function 2017.05.23
+												print 'find FUNCTION %s/%s' % ( proc_codes.proc_data_list[index1_r].left[index2_r], proc_codes.proc_data_list[index1_r].right[index2_r] )
+												tmp_split_title = proc_codes.proc_data_list[index1_r].title[index2_r]
+												tmp_split_type = proc_codes.proc_data_list[index1_r].type[index2_r]
+												tmp_split_left = proc_codes.proc_data_list[index1_r].left[index2_r]
+												tmp_split_right = proc_codes.proc_data_list[index1_r].right[index2_r]
+												if tmp_split_left.find('(')!=-1 and tmp_split_left.find('(') < len(tmp_split_left)-1:
+
+													print 'org [%d][%d] %s,%s,%s,%s' % ( \
+														index1_r, \
+														index2_r, \
+														tmp_split_title, \
+														tmp_split_type, \
+														tmp_split_left, \
+														tmp_split_right \
+													)
+
+													proc_codes.proc_data_list[index1_r].title[index2_r] = tmp_split_title
+													proc_codes.proc_data_list[index1_r].type[index2_r]  = tmp_split_type +'<start>'
+													proc_codes.proc_data_list[index1_r].right[index2_r] = tmp_split_right
+													proc_codes.proc_data_list[index1_r].left[index2_r] = tmp_split_left[:tmp_split_left.find('(',1)+1]
+
+													print 'mod [%d][%d] %s,%s,%s,%s' % ( \
+														index1_r, \
+														index2_r, \
+														proc_codes.proc_data_list[index1_r].title[index2_r], \
+														proc_codes.proc_data_list[index1_r].type[index2_r], \
+														proc_codes.proc_data_list[index1_r].left[index2_r], \
+														proc_codes.proc_data_list[index1_r].right[index2_r] \
+													)
+
+													tmp_split_left = tmp_split_left[tmp_split_left.find('(',1)+1:]
+													proc_codes.proc_data_list[index1_r].title.insert(index2_r+1, tmp_split_title)
+													proc_codes.proc_data_list[index1_r].type.insert(index2_r+1, tmp_split_type)
+													proc_codes.proc_data_list[index1_r].right.insert(index2_r+1, tmp_split_right)
+													proc_codes.proc_data_list[index1_r].left.insert(index2_r+1, tmp_split_left)
+
+													print 'add [%d][%d] %s,%s,%s,%s' % ( \
+														index1_r, \
+														index2_r, \
+														proc_codes.proc_data_list[index1_r].title[index2_r], \
+														proc_codes.proc_data_list[index1_r].type[index2_r], \
+														proc_codes.proc_data_list[index1_r].left[index2_r], \
+														proc_codes.proc_data_list[index1_r].right[index2_r] \
+													)
+													print 'add [%d][%d] %s,%s,%s,%s' % ( \
+														index1_r, \
+														index2_r, \
+														proc_codes.proc_data_list[index1_r].title[index2_r+1], \
+														proc_codes.proc_data_list[index1_r].type[index2_r+1], \
+														proc_codes.proc_data_list[index1_r].left[index2_r+1], \
+														proc_codes.proc_data_list[index1_r].right[index2_r+1] \
+													)
+												else:
+
+
+
+													proc_codes.proc_data_list[index1_r].type[index2_r] += '<start>'
 												bracket_search_flag=False
 												break
 										else:
@@ -1544,7 +1619,7 @@ def analyze_control_statement(proc_codes):
 
 
 
-##### TBD (case, default for switch)
+##### <TBD> (case, default for switch)
 								if proc_codes.proc_data_list[index1_r].left[index2_r].find(':')!=-1:
 									if proc_codes.proc_data_list[index1_r].left[index2_r].find('case ')!=-1:
 										#subproc_reverse = False
