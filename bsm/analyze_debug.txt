@@ -1,4 +1,4 @@
-Total lines: 104 
+Total lines: 112 
 Total functions : 2 
 --------------------------
 [Function Name] : fn_btt_tle_initialize 
@@ -11,8 +11,16 @@ Total functions : 2
 [4] MAINPROCESS(1) func hogege2, 
 [5] MAINPROCESS(1) func (S4)BTT_TRAILER_SIZE_UNKNOWN 
 [6] MAINPROCESS(1) func<end> ); 
-[7] MAINPROCESS(1) proc return; 
------------------ Total Codes : 7 lines
+[7] MAINPROCESS(1) if if( 
+[8] MAINPROCESS(1) if a==1 
+[9] MAINPROCESS(1) if ) 
+[10] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[11] SUBPROCESS(1) equal hogehoge3 2;
+[12] MAINPROCESS(2) else else 
+[13] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[14] SUBPROCESS(1) proc return; 
+[15] MAINPROCESS(3) proc return; 
+----------------- Total Codes : 15 lines
 --------------------------
 [Function Name] : fn_miki_test4 
 -Return type : VD 
