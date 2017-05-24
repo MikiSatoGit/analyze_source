@@ -1,4 +1,4 @@
-Total lines: 112 
+Total lines: 117 
 Total functions : 2 
 --------------------------
 [Function Name] : fn_btt_tle_initialize 
@@ -12,15 +12,21 @@ Total functions : 2
 [5] MAINPROCESS(1) func (S4)BTT_TRAILER_SIZE_UNKNOWN 
 [6] MAINPROCESS(1) func<end> ); 
 [7] MAINPROCESS(1) if if( 
-[8] MAINPROCESS(1) if a==1 
+[8] MAINPROCESS(1) if a==1 && b==1 
 [9] MAINPROCESS(1) if ) 
 [10] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[11] SUBPROCESS(1) equal hogehoge3 2;
-[12] MAINPROCESS(2) else else 
-[13] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[14] SUBPROCESS(1) return return; 
-[15] MAINPROCESS(3) return return; 
------------------ Total Codes : 15 lines
+[11] SUBPROCESS(1) equal hogehoge3 1;
+[12] MAINPROCESS(2) else if else if( 
+[13] MAINPROCESS(2) else if a==2 
+[14] MAINPROCESS(2) else if ) 
+[15] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[16] SUBPROCESS(1) return return; 
+[17] MAINPROCESS(3) else else 
+[18] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[19] SUBPROCESS(1) equal hogehoge3 3;
+[20] MAINPROCESS(4) equal a 4;
+[21] MAINPROCESS(4) return return; 
+----------------- Total Codes : 21 lines
 --------------------------
 [Function Name] : fn_miki_test4 
 -Return type : VD 
@@ -57,6 +63,7 @@ Total functions : 2
 [27] SUBSUBPROCESS(1) ??? (FL)6.0,		(FL)45.7 
 [28] SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
 [29] SUBSUBPROCESS(1) ??? (FL)9.0,		(FL)38.6 
+
 [30] MAINPROCESS(3) ??? ; 
 [31] MAINPROCESS(3) func<start> miki2_1 = subsub_1( 
 [32] MAINPROCESS(3) func  (S4)arg2_1_1 

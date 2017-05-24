@@ -1260,58 +1260,21 @@ def analyze_sub_process_code(proc_codes):
 
 
 ##### divide by ( of function 20170523
-												print 'find FUNCTION %s/%s' % ( proc_codes.proc_data_list[index1_r].left[index2_r], proc_codes.proc_data_list[index1_r].right[index2_r] )
 												tmp_split_title = proc_codes.proc_data_list[index1_r].title[index2_r]
 												tmp_split_type = proc_codes.proc_data_list[index1_r].type[index2_r]
 												tmp_split_left = proc_codes.proc_data_list[index1_r].left[index2_r]
 												tmp_split_right = proc_codes.proc_data_list[index1_r].right[index2_r]
 												if tmp_split_left.find('(')!=-1 and tmp_split_left.find('(') < len(tmp_split_left)-1:
-
-													print 'org [%d][%d] %s,%s,%s,%s' % ( \
-														index1_r, \
-														index2_r, \
-														tmp_split_title, \
-														tmp_split_type, \
-														tmp_split_left, \
-														tmp_split_right \
-													)
-
 													proc_codes.proc_data_list[index1_r].title[index2_r] = tmp_split_title
 													proc_codes.proc_data_list[index1_r].type[index2_r]  = tmp_split_type +'<start>'
 													proc_codes.proc_data_list[index1_r].right[index2_r] = tmp_split_right
 													proc_codes.proc_data_list[index1_r].left[index2_r] = tmp_split_left[:tmp_split_left.find('(',1)+1]
-
-													print 'mod [%d][%d] %s,%s,%s,%s' % ( \
-														index1_r, \
-														index2_r, \
-														proc_codes.proc_data_list[index1_r].title[index2_r], \
-														proc_codes.proc_data_list[index1_r].type[index2_r], \
-														proc_codes.proc_data_list[index1_r].left[index2_r], \
-														proc_codes.proc_data_list[index1_r].right[index2_r] \
-													)
 
 													tmp_split_left = tmp_split_left[tmp_split_left.find('(',1)+1:]
 													proc_codes.proc_data_list[index1_r].title.insert(index2_r+1, tmp_split_title)
 													proc_codes.proc_data_list[index1_r].type.insert(index2_r+1, tmp_split_type)
 													proc_codes.proc_data_list[index1_r].right.insert(index2_r+1, tmp_split_right)
 													proc_codes.proc_data_list[index1_r].left.insert(index2_r+1, tmp_split_left)
-
-													print 'add [%d][%d] %s,%s,%s,%s' % ( \
-														index1_r, \
-														index2_r, \
-														proc_codes.proc_data_list[index1_r].title[index2_r], \
-														proc_codes.proc_data_list[index1_r].type[index2_r], \
-														proc_codes.proc_data_list[index1_r].left[index2_r], \
-														proc_codes.proc_data_list[index1_r].right[index2_r] \
-													)
-													print 'add [%d][%d] %s,%s,%s,%s' % ( \
-														index1_r, \
-														index2_r, \
-														proc_codes.proc_data_list[index1_r].title[index2_r+1], \
-														proc_codes.proc_data_list[index1_r].type[index2_r+1], \
-														proc_codes.proc_data_list[index1_r].left[index2_r+1], \
-														proc_codes.proc_data_list[index1_r].right[index2_r+1] \
-													)
 												else:
 
 

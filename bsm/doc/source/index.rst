@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 Functional Process Detail Specification (Debug)
-=================================
+=================================================
 
 .. toctree::
    :maxdepth: 2
