@@ -348,6 +348,8 @@ def create_main_blocks(block_data_list):
 # [out] sub_proc_list :  sub block code
 # [out] block_code_cond_list : if, elseif, else block code
 
+	debug_out = True #0523
+
 	if debug_out:
 		print '<create_main_blocks> ----------------------------------------'
 	block_code =''
@@ -362,6 +364,13 @@ def create_main_blocks(block_data_list):
 
 		if debug_out:
 			print '<create_main_blocks> %s' % tmp_str
+
+		# break if only return 2017.05.23
+		if tmp_blockdata.proc_size()==1:
+			if tmp_blockdata.procs[0].type[0]=='return':
+				break
+
+
 		if tmp_str.find('_else')!=-1:
 			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev)
 			condition_if_prev = ''
@@ -642,6 +651,11 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 		blockdata = block_data_list.blockdata[index]
 		for index2 in range(0, blockdata.proc_size()):
 			for index3 in range(0, len(blockdata.procs[index2].title) ):
+
+				# break if only return 2017.05.23
+				if blockdata.proc_size()==1:
+					if blockdata.procs[index2].type[index3]=='return':
+						break
 
 				### COND
 				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3] ):

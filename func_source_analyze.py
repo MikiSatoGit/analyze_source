@@ -184,7 +184,7 @@ class ProcessCodes:
 class ProcessData:
 	def __init__(self):
 		self.title =[]
-		self.type = []	#subproc,equal,proc,func,ctrl(if, else if, else, for, while, switch, case, default) ...
+		self.type = []	#subproc,equal,proc,func,return,ctrl(if, else if, else, for, while, switch, case, default) ...
 		self.left = []
 		self.right = []
 
@@ -1325,8 +1325,10 @@ def analyze_sub_process_code(proc_codes):
 							else:
 								if debug_out:
 									print '<analyze_sub_process_code>  not find );'
-
-								proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
+								if is_return(tmp_left):
+									proc_data.append_data(tmp_title,'return', tmp_left.strip(), tmp_right.strip())
+								else:
+									proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
 
 								if debug_out:
 									print '<analyze_sub_process_code>   -> append(5) %s %s' % (tmp_left.strip(), tmp_right.strip())
@@ -1347,7 +1349,10 @@ def analyze_sub_process_code(proc_codes):
 								if tmp_left.strip().find(';')==0 and tmp_left.strip().find(';')==len(tmp_left.strip())-1:
 									break
 								else:
-									proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
+									if is_return(tmp_left):
+										proc_data.append_data(tmp_title,'return', tmp_left.strip(), tmp_right.strip())
+									else:
+										proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
 
 								if debug_out:
 									print '<analyze_sub_process_code>   -> append(7) %s %s' % (tmp_left.strip(), tmp_right.strip())
@@ -1382,6 +1387,15 @@ def analyze_sub_process_code(proc_codes):
 	return
 
 
+def is_return(code):
+	bres = False
+	tmp_code = code
+	tmp_code = tmp_code.replace(' ', '')
+	if tmp_code=='return;':
+		bres = True
+	return bres
+
+
 def is_ctrl_stat(code):
 	if is_ctrl_stat_word('else if', code):
 		return True
@@ -1395,7 +1409,6 @@ def is_ctrl_stat(code):
 		return True
 	if is_ctrl_stat_word('switch', code):
 		return True
-
 	return False
 
 

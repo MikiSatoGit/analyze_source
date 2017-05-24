@@ -18,8 +18,8 @@ Total functions : 2
 [11] SUBPROCESS(1) equal hogehoge3 2;
 [12] MAINPROCESS(2) else else 
 [13] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[14] SUBPROCESS(1) proc return; 
-[15] MAINPROCESS(3) proc return; 
+[14] SUBPROCESS(1) return return; 
+[15] MAINPROCESS(3) return return; 
 ----------------- Total Codes : 15 lines
 --------------------------
 [Function Name] : fn_miki_test4 
@@ -141,5 +141,5 @@ Total functions : 2
 [111] MAINPROCESS(11) for ) 
 [112] MAINPROCESS(11) subproc SUBPROCESS(1) 
 [113] SUBPROCESS(1) equal test1 + 1;
-[114] MAINPROCESS(12) proc return; 
+[114] MAINPROCESS(12) return return; 
 ----------------- Total Codes : 114 lines
