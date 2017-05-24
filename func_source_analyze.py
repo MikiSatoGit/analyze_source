@@ -1259,7 +1259,7 @@ def analyze_sub_process_code(proc_codes):
 
 
 
-##### divide by ( of function 2017.05.23
+##### divide by ( of function 20170523
 												print 'find FUNCTION %s/%s' % ( proc_codes.proc_data_list[index1_r].left[index2_r], proc_codes.proc_data_list[index1_r].right[index2_r] )
 												tmp_split_title = proc_codes.proc_data_list[index1_r].title[index2_r]
 												tmp_split_type = proc_codes.proc_data_list[index1_r].type[index2_r]
@@ -1670,7 +1670,7 @@ def analyze_control_statement(proc_codes):
 
 
 
-##### divide by ) in the end of line (for for()) 2017.05.22
+##### divide by ) in the end of line (for for()) 20170523
 								if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')!=-1 \
 								and proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')==len(proc_codes.proc_data_list[index1_r].left[index2_r])-1:
 									tmp_title_add = []

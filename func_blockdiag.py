@@ -365,7 +365,7 @@ def create_main_blocks(block_data_list):
 		if debug_out:
 			print '<create_main_blocks> %s' % tmp_str
 
-		# break if only return 2017.05.23
+		# break if only return 20170523
 		if tmp_blockdata.proc_size()==1:
 			if tmp_blockdata.procs[0].type[0]=='return':
 				break
@@ -652,7 +652,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 		for index2 in range(0, blockdata.proc_size()):
 			for index3 in range(0, len(blockdata.procs[index2].title) ):
 
-				# break if only return 2017.05.23
+				# break if only return 20170523
 				if blockdata.proc_size()==1:
 					if blockdata.procs[index2].type[index3]=='return':
 						break
@@ -665,12 +665,16 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						csvfile = csvfile_base + '_' + blockdata.title + '_cond.csv'
 						if os.path.exists(csvfile)==False:
 							fout_csv = open(csvfile,'a')
-							table = 'COND#' + ', ' + 'Data'  + ', ' + 'Condition' + '\n'
+							table = 'COND#' + ', ' \
+							+ 'Data'  + ', ' \
+							+ 'Condition' + '\n'
 							fout_csv.write(table)
 						else:
 							fout_csv = open(csvfile,'a')
 						cond_id += 1
-						table = 'COND.' + str(cond_id) + ', ' + blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
+						table = 'COND.' + str(cond_id) + ', ' \
+						+ blockdata.procs[index2].left[index3]  + ', ' \
+						+ blockdata.procs[index2].right[index3] + '\n'
 						fout_csv.write(table)
 						fout_csv.close()
 
@@ -683,7 +687,9 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
 					if os.path.exists(csvfile)==False:
 						fout_csv = open(csvfile,'a')
-						table = 'PROC#' + ', ' + 'Processing'  + ', ' + 'Description' + '\n'
+						table = 'PROC#' + ', ' \
+						+ 'Processing'  + ', ' \
+						+ 'Description' + '\n'
 						fout_csv.write(table)
 					else:
 						fout_csv = open(csvfile,'a')
@@ -693,21 +699,27 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						proc_id += 1
 						arg_id = 0
 						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3]  + '\n'
+						+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
+						+ '\n'
 						if blockdata.procs[index2].left[index3].find('=')!=-1:
 							func_name = blockdata.procs[index2].left[index3][blockdata.procs[index2].left[index3].find('='):blockdata.procs[index2].left[index3].find('(')]
 							func_name = func_name.strip()
 						else:
 							func_name = blockdata.procs[index2].left[index3][:blockdata.procs[index2].left[index3].find('(')]
 							func_name = func_name.strip()
+
+#0523						if debug_out:
 						print '<draw_diag> func name : %s' % func_name
+
 					elif blockdata.procs[index2].type[index3].strip().find('<end>')!=-1:
 						continue
 					else:
 						arg_id += 1
-						table = 'PROC.' + str(proc_id) + ', ' \
-						+ func_name + '(): arg.' + str(arg_id) \
-						+ ', ' + blockdata.procs[index2].left[index3]  + blockdata.procs[index2].right[index3] + '\n'
+#0523						table = 'PROC.' + str(proc_id) + ', ' \
+#0523						+ func_name + '(): arg.' + str(arg_id) \
+						table = '' + ', ' \
+						+ '[arg.' + str(arg_id) + ']' + ', ' \
+						+ blockdata.procs[index2].left[index3]  + blockdata.procs[index2].right[index3] + '\n'
 
 					#########
 					fout_csv.write(table)
@@ -725,10 +737,12 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					proc_id += 1
 					if blockdata.procs[index2].type[index3].strip().find('equal')!=-1:
 						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' + '\n'
+						+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
+						+ '\n'
 					else:
 						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
+						+ blockdata.procs[index2].left[index3]  + ', ' \
+						+ blockdata.procs[index2].right[index3] + '\n'
 					fout_csv.write(table)
 					fout_csv.close()
 
