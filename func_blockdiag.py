@@ -146,31 +146,37 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	for block_code_cond in block_code_cond_list:
 		block_code += block_code_cond
 
-	source = source_header
-	source += block_code
-	source += ' }'
+# create source code if there is some process
+	if block_code == '':
+		source =''
+	else:
+		source = source_header
+		source += block_code
+		source += ' }'
 
 # skip "_returnonly" if only return in sub process 20170524
 	for skip_code in skip_code_list:
-		print 'skip: %s' % skip_code
 		source = source.replace(skip_code, '->')
+		if debug_out:
+			print 'skip: %s' % skip_code
 
 
 #################### Draw Block diag ####################
 	print '----------<%s>----------' % funcname
 	print source
 
-	if save_png_flag:
-		tree = parser.parse_string(source) 
-		diagram = builder.ScreenNodeBuilder.build(tree) 
-		draw = drawer.DiagramDraw('SVG', diagram, filename=outfile) 
-		draw.draw()
-		draw.save() 
+	if source != '':
+		if save_png_flag:
+			tree = parser.parse_string(source) 
+			diagram = builder.ScreenNodeBuilder.build(tree) 
+			draw = drawer.DiagramDraw('SVG', diagram, filename=outfile) 
+			draw.draw()
+			draw.save() 
 
-	if save_txt_flag:
-		fout = open(txtfile,'w')
-		fout.write(source)
-		fout.close()
+		if save_txt_flag:
+			fout = open(txtfile,'w')
+			fout.write(source)
+			fout.close()
 
 #################### Extract Sub Block ####################
 	out_proc_codes_list, header_list = extract_sub_proc(proc_codes, level_title)
@@ -398,6 +404,17 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 	return_flg = False
 	skip_code_list = []
 
+
+	# skip if only return 20170524
+	for index in range(0, block_data_list.size()):
+		blockdata = block_data_list.blockdata[index]
+		if blockdata.proc_size()==1:
+			if blockdata.proc_size()==1:
+				if len(blockdata.procs[0].type)==1:
+					if blockdata.procs[0].type[0]=='return':
+						return block_code, sub_proc_list, block_code_cond_list, skip_code_list
+
+
 	# check if process includes return (at the deepest level(block layer=1)) 20170524
 	if len(block_data_list.blockdata)==1:
 		tmp_blockdata = block_data_list.blockdata[0]
@@ -408,7 +425,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 				if tmp_data=='return':
 					return_flg = True
 					break
-
 
 # main flow
 	for index in range(0, len(block_data_list.blockdata)):
