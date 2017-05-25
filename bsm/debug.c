@@ -7,6 +7,21 @@ VD fn_btt_tle_initialize()
 		hogege2,
 		(S4)BTT_TRAILER_SIZE_UNKNOWN
 	);
+
+	if(a==1 && b==1)
+	{
+		hogehoge3 = 1;
+	}
+	else if(a==2)
+	{
+		return;
+	}
+	else
+	{
+		hogehoge3 = 3;
+	}
+
+	a = 4;
 	return;
 }
 

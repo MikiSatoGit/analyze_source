@@ -184,7 +184,7 @@ class ProcessCodes:
 class ProcessData:
 	def __init__(self):
 		self.title =[]
-		self.type = []	#subproc,equal,proc,func,ctrl(if, else if, else, for, while, switch, case, default) ...
+		self.type = []	#subproc,equal,proc,func,return,ctrl(if, else if, else, for, while, switch, case, default) ...
 		self.left = []
 		self.right = []
 
@@ -1259,59 +1259,22 @@ def analyze_sub_process_code(proc_codes):
 
 
 
-##### divide by ( of function 2017.05.23
-												print 'find FUNCTION %s/%s' % ( proc_codes.proc_data_list[index1_r].left[index2_r], proc_codes.proc_data_list[index1_r].right[index2_r] )
+##### divide by ( of function 20170523
 												tmp_split_title = proc_codes.proc_data_list[index1_r].title[index2_r]
 												tmp_split_type = proc_codes.proc_data_list[index1_r].type[index2_r]
 												tmp_split_left = proc_codes.proc_data_list[index1_r].left[index2_r]
 												tmp_split_right = proc_codes.proc_data_list[index1_r].right[index2_r]
 												if tmp_split_left.find('(')!=-1 and tmp_split_left.find('(') < len(tmp_split_left)-1:
-
-													print 'org [%d][%d] %s,%s,%s,%s' % ( \
-														index1_r, \
-														index2_r, \
-														tmp_split_title, \
-														tmp_split_type, \
-														tmp_split_left, \
-														tmp_split_right \
-													)
-
 													proc_codes.proc_data_list[index1_r].title[index2_r] = tmp_split_title
 													proc_codes.proc_data_list[index1_r].type[index2_r]  = tmp_split_type +'<start>'
 													proc_codes.proc_data_list[index1_r].right[index2_r] = tmp_split_right
 													proc_codes.proc_data_list[index1_r].left[index2_r] = tmp_split_left[:tmp_split_left.find('(',1)+1]
-
-													print 'mod [%d][%d] %s,%s,%s,%s' % ( \
-														index1_r, \
-														index2_r, \
-														proc_codes.proc_data_list[index1_r].title[index2_r], \
-														proc_codes.proc_data_list[index1_r].type[index2_r], \
-														proc_codes.proc_data_list[index1_r].left[index2_r], \
-														proc_codes.proc_data_list[index1_r].right[index2_r] \
-													)
 
 													tmp_split_left = tmp_split_left[tmp_split_left.find('(',1)+1:]
 													proc_codes.proc_data_list[index1_r].title.insert(index2_r+1, tmp_split_title)
 													proc_codes.proc_data_list[index1_r].type.insert(index2_r+1, tmp_split_type)
 													proc_codes.proc_data_list[index1_r].right.insert(index2_r+1, tmp_split_right)
 													proc_codes.proc_data_list[index1_r].left.insert(index2_r+1, tmp_split_left)
-
-													print 'add [%d][%d] %s,%s,%s,%s' % ( \
-														index1_r, \
-														index2_r, \
-														proc_codes.proc_data_list[index1_r].title[index2_r], \
-														proc_codes.proc_data_list[index1_r].type[index2_r], \
-														proc_codes.proc_data_list[index1_r].left[index2_r], \
-														proc_codes.proc_data_list[index1_r].right[index2_r] \
-													)
-													print 'add [%d][%d] %s,%s,%s,%s' % ( \
-														index1_r, \
-														index2_r, \
-														proc_codes.proc_data_list[index1_r].title[index2_r+1], \
-														proc_codes.proc_data_list[index1_r].type[index2_r+1], \
-														proc_codes.proc_data_list[index1_r].left[index2_r+1], \
-														proc_codes.proc_data_list[index1_r].right[index2_r+1] \
-													)
 												else:
 
 
@@ -1325,8 +1288,10 @@ def analyze_sub_process_code(proc_codes):
 							else:
 								if debug_out:
 									print '<analyze_sub_process_code>  not find );'
-
-								proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
+								if is_return(tmp_left):
+									proc_data.append_data(tmp_title,'return', tmp_left.strip(), tmp_right.strip())
+								else:
+									proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
 
 								if debug_out:
 									print '<analyze_sub_process_code>   -> append(5) %s %s' % (tmp_left.strip(), tmp_right.strip())
@@ -1347,7 +1312,10 @@ def analyze_sub_process_code(proc_codes):
 								if tmp_left.strip().find(';')==0 and tmp_left.strip().find(';')==len(tmp_left.strip())-1:
 									break
 								else:
-									proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
+									if is_return(tmp_left):
+										proc_data.append_data(tmp_title,'return', tmp_left.strip(), tmp_right.strip())
+									else:
+										proc_data.append_data(tmp_title,'proc', tmp_left.strip(), tmp_right.strip())
 
 								if debug_out:
 									print '<analyze_sub_process_code>   -> append(7) %s %s' % (tmp_left.strip(), tmp_right.strip())
@@ -1382,6 +1350,15 @@ def analyze_sub_process_code(proc_codes):
 	return
 
 
+def is_return(code):
+	bres = False
+	tmp_code = code
+	tmp_code = tmp_code.replace(' ', '')
+	if tmp_code=='return;':
+		bres = True
+	return bres
+
+
 def is_ctrl_stat(code):
 	if is_ctrl_stat_word('else if', code):
 		return True
@@ -1395,7 +1372,6 @@ def is_ctrl_stat(code):
 		return True
 	if is_ctrl_stat_word('switch', code):
 		return True
-
 	return False
 
 
@@ -1657,7 +1633,7 @@ def analyze_control_statement(proc_codes):
 
 
 
-##### divide by ) in the end of line (for for()) 2017.05.22
+##### divide by ) in the end of line (for for()) 20170523
 								if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')!=-1 \
 								and proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')==len(proc_codes.proc_data_list[index1_r].left[index2_r])-1:
 									tmp_title_add = []

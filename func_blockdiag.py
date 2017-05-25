@@ -83,12 +83,12 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	source_header += 'span_height = 20;\n'
 	source_header += 'class if [shape = diamond];\n'
 	source_header += 'class elif [shape = diamond];\n'
-#	source_header += 'class else [shape = diamond];\n'
+	source_header += 'class else [shape = circle, color = gray];\n'
 	source_header += 'class for [shape = flowchart.loopin];\n'
 	source_header += 'class forend [shape = flowchart.loopout];\n'
-	source_header += 'class while [shape = flowchart.loopin, color = gray];\n'
-	source_header += 'class whileend [shape = flowchart.loopout, color = gray];\n'
-	source_header += 'class switch [shape = diamond, color = gray];\n'
+	source_header += 'class while [shape = flowchart.loopin, color = lightblue];\n'
+	source_header += 'class whileend [shape = flowchart.loopout, color = lightblue];\n'
+	source_header += 'class switch [shape = diamond, color = lightblue];\n'
 	source_header += 'class pt [shape = minidiamond];\n'
 	source_header += 'class subproc [color = pink];\n'
 	source_header += 'START -> '
@@ -108,114 +108,27 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 					proc_codes.proc_data_list[index1].right[index2] \
 				)
 		
-
-
 	block_data_list = check_proc_codes(proc_codes, level_title)
 
-
-
-#	if debug_out:
-	print '<draw_diag> after ---------------------------------------- %s' % csvfile_base
-	print block_data_list.size()
-	for index in range(0, block_data_list.size()):
-		blockdata = block_data_list.blockdata[index]
-		print '[%d]%s(%s) %d' % ( index, blockdata.title, blockdata.type, blockdata.proc_size() )
-		for index2 in range(0, blockdata.proc_size()):
-			for index3 in range(0, len(blockdata.procs[index2].title) ):
-				print '  [%s] %s %s' % ( \
-					blockdata.procs[index2].type[index3], \
-					blockdata.procs[index2].left[index3], \
-					blockdata.procs[index2].right[index3] \
-				)
+	if debug_out:
+		print '<draw_diag> after ---------------------------------------- %s' % csvfile_base
+		print '<draw_diag> block size : %d' % block_data_list.size()
+		for index in range(0, block_data_list.size()):
+			blockdata = block_data_list.blockdata[index]
+			print '<draw_diag> [%d]%s(%s) %d' % ( index, blockdata.title, blockdata.type, blockdata.proc_size() )
+			for index2 in range(0, blockdata.proc_size()):
+				for index3 in range(0, len(blockdata.procs[index2].title) ):
+					print '<draw_diag>   >>> <%s (%s)>[%s] %s --- %s' % ( \
+						blockdata.title, \
+						blockdata.type, \
+						blockdata.procs[index2].type[index3], \
+						blockdata.procs[index2].left[index3], \
+						blockdata.procs[index2].right[index3] \
+					)
 
 
 #################### Create csv file of cond & proc ####################
-	proc_id = 0
-	cond_id = 0
-	arg_id = 0
-	tmp_files = glob.glob(csvfile_base+'*.csv')
-	for tmp_file in tmp_files:
-		os.remove(tmp_file)
-
-	for index in range(0, block_data_list.size()):
-		blockdata = block_data_list.blockdata[index]
-		for index2 in range(0, blockdata.proc_size()):
-			for index3 in range(0, len(blockdata.procs[index2].title) ):
-
-				### COND
-				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3] ):
-					if index2==0 or blockdata.procs[index2].left[index3]==')':
-						continue
-					else:
-						csvfile = csvfile_base + '_' + blockdata.title + '_cond.csv'
-						if os.path.exists(csvfile)==False:
-							fout_csv = open(csvfile,'a')
-							table = 'COND#' + ', ' + 'Data'  + ', ' + 'Condition' + '\n'
-							fout_csv.write(table)
-						else:
-							fout_csv = open(csvfile,'a')
-						cond_id += 1
-						table = 'COND.' + str(cond_id) + ', ' + blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
-						fout_csv.write(table)
-						fout_csv.close()
-
-				### subproc
-				elif blockdata.procs[index2].type[index3].strip()=='subproc':
-					continue
-
-				### func
-				elif blockdata.procs[index2].type[index3].strip().find('func')!=-1:
-					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
-					if os.path.exists(csvfile)==False:
-						fout_csv = open(csvfile,'a')
-						table = 'PROC#' + ', ' + 'Processing'  + ', ' + 'Description' + '\n'
-						fout_csv.write(table)
-					else:
-						fout_csv = open(csvfile,'a')
-
-					#########
-					if blockdata.procs[index2].type[index3].strip().find('<start>')!=-1:
-						proc_id += 1
-						arg_id = 0
-						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3]  + '\n'
-						if blockdata.procs[index2].left[index3].find('=')!=-1:
-							func_name = blockdata.procs[index2].left[index3][blockdata.procs[index2].left[index3].find('='):blockdata.procs[index2].left[index3].find('(')]
-							func_name = func_name.strip()
-						else:
-							func_name = blockdata.procs[index2].left[index3][:blockdata.procs[index2].left[index3].find('(')]
-							func_name = func_name.strip()
-						print '<draw_diag> func name : %s' % func_name
-					elif blockdata.procs[index2].type[index3].strip().find('<end>')!=-1:
-						continue
-					else:
-						arg_id += 1
-						table = 'PROC.' + str(proc_id) + ', ' \
-						+ func_name + '(): arg.' + str(arg_id) \
-						+ ', ' + blockdata.procs[index2].left[index3]  + blockdata.procs[index2].right[index3] + '\n'
-
-					#########
-					fout_csv.write(table)
-					fout_csv.close()
-
-				### PROC
-				else:
-					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
-					if os.path.exists(csvfile)==False:
-						fout_csv = open(csvfile,'a')
-						table = 'PROC#' + ', ' + 'Processing'  + ', ' + 'Description' + '\n'
-						fout_csv.write(table)
-					else:
-						fout_csv = open(csvfile,'a')
-					proc_id += 1
-					if blockdata.procs[index2].type[index3].strip().find('equal')!=-1:
-						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' + '\n'
-					else:
-						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3]  + ', ' + blockdata.procs[index2].right[index3] + '\n'
-					fout_csv.write(table)
-					fout_csv.close()
+	output_proc_to_csv(csvfile_base, block_data_list)
 
 
 #################### Create Block diag code ####################
@@ -270,6 +183,7 @@ def check_proc_codes(proc_codes, level_title):
 # [in] proc_codes : FunctionList.FunctionData.process_code_list (ProcessCodes)
 # [in] level_title : process level (str) : MAINPROCESS, SUBPROCESS,...
 # [out] block_data_list : BlockDataList = List of [title, type, List of [ProcessData(title,type,left,right)] 
+
 	block_data_list = BlockDataList()
 	block_data = BlockData()
 	current_title = ''
@@ -283,6 +197,7 @@ def check_proc_codes(proc_codes, level_title):
 			proc_title = proc_codes.proc_data_list[index1].title[index2].strip()
 			proc_type = proc_codes.proc_data_list[index1].type[index2].strip()
 			proc_left = proc_codes.proc_data_list[index1].left[index2]
+			proc_right = proc_codes.proc_data_list[index1].right[index2]
 
 ### MAIN process
 			if is_level_title(proc_title, level_title):
@@ -334,10 +249,38 @@ def check_proc_codes(proc_codes, level_title):
 							proc_title = proc_title.replace(')', '')
 
 						current_title = proc_title
-
 						block_data.title = current_title
+
+
+
+
+						# add "_return" if only return in sub process 20170524
+						if index1+1 < proc_codes.get_proc_data_size():
+							if  proc_codes.proc_data_list[index1+1].get_main_size()==1 \
+							and proc_codes.proc_data_list[index1+1].type[0]=='return'\
+							and proc_codes.proc_data_list[index1].title[index2]!=proc_codes.proc_data_list[index1+1].title[0]:
+								if debug_out:
+									print '<check_proc_codes> Skip only return in sub proc [%d/%d][%d/%d] %s (%d)' % ( \
+										index1, proc_codes.get_proc_data_size(), \
+										index2, proc_codes.proc_data_list[index1].get_main_size(), \
+										block_data.title, \
+										block_data.proc_size()
+									)
+								block_data.title = block_data.title + '_return'
+
+
+
+
 						if debug_out:
-							print block_data.title
+							print '<check_proc_codes> BLOCK(%s)' % block_data.title
+							print '<check_proc_codes>  >>>[%d][%d] <%s (%s)> %s --- %s' % (\
+							 index1, \
+							 index2, \
+							 proc_codes.proc_data_list[index1].title[index2], \
+							 proc_codes.proc_data_list[index1].type[index2], \
+							 proc_codes.proc_data_list[index1].left[index2], \
+							 proc_codes.proc_data_list[index1].right[index2] \
+							)
 
 						tmp_procdata = func_source_analyze.ProcessData()
 						tmp_procdata.title.append( proc_codes.proc_data_list[index1].title[index2] )
@@ -361,7 +304,7 @@ def check_proc_codes(proc_codes, level_title):
 #### SUB process
 			else:
 				if debug_out:
-					print '<check_proc_codes> Skip sub proc'
+					print '<check_proc_codes> Skip sub proc[%d][%d] <%s (%s)> %s --- %s' % ( index1, index2, proc_title, proc_type, proc_left, proc_right )
 
 	if block_data.proc_size() != 0:
 		block_data_list.blockdata.append(copy.deepcopy(block_data))
@@ -424,6 +367,8 @@ def create_main_blocks(block_data_list):
 # [out] sub_proc_list :  sub block code
 # [out] block_code_cond_list : if, elseif, else block code
 
+	debug_out = True #0524
+
 	if debug_out:
 		print '<create_main_blocks> ----------------------------------------'
 	block_code =''
@@ -438,7 +383,14 @@ def create_main_blocks(block_data_list):
 
 		if debug_out:
 			print '<create_main_blocks> %s' % tmp_str
+
+		# break if only return 20170523
+		if tmp_blockdata.proc_size()==1:
+			if tmp_blockdata.procs[0].type[0]=='return':
+				break
+
 		if tmp_str.find('_else')!=-1:
+
 			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev)
 			condition_if_prev = ''
 
@@ -481,6 +433,13 @@ def create_main_blocks(block_data_list):
 				block_code += tmp_str
 				block_code += ' -> '
 			else:
+				# skip "_return" if only return in sub process 20170524
+				if tmp_str.find('_return')!=-1:
+					for tmp_code_cond in block_code_cond_list:
+						print '\t(return) %s' % tmp_code_cond
+#				else:
+
+
 				sub_proc_list.append(tmp_str)
 
 	block_code += 'END;\n'
@@ -532,6 +491,14 @@ def create_if_blocks(condition_str, code, condition_prev):
 
 		block_code_cond = code.replace(condition_str, '_yes_pt') + '[label = "yes"];\n'
 		block_code_cond_list.append(block_code_cond)
+
+#	if debug_out = True:
+	print '<create_if_blocks>'
+	for tmp_code_cond in block_code_cond_list:
+			print '\t(cond) %s' % tmp_code_cond
+
+
+
 
 	return block_code_cond_list
 
@@ -703,3 +670,114 @@ def extract_sub_proc(proc_codes, level_title):
 			header_list.pop()
 
 	return out_proc_codes_list, header_list
+
+
+
+def output_proc_to_csv(csvfile_base, block_data_list):
+	proc_id = 0
+	cond_id = 0
+	arg_id = 0
+	tmp_files = glob.glob(csvfile_base+'*.csv')
+	for tmp_file in tmp_files:
+		os.remove(tmp_file)
+
+	for index in range(0, block_data_list.size()):
+		blockdata = block_data_list.blockdata[index]
+		for index2 in range(0, blockdata.proc_size()):
+			for index3 in range(0, len(blockdata.procs[index2].title) ):
+
+				# break if only return 20170523
+				if blockdata.proc_size()==1:
+					if blockdata.procs[index2].type[index3]=='return':
+						break
+
+				### COND
+				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3] ):
+					if index2==0 or blockdata.procs[index2].left[index3]==')':
+						continue
+					else:
+						csvfile = csvfile_base + '_' + blockdata.title + '_cond.csv'
+						if os.path.exists(csvfile)==False:
+							fout_csv = open(csvfile,'a')
+							table = 'COND#' + ', ' \
+							+ 'Data'  + ', ' \
+							+ 'Condition' + '\n'
+							fout_csv.write(table)
+						else:
+							fout_csv = open(csvfile,'a')
+						cond_id += 1
+						table = 'COND.' + str(cond_id) + ', ' \
+						+ blockdata.procs[index2].left[index3]  + ', ' \
+						+ blockdata.procs[index2].right[index3] + '\n'
+						fout_csv.write(table)
+						fout_csv.close()
+
+				### subproc
+				elif blockdata.procs[index2].type[index3].strip()=='subproc':
+					continue
+
+				### func
+				elif blockdata.procs[index2].type[index3].strip().find('func')!=-1:
+					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
+					if os.path.exists(csvfile)==False:
+						fout_csv = open(csvfile,'a')
+						table = 'PROC#' + ', ' \
+						+ 'Processing'  + ', ' \
+						+ 'Description' + '\n'
+						fout_csv.write(table)
+					else:
+						fout_csv = open(csvfile,'a')
+
+					#########
+					if blockdata.procs[index2].type[index3].strip().find('<start>')!=-1:
+						proc_id += 1
+						arg_id = 0
+						table = 'PROC.' + str(proc_id) + ', ' \
+						+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
+						+ '\n'
+						if blockdata.procs[index2].left[index3].find('=')!=-1:
+							func_name = blockdata.procs[index2].left[index3][blockdata.procs[index2].left[index3].find('='):blockdata.procs[index2].left[index3].find('(')]
+							func_name = func_name.strip()
+						else:
+							func_name = blockdata.procs[index2].left[index3][:blockdata.procs[index2].left[index3].find('(')]
+							func_name = func_name.strip()
+
+						if debug_out:
+							print '<output_proc_to_csv> func name : %s' % func_name
+
+					elif blockdata.procs[index2].type[index3].strip().find('<end>')!=-1:
+						continue
+					else:
+						arg_id += 1
+#0523						table = 'PROC.' + str(proc_id) + ', ' \
+#0523						+ func_name + '(): arg.' + str(arg_id) \
+						table = '' + ', ' \
+						+ '[arg.' + str(arg_id) + ']' + ', ' \
+						+ blockdata.procs[index2].left[index3]  + blockdata.procs[index2].right[index3] + '\n'
+
+					#########
+					fout_csv.write(table)
+					fout_csv.close()
+
+				### PROC
+				else:
+					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
+					if os.path.exists(csvfile)==False:
+						fout_csv = open(csvfile,'a')
+						table = 'PROC#' + ', ' + 'Processing'  + ', ' + 'Description' + '\n'
+						fout_csv.write(table)
+					else:
+						fout_csv = open(csvfile,'a')
+					proc_id += 1
+					if blockdata.procs[index2].type[index3].strip().find('equal')!=-1:
+						table = 'PROC.' + str(proc_id) + ', ' \
+						+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
+						+ '\n'
+					else:
+						table = 'PROC.' + str(proc_id) + ', ' \
+						+ blockdata.procs[index2].left[index3]  + ', ' \
+						+ blockdata.procs[index2].right[index3] + '\n'
+					fout_csv.write(table)
+					fout_csv.close()
+
+	return
