@@ -376,8 +376,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 # [out] block_code_cond_list : if, elseif, else block code
 # [out] skip_code_list
 
-	debug_out = True #0524
-
 	if debug_out:
 		print '<create_main_blocks> ----------------------------------------'
 		print '<create_main_blocks> INPUT:blockdata x %d' % len(block_data_list.blockdata)
@@ -419,13 +417,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 
 		if debug_out:
 			print '<create_main_blocks> %s' % tmp_str
-
-		# break if only return 20170523
-#		if tmp_blockdata.proc_size()==1:
-#			if tmp_blockdata.procs[0].type[0]=='return':
-#				if sub_proc_flg:
-#					return_flg = True
-#				break
 
 		if tmp_str.find('_else')!=-1:
 			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev, condition_if_parent)
@@ -477,33 +468,19 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 
 				# skip "_returnonly" if only return in sub process 20170524
 				if tmp_str.find('_returnonly')!=-1:
-					print '<create_main_blocks> Find return_only : %s' % tmp_str
 
 					# replace "-> XXX_subproc ->"" to "->" (output skip code and replace after whole process)
 					tmp_skip_code = tmp_str
 					tmp_skip_code += '_subproc'
 					tmp_skip_code = '-> ' + tmp_skip_code + ' ->'
 					skip_code_list.append(tmp_skip_code)
-					print '<create_main_blocks> Skip : %s' % tmp_skip_code
-#					for index_rep in range( 0, len(block_code_cond_list) ):
-#						tmp_code_cond = block_code_cond_list[index_rep]
-#						print '<create_main_blocks> ...Cheking : %s' % tmp_code_cond.strip()
-#						if tmp_code_cond.find(tmp_skip_code)!=-1:
-#							print '<create_main_blocks> ......Find : %s' % tmp_skip_code
-#							tmp_skip_code_replace = tmp_code_cond.replace(tmp_skip_code, '->')
-#							block_code_cond_list[index_rep] = tmp_skip_code_replace
-#							break
-
 
 					# replace "XXX_end_pt -> PARENT_end_pt" to "XXX_end_pt -> END"
 					tmp_end = tmp_str[:tmp_str.find('_')]
 					tmp_end += '_end_pt'
-					print '<create_main_blocks> Replace : %s' % tmp_end
 					for index_rep in range( 0, len(block_code_cond_list) ):
 						tmp_code_cond = block_code_cond_list[index_rep]
-						print '<create_main_blocks> ...Cheking : %s' % tmp_code_cond.strip()
 						if tmp_code_cond.find(tmp_end)!=-1:
-							print '<create_main_blocks> ......Find : %s' % tmp_end
 							tmp_end_code = tmp_code_cond[tmp_code_cond.find(tmp_end):]
 							tmp_end_code = tmp_end_code[:tmp_end_code.find(';',1)]
 							tmp_end_code_replace = tmp_end + ' -> END'
@@ -613,7 +590,6 @@ def create_subproc_blocks(sub_proc_list):
 		block_code += ' -> '
 		block_code += block_code_sub + '_subproc'
 		block_code += ' -> '
-#0524
 		block_code += block_code_sub[:block_code_sub.find('_')] + tmp_pt_end
 		block_code += ';\n'
 
@@ -768,7 +744,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 		for index2 in range(0, blockdata.proc_size()):
 			for index3 in range(0, len(blockdata.procs[index2].title) ):
 
-				# break if only return 20170523
+				# break if only return 20170524
 				if blockdata.proc_size()==1:
 					if blockdata.procs[index2].type[index3]=='return':
 						break
@@ -831,8 +807,6 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						continue
 					else:
 						arg_id += 1
-#0523						table = 'PROC.' + str(proc_id) + ', ' \
-#0523						+ func_name + '(): arg.' + str(arg_id) \
 						table = '' + ', ' \
 						+ '[arg.' + str(arg_id) + ']' + ', ' \
 						+ blockdata.procs[index2].left[index3]  + blockdata.procs[index2].right[index3] + '\n'
