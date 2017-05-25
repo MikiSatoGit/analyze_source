@@ -46,6 +46,10 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 # [in] level_title : process level (str) : MAINPROCESS, SUBPROCESS,...
 # [in] outputmode : 0:png, 1:source txt, 2:both
 
+	sub_proc_flg = True
+	if level_title == 'MAINPROCESS':
+		sub_proc_flg = False
+
 	outfile = ''
 	txtfile = ''
 	csvfile_base = ''	
@@ -133,7 +137,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 
 #################### Create Block diag code ####################
 # add main flow
-	block_code, sub_proc_list, block_code_cond_list = create_main_blocks(block_data_list)
+	block_code, sub_proc_list, block_code_cond_list, skip_code_list = create_main_blocks(block_data_list, sub_proc_flg)
 
 # add sub flow
 	block_code += create_subproc_blocks(sub_proc_list)
@@ -142,26 +146,37 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	for block_code_cond in block_code_cond_list:
 		block_code += block_code_cond
 
-	source = source_header
-	source += block_code
-	source += ' }'
+# create source code if there is some process
+	if block_code == '':
+		source =''
+	else:
+		source = source_header
+		source += block_code
+		source += ' }'
+
+# skip "_returnonly" if only return in sub process 20170524
+	for skip_code in skip_code_list:
+		source = source.replace(skip_code, '->')
+		if debug_out:
+			print 'skip: %s' % skip_code
 
 
 #################### Draw Block diag ####################
 	print '----------<%s>----------' % funcname
 	print source
 
-	if save_png_flag:
-		tree = parser.parse_string(source) 
-		diagram = builder.ScreenNodeBuilder.build(tree) 
-		draw = drawer.DiagramDraw('SVG', diagram, filename=outfile) 
-		draw.draw()
-		draw.save() 
+	if source != '':
+		if save_png_flag:
+			tree = parser.parse_string(source) 
+			diagram = builder.ScreenNodeBuilder.build(tree) 
+			draw = drawer.DiagramDraw('SVG', diagram, filename=outfile) 
+			draw.draw()
+			draw.save() 
 
-	if save_txt_flag:
-		fout = open(txtfile,'w')
-		fout.write(source)
-		fout.close()
+		if save_txt_flag:
+			fout = open(txtfile,'w')
+			fout.write(source)
+			fout.close()
 
 #################### Extract Sub Block ####################
 	out_proc_codes_list, header_list = extract_sub_proc(proc_codes, level_title)
@@ -179,6 +194,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	return out_proc_codes_list, header_list
 
 
+
 def check_proc_codes(proc_codes, level_title):
 # [in] proc_codes : FunctionList.FunctionData.process_code_list (ProcessCodes)
 # [in] level_title : process level (str) : MAINPROCESS, SUBPROCESS,...
@@ -191,7 +207,6 @@ def check_proc_codes(proc_codes, level_title):
 	cond_proc_id = 0
 
 	for index1 in range(0, proc_codes.get_proc_data_size()):
-
 
 		for index2 in range(0,proc_codes.proc_data_list[index1].get_main_size()):
 			proc_title = proc_codes.proc_data_list[index1].title[index2].strip()
@@ -251,13 +266,10 @@ def check_proc_codes(proc_codes, level_title):
 						current_title = proc_title
 						block_data.title = current_title
 
-
-
-
-						# add "_return" if only return in sub process 20170524
+						# add "_returnonly" if only return in sub process 20170524
 						if index1+1 < proc_codes.get_proc_data_size():
 							if  proc_codes.proc_data_list[index1+1].get_main_size()==1 \
-							and proc_codes.proc_data_list[index1+1].type[0]=='return'\
+							and proc_codes.proc_data_list[index1+1].type[0]=='return' \
 							and proc_codes.proc_data_list[index1].title[index2]!=proc_codes.proc_data_list[index1+1].title[0]:
 								if debug_out:
 									print '<check_proc_codes> Skip only return in sub proc [%d/%d][%d/%d] %s (%d)' % ( \
@@ -266,10 +278,7 @@ def check_proc_codes(proc_codes, level_title):
 										block_data.title, \
 										block_data.proc_size()
 									)
-								block_data.title = block_data.title + '_return'
-
-
-
+								block_data.title = block_data.title + '_returnonly'
 
 						if debug_out:
 							print '<check_proc_codes> BLOCK(%s)' % block_data.title
@@ -312,6 +321,7 @@ def check_proc_codes(proc_codes, level_title):
 	return block_data_list
 
 
+
 def is_level_title(proc_title, level_title):
 	bret = False
 	tmp_proc_title = proc_title
@@ -319,6 +329,7 @@ def is_level_title(proc_title, level_title):
 	if tmp_proc_title==level_title:
 		bret = True
 	return bret
+
 
 
 def rename_title(proc_type, proc_title, cond_proc_id, proc_id, level_title):
@@ -331,6 +342,7 @@ def rename_title(proc_type, proc_title, cond_proc_id, proc_id, level_title):
 		proc_title = proc_title.replace('(', '')
 		proc_title = proc_title.replace(')', '')
 	return proc_title, cond_proc_id, proc_id
+
 
 
 def find_ctrl_stat_in_title(title, type, level_title):
@@ -361,20 +373,58 @@ def find_ctrl_stat_in_title(title, type, level_title):
 	return title
 
 
-def create_main_blocks(block_data_list):
+
+def create_main_blocks(block_data_list, sub_proc_flg):
 # [in] block_data_list : BlockDataList = List of [title, type, List of [ProcessData(title,type,left,right)] 
+# [in] sub_proc_flg : False = Main, True = Sub
 # [out] block_code : main block code
 # [out] sub_proc_list :  sub block code
 # [out] block_code_cond_list : if, elseif, else block code
-
-	debug_out = True #0524
+# [out] skip_code_list
 
 	if debug_out:
 		print '<create_main_blocks> ----------------------------------------'
+		print '<create_main_blocks> INPUT:blockdata x %d' % len(block_data_list.blockdata)
+		for index in range( 0, len(block_data_list.blockdata) ):
+			tmp_blockdata = block_data_list.blockdata[index]
+			print '<create_main_blocks> INPUT: [%d] procdata x %d' % ( index, len(tmp_blockdata.procs) )
+			for index2 in range( 0, len(tmp_blockdata.procs) ):
+				tmp_procdata = tmp_blockdata.procs[index2]
+				print '<create_main_blocks> INPUT: [%d][%d] proc x %d' % ( index, index2, tmp_procdata.get_main_size() )
+				for index3 in range( 0, tmp_procdata.get_main_size() ):
+					tmp_data = tmp_procdata.type[index3]
+					print '<create_main_blocks> INPUT: [%d][%d] type = %s' % ( index, index2, tmp_data )
+
+
 	block_code =''
 	block_code_cond_list = []
 	condition_if_prev = ''
+	condition_if_parent = ''
 	sub_proc_list = []
+	return_flg = False
+	skip_code_list = []
+
+
+	# skip if only return 20170524
+	for index in range(0, block_data_list.size()):
+		blockdata = block_data_list.blockdata[index]
+		if blockdata.proc_size()==1:
+			if blockdata.proc_size()==1:
+				if len(blockdata.procs[0].type)==1:
+					if blockdata.procs[0].type[0]=='return':
+						return block_code, sub_proc_list, block_code_cond_list, skip_code_list
+
+
+	# check if process includes return (at the deepest level(block layer=1)) 20170524
+	if len(block_data_list.blockdata)==1:
+		tmp_blockdata = block_data_list.blockdata[0]
+		for index2 in range( 0, len(tmp_blockdata.procs) ):
+			tmp_procdata = tmp_blockdata.procs[index2]
+			for index3 in range( 0, tmp_procdata.get_main_size() ):
+				tmp_data = tmp_procdata.type[index3]
+				if tmp_data=='return':
+					return_flg = True
+					break
 
 # main flow
 	for index in range(0, len(block_data_list.blockdata)):
@@ -384,23 +434,19 @@ def create_main_blocks(block_data_list):
 		if debug_out:
 			print '<create_main_blocks> %s' % tmp_str
 
-		# break if only return 20170523
-		if tmp_blockdata.proc_size()==1:
-			if tmp_blockdata.procs[0].type[0]=='return':
-				break
-
 		if tmp_str.find('_else')!=-1:
-
-			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev)
+			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev, condition_if_parent)
 			condition_if_prev = ''
+			condition_if_parent = ''
 
 		elif tmp_str.find('_elif')!=-1:
-			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_if_prev)
+			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_if_prev, condition_if_parent)
 			condition_if_prev = tmp_str
 
 		elif tmp_str.find('_if')!=-1:
-			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_if_prev)
+			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_if_prev, condition_if_parent)
 			condition_if_prev = tmp_str
+			condition_if_parent = tmp_str
 
 			block_code += tmp_str
 			block_code += ' -> '
@@ -433,20 +479,46 @@ def create_main_blocks(block_data_list):
 				block_code += tmp_str
 				block_code += ' -> '
 			else:
-				# skip "_return" if only return in sub process 20170524
-				if tmp_str.find('_return')!=-1:
-					for tmp_code_cond in block_code_cond_list:
-						print '\t(return) %s' % tmp_code_cond
-#				else:
-
-
 				sub_proc_list.append(tmp_str)
 
-	block_code += 'END;\n'
-	return block_code, sub_proc_list, block_code_cond_list
+
+				# skip "_returnonly" if only return in sub process 20170524
+				if tmp_str.find('_returnonly')!=-1:
+
+					# replace "-> XXX_subproc ->"" to "->" (output skip code and replace after whole process)
+					tmp_skip_code = tmp_str
+					tmp_skip_code += '_subproc'
+					tmp_skip_code = '-> ' + tmp_skip_code + ' ->'
+					skip_code_list.append(tmp_skip_code)
+
+					# replace "XXX_end_pt -> PARENT_end_pt" to "XXX_end_pt -> END"
+					tmp_end = tmp_str[:tmp_str.find('_')]
+					tmp_end += '_end_pt'
+					for index_rep in range( 0, len(block_code_cond_list) ):
+						tmp_code_cond = block_code_cond_list[index_rep]
+						if tmp_code_cond.find(tmp_end)!=-1:
+							tmp_end_code = tmp_code_cond[tmp_code_cond.find(tmp_end):]
+							tmp_end_code = tmp_end_code[:tmp_end_code.find(';',1)]
+							tmp_end_code_replace = tmp_end + ' -> END'
+							tmp_code_cond_replace = tmp_code_cond.replace(tmp_end_code, tmp_end_code_replace)
+							block_code_cond_list[index_rep] = tmp_code_cond_replace
+							break
 
 
-def create_if_blocks(condition_str, code, condition_prev):
+	if sub_proc_flg:
+		if return_flg:
+			block_code += 'END;\n'
+		else:
+			block_code += 'NEXT;\n'
+	else:
+		block_code += 'END;\n'
+
+
+	return block_code, sub_proc_list, block_code_cond_list, skip_code_list
+
+
+
+def create_if_blocks(condition_str, code, condition_prev, condition_if_parent):
 	block_code_cond_list = []
 	block_code_cond = ''
 	parent_condition = ''
@@ -474,7 +546,9 @@ def create_if_blocks(condition_str, code, condition_prev):
 		# end_pt -> end_pt(parent)
 		block_code_cond += code.replace(condition_str, '_end_pt')
 		block_code_cond += ' -> '
-		block_code_cond += condition_prev.replace(parent_condition, '_end_pt')
+		# connect to end_pt of original parent condition 20170524
+		#block_code_cond += condition_prev.replace(parent_condition, '_end_pt')
+		block_code_cond += condition_if_parent.replace('_if', '_end_pt')
 		block_code_cond += ';\n'
 		block_code_cond_list.append(block_code_cond)
 
@@ -492,15 +566,14 @@ def create_if_blocks(condition_str, code, condition_prev):
 		block_code_cond = code.replace(condition_str, '_yes_pt') + '[label = "yes"];\n'
 		block_code_cond_list.append(block_code_cond)
 
-#	if debug_out = True:
-	print '<create_if_blocks>'
-	for tmp_code_cond in block_code_cond_list:
-			print '\t(cond) %s' % tmp_code_cond
-
-
-
+	if debug_out == True:
+		print '<create_if_blocks>'
+		for tmp_code_cond in block_code_cond_list:
+				print '\t(cond) %s' % tmp_code_cond
 
 	return block_code_cond_list
+
+
 
 
 def create_subproc_blocks(sub_proc_list):
@@ -537,6 +610,7 @@ def create_subproc_blocks(sub_proc_list):
 		block_code += ';\n'
 
 	return block_code
+
 
 
 def extract_sub_proc(proc_codes, level_title):
@@ -686,7 +760,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 		for index2 in range(0, blockdata.proc_size()):
 			for index3 in range(0, len(blockdata.procs[index2].title) ):
 
-				# break if only return 20170523
+				# break if only return 20170524
 				if blockdata.proc_size()==1:
 					if blockdata.procs[index2].type[index3]=='return':
 						break
@@ -749,8 +823,6 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						continue
 					else:
 						arg_id += 1
-#0523						table = 'PROC.' + str(proc_id) + ', ' \
-#0523						+ func_name + '(): arg.' + str(arg_id) \
 						table = '' + ', ' \
 						+ '[arg.' + str(arg_id) + ']' + ', ' \
 						+ blockdata.procs[index2].left[index3]  + blockdata.procs[index2].right[index3] + '\n'

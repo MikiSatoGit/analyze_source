@@ -40,128 +40,191 @@ Total functions : 3
 [27] MAINPROCESS(1) for  for ( 
 [28] MAINPROCESS(1) for  u1_t_i = (U1)0; 
 [29] MAINPROCESS(1) for  u1_t_i < CU1_LCA_CMN_FSK_DOA_PEAK_BUFFSIZE; 
-[30] MAINPROCESS(1) for  u1_t_i++) 
-[31] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[32] SUBPROCESS(1) equal au1_t_used_2f[u1_t_i] (U1)0;
-[33] SUBPROCESS(1) equal afl_t_music_doa_pow_2f	[u1_t_i] (FL)0;
-[34] SUBPROCESS(1) equal afl_t_music_bin_intpl_2f	[u1_t_i] (FL)0;
-[35] SUBPROCESS(1) equal afl_t_music_doa_bin_intpl_2f[u1_t_i] (FL)0;
-[36] SUBPROCESS(1) equal au1_t_2f_dft_peak_flg		[u1_t_i] CU1_DF_OFF;
-[37] SUBPROCESS(1) equal au1_t_2f_sharp_dftpeak_flg	[u1_t_i] CU1_DF_OFF;
-[38] MAINPROCESS(2) equal u1_t_peak_music_num_up (U1)0;
-[39] MAINPROCESS(2) equal u1_t_peak_music_num_dn (U1)0;
-[40] MAINPROCESS(2) for  for ( 
-[41] MAINPROCESS(2) for  u1_t_i = (U1)0; 
-[42] MAINPROCESS(2) for  u1_t_i < CU1_LCA_CMN_LFM_DOA_PEAK_BUFFSIZE; 
-[43] MAINPROCESS(2) for  u1_t_i++) 
-[44] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[45] SUBPROCESS(1) equal afl_t_music_doa_pow_up[u1_t_i] (FL)0;
-[46] SUBPROCESS(1) equal afl_t_music_doa_pow_dn[u1_t_i] (FL)0;
-[47] SUBPROCESS(1) equal afl_t_music_bin_intpl_up[u1_t_i] (FL)0;
-[48] SUBPROCESS(1) equal afl_t_music_bin_intpl_dn[u1_t_i] (FL)0;
-[49] SUBPROCESS(1) equal afl_t_music_doa_bin_intpl_up[u1_t_i] (FL)0;
-[50] SUBPROCESS(1) equal afl_t_music_doa_bin_intpl_dn[u1_t_i] (FL)0;
-[51] SUBPROCESS(1) equal au1_t_used_up[u1_t_i] CU1_DF_OFF;
-[52] SUBPROCESS(1) equal au1_t_used_dn[u1_t_i] CU1_DF_OFF;
-[53] MAINPROCESS(3) equal u1_t_nml_crn_num (U1)0;
-[54] MAINPROCESS(3) equal u1_t_tgt_crn_num (U1)0;
-[55] MAINPROCESS(3) equal u1_t_alm_flg CU1_DF_OFF;
-[56] MAINPROCESS(3) equal u1_t_hazard_flg CU1_DF_OFF;
-[57] MAINPROCESS(3) func<start> fn_lca_cmn_init( 
-[58] MAINPROCESS(3) func CU1_LCA_CMN_NORMAL_BUFFSIZE 
-[59] MAINPROCESS(3) func<end> ); 
-[60] MAINPROCESS(3) func<start> fn_lca_cmn_init( 
-[61] MAINPROCESS(3) func CU1_LCA_CMN_TGT_BUFFSIZE 
+[30] MAINPROCESS(1) for  u1_t_i++ 
+[31] MAINPROCESS(1) for  ) 
+[32] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[33] SUBPROCESS(1) equal au1_t_used_2f[u1_t_i] (U1)0;
+[34] SUBPROCESS(1) equal afl_t_music_doa_pow_2f	[u1_t_i] (FL)0;
+[35] SUBPROCESS(1) equal afl_t_music_bin_intpl_2f	[u1_t_i] (FL)0;
+[36] SUBPROCESS(1) equal afl_t_music_doa_bin_intpl_2f[u1_t_i] (FL)0;
+[37] SUBPROCESS(1) equal au1_t_2f_dft_peak_flg		[u1_t_i] CU1_DF_OFF;
+[38] SUBPROCESS(1) equal au1_t_2f_sharp_dftpeak_flg	[u1_t_i] CU1_DF_OFF;
+[39] MAINPROCESS(2) equal u1_t_peak_music_num_up (U1)0;
+[40] MAINPROCESS(2) equal u1_t_peak_music_num_dn (U1)0;
+[41] MAINPROCESS(2) for  for ( 
+[42] MAINPROCESS(2) for  u1_t_i = (U1)0; 
+[43] MAINPROCESS(2) for  u1_t_i < CU1_LCA_CMN_LFM_DOA_PEAK_BUFFSIZE; 
+[44] MAINPROCESS(2) for  u1_t_i++ 
+[45] MAINPROCESS(2) for  ) 
+[46] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[47] SUBPROCESS(1) equal afl_t_music_doa_pow_up[u1_t_i] (FL)0;
+[48] SUBPROCESS(1) equal afl_t_music_doa_pow_dn[u1_t_i] (FL)0;
+[49] SUBPROCESS(1) equal afl_t_music_bin_intpl_up[u1_t_i] (FL)0;
+[50] SUBPROCESS(1) equal afl_t_music_bin_intpl_dn[u1_t_i] (FL)0;
+[51] SUBPROCESS(1) equal afl_t_music_doa_bin_intpl_up[u1_t_i] (FL)0;
+[52] SUBPROCESS(1) equal afl_t_music_doa_bin_intpl_dn[u1_t_i] (FL)0;
+[53] SUBPROCESS(1) equal au1_t_used_up[u1_t_i] CU1_DF_OFF;
+[54] SUBPROCESS(1) equal au1_t_used_dn[u1_t_i] CU1_DF_OFF;
+[55] MAINPROCESS(3) equal u1_t_nml_crn_num (U1)0;
+[56] MAINPROCESS(3) equal u1_t_tgt_crn_num (U1)0;
+[57] MAINPROCESS(3) equal u1_t_alm_flg CU1_DF_OFF;
+[58] MAINPROCESS(3) equal u1_t_hazard_flg CU1_DF_OFF;
+[59] MAINPROCESS(3) func<start> fn_lca_cmn_init( 
+[60] MAINPROCESS(3) func ast_t_nml_crn, 
+[61] MAINPROCESS(3) func CU1_LCA_CMN_NORMAL_BUFFSIZE 
 [62] MAINPROCESS(3) func<end> ); 
-[63] MAINPROCESS(3) equal st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg st_g_bsm_loop_data.afl_installed_angle[0];
-[64] MAINPROCESS(3) if  if ( 
-[65] MAINPROCESS(3) if  st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg < (FL)0 
-[66] MAINPROCESS(3) if  ) 
-[67] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[68] SUBPROCESS(1) equal st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg (FL)0;
-[69] MAINPROCESS(4) else if  else if ( 
-[70] MAINPROCESS(4) else if  st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg > (FL)(LCA_DEG_MAX) / (FL)2 
-[71] MAINPROCESS(4) else if  ) 
-[72] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[73] SUBPROCESS(1) equal st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg (FL)(LCA_DEG_MAX) / (FL)2;
-[74] MAINPROCESS(5) else else 
-[75] MAINPROCESS(5) subproc SUBPROCESS(1) 
-[76] MAINPROCESS(6) switch  switch ( 
-[77] MAINPROCESS(6) switch  u1_g_lca_ttc_table_custom_for_base 
-[78] MAINPROCESS(6) switch  ) 
-[79] MAINPROCESS(6) subproc SUBPROCESS(1) 
-[80] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_OFF: 
-[81] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)0;
-[82] SUBPROCESS(1) proc break; 
-[83] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_SHORT: 
-[84] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)3;
-[85] SUBPROCESS(1) proc break; 
-[86] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_MIDDLE: 
-[87] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)4;
-[88] SUBPROCESS(1) proc break; 
-[89] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_LONG: 
-[90] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)5;
-[91] SUBPROCESS(1) proc break; 
-[92] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_INIT: 
-[93] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)0;
-[94] SUBPROCESS(1) proc break; 
-[95] SUBPROCESS(1) ??? default: 
-[96] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)0;
-[97] SUBPROCESS(1) proc break; 
-[98] MAINPROCESS(7) func<start> fn_lca_recg03_set_freq_threshold_2fcw( 
-[99] MAINPROCESS(7) func<end> ); 
-[100] MAINPROCESS(7) func<start> fn_lca_recg03_set_freq_threshold_fmcw( 
-[101] MAINPROCESS(7) func<end> ); 
-[102] MAINPROCESS(7) func<start> fn_lca_recg01_cal_wall_dist( 
-[103] MAINPROCESS(7) func au1_t_used_dn 
-[104] MAINPROCESS(7) func<end> ); 
-[105] MAINPROCESS(7) if  if ( 
-[106] MAINPROCESS(7) if  fl_g_v_self_bsm_for_base > CFL_LCA_CMN_FHL_ON_SELF_VELOCITY_KMPH 
-[107] MAINPROCESS(7) if  ) 
-[108] MAINPROCESS(7) subproc SUBPROCESS(1) 
-[109] SUBPROCESS(1) func<start> fn_lca_recg02_one_side_vehicle_map( 
-[110] SUBPROCESS(1) func<end> ); 
-[111] MAINPROCESS(8) func<start> fn_lca_recg04_calc_fcw_dft_ryy_matrix( 
-[112] MAINPROCESS(8) func<end> ); 
-[113] MAINPROCESS(8) func<start> fn_lca_recg05_seak_dft_2f_peak( 
-[114] MAINPROCESS(8) func afl_t_music_doa_bin_intpl_2f 
-[115] MAINPROCESS(8) func<end> ); 
-[116] MAINPROCESS(8) func<start> fn_lca_recg06_calc_2f_useless_flg( 
-[117] MAINPROCESS(8) func<end> ); 
-[118] MAINPROCESS(8) func<start> fn_lca_recg07_seak_dft_fmcw_up_peak( 
-[119] MAINPROCESS(8) func afl_t_music_doa_bin_intpl_up 
-[120] MAINPROCESS(8) func<end> ); 
-[121] MAINPROCESS(8) func<start> fn_lca_cmn_environ_judgement( 
-[122] MAINPROCESS(8) func<end> ); 
-[123] MAINPROCESS(8) func<start> fn_lca_recg08_seek_prior_obj( 
-[124] MAINPROCESS(8) func ast_t_nml_crn 
+[63] MAINPROCESS(3) func<start> fn_lca_cmn_init( 
+[64] MAINPROCESS(3) func ast_t_tgt_crn, 
+[65] MAINPROCESS(3) func CU1_LCA_CMN_TGT_BUFFSIZE 
+[66] MAINPROCESS(3) func<end> ); 
+[67] MAINPROCESS(3) equal st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg st_g_bsm_loop_data.afl_installed_angle[0];
+[68] MAINPROCESS(3) if  if ( 
+[69] MAINPROCESS(3) if  st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg < (FL)0 
+[70] MAINPROCESS(3) if  ) 
+[71] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[72] SUBPROCESS(1) equal st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg (FL)0;
+[73] MAINPROCESS(4) else if  else if ( 
+[74] MAINPROCESS(4) else if  st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg > (FL)(LCA_DEG_MAX) / (FL)2 
+[75] MAINPROCESS(4) else if  ) 
+[76] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[77] SUBPROCESS(1) equal st_g_lca_ecu_loop_data.fl_lca_installed_angle_deg (FL)(LCA_DEG_MAX) / (FL)2;
+[78] MAINPROCESS(5) else else 
+[79] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[80] MAINPROCESS(6) switch  switch ( 
+[81] MAINPROCESS(6) switch  u1_g_lca_ttc_table_custom_for_base 
+[82] MAINPROCESS(6) switch  ) 
+[83] MAINPROCESS(6) subproc SUBPROCESS(1) 
+[84] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_OFF: 
+[85] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)0;
+[86] SUBPROCESS(1) proc break; 
+[87] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_SHORT: 
+[88] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)3;
+[89] SUBPROCESS(1) proc break; 
+[90] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_MIDDLE: 
+[91] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)4;
+[92] SUBPROCESS(1) proc break; 
+[93] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_LONG: 
+[94] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)5;
+[95] SUBPROCESS(1) proc break; 
+[96] SUBPROCESS(1) ??? case CU1_SYSTEM_LCA_TTC_CUSTOMIZE_LCA_MODE_INIT: 
+[97] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)0;
+[98] SUBPROCESS(1) proc break; 
+[99] SUBPROCESS(1) ??? default: 
+[100] SUBPROCESS(1) equal fl_g_lca_ecu_ttc_thre (FL)0;
+[101] SUBPROCESS(1) proc break; 
+[102] MAINPROCESS(7) func<start> fn_lca_recg03_set_freq_threshold_2fcw( 
+[103] MAINPROCESS(7) func<end> ); 
+[104] MAINPROCESS(7) func<start> fn_lca_recg03_set_freq_threshold_fmcw( 
+[105] MAINPROCESS(7) func<end> ); 
+[106] MAINPROCESS(7) func<start> fn_lca_recg01_cal_wall_dist( 
+[107] MAINPROCESS(7) func &u1_t_peak_music_num_up, 
+[108] MAINPROCESS(7) func afl_t_music_doa_pow_up, 
+[109] MAINPROCESS(7) func afl_t_music_bin_intpl_up, 
+[110] MAINPROCESS(7) func afl_t_music_doa_bin_intpl_up, 
+[111] MAINPROCESS(7) func &u1_t_peak_music_num_dn, 
+[112] MAINPROCESS(7) func afl_t_music_doa_pow_dn, 
+[113] MAINPROCESS(7) func afl_t_music_bin_intpl_dn, 
+[114] MAINPROCESS(7) func afl_t_music_doa_bin_intpl_dn, 
+[115] MAINPROCESS(7) func au1_t_used_up, 
+[116] MAINPROCESS(7) func au1_t_used_dn 
+[117] MAINPROCESS(7) func<end> ); 
+[118] MAINPROCESS(7) if  if ( 
+[119] MAINPROCESS(7) if  fl_g_v_self_bsm_for_base > CFL_LCA_CMN_FHL_ON_SELF_VELOCITY_KMPH 
+[120] MAINPROCESS(7) if  ) 
+[121] MAINPROCESS(7) subproc SUBPROCESS(1) 
+[122] SUBPROCESS(1) func<start> fn_lca_recg02_one_side_vehicle_map( 
+[123] SUBPROCESS(1) func<end> ); 
+[124] MAINPROCESS(8) func<start> fn_lca_recg04_calc_fcw_dft_ryy_matrix( 
 [125] MAINPROCESS(8) func<end> ); 
-[126] MAINPROCESS(8) func<start> fn_lca_recg09_seek_ordinary_obj( 
-[127] MAINPROCESS(8) func ast_t_nml_crn 
-[128] MAINPROCESS(8) func<end> ); 
-[129] MAINPROCESS(8) func<start> fn_lca_recg10_seek_2f_obj( 
-[130] MAINPROCESS(8) func ast_t_nml_crn 
-[131] MAINPROCESS(8) func<end> ); 
-[132] MAINPROCESS(8) func<start> fn_lca_recg17_normal_erase_and_add( 
-[133] MAINPROCESS(8) func ast_t_nml_crn 
-[134] MAINPROCESS(8) func<end> ); 
-[135] MAINPROCESS(8) func<start> fn_lca_recg11_nml_connect( 
-[136] MAINPROCESS(8) func ast_t_nml_crn 
-[137] MAINPROCESS(8) func<end> ); 
-[138] MAINPROCESS(8) func<start> fn_lca_recg12_tgt_connect( 
-[139] MAINPROCESS(8) func au1_t_2f_sharp_dftpeak_flg 
-[140] MAINPROCESS(8) func<end> ); 
-[141] MAINPROCESS(8) func<start> fn_lca_recg13_lca_alm( 
-[142] MAINPROCESS(8) func &u1_t_alm_flg 
+[126] MAINPROCESS(8) func<start> fn_lca_recg05_seak_dft_2f_peak( 
+[127] MAINPROCESS(8) func &u1_t_peak_music_num_2f, 
+[128] MAINPROCESS(8) func au1_t_2f_dft_peak_flg, 
+[129] MAINPROCESS(8) func au1_t_2f_sharp_dftpeak_flg, 
+[130] MAINPROCESS(8) func afl_t_music_doa_pow_2f, 
+[131] MAINPROCESS(8) func afl_t_music_bin_intpl_2f, 
+[132] MAINPROCESS(8) func afl_t_music_doa_bin_intpl_2f 
+[133] MAINPROCESS(8) func<end> ); 
+[134] MAINPROCESS(8) func<start> fn_lca_recg06_calc_2f_useless_flg( 
+[135] MAINPROCESS(8) func<end> ); 
+[136] MAINPROCESS(8) func<start> fn_lca_recg07_seak_dft_fmcw_up_peak( 
+[137] MAINPROCESS(8) func &u1_t_peak_music_num_up, 
+[138] MAINPROCESS(8) func afl_t_music_doa_pow_up, 
+[139] MAINPROCESS(8) func afl_t_music_bin_intpl_up, 
+[140] MAINPROCESS(8) func afl_t_music_doa_bin_intpl_up 
+[141] MAINPROCESS(8) func<end> ); 
+[142] MAINPROCESS(8) func<start> fn_lca_cmn_environ_judgement( 
 [143] MAINPROCESS(8) func<end> ); 
-[144] MAINPROCESS(8) func<start> fn_lca_recg14_fhl_alm( 
-[145] MAINPROCESS(8) func &u1_t_hazard_flg 
-[146] MAINPROCESS(8) func<end> ); 
-[147] MAINPROCESS(8) func<start> fn_lca_recg15_loop_data_trim( 
-[148] MAINPROCESS(8) func u1_t_hazard_flg 
-[149] MAINPROCESS(8) func<end> ); 
-[150] MAINPROCESS(8) proc return; 
------------------ Total Codes : 150 lines
+[144] MAINPROCESS(8) func<start> fn_lca_recg08_seek_prior_obj( 
+[145] MAINPROCESS(8) func &u1_t_nml_crn_num, 
+[146] MAINPROCESS(8) func ast_t_nml_crn 
+[147] MAINPROCESS(8) func<end> ); 
+[148] MAINPROCESS(8) func<start> fn_lca_recg09_seek_ordinary_obj( 
+[149] MAINPROCESS(8) func u1_t_peak_music_num_2f, 
+[150] MAINPROCESS(8) func afl_t_music_doa_pow_2f, 
+[151] MAINPROCESS(8) func afl_t_music_bin_intpl_2f, 
+[152] MAINPROCESS(8) func afl_t_music_doa_bin_intpl_2f, 
+[153] MAINPROCESS(8) func au1_t_2f_dft_peak_flg, 
+[154] MAINPROCESS(8) func u1_t_peak_music_num_up, 
+[155] MAINPROCESS(8) func afl_t_music_doa_pow_up, 
+[156] MAINPROCESS(8) func afl_t_music_bin_intpl_up, 
+[157] MAINPROCESS(8) func afl_t_music_doa_bin_intpl_up, 
+[158] MAINPROCESS(8) func &u1_t_peak_music_num_dn, 
+[159] MAINPROCESS(8) func afl_t_music_doa_pow_dn, 
+[160] MAINPROCESS(8) func afl_t_music_bin_intpl_dn, 
+[161] MAINPROCESS(8) func afl_t_music_doa_bin_intpl_dn, 
+[162] MAINPROCESS(8) func au1_t_used_up, 
+[163] MAINPROCESS(8) func au1_t_used_dn, 
+[164] MAINPROCESS(8) func au1_t_used_2f, 
+[165] MAINPROCESS(8) func &u1_t_nml_crn_num, 
+[166] MAINPROCESS(8) func ast_t_nml_crn 
+[167] MAINPROCESS(8) func<end> ); 
+[168] MAINPROCESS(8) func<start> fn_lca_recg10_seek_2f_obj( 
+[169] MAINPROCESS(8) func au1_t_used_2f, 
+[170] MAINPROCESS(8) func u1_t_peak_music_num_2f, 
+[171] MAINPROCESS(8) func afl_t_music_doa_pow_2f, 
+[172] MAINPROCESS(8) func afl_t_music_bin_intpl_2f, 
+[173] MAINPROCESS(8) func afl_t_music_doa_bin_intpl_2f, 
+[174] MAINPROCESS(8) func au1_t_2f_sharp_dftpeak_flg, 
+[175] MAINPROCESS(8) func &u1_t_nml_crn_num, 
+[176] MAINPROCESS(8) func ast_t_nml_crn 
+[177] MAINPROCESS(8) func<end> ); 
+[178] MAINPROCESS(8) func<start> fn_lca_recg17_normal_erase_and_add( 
+[179] MAINPROCESS(8) func &u1_t_nml_crn_num, 
+[180] MAINPROCESS(8) func ast_t_nml_crn 
+[181] MAINPROCESS(8) func<end> ); 
+[182] MAINPROCESS(8) func<start> fn_lca_recg11_nml_connect( 
+[183] MAINPROCESS(8) func &u1_t_nml_crn_num, 
+[184] MAINPROCESS(8) func ast_t_nml_crn 
+[185] MAINPROCESS(8) func<end> ); 
+[186] MAINPROCESS(8) func<start> fn_lca_recg12_tgt_connect( 
+[187] MAINPROCESS(8) func u1_t_nml_crn_num, 
+[188] MAINPROCESS(8) func ast_t_nml_crn, 
+[189] MAINPROCESS(8) func &u1_t_tgt_crn_num, 
+[190] MAINPROCESS(8) func ast_t_tgt_crn, 
+[191] MAINPROCESS(8) func u1_t_peak_music_num_2f, 
+[192] MAINPROCESS(8) func afl_t_music_bin_intpl_2f, 
+[193] MAINPROCESS(8) func au1_t_2f_sharp_dftpeak_flg 
+[194] MAINPROCESS(8) func<end> ); 
+[195] MAINPROCESS(8) func<start> fn_lca_recg13_lca_alm( 
+[196] MAINPROCESS(8) func u1_t_tgt_crn_num, 
+[197] MAINPROCESS(8) func ast_t_tgt_crn, 
+[198] MAINPROCESS(8) func &u1_t_alm_flg 
+[199] MAINPROCESS(8) func<end> ); 
+[200] MAINPROCESS(8) func<start> fn_lca_recg14_fhl_alm( 
+[201] MAINPROCESS(8) func u1_t_tgt_crn_num, 
+[202] MAINPROCESS(8) func ast_t_tgt_crn, 
+[203] MAINPROCESS(8) func &u1_t_hazard_flg 
+[204] MAINPROCESS(8) func<end> ); 
+[205] MAINPROCESS(8) func<start> fn_lca_recg15_loop_data_trim( 
+[206] MAINPROCESS(8) func u1_t_nml_crn_num, 
+[207] MAINPROCESS(8) func ast_t_nml_crn, 
+[208] MAINPROCESS(8) func u1_t_tgt_crn_num, 
+[209] MAINPROCESS(8) func ast_t_tgt_crn, 
+[210] MAINPROCESS(8) func u1_t_alm_flg, 
+[211] MAINPROCESS(8) func u1_t_hazard_flg 
+[212] MAINPROCESS(8) func<end> ); 
+[213] MAINPROCESS(8) return return; 
+----------------- Total Codes : 213 lines
 --------------------------
 [Function Name] : fn_lca_abst_init_data 
 -Return type : VD 
@@ -169,7 +232,7 @@ Total functions : 3
 ----- Codes -----
 [1] MAINPROCESS(1) func<start> fn_lca_abst_read_data_by_bsmdest( 
 [2] MAINPROCESS(1) func<end> ); 
-[3] MAINPROCESS(1) proc return; 
+[3] MAINPROCESS(1) return return; 
 ----------------- Total Codes : 3 lines
 --------------------------
 [Function Name] : fn_lca_abst_read_data_by_bsmdest 
@@ -200,5 +263,5 @@ Total functions : 3
 [22] SUBPROCESS(1) equal FL_LCA_CMN_OUTSIDE_HENI_OFFSET_2SIGMA (FL)5.95;
 [23] SUBPROCESS(1) equal FL_LCA_CMN_OUTSIDE_HENI_OFFSET_1SIGMA (FL)5.7;
 [24] SUBPROCESS(1) equal FL_LCA_CMN_OUTSIDE_HENI_OFFSET_05SIGMA (FL)5.45;
-[25] MAINPROCESS(4) proc return; 
+[25] MAINPROCESS(4) return return; 
 ----------------- Total Codes : 25 lines
