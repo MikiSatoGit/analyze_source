@@ -14,11 +14,18 @@ VD fn_btt_tle_initialize()
 	}
 	else if(a==2)
 	{
+//		hogehoge3 = 2;
 		return;
+	}
+	else if(a==3)
+	{
+		hogehoge3 = 3;
+//		return;
 	}
 	else
 	{
-		hogehoge3 = 3;
+		hogehoge3 = 4;
+		return;
 	}
 
 	a = 4;
@@ -116,7 +123,8 @@ VD fn_miki_test4(
 		}
 		else
 		{
-			level1_1_3_1 = hoge1_1_3_1;
+//			level1_1_3_1 = hoge1_1_3_1;
+			return;
 		}
 	}
 	else if(lv1_2 == 12)

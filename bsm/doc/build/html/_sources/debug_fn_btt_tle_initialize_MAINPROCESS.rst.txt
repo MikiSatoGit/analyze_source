@@ -19,8 +19,13 @@ debug_fn_btt_tle_initialize_MAINPROCESS
    :encoding: utf-8
    :header-rows: 1
 
-.. csv-table:: MAIN4
-   :file: ../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_MAIN4_proc.csv
+.. csv-table:: ELIF3
+   :file: ../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_ELIF3_elif_cond.csv
+   :encoding: utf-8
+   :header-rows: 1
+
+.. csv-table:: MAIN5
+   :file: ../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_MAIN5_proc.csv
    :encoding: utf-8
    :header-rows: 1
 
@@ -29,5 +34,6 @@ debug_fn_btt_tle_initialize_MAINPROCESS
 
    debug_fn_btt_tle_initialize_IF1_SUBPROCESS
 
-   debug_fn_btt_tle_initialize_ELSE3_SUBPROCESS
+   debug_fn_btt_tle_initialize_ELIF3_SUBPROCESS
 
+   debug_fn_btt_tle_initialize_ELSE4_SUBPROCESS

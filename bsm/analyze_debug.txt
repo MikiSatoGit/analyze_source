@@ -1,4 +1,4 @@
-Total lines: 117 
+Total lines: 122 
 Total functions : 2 
 --------------------------
 [Function Name] : fn_btt_tle_initialize 
@@ -21,12 +21,18 @@ Total functions : 2
 [14] MAINPROCESS(2) else if ) 
 [15] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [16] SUBPROCESS(1) return return; 
-[17] MAINPROCESS(3) else else 
-[18] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[19] SUBPROCESS(1) equal hogehoge3 3;
-[20] MAINPROCESS(4) equal a 4;
-[21] MAINPROCESS(4) return return; 
------------------ Total Codes : 21 lines
+[17] MAINPROCESS(3) else if else if( 
+[18] MAINPROCESS(3) else if a==3 
+[19] MAINPROCESS(3) else if ) 
+[20] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[21] SUBPROCESS(1) equal hogehoge3 3;
+[22] MAINPROCESS(4) else else 
+[23] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[24] SUBPROCESS(1) equal hogehoge3 4;
+[25] SUBPROCESS(1) return return; 
+[26] MAINPROCESS(5) equal a 4;
+[27] MAINPROCESS(5) return return; 
+----------------- Total Codes : 27 lines
 --------------------------
 [Function Name] : fn_miki_test4 
 -Return type : VD 
@@ -131,7 +137,7 @@ Total functions : 2
 [95] SUBSUBPROCESS(1) equal level1_1_2_1 hoge1_1_2_1;
 [96] SUBPROCESS(3) else else 
 [97] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[98] SUBSUBPROCESS(1) equal level1_1_3_1 hoge1_1_3_1;
+[98] SUBSUBPROCESS(1) return return; 
 [99] MAINPROCESS(9) else if else if( 
 [100] MAINPROCESS(9) else if lv1_2 == 12 
 [101] MAINPROCESS(9) else if ) 
