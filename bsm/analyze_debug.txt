@@ -63,7 +63,6 @@ Total functions : 2
 [27] SUBSUBPROCESS(1) ??? (FL)6.0,		(FL)45.7 
 [28] SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
 [29] SUBSUBPROCESS(1) ??? (FL)9.0,		(FL)38.6 
-
 [30] MAINPROCESS(3) ??? ; 
 [31] MAINPROCESS(3) func<start> miki2_1 = subsub_1( 
 [32] MAINPROCESS(3) func  (S4)arg2_1_1 
