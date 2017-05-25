@@ -1,0 +1,1134 @@
+bsm\debug.c
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 10
+<create_main_blocks> INPUT: [0] procdata x 6
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> INPUT: [0][1] proc x 1
+<create_main_blocks> INPUT: [0][1] type = func<start>
+<create_main_blocks> INPUT: [0][2] proc x 1
+<create_main_blocks> INPUT: [0][2] type = func
+<create_main_blocks> INPUT: [0][3] proc x 1
+<create_main_blocks> INPUT: [0][3] type = func
+<create_main_blocks> INPUT: [0][4] proc x 1
+<create_main_blocks> INPUT: [0][4] type = func
+<create_main_blocks> INPUT: [0][5] proc x 1
+<create_main_blocks> INPUT: [0][5] type = func<end>
+<create_main_blocks> INPUT: [1] procdata x 3
+<create_main_blocks> INPUT: [1][0] proc x 1
+<create_main_blocks> INPUT: [1][0] type = if
+<create_main_blocks> INPUT: [1][1] proc x 1
+<create_main_blocks> INPUT: [1][1] type = if
+<create_main_blocks> INPUT: [1][2] proc x 1
+<create_main_blocks> INPUT: [1][2] type = if
+<create_main_blocks> INPUT: [2] procdata x 1
+<create_main_blocks> INPUT: [2][0] proc x 1
+<create_main_blocks> INPUT: [2][0] type = subproc
+<create_main_blocks> INPUT: [3] procdata x 3
+<create_main_blocks> INPUT: [3][0] proc x 1
+<create_main_blocks> INPUT: [3][0] type = else if
+<create_main_blocks> INPUT: [3][1] proc x 1
+<create_main_blocks> INPUT: [3][1] type = else if
+<create_main_blocks> INPUT: [3][2] proc x 1
+<create_main_blocks> INPUT: [3][2] type = else if
+<create_main_blocks> INPUT: [4] procdata x 1
+<create_main_blocks> INPUT: [4][0] proc x 1
+<create_main_blocks> INPUT: [4][0] type = subproc
+<create_main_blocks> INPUT: [5] procdata x 3
+<create_main_blocks> INPUT: [5][0] proc x 1
+<create_main_blocks> INPUT: [5][0] type = else if
+<create_main_blocks> INPUT: [5][1] proc x 1
+<create_main_blocks> INPUT: [5][1] type = else if
+<create_main_blocks> INPUT: [5][2] proc x 1
+<create_main_blocks> INPUT: [5][2] type = else if
+<create_main_blocks> INPUT: [6] procdata x 1
+<create_main_blocks> INPUT: [6][0] proc x 1
+<create_main_blocks> INPUT: [6][0] type = subproc
+<create_main_blocks> INPUT: [7] procdata x 1
+<create_main_blocks> INPUT: [7][0] proc x 1
+<create_main_blocks> INPUT: [7][0] type = else
+<create_main_blocks> INPUT: [8] procdata x 1
+<create_main_blocks> INPUT: [8][0] proc x 1
+<create_main_blocks> INPUT: [8][0] type = subproc
+<create_main_blocks> INPUT: [9] procdata x 2
+<create_main_blocks> INPUT: [9][0] proc x 1
+<create_main_blocks> INPUT: [9][0] type = equal
+<create_main_blocks> INPUT: [9][1] proc x 1
+<create_main_blocks> INPUT: [9][1] type = return
+<create_main_blocks> MAIN1
+<create_main_blocks> IF1_if
+<create_main_blocks> IF1_SUB1
+<create_main_blocks> ELIF2_elif
+<create_main_blocks> ELIF2_SUB1_returnonly
+<create_main_blocks> Find return_only : ELIF2_SUB1_returnonly
+<create_main_blocks> Skip : -> ELIF2_SUB1_returnonly_subproc ->
+<create_main_blocks> Replace : ELIF2_end_pt
+<create_main_blocks> ...Cheking : IF1_if -> IF1_yes_pt;
+<create_main_blocks> ...Cheking : IF1_yes_pt[label = "yes"];
+<create_main_blocks> ...Cheking : IF1_if -> IF1_no_pt -> ELIF2_elif;
+ELIF2_end_pt -> IF1_end_pt;
+<create_main_blocks> ......Find : ELIF2_end_pt
+<create_main_blocks> ELIF3_elif
+<create_main_blocks> ELIF3_SUB1
+<create_main_blocks> ELSE4_else
+<create_main_blocks> ELSE4_SUB1
+<create_main_blocks> MAIN5
+skip: -> ELIF2_SUB1_returnonly_subproc ->
+----------<fn_btt_tle_initialize>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> MAIN1 -> IF1_if -> IF1_yes_pt;
+IF1_end_pt -> MAIN5 -> END;
+IF1_yes_pt -> IF1_SUB1_subproc -> IF1_end_pt;
+ELIF2_yes_pt -> ELIF2_end_pt;
+ELIF3_yes_pt -> ELIF3_SUB1_subproc -> ELIF3_end_pt;
+ELSE4_else -> ELSE4_SUB1_subproc -> ELSE4_end_pt;
+IF1_if -> IF1_yes_pt;
+IF1_yes_pt[label = "yes"];
+IF1_if -> IF1_no_pt -> ELIF2_elif;
+ELIF2_end_pt -> END;
+IF1_no_pt[label = "No"];
+ELIF2_elif -> ELIF2_yes_pt;
+ELIF2_yes_pt[label = "yes"];
+ELIF2_elif -> ELIF2_no_pt -> ELIF3_elif;
+ELIF3_end_pt -> IF1_end_pt;
+ELIF2_no_pt[label = "No"];
+ELIF3_elif -> ELIF3_yes_pt;
+ELIF3_yes_pt[label = "yes"];
+ELIF3_elif -> ELIF3_no_pt -> ELSE4_else;
+ELSE4_end_pt -> IF1_end_pt;
+ELIF3_no_pt[label = "No"];
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_btt_tle_initialize_IF1>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = return
+<create_main_blocks> SUB1
+----------<fn_btt_tle_initialize_ELIF2>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> END;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_btt_tle_initialize_ELIF3>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 2
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> INPUT: [0][1] proc x 1
+<create_main_blocks> INPUT: [0][1] type = return
+<create_main_blocks> SUB1
+----------<fn_btt_tle_initialize_ELSE4>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> END;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 23
+<create_main_blocks> INPUT: [0] procdata x 3
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = if
+<create_main_blocks> INPUT: [0][1] proc x 1
+<create_main_blocks> INPUT: [0][1] type = if
+<create_main_blocks> INPUT: [0][2] proc x 1
+<create_main_blocks> INPUT: [0][2] type = if
+<create_main_blocks> INPUT: [1] procdata x 1
+<create_main_blocks> INPUT: [1][0] proc x 1
+<create_main_blocks> INPUT: [1][0] type = subproc
+<create_main_blocks> INPUT: [2] procdata x 8
+<create_main_blocks> INPUT: [2][0] proc x 1
+<create_main_blocks> INPUT: [2][0] type = proc
+<create_main_blocks> INPUT: [2][1] proc x 1
+<create_main_blocks> INPUT: [2][1] type = proc
+<create_main_blocks> INPUT: [2][2] proc x 1
+<create_main_blocks> INPUT: [2][2] type = proc
+<create_main_blocks> INPUT: [2][3] proc x 1
+<create_main_blocks> INPUT: [2][3] type = proc
+<create_main_blocks> INPUT: [2][4] proc x 1
+<create_main_blocks> INPUT: [2][4] type = proc
+<create_main_blocks> INPUT: [2][5] proc x 1
+<create_main_blocks> INPUT: [2][5] type = proc
+<create_main_blocks> INPUT: [2][6] proc x 1
+<create_main_blocks> INPUT: [2][6] type = ???
+<create_main_blocks> INPUT: [2][7] proc x 1
+<create_main_blocks> INPUT: [2][7] type = subproc
+<create_main_blocks> INPUT: [3] procdata x 10
+<create_main_blocks> INPUT: [3][0] proc x 1
+<create_main_blocks> INPUT: [3][0] type = func<start>
+<create_main_blocks> INPUT: [3][1] proc x 1
+<create_main_blocks> INPUT: [3][1] type = func
+<create_main_blocks> INPUT: [3][2] proc x 1
+<create_main_blocks> INPUT: [3][2] type = func<end>
+<create_main_blocks> INPUT: [3][3] proc x 1
+<create_main_blocks> INPUT: [3][3] type = func<start>
+<create_main_blocks> INPUT: [3][4] proc x 1
+<create_main_blocks> INPUT: [3][4] type = func
+<create_main_blocks> INPUT: [3][5] proc x 1
+<create_main_blocks> INPUT: [3][5] type = func<end>
+<create_main_blocks> INPUT: [3][6] proc x 1
+<create_main_blocks> INPUT: [3][6] type = func<start>
+<create_main_blocks> INPUT: [3][7] proc x 1
+<create_main_blocks> INPUT: [3][7] type = func
+<create_main_blocks> INPUT: [3][8] proc x 1
+<create_main_blocks> INPUT: [3][8] type = func
+<create_main_blocks> INPUT: [3][9] proc x 1
+<create_main_blocks> INPUT: [3][9] type = func<end>
+<create_main_blocks> INPUT: [4] procdata x 3
+<create_main_blocks> INPUT: [4][0] proc x 1
+<create_main_blocks> INPUT: [4][0] type = switch 
+<create_main_blocks> INPUT: [4][1] proc x 1
+<create_main_blocks> INPUT: [4][1] type = switch 
+<create_main_blocks> INPUT: [4][2] proc x 1
+<create_main_blocks> INPUT: [4][2] type = switch 
+<create_main_blocks> INPUT: [5] procdata x 1
+<create_main_blocks> INPUT: [5][0] proc x 1
+<create_main_blocks> INPUT: [5][0] type = subproc
+<create_main_blocks> INPUT: [6] procdata x 3
+<create_main_blocks> INPUT: [6][0] proc x 1
+<create_main_blocks> INPUT: [6][0] type = while
+<create_main_blocks> INPUT: [6][1] proc x 1
+<create_main_blocks> INPUT: [6][1] type = while
+<create_main_blocks> INPUT: [6][2] proc x 1
+<create_main_blocks> INPUT: [6][2] type = while
+<create_main_blocks> INPUT: [7] procdata x 1
+<create_main_blocks> INPUT: [7][0] proc x 1
+<create_main_blocks> INPUT: [7][0] type = subproc
+<create_main_blocks> INPUT: [8] procdata x 3
+<create_main_blocks> INPUT: [8][0] proc x 1
+<create_main_blocks> INPUT: [8][0] type = if
+<create_main_blocks> INPUT: [8][1] proc x 1
+<create_main_blocks> INPUT: [8][1] type = if
+<create_main_blocks> INPUT: [8][2] proc x 1
+<create_main_blocks> INPUT: [8][2] type = if
+<create_main_blocks> INPUT: [9] procdata x 1
+<create_main_blocks> INPUT: [9][0] proc x 1
+<create_main_blocks> INPUT: [9][0] type = subproc
+<create_main_blocks> INPUT: [10] procdata x 3
+<create_main_blocks> INPUT: [10][0] proc x 1
+<create_main_blocks> INPUT: [10][0] type = if
+<create_main_blocks> INPUT: [10][1] proc x 1
+<create_main_blocks> INPUT: [10][1] type = if
+<create_main_blocks> INPUT: [10][2] proc x 1
+<create_main_blocks> INPUT: [10][2] type = if
+<create_main_blocks> INPUT: [11] procdata x 1
+<create_main_blocks> INPUT: [11][0] proc x 1
+<create_main_blocks> INPUT: [11][0] type = subproc
+<create_main_blocks> INPUT: [12] procdata x 1
+<create_main_blocks> INPUT: [12][0] proc x 1
+<create_main_blocks> INPUT: [12][0] type = else
+<create_main_blocks> INPUT: [13] procdata x 1
+<create_main_blocks> INPUT: [13][0] proc x 1
+<create_main_blocks> INPUT: [13][0] type = subproc
+<create_main_blocks> INPUT: [14] procdata x 3
+<create_main_blocks> INPUT: [14][0] proc x 1
+<create_main_blocks> INPUT: [14][0] type = if
+<create_main_blocks> INPUT: [14][1] proc x 1
+<create_main_blocks> INPUT: [14][1] type = if
+<create_main_blocks> INPUT: [14][2] proc x 1
+<create_main_blocks> INPUT: [14][2] type = if
+<create_main_blocks> INPUT: [15] procdata x 1
+<create_main_blocks> INPUT: [15][0] proc x 1
+<create_main_blocks> INPUT: [15][0] type = subproc
+<create_main_blocks> INPUT: [16] procdata x 3
+<create_main_blocks> INPUT: [16][0] proc x 1
+<create_main_blocks> INPUT: [16][0] type = else if
+<create_main_blocks> INPUT: [16][1] proc x 1
+<create_main_blocks> INPUT: [16][1] type = else if
+<create_main_blocks> INPUT: [16][2] proc x 1
+<create_main_blocks> INPUT: [16][2] type = else if
+<create_main_blocks> INPUT: [17] procdata x 1
+<create_main_blocks> INPUT: [17][0] proc x 1
+<create_main_blocks> INPUT: [17][0] type = subproc
+<create_main_blocks> INPUT: [18] procdata x 1
+<create_main_blocks> INPUT: [18][0] proc x 1
+<create_main_blocks> INPUT: [18][0] type = else
+<create_main_blocks> INPUT: [19] procdata x 1
+<create_main_blocks> INPUT: [19][0] proc x 1
+<create_main_blocks> INPUT: [19][0] type = subproc
+<create_main_blocks> INPUT: [20] procdata x 5
+<create_main_blocks> INPUT: [20][0] proc x 1
+<create_main_blocks> INPUT: [20][0] type = for
+<create_main_blocks> INPUT: [20][1] proc x 1
+<create_main_blocks> INPUT: [20][1] type = for
+<create_main_blocks> INPUT: [20][2] proc x 1
+<create_main_blocks> INPUT: [20][2] type = for
+<create_main_blocks> INPUT: [20][3] proc x 1
+<create_main_blocks> INPUT: [20][3] type = for
+<create_main_blocks> INPUT: [20][4] proc x 1
+<create_main_blocks> INPUT: [20][4] type = for
+<create_main_blocks> INPUT: [21] procdata x 1
+<create_main_blocks> INPUT: [21][0] proc x 1
+<create_main_blocks> INPUT: [21][0] type = subproc
+<create_main_blocks> INPUT: [22] procdata x 1
+<create_main_blocks> INPUT: [22][0] proc x 1
+<create_main_blocks> INPUT: [22][0] type = return
+<create_main_blocks> IF1_if
+<create_main_blocks> IF1_SUB1
+<create_main_blocks> MAIN2
+<create_main_blocks> MAIN3
+<create_main_blocks> SWITCH3_switch
+<create_main_blocks> SWITCH3_SUB1
+<create_main_blocks> WHILELOOP4_while
+<create_main_blocks> WHILELOOP4_SUB1
+<create_main_blocks> IF5_if
+<create_main_blocks> IF5_SUB1
+<create_main_blocks> IF6_if
+<create_main_blocks> IF6_SUB1
+<create_main_blocks> ELSE7_else
+<create_main_blocks> ELSE7_SUB1
+<create_main_blocks> IF8_if
+<create_main_blocks> IF8_SUB1
+<create_main_blocks> ELIF9_elif
+<create_main_blocks> ELIF9_SUB1
+<create_main_blocks> ELSE10_else
+<create_main_blocks> ELSE10_SUB1
+<create_main_blocks> FORLOOP11_for
+<create_main_blocks> FORLOOP11_SUB1
+<create_main_blocks> MAIN12
+----------<fn_miki_test4>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> IF1_if -> IF1_yes_pt;
+IF1_end_pt -> MAIN2 -> MAIN3 -> SWITCH3_switch;
+SWITCH3_end_pt -> WHILELOOP4_while;
+WHILELOOP4_END_whileend -> IF5_if -> IF5_yes_pt;
+IF5_end_pt -> IF6_if -> IF6_yes_pt;
+IF6_end_pt -> IF8_if -> IF8_yes_pt;
+IF8_end_pt -> FORLOOP11_for;
+FORLOOP11_END_forend -> MAIN12 -> END;
+IF1_yes_pt -> IF1_SUB1_subproc -> IF1_end_pt;
+SWITCH3_switch -> SWITCH3_SUB1_subproc -> SWITCH3_end_pt;
+WHILELOOP4_while -> WHILELOOP4_SUB1_subproc -> WHILELOOP4_END_whileend;
+IF5_yes_pt -> IF5_SUB1_subproc -> IF5_end_pt;
+IF6_yes_pt -> IF6_SUB1_subproc -> IF6_end_pt;
+ELSE7_else -> ELSE7_SUB1_subproc -> ELSE7_end_pt;
+IF8_yes_pt -> IF8_SUB1_subproc -> IF8_end_pt;
+ELIF9_yes_pt -> ELIF9_SUB1_subproc -> ELIF9_end_pt;
+ELSE10_else -> ELSE10_SUB1_subproc -> ELSE10_end_pt;
+FORLOOP11_for -> FORLOOP11_SUB1_subproc -> FORLOOP11_END_forend;
+IF1_if -> IF1_yes_pt;
+IF1_yes_pt[label = "yes"];
+IF5_if -> IF5_yes_pt;
+IF5_yes_pt[label = "yes"];
+IF6_if -> IF6_yes_pt;
+IF6_yes_pt[label = "yes"];
+IF6_if -> IF6_no_pt -> ELSE7_else;
+ELSE7_end_pt -> IF6_end_pt;
+IF6_no_pt[label = "No"];
+IF8_if -> IF8_yes_pt;
+IF8_yes_pt[label = "yes"];
+IF8_if -> IF8_no_pt -> ELIF9_elif;
+ELIF9_end_pt -> IF8_end_pt;
+IF8_no_pt[label = "No"];
+ELIF9_elif -> ELIF9_yes_pt;
+ELIF9_yes_pt[label = "yes"];
+ELIF9_elif -> ELIF9_no_pt -> ELSE10_else;
+ELSE10_end_pt -> IF8_end_pt;
+ELIF9_no_pt[label = "No"];
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_miki_test4_IF1>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 8
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = subproc
+<create_main_blocks> INPUT: [1] procdata x 1
+<create_main_blocks> INPUT: [1][0] proc x 1
+<create_main_blocks> INPUT: [1][0] type = subproc
+<create_main_blocks> INPUT: [2] procdata x 1
+<create_main_blocks> INPUT: [2][0] proc x 1
+<create_main_blocks> INPUT: [2][0] type = subproc
+<create_main_blocks> INPUT: [3] procdata x 1
+<create_main_blocks> INPUT: [3][0] proc x 1
+<create_main_blocks> INPUT: [3][0] type = subproc
+<create_main_blocks> INPUT: [4] procdata x 1
+<create_main_blocks> INPUT: [4][0] proc x 1
+<create_main_blocks> INPUT: [4][0] type = subproc
+<create_main_blocks> INPUT: [5] procdata x 1
+<create_main_blocks> INPUT: [5][0] proc x 1
+<create_main_blocks> INPUT: [5][0] type = subproc
+<create_main_blocks> INPUT: [6] procdata x 1
+<create_main_blocks> INPUT: [6][0] proc x 1
+<create_main_blocks> INPUT: [6][0] type = subproc
+<create_main_blocks> INPUT: [7] procdata x 1
+<create_main_blocks> INPUT: [7][0] proc x 1
+<create_main_blocks> INPUT: [7][0] type = subproc
+<create_main_blocks> SUB1
+<create_main_blocks> SUB2
+<create_main_blocks> SUB3
+<create_main_blocks> SUB4
+<create_main_blocks> SUB5
+<create_main_blocks> SUB6
+<create_main_blocks> SUB7
+<create_main_blocks> SUB8
+----------<fn_miki_test4_MAIN2>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> SUB2 -> SUB3 -> SUB4 -> SUB5 -> SUB6 -> SUB7 -> SUB8 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 9
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> INPUT: [0][1] proc x 1
+<create_main_blocks> INPUT: [0][1] type = equal
+<create_main_blocks> INPUT: [0][2] proc x 1
+<create_main_blocks> INPUT: [0][2] type = proc
+<create_main_blocks> INPUT: [0][3] proc x 1
+<create_main_blocks> INPUT: [0][3] type = ???
+<create_main_blocks> INPUT: [0][4] proc x 1
+<create_main_blocks> INPUT: [0][4] type = equal
+<create_main_blocks> INPUT: [0][5] proc x 1
+<create_main_blocks> INPUT: [0][5] type = proc
+<create_main_blocks> INPUT: [0][6] proc x 1
+<create_main_blocks> INPUT: [0][6] type = ???
+<create_main_blocks> INPUT: [0][7] proc x 1
+<create_main_blocks> INPUT: [0][7] type = equal
+<create_main_blocks> INPUT: [0][8] proc x 1
+<create_main_blocks> INPUT: [0][8] type = proc
+<create_main_blocks> SUB1
+----------<fn_miki_test4_SWITCH3>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_miki_test4_WHILELOOP4>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_miki_test4_IF5>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_miki_test4_IF6>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_miki_test4_ELSE7>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 6
+<create_main_blocks> INPUT: [0] procdata x 3
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = if
+<create_main_blocks> INPUT: [0][1] proc x 1
+<create_main_blocks> INPUT: [0][1] type = if
+<create_main_blocks> INPUT: [0][2] proc x 1
+<create_main_blocks> INPUT: [0][2] type = if
+<create_main_blocks> INPUT: [1] procdata x 1
+<create_main_blocks> INPUT: [1][0] proc x 1
+<create_main_blocks> INPUT: [1][0] type = subproc
+<create_main_blocks> INPUT: [2] procdata x 3
+<create_main_blocks> INPUT: [2][0] proc x 1
+<create_main_blocks> INPUT: [2][0] type = else if
+<create_main_blocks> INPUT: [2][1] proc x 1
+<create_main_blocks> INPUT: [2][1] type = else if
+<create_main_blocks> INPUT: [2][2] proc x 1
+<create_main_blocks> INPUT: [2][2] type = else if
+<create_main_blocks> INPUT: [3] procdata x 1
+<create_main_blocks> INPUT: [3][0] proc x 1
+<create_main_blocks> INPUT: [3][0] type = subproc
+<create_main_blocks> INPUT: [4] procdata x 1
+<create_main_blocks> INPUT: [4][0] proc x 1
+<create_main_blocks> INPUT: [4][0] type = else
+<create_main_blocks> INPUT: [5] procdata x 1
+<create_main_blocks> INPUT: [5][0] proc x 1
+<create_main_blocks> INPUT: [5][0] type = subproc
+<create_main_blocks> IF1_if
+<create_main_blocks> IF1_SUBSUB1
+<create_main_blocks> ELIF2_elif
+<create_main_blocks> ELIF2_SUBSUB1
+<create_main_blocks> ELSE3_else
+<create_main_blocks> ELSE3_SUBSUB1_returnonly
+<create_main_blocks> Find return_only : ELSE3_SUBSUB1_returnonly
+<create_main_blocks> Skip : -> ELSE3_SUBSUB1_returnonly_subproc ->
+<create_main_blocks> Replace : ELSE3_end_pt
+<create_main_blocks> ...Cheking : IF1_if -> IF1_yes_pt;
+<create_main_blocks> ...Cheking : IF1_yes_pt[label = "yes"];
+<create_main_blocks> ...Cheking : IF1_if -> IF1_no_pt -> ELIF2_elif;
+ELIF2_end_pt -> IF1_end_pt;
+<create_main_blocks> ...Cheking : IF1_no_pt[label = "No"];
+<create_main_blocks> ...Cheking : ELIF2_elif -> ELIF2_yes_pt;
+<create_main_blocks> ...Cheking : ELIF2_yes_pt[label = "yes"];
+<create_main_blocks> ...Cheking : ELIF2_elif -> ELIF2_no_pt -> ELSE3_else;
+ELSE3_end_pt -> IF1_end_pt;
+<create_main_blocks> ......Find : ELSE3_end_pt
+skip: -> ELSE3_SUBSUB1_returnonly_subproc ->
+----------<fn_miki_test4_IF8>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> IF1_if -> IF1_yes_pt;
+IF1_end_pt -> NEXT;
+IF1_yes_pt -> IF1_SUBSUB1_subproc -> IF1_end_pt;
+ELIF2_yes_pt -> ELIF2_SUBSUB1_subproc -> ELIF2_end_pt;
+ELSE3_else -> ELSE3_end_pt;
+IF1_if -> IF1_yes_pt;
+IF1_yes_pt[label = "yes"];
+IF1_if -> IF1_no_pt -> ELIF2_elif;
+ELIF2_end_pt -> IF1_end_pt;
+IF1_no_pt[label = "No"];
+ELIF2_elif -> ELIF2_yes_pt;
+ELIF2_yes_pt[label = "yes"];
+ELIF2_elif -> ELIF2_no_pt -> ELSE3_else;
+ELSE3_end_pt -> END;
+ELIF2_no_pt[label = "No"];
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_miki_test4_ELIF9>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_miki_test4_ELSE10>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUB1
+----------<fn_miki_test4_FORLOOP11>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_MAIN2_SUB1>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_MAIN2_SUB2>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_MAIN2_SUB3>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_MAIN2_SUB4>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_MAIN2_SUB5>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_MAIN2_SUB6>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_MAIN2_SUB7>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = ???
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_MAIN2_SUB8>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 3
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> INPUT: [1] procdata x 3
+<create_main_blocks> INPUT: [1][0] proc x 1
+<create_main_blocks> INPUT: [1][0] type = if
+<create_main_blocks> INPUT: [1][1] proc x 1
+<create_main_blocks> INPUT: [1][1] type = if
+<create_main_blocks> INPUT: [1][2] proc x 1
+<create_main_blocks> INPUT: [1][2] type = if
+<create_main_blocks> INPUT: [2] procdata x 1
+<create_main_blocks> INPUT: [2][0] proc x 1
+<create_main_blocks> INPUT: [2][0] type = subproc
+<create_main_blocks> SUBSUB1
+<create_main_blocks> IF1_if
+<create_main_blocks> IF1_SUBSUBSUB1
+----------<fn_miki_test4_IF8_IF1>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> IF1_if -> IF1_yes_pt;
+IF1_end_pt -> NEXT;
+IF1_yes_pt -> IF1_SUBSUBSUB1_subproc -> IF1_end_pt;
+IF1_if -> IF1_yes_pt;
+IF1_yes_pt[label = "yes"];
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_IF8_ELIF2>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> NEXT;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 1
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = return
+<create_main_blocks> SUBSUB1
+----------<fn_miki_test4_IF8_ELSE3>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUB1 -> END;
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 2
+<create_main_blocks> INPUT: [0] procdata x 3
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = if
+<create_main_blocks> INPUT: [0][1] proc x 1
+<create_main_blocks> INPUT: [0][1] type = if
+<create_main_blocks> INPUT: [0][2] proc x 1
+<create_main_blocks> INPUT: [0][2] type = if
+<create_main_blocks> INPUT: [1] procdata x 1
+<create_main_blocks> INPUT: [1][0] proc x 1
+<create_main_blocks> INPUT: [1][0] type = subproc
+<create_main_blocks> IF1_if
+<create_main_blocks> IF1_SUBSUBSUBSUB1
+----------<fn_miki_test4_IF8_IF1_IF1>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> IF1_if -> IF1_yes_pt;
+IF1_end_pt -> NEXT;
+IF1_yes_pt -> IF1_SUBSUBSUBSUB1_subproc -> IF1_end_pt;
+IF1_if -> IF1_yes_pt;
+IF1_yes_pt[label = "yes"];
+ }
+<create_main_blocks> ----------------------------------------
+<create_main_blocks> INPUT:blockdata x 1
+<create_main_blocks> INPUT: [0] procdata x 2
+<create_main_blocks> INPUT: [0][0] proc x 1
+<create_main_blocks> INPUT: [0][0] type = equal
+<create_main_blocks> INPUT: [0][1] proc x 1
+<create_main_blocks> INPUT: [0][1] type = equal
+<create_main_blocks> SUBSUBSUBSUB1
+----------<fn_miki_test4_IF8_IF1_IF1_IF1>----------
+blockdiag {
+orientation = portrait;
+plugin autoclass;
+span_width = 24;
+span_height = 20;
+class if [shape = diamond];
+class elif [shape = diamond];
+class else [shape = circle, color = gray];
+class for [shape = flowchart.loopin];
+class forend [shape = flowchart.loopout];
+class while [shape = flowchart.loopin, color = lightblue];
+class whileend [shape = flowchart.loopout, color = lightblue];
+class switch [shape = diamond, color = lightblue];
+class pt [shape = minidiamond];
+class subproc [color = pink];
+START -> SUBSUBSUBSUB1 -> NEXT;
+ }

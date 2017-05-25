@@ -150,10 +150,11 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	source += block_code
 	source += ' }'
 
-	# skip "_returnonly" if only return in sub process 20170524
+# skip "_returnonly" if only return in sub process 20170524
 	for skip_code in skip_code_list:
 		print 'skip: %s' % skip_code
 		source = source.replace(skip_code, '->')
+
 
 #################### Draw Block diag ####################
 	print '----------<%s>----------' % funcname
@@ -185,6 +186,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 			print code.get_proc_data_size()
 
 	return out_proc_codes_list, header_list
+
 
 
 def check_proc_codes(proc_codes, level_title):
@@ -313,6 +315,7 @@ def check_proc_codes(proc_codes, level_title):
 	return block_data_list
 
 
+
 def is_level_title(proc_title, level_title):
 	bret = False
 	tmp_proc_title = proc_title
@@ -320,6 +323,7 @@ def is_level_title(proc_title, level_title):
 	if tmp_proc_title==level_title:
 		bret = True
 	return bret
+
 
 
 def rename_title(proc_type, proc_title, cond_proc_id, proc_id, level_title):
@@ -332,6 +336,7 @@ def rename_title(proc_type, proc_title, cond_proc_id, proc_id, level_title):
 		proc_title = proc_title.replace('(', '')
 		proc_title = proc_title.replace(')', '')
 	return proc_title, cond_proc_id, proc_id
+
 
 
 def find_ctrl_stat_in_title(title, type, level_title):
@@ -360,6 +365,7 @@ def find_ctrl_stat_in_title(title, type, level_title):
 		title += '_cond'
 
 	return title
+
 
 
 def create_main_blocks(block_data_list, sub_proc_flg):
@@ -518,6 +524,7 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 	return block_code, sub_proc_list, block_code_cond_list, skip_code_list
 
 
+
 def create_if_blocks(condition_str, code, condition_prev, condition_if_parent):
 	block_code_cond_list = []
 	block_code_cond = ''
@@ -542,7 +549,6 @@ def create_if_blocks(condition_str, code, condition_prev, condition_if_parent):
 		block_code_cond += ' -> '
 		block_code_cond += code
 		block_code_cond += ';\n'
-
 
 		# end_pt -> end_pt(parent)
 		block_code_cond += code.replace(condition_str, '_end_pt')
@@ -572,10 +578,9 @@ def create_if_blocks(condition_str, code, condition_prev, condition_if_parent):
 		for tmp_code_cond in block_code_cond_list:
 				print '\t(cond) %s' % tmp_code_cond
 
-
-
-
 	return block_code_cond_list
+
+
 
 
 def create_subproc_blocks(sub_proc_list):
@@ -613,6 +618,7 @@ def create_subproc_blocks(sub_proc_list):
 		block_code += ';\n'
 
 	return block_code
+
 
 
 def extract_sub_proc(proc_codes, level_title):
