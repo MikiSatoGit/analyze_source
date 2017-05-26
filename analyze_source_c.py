@@ -17,6 +17,7 @@ import operator
 import copy
 import func_source_analyze
 import func_blockdiag
+import func_sphinx
 
 ############################################################################################
 debug_out = False
@@ -40,7 +41,7 @@ if argc==2 :
 	filename1 = argvs[1]
 else:
 	filename1 = raw_input("Please specify [source file path] -> ")
-print filename1
+print 'Checking %s' % filename1
 if not os.path.exists(filename1):
 	print "ERROR:Could not start %s." % argvs[0]
 	quit()
@@ -51,8 +52,6 @@ if filename1.find('\\')!=-1:
 	str_filename1 = filename1.rsplit('\\',1)
 elif filename1.find('/')!=-1:
 	str_filename1 = str_filename1.rsplit('/',1)
-
-
 
 if len(str_filename1)>1:
 	outfile = str_filename1[0] +'\\analyze_' + str_filename1[1]
@@ -119,12 +118,6 @@ for index1 in range(0, func_list.func_num):
 		func_source_analyze.print_out(fout, "     [%d] : %s "  %(index2, func_list.function_data[index1].argument_list[index2].type), 0),
 		func_source_analyze.print_out(fout, " %s "  %(func_list.function_data[index1].argument_list[index2].name), 1),
 	
-	# CODE
-	if debug_out:
-		func_source_analyze.print_out(fout, "-Codes: %s lines" % func_list.function_data[index1].line_num, 1)
-		for index2 in range(0, len(func_list.function_data[index1].codes)):
-			func_source_analyze.print_out(fout, "%s"  % func_list.function_data[index1].codes[index2], 1)
-
 
 ###### call function (analyze_process_code) ######
 	if debug_out:
@@ -218,20 +211,55 @@ for index1 in range(0, func_list.func_num):
 
 
 ##################################################
-# output func definition to csv file
+# create func definition to csv file
 ##################################################
-	func_blockdiag.output_func_def_to_csv(
-		str_filename1, \
-		func_list, \
-		'arg'
-	)
-	func_blockdiag.output_func_def_to_csv(
-		str_filename1, \
-		func_list, \
-		'ret'
-	)
+func_blockdiag.output_func_def_to_csv(
+	str_filename1, \
+	func_list, \
+	'arg'
+)
+func_blockdiag.output_func_def_to_csv(
+	str_filename1, \
+	func_list, \
+	'ret'
+)
 
 
+##################################################
+# create rst file for Sphinx
+##################################################
+FileList_list = func_sphinx.get_file_list( str_filename1, func_list )
+
+
+for file_list in FileList_list:
+	print file_list.name
+	cnt = 0
+	for item in file_list.arg:
+		print 'arg[%d] %s' % (cnt, item)
+		cnt += 1
+	cnt = 0
+	for item in file_list.ret:
+		print 'ret[%d] %s' % (cnt, item)
+		cnt += 1
+	cnt = 0
+	for item in file_list.proc:
+		print 'proc[%d] %s' % (cnt, item)
+		cnt += 1
+	cnt = 0
+	for item in file_list.cond:
+		print 'cond[%d] %s' % (cnt, item)
+		cnt += 1
+	cnt = 0
+	for item in file_list.fig:
+		print 'fig[%d] %s' % (cnt, item)
+		cnt += 1
+
+
+doc_path = func_sphinx.set_doc_path( str_filename1 )
+rst_index_file = func_sphinx.create_index( doc_path, func_list )
+print rst_index_file
+
+#func_sphinx.create_func_main( doc_path, func_list )
 
 
 ##################################################
