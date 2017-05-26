@@ -9,7 +9,7 @@ if "%SPHINXBUILD%" == "" (
 )
 set SOURCEDIR=source
 set BUILDDIR=build
-set SPHINXPROJ=Debug
+set SPHINXPROJ=FunctionalProcessSpecification
 
 if "%1" == "" goto help
 

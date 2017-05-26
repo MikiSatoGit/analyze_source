@@ -39,6 +39,7 @@ class BlockData:
 
 debug_out = False
 
+
 def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 # [in] sourcefilename : C source file name(str)
 # [in] funcname : FunctionList.FunctionData.name (str)
@@ -161,9 +162,10 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 			print 'skip: %s' % skip_code
 
 
-#################### Draw Block diag ####################
-	print '----------<%s>----------' % funcname
-	print source
+#################### Draw Block diag (call blockdiag) ####################
+	if debug_out:
+		print '----------<%s>----------' % funcname
+		print source
 
 	if source != '':
 		if save_png_flag:
@@ -827,8 +829,8 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						table = \
 							'PROC.' + str(proc_id) + ', ' \
 							+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
-							+ ' - ' + ', '\
-							+ ' - ' \
+							+ 'TBD' + ', '\
+							+ 'TBD' \
 							+ '\n'
 
 						if blockdata.procs[index2].left[index3].find('=')!=-1:
@@ -851,7 +853,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 							  ' ' + ', ' \
 							+ '[arg.' + str(arg_id) + ']' + ', ' \
 							+ blockdata.procs[index2].left[index3].replace(',', '') + blockdata.procs[index2].right[index3] + ' ,' \
-							+ ' - ' \
+							+ 'TBD' \
 							+ '\n'
 
 					#########
@@ -882,8 +884,8 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						table = \
 							  'PROC.' + str(proc_id) + ', ' \
 							+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
-							+ ' - ' + ', '\
-							+ ' - ' \
+							+ 'TBD' + ', '\
+							+ 'TBD' \
 							+ '\n'
 
 					else:

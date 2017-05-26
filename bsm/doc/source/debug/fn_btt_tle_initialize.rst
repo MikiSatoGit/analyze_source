@@ -1,5 +1,5 @@
 =========================================================
-debug_fn_btt_tle_initialize_MAINPROCESS
+fn_btt_tle_initialize
 =========================================================
 
 
@@ -11,60 +11,31 @@ Interface
    :encoding: utf-8
    :header-rows: 1
    :widths: 40, 5, 10, 5, 10, 10, 10, 10
-   :file: ../../csv/debug_fn_btt_tle_initialize_arg.csv
+   :file: ../../../csv/debug_fn_btt_tle_initialize_arg.csv
 
 .. csv-table:: Return Value
    :encoding: utf-8
    :header-rows: 1
    :widths: 40, 5, 10, 5, 10, 10, 10, 10
-   :file: ../../csv/debug_fn_btt_tle_initialize_ret.csv
-
-
+   :file: ../../../csv/debug_fn_btt_tle_initialize_ret.csv
 
 ++++++++++++++++++++
 Main Process Flow
 ++++++++++++++++++++
 
-.. image:: ../../fig/debug_fn_btt_tle_initialize_MAINPROCESS.svg
+.. image:: ../../../fig/debug_fn_btt_tle_initialize_MAINPROCESS.svg
    :width: 600px
 
 
 ++++++++++++++++++++
-Process & Condition
+Process Table
 ++++++++++++++++++++
-
-=============================
 
 .. csv-table:: MAIN1
    :encoding: utf-8
    :header-rows: 1
    :widths: 20, 40, 25, 15
-   :file: ../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_MAIN1_proc.csv
-
-=============================
-
-.. csv-table:: IF1
-   :encoding: utf-8
-   :header-rows: 1
-   :widths: 20, 40, 40
-   :file: ../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_IF1_if_cond.csv
-
-=============================
-
-.. csv-table:: ELIF2
-   :encoding: utf-8
-   :header-rows: 1
-   :widths: 20, 40, 40
-   :file: ../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_ELIF2_elif_cond.csv
-
-=============================
-
-.. csv-table:: ELIF3
-   :encoding: utf-8
-   :header-rows: 1
-   :widths: 20, 40, 40
-   :file: ../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_ELIF3_elif_cond.csv
-
+   :file: ../../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_MAIN1_proc.csv
 
 =============================
 
@@ -72,7 +43,35 @@ Process & Condition
    :encoding: utf-8
    :header-rows: 1
    :widths: 20, 40, 25, 15
-   :file: ../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_MAIN5_proc.csv
+   :file: ../../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_MAIN5_proc.csv
+
+
+++++++++++++++++++++
+Condition Table
+++++++++++++++++++++
+
+.. csv-table:: IF1
+   :encoding: utf-8
+   :header-rows: 1
+   :widths: 20, 40, 40
+   :file: ../../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_IF1_if_cond.csv
+
+
+=============================
+
+.. csv-table:: ELIF2
+   :encoding: utf-8
+   :header-rows: 1
+   :widths: 20, 40, 40
+   :file: ../../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_ELIF2_elif_cond.csv
+
+=============================
+
+.. csv-table:: ELIF3
+   :encoding: utf-8
+   :header-rows: 1
+   :widths: 20, 40, 40
+   :file: ../../../csv/debug_fn_btt_tle_initialize_MAINPROCESS_ELIF3_elif_cond.csv
 
 
 ++++++++++++++++++++
@@ -83,8 +82,8 @@ Subprocesses
    :maxdepth: 1
 
 
-   debug_fn_btt_tle_initialize_IF1_SUBPROCESS
+   fn_btt_tle_initialize_IF1_SUBPROCESS
 
-   debug_fn_btt_tle_initialize_ELIF3_SUBPROCESS
+   fn_btt_tle_initialize_ELIF3_SUBPROCESS
 
-   debug_fn_btt_tle_initialize_ELSE4_SUBPROCESS
+   fn_btt_tle_initialize_ELSE4_SUBPROCESS
