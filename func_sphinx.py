@@ -142,6 +142,7 @@ def create_index(doc_path, func_list):
 
 	return rstfile
 
+
 def create_func_main(doc_path, func_list):
 	code =''
 	indent = '   '
