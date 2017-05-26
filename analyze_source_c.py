@@ -141,7 +141,7 @@ for index1 in range(0, func_list.func_num):
 
 
 ##################################################
-# drawing flow chart
+# draw flow chart and output proc&cond to csv file
 ##################################################
 ###### call function (draw_diag) ######
 ##### main
@@ -217,7 +217,19 @@ for index1 in range(0, func_list.func_num):
 			del next_proc_list[:]
 
 
-
+##################################################
+# output func definition to csv file
+##################################################
+	func_blockdiag.output_func_def_to_csv(
+		str_filename1, \
+		func_list, \
+		'arg'
+	)
+	func_blockdiag.output_func_def_to_csv(
+		str_filename1, \
+		func_list, \
+		'ret'
+	)
 
 
 
