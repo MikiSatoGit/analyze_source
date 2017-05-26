@@ -773,16 +773,26 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						csvfile = csvfile_base + '_' + blockdata.title + '_cond.csv'
 						if os.path.exists(csvfile)==False:
 							fout_csv = open(csvfile,'a')
-							table = 'COND#' + ', ' \
-							+ 'Data'  + ', ' \
-							+ 'Condition' + '\n'
+
+							# COND format
+							table = \
+								  'COND#' + ', ' \
+								+ 'Data'  + ', ' \
+								+ 'Condition' + \
+								'\n'
+
 							fout_csv.write(table)
 						else:
 							fout_csv = open(csvfile,'a')
 						cond_id += 1
-						table = 'COND.' + str(cond_id) + ', ' \
-						+ blockdata.procs[index2].left[index3]  + ', ' \
-						+ blockdata.procs[index2].right[index3] + '\n'
+
+						# COND output
+						table = \
+							  'COND.' + str(cond_id) + ', ' \
+							+ blockdata.procs[index2].left[index3] + ', ' \
+							+ blockdata.procs[index2].right[index3] \
+							+ '\n'
+
 						fout_csv.write(table)
 						fout_csv.close()
 
@@ -795,9 +805,15 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
 					if os.path.exists(csvfile)==False:
 						fout_csv = open(csvfile,'a')
-						table = 'PROC#' + ', ' \
-						+ 'Processing'  + ', ' \
-						+ 'Description' + '\n'
+
+						# PROC format (FUNC)
+						table = \
+							  'PROC#' + ', ' \
+							+ 'Processing' + ', ' \
+							+ '(Argument)'  + ', ' \
+							+ 'Description' \
+							+ '\n'
+
 						fout_csv.write(table)
 					else:
 						fout_csv = open(csvfile,'a')
@@ -806,9 +822,15 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					if blockdata.procs[index2].type[index3].strip().find('<start>')!=-1:
 						proc_id += 1
 						arg_id = 0
-						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
-						+ '\n'
+
+						# PROC output (FUNC)
+						table = \
+							'PROC.' + str(proc_id) + ', ' \
+							+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
+							+ ' - ' + ', '\
+							+ ' - ' \
+							+ '\n'
+
 						if blockdata.procs[index2].left[index3].find('=')!=-1:
 							func_name = blockdata.procs[index2].left[index3][blockdata.procs[index2].left[index3].find('='):blockdata.procs[index2].left[index3].find('(')]
 							func_name = func_name.strip()
@@ -823,9 +845,14 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						continue
 					else:
 						arg_id += 1
-						table = '' + ', ' \
-						+ '[arg.' + str(arg_id) + ']' + ', ' \
-						+ blockdata.procs[index2].left[index3]  + blockdata.procs[index2].right[index3] + '\n'
+
+						# PROC output (FUNC-ARG)
+						table = \
+							  ' ' + ', ' \
+							+ '[arg.' + str(arg_id) + ']' + ', ' \
+							+ blockdata.procs[index2].left[index3].replace(',', '') + blockdata.procs[index2].right[index3] + ' ,' \
+							+ ' - ' \
+							+ '\n'
 
 					#########
 					fout_csv.write(table)
@@ -836,20 +863,90 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
 					if os.path.exists(csvfile)==False:
 						fout_csv = open(csvfile,'a')
-						table = 'PROC#' + ', ' + 'Processing'  + ', ' + 'Description' + '\n'
+
+						# PROC format
+						table = \
+							  'PROC#' + ', ' \
+							+ 'Processing'  + ', ' \
+							+ '(Argument)'  + ', ' \
+							+ 'Description' \
+							+ '\n'
+
 						fout_csv.write(table)
 					else:
 						fout_csv = open(csvfile,'a')
 					proc_id += 1
 					if blockdata.procs[index2].type[index3].strip().find('equal')!=-1:
-						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
-						+ '\n'
+
+						# PROC output
+						table = \
+							  'PROC.' + str(proc_id) + ', ' \
+							+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
+							+ ' - ' + ', '\
+							+ ' - ' \
+							+ '\n'
+
 					else:
-						table = 'PROC.' + str(proc_id) + ', ' \
-						+ blockdata.procs[index2].left[index3]  + ', ' \
-						+ blockdata.procs[index2].right[index3] + '\n'
+
+						# COND output
+						table = \
+							  'PROC.' + str(proc_id) + ', ' \
+							+ blockdata.procs[index2].left[index3]  + ', ' \
+							+ blockdata.procs[index2].right[index3] \
+							+ '\n'
+
 					fout_csv.write(table)
 					fout_csv.close()
+
+	return
+
+
+
+def output_func_def_to_csv(sourcefilename, func_list):
+
+	csvfile_base = ''	
+	if len(sourcefilename)>1:
+		if os.path.exists(sourcefilename[0] + '\\csv')==False:
+			os.makedirs(sourcefilename[0] + '\\csv')
+		csvfile_base = sourcefilename[0] + '\\csv\\' + sourcefilename[1]
+	else:
+		if os.path.exists('\\csv')==False:
+			os.makedirs('\\csv')
+		csvfile_base = '\\csv\\' + sourcefilename[0]
+	csvfile_base = csvfile_base[0:csvfile_base.rfind('.')] + '_'
+
+	tmp_files = glob.glob(csvfile_base+'*_def.csv')
+	for tmp_file in tmp_files:
+		os.remove(tmp_file)
+
+
+	for index1 in range(0, func_list.func_num):
+		name = func_list.function_data[index1].name
+
+
+		csvfile = csvfile_base + name + '_def.csv'
+		fout_csv = open(csvfile,'a')
+		table = \
+		  'Argument' + ', ' \
+		+ 'Unit'  + ', ' \
+		+ 'Default' + ', ' \
+		+ 'LSB' + ', ' \
+		+ 'Type' + ', ' \
+		+ 'Offset' + ', ' \
+		+ 'Range' \
+		+ '\n'
+		fout_csv.write(table)
+
+		fout_csv = open(csvfile,'a')
+		table = \
+		  'dummy' + ', ' \
+		+ ' '  + ', ' \
+		+ ' ' + ', ' \
+		+ ' ' + ', ' \
+		+ 'void' + ', ' \
+		+ ' ' + ', ' \
+		+ ' ' \
+		+ '\n'
+		fout_csv.write(table)
 
 	return
