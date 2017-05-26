@@ -254,11 +254,12 @@ for file_list in FileList_list:
 		print 'fig[%d] %s' % (cnt, item)
 		cnt += 1
 
-doc_path = func_sphinx.set_doc_path( str_filename1 )
-print doc_path
 
+doc_path = func_sphinx.set_doc_path( str_filename1 )
 rst_index_file = func_sphinx.create_index( doc_path, func_list )
 print rst_index_file
+
+func_sphinx.create_func_main( doc_path, func_list )
 
 
 ##################################################

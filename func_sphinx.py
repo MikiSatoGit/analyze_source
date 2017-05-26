@@ -111,9 +111,10 @@ def create_index(doc_path, func_list):
 	file_title = doc_path[:doc_path.rfind('\\')]
 	file_title = file_title[file_title.rfind('\\')+1:]
 	rstfile = doc_path + 'index.rst'
+	code =''
 	indent = '   '
 
-	fout_rsv = open(rstfile,'w')
+	fout_rst = open(rstfile,'w')
 
 	code = '================================================='
 	code += '\n'
@@ -136,8 +137,75 @@ def create_index(doc_path, func_list):
 		code += funcname
 		code += '\n'
 
-	fout_rsv.write(code)
-	fout_rsv.close()
+	fout_rst.write(code)
+	fout_rst.close()
 
 	return rstfile
 
+def create_func_main(doc_path, func_list):
+	code =''
+	indent = '   '
+
+	table_header = '\n'
+	table_header += indent
+	table_header += ':encoding: utf-8'
+	table_header += '\n'
+	table_header += indent
+	table_header += ':header-rows: 1'
+	table_header += '\n'
+	table_header += indent
+	table_header += ':widths: 40, 5, 10, 5, 10, 10, 10, 10'
+	table_header += '\n'
+	table_header += indent
+	table_header += ':file: ..\\..\\..\\'
+
+	table_header_top = '.. csv-table:: '
+
+	table_header_arg = table_header_top
+	table_header_arg += 'Arguments'
+	table_header_arg += table_header
+
+	table_header_ret = table_header_top
+	table_header_ret = 'Return Value'
+	table_header_ret += table_header
+
+
+
+
+
+	for index1 in range(0, func_list.func_num):
+		funcname = func_list.function_data[index1].name
+		rstfile = doc_path + funcname + '.rst'
+		fout_rst = open(rstfile,'w')
+
+		code = '================================================='
+		code += '\n'
+		code += funcname
+		code += '\n'
+		code += '================================================='
+		code += '\n'
+		code += '\n'
+		code += '\n'
+
+		code += '+++++++++++++++++++'
+		code += '\n'
+		code += 'Interface'
+		code += '\n'
+		code += '+++++++++++++++++++'
+		code += '\n'
+		code += '\n'
+
+
+		code += '+++++++++++++++++++'
+		code += '\n'
+		code += 'Main Process Flow'
+		code += '\n'
+		code += '+++++++++++++++++++'
+		code += '\n'
+		code += '\n'
+
+
+		fout_rst.write(code)
+		fout_rst.close()
+
+	return
