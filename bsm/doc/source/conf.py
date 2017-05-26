@@ -82,18 +82,34 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-#html_theme = 'alabaster'
-html_theme = 'classic'
-#html_theme = 'traditional'
-
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-html_theme_options = {
-    "rightsidebar": "false",
-    "relbarbgcolor": "black"
-}
+
+#html_theme = 'alabaster'
+
+#html_theme = 'traditional'
+
+#html_theme = 'classic'
+#html_theme_options = {
+#    "rightsidebar": "True",
+#    "relbarbgcolor": "black"
+#}
+
+
+#html_theme = 'scrolls'
+#html_theme_options = {
+#    "headerbordercolor": ""
+#    "subheadlinecolor": ""
+#    "linkcolor": "blue"
+#    "visitedlinkcolor": ""
+#    "admonitioncolor": ""
+#}
+
+
+html_theme = 'sphinx_rtd_theme'
+
 
 
 # Add any paths that contain custom static files (such as style sheets) here,

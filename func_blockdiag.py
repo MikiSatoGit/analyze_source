@@ -902,8 +902,10 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 
 
 
-def output_func_def_to_csv(sourcefilename, func_list):
-
+def output_func_def_to_csv(sourcefilename, func_list, deftype):
+# [in] sourcefilename : C source file name(str)
+# [in] func_list : FunctionList
+# [in] deftype : arg, ret
 	csvfile_base = ''	
 	if len(sourcefilename)>1:
 		if os.path.exists(sourcefilename[0] + '\\csv')==False:
@@ -915,17 +917,18 @@ def output_func_def_to_csv(sourcefilename, func_list):
 		csvfile_base = '\\csv\\' + sourcefilename[0]
 	csvfile_base = csvfile_base[0:csvfile_base.rfind('.')] + '_'
 
-	tmp_files = glob.glob(csvfile_base+'*_def.csv')
+	tmp_files = glob.glob(csvfile_base+'*_' + deftype + '.csv')
 	for tmp_file in tmp_files:
 		os.remove(tmp_file)
 
-
 	for index1 in range(0, func_list.func_num):
-		name = func_list.function_data[index1].name
+		funcname = func_list.function_data[index1].name
 
+		csvfile = csvfile_base + funcname + '_' + deftype + '.csv'
 
-		csvfile = csvfile_base + name + '_def.csv'
 		fout_csv = open(csvfile,'a')
+
+# header
 		table = \
 		  'Argument' + ', ' \
 		+ 'Unit'  + ', ' \
@@ -933,20 +936,55 @@ def output_func_def_to_csv(sourcefilename, func_list):
 		+ 'LSB' + ', ' \
 		+ 'Type' + ', ' \
 		+ 'Offset' + ', ' \
-		+ 'Range' \
+		+ 'Range' + ', ' \
+		+ 'Description' \
 		+ '\n'
+
 		fout_csv.write(table)
 
+
 		fout_csv = open(csvfile,'a')
-		table = \
-		  'dummy' + ', ' \
-		+ ' '  + ', ' \
-		+ ' ' + ', ' \
-		+ ' ' + ', ' \
-		+ 'void' + ', ' \
-		+ ' ' + ', ' \
-		+ ' ' \
-		+ '\n'
+
+# argument
+		if deftype=='arg':
+			if func_list.function_data[index1].argument_num!=0:
+				for index2 in range(0, func_list.function_data[index1].argument_num):
+					param_type = func_list.function_data[index1].argument_list[index2].type
+					param_name = func_list.function_data[index1].argument_list[index2].name
+					table = \
+					  param_name + ', ' \
+					+ ' '  + ', ' \
+					+ ' ' + ', ' \
+					+ ' ' + ', ' \
+					+ param_type + ', ' \
+					+ ' ' + ', ' \
+					+ ' ' \
+					+ '\n'
+			else:
+				table = \
+				  '(none)' + ', ' \
+				+ ' '  + ', ' \
+				+ ' ' + ', ' \
+				+ ' ' + ', ' \
+				+ ' ' + ', ' \
+				+ ' ' + ', ' \
+				+ ' ' \
+				+ '\n'
+
+# return value
+		if deftype=='ret':
+			param_type = func_list.function_data[index1].return_type
+			table = \
+			  '(Return value)' + ', ' \
+			+ ' '  + ', ' \
+			+ ' ' + ', ' \
+			+ ' ' + ', ' \
+			+ param_type + ', ' \
+			+ ' ' + ', ' \
+			+ ' ' \
+			+ '\n'
+
 		fout_csv.write(table)
 
 	return
+

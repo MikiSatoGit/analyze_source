@@ -3,10 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+
+.. highlight:: rst
+
 Functional Process Detail Specification (Debug)
 =================================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 10
 
    debug_fn_btt_tle_initialize_MAINPROCESS

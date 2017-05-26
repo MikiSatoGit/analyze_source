@@ -222,7 +222,13 @@ for index1 in range(0, func_list.func_num):
 ##################################################
 	func_blockdiag.output_func_def_to_csv(
 		str_filename1, \
-		func_list \
+		func_list, \
+		'arg'
+	)
+	func_blockdiag.output_func_def_to_csv(
+		str_filename1, \
+		func_list, \
+		'ret'
 	)
 
 
