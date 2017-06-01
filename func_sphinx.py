@@ -150,23 +150,14 @@ def create_func_main(doc_path, func_list, fileList_list):
 		print '<create_func_main> [PATH] %s' % doc_path
 
 	code =''
-	indent = '   '
 
+#	table_header_arg = table_header_top()
+#	table_header_arg += 'Arguments'
+#	table_header_arg += table_footer_interface()
 
-	table_header_arg = table_header_top()
-	table_header_arg += 'Arguments'
-	table_header_arg += table_header_interface()
-
-	table_header_ret = table_header_top()
-	table_header_ret += 'Return Value'
-	table_header_ret += table_header_interface()
-
-
-
-	image_header_fig = '.. image:: ../../../fig/'
-	table_footer_fig = '\n'
-	table_footer_fig += indent
-	table_footer_fig += ':width: 600px'
+#	table_header_ret = table_header_top()
+#	table_header_ret += 'Return Value'
+#	table_header_ret += table_footer_interface()
 
 
 	for index1 in range(0, func_list.func_num):
@@ -192,33 +183,42 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += '\n'
 		code += '\n'
 
+		tmp_filelist = fileList_list[index1]
+
 		# Arguments
-		cnt = 0
-		used_arg = []
-		for item in fileList_list[index1].arg:
-			arg_file =  item[item.rfind('\\')+1:]
-			code += table_header_arg
-			code += arg_file
-			code += '\n'
-			code += '\n'
-			used_arg.append(cnt)
-			cnt += 1
-		for id in reversed(used_arg):
-			fileList_list[index1].arg.pop(id)
+		tmp_code, tmp_filelist = create_argument_code(tmp_filelist)
+		code += tmp_code
+
+#		cnt = 0
+#		used_arg = []
+#		for item in fileList_list[index1].arg:
+#			arg_file =  item[item.rfind('\\')+1:]
+#			code += table_header_arg
+#			code += arg_file
+#			code += '\n'
+#			code += '\n'
+#			used_arg.append(cnt)
+#			cnt += 1
+#		for id in reversed(used_arg):
+#			fileList_list[index1].arg.pop(id)
 
 		# Return value
-		cnt = 0
-		used_ret = []
-		for item in fileList_list[index1].ret:
-			ret_file =  item[item.rfind('\\')+1:]
-			code += table_header_ret
-			code += ret_file
-			code += '\n'
-			code += '\n'
-			used_ret.append(cnt)
-			cnt += 1
-		for id in reversed(used_ret):
-			fileList_list[index1].ret.pop(id)
+		tmp_code, tmp_filelist = create_return_value_code(tmp_filelist)
+		code += tmp_code
+
+
+#		cnt = 0
+#		used_ret = []
+#		for item in fileList_list[index1].ret:
+#			ret_file =  item[item.rfind('\\')+1:]
+#			code += table_header_ret
+#			code += ret_file
+#			code += '\n'
+#			code += '\n'
+#			used_ret.append(cnt)
+#			cnt += 1
+#		for id in reversed(used_ret):
+#			fileList_list[index1].ret.pop(id)
 
 
 		code += '+++++++++++++++++++'
@@ -230,24 +230,27 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += '\n'
 
 		# Main process flow
-		cnt = 0
-		used_fig = []
-		for item in fileList_list[index1].fig:
-			fig_title = funcname + '_MAINPROCESS.'
-			fig_file =  item[item.rfind('\\')+1:]
-			if fig_file.find(fig_title)!=-1:
-				code += image_header_fig
-				code += fig_file
-				code += table_footer_fig
-				code += '\n'
-				code += '\n'
-				used_fig.append(cnt)
-			cnt += 1
-		print used_fig
-		for id in reversed(used_fig):
-			print len(fileList_list[index1].fig)
-			fileList_list[index1].fig.pop(id)
-			print len(fileList_list[index1].fig)
+		tmp_code, tmp_filelist = create_main_flow_code('MAINPROCESS', tmp_filelist, funcname)
+		code += tmp_code
+
+#		cnt = 0
+#		used_fig = []
+#		for item in fileList_list[index1].fig:
+#			fig_title = funcname + '_MAINPROCESS.'
+#			fig_file =  item[item.rfind('\\')+1:]
+#			if fig_file.find(fig_title)!=-1:
+#				code += image_header()
+#				code += fig_file
+#				code += image_footer()
+#				code += '\n'
+#				code += '\n'
+#				used_fig.append(cnt)
+#			cnt += 1
+#		print used_fig
+#		for id in reversed(used_fig):
+#			print len(fileList_list[index1].fig)
+#			fileList_list[index1].fig.pop(id)
+#			print len(fileList_list[index1].fig)
 
 
 		code += '================================================='
@@ -259,27 +262,30 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += '\n'
 
 		# Proc. table
-		cnt = 0
-		used_proc = []
-		for item in fileList_list[index1].proc:
-			proc_title = funcname + '_MAINPROCESS_'
-			proc_file =  item[item.rfind('\\')+1:]
-			proc_sub_title = proc_file[proc_file.find('_MAINPROCESS_')+len('_MAINPROCESS_'):]
-			proc_sub_title = proc_sub_title.replace('_proc.csv','')
-			if proc_file.find(proc_title)!=-1:
-				code += table_header_top()
-				code += proc_sub_title
-				code += table_header_proc()
-				code += proc_file
-				code += '\n'
-				code += '\n'
-				code += '============================='
-				code += '\n'
-				code += '\n'
-				used_proc.append(cnt)
-			cnt += 1
-		for id in reversed(used_proc):
-			fileList_list[index1].proc.pop(id)
+		tmp_code, tmp_filelist = create_proc_code('MAINPROCESS', tmp_filelist, funcname)
+		code += tmp_code
+
+#		cnt = 0
+#		used_proc = []
+#		for item in fileList_list[index1].proc:
+#			proc_title = funcname + '_MAINPROCESS_'
+#			proc_file =  item[item.rfind('\\')+1:]
+#			proc_sub_title = proc_file[proc_file.find('_MAINPROCESS_')+len('_MAINPROCESS_'):]
+#			proc_sub_title = proc_sub_title.replace('_proc.csv','')
+#			if proc_file.find(proc_title)!=-1:
+#				code += table_header_top()
+#				code += proc_sub_title
+#				code += table_footer_proc()
+#				code += proc_file
+#				code += '\n'
+#				code += '\n'
+#				code += '============================='
+#				code += '\n'
+#				code += '\n'
+#				used_proc.append(cnt)
+#			cnt += 1
+#		for id in reversed(used_proc):
+#			fileList_list[index1].proc.pop(id)
 
 
 		code += '================================================='
@@ -291,28 +297,32 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += '\n'
 
 		# Cond. table
-		cnt = 0
-		used_cond = []
-		for item in fileList_list[index1].cond:
-			cond_title = funcname + '_MAINPROCESS_'
-			cond_file =  item[item.rfind('\\')+1:]
-			cond_sub_title = cond_file[cond_file.find('_MAINPROCESS_')+len('_MAINPROCESS_'):]
-			cond_sub_title = cond_sub_title.replace('_cond.csv','')
-			cond_sub_title = cond_sub_title[:cond_sub_title.rfind('_')]
-			if cond_file.find(cond_title)!=-1:
-				code += table_header_top()
-				code += cond_sub_title
-				code += table_header_cond()
-				code += cond_file
-				code += '\n'
-				code += '\n'
-				code += '============================='
-				code += '\n'
-				code += '\n'
-				used_cond.append(cnt)
-			cnt += 1
-		for id in reversed(used_cond):
-			fileList_list[index1].cond.pop(id)
+		tmp_code, tmp_filelist = create_cond_code('MAINPROCESS', tmp_filelist, funcname)
+		code += tmp_code
+
+
+#		cnt = 0
+#		used_cond = []
+#		for item in fileList_list[index1].cond:
+#			cond_title = funcname + '_MAINPROCESS_'
+#			cond_file =  item[item.rfind('\\')+1:]
+#			cond_sub_title = cond_file[cond_file.find('_MAINPROCESS_')+len('_MAINPROCESS_'):]
+#			cond_sub_title = cond_sub_title.replace('_cond.csv','')
+#			cond_sub_title = cond_sub_title[:cond_sub_title.rfind('_')]
+#			if cond_file.find(cond_title)!=-1:
+#				code += table_header_top()
+#				code += cond_sub_title
+#				code += table_footer_cond()
+#				code += cond_file
+#				code += '\n'
+#				code += '\n'
+#				code += '============================='
+#				code += '\n'
+#				code += '\n'
+#				used_cond.append(cnt)
+#			cnt += 1
+#		for id in reversed(used_cond):
+#			fileList_list[index1].cond.pop(id)
 
 
 
@@ -325,23 +335,26 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += '\n'
 
 		# Subproc link
-		cnt = 0
-		for item in fileList_list[index1].fig:
-			fig_title = '_SUBPROCESS.'
-			fig_file =  item[item.rfind('\\')+1:]
-			sub_link =  fig_file[fig_file.find('_', 1)+1:]
-			sub_link =  sub_link[:sub_link.rfind('.')]
-			if fig_file.find(fig_title)!=-1:
-				code += sub_link
-				code += '\n'
-				code += '\n'
-		code += '\n'
+		tmp_code = create_subproc_link_code('SUBPROCESS', tmp_filelist)
+		code += tmp_code
+
+#		cnt = 0
+#		for item in fileList_list[index1].fig:
+#			fig_title = '_SUBPROCESS.'
+#			fig_file =  item[item.rfind('\\')+1:]
+#			sub_link =  fig_file[fig_file.find('_', 1)+1:]
+#			sub_link =  sub_link[:sub_link.rfind('.')]
+#			if fig_file.find(fig_title)!=-1:
+#				code += sub_link
+#				code += '\n'
+#				code += '\n'
+#		code += '\n'
 
 
 		fout_rst.write(code)
 		fout_rst.close()
 
-
+		fileList_list[index1] = tmp_filelist
 
 
 
@@ -350,54 +363,204 @@ def create_func_main(doc_path, func_list, fileList_list):
 	return fileList_list
 
 
+def indent():
+	indent = '   '
+	return indent
+
 def table_header_top():
 	table_header_top = '.. csv-table:: '
 	return table_header_top
 
+def image_header():
+	image_header_top = '.. image:: ../../../fig/'
+	return image_header_top
 
-def table_header_interface():
-	table_header_interface = '\n'
-	table_header_interface += indent
-	table_header_interface += ':encoding: utf-8'
-	table_header_interface += '\n'
-	table_header_interface += indent
-	table_header_interface += ':header-rows: 1'
-	table_header_interface += '\n'
-	table_header_interface += indent
-	table_header_interface += ':widths: 40, 5, 10, 5, 10, 10, 10, 10'
-	table_header_interface += '\n'
-	table_header_interface += indent
-	table_header_interface += ':file: ../../../csv/'
-	return table_header_interface
+def image_footer():
+	image_footer = '\n'
+	image_footer += indent()
+	image_footer += ':width: 600px'
+	return image_footer
 
-
-def table_header_proc():
-	table_header_proc = '\n'
-	table_header_proc += indent
-	table_header_proc += ':encoding: utf-8'
-	table_header_proc += '\n'
-	table_header_proc += indent
-	table_header_proc += ':header-rows: 1'
-	table_header_proc += '\n'
-	table_header_proc += indent
-	table_header_proc += ':widths: 20, 40, 25, 15'
-	table_header_proc += '\n'
-	table_header_proc += indent
-	table_header_proc += ':file: ../../../csv/'
-	return table_header_proc
+def table_footer_interface():
+	table_footer_interface = '\n'
+	table_footer_interface += indent()
+	table_footer_interface += ':encoding: utf-8'
+	table_footer_interface += '\n'
+	table_footer_interface += indent()
+	table_footer_interface += ':header-rows: 1'
+	table_footer_interface += '\n'
+	table_footer_interface += indent()
+	table_footer_interface += ':widths: 40, 5, 10, 5, 10, 10, 10, 10'
+	table_footer_interface += '\n'
+	table_footer_interface += indent()
+	table_footer_interface += ':file: ../../../csv/'
+	return table_footer_interface
 
 
-def table_header_cond():
-	table_header_cond = '\n'
-	table_header_cond += indent
-	table_header_cond += ':encoding: utf-8'
-	table_header_cond += '\n'
-	table_header_cond += indent
-	table_header_cond += ':header-rows: 1'
-	table_header_cond += '\n'
-	table_header_cond += indent
-	table_header_cond += ':widths: 20, 40, 40'
-	table_header_cond += '\n'
-	table_header_cond += indent
-	table_header_cond += ':file: ../../../csv/'
-	return table_header_cond
+def table_footer_proc():
+	table_footer_proc = '\n'
+	table_footer_proc += indent()
+	table_footer_proc += ':encoding: utf-8'
+	table_footer_proc += '\n'
+	table_footer_proc += indent()
+	table_footer_proc += ':header-rows: 1'
+	table_footer_proc += '\n'
+	table_footer_proc += indent()
+	table_footer_proc += ':widths: 20, 40, 25, 15'
+	table_footer_proc += '\n'
+	table_footer_proc += indent()
+	table_footer_proc += ':file: ../../../csv/'
+	return table_footer_proc
+
+
+def table_footer_cond():
+	table_footer_cond = '\n'
+	table_footer_cond += indent()
+	table_footer_cond += ':encoding: utf-8'
+	table_footer_cond += '\n'
+	table_footer_cond += indent()
+	table_footer_cond += ':header-rows: 1'
+	table_footer_cond += '\n'
+	table_footer_cond += indent()
+	table_footer_cond += ':widths: 20, 40, 40'
+	table_footer_cond += '\n'
+	table_footer_cond += indent()
+	table_footer_cond += ':file: ../../../csv/'
+	return table_footer_cond
+
+
+def create_argument_code(filelist):
+	table_header_arg = table_header_top()
+	table_header_arg += 'Arguments'
+	table_header_arg += table_footer_interface()
+	code = ''
+	cnt = 0
+	used_arg = []
+	for item in filelist.arg:
+		arg_file =  item[item.rfind('\\')+1:]
+		code += table_header_arg
+		code += arg_file
+		code += '\n'
+		code += '\n'
+		used_arg.append(cnt)
+		cnt += 1
+	for id in reversed(used_arg):
+		filelist.arg.pop(id)
+	return code, filelist
+
+
+def create_return_value_code(filelist):
+	table_header_ret = table_header_top()
+	table_header_ret += 'Return Value'
+	table_header_ret += table_footer_interface()
+	code = ''
+	cnt = 0
+	used_ret = []
+	for item in filelist.ret:
+		ret_file =  item[item.rfind('\\')+1:]
+		code += table_header_ret
+		code += ret_file
+		code += '\n'
+		code += '\n'
+		used_ret.append(cnt)
+		cnt += 1
+	for id in reversed(used_ret):
+		filelist.ret.pop(id)
+	return code, filelist
+
+
+def create_main_flow_code(level_title, filelist, funcname):
+	code = ''
+	cnt = 0
+	used_fig = []
+	level_key = '_' + level_title + '.'
+	for item in filelist.fig:
+		fig_title = funcname + level_key
+		fig_file =  item[item.rfind('\\')+1:]
+		if fig_file.find(fig_title)!=-1:
+			code += image_header()
+			code += fig_file
+			code += image_footer()
+			code += '\n'
+			code += '\n'
+			used_fig.append(cnt)
+		cnt += 1
+	print used_fig
+	for id in reversed(used_fig):
+		filelist.fig.pop(id)
+	return code, filelist
+
+
+def create_proc_code(level_title, filelist, funcname):
+	code = ''
+	cnt = 0
+	used_proc = []
+	level_key = '_' + level_title +'_'
+	for item in filelist.proc:
+		proc_title = funcname + level_key
+		proc_file =  item[item.rfind('\\')+1:]
+		proc_sub_title = proc_file[proc_file.find(level_key)+len(level_key):]
+		proc_sub_title = proc_sub_title.replace('_proc.csv','')
+		if proc_file.find(proc_title)!=-1:
+			code += table_header_top()
+			code += proc_sub_title
+			code += table_footer_proc()
+			code += proc_file
+			code += '\n'
+			code += '\n'
+			code += '============================='
+			code += '\n'
+			code += '\n'
+			used_proc.append(cnt)
+		cnt += 1
+	for id in reversed(used_proc):
+		filelist.proc.pop(id)
+	return code, filelist
+
+
+def create_cond_code(level_title, filelist, funcname):
+	code = ''
+	cnt = 0
+	used_cond = []
+	level_key = '_' + level_title +'_'
+	for item in filelist.cond:
+		cond_title = funcname + level_key
+		cond_file =  item[item.rfind('\\')+1:]
+		cond_sub_title = cond_file[cond_file.find(level_key)+len(level_key):]
+		cond_sub_title = cond_sub_title.replace('_cond.csv','')
+		cond_sub_title = cond_sub_title[:cond_sub_title.rfind('_')]
+		if cond_file.find(cond_title)!=-1:
+			code += table_header_top()
+			code += cond_sub_title
+			code += table_footer_cond()
+			code += cond_file
+			code += '\n'
+			code += '\n'
+			code += '============================='
+			code += '\n'
+			code += '\n'
+			used_cond.append(cnt)
+		cnt += 1
+	for id in reversed(used_cond):
+		filelist.cond.pop(id)
+	return code, filelist
+
+
+def create_subproc_link_code(level_title, filelist):
+	code = ''
+	cnt = 0
+	level_key = '_' + level_title +'.'
+	for item in filelist.fig:
+		fig_title = level_key
+		fig_file =  item[item.rfind('\\')+1:]
+		sub_link =  fig_file[fig_file.find('_', 1)+1:]
+		sub_link =  sub_link[:sub_link.rfind('.')]
+		if fig_file.find(fig_title)!=-1:
+			code += sub_link
+			code += '\n'
+			code += '\n'
+	code += '\n'
+	return code
+
+
+
