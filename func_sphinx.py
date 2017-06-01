@@ -153,37 +153,22 @@ def create_func_main(doc_path, func_list, fileList_list):
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
+		code = ''
+		tmp_filelist = fileList_list[index1]
+
+##### Open file #####
 		rstfile = doc_path + funcname + '.rst'
 		fout_rst = open(rstfile,'w')
 
-		code = ''
+
 ##### TITLE #####
 		tmp_code = title_top(funcname)
 		code += tmp_code
-
-#		code = '================================================='
-#		code += '\n'
-#		code += funcname
-#		code += '\n'
-#		code += '================================================='
-#		code += '\n'
-#		code += '\n'
-#		code += '\n'
 
 
 ##### INTERFACE #####
 		tmp_code = title_interface()
 		code += tmp_code
-
-#		code += '+++++++++++++++++++'
-#		code += '\n'
-#		code += 'Interface'
-#		code += '\n'
-#		code += '+++++++++++++++++++'
-#		code += '\n'
-#		code += '\n'
-
-		tmp_filelist = fileList_list[index1]
 
 		# Arguments
 		tmp_code, tmp_filelist = create_argument_code(tmp_filelist)
@@ -198,14 +183,6 @@ def create_func_main(doc_path, func_list, fileList_list):
 		tmp_code = title_main_flow()
 		code += tmp_code
 
-#		code += '+++++++++++++++++++'
-#		code += '\n'
-#		code += 'Main Process Flow'
-#		code += '\n'
-#		code += '+++++++++++++++++++'
-#		code += '\n'
-#		code += '\n'
-
 		# Main process flow
 		tmp_code, tmp_filelist = create_main_flow_code('MAINPROCESS', tmp_filelist, funcname)
 		code += tmp_code
@@ -214,14 +191,6 @@ def create_func_main(doc_path, func_list, fileList_list):
 ##### PROCESS TABLE #####
 		tmp_code = title_proc_table()
 		code += tmp_code
-
-#		code += '================================================='
-#		code += '\n'
-#		code += 'Process Table'
-#		code += '\n'
-#		code += '================================================='
-#		code += '\n'
-#		code += '\n'
 
 		# Proc. table
 		tmp_code, tmp_filelist = create_proc_code('MAINPROCESS', tmp_filelist, funcname)
@@ -232,14 +201,6 @@ def create_func_main(doc_path, func_list, fileList_list):
 		tmp_code = title_cond_table()
 		code += tmp_code
 
-#		code += '================================================='
-#		code += '\n'
-#		code += 'Condition Table'
-#		code += '\n'
-#		code += '================================================='
-#		code += '\n'
-#		code += '\n'
-
 		# Cond. table
 		tmp_code, tmp_filelist = create_cond_code('MAINPROCESS', tmp_filelist, funcname)
 		code += tmp_code
@@ -249,26 +210,15 @@ def create_func_main(doc_path, func_list, fileList_list):
 		tmp_code = title_subproc_link()
 		code += tmp_code
 
-#		code += '================================================='
-#		code += '\n'
-#		code += 'Subprocesses'
-#		code += '\n'
-#		code += '================================================='
-#		code += '\n'
-#		code += '\n'
-
 		# Subproc link
 		tmp_code = create_subproc_link_code('SUBPROCESS', tmp_filelist)
 		code += tmp_code
 
+##### Close file #####
 		fout_rst.write(code)
 		fout_rst.close()
 
 		fileList_list[index1] = tmp_filelist
-
-
-
-
 
 	return fileList_list
 
