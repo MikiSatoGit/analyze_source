@@ -1,4 +1,4 @@
-Total lines: 45 
+Total lines: 50 
 Total functions : 2 
 --------------------------
 [Function Name] : fn_btt_tle_initialize 
@@ -16,23 +16,28 @@ Total functions : 2
 [9] MAINPROCESS(1) if ) 
 [10] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [11] SUBPROCESS(1) equal hogehoge3 1;
-[12] MAINPROCESS(2) else if else if( 
-[13] MAINPROCESS(2) else if a==2 
-[14] MAINPROCESS(2) else if ) 
-[15] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[16] SUBPROCESS(1) return return; 
-[17] MAINPROCESS(3) else if else if( 
-[18] MAINPROCESS(3) else if a==3 
-[19] MAINPROCESS(3) else if ) 
-[20] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[21] SUBPROCESS(1) equal hogehoge3 3;
-[22] MAINPROCESS(4) else else 
-[23] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[24] SUBPROCESS(1) equal hogehoge3 4;
-[25] SUBPROCESS(1) return return; 
-[26] MAINPROCESS(5) equal a 4;
-[27] MAINPROCESS(5) return return; 
------------------ Total Codes : 27 lines
+[12] SUBPROCESS(1) if if( 
+[13] SUBPROCESS(1) if c==1 
+[14] SUBPROCESS(1) if ) 
+[15] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[16] SUBSUBPROCESS(1) equal hogehoge3 11;
+[17] MAINPROCESS(2) else if else if( 
+[18] MAINPROCESS(2) else if a==2 
+[19] MAINPROCESS(2) else if ) 
+[20] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[21] SUBPROCESS(1) return return; 
+[22] MAINPROCESS(3) else if else if( 
+[23] MAINPROCESS(3) else if a==3 
+[24] MAINPROCESS(3) else if ) 
+[25] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[26] SUBPROCESS(1) equal hogehoge3 3;
+[27] MAINPROCESS(4) else else 
+[28] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[29] SUBPROCESS(1) equal hogehoge3 4;
+[30] SUBPROCESS(1) return return; 
+[31] MAINPROCESS(5) equal a 4;
+[32] MAINPROCESS(5) return return; 
+----------------- Total Codes : 32 lines
 --------------------------
 [Function Name] : fn_miki_test5 
 -Return type : VD 
@@ -59,5 +64,6 @@ Total functions : 2
 [17] SUBPROCESS(8) subproc SUBSUBPROCESS(1) 
 [18] SUBSUBPROCESS(1) ??? (FL)9.0,		(FL)38.6 
 [19] MAINPROCESS(2) ??? ; 
-[20] MAINPROCESS(2) return return; 
------------------ Total Codes : 20 lines
+[20] MAINPROCESS(2) equal a 4;
+[21] MAINPROCESS(2) return return; 
+----------------- Total Codes : 21 lines

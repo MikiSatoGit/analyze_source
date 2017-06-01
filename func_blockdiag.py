@@ -949,7 +949,9 @@ def output_func_def_to_csv(sourcefilename, func_list, deftype):
 		table = ''
 # argument
 		if deftype=='arg':
-			print '<output_func_def_to_csv> arg num : %d' % func_list.function_data[index1].argument_num
+			if debug_out:
+				print '<output_func_def_to_csv> arg num : %d' % func_list.function_data[index1].argument_num
+
 			if func_list.function_data[index1].argument_num!=0:
 				for index2 in range(0, func_list.function_data[index1].argument_num):
 					param_type = func_list.function_data[index1].argument_list[index2].type

@@ -23,6 +23,9 @@ Interface
 Main Process Flow
 +++++++++++++++++++
 
+.. image:: ../../../fig/debug_fn_miki_test5_MAINPROCESS.svg
+   :width: 600px
+
 +++++++++++++++++++
 Process Table
 +++++++++++++++++++
@@ -35,6 +38,14 @@ Process Table
 
 -----------------------------
 
+.. csv-table:: MAIN2
+   :encoding: utf-8
+   :header-rows: 1
+   :widths: 20, 40, 25, 15
+   :file: ../../../csv/debug_fn_miki_test5_MAINPROCESS_MAIN2_proc.csv
+
+-----------------------------
+
 +++++++++++++++++++
 Condition Table
 +++++++++++++++++++
@@ -43,6 +54,8 @@ Condition Table
 Subprocesses
 +++++++++++++++++++
 
-fn_miki_test5_MAIN1_SUBPROCESS
+.. toctree::   :maxdepth: 1
+
+   fn_miki_test5_MAIN1_SUBPROCESS
 
 
