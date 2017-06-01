@@ -7,6 +7,6 @@ Functional Process Detail Specification
 =================================================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    debug/index

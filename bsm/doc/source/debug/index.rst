@@ -4,7 +4,7 @@ debug
 
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
 
    fn_btt_tle_initialize
    fn_miki_test5

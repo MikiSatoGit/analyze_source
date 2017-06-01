@@ -127,7 +127,7 @@ def create_index(doc_path, func_list):
 	code += '.. toctree::'
 	code += '\n'
 	code += indent
-	code += ':maxdepth: 2'
+	code += ':maxdepth: 1'
 	code += '\n'
 	code += '\n'
 
@@ -149,39 +149,39 @@ def create_func_main(doc_path, func_list, fileList_list):
 	if debug_out:
 		print '<create_func_main> [PATH] %s' % doc_path
 
-	code =''
-
-#	table_header_arg = table_header_top()
-#	table_header_arg += 'Arguments'
-#	table_header_arg += table_footer_interface()
-
-#	table_header_ret = table_header_top()
-#	table_header_ret += 'Return Value'
-#	table_header_ret += table_footer_interface()
-
+	code = ''
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
 		rstfile = doc_path + funcname + '.rst'
 		fout_rst = open(rstfile,'w')
 
-		code = '================================================='
-		code += '\n'
-		code += funcname
-		code += '\n'
-		code += '================================================='
-		code += '\n'
-		code += '\n'
-		code += '\n'
+		code = ''
+##### TITLE #####
+		tmp_code = title_top(funcname)
+		code += tmp_code
+
+#		code = '================================================='
+#		code += '\n'
+#		code += funcname
+#		code += '\n'
+#		code += '================================================='
+#		code += '\n'
+#		code += '\n'
+#		code += '\n'
 
 
-		code += '+++++++++++++++++++'
-		code += '\n'
-		code += 'Interface'
-		code += '\n'
-		code += '+++++++++++++++++++'
-		code += '\n'
-		code += '\n'
+##### INTERFACE #####
+		tmp_code = title_interface()
+		code += tmp_code
+
+#		code += '+++++++++++++++++++'
+#		code += '\n'
+#		code += 'Interface'
+#		code += '\n'
+#		code += '+++++++++++++++++++'
+#		code += '\n'
+#		code += '\n'
 
 		tmp_filelist = fileList_list[index1]
 
@@ -189,167 +189,77 @@ def create_func_main(doc_path, func_list, fileList_list):
 		tmp_code, tmp_filelist = create_argument_code(tmp_filelist)
 		code += tmp_code
 
-#		cnt = 0
-#		used_arg = []
-#		for item in fileList_list[index1].arg:
-#			arg_file =  item[item.rfind('\\')+1:]
-#			code += table_header_arg
-#			code += arg_file
-#			code += '\n'
-#			code += '\n'
-#			used_arg.append(cnt)
-#			cnt += 1
-#		for id in reversed(used_arg):
-#			fileList_list[index1].arg.pop(id)
-
 		# Return value
 		tmp_code, tmp_filelist = create_return_value_code(tmp_filelist)
 		code += tmp_code
 
 
-#		cnt = 0
-#		used_ret = []
-#		for item in fileList_list[index1].ret:
-#			ret_file =  item[item.rfind('\\')+1:]
-#			code += table_header_ret
-#			code += ret_file
-#			code += '\n'
-#			code += '\n'
-#			used_ret.append(cnt)
-#			cnt += 1
-#		for id in reversed(used_ret):
-#			fileList_list[index1].ret.pop(id)
+##### MAIN FLOW #####
+		tmp_code = title_main_flow()
+		code += tmp_code
 
-
-		code += '+++++++++++++++++++'
-		code += '\n'
-		code += 'Main Process Flow'
-		code += '\n'
-		code += '+++++++++++++++++++'
-		code += '\n'
-		code += '\n'
+#		code += '+++++++++++++++++++'
+#		code += '\n'
+#		code += 'Main Process Flow'
+#		code += '\n'
+#		code += '+++++++++++++++++++'
+#		code += '\n'
+#		code += '\n'
 
 		# Main process flow
 		tmp_code, tmp_filelist = create_main_flow_code('MAINPROCESS', tmp_filelist, funcname)
 		code += tmp_code
 
-#		cnt = 0
-#		used_fig = []
-#		for item in fileList_list[index1].fig:
-#			fig_title = funcname + '_MAINPROCESS.'
-#			fig_file =  item[item.rfind('\\')+1:]
-#			if fig_file.find(fig_title)!=-1:
-#				code += image_header()
-#				code += fig_file
-#				code += image_footer()
-#				code += '\n'
-#				code += '\n'
-#				used_fig.append(cnt)
-#			cnt += 1
-#		print used_fig
-#		for id in reversed(used_fig):
-#			print len(fileList_list[index1].fig)
-#			fileList_list[index1].fig.pop(id)
-#			print len(fileList_list[index1].fig)
 
+##### PROCESS TABLE #####
+		tmp_code = title_proc_table()
+		code += tmp_code
 
-		code += '================================================='
-		code += '\n'
-		code += 'Process Table'
-		code += '\n'
-		code += '================================================='
-		code += '\n'
-		code += '\n'
+#		code += '================================================='
+#		code += '\n'
+#		code += 'Process Table'
+#		code += '\n'
+#		code += '================================================='
+#		code += '\n'
+#		code += '\n'
 
 		# Proc. table
 		tmp_code, tmp_filelist = create_proc_code('MAINPROCESS', tmp_filelist, funcname)
 		code += tmp_code
 
-#		cnt = 0
-#		used_proc = []
-#		for item in fileList_list[index1].proc:
-#			proc_title = funcname + '_MAINPROCESS_'
-#			proc_file =  item[item.rfind('\\')+1:]
-#			proc_sub_title = proc_file[proc_file.find('_MAINPROCESS_')+len('_MAINPROCESS_'):]
-#			proc_sub_title = proc_sub_title.replace('_proc.csv','')
-#			if proc_file.find(proc_title)!=-1:
-#				code += table_header_top()
-#				code += proc_sub_title
-#				code += table_footer_proc()
-#				code += proc_file
-#				code += '\n'
-#				code += '\n'
-#				code += '============================='
-#				code += '\n'
-#				code += '\n'
-#				used_proc.append(cnt)
-#			cnt += 1
-#		for id in reversed(used_proc):
-#			fileList_list[index1].proc.pop(id)
 
+##### CONDITION TABLE #####
+		tmp_code = title_cond_table()
+		code += tmp_code
 
-		code += '================================================='
-		code += '\n'
-		code += 'Condition Table'
-		code += '\n'
-		code += '================================================='
-		code += '\n'
-		code += '\n'
+#		code += '================================================='
+#		code += '\n'
+#		code += 'Condition Table'
+#		code += '\n'
+#		code += '================================================='
+#		code += '\n'
+#		code += '\n'
 
 		# Cond. table
 		tmp_code, tmp_filelist = create_cond_code('MAINPROCESS', tmp_filelist, funcname)
 		code += tmp_code
 
 
-#		cnt = 0
-#		used_cond = []
-#		for item in fileList_list[index1].cond:
-#			cond_title = funcname + '_MAINPROCESS_'
-#			cond_file =  item[item.rfind('\\')+1:]
-#			cond_sub_title = cond_file[cond_file.find('_MAINPROCESS_')+len('_MAINPROCESS_'):]
-#			cond_sub_title = cond_sub_title.replace('_cond.csv','')
-#			cond_sub_title = cond_sub_title[:cond_sub_title.rfind('_')]
-#			if cond_file.find(cond_title)!=-1:
-#				code += table_header_top()
-#				code += cond_sub_title
-#				code += table_footer_cond()
-#				code += cond_file
-#				code += '\n'
-#				code += '\n'
-#				code += '============================='
-#				code += '\n'
-#				code += '\n'
-#				used_cond.append(cnt)
-#			cnt += 1
-#		for id in reversed(used_cond):
-#			fileList_list[index1].cond.pop(id)
+##### CONDITION TABLE #####
+		tmp_code = title_subproc_link()
+		code += tmp_code
 
-
-
-		code += '================================================='
-		code += '\n'
-		code += 'Subprocesses'
-		code += '\n'
-		code += '================================================='
-		code += '\n'
-		code += '\n'
+#		code += '================================================='
+#		code += '\n'
+#		code += 'Subprocesses'
+#		code += '\n'
+#		code += '================================================='
+#		code += '\n'
+#		code += '\n'
 
 		# Subproc link
 		tmp_code = create_subproc_link_code('SUBPROCESS', tmp_filelist)
 		code += tmp_code
-
-#		cnt = 0
-#		for item in fileList_list[index1].fig:
-#			fig_title = '_SUBPROCESS.'
-#			fig_file =  item[item.rfind('\\')+1:]
-#			sub_link =  fig_file[fig_file.find('_', 1)+1:]
-#			sub_link =  sub_link[:sub_link.rfind('.')]
-#			if fig_file.find(fig_title)!=-1:
-#				code += sub_link
-#				code += '\n'
-#				code += '\n'
-#		code += '\n'
-
 
 		fout_rst.write(code)
 		fout_rst.close()
@@ -396,7 +306,6 @@ def table_footer_interface():
 	table_footer_interface += ':file: ../../../csv/'
 	return table_footer_interface
 
-
 def table_footer_proc():
 	table_footer_proc = '\n'
 	table_footer_proc += indent()
@@ -412,7 +321,6 @@ def table_footer_proc():
 	table_footer_proc += ':file: ../../../csv/'
 	return table_footer_proc
 
-
 def table_footer_cond():
 	table_footer_cond = '\n'
 	table_footer_cond += indent()
@@ -427,6 +335,77 @@ def table_footer_cond():
 	table_footer_cond += indent()
 	table_footer_cond += ':file: ../../../csv/'
 	return table_footer_cond
+
+def title_top(funcname):
+	code = ''
+	code = '================================================='
+	code += '\n'
+	code += funcname
+	code += '\n'
+	code += '================================================='
+	code += '\n'
+	code += '\n'
+	code += '\n'
+	return code
+
+def title_interface():
+	code = ''
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += 'Interface'
+	code += '\n'
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += '\n'
+	return code
+
+def title_main_flow():
+	code = ''
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += 'Main Process Flow'
+	code += '\n'
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += '\n'
+	return code
+
+def title_proc_table():
+	code = ''
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += 'Process Table'
+	code += '\n'
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += '\n'
+	return code
+
+def title_cond_table():
+	code = ''
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += 'Condition Table'
+	code += '\n'
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += '\n'
+	return code
+
+def title_subproc_link():
+	code = ''
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += 'Subprocesses'
+	code += '\n'
+	code += '+++++++++++++++++++'
+	code += '\n'
+	code += '\n'
+	return code
+
+
+
+
 
 
 def create_argument_code(filelist):
@@ -485,7 +464,6 @@ def create_main_flow_code(level_title, filelist, funcname):
 			code += '\n'
 			used_fig.append(cnt)
 		cnt += 1
-	print used_fig
 	for id in reversed(used_fig):
 		filelist.fig.pop(id)
 	return code, filelist
@@ -508,7 +486,7 @@ def create_proc_code(level_title, filelist, funcname):
 			code += proc_file
 			code += '\n'
 			code += '\n'
-			code += '============================='
+			code += '-----------------------------'
 			code += '\n'
 			code += '\n'
 			used_proc.append(cnt)
@@ -536,7 +514,7 @@ def create_cond_code(level_title, filelist, funcname):
 			code += cond_file
 			code += '\n'
 			code += '\n'
-			code += '============================='
+			code += '-----------------------------'
 			code += '\n'
 			code += '\n'
 			used_cond.append(cnt)

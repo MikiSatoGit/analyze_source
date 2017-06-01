@@ -33,8 +33,8 @@ VD fn_btt_tle_initialize()
 
 
 VD fn_miki_test5(
-	type1 arg1
-	,type2 arg2
+	type1 arg1,
+	type2 arg2
 )
 {
 	const FL CFL_D_MAP_EXOBJ_POWER[CU2_MAP_EXOBJ_POWER_INDEX][2] = {
