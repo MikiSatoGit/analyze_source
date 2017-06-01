@@ -1,5 +1,5 @@
-.. Functional Process Specification documentation master file, created by
-   sphinx-quickstart on Fri May 26 15:39:00 2017.
+.. Functional Process Detail Specification documentation master file, created by
+   sphinx-quickstart on Thu Jun 01 15:55:41 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 

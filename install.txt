@@ -2,3 +2,48 @@ pip install Sphinx
 easy_install pillow
 easy_install blockdiag
 
+-------------------------------
+Create sphinx project
+sphinx-quickstart
+> Separate source and build directories (y/n) [n]: y
+> Project name: Functional Process Detail Specification
+> Author name(s): Miki Sato
+> Project version []: 0.1
+
+-------------------------------
+Edit "conf.py"
+
+html_theme = 'sphinx_rtd_theme'
+
+#html_theme = 'alabaster'
+#html_theme = 'traditional'
+
+#html_theme = 'classic'
+#html_theme_options = {
+#    "rightsidebar": "True",
+#    "relbarbgcolor": "black"
+#}
+
+#html_theme = 'scrolls'
+#html_theme_options = {
+#    "headerbordercolor": ""
+#    "subheadlinecolor": ""
+#    "linkcolor": "blue"
+#    "visitedlinkcolor": ""
+#    "admonitioncolor": ""
+#}
+
+-------------------------------
+Edit "index.rst"
+
+Functional Process Detail Specification
+=================================================
+
+.. toctree::
+   :maxdepth: 1
+
+   debug/index
+
+
+-------------------------------
+make html

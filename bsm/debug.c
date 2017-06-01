@@ -10,6 +10,10 @@ VD fn_btt_tle_initialize()
 	if(a==1 && b==1)
 	{
 		hogehoge3 = 1;
+		if(c==1)
+		{
+			hogehoge3 = 11;
+		}
 	}
 	else if(a==2)
 	{
@@ -33,8 +37,8 @@ VD fn_btt_tle_initialize()
 
 
 VD fn_miki_test5(
-	type1 arg1,
-	type2 arg2
+	type1 arg1
+	,type2 arg2
 )
 {
 	const FL CFL_D_MAP_EXOBJ_POWER[CU2_MAP_EXOBJ_POWER_INDEX][2] = {
@@ -49,6 +53,7 @@ VD fn_miki_test5(
 		{(FL)9.0,		(FL)38.6}
 	};
 
+	a = 4;
 	return;
 
 }

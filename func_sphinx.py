@@ -30,6 +30,8 @@ class FileList:
 		del self.fig[:]
 
 
+debug_out = False
+
 def get_file_list(sourcefilename, func_list):
 	if len(sourcefilename)>1:
 		if os.path.exists(sourcefilename[0] + '\\csv')==False:
@@ -144,7 +146,6 @@ def create_index(doc_path, func_list):
 
 
 def create_func_main(doc_path, func_list, fileList_list):
-	debug_out = True
 
 	if debug_out:
 		print '<create_func_main> [PATH] %s' % doc_path
@@ -206,12 +207,12 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 
-##### CONDITION TABLE #####
+##### SUBPROC LINK #####
 		tmp_code = title_subproc_link()
 		code += tmp_code
 
 		# Subproc link
-		tmp_code = create_subproc_link_code('SUBPROCESS', tmp_filelist)
+		tmp_code = create_subproc_link_code('SUBPROCESS', funcname, tmp_filelist)
 		code += tmp_code
 
 ##### Close file #####
@@ -221,6 +222,103 @@ def create_func_main(doc_path, func_list, fileList_list):
 		fileList_list[index1] = tmp_filelist
 
 	return fileList_list
+
+
+
+def create_func_sub(doc_path, func_list, fileList_list, level_title):
+
+	if debug_out:
+		print '<create_func_sub> [PATH] %s' % doc_path
+
+	code = ''
+	level_key = '_' + level_title + '.'
+
+	for index1 in range(0, func_list.func_num):
+		funcname = func_list.function_data[index1].name
+
+		for fig in reversed(fileList_list[index1].fig):
+			if debug_out:
+				print '<create_func_sub> ...cheking %s' % fig
+
+			if fig.find(level_key)!=-1:
+				tmp_filelist = fileList_list[index1]
+				subproc_file = fig[fig.rfind('\\')+1:fig.rfind(".")]
+				subproc_file = subproc_file[subproc_file.find(funcname):]
+				sub_funcname = subproc_file.replace('_'+level_title, '')
+
+##### Open file #####
+				code = ''
+				rstfile = doc_path + subproc_file + '.rst'
+				fout_rst = open(rstfile,'w')
+
+##### TITLE #####
+				subproc_name = subproc_file.replace(funcname+'_','')
+				subproc_name = subproc_name.replace('PROCESS','1')
+
+				if debug_out:
+					print '<create_func_sub>----------------------------------'
+					print '<create_func_sub> [FUNC] %s' % funcname
+					print '<create_func_sub> [SUB FILE] %s' % subproc_file
+					print '<create_func_sub> [SUB FUNC] %s' % sub_funcname
+					print '<create_func_sub> [SUB NAME] %s' % subproc_name
+					print '<create_func_sub>----------------------------------'
+
+				tmp_code = title_top(subproc_name)
+				code += tmp_code
+
+##### MAIN FLOW #####
+				tmp_code = title_main_flow()
+				code += tmp_code
+
+				# Main process flow
+				tmp_code, tmp_filelist = create_main_flow_code(level_title, tmp_filelist, sub_funcname)
+				code += tmp_code
+
+##### PROCESS TABLE #####
+				tmp_code = title_proc_table()
+				code += tmp_code
+
+				# Proc. table
+				tmp_code, tmp_filelist = create_proc_code(level_title, tmp_filelist, sub_funcname)
+				code += tmp_code
+
+##### CONDITION TABLE #####
+				tmp_code = title_cond_table()
+				code += tmp_code
+
+				# Cond. table
+				tmp_code, tmp_filelist = create_cond_code(level_title, tmp_filelist, sub_funcname)
+				code += tmp_code
+
+
+##### SUBPROC LINK #####
+				tmp_code = title_subproc_link()
+				code += tmp_code
+
+				# Subproc link
+				tmp_code = create_subproc_link_code('SUB'+level_title, sub_funcname, tmp_filelist)
+				code += tmp_code
+
+##### Close file #####
+				fout_rst.write(code)
+				fout_rst.close()
+
+
+		fileList_list[index1] = tmp_filelist
+
+	return fileList_list
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 def indent():
@@ -285,6 +383,14 @@ def table_footer_cond():
 	table_footer_cond += indent()
 	table_footer_cond += ':file: ../../../csv/'
 	return table_footer_cond
+
+def link_header():
+	link_header = '.. toctree::'
+	link_header += indent()
+	link_header += ':maxdepth: 1'
+	link_header += '\n'
+	link_header += '\n'
+	return link_header
 
 def title_top(funcname):
 	code = ''
@@ -352,10 +458,6 @@ def title_subproc_link():
 	code += '\n'
 	code += '\n'
 	return code
-
-
-
-
 
 
 def create_argument_code(filelist):
@@ -474,16 +576,21 @@ def create_cond_code(level_title, filelist, funcname):
 	return code, filelist
 
 
-def create_subproc_link_code(level_title, filelist):
+def create_subproc_link_code(level_title, func_title, filelist):
 	code = ''
-	cnt = 0
 	level_key = '_' + level_title +'.'
+	header_flg = False
+
 	for item in filelist.fig:
 		fig_title = level_key
 		fig_file =  item[item.rfind('\\')+1:]
 		sub_link =  fig_file[fig_file.find('_', 1)+1:]
 		sub_link =  sub_link[:sub_link.rfind('.')]
-		if fig_file.find(fig_title)!=-1:
+		if fig_file.find(fig_title)!=-1 and fig_file.find(func_title)!=-1:
+			if not header_flg:
+				code += link_header()
+				header_flg = True
+			code += indent()
 			code += sub_link
 			code += '\n'
 			code += '\n'
@@ -491,4 +598,16 @@ def create_subproc_link_code(level_title, filelist):
 	return code
 
 
+
+def check_files(fileList_list):
+	bret = True
+	if len(fileList_list)!=0:
+		for filelist in fileList_list:
+			if len(filelist.arg)==0 \
+			and len(filelist.ret)==0 \
+			and len(filelist.proc)==0 \
+			and len(filelist.cond)==0 \
+			and len(filelist.fig)==0:
+				bret = False
+	return bret
 

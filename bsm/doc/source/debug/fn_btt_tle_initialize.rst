@@ -78,10 +78,12 @@ Condition Table
 Subprocesses
 +++++++++++++++++++
 
-fn_btt_tle_initialize_ELIF3_SUBPROCESS
+.. toctree::   :maxdepth: 1
 
-fn_btt_tle_initialize_ELSE4_SUBPROCESS
+   fn_btt_tle_initialize_ELIF3_SUBPROCESS
 
-fn_btt_tle_initialize_IF1_SUBPROCESS
+   fn_btt_tle_initialize_ELSE4_SUBPROCESS
+
+   fn_btt_tle_initialize_IF1_SUBPROCESS
 
 
