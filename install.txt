@@ -6,7 +6,7 @@ easy_install blockdiag
 Create sphinx project
 sphinx-quickstart
 > Separate source and build directories (y/n) [n]: y
-> Project name: Functional Process Detail Specification
+> Project name: Functional Process Specification
 > Author name(s): Miki Sato
 > Project version []: 0.1
 
