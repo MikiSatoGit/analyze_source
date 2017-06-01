@@ -228,38 +228,75 @@ func_blockdiag.output_func_def_to_csv(
 ##################################################
 # create rst file for Sphinx
 ##################################################
-FileList_list = func_sphinx.get_file_list( str_filename1, func_list )
+# check csv / fig files
+fileList_list = func_sphinx.get_file_list( str_filename1, func_list )
+
+#create index file
+doc_path = func_sphinx.set_doc_path( str_filename1 )
+rst_index_file = func_sphinx.create_index( doc_path, func_list )
 
 
-for file_list in FileList_list:
-	print file_list.name
+
+
+for file_list in fileList_list:
+	print '[FUNCTION] %s' % file_list.name
+
 	cnt = 0
 	for item in file_list.arg:
 		print 'arg[%d] %s' % (cnt, item)
 		cnt += 1
+
 	cnt = 0
 	for item in file_list.ret:
 		print 'ret[%d] %s' % (cnt, item)
 		cnt += 1
-	cnt = 0
-	for item in file_list.proc:
-		print 'proc[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.cond:
-		print 'cond[%d] %s' % (cnt, item)
-		cnt += 1
+
 	cnt = 0
 	for item in file_list.fig:
 		print 'fig[%d] %s' % (cnt, item)
 		cnt += 1
 
+	cnt = 0
+	for item in file_list.proc:
+		print 'proc[%d] %s' % (cnt, item)
+		cnt += 1
 
-doc_path = func_sphinx.set_doc_path( str_filename1 )
-rst_index_file = func_sphinx.create_index( doc_path, func_list )
-print rst_index_file
+	cnt = 0
+	for item in file_list.cond:
+		print 'cond[%d] %s' % (cnt, item)
+		cnt += 1
+print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 
-#func_sphinx.create_func_main( doc_path, func_list )
+#create function main file
+fileList_list = func_sphinx.create_func_main( doc_path, func_list, fileList_list )
+
+for file_list in fileList_list:
+	print '[FUNCTION] %s' % file_list.name
+
+	cnt = 0
+	for item in file_list.arg:
+		print 'arg[%d] %s' % (cnt, item)
+		cnt += 1
+
+	cnt = 0
+	for item in file_list.ret:
+		print 'ret[%d] %s' % (cnt, item)
+		cnt += 1
+
+	cnt = 0
+	for item in file_list.fig:
+		print 'fig[%d] %s' % (cnt, item)
+		cnt += 1
+
+	cnt = 0
+	for item in file_list.proc:
+		print 'proc[%d] %s' % (cnt, item)
+		cnt += 1
+
+	cnt = 0
+	for item in file_list.cond:
+		print 'cond[%d] %s' % (cnt, item)
+		cnt += 1
 
 
 ##################################################
