@@ -946,14 +946,15 @@ def output_func_def_to_csv(sourcefilename, func_list, deftype):
 
 
 		fout_csv = open(csvfile,'a')
-
+		table = ''
 # argument
 		if deftype=='arg':
+			print '<output_func_def_to_csv> arg num : %d' % func_list.function_data[index1].argument_num
 			if func_list.function_data[index1].argument_num!=0:
 				for index2 in range(0, func_list.function_data[index1].argument_num):
 					param_type = func_list.function_data[index1].argument_list[index2].type
 					param_name = func_list.function_data[index1].argument_list[index2].name
-					table = \
+					table += \
 					  param_name + ', ' \
 					+ ' '  + ', ' \
 					+ ' ' + ', ' \
@@ -963,7 +964,7 @@ def output_func_def_to_csv(sourcefilename, func_list, deftype):
 					+ ' ' \
 					+ '\n'
 			else:
-				table = \
+				table += \
 				  '(none)' + ', ' \
 				+ ' '  + ', ' \
 				+ ' ' + ', ' \

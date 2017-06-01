@@ -75,12 +75,12 @@
   <polygon fill="rgb(0,0,0)" points="88,79 84,72 92,72 88,79" stroke="rgb(0,0,0)" />
   <path d="M 88 120 L 88 124" fill="none" stroke="rgb(0,0,0)" />
   <polygon fill="rgb(0,0,0)" points="88,131 84,124 92,124 88,131" stroke="rgb(0,0,0)" />
+  <path d="M 88 188 L 88 204" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="88,211 84,204 92,204 88,211" stroke="rgb(0,0,0)" />
   <path d="M 88 188 L 88 190" fill="none" stroke="rgb(0,0,0)" />
   <path d="M 88 190 L 240 190" fill="none" stroke="rgb(0,0,0)" />
   <path d="M 240 190 L 240 204" fill="none" stroke="rgb(0,0,0)" />
   <polygon fill="rgb(0,0,0)" points="240,211 236,204 244,204 240,211" stroke="rgb(0,0,0)" />
-  <path d="M 88 188 L 88 204" fill="none" stroke="rgb(0,0,0)" />
-  <polygon fill="rgb(0,0,0)" points="88,211 84,204 92,204 88,211" stroke="rgb(0,0,0)" />
   <path d="M 88 228 L 88 252" fill="none" stroke="rgb(0,0,0)" />
   <polygon fill="rgb(0,0,0)" points="88,259 84,252 92,252 88,259" stroke="rgb(0,0,0)" />
   <path d="M 88 708 L 88 732" fill="none" stroke="rgb(0,0,0)" />
@@ -125,12 +125,12 @@
   <polygon fill="rgb(0,0,0)" points="392,331 388,324 396,324 392,331" stroke="rgb(0,0,0)" />
   <path d="M 392 348 L 392 364" fill="none" stroke="rgb(0,0,0)" />
   <polygon fill="rgb(0,0,0)" points="392,371 388,364 396,364 392,371" stroke="rgb(0,0,0)" />
-  <path d="M 392 428 L 392 444" fill="none" stroke="rgb(0,0,0)" />
-  <polygon fill="rgb(0,0,0)" points="392,451 388,444 396,444 392,451" stroke="rgb(0,0,0)" />
   <path d="M 392 428 L 392 430" fill="none" stroke="rgb(0,0,0)" />
   <path d="M 392 430 L 544 430" fill="none" stroke="rgb(0,0,0)" />
   <path d="M 544 430 L 544 444" fill="none" stroke="rgb(0,0,0)" />
   <polygon fill="rgb(0,0,0)" points="544,451 540,444 548,444 544,451" stroke="rgb(0,0,0)" />
+  <path d="M 392 428 L 392 444" fill="none" stroke="rgb(0,0,0)" />
+  <polygon fill="rgb(0,0,0)" points="392,451 388,444 396,444 392,451" stroke="rgb(0,0,0)" />
   <path d="M 544 468 L 544 488" fill="none" stroke="rgb(0,0,0)" />
   <polygon fill="rgb(0,0,0)" points="544,495 540,488 548,488 544,495" stroke="rgb(0,0,0)" />
 </svg>
