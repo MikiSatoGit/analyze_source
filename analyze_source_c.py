@@ -12,8 +12,8 @@
 #
 import os.path
 import sys
-import csv
-import operator
+#import csv
+#import operator
 import copy
 import func_source_analyze
 import func_blockdiag
@@ -41,7 +41,7 @@ if argc==2 :
 	filename1 = argvs[1]
 else:
 	filename1 = raw_input("Please specify [source file path] -> ")
-print 'Checking %s' % filename1
+print '...checking %s' % filename1
 if not os.path.exists(filename1):
 	print "ERROR:Could not start %s." % argvs[0]
 	quit()
@@ -178,6 +178,11 @@ for index1 in range(0, func_list.func_num):
 
 			if debug_out:
 				print '<%d>>>>>>>>>>>>>%s' % (index, tmp_header)
+
+
+			if isinstance(func_list.function_data[index1].name, list):
+				func_list.function_data[index1].name = ','.join(func_list.function_data[index1].name)
+
 
 			tmp_proc_codes_list, tmp_header_list = func_blockdiag.draw_diag( \
 				str_filename1, \

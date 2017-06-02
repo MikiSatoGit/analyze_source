@@ -1,4 +1,4 @@
-Total lines: 39 
+Total lines: 87 
 Total functions : 2 
 --------------------------
 [Function Name] : fn_btt_aaz_activate 
@@ -23,26 +23,80 @@ Total functions : 2
 [16] MAINPROCESS(2) return return; 
 ----------------- Total Codes : 16 lines
 --------------------------
-[Function Name] : fn_btt_aaz_initialize 
+[Function Name] : fn_btt_atd_main 
 -Return type : VD 
--Argument : 2 
-     [0] : FL   fl_a_trailer_length 
-     [1] : FL   fl_a_trailer_width 
+-Argument : 12 
+     [0] : FL   fl_a_self_v 
+     [1] : S4   s4_a_curve_r 
+     [2] : S1   s1_a_shift_flg 
+     [3] : NORMAL_BSM   *pst_a_object 
+     [4] : S4   s4_a_object_size 
+     [5] : FL   fl_a_doa_pow_ave[2][3] 
+     [6] : FL   fl_a_doa_pow_dev[2][3] 
+     [7] : S4   s4_a_doa_bf_peak_bin 
+     [8] : FL   fl_a_doa_bf_peak_pow 
+     [9] : BTT_CLUSTER_INFO   *pst_a_cluster_info 
+     [10] : BTT_AUX_TRAILER_INFO   *pst_a_aux_trailer_info 
+     [11] : BTT_RESULT*   pst_a_btt_result 
 ----- Codes -----
 [1] MAINPROCESS(1) if if( 
-[2] MAINPROCESS(1) if st_aaz_params.First == BTT_RET_t.Bool.FALSE 
+[2] MAINPROCESS(1) if st_g_btt_stat.ATD != BTT_RET_t.Func_Stat.ACTIVE 
 [3] MAINPROCESS(1) if ) 
 [4] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [5] SUBPROCESS(1) return return; 
-[6] MAINPROCESS(2) equal st_aaz_params.VarY BTT_REAR_RANGE_LONG;
-[7] MAINPROCESS(2) equal st_aaz_params.First BTT_RET_t.Bool.FALSE;
-[8] MAINPROCESS(2) equal st_aaz_params.TLength_AAZ fl_a_trailer_length;
-[9] MAINPROCESS(2) equal st_aaz_params.TLength_valid_count (S4) 0;
-[10] MAINPROCESS(2) equal st_aaz_params.TLength_invalid_count (S4) 0;
-[11] MAINPROCESS(2) equal st_aaz_params.TLength_unknown_count (S4) 0;
-[12] MAINPROCESS(2) equal st_aaz_params.TWidth_AAZ fl_a_trailer_width;
-[13] MAINPROCESS(2) equal st_aaz_params.TWidth_valid_count (S4) 0;
-[14] MAINPROCESS(2) equal st_aaz_params.TWidth_invalid_count (S4) 0;
-[15] MAINPROCESS(2) equal st_aaz_params.TWidth_unknown_count (S4) 0;
-[16] MAINPROCESS(2) return return; 
------------------ Total Codes : 16 lines
+[6] MAINPROCESS(2) if if( 
+[7] MAINPROCESS(2) if s1_a_shift_flg != (S1) 0 
+[8] MAINPROCESS(2) if ) 
+[9] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[10] SUBPROCESS(1) if if( 
+[11] SUBPROCESS(1) if fl_a_self_v > BTT_ACTIVE_SPEED_TH 
+[12] SUBPROCESS(1) if ) 
+[13] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[14] SUBSUBPROCESS(1) if if( 
+[15] SUBSUBPROCESS(1) if st_atd_params.timer < BTT_ATD_MAX_TIME 
+[16] SUBSUBPROCESS(1) if ) 
+[17] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[18] SUBSUBSUBPROCESS(1) if if( 
+[19] SUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.UNKNOWN 
+[20] SUBSUBSUBPROCESS(1) if ) 
+[21] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[22] SUBSUBSUBSUBPROCESS(1) func<start> pst_a_btt_result->TFlag = fn_btt_atd_detect_trailer( 
+[23] SUBSUBSUBSUBPROCESS(1) func fl_a_self_v, 
+[24] SUBSUBSUBSUBPROCESS(1) func s4_a_curve_r, 
+[25] SUBSUBSUBSUBPROCESS(1) func pst_a_object, 
+[26] SUBSUBSUBSUBPROCESS(1) func s4_a_object_size, 
+[27] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_pow_ave, 
+[28] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_pow_dev, 
+[29] SUBSUBSUBSUBPROCESS(1) func s4_a_doa_bf_peak_bin, 
+[30] SUBSUBSUBSUBPROCESS(1) func fl_a_doa_bf_peak_pow, 
+[31] SUBSUBSUBSUBPROCESS(1) func pst_a_cluster_info, 
+[32] SUBSUBSUBSUBPROCESS(1) func pst_a_aux_trailer_info 
+[33] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[34] SUBSUBSUBSUBPROCESS(1) if if( 
+[35] SUBSUBSUBSUBPROCESS(1) if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.CONNECT 
+[36] SUBSUBSUBSUBPROCESS(1) if ) 
+[37] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[38] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[39] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[40] SUBSUBSUBSUBPROCESS(2) else if else if( 
+[41] SUBSUBSUBSUBPROCESS(2) else if pst_a_btt_result->TFlag == BTT_RET_t.TFlag.NOTCONNECT 
+[42] SUBSUBSUBSUBPROCESS(2) else if ) 
+[43] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[44] SUBSUBSUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[45] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[46] SUBSUBSUBSUBPROCESS(3) else else 
+[47] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[48] SUBSUBPROCESS(2) else else 
+[49] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[50] SUBSUBSUBPROCESS(1) equal pst_a_btt_result->TFlag BTT_RET_t.TFlag.UNKNOWN;
+[51] SUBSUBSUBPROCESS(1) func<start> fn_btt_atd_deactivate( 
+[52] SUBSUBSUBPROCESS(1) func<end> ); 
+[53] SUBSUBPROCESS(3) proc st_atd_params.timer++; 
+[54] SUBPROCESS(2) else else 
+[55] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[56] MAINPROCESS(3) else else 
+[57] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[58] SUBPROCESS(1) func<start> fn_btt_atd_initialize( 
+[59] SUBPROCESS(1) func<end> ); 
+[60] MAINPROCESS(4) return return; 
+----------------- Total Codes : 60 lines

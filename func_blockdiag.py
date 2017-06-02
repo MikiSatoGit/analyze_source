@@ -51,6 +51,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	if level_title == 'MAINPROCESS':
 		sub_proc_flg = False
 
+	if isinstance(funcname, list):
+		funcname = ','.join(funcname)
+
 	outfile = ''
 	txtfile = ''
 	csvfile_base = ''	
@@ -70,7 +73,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 		outfile = '\\fig\\' + sourcefilename[0]
 		txtfile = '\\fig\\' + sourcefilename[0]
 		csvfile_base = '\\csv\\' + sourcefilename[0]
+
 	outfile = outfile[0:outfile.rfind('.')] + '_' + funcname + '_' + level_title +'.svg'
+
 	txtfile = txtfile[0:txtfile.rfind('.')] + '_' + funcname + '_' + level_title +'.diag'
 	csvfile_base = csvfile_base[0:csvfile_base.rfind('.')] + '_' + funcname + '_' + level_title
 
@@ -154,7 +159,6 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 		source = source_header
 		source += block_code
 		source += ' }'
-
 
 	if debug_out:
 		print '----------<%s>----------(BEFORE REPLACE RETURN)' % funcname
@@ -246,6 +250,8 @@ def check_proc_codes(proc_codes, level_title):
 # while
 # switch, case, default
 					if func_source_analyze.is_ctrl_stat(proc_type)==True:
+
+
 						if block_data.proc_size() != 0:
 							block_data_list.blockdata.append(copy.deepcopy(block_data))
 						block_data.clear()
@@ -313,6 +319,7 @@ def check_proc_codes(proc_codes, level_title):
 
 				# level title is not chaged
 				else:
+
 					tmp_procdata = func_source_analyze.ProcessData()
 					tmp_procdata.title.append( proc_codes.proc_data_list[index1].title[index2] )
 					tmp_procdata.type.append( proc_codes.proc_data_list[index1].type[index2] )
@@ -417,20 +424,11 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 	return_flg = False
 	skip_code_list = []
 	if_no_end = ''
-
-
-	# skip if only return 20170524
-	for index in range(0, block_data_list.size()):
-		blockdata = block_data_list.blockdata[index]
-		if blockdata.proc_size()==1:
-			if blockdata.proc_size()==1:
-				if len(blockdata.procs[0].type)==1:
-					if blockdata.procs[0].type[0]=='return':
-						return block_code, sub_proc_list, block_code_cond_list, skip_code_list
-
+	return_only_flg = False
 
 	# check if process includes return (at the deepest level(block layer=1)) 20170524
-	if len(block_data_list.blockdata)==1:
+	#if len(block_data_list.blockdata)==1:
+	if block_data_list.size()==1:
 		tmp_blockdata = block_data_list.blockdata[0]
 		for index2 in range( 0, len(tmp_blockdata.procs) ):
 			tmp_procdata = tmp_blockdata.procs[index2]
@@ -441,7 +439,23 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 					break
 
 # main flow
-	for index in range(0, len(block_data_list.blockdata)):
+#	for index in range(0, len(block_data_list.blockdata)):
+	for index in range(0, block_data_list.size()):
+
+		# skip if only return 20170601
+		blockdata = block_data_list.blockdata[index]
+		if blockdata.proc_size()==1:
+			if blockdata.proc_size()==1:
+				if len(blockdata.procs[0].type)==1:
+					if blockdata.procs[0].type[0]=='return':
+
+						if debug_out:
+							print '<create_main_blocks> RETURN: [%d][%d] type = %s' % ( index, index2, blockdata.procs[0].type[0] )
+
+						if block_data_list.size()==1:
+							return_only_flg = True
+						break
+
 		tmp_blockdata = block_data_list.blockdata[index]
 		tmp_str = tmp_blockdata.title
 
@@ -459,7 +473,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 				skip_code_list.append(if_no_end)
 				if_no_end = ''
 
-
 		elif tmp_str.find('_elif')!=-1:
 			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_if_prev, condition_if_parent)
 			condition_if_prev = tmp_str
@@ -469,7 +482,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 				if_no_end = '<<REMOVE>>' + if_no_end
 				skip_code_list.append(if_no_end)
 				if_no_end = ''
-
 
 		elif tmp_str.find('_if')!=-1:
 			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_if_prev, condition_if_parent)
@@ -578,14 +590,14 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 							break
 
 
-	if sub_proc_flg:
-		if return_flg:
-			block_code += 'END;\n'
+	if not return_only_flg:
+		if sub_proc_flg:
+			if return_flg:
+				block_code += 'END;\n'
+			else:
+				block_code += 'NEXT;\n'
 		else:
-			block_code += 'NEXT;\n'
-	else:
-		block_code += 'END;\n'
-
+			block_code += 'END;\n'
 
 	return block_code, sub_proc_list, block_code_cond_list, skip_code_list
 
@@ -648,11 +660,11 @@ def create_if_blocks(condition_str, code, condition_prev, condition_if_parent):
 
 
 
-
 def create_subproc_blocks(sub_proc_list):
 # [in] sub_proc_list :  sub block code
 # [out] block_code : main block code
 	block_code = ''
+
 	for block_code_sub in sub_proc_list:
 		tmp_pt_start = ''
 		tmp_pt_end = '' 
@@ -834,6 +846,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 			for index3 in range(0, len(blockdata.procs[index2].title) ):
 
 				# break if only return 20170524
+#				if blockdata.proc_size()==1:
 				if blockdata.proc_size()==1:
 					if blockdata.procs[index2].type[index3]=='return':
 						break
@@ -996,6 +1009,9 @@ def output_func_def_to_csv(sourcefilename, func_list, deftype):
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
+
+		if isinstance(funcname, list):
+			funcname = ','.join(funcname)
 
 		csvfile = csvfile_base + funcname + '_' + deftype + '.csv'
 
