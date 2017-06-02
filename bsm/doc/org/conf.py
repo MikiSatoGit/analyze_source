@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# Functional Process Detail Specification documentation build configuration file, created by
-# sphinx-quickstart on Thu Jun 01 15:55:41 2017.
+# Functional Process Specification documentation build configuration file, created by
+# sphinx-quickstart on Thu Jun 01 17:48:48 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -45,7 +45,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Functional Process Detail Specification'
+project = u'Functional Process Specification'
 copyright = u'2017, Miki Sato'
 author = u'Miki Sato'
 
@@ -82,6 +82,8 @@ todo_include_todos = False
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
+html_theme = 'sphinx_rtd_theme'
+
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
@@ -120,7 +122,7 @@ html_static_path = ['_static']
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'FunctionalProcessDetailSpecificationdoc'
+htmlhelp_basename = 'FunctionalProcessSpecificationdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -147,7 +149,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'FunctionalProcessDetailSpecification.tex', u'Functional Process Detail Specification Documentation',
+    (master_doc, 'FunctionalProcessSpecification.tex', u'Functional Process Specification Documentation',
      u'Miki Sato', 'manual'),
 ]
 
@@ -157,7 +159,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'functionalprocessdetailspecification', u'Functional Process Detail Specification Documentation',
+    (master_doc, 'functionalprocessspecification', u'Functional Process Specification Documentation',
      [author], 1)
 ]
 
@@ -168,8 +170,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'FunctionalProcessDetailSpecification', u'Functional Process Detail Specification Documentation',
-     author, 'FunctionalProcessDetailSpecification', 'One line description of project.',
+    (master_doc, 'FunctionalProcessSpecification', u'Functional Process Specification Documentation',
+     author, 'FunctionalProcessSpecification', 'One line description of project.',
      'Miscellaneous'),
 ]
 

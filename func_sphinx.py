@@ -163,7 +163,7 @@ def create_func_main(doc_path, func_list, fileList_list):
 
 
 ##### TITLE #####
-		tmp_code = title_top(funcname)
+		tmp_code = title_top(funcname, '')
 		code += tmp_code
 
 
@@ -236,12 +236,12 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
 
+		tmp_filelist = fileList_list[index1]
 		for fig in reversed(fileList_list[index1].fig):
 			if debug_out:
 				print '<create_func_sub> ...cheking %s' % fig
 
 			if fig.find(level_key)!=-1:
-				tmp_filelist = fileList_list[index1]
 				subproc_file = fig[fig.rfind('\\')+1:fig.rfind(".")]
 				subproc_file = subproc_file[subproc_file.find(funcname):]
 				sub_funcname = subproc_file.replace('_'+level_title, '')
@@ -263,7 +263,7 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 					print '<create_func_sub> [SUB NAME] %s' % subproc_name
 					print '<create_func_sub>----------------------------------'
 
-				tmp_code = title_top(subproc_name)
+				tmp_code = title_top(funcname, subproc_name)
 				code += tmp_code
 
 ##### MAIN FLOW #####
@@ -392,13 +392,24 @@ def link_header():
 	link_header += '\n'
 	return link_header
 
-def title_top(funcname):
+def title_top(funcname, subproc_name):
+	num = len(funcname)
+	num += len(subproc_name)
+	num += 5
+
 	code = ''
-	code = '================================================='
+#	code = '================================================='
+	for index in range(0,num):
+		code += '='
 	code += '\n'
 	code += funcname
+	if subproc_name != '':
+		code += '::'
+		code += subproc_name
 	code += '\n'
-	code += '================================================='
+#	code += '================================================='
+	for index in range(0,num):
+		code += '='
 	code += '\n'
 	code += '\n'
 	code += '\n'
@@ -600,14 +611,14 @@ def create_subproc_link_code(level_title, func_title, filelist):
 
 
 def check_files(fileList_list):
-	bret = True
+	bret = False
 	if len(fileList_list)!=0:
 		for filelist in fileList_list:
-			if len(filelist.arg)==0 \
-			and len(filelist.ret)==0 \
-			and len(filelist.proc)==0 \
-			and len(filelist.cond)==0 \
-			and len(filelist.fig)==0:
-				bret = False
+			if len(filelist.arg)!=0 \
+			or len(filelist.ret)!=0 \
+			or len(filelist.proc)!=0 \
+			or len(filelist.cond)!=0 \
+			or len(filelist.fig)!=0:
+				bret = True
 	return bret
 

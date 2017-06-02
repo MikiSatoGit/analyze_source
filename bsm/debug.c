@@ -1,60 +1,63 @@
-VD fn_btt_tle_initialize()
+VD fn_btt_aaz_activate()
 {
-	st_tle_params.timer = 0;
-	fn_btt_set_trailer_length(
-		hogege1,
-		hogege2,
-		(S4)BTT_TRAILER_SIZE_UNKNOWN
-	);
+	/*! @note (1) set AAZ state to ACTIVE if AAZ is ENABLE */
+	if( st_g_btt_stat.AAZ == BTT_RET_t.Func_Stat.ENABLE )
+	{
+		st_g_btt_stat.AAZ = BTT_RET_t.Func_Stat.ACTIVE;
 
-	if(a==1 && b==1)
-	{
-		hogehoge3 = 1;
-		if(c==1)
-		{
-			hogehoge3 = 11;
-		}
+		/* Based on RDD:Table.4.2.6.1-1 */
+		/*! @note (2) initialize AAZ internal parameters to initial value */
+		st_aaz_params.VarY = (FL) 0.0;
+		st_aaz_params.First = BTT_RET_t.Bool.TRUE;
+		st_aaz_params.TLength_AAZ = BTT_TRAILER_SIZE_UNKNOWN;
+		st_aaz_params.TLength_valid_count = (S4) 0;
+		st_aaz_params.TLength_invalid_count = (S4) 0;
+		st_aaz_params.TLength_unknown_count = (S4) 0;
+		st_aaz_params.TWidth_AAZ = BTT_TRAILER_SIZE_UNKNOWN;
+		st_aaz_params.TWidth_valid_count = (S4) 0;
+		st_aaz_params.TWidth_invalid_count = (S4) 0;
+		st_aaz_params.TWidth_unknown_count = (S4) 0;
 	}
-	else if(a==2)
-	{
-//		hogehoge3 = 2;
-		return;
-	}
-	else if(a==3)
-	{
-		hogehoge3 = 3;
-//		return;
-	}
-	else
-	{
-		hogehoge3 = 4;
-		return;
-	}
-
-	a = 4;
 	return;
 }
 
 
-VD fn_miki_test5(
-	type1 arg1
-	,type2 arg2
+VD fn_btt_aaz_initialize(
+	FL fl_a_trailer_length,			/*!< [in] TLength */
+	FL fl_a_trailer_width			/*!< [in] TWidth */
 )
 {
-	const FL CFL_D_MAP_EXOBJ_POWER[CU2_MAP_EXOBJ_POWER_INDEX][2] = {
-		/* ’¼ü‹——£[m]  “d—Íè‡’l[dB] */
-		{(FL)1.0,		(FL)72.0},
-		{(FL)2.0,		(FL)65.0},
-		{(FL)2.5,		(FL)62.5},
-		{(FL)3.0,		(FL)57.7},
-		{(FL)4.0,		(FL)52.7},
-		{(FL)5.0,		(FL)48.9},
-		{(FL)6.0,		(FL)45.7},
-		{(FL)9.0,		(FL)38.6}
-	};
+	/*! @note (1) check AAZ initialize status (Do nothing if it is not the first cycle) */
+	if( st_aaz_params.First == BTT_RET_t.Bool.FALSE )
+	{
+		return;
+	}
+//	else if(a==1)
+//	{
+//		a=2;
+//		return;
+//	}
+//	else
+//	{
+//		a=3;
+//		return;
+//	}
 
-	a = 4;
+
+	/* Based on RDD:Table.4.2.6.1-1 */
+	/*! @note (2) initialize AAZ internal parameters to default value */
+	st_aaz_params.VarY = BTT_REAR_RANGE_LONG;	//(TBD) or BTT_REAR_RANGE_MAX?
+	st_aaz_params.First = BTT_RET_t.Bool.FALSE;
+	st_aaz_params.TLength_AAZ = fl_a_trailer_length;
+	st_aaz_params.TLength_valid_count = (S4) 0;
+	st_aaz_params.TLength_invalid_count = (S4) 0;
+	st_aaz_params.TLength_unknown_count = (S4) 0;
+	st_aaz_params.TWidth_AAZ = fl_a_trailer_width;
+	st_aaz_params.TWidth_valid_count = (S4) 0;
+	st_aaz_params.TWidth_invalid_count = (S4) 0;
+	st_aaz_params.TWidth_unknown_count = (S4) 0;
 	return;
-
 }
+
+
 

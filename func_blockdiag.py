@@ -136,7 +136,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	output_proc_to_csv(csvfile_base, block_data_list)
 
 
-#################### Create Block diag code ####################
+#################### CreaFte Block diag code ####################
 # add main flow
 	block_code, sub_proc_list, block_code_cond_list, skip_code_list = create_main_blocks(block_data_list, sub_proc_flg)
 
@@ -155,11 +155,21 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 		source += block_code
 		source += ' }'
 
+
+	if debug_out:
+		print '----------<%s>----------(BEFORE REPLACE RETURN)' % funcname
+		print source
+
+
 # skip "_returnonly" if only return in sub process 20170524
 	for skip_code in skip_code_list:
-		source = source.replace(skip_code, '->')
 		if debug_out:
 			print 'skip: %s' % skip_code
+		# remove "_returnonly" if only return in sub process (for if yes) 20170601
+		if skip_code.find('<<REMOVE>>')!=-1:
+			source = source.replace( skip_code.replace('<<REMOVE>>', ''), '' )
+		else:
+			source = source.replace(skip_code, '->')
 
 
 #################### Draw Block diag (call blockdiag) ####################
@@ -245,6 +255,7 @@ def check_proc_codes(proc_codes, level_title):
 						# convert title
 						block_data.title = proc_title
 						block_data.type = proc_type
+
 
 						tmp_procdata = func_source_analyze.ProcessData()
 						tmp_procdata.title.append( proc_codes.proc_data_list[index1].title[index2] )
@@ -405,6 +416,7 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 	sub_proc_list = []
 	return_flg = False
 	skip_code_list = []
+	if_no_end = ''
 
 
 	# skip if only return 20170524
@@ -434,29 +446,89 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 		tmp_str = tmp_blockdata.title
 
 		if debug_out:
-			print '<create_main_blocks> %s' % tmp_str
+			print '<create_main_blocks> Checking  %s' % tmp_str
 
 		if tmp_str.find('_else')!=-1:
 			block_code_cond_list += create_if_blocks('_else', tmp_str, condition_if_prev, condition_if_parent)
 			condition_if_prev = ''
 			condition_if_parent = ''
 
+			# need to erase 'no->end' when there is else / else if 20170601
+			if if_no_end != '':
+				if_no_end = '<<REMOVE>>' + if_no_end
+				skip_code_list.append(if_no_end)
+				if_no_end = ''
+
+
 		elif tmp_str.find('_elif')!=-1:
 			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_if_prev, condition_if_parent)
 			condition_if_prev = tmp_str
+
+			# need to erase 'no->end' when there is else / else if 20170601
+			if if_no_end != '':
+				if_no_end = '<<REMOVE>>' + if_no_end
+				skip_code_list.append(if_no_end)
+				if_no_end = ''
+
 
 		elif tmp_str.find('_if')!=-1:
 			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_if_prev, condition_if_parent)
 			condition_if_prev = tmp_str
 			condition_if_parent = tmp_str
+			if_no_end = ''
 
 			block_code += tmp_str
 			block_code += ' -> '
 			block_code += tmp_str.replace('_if', '_yes_pt')
 			block_code += ';\n'
-#			block_code += ' -> '
-			block_code += tmp_str.replace('_if', '_end_pt')
-			block_code += ' -> '
+
+			# skip "_returnonly" if only return in sub process (for if yes) 20170601
+			tmptmp_str = tmp_str.replace('_if','')
+			if_return_flg = False
+			tmp_skip_code_next = ''
+			for tmptmp_blockdata in block_data_list.blockdata:
+				if tmptmp_blockdata.title.find(tmptmp_str)==0 \
+				and tmptmp_blockdata.title.find('_returnonly')!=-1:
+					if_return_flg = True
+					tmp_skip_code_next = tmptmp_blockdata.title
+					break
+			if if_return_flg:
+				# if_yes->END
+				block_code += tmp_str.replace('_if', '_yes_pt')
+				block_code += ' -> END'
+				block_code += ';\n'
+				# if->if_no
+				block_code += tmp_str
+				block_code += ' -> '
+				block_code += tmp_str.replace('_if', '_no_pt')
+				block_code += ';\n'
+				block_code += tmp_str.replace('_if', '_no_pt') + '[label = "No"];\n'
+
+				# if_no -> if_end
+				# need to erase 'no->end' when there is else / else if
+				if_no_end = tmp_str.replace('_if', '_no_pt')
+				if_no_end += ' -> '
+				if_no_end += tmp_str.replace('_if', '_end_pt')
+				if_no_end += ';\n'
+				block_code += if_no_end
+
+				# if_end ->
+				block_code += tmp_str.replace('_if', '_end_pt')
+				block_code += ' -> '
+
+				tmp_skip_code = '<<REMOVE>>'
+				tmp_skip_code += tmp_str.replace('_if', '_yes_pt')
+				tmp_skip_code += ' -> ' + tmp_skip_code_next
+				tmp_skip_code += '_subproc'
+				tmp_skip_code += ' -> '
+				tmp_skip_code += tmp_str.replace('_if', '_end_pt')
+				tmp_skip_code += ';\n'
+				skip_code_list.append(tmp_skip_code)
+
+			else:
+				# if_end ->
+				block_code += tmp_str.replace('_if', '_end_pt')
+				block_code += ' -> '
 
 		elif tmp_str.find('_switch')!=-1:
 			block_code += tmp_str
@@ -482,7 +554,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 				block_code += ' -> '
 			else:
 				sub_proc_list.append(tmp_str)
-
 
 				# skip "_returnonly" if only return in sub process 20170524
 				if tmp_str.find('_returnonly')!=-1:
@@ -568,10 +639,10 @@ def create_if_blocks(condition_str, code, condition_prev, condition_if_parent):
 		block_code_cond = code.replace(condition_str, '_yes_pt') + '[label = "yes"];\n'
 		block_code_cond_list.append(block_code_cond)
 
-	if debug_out == True:
+	if debug_out:
 		print '<create_if_blocks>'
 		for tmp_code_cond in block_code_cond_list:
-				print '\t(cond) %s' % tmp_code_cond
+			print '\t(cond) %s' % tmp_code_cond
 
 	return block_code_cond_list
 
