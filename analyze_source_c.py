@@ -238,72 +238,7 @@ rst_index_file = func_sphinx.create_index( doc_path, func_list )
 
 
 
-
-for file_list in fileList_list:
-	print '[FUNCTION] %s' % file_list.name
-	cnt = 0
-	for item in file_list.arg:
-		print 'arg[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.ret:
-		print 'ret[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.fig:
-		print 'fig[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.proc:
-		print 'proc[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.cond:
-		print 'cond[%d] %s' % (cnt, item)
-		cnt += 1
-print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-
-
-
-
-#create main file
-fileList_list = func_sphinx.create_func_main( doc_path, func_list, fileList_list )
-
-
-
-for file_list in fileList_list:
-	print '[FUNCTION] %s' % file_list.name
-	cnt = 0
-	for item in file_list.arg:
-		print 'arg[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.ret:
-		print 'ret[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.fig:
-		print 'fig[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.proc:
-		print 'proc[%d] %s' % (cnt, item)
-		cnt += 1
-	cnt = 0
-	for item in file_list.cond:
-		print 'cond[%d] %s' % (cnt, item)
-		cnt += 1
-print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-
-
-
-
-#create sub process file
-level_title = 'PROCESS'
-while func_sphinx.check_files(fileList_list):
-	level_title = 'SUB' + level_title
-	fileList_list = func_sphinx.create_func_sub( doc_path, func_list, fileList_list, level_title )
-
+if debug_out:
 	for file_list in fileList_list:
 		print '[FUNCTION] %s' % file_list.name
 		cnt = 0
@@ -327,6 +262,73 @@ while func_sphinx.check_files(fileList_list):
 			print 'cond[%d] %s' % (cnt, item)
 			cnt += 1
 	print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+
+
+
+
+#create main file
+fileList_list = func_sphinx.create_func_main( doc_path, func_list, fileList_list )
+
+
+
+if debug_out:
+	for file_list in fileList_list:
+		print '[FUNCTION] %s' % file_list.name
+		cnt = 0
+		for item in file_list.arg:
+			print 'arg[%d] %s' % (cnt, item)
+			cnt += 1
+		cnt = 0
+		for item in file_list.ret:
+			print 'ret[%d] %s' % (cnt, item)
+			cnt += 1
+		cnt = 0
+		for item in file_list.fig:
+			print 'fig[%d] %s' % (cnt, item)
+			cnt += 1
+		cnt = 0
+		for item in file_list.proc:
+			print 'proc[%d] %s' % (cnt, item)
+			cnt += 1
+		cnt = 0
+		for item in file_list.cond:
+			print 'cond[%d] %s' % (cnt, item)
+			cnt += 1
+	print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
+
+
+
+
+#create sub process file
+level_title = 'PROCESS'
+while func_sphinx.check_files(fileList_list):
+	level_title = 'SUB' + level_title
+	fileList_list = func_sphinx.create_func_sub( doc_path, func_list, fileList_list, level_title )
+
+	if debug_out:
+		for file_list in fileList_list:
+			print '[FUNCTION] %s' % file_list.name
+			cnt = 0
+			for item in file_list.arg:
+				print 'arg[%d] %s' % (cnt, item)
+				cnt += 1
+			cnt = 0
+			for item in file_list.ret:
+				print 'ret[%d] %s' % (cnt, item)
+				cnt += 1
+			cnt = 0
+			for item in file_list.fig:
+				print 'fig[%d] %s' % (cnt, item)
+				cnt += 1
+			cnt = 0
+			for item in file_list.proc:
+				print 'proc[%d] %s' % (cnt, item)
+				cnt += 1
+			cnt = 0
+			for item in file_list.cond:
+				print 'cond[%d] %s' % (cnt, item)
+				cnt += 1
+		print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 
 
 

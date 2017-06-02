@@ -8,6 +8,18 @@ VD fn_btt_aaz_initialize(
 	{
 		return;
 	}
+//	else if(a==1)
+//	{
+//		a=2;
+//		return;
+//	}
+//	else
+//	{
+//		a=3;
+//		return;
+//	}
+
+
 	/* Based on RDD:Table.4.2.6.1-1 */
 	/*! @note (2) initialize AAZ internal parameters to default value */
 	st_aaz_params.VarY = BTT_REAR_RANGE_LONG;	//(TBD) or BTT_REAR_RANGE_MAX?
