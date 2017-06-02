@@ -51,6 +51,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	if level_title == 'MAINPROCESS':
 		sub_proc_flg = False
 
+	if isinstance(funcname, list):
+		funcname = ','.join(funcname)
+
 	outfile = ''
 	txtfile = ''
 	csvfile_base = ''	
@@ -70,7 +73,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 		outfile = '\\fig\\' + sourcefilename[0]
 		txtfile = '\\fig\\' + sourcefilename[0]
 		csvfile_base = '\\csv\\' + sourcefilename[0]
+
 	outfile = outfile[0:outfile.rfind('.')] + '_' + funcname + '_' + level_title +'.svg'
+
 	txtfile = txtfile[0:txtfile.rfind('.')] + '_' + funcname + '_' + level_title +'.diag'
 	csvfile_base = csvfile_base[0:csvfile_base.rfind('.')] + '_' + funcname + '_' + level_title
 
@@ -1004,6 +1009,9 @@ def output_func_def_to_csv(sourcefilename, func_list, deftype):
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
+
+		if isinstance(funcname, list):
+			funcname = ','.join(funcname)
 
 		csvfile = csvfile_base + funcname + '_' + deftype + '.csv'
 

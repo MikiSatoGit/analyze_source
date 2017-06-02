@@ -57,6 +57,10 @@ def get_file_list(sourcefilename, func_list):
 	for index1 in range(0, func_list.func_num):
 		file_list.clear()
 		funcname = func_list.function_data[index1].name
+
+		if isinstance(funcname, list):
+			funcname = ','.join(funcname)
+
 		argfile = csv_file_base + funcname + '*' + 'arg.csv'
 		retfile = csv_file_base + funcname + '*' + 'ret.csv'
 		procfile = csv_file_base + funcname + '_' + '*' + '_proc.csv'
@@ -135,6 +139,10 @@ def create_index(doc_path, func_list):
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
+
+		if isinstance(funcname, list):
+			funcname = ','.join(funcname)
+
 		code += indent
 		code += funcname
 		code += '\n'
@@ -156,6 +164,10 @@ def create_func_main(doc_path, func_list, fileList_list):
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
+
+		if isinstance(funcname, list):
+			funcname = ','.join(funcname)
+
 		code = ''
 		tmp_filelist = fileList_list[index1]
 
@@ -599,7 +611,6 @@ def create_subproc_link_code(level_title, func_title, filelist, doc_title):
 	for item in filelist.fig:
 		fig_title = level_key
 		fig_file =  item[item.rfind('\\')+1:]
-#		sub_link =  fig_file[fig_file.find('_', 1)+1:]
 		sub_link =  fig_file[fig_file.find(doc_title + '_', 1)+len(doc_title)+2:]
 		sub_link =  sub_link[:sub_link.rfind('.')]
 		if fig_file.find(fig_title)!=-1 and fig_file.find(func_title)!=-1:
@@ -612,7 +623,6 @@ def create_subproc_link_code(level_title, func_title, filelist, doc_title):
 			code += '\n'
 	code += '\n'
 	return code
-
 
 
 def check_files(fileList_list):
