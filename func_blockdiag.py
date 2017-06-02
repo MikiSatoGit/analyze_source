@@ -156,9 +156,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 		source += ' }'
 
 
-	if debug_out:
-		print '----------<%s>----------(BEFORE REPLACE RETURN)' % funcname
-		print source
+#0601	if debug_out:
+	print '----------<%s>----------(BEFORE REPLACE RETURN)' % funcname
+	print source
 
 
 # skip "_returnonly" if only return in sub process 20170524
@@ -173,9 +173,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 
 
 #################### Draw Block diag (call blockdiag) ####################
-	if debug_out:
-		print '----------<%s>----------' % funcname
-		print source
+#0601	if debug_out:
+	print '----------<%s>----------' % funcname
+	print source
 
 	if source != '':
 		if save_png_flag:
@@ -246,6 +246,8 @@ def check_proc_codes(proc_codes, level_title):
 # while
 # switch, case, default
 					if func_source_analyze.is_ctrl_stat(proc_type)==True:
+
+
 						if block_data.proc_size() != 0:
 							block_data_list.blockdata.append(copy.deepcopy(block_data))
 						block_data.clear()
@@ -313,6 +315,7 @@ def check_proc_codes(proc_codes, level_title):
 
 				# level title is not chaged
 				else:
+
 					tmp_procdata = func_source_analyze.ProcessData()
 					tmp_procdata.title.append( proc_codes.proc_data_list[index1].title[index2] )
 					tmp_procdata.type.append( proc_codes.proc_data_list[index1].type[index2] )
@@ -395,6 +398,8 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 # [out] block_code_cond_list : if, elseif, else block code
 # [out] skip_code_list
 
+	debug_out = True #0601
+
 	if debug_out:
 		print '<create_main_blocks> ----------------------------------------'
 		print '<create_main_blocks> INPUT:blockdata x %d' % len(block_data_list.blockdata)
@@ -420,13 +425,18 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 
 
 	# skip if only return 20170524
-	for index in range(0, block_data_list.size()):
-		blockdata = block_data_list.blockdata[index]
-		if blockdata.proc_size()==1:
-			if blockdata.proc_size()==1:
-				if len(blockdata.procs[0].type)==1:
-					if blockdata.procs[0].type[0]=='return':
-						return block_code, sub_proc_list, block_code_cond_list, skip_code_list
+#	if block_data_list.size()==1: #0601
+#		for index in range(0, block_data_list.size()):
+#			blockdata = block_data_list.blockdata[index]
+#			if blockdata.proc_size()==1:
+#				if blockdata.proc_size()==1:
+#					if len(blockdata.procs[0].type)==1:
+#						if blockdata.procs[0].type[0]=='return':
+#
+#							if debug_out:
+#								print '<create_main_blocks> RETURN: [%d][%d] type = %s' % ( index, index2, blockdata.procs[0].type[0] )
+#
+#							return block_code, sub_proc_list, block_code_cond_list, skip_code_list
 
 
 	# check if process includes return (at the deepest level(block layer=1)) 20170524
@@ -442,6 +452,22 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 
 # main flow
 	for index in range(0, len(block_data_list.blockdata)):
+
+	# skip if only return 20170601
+		blockdata = block_data_list.blockdata[index]
+		if blockdata.proc_size()==1:
+			if blockdata.proc_size()==1:
+				if len(blockdata.procs[0].type)==1:
+					if blockdata.procs[0].type[0]=='return':
+
+						if debug_out:
+							print '<create_main_blocks> RETURN: [%d][%d] type = %s' % ( index, index2, blockdata.procs[0].type[0] )
+
+						break
+
+
+
+
 		tmp_blockdata = block_data_list.blockdata[index]
 		tmp_str = tmp_blockdata.title
 
