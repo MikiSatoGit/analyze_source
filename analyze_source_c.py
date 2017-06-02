@@ -12,8 +12,8 @@
 #
 import os.path
 import sys
-import csv
-import operator
+#import csv
+#import operator
 import copy
 import func_source_analyze
 import func_blockdiag
