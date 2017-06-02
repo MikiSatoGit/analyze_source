@@ -1,26 +1,24 @@
-Total lines: 21 
+Total lines: 18 
 Total functions : 1 
 --------------------------
-[Function Name] : fn_btt_aaz_initialize 
+[Function Name] : fn_btt_aaz_activate 
 -Return type : VD 
--Argument : 2 
-     [0] : FL   fl_a_trailer_length 
-     [1] : FL   fl_a_trailer_width 
+-Argument : 0 
 ----- Codes -----
 [1] MAINPROCESS(1) if if( 
-[2] MAINPROCESS(1) if st_aaz_params.First == BTT_RET_t.Bool.FALSE 
+[2] MAINPROCESS(1) if st_g_btt_stat.AAZ == BTT_RET_t.Func_Stat.ENABLE 
 [3] MAINPROCESS(1) if ) 
 [4] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[5] SUBPROCESS(1) return return; 
-[6] MAINPROCESS(2) equal st_aaz_params.VarY BTT_REAR_RANGE_LONG;
-[7] MAINPROCESS(2) equal st_aaz_params.First BTT_RET_t.Bool.FALSE;
-[8] MAINPROCESS(2) equal st_aaz_params.TLength_AAZ fl_a_trailer_length;
-[9] MAINPROCESS(2) equal st_aaz_params.TLength_valid_count (S4) 0;
-[10] MAINPROCESS(2) equal st_aaz_params.TLength_invalid_count (S4) 0;
-[11] MAINPROCESS(2) equal st_aaz_params.TLength_unknown_count (S4) 0;
-[12] MAINPROCESS(2) equal st_aaz_params.TWidth_AAZ fl_a_trailer_width;
-[13] MAINPROCESS(2) equal st_aaz_params.TWidth_valid_count (S4) 0;
-[14] MAINPROCESS(2) equal st_aaz_params.TWidth_invalid_count (S4) 0;
-[15] MAINPROCESS(2) equal st_aaz_params.TWidth_unknown_count (S4) 0;
+[5] SUBPROCESS(1) equal st_g_btt_stat.AAZ BTT_RET_t.Func_Stat.ACTIVE;
+[6] SUBPROCESS(1) equal st_aaz_params.VarY (FL) 0.0;
+[7] SUBPROCESS(1) equal st_aaz_params.First BTT_RET_t.Bool.TRUE;
+[8] SUBPROCESS(1) equal st_aaz_params.TLength_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[9] SUBPROCESS(1) equal st_aaz_params.TLength_valid_count (S4) 0;
+[10] SUBPROCESS(1) equal st_aaz_params.TLength_invalid_count (S4) 0;
+[11] SUBPROCESS(1) equal st_aaz_params.TLength_unknown_count (S4) 0;
+[12] SUBPROCESS(1) equal st_aaz_params.TWidth_AAZ BTT_TRAILER_SIZE_UNKNOWN;
+[13] SUBPROCESS(1) equal st_aaz_params.TWidth_valid_count (S4) 0;
+[14] SUBPROCESS(1) equal st_aaz_params.TWidth_invalid_count (S4) 0;
+[15] SUBPROCESS(1) equal st_aaz_params.TWidth_unknown_count (S4) 0;
 [16] MAINPROCESS(2) return return; 
 ----------------- Total Codes : 16 lines

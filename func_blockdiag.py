@@ -172,9 +172,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 
 
 #################### Draw Block diag (call blockdiag) ####################
-#0601	if debug_out:
-	print '----------<%s>----------' % funcname
-	print source
+	if debug_out:
+		print '----------<%s>----------' % funcname
+		print source
 
 	if source != '':
 		if save_png_flag:
@@ -397,8 +397,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 # [out] block_code_cond_list : if, elseif, else block code
 # [out] skip_code_list
 
-	debug_out = True #0601
-
 	if debug_out:
 		print '<create_main_blocks> ----------------------------------------'
 		print '<create_main_blocks> INPUT:blockdata x %d' % len(block_data_list.blockdata)
@@ -421,20 +419,7 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 	return_flg = False
 	skip_code_list = []
 	if_no_end = ''
-	return_only_flg = False # 20170601
-
-
-	# skip if only return 20170524 -> #0601
-#	for index in range(0, block_data_list.size()):
-#		blockdata = block_data_list.blockdata[index]
-#		if blockdata.proc_size()==1:
-#			if blockdata.proc_size()==1:
-#				if len(blockdata.procs[0].type)==1:
-#					if blockdata.procs[0].type[0]=='return':
-##						if debug_out:
-#						print '<create_main_blocks> RETURN: [%d][%d] type = %s' % ( index, index2, blockdata.procs[0].type[0] )
-#						return block_code, sub_proc_list, block_code_cond_list, skip_code_list
-
+	return_only_flg = False
 
 	# check if process includes return (at the deepest level(block layer=1)) 20170524
 	#if len(block_data_list.blockdata)==1:
@@ -464,11 +449,7 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 
 						if block_data_list.size()==1:
 							return_only_flg = True
-
 						break
-
-
-
 
 		tmp_blockdata = block_data_list.blockdata[index]
 		tmp_str = tmp_blockdata.title
@@ -487,7 +468,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 				skip_code_list.append(if_no_end)
 				if_no_end = ''
 
-
 		elif tmp_str.find('_elif')!=-1:
 			block_code_cond_list += create_if_blocks('_elif', tmp_str, condition_if_prev, condition_if_parent)
 			condition_if_prev = tmp_str
@@ -497,7 +477,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 				if_no_end = '<<REMOVE>>' + if_no_end
 				skip_code_list.append(if_no_end)
 				if_no_end = ''
-
 
 		elif tmp_str.find('_if')!=-1:
 			block_code_cond_list += create_if_blocks('_if', tmp_str, condition_if_prev, condition_if_parent)
@@ -615,7 +594,6 @@ def create_main_blocks(block_data_list, sub_proc_flg):
 		else:
 			block_code += 'END;\n'
 
-
 	return block_code, sub_proc_list, block_code_cond_list, skip_code_list
 
 
@@ -674,7 +652,6 @@ def create_if_blocks(condition_str, code, condition_prev, condition_if_parent):
 			print '\t(cond) %s' % tmp_code_cond
 
 	return block_code_cond_list
-
 
 
 

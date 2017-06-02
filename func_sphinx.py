@@ -151,6 +151,8 @@ def create_func_main(doc_path, func_list, fileList_list):
 		print '<create_func_main> [PATH] %s' % doc_path
 
 	code = ''
+	doc_title = doc_path[:doc_path.rfind('\\')]
+	doc_title = doc_title[doc_title.rfind('\\')+1:]
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
@@ -212,7 +214,7 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Subproc link
-		tmp_code = create_subproc_link_code('SUBPROCESS', funcname, tmp_filelist)
+		tmp_code = create_subproc_link_code('SUBPROCESS', funcname, tmp_filelist, doc_title)
 		code += tmp_code
 
 ##### Close file #####
@@ -232,6 +234,8 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 
 	code = ''
 	level_key = '_' + level_title + '.'
+	doc_title = doc_path[:doc_path.rfind('\\')]
+	doc_title = doc_title[doc_title.rfind('\\')+1:]
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
@@ -296,7 +300,7 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 				code += tmp_code
 
 				# Subproc link
-				tmp_code = create_subproc_link_code('SUB'+level_title, sub_funcname, tmp_filelist)
+				tmp_code = create_subproc_link_code('SUB'+level_title, sub_funcname, tmp_filelist, doc_title)
 				code += tmp_code
 
 ##### Close file #####
@@ -587,7 +591,7 @@ def create_cond_code(level_title, filelist, funcname):
 	return code, filelist
 
 
-def create_subproc_link_code(level_title, func_title, filelist):
+def create_subproc_link_code(level_title, func_title, filelist, doc_title):
 	code = ''
 	level_key = '_' + level_title +'.'
 	header_flg = False
@@ -595,7 +599,8 @@ def create_subproc_link_code(level_title, func_title, filelist):
 	for item in filelist.fig:
 		fig_title = level_key
 		fig_file =  item[item.rfind('\\')+1:]
-		sub_link =  fig_file[fig_file.find('_', 1)+1:]
+#		sub_link =  fig_file[fig_file.find('_', 1)+1:]
+		sub_link =  fig_file[fig_file.find(doc_title + '_', 1)+len(doc_title)+2:]
 		sub_link =  sub_link[:sub_link.rfind('.')]
 		if fig_file.find(fig_title)!=-1 and fig_file.find(func_title)!=-1:
 			if not header_flg:
