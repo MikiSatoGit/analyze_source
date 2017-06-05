@@ -9,6 +9,5 @@ Functional Process Specification
 .. toctree::
    :maxdepth: 1
 
-   bsm_btt/index
+   debug/index
 
-   bsm_recog_05/index
