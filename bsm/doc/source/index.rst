@@ -11,6 +11,3 @@ Functional Process Specification
 
    debug/index
 
-   bsm_btt/index
-
-   for_test_bsm_btt_ok/index
