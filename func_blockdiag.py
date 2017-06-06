@@ -843,18 +843,20 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 	for index in range(0, block_data_list.size()):
 		blockdata = block_data_list.blockdata[index]
 		for index2 in range(0, blockdata.proc_size()):
+
+
 			for index3 in range(0, len(blockdata.procs[index2].title) ):
 
 				# break if only return 20170524
-#				if blockdata.proc_size()==1:
 				if blockdata.proc_size()==1:
-					if blockdata.procs[index2].type[index3]=='return':
+					if blockdata.procs[index2].type[index3].strip()=='return':
 						break
 
 				### COND
-				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3] ):
+				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3].strip() ):
 					if index2==0 or blockdata.procs[index2].left[index3]==')':
 						continue
+
 					else:
 						csvfile = csvfile_base + '_' + blockdata.title + '_cond.csv'
 						if os.path.exists(csvfile)==False:

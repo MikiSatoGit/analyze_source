@@ -1360,6 +1360,7 @@ def is_return(code):
 
 
 def is_ctrl_stat(code):
+	code = code.strip()
 	if is_ctrl_stat_word('else if', code):
 		return True
 	if is_ctrl_stat_word('if', code):
