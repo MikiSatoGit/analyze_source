@@ -17,6 +17,12 @@ VD fn_miki_test3(
 		arg2_3_2
 	);
 
+	for(i=(S4)0; i<(S4)n; i++)
+	{
+		test1 += 1;
+	}
+
+
 
 	switch (hogehoge3_2){									/* SUBSUBSUBSUBPROCESS(2) « */
 	case mode1:
@@ -38,8 +44,18 @@ VD fn_miki_test3(
 	);
 
 	if (
-		(fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]) < POW_DIFF_UP_DOWN_DOA)							/* COND. j1 */
-		 && (fl_abs(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]) < (FL)s4_t_tmp_doa_diff_up_down)		/* COND. j2 */
+//		( fl_abs( afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k] ) < POW_DIFF_UP_DOWN_DOA )							/* COND. j1 */
+//		&& ( fl_abs( afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k] ) < (FL)s4_t_tmp_doa_diff_up_down )		/* COND. j2 */
+		(
+			fl_abs(
+				afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]
+			) < POW_DIFF_UP_DOWN_DOA
+		)							/* COND. j1 */
+		&& (
+			fl_abs(
+				afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]
+			) < (FL)s4_t_tmp_doa_diff_up_down
+		)		/* COND. j2 */
 	) {
 		afl_t_compare[s4_t_lp_i][s4_t_lp_k] = ( 8.0F * fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]))
 											  + 1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]));
