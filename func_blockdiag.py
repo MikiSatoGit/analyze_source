@@ -973,7 +973,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						table = \
 							  'PROC.' + str(proc_id) + ', ' \
 							+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '\
-							+ 'NA' + ', '\
+							+ '(NA)' + ', '\
 							+ 'TBD' \
 							+ '\n'
 					elif blockdata.procs[index2].type[index3].strip().find('equal<end>')!=-1:
@@ -998,7 +998,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 							table = \
 								  'PROC.' + str(proc_id) + ', ' \
 								+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
-								+ 'TBD' + ', '\
+								+ '(NA)' + ', '\
 								+ 'TBD' \
 								+ '\n'
 

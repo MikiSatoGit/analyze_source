@@ -1088,7 +1088,7 @@ def analyze_process_code(proc_codes):
 	if debug_out:
 		for debug_index in range (0, proc_codes.get_proc_data_size()):
 			for debug_index2 in range (0, proc_codes.proc_data_list[debug_index].get_main_size()):
-				print '<analyze_process_code> [%s] %s / %s' % \
+				print '<analyze_process_code(after sub proc analyze)> [%s] %s / %s' % \
 				( proc_codes.proc_data_list[debug_index].type[debug_index2], \
 				  proc_codes.proc_data_list[debug_index].left[debug_index2], \
 				  proc_codes.proc_data_list[debug_index].right[debug_index2] )
@@ -1101,6 +1101,15 @@ def analyze_process_code(proc_codes):
 
 		if debug_out:
 			print '-->ctrl stat %s / %d' %  (ctrl, ctrl_proc_num)
+
+	if debug_out:
+		for debug_index in range (0, proc_codes.get_proc_data_size()):
+			for debug_index2 in range (0, proc_codes.proc_data_list[debug_index].get_main_size()):
+				print '<analyze_process_code(after ctrl stat analyze)> [%s] %s / %s' % \
+				( proc_codes.proc_data_list[debug_index].type[debug_index2], \
+				  proc_codes.proc_data_list[debug_index].left[debug_index2], \
+				  proc_codes.proc_data_list[debug_index].right[debug_index2] )
+
 
 	# check whether funq 'A();'' or equal 'A=();' 20170605
 	proc_codes = check_func_equal(proc_codes)
@@ -1411,7 +1420,6 @@ def analyze_control_statement(proc_codes):
 #	continue				skip remaining process in loop
 #	goto 					jump
 
-
 	if debug_out:
 		print '<analyze_control_statement> START of analyze_control_statement'
 
@@ -1590,10 +1598,10 @@ def analyze_control_statement(proc_codes):
 
 											subproc_reverse = False
 
-###### not find '(' or ')' of condition
+###### not find '(' of condition
 							else:
 								if debug_out:
-									print '<analyze_control_statement> [%d][%d] NOT Find () @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('))
+									print '<analyze_control_statement> [%d][%d] NOT Find ( @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('))
 
 
 
@@ -1634,10 +1642,11 @@ def analyze_control_statement(proc_codes):
 							else:
 
 
-
 ##### divide by ) in the end of line (for for()) 20170523
 								if proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')!=-1 \
-								and proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')==len(proc_codes.proc_data_list[index1_r].left[index2_r])-1:
+								and proc_codes.proc_data_list[index1_r].left[index2_r].rfind(')')==len(proc_codes.proc_data_list[index1_r].left[index2_r])-1 \
+								and len(proc_codes.proc_data_list[index1_r].left[index2_r].strip() ) != 1: #20170605 added to avoid creating empty process 
+
 									tmp_title_add = []
 									tmp_type_add = []
 									tmp_left_add = []
@@ -1658,9 +1667,6 @@ def analyze_control_statement(proc_codes):
 									proc_codes.proc_data_list[index1_r].type[index2_r : index2_r+1] = tmp_type_add
 									proc_codes.proc_data_list[index1_r].left[index2_r : index2_r+1] = tmp_left_add
 									proc_codes.proc_data_list[index1_r].right[index2_r : index2_r+1] = tmp_right_add
-
-
-
 
 								if debug_out:
 									print '<analyze_control_statement>  -> NOTHING in %s' % proc_codes.proc_data_list[index1_r].left[index2_r]
