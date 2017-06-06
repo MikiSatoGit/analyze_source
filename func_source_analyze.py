@@ -1102,6 +1102,11 @@ def analyze_process_code(proc_codes):
 		if debug_out:
 			print '-->ctrl stat %s / %d' %  (ctrl, ctrl_proc_num)
 
+	# check whether funq 'A();'' or equal 'A=();' 20170605
+	proc_codes = check_func_equal(proc_codes)
+
+
+
 ########## <TBD> analyze condition of control statement ########## 
 ###### NEED TO CREATE #######
 
@@ -1180,8 +1185,6 @@ def analyze_sub_process_code(proc_codes):
 							if debug_out:
 								print '<analyze_sub_process_code>  find )'
 
-
-
 							tmp_bracket_to_end = tmp_left[tmp_left.rfind(')')+1:tmp_left.find(';')].strip()
 							if len(tmp_bracket_to_end)==0:
 
@@ -1255,10 +1258,8 @@ def analyze_sub_process_code(proc_codes):
 												proc_codes.proc_data_list[index1_r].type[index2_r] = '???'
 											else:
 												proc_codes.proc_data_list[index1_r].type[index2_r] = 'func'
+
 											if bracket_level==0:
-
-
-
 ##### divide by ( of function 20170523
 												tmp_split_title = proc_codes.proc_data_list[index1_r].title[index2_r]
 												tmp_split_type = proc_codes.proc_data_list[index1_r].type[index2_r]
@@ -1360,6 +1361,7 @@ def is_return(code):
 
 
 def is_ctrl_stat(code):
+	code = code.strip()
 	if is_ctrl_stat_word('else if', code):
 		return True
 	if is_ctrl_stat_word('if', code):
@@ -1814,3 +1816,28 @@ def analyze_control_statement(proc_codes):
 
 	return 	ctrl_stat_list
 
+def check_func_equal(proc_codes):
+# [in] proc_codes : ProcessCodes
+# [out] proc_codes : ProcessCodes
+	is_equal = False
+	for index in range( 0, proc_codes.get_proc_data_size() ):
+		tmp_proc_data = proc_codes.proc_data_list[index]
+		for index2 in range( 0, tmp_proc_data.get_main_size() ):
+			tmp_type = tmp_proc_data.type[index2]
+			tmp_left = tmp_proc_data.left[index2]
+			if tmp_type.strip()=='func<start>':
+				if tmp_left.find('=')!=-1 and tmp_left.find('=') < tmp_left.find('('):
+					tmp_func_name = tmp_left[tmp_left.find('=')+1:tmp_left.find('(')]
+					tmp_func_name = tmp_func_name.replace('','')
+					tmp_func_name = tmp_func_name.strip()
+					if len(tmp_func_name)==0 or tmp_func_name=='-':
+						is_equal = True
+					else:
+						is_equal = False
+			if is_equal:
+				proc_codes.proc_data_list[index].type[index2] = proc_codes.proc_data_list[index].type[index2].replace('func','equal')
+
+			if tmp_type.strip()=='func<end>':
+				is_equal = False
+
+	return proc_codes

@@ -836,6 +836,8 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 	proc_id = 0
 	cond_id = 0
 	arg_id = 0
+	is_equal_seq = False
+
 	tmp_files = glob.glob(csvfile_base+'*.csv')
 	for tmp_file in tmp_files:
 		os.remove(tmp_file)
@@ -843,18 +845,20 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 	for index in range(0, block_data_list.size()):
 		blockdata = block_data_list.blockdata[index]
 		for index2 in range(0, blockdata.proc_size()):
+
+
 			for index3 in range(0, len(blockdata.procs[index2].title) ):
 
 				# break if only return 20170524
-#				if blockdata.proc_size()==1:
 				if blockdata.proc_size()==1:
-					if blockdata.procs[index2].type[index3]=='return':
+					if blockdata.procs[index2].type[index3].strip()=='return':
 						break
 
 				### COND
-				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3] ):
+				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3].strip() ):
 					if index2==0 or blockdata.procs[index2].left[index3]==')':
 						continue
+
 					else:
 						csvfile = csvfile_base + '_' + blockdata.title + '_cond.csv'
 						if os.path.exists(csvfile)==False:
@@ -913,7 +917,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						table = \
 							'PROC.' + str(proc_id) + ', ' \
 							+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
-							+ 'TBD' + ', '\
+							+ 'see below' + ', '\
 							+ 'TBD' \
 							+ '\n'
 
@@ -962,15 +966,41 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					else:
 						fout_csv = open(csvfile,'a')
 					proc_id += 1
-					if blockdata.procs[index2].type[index3].strip().find('equal')!=-1:
 
-						# PROC output
+
+					if blockdata.procs[index2].type[index3].strip().find('equal<start>')!=-1:
+						is_equal_seq = True
 						table = \
 							  'PROC.' + str(proc_id) + ', ' \
-							+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
-							+ 'TBD' + ', '\
+							+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '\
+							+ 'NA' + ', '\
 							+ 'TBD' \
 							+ '\n'
+					elif blockdata.procs[index2].type[index3].strip().find('equal<end>')!=-1:
+						is_equal_seq = False
+						table = \
+							  '' + ', ' \
+							+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', ' \
+							+ '' + ', '\
+							+ '' \
+							+ '\n'
+
+					elif blockdata.procs[index2].type[index3].strip().find('equal')!=-1:
+						# PROC output
+						if is_equal_seq:
+							table = \
+								  '' + ', ' \
+								+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', ' \
+								+ '' + ', '\
+								+ '' \
+								+ '\n'
+						else:
+							table = \
+								  'PROC.' + str(proc_id) + ', ' \
+								+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
+								+ 'TBD' + ', '\
+								+ 'TBD' \
+								+ '\n'
 
 					else:
 
@@ -1019,7 +1049,7 @@ def output_func_def_to_csv(sourcefilename, func_list, deftype):
 
 # header
 		table = \
-		  'Argument' + ', ' \
+		  'Parameter' + ', ' \
 		+ 'Unit'  + ', ' \
 		+ 'Default' + ', ' \
 		+ 'LSB' + ', ' \
@@ -1067,7 +1097,7 @@ def output_func_def_to_csv(sourcefilename, func_list, deftype):
 		if deftype=='ret':
 			param_type = func_list.function_data[index1].return_type
 			table = \
-			  '(Return value)' + ', ' \
+			  '(value)' + ', ' \
 			+ ' '  + ', ' \
 			+ ' ' + ', ' \
 			+ ' ' + ', ' \

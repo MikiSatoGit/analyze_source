@@ -343,6 +343,9 @@ def indent():
 
 def table_header_top():
 	table_header_top = '.. csv-table:: '
+#	table_header_top += '\n'
+#	table_header_top += indent()
+#	table_header_top += ':header: '
 	return table_header_top
 
 def image_header():
@@ -360,6 +363,11 @@ def table_footer_interface():
 	table_footer_interface += indent()
 	table_footer_interface += ':encoding: utf-8'
 	table_footer_interface += '\n'
+
+	table_footer_interface += indent()
+	table_footer_interface += ':align: left'
+	table_footer_interface += '\n'
+
 	table_footer_interface += indent()
 	table_footer_interface += ':header-rows: 1'
 	table_footer_interface += '\n'
@@ -375,6 +383,11 @@ def table_footer_proc():
 	table_footer_proc += indent()
 	table_footer_proc += ':encoding: utf-8'
 	table_footer_proc += '\n'
+
+	table_footer_proc += indent()
+	table_footer_proc += ':align: left'
+	table_footer_proc += '\n'
+
 	table_footer_proc += indent()
 	table_footer_proc += ':header-rows: 1'
 	table_footer_proc += '\n'
@@ -390,6 +403,11 @@ def table_footer_cond():
 	table_footer_cond += indent()
 	table_footer_cond += ':encoding: utf-8'
 	table_footer_cond += '\n'
+
+	table_footer_cond += indent()
+	table_footer_cond += ':align: left'
+	table_footer_cond += '\n'
+
 	table_footer_cond += indent()
 	table_footer_cond += ':header-rows: 1'
 	table_footer_cond += '\n'

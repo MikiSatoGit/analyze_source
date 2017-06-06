@@ -31,7 +31,11 @@ VD fn_miki_test3(
 	}														/* SUBSUBSUBSUBPROCESS(2) Å™ */
 
 
-	fl_t_tmp_theta = -(PI / 180.0F * (st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_peak_doa_bins_intpl_2f[s4_t_lp_i] +  (FL)DOA_BIN_START_ANG));
+	fl_t_tmp_theta = -( 
+		PI / 180.0F * (
+			st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_peak_doa_bins_intpl_2f[s4_t_lp_i] +  (FL)DOA_BIN_START_ANG
+		) 
+	);
 
 	if (
 		(fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k]) < POW_DIFF_UP_DOWN_DOA)							/* COND. j1 */
