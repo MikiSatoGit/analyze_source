@@ -1604,7 +1604,6 @@ def analyze_control_statement(proc_codes):
 									print '<analyze_control_statement> [%d][%d] NOT Find ( @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('))
 
 
-
 ##### <TBD> (case, default for switch)
 								if proc_codes.proc_data_list[index1_r].left[index2_r].find(':')!=-1:
 									if proc_codes.proc_data_list[index1_r].left[index2_r].find('case ')!=-1:
@@ -1619,7 +1618,6 @@ def analyze_control_statement(proc_codes):
 									#subproc_reverse = False
 									if debug_out:
 										print '<analyze_control_statement> [%d][%d] Find init @[%d]' % (index1_r, index2_r, proc_codes.proc_data_list[index1_r].left[index2_r].rfind('('))
-
 
 
 ###### find else
