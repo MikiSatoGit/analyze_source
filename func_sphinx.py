@@ -73,12 +73,23 @@ def get_file_list(sourcefilename, func_list):
 		condfile_list = glob.glob(condfile)
 		figfile_list = glob.glob(figfile)
 
+
+		# remove files which includes same word in funcname ( such as aaa() and aaa2() ) #20170606
+		argfile_list = check_file_include_funcname(argfile_list, funcname, func_list)
+		retfile_list = check_file_include_funcname(retfile_list, funcname, func_list)
+		procfile_list = check_file_include_funcname(procfile_list, funcname, func_list)
+		condfile_list = check_file_include_funcname(condfile_list, funcname, func_list)
+		figfile_list = check_file_include_funcname(figfile_list, funcname, func_list)
+
+
 		file_list.name = funcname
 		file_list.arg = argfile_list
 		file_list.ret = retfile_list
 		file_list.proc = procfile_list
 		file_list.cond = condfile_list
 		file_list.fig = figfile_list
+
+
 		FileList_list.append( copy.deepcopy(file_list) )
 
 	return FileList_list
@@ -154,7 +165,6 @@ def create_index(doc_path, func_list):
 
 
 def create_func_main(doc_path, func_list, fileList_list):
-
 	if debug_out:
 		print '<create_func_main> [PATH] %s' % doc_path
 
@@ -164,6 +174,10 @@ def create_func_main(doc_path, func_list, fileList_list):
 
 	for index1 in range(0, func_list.func_num):
 		funcname = func_list.function_data[index1].name
+
+		if debug_out:
+			print '<create_func_main> [FUNCNAME] %s[%d/%d]' % (funcname, index1+1, func_list.func_num)
+
 
 		if isinstance(funcname, list):
 			funcname = ','.join(funcname)
@@ -255,7 +269,7 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 		tmp_filelist = fileList_list[index1]
 		for fig in reversed(fileList_list[index1].fig):
 			if debug_out:
-				print '<create_func_sub> ...cheking %s' % fig
+				print '<create_func_sub> ...cheking %s@%s' % (fig, level_key)
 
 			if fig.find(level_key)!=-1:
 				subproc_file = fig[fig.rfind('\\')+1:fig.rfind(".")]
@@ -563,6 +577,7 @@ def create_main_flow_code(level_title, filelist, funcname):
 		cnt += 1
 	for id in reversed(used_fig):
 		filelist.fig.pop(id)
+
 	return code, filelist
 
 
@@ -647,6 +662,15 @@ def check_files(fileList_list):
 	bret = False
 	if len(fileList_list)!=0:
 		for filelist in fileList_list:
+
+			if debug_out:
+				print '<check_files>---------------------------------------'
+				print '<check_files> arg: %d' % len(filelist.arg)
+				print '<check_files> ret: %d' % len(filelist.ret)
+				print '<check_files> proc: %d' % len(filelist.proc)
+				print '<check_files> cond: %d' % len(filelist.cond)
+				print '<check_files> fig: %d' % len(filelist.fig)
+
 			if len(filelist.arg)!=0 \
 			or len(filelist.ret)!=0 \
 			or len(filelist.proc)!=0 \
@@ -655,3 +679,23 @@ def check_files(fileList_list):
 				bret = True
 	return bret
 
+
+def check_file_include_funcname(file_list, funcname, func_list):
+	file_list_out = []
+	counfusing_filename_list = []
+	for index1 in range(0, func_list.func_num):
+		tmp_funcname = func_list.function_data[index1].name.strip()
+		if tmp_funcname!=funcname.strip() and tmp_funcname.find(funcname.strip())!=-1:
+			counfusing_filename_list.append(tmp_funcname)
+
+	for filename in file_list:
+		erase = False
+		for counfusing_filename in counfusing_filename_list:
+			if filename.find(counfusing_filename)!=-1:
+				erase = True
+
+		if not erase:
+			file_list_out.append(filename)
+
+
+	return file_list_out

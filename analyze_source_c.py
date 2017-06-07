@@ -229,7 +229,6 @@ func_blockdiag.output_func_def_to_csv(
 	'ret'
 )
 
-
 ##################################################
 # create rst file for Sphinx
 ##################################################
@@ -240,9 +239,6 @@ fileList_list = func_sphinx.get_file_list( str_filename1, func_list )
 doc_path = func_sphinx.set_doc_path( str_filename1 )
 rst_index_file = func_sphinx.create_index( doc_path, func_list )
 
-
-
-
 if debug_out:
 	for file_list in fileList_list:
 		print '[FUNCTION] %s' % file_list.name
@@ -267,15 +263,11 @@ if debug_out:
 			print 'cond[%d] %s' % (cnt, item)
 			cnt += 1
 	print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-
-
 
 
 #create main file
 fileList_list = func_sphinx.create_func_main( doc_path, func_list, fileList_list )
 
-
-
 if debug_out:
 	for file_list in fileList_list:
 		print '[FUNCTION] %s' % file_list.name
@@ -302,7 +294,7 @@ if debug_out:
 	print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 
 
-
+print '*******************************************************************************'
 
 #create sub process file
 level_title = 'PROCESS'
@@ -334,7 +326,6 @@ while func_sphinx.check_files(fileList_list):
 				print 'cond[%d] %s' % (cnt, item)
 				cnt += 1
 		print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
-
 
 
 ##################################################
