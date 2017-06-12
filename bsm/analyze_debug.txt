@@ -31,43 +31,44 @@ Total functions : 1
 [22] MAINPROCESS(2) switch  ) 
 [23] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [24] SUBPROCESS(1) ??? case mode1: 
-[25] SUBPROCESS(1) equal miki4_2_1 subsubsubsub_mode_1;
-[26] SUBPROCESS(1) proc break; 
-[27] SUBPROCESS(1) ??? case mode1: 
-[28] SUBPROCESS(1) equal miki4_2_2 subsubsubsub_mode_2;
-[29] SUBPROCESS(1) proc break; 
-[30] SUBPROCESS(1) ??? default: 
-[31] SUBPROCESS(1) equal miki4_2_3 subsubsubsub_mode_default;
-[32] SUBPROCESS(1) proc break; 
-[33] MAINPROCESS(3) equal<start> fl_t_tmp_theta = -( 
-[34] MAINPROCESS(3) equal PI / 180.0F * ( 
-[35] MAINPROCESS(3) equal st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_peak_doa_bins_intpl_2f[s4_t_lp_i] +  (FL)DOA_BIN_START_ANG 
-[36] MAINPROCESS(3) equal ) 
-[37] MAINPROCESS(3) equal<end> ); 
-[38] MAINPROCESS(3) if  if ( 
-[39] MAINPROCESS(3) if  ( 
-[40] MAINPROCESS(3) if  fl_abs( 
-[41] MAINPROCESS(3) if  afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k] 
-[42] MAINPROCESS(3) if  ) < POW_DIFF_UP_DOWN_DOA 
-[43] MAINPROCESS(3) if  ) 
-[44] MAINPROCESS(3) if  && ( 
-[45] MAINPROCESS(3) if  fl_abs( 
-[46] MAINPROCESS(3) if  afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k] 
-[47] MAINPROCESS(3) if  ) < (FL)s4_t_tmp_doa_diff_up_down 
-[48] MAINPROCESS(3) if  ) 
+[25] SUBPROCESS(1) func<start> miki4_2_1 = subsubsubsub_mode_1( 
+[26] SUBPROCESS(1) func<end> ); 
+[27] SUBPROCESS(1) proc break; 
+[28] SUBPROCESS(1) ??? case mode1: 
+[29] SUBPROCESS(1) equal miki4_2_2 subsubsubsub_mode_2;
+[30] SUBPROCESS(1) proc break; 
+[31] SUBPROCESS(1) ??? default: 
+[32] SUBPROCESS(1) equal miki4_2_3 subsubsubsub_mode_default;
+[33] SUBPROCESS(1) proc break; 
+[34] MAINPROCESS(3) equal<start> fl_t_tmp_theta = -( 
+[35] MAINPROCESS(3) equal PI / 180.0F * ( 
+[36] MAINPROCESS(3) equal st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_peak_doa_bins_intpl_2f[s4_t_lp_i] +  (FL)DOA_BIN_START_ANG 
+[37] MAINPROCESS(3) equal ) 
+[38] MAINPROCESS(3) equal<end> ); 
+[39] MAINPROCESS(3) if  if ( 
+[40] MAINPROCESS(3) if  ( 
+[41] MAINPROCESS(3) if  fl_abs( 
+[42] MAINPROCESS(3) if  afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k] 
+[43] MAINPROCESS(3) if  ) < POW_DIFF_UP_DOWN_DOA 
+[44] MAINPROCESS(3) if  ) 
+[45] MAINPROCESS(3) if  && ( 
+[46] MAINPROCESS(3) if  fl_abs( 
+[47] MAINPROCESS(3) if  afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k] 
+[48] MAINPROCESS(3) if  ) < (FL)s4_t_tmp_doa_diff_up_down 
 [49] MAINPROCESS(3) if  ) 
-[50] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[51] SUBPROCESS(1) equal<start> afl_t_compare[s4_t_lp_i][s4_t_lp_k] = ( 
-[52] SUBPROCESS(1) equal  8.0F * fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k])) + 1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]) 
-[53] SUBPROCESS(1) equal<end> ); 
-[54] MAINPROCESS(4) equal<start> afl_t_compare[s4_a_peak_num_up - 1 - s4_t_lp_i][s4_t_lp_k] = ( 
-[55] MAINPROCESS(4) equal 0.5F * fl_abs(afl_a_peak_doa_powers_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k])) + (1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]))) + (1.0F * fl_abs((FL)(afl_a_peak_bins_intpl_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_bins_intpl_dn[s4_t_lp_k] - (FL)s4_t_shift)) 
-[56] MAINPROCESS(4) equal<end> ); 
-[57] MAINPROCESS(4) func<start> tmp_comp = fl_abs( 
-[58] MAINPROCESS(4) func afl_a_alarmed_target_current[k][0]-afl_a_Tx_float[0][8]) + fl_abs(afl_a_alarmed_target_current[k][1]-afl_a_Tx_float[0][7] 
-[59] MAINPROCESS(4) func<end> ); 
-[60] MAINPROCESS(4) func<start> tmp_comp = fl_abs( 
-[61] MAINPROCESS(4) func afl_a_alarmed_target_current[k][0]-afl_a_Tx_float[0][8]) + fl_abs(afl_a_alarmed_target_current[k][1]-afl_a_Tx_float[0][7] 
-[62] MAINPROCESS(4) func<end> ); 
-[63] MAINPROCESS(4) return return; 
------------------ Total Codes : 63 lines
+[50] MAINPROCESS(3) if  ) 
+[51] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[52] SUBPROCESS(1) equal<start> afl_t_compare[s4_t_lp_i][s4_t_lp_k] = ( 
+[53] SUBPROCESS(1) equal  8.0F * fl_abs(afl_a_peak_doa_powers_up[s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k])) + 1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]) 
+[54] SUBPROCESS(1) equal<end> ); 
+[55] MAINPROCESS(4) equal<start> afl_t_compare[s4_a_peak_num_up - 1 - s4_t_lp_i][s4_t_lp_k] = ( 
+[56] MAINPROCESS(4) equal 0.5F * fl_abs(afl_a_peak_doa_powers_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_doa_powers_dn[s4_t_lp_k])) + (1.0F * fl_abs((FL)(afl_a_peak_doa_bins_intpl_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_doa_bins_intpl_dn[s4_t_lp_k]))) + (1.0F * fl_abs((FL)(afl_a_peak_bins_intpl_up[s4_a_peak_num_up - 1 - s4_t_lp_i] - afl_a_peak_bins_intpl_dn[s4_t_lp_k] - (FL)s4_t_shift)) 
+[57] MAINPROCESS(4) equal<end> ); 
+[58] MAINPROCESS(4) func<start> tmp_comp = fl_abs( 
+[59] MAINPROCESS(4) func afl_a_alarmed_target_current[k][0]-afl_a_Tx_float[0][8]) + fl_abs(afl_a_alarmed_target_current[k][1]-afl_a_Tx_float[0][7] 
+[60] MAINPROCESS(4) func<end> ); 
+[61] MAINPROCESS(4) func<start> tmp_comp = fl_abs( 
+[62] MAINPROCESS(4) func afl_a_alarmed_target_current[k][0]-afl_a_Tx_float[0][8]) + fl_abs(afl_a_alarmed_target_current[k][1]-afl_a_Tx_float[0][7] 
+[63] MAINPROCESS(4) func<end> ); 
+[64] MAINPROCESS(4) return return; 
+----------------- Total Codes : 64 lines
