@@ -26,7 +26,7 @@ VD fn_miki_test3(
 
 	switch (hogehoge3_2){									/* SUBSUBSUBSUBPROCESS(2) Å´ */
 	case mode1:
-		miki4_2_1 = subsubsubsub_mode_1;
+		miki4_2_1 = subsubsubsub_mode_1();
 		break;
 	case mode1:
 		miki4_2_2 = subsubsubsub_mode_2;
