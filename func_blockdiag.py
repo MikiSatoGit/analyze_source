@@ -833,8 +833,14 @@ def extract_sub_proc(proc_codes, level_title):
 
 
 def output_proc_to_csv(csvfile_base, block_data_list):
+	csvfile = ''
 	proc_id = 0
 	cond_id = 0
+	cond_level = 0
+	tmp_cond_code = ''
+	tmp_cond_code_list = []
+	tmp_cond_whole = ''
+	tmp_bracket_cnt = 0
 	arg_id = 0
 	is_equal_seq = False
 
@@ -854,9 +860,11 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					if blockdata.procs[index2].type[index3].strip()=='return':
 						break
 
-				### COND
+##### COND
 				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3].strip() ):
-					if index2==0 or blockdata.procs[index2].left[index3]==')':
+					if index2==0:
+						if debug_out:
+							print '<output_proc_to_csv> END of COND(1)'
 						continue
 
 					else:
@@ -870,27 +878,115 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 								+ 'Data'  + ', ' \
 								+ 'Condition' + \
 								'\n'
-
 							fout_csv.write(table)
+
+							tmp_cond_code = ''
+							del tmp_cond_code_list[:]
+							tmp_cond_whole = ''
+							tmp_bracket_cnt = 0
+
 						else:
 							fout_csv = open(csvfile,'a')
-						cond_id += 1
 
-						# COND output
-						table = \
-							  'COND.' + str(cond_id) + ', ' \
-							+ blockdata.procs[index2].left[index3] + ', ' \
-							+ blockdata.procs[index2].right[index3] \
-							+ '\n'
+						# Check bracket level in Condition 20170613
+						cond_level += blockdata.procs[index2].left[index3].count('(')
+						cond_level -= blockdata.procs[index2].left[index3].count(')')
+						if cond_level < 0 and blockdata.procs[index2].left[index3].strip()==')':
+							if debug_out:
+								print '<output_proc_to_csv> END of COND(2)'
+						else:
+							tmp_cond_code += blockdata.procs[index2].left[index3]
 
-						fout_csv.write(table)
+						if debug_out:
+							print '<output_proc_to_csv> [%d] %s' % (cond_level, tmp_cond_code)
+
+						# Divide condition code by ';','&&','||' 20170613
+						if cond_level < 0:
+							tmp_cond_code_list = devide_by_condition_div_symbol(tmp_cond_code)
+							for tmp_code in tmp_cond_code_list:
+								if is_condition_div_symbol(tmp_code):
+									tmp_cond_whole += ' ' + tmp_code + ' '
+								else:
+									cond_id += 1
+									table = 'COND.' + str(cond_id) + ', ' \
+
+									# Create total condition expression(1) 
+									tmp_bracket_check = tmp_code.strip()
+									while tmp_bracket_check.find('(')==0:
+										tmp_bracket_check = tmp_bracket_check[1:]
+										tmp_cond_whole += '('
+									tmp_cond_whole += 'COND.' + str(cond_id)
+
+									# erase top bracket (and corresponding end bracket)
+									tmp_right = tmp_code.strip()
+									while tmp_right.find('(')==0:
+										tmp_right = tmp_right[1:]
+										tmp_bracket_cnt += 1
+									while tmp_right.rfind(')')==len(tmp_right)-1:
+										if tmp_right.count('(') - tmp_right.count(')')==0:
+											break
+										else:
+											tmp_right = tmp_right[:len(tmp_right)-1]
+											tmp_bracket_cnt -= 1
+
+									# extract condition data
+									tmp_code_item = devide_by_condition_symbol(tmp_code)
+									if isinstance(tmp_code_item,list):
+										if len(tmp_code_item)==3: #Should be 3 (A symbol, B) or 1(A)
+											tmp_left = tmp_code_item[0].strip()
+											while tmp_left.find('(')==0:
+												tmp_left = tmp_left[1:]
+											table += tmp_left + ', ' \
+												  + tmp_right \
+												  + '\n'
+										else:
+											table += '' + ', ' \
+												  + tmp_right \
+												  + '\n'
+									else:
+										table += 'ERROR?' + ', ' \
+											  + tmp_right \
+											  + '\n'
+									fout_csv.write(table)
+
+									# Create total condition expression(2) 
+									tmp_bracket_check = tmp_code.strip()
+									while tmp_bracket_check.rfind(')')==len(tmp_bracket_check)-1:
+										tmp_bracket_check = tmp_bracket_check[:len(tmp_bracket_check)-1]
+										tmp_cond_whole += ')'
+
+
+							tmp_cond_code = ''
+							cond_level = 0
+
+
+						if tmp_cond_whole!='':
+							table = \
+								  'TOTAL' + ', ' \
+								+ tmp_cond_whole  + ', ' \
+								+ '' + \
+								'\n'
+							fout_csv.write(table)
 						fout_csv.close()
 
-				### subproc
+
+
+
+
+
+
+
+
+
+
+
+
+
+##### subproc
 				elif blockdata.procs[index2].type[index3].strip()=='subproc':
 					continue
 
-				### func
+##### func
 				elif blockdata.procs[index2].type[index3].strip().find('func')!=-1:
 					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
 					if os.path.exists(csvfile)==False:
@@ -948,7 +1044,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					fout_csv.write(table)
 					fout_csv.close()
 
-				### PROC
+##### PROC
 				else:
 					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
 					if os.path.exists(csvfile)==False:
@@ -1015,6 +1111,50 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					fout_csv.close()
 
 	return
+
+
+def is_condition_div_symbol(code):
+	bret = False
+	if code.strip()==';' \
+	or code.strip()=='&&' \
+	or code.strip()=='||':
+#	or code.strip()=='==' \
+#	or code.strip()=='<' \
+#	or code.strip()=='<=' \
+#	or code.strip()=='>' \
+#	or code.strip()=='>=':
+		bret = True
+	return bret
+
+
+def devide_by_condition_div_symbol(code):
+	code_list = []
+	tmp_code = code.replace(' ', '')
+	tmp_code = tmp_code.replace(';', '$$;$$')
+	tmp_code = tmp_code.replace('&&', '$$&&$$')
+	tmp_code = tmp_code.replace('||', '$$||$$')
+	code_list = tmp_code.split('$$')
+	return code_list
+
+def devide_by_condition_symbol(code):
+	code_list = []
+	tmp_code = code.replace(' ', '')
+	if tmp_code.find('=')!=-1:
+		if tmp_code.find('==')!=-1:
+			tmp_code = tmp_code.replace('==', '$$==$$')
+		elif tmp_code.find('<=')!=-1:
+			tmp_code = tmp_code.replace('<=', '$$<=$$')
+		elif tmp_code.find('>=')!=-1:
+			tmp_code = tmp_code.replace('>=', '$$>=$$')
+		else:
+			tmp_code = tmp_code.replace('=', '$$=$$')
+	else:
+		if tmp_code.find('<')!=-1:
+			tmp_code = tmp_code.replace('<', '$$<$$')
+		if tmp_code.find('>')!=-1:
+			tmp_code = tmp_code.replace('>', '$$>$$')
+	code_list = tmp_code.split('$$')
+	return code_list
 
 
 

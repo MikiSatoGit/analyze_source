@@ -23,6 +23,11 @@ VD fn_miki_test3(
 	}
 
 
+	if( A1==(S4)a1 || (B1==(FL)b1 && B2==(FL)b3) || (C1 > c1() && C2() > c2 && C3 > (S4)c3()) && ( (D1 < d1 && D2 < d2) || (D3 >= d3 && D4 >= d4) ) )
+	{
+		hoge = hogehoge;
+	}
+
 
 	switch (hogehoge3_2){									/* SUBSUBSUBSUBPROCESS(2) Å´ */
 	case mode1:
