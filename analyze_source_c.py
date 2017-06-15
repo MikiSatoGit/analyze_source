@@ -294,8 +294,6 @@ if debug_out:
 	print '>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>'
 
 
-print '*******************************************************************************'
-
 #create sub process file
 level_title = 'PROCESS'
 while func_sphinx.check_files(fileList_list):

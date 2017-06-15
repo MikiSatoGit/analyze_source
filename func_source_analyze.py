@@ -1117,7 +1117,8 @@ def analyze_process_code(proc_codes):
 
 
 ########## <TBD> analyze condition of control statement ########## 
-###### NEED TO CREATE #######
+###### NEED TO IMPLEMENT #######
+# -> Implemented in func_blockdiag.output_proc_to_csv()
 
 ########## <TBD> analyze call function ########## 
 ###### NEED TO IMPLEMENT #######
