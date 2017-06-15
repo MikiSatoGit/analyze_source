@@ -836,11 +836,11 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 	csvfile = ''
 	proc_id = 0
 	cond_id = 0
-	cond_level = 0 #0613
-	tmp_cond_code = '' #0613
-	tmp_cond_code_list = [] #0613
-	tmp_cond_whole = '' #0613
-	tmp_bracket_cnt = 0 #0613
+	cond_level = 0
+	tmp_cond_code = ''
+	tmp_cond_code_list = []
+	tmp_cond_whole = ''
+	tmp_bracket_cnt = 0
 	arg_id = 0
 	is_equal_seq = False
 
@@ -862,8 +862,6 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 
 ##### COND
 				if func_source_analyze.is_ctrl_stat( blockdata.procs[index2].type[index3].strip() ):
-
-#0613					if index2==0 or blockdata.procs[index2].left[index3]==')':
 					if index2==0:
 						if debug_out:
 							print '<output_proc_to_csv> END of COND(1)'
@@ -882,30 +880,13 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 								'\n'
 							fout_csv.write(table)
 
-							tmp_cond_code = '' #0613
-							del tmp_cond_code_list[:] #0613
-							tmp_cond_whole = '' #0613
-							tmp_bracket_cnt = 0 #0613
+							tmp_cond_code = ''
+							del tmp_cond_code_list[:]
+							tmp_cond_whole = ''
+							tmp_bracket_cnt = 0
 
 						else:
 							fout_csv = open(csvfile,'a')
-
-
-
-						# COND output
-#0613						cond_id += 1
-#0613						table = \
-#0613							  'COND.' + str(cond_id) + ', ' \
-#0613							+ blockdata.procs[index2].left[index3] + ', ' \
-#0613							+ blockdata.procs[index2].right[index3] \
-#0613							+ '\n'
-#0613
-#0613						fout_csv.write(table)
-#0613						fout_csv.close()
-
-
-
-
 
 						# Check bracket level in Condition 20170613
 						cond_level += blockdata.procs[index2].left[index3].count('(')
