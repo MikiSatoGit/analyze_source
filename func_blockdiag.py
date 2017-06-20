@@ -970,18 +970,6 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						fout_csv.close()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ##### subproc
 				elif blockdata.procs[index2].type[index3].strip()=='subproc':
 					continue
@@ -1013,9 +1001,9 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						table = \
 							'PROC.' + str(proc_id) + ', ' \
 							+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
-#0619							+ 'see below' + ', '\
-#0619							+ 'TBD' \
-#0619							+ '\n'
+							#	+ 'see below' + ', '\
+							#	+ 'TBD' \
+							#	+ '\n'
 
 
 						if debug_out:
@@ -1060,10 +1048,6 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 							+ 'TBD' \
 							+ '\n'
 
-					#########
-#0619					fout_csv.write(table)
-#0619					fout_csv.close()
-
 ##### PROC
 				else:
 					csvfile = csvfile_base + '_' + blockdata.title + '_proc.csv'
@@ -1082,7 +1066,6 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					else:
 						fout_csv = open(csvfile,'a')
 					proc_id += 1
-
 
 
 					#write case in PROC# 20170619

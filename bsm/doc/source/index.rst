@@ -10,5 +10,3 @@ Functional Process Specification
    :maxdepth: 1
 
    debug/index
-   bsm_btt/index
-   bsm_recog_05/index
