@@ -970,18 +970,6 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						fout_csv.close()
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 ##### subproc
 				elif blockdata.procs[index2].type[index3].strip()=='subproc':
 					continue
@@ -1013,36 +1001,52 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						table = \
 							'PROC.' + str(proc_id) + ', ' \
 							+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
-							+ 'see below' + ', '\
-							+ 'TBD' \
-							+ '\n'
+							#	+ 'see below' + ', '\
+							#	+ 'TBD' \
+							#	+ '\n'
 
-						if blockdata.procs[index2].left[index3].find('=')!=-1:
-							func_name = blockdata.procs[index2].left[index3][blockdata.procs[index2].left[index3].find('='):blockdata.procs[index2].left[index3].find('(')]
-							func_name = func_name.strip()
-						else:
-							func_name = blockdata.procs[index2].left[index3][:blockdata.procs[index2].left[index3].find('(')]
-							func_name = func_name.strip()
 
 						if debug_out:
+							if blockdata.procs[index2].left[index3].find('=')!=-1:
+								func_name = blockdata.procs[index2].left[index3][blockdata.procs[index2].left[index3].find('='):blockdata.procs[index2].left[index3].find('(')]
+								func_name = func_name.strip()
+							else:
+								func_name = blockdata.procs[index2].left[index3][:blockdata.procs[index2].left[index3].find('(')]
+								func_name = func_name.strip()
 							print '<output_proc_to_csv> func name : %s' % func_name
 
 					elif blockdata.procs[index2].type[index3].strip().find('<end>')!=-1:
+
+
+						#don't say "see below" when no arguments 20170619
+						if arg_id==0:
+							table += \
+								  '' + ', '\
+								+ 'TBD' \
+								+ '\n'
+						fout_csv.write(table)
+						fout_csv.close()
+
+
 						continue
 					else:
 						arg_id += 1
 
+						#don't say "see below" when no arguments 20170619
+						if arg_id==1:
+							table += \
+								  'see below' + ', '\
+								+ 'TBD' \
+								+ '\n'
+
+
 						# PROC output (FUNC-ARG)
-						table = \
+						table += \
 							  ' ' + ', ' \
 							+ '[arg.' + str(arg_id) + ']' + ', ' \
 							+ blockdata.procs[index2].left[index3].replace(',', '') + blockdata.procs[index2].right[index3] + ' ,' \
 							+ 'TBD' \
 							+ '\n'
-
-					#########
-					fout_csv.write(table)
-					fout_csv.close()
 
 ##### PROC
 				else:
@@ -1064,7 +1068,17 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 					proc_id += 1
 
 
-					if blockdata.procs[index2].type[index3].strip().find('equal<start>')!=-1:
+					#write case in PROC# 20170619
+					if blockdata.procs[index2].type[index3].strip().find('???')!=-1:
+						table = \
+							  blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '\
+							+ 'see below' + ', '\
+							+ '' \
+							+ '\n'
+
+
+
+					elif blockdata.procs[index2].type[index3].strip().find('equal<start>')!=-1:
 						is_equal_seq = True
 						table = \
 							  'PROC.' + str(proc_id) + ', ' \
