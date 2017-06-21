@@ -644,7 +644,7 @@ def create_subproc_link_code(level_title, func_title, filelist, doc_title):
 	for item in filelist.fig:
 		fig_title = level_key
 		fig_file =  item[item.rfind('\\')+1:]
-		sub_link =  fig_file[fig_file.find(doc_title + '_', 1)+len(doc_title)+2:]
+		sub_link =  fig_file[fig_file.find(doc_title + '_')+len(doc_title)+1:]
 		sub_link =  sub_link[:sub_link.rfind('.')]
 		if fig_file.find(fig_title)!=-1 and fig_file.find(func_title)!=-1:
 			if not header_flg:

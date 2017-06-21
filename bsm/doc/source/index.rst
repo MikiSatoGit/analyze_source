@@ -9,4 +9,5 @@ Functional Process Specification
 .. toctree::
    :maxdepth: 1
 
-   debug/index
+   lca_main/index
+   lca_core/index
