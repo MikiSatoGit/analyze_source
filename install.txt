@@ -1,3 +1,6 @@
+=================================================
+Install
+=================================================
 easy_install pillow
 easy_install blockdiag
 easy_install sphinx (pip install sphinx)
