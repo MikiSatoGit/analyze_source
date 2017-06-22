@@ -32,6 +32,7 @@ class FileList:
 
 debug_out = False
 
+
 def get_file_list(sourcefilename, func_list):
 	if len(sourcefilename)>1:
 		if os.path.exists(sourcefilename[0] + '\\csv')==False:
@@ -129,7 +130,6 @@ def create_index(doc_path, func_list):
 	file_title = file_title[file_title.rfind('\\')+1:]
 	rstfile = doc_path + 'index.rst'
 	code =''
-	indent = '   '
 
 	fout_rst = open(rstfile,'w')
 
@@ -143,7 +143,7 @@ def create_index(doc_path, func_list):
 	code += '\n'
 	code += '.. toctree::'
 	code += '\n'
-	code += indent
+	code += indent()
 	code += ':maxdepth: 1'
 	code += '\n'
 	code += '\n'
@@ -154,7 +154,7 @@ def create_index(doc_path, func_list):
 		if isinstance(funcname, list):
 			funcname = ','.join(funcname)
 
-		code += indent
+		code += indent()
 		code += funcname
 		code += '\n'
 
@@ -213,7 +213,9 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Main process flow
-		tmp_code, tmp_filelist = create_main_flow_code('MAINPROCESS', tmp_filelist, funcname)
+		# replaced create_main_flow_code() to parse_main_flow_code to include blockdiag code in rst file 20160622
+		#tmp_code, tmp_filelist = create_main_flow_code('MAINPROCESS', tmp_filelist, funcname)
+		tmp_code, tmp_filelist = parse_main_flow_code('MAINPROCESS', tmp_filelist, funcname, doc_path)
 		code += tmp_code
 
 
@@ -337,9 +339,6 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 		fileList_list[index1] = tmp_filelist
 
 	return fileList_list
-
-
-
 
 
 
@@ -580,6 +579,36 @@ def create_main_flow_code(level_title, filelist, funcname):
 
 	return code, filelist
 
+
+def parse_main_flow_code(level_title, filelist, funcname, doc_path):
+	code = ''
+	cnt = 0
+	used_fig = []
+	level_key = '_' + level_title + '.'
+	for item in filelist.fig:
+		fig_title = funcname + level_key
+		fig_file =  item[item.rfind('\\')+1:]
+		if fig_file.find(fig_title)!=-1:
+
+			diag_file_path = doc_path[:doc_path.find('\\')]
+			diag_file_path += '/fig/' + fig_file
+			f_diag = open(diag_file_path,'r')
+			code += '.. blockdiag::\n'
+			code += '\n'
+			for line in f_diag:
+				code += indent()
+				code += line
+
+			code += '\n'
+			code += '\n'
+			used_fig.append(cnt)
+			f_diag.close()
+
+		cnt += 1
+	for id in reversed(used_fig):
+		filelist.fig.pop(id)
+
+	return code, filelist
 
 def create_proc_code(level_title, filelist, funcname):
 	code = ''

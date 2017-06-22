@@ -1,6 +1,7 @@
 easy_install pillow
 easy_install blockdiag
 easy_install sphinx (pip install sphinx)
+pip install sphinxcontrib-actdiag sphinxcontrib-blockdiag sphinxcontrib-nwdiag sphinxcontrib-seqdiag
 pip install sphinx_rtd_theme
 
 =================================================

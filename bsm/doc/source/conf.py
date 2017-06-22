@@ -30,7 +30,14 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = [
+    'sphinxcontrib.blockdiag',
+    'sphinxcontrib.seqdiag',
+    'sphinxcontrib.actdiag',
+    'sphinxcontrib.nwdiag',
+    'sphinxcontrib.rackdiag',
+    'sphinxcontrib.packetdiag',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -180,3 +187,10 @@ texinfo_documents = [
 
 
 
+# -- Options for bloackdiag -------------------------------------------
+blockdiag_html_image_format = 'SVG'
+seqdiag_html_image_format = 'SVG'
+actdiag_html_image_format = 'SVG'
+nwdiag_html_image_format = 'SVG'
+rackiag_html_image_format = 'SVG'
+packetdiag_html_image_format = 'SVG'
