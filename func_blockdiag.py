@@ -38,14 +38,14 @@ class BlockData:
 
 
 debug_out = False
-
+fig_type = 'SVG'	# SVG or PNG
 
 def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 # [in] sourcefilename : C source file name(str)
 # [in] funcname : FunctionList.FunctionData.name (str)
 # [in] proc_codes : FunctionList.FunctionData.process_code_list (ProcessCodes)
 # [in] level_title : process level (str) : MAINPROCESS, SUBPROCESS,...
-# [in] outputmode : 0:png, 1:source txt, 2:both
+# [in] outputmode : 0:png or svg, 1:source txt, 2:both
 
 	sub_proc_flg = True
 	if level_title == 'MAINPROCESS':
@@ -74,7 +74,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 		txtfile = '\\fig\\' + sourcefilename[0]
 		csvfile_base = '\\csv\\' + sourcefilename[0]
 
-	outfile = outfile[0:outfile.rfind('.')] + '_' + funcname + '_' + level_title +'.svg'
+	outfile = outfile[0:outfile.rfind('.')] + '_' + funcname + '_' + level_title +'.' + fig_type
 
 	txtfile = txtfile[0:txtfile.rfind('.')] + '_' + funcname + '_' + level_title +'.diag'
 	csvfile_base = csvfile_base[0:csvfile_base.rfind('.')] + '_' + funcname + '_' + level_title
@@ -91,6 +91,9 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	source_header += 'plugin autoclass;\n'
 	source_header += 'span_width = 24;\n'
 	source_header += 'span_height = 20;\n'
+
+	source_header += 'height = 200;\n'
+
 	source_header += 'class if [shape = diamond];\n'
 	source_header += 'class elif [shape = diamond];\n'
 	source_header += 'class else [shape = circle, color = gray];\n'
@@ -185,7 +188,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 		if save_png_flag:
 			tree = parser.parse_string(source) 
 			diagram = builder.ScreenNodeBuilder.build(tree) 
-			draw = drawer.DiagramDraw('SVG', diagram, filename=outfile) 
+			draw = drawer.DiagramDraw(fig_type, diagram, filename=outfile) 
 			draw.draw()
 			draw.save() 
 
