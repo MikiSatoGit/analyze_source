@@ -143,7 +143,8 @@ for index1 in range(0, func_list.func_num):
 		func_list.function_data[index1].name, \
 		func_list.function_data[index1].process_code_list, \
 		'MAINPROCESS', \
-		0
+		1 #0:fig, 1:txt, 2:both
+		# replaced fig to txt 20160622
 	)
 
 	if debug_out:
@@ -189,7 +190,8 @@ for index1 in range(0, func_list.func_num):
 				func_list.function_data[index1].name + '_'+ tmp_header, \
 				each_proc_codes, \
 				level_title, \
-				0
+				1 #0:fig, 1:txt, 2:both
+        		# replaced fig to txt 20160622
 			)
 			if len(tmp_header_list)!=0:
 				for i in range(0, len(tmp_header_list)):

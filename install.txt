@@ -1,8 +1,12 @@
 easy_install pillow
 easy_install blockdiag
 easy_install sphinx (pip install sphinx)
+pip install sphinxcontrib-actdiag sphinxcontrib-blockdiag sphinxcontrib-nwdiag sphinxcontrib-seqdiag
 pip install sphinx_rtd_theme
 
+=================================================
+SPHINX
+=================================================
 -------------------------------
 Create sphinx project
 sphinx-quickstart
@@ -48,3 +52,39 @@ Functional Process Detail Specification
 
 -------------------------------
 make html
+
+
+
+
+
+=================================================
+TEXLIVE
+=================================================
+- Install texlive
+https://www.tug.org/texlive/acquire-netinstall.html
+
+https://medemanabu.net/latex/windows-tex-live-download-install/
+
+- Set Environment Variables
+TEXLIVE_ROOT : C:\miki\applications\texlive\2017\bin\win32
+PATH : + %TEXLIVE_ROOT%
+
+- Command
+make latexpdf
+cd build/latex
+pLatex ***.tex
+dvipdfmx ***.dvi
+
+(or Open tex file by TeXworks editor -> Run)
+
+If pdf is not vreated, try:
+
+
+
+
+
+
+
+
+
+
