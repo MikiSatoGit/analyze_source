@@ -205,11 +205,15 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Arguments
-		tmp_code, tmp_filelist = create_argument_code(tmp_filelist)
+		# replaced create_argument_code() to parse_main_flow_code to include blockdiag code in rst file 20160622
+		#tmp_code, tmp_filelist = create_argument_code(tmp_filelist)
+		tmp_code, tmp_filelist = parse_arg_csv_to_listtable(tmp_filelist, doc_path)
 		code += tmp_code
 
 		# Return value
-		tmp_code, tmp_filelist = create_return_value_code(tmp_filelist)
+		# replaced create_return_value_code() to parse_ret_csv_to_listtable to include blockdiag code in rst file 20160622
+		#tmp_code, tmp_filelist = create_return_value_code(tmp_filelist)
+		tmp_code, tmp_filelist = parse_ret_csv_to_listtable(tmp_filelist, doc_path)
 		code += tmp_code
 
 
@@ -218,7 +222,7 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Main process flow
-		# replaced create_main_flow_code() to parse_main_flow_code to include blockdiag code in rst file 20160622
+		# replaced create_main_flow_code() to parse_arg_csv_to_listtable() to include blockdiag code in rst file 20160622
 		#tmp_code, tmp_filelist = create_main_flow_code('MAINPROCESS', tmp_filelist, funcname)
 		tmp_code, tmp_filelist = parse_main_flow_code('MAINPROCESS', tmp_filelist, funcname, doc_path)
 		code += tmp_code
@@ -229,7 +233,7 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Proc. table
-		# replaced create_proc_code() to parse_proc_csv_to_listtable to include table code in rst file 20160622
+		# replaced create_proc_code() to parse_proc_csv_to_listtable() to include table code in rst file 20160622
 		#tmp_code, tmp_filelist = create_proc_code('MAINPROCESS', tmp_filelist, funcname)
 		tmp_code, tmp_filelist = parse_proc_csv_to_listtable('MAINPROCESS', tmp_filelist, funcname, doc_path)
 		code += tmp_code
@@ -240,7 +244,8 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Cond. table
-		tmp_code, tmp_filelist = create_cond_code('MAINPROCESS', tmp_filelist, funcname)
+		# replaced create_cond_code() to parse_proc_csv_to_listtable() to include table code in rst file 20160622
+		tmp_code, tmp_filelist = parse_cond_csv_to_listtable('MAINPROCESS', tmp_filelist, funcname, doc_path)
 		code += tmp_code
 
 
@@ -398,6 +403,14 @@ def table_footer_interface():
 	table_footer_interface += ':file: ../../../csv/'
 	return table_footer_interface
 
+def list_footer_interface():
+	list_footer_interface  = indent()
+	list_footer_interface += ':header-rows: 1'
+	list_footer_interface += '\n'
+	list_footer_interface += indent()
+	list_footer_interface += ':widths: 40, 5, 10, 5, 10, 10, 10, 10'
+	list_footer_interface += '\n'
+	return list_footer_interface
 
 def table_footer_proc():
 	table_footer_proc = '\n'
@@ -418,7 +431,6 @@ def table_footer_proc():
 	table_footer_proc += indent()
 	table_footer_proc += ':file: ../../../csv/'
 	return table_footer_proc
-
 
 def list_footer_proc():
 	list_footer_proc = indent()
@@ -448,6 +460,15 @@ def table_footer_cond():
 	table_footer_cond += indent()
 	table_footer_cond += ':file: ../../../csv/'
 	return table_footer_cond
+
+def list_footer_cond():
+	list_footer_cond  = indent()
+	list_footer_cond += ':header-rows: 1'
+	list_footer_cond += '\n'
+	list_footer_cond += indent()
+	list_footer_cond += ':widths: 20, 40, 40'
+	list_footer_cond += '\n'
+	return list_footer_cond
 
 def link_header():
 	link_header = '.. toctree::'
@@ -535,7 +556,6 @@ def title_subproc_link():
 	code += '\n'
 	return code
 
-
 def create_argument_code(filelist):
 	table_header_arg = table_header_top()
 	table_header_arg += 'Arguments'
@@ -555,6 +575,34 @@ def create_argument_code(filelist):
 		filelist.arg.pop(id)
 	return code, filelist
 
+def parse_arg_csv_to_listtable(filelist, doc_path):
+	code = ''
+	cnt = 0
+	used_arg = []
+	for item in filelist.arg:
+		arg_file =  item[item.rfind('\\')+1:]
+
+		csv_file_path = doc_path[:doc_path.find('\\')]
+		csv_file_path += '/csv/' + arg_file
+		datalist = read_csv_file(csv_file_path)
+
+		code += '.. list-table:: '
+		code += 'Arguments'
+		code += '\n'
+		code += list_footer_interface()
+		code += '\n'
+		code += datalist
+		code += '\n'
+		code += '\n'
+		code += '-----------------------------'
+		code += '\n'
+		code += '\n'
+
+		used_arg.append(cnt)
+		cnt += 1
+	for id in reversed(used_arg):
+		filelist.arg.pop(id)
+	return code, filelist
 
 def create_return_value_code(filelist):
 	table_header_ret = table_header_top()
@@ -575,6 +623,34 @@ def create_return_value_code(filelist):
 		filelist.ret.pop(id)
 	return code, filelist
 
+def parse_ret_csv_to_listtable(filelist, doc_path):
+	code = ''
+	cnt = 0
+	used_ret = []
+	for item in filelist.ret:
+		ret_file =  item[item.rfind('\\')+1:]
+
+		csv_file_path = doc_path[:doc_path.find('\\')]
+		csv_file_path += '/csv/' + ret_file
+		datalist = read_csv_file(csv_file_path)
+
+		code += '.. list-table:: '
+		code += 'Return Value'
+		code += '\n'
+		code += list_footer_interface()
+		code += '\n'
+		code += datalist
+		code += '\n'
+		code += '\n'
+		code += '-----------------------------'
+		code += '\n'
+		code += '\n'
+
+		used_ret.append(cnt)
+		cnt += 1
+	for id in reversed(used_ret):
+		filelist.ret.pop(id)
+	return code, filelist
 
 def create_main_flow_code(level_title, filelist, funcname):
 	code = ''
@@ -710,6 +786,41 @@ def create_cond_code(level_title, filelist, funcname):
 			code += '-----------------------------'
 			code += '\n'
 			code += '\n'
+			used_cond.append(cnt)
+		cnt += 1
+	for id in reversed(used_cond):
+		filelist.cond.pop(id)
+	return code, filelist
+
+def parse_cond_csv_to_listtable(level_title, filelist, funcname, doc_path):
+	code = ''
+	cnt = 0
+	used_cond = []
+	level_key = '_' + level_title +'_'
+	for item in filelist.cond:
+		cond_title = funcname + level_key
+		cond_file =  item[item.rfind('\\')+1:]
+		cond_sub_title = cond_file[cond_file.find(level_key)+len(level_key):]
+		cond_sub_title = cond_sub_title.replace('_cond.csv','')
+		cond_sub_title = cond_sub_title[:cond_sub_title.rfind('_')]
+		if cond_file.find(cond_title)!=-1:
+
+			csv_file_path = doc_path[:doc_path.find('\\')]
+			csv_file_path += '/csv/' + cond_file
+			datalist = read_csv_file(csv_file_path)
+
+			code += '.. list-table:: '
+			code += cond_sub_title
+			code += '\n'
+			code += list_footer_cond()
+			code += '\n'
+			code += datalist
+			code += '\n'
+			code += '\n'
+			code += '-----------------------------'
+			code += '\n'
+			code += '\n'
+
 			used_cond.append(cnt)
 		cnt += 1
 	for id in reversed(used_cond):

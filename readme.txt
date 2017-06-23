@@ -1,16 +1,13 @@
 =================================================
-Install
+Install python packages
 =================================================
 easy_install pillow
 easy_install blockdiag
 easy_install sphinx (pip install sphinx)
 pip install sphinxcontrib-actdiag sphinxcontrib-blockdiag sphinxcontrib-nwdiag sphinxcontrib-seqdiag
-
-<optional>
 pip install sphinx_rtd_theme
 easy_install pandas
 or (https://pypi.python.org/pypi/pandas/0.15.2/#downloads pandas-0.15.2.win32-py2.7.exe)
-pip install redis
 
 
 =================================================
@@ -26,11 +23,8 @@ sphinx-quickstart
 
 -------------------------------
 Edit "conf.py"
-
+-  Theme
 html_theme = 'sphinx_rtd_theme'
-
-#html_theme = 'alabaster'
-#html_theme = 'traditional'
 
 #html_theme = 'classic'
 #html_theme_options = {
@@ -47,6 +41,26 @@ html_theme = 'sphinx_rtd_theme'
 #    "admonitioncolor": ""
 #}
 
+- blockdiag 
+extensions = [
+    'sphinxcontrib.blockdiag',
+    'sphinxcontrib.seqdiag',
+    'sphinxcontrib.actdiag',
+    'sphinxcontrib.nwdiag',
+    'sphinxcontrib.rackdiag',
+    'sphinxcontrib.packetdiag',
+]
+
+html_static_path = ['_static']
+html_style = 'css/my_theme.css'
+
+blockdiag_html_image_format = 'PNG'
+seqdiag_html_image_format = 'PNG'
+actdiag_html_image_format = 'PNG'
+nwdiag_html_image_format = 'PNG'
+rackiag_html_image_format = 'PNG'
+packetdiag_html_image_format = 'PNG'
+
 -------------------------------
 Edit "index.rst"
 
@@ -56,7 +70,7 @@ Functional Process Detail Specification
 .. toctree::
    :maxdepth: 1
 
-   debug/index
+   debug/index <- add index
 
 
 -------------------------------
@@ -67,7 +81,7 @@ make html
 
 
 =================================================
-TEXLIVE
+TEXLIVE for PDF
 =================================================
 - Install texlive
 https://www.tug.org/texlive/acquire-netinstall.html
