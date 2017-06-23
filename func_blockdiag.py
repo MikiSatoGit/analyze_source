@@ -999,9 +999,14 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						arg_id = 0
 
 						# PROC output (FUNC)
+						# replace ',' to '/' 20170623
+						tmp_left = blockdata.procs[index2].left[index3].replace(',', ' &')
+						tmp_right = blockdata.procs[index2].right[index3].replace(',', ' &')
+
 						table = \
 							'PROC.' + str(proc_id) + ', ' \
-							+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ',' \
+							+ tmp_left + ')' + tmp_right + ','
+#0623							+ blockdata.procs[index2].left[index3] + ')' + blockdata.procs[index2].right[index3] + ','
 							#	+ 'see below' + ', '\
 							#	+ 'TBD' \
 							#	+ '\n'
@@ -1022,7 +1027,7 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						#don't say "see below" when no arguments 20170619
 						if arg_id==0:
 							table += \
-								  '' + ', '\
+								  '' + ', ' \
 								+ 'TBD' \
 								+ '\n'
 						fout_csv.write(table)
@@ -1068,59 +1073,71 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						fout_csv = open(csvfile,'a')
 					proc_id += 1
 
+					# replace ',' to '/' 20170623
+					tmp_left = blockdata.procs[index2].left[index3].replace(',', ' &')
+					tmp_right = blockdata.procs[index2].right[index3].replace(',', ' &')
 
 					#write case in PROC# 20170619
 					if blockdata.procs[index2].type[index3].strip().find('???')!=-1:
 						table = \
-							  blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '\
+							  tmp_left + '' + tmp_right + ', '\
 							+ 'see below' + ', '\
 							+ '' \
 							+ '\n'
-
-
+#0623							  blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '
 
 					elif blockdata.procs[index2].type[index3].strip().find('equal<start>')!=-1:
 						is_equal_seq = True
 						table = \
 							  'PROC.' + str(proc_id) + ', ' \
-							+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '\
-							+ '(NA)' + ', '\
+							+ tmp_left + '' + tmp_right + ', '\
+							+ '' + ', '\
 							+ 'TBD' \
 							+ '\n'
+#0623							+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '
+
 					elif blockdata.procs[index2].type[index3].strip().find('equal<end>')!=-1:
 						is_equal_seq = False
 						table = \
 							  '' + ', ' \
-							+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', ' \
+							+ tmp_left + '' + tmp_right + ', '\
 							+ '' + ', '\
-							+ '' \
+							+ 'TBD' \
 							+ '\n'
+#0623							+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '
 
 					elif blockdata.procs[index2].type[index3].strip().find('equal')!=-1:
 						# PROC output
 						if is_equal_seq:
 							table = \
 								  '' + ', ' \
-								+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', ' \
+								+ tmp_left + '' + tmp_right + ', '\
 								+ '' + ', '\
-								+ '' \
+								+ 'TBD' \
 								+ '\n'
+#0623								+ blockdata.procs[index2].left[index3] + '' + blockdata.procs[index2].right[index3] + ', '
+
 						else:
 							table = \
 								  'PROC.' + str(proc_id) + ', ' \
-								+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', ' \
-								+ '(NA)' + ', '\
+								+ tmp_left + '=' + tmp_right + ', '\
+								+ '' + ', '\
 								+ 'TBD' \
 								+ '\n'
+#0623								+ blockdata.procs[index2].left[index3]  + ' = ' + blockdata.procs[index2].right[index3] + ', '
 
 					else:
 
 						# COND output
 						table = \
 							  'PROC.' + str(proc_id) + ', ' \
-							+ blockdata.procs[index2].left[index3]  + ', ' \
-							+ blockdata.procs[index2].right[index3] \
+							+ tmp_left  + '' + tmp_right + ', ' \
+							+ '' + ', '\
+							+ 'TBD' \
 							+ '\n'
+
+#0623							+ blockdata.procs[index2].left[index3]  + ', ' \
+#0623							+ blockdata.procs[index2].right[index3] \
 
 					fout_csv.write(table)
 					fout_csv.close()

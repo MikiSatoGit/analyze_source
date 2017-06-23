@@ -9,8 +9,6 @@ BTT Logic Specification
 .. toctree::
    :maxdepth: 2
 
-   bsm_recog_01/index
-   bsm_recog_03/index
-   bsm_connect_01/index
+   bsm_alarm_01/index
 
 
