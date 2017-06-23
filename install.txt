@@ -5,7 +5,13 @@ easy_install pillow
 easy_install blockdiag
 easy_install sphinx (pip install sphinx)
 pip install sphinxcontrib-actdiag sphinxcontrib-blockdiag sphinxcontrib-nwdiag sphinxcontrib-seqdiag
+
+<optional>
 pip install sphinx_rtd_theme
+easy_install pandas
+or (https://pypi.python.org/pypi/pandas/0.15.2/#downloads pandas-0.15.2.win32-py2.7.exe)
+pip install redis
+
 
 =================================================
 SPHINX
