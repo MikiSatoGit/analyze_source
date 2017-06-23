@@ -91,9 +91,7 @@ def draw_diag(sourcefilename, funcname, proc_codes, level_title, outputmode):
 	source_header += 'plugin autoclass;\n'
 	source_header += 'span_width = 24;\n'
 	source_header += 'span_height = 20;\n'
-
 	source_header += 'height = 200;\n'
-
 	source_header += 'class if [shape = diamond];\n'
 	source_header += 'class elif [shape = diamond];\n'
 	source_header += 'class else [shape = circle, color = gray];\n'

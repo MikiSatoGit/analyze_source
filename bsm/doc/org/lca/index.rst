@@ -1,16 +1,15 @@
-.. BTT Logic Specification documentation master file, created by
-   sphinx-quickstart on Fri Jun 23 15:16:33 2017.
+.. LCA Logic Specification documentation master file, created by
+   sphinx-quickstart on Fri Jun 23 14:45:55 2017.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-BTT Logic Specification
+LCA Logic Specification
 ===================================================
 
 .. toctree::
    :maxdepth: 2
 
-   bsm_recog_01/index
-   bsm_recog_03/index
-   bsm_connect_01/index
+   lca_main/index
+   lca_core/index
 
 

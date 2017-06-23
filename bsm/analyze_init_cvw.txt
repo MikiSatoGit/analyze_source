@@ -237,48 +237,47 @@ Total functions : 23
 [30] SUBSUBSUBPROCESS(1) if  ) 
 [31] SUBSUBSUBPROCESS(1) if  && (ast_a_normal[s4_t_lp_j].fl_Robs != CFL_UNKNOWN_VALUE 
 [32] SUBSUBSUBPROCESS(1) if  ) 
-[33] SUBSUBSUBPROCESS(1) if   
-[34] SUBSUBSUBPROCESS(1) if  ) 
-[35] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[36] SUBSUBSUBSUBPROCESS(1) if  if ( 
-[37] SUBSUBSUBSUBPROCESS(1) if  ast_t_buf_normal[s4_t_lp_i].fl_Ryfil < ast_t_buf_normal[s4_t_lp_j].fl_Ryfil 
-[38] SUBSUBSUBSUBPROCESS(1) if  ) 
-[39] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[40] SUBSUBSUBSUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_lp_i] ast_a_normal[s4_t_lp_j];
-[41] SUBSUBSUBSUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_lp_j] ast_a_normal[s4_t_lp_i];
-[42] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_normal[s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
-[43] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_normal[s4_t_lp_j] ast_t_buf_normal[s4_t_lp_j];
-[44] MAINPROCESS(2) func<start> fn_init( 
-[45] MAINPROCESS(2) func ast_t_buf_normal, NORMAL_BUFFSIZE 
-[46] MAINPROCESS(2) func<end> ); 
-[47] MAINPROCESS(2) equal s4_t_count1 0;
-[48] MAINPROCESS(2) for  for ( 
-[49] MAINPROCESS(2) for  s4_t_lp_i = 0; 
-[50] MAINPROCESS(2) for  s4_t_lp_i < NORMAL_BUFFSIZE; 
-[51] MAINPROCESS(2) for  s4_t_lp_i++ 
-[52] MAINPROCESS(2) for  ) 
-[53] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[54] SUBPROCESS(1) if  if ( 
-[55] SUBPROCESS(1) if  ast_a_normal[s4_t_lp_i].s4_flg_dc >= OBJECT_TYPE_2F 
-[56] SUBPROCESS(1) if  ) 
-[57] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[58] SUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_count1] ast_a_normal[s4_t_lp_i];
-[59] SUBSUBPROCESS(1) func<start> fn_init( 
-[60] SUBSUBPROCESS(1) func &ast_a_normal[s4_t_lp_i], 1 
-[61] SUBSUBPROCESS(1) func<end> ); 
-[62] SUBSUBPROCESS(1) proc s4_t_count1++; 
-[63] MAINPROCESS(3) func<start> s4_t_count2 = s4_trim_normal( 
-[64] MAINPROCESS(3) func ast_a_normal 
-[65] MAINPROCESS(3) func<end> ); 
-[66] MAINPROCESS(3) for  for ( 
-[67] MAINPROCESS(3) for  s4_t_lp_i = 0; 
-[68] MAINPROCESS(3) for  s4_t_lp_i < s4_t_count1; 
-[69] MAINPROCESS(3) for  s4_t_lp_i++ 
-[70] MAINPROCESS(3) for  ) 
-[71] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[72] SUBPROCESS(1) equal ast_a_normal[s4_t_count2 + s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
-[73] MAINPROCESS(4) return return; 
------------------ Total Codes : 73 lines
+[33] SUBSUBSUBPROCESS(1) if  ) 
+[34] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[35] SUBSUBSUBSUBPROCESS(1) if  if ( 
+[36] SUBSUBSUBSUBPROCESS(1) if  ast_t_buf_normal[s4_t_lp_i].fl_Ryfil < ast_t_buf_normal[s4_t_lp_j].fl_Ryfil 
+[37] SUBSUBSUBSUBPROCESS(1) if  ) 
+[38] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[39] SUBSUBSUBSUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_lp_i] ast_a_normal[s4_t_lp_j];
+[40] SUBSUBSUBSUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_lp_j] ast_a_normal[s4_t_lp_i];
+[41] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_normal[s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
+[42] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_normal[s4_t_lp_j] ast_t_buf_normal[s4_t_lp_j];
+[43] MAINPROCESS(2) func<start> fn_init( 
+[44] MAINPROCESS(2) func ast_t_buf_normal, NORMAL_BUFFSIZE 
+[45] MAINPROCESS(2) func<end> ); 
+[46] MAINPROCESS(2) equal s4_t_count1 0;
+[47] MAINPROCESS(2) for  for ( 
+[48] MAINPROCESS(2) for  s4_t_lp_i = 0; 
+[49] MAINPROCESS(2) for  s4_t_lp_i < NORMAL_BUFFSIZE; 
+[50] MAINPROCESS(2) for  s4_t_lp_i++ 
+[51] MAINPROCESS(2) for  ) 
+[52] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[53] SUBPROCESS(1) if  if ( 
+[54] SUBPROCESS(1) if  ast_a_normal[s4_t_lp_i].s4_flg_dc >= OBJECT_TYPE_2F 
+[55] SUBPROCESS(1) if  ) 
+[56] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[57] SUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_count1] ast_a_normal[s4_t_lp_i];
+[58] SUBSUBPROCESS(1) func<start> fn_init( 
+[59] SUBSUBPROCESS(1) func &ast_a_normal[s4_t_lp_i], 1 
+[60] SUBSUBPROCESS(1) func<end> ); 
+[61] SUBSUBPROCESS(1) proc s4_t_count1++; 
+[62] MAINPROCESS(3) func<start> s4_t_count2 = s4_trim_normal( 
+[63] MAINPROCESS(3) func ast_a_normal 
+[64] MAINPROCESS(3) func<end> ); 
+[65] MAINPROCESS(3) for  for ( 
+[66] MAINPROCESS(3) for  s4_t_lp_i = 0; 
+[67] MAINPROCESS(3) for  s4_t_lp_i < s4_t_count1; 
+[68] MAINPROCESS(3) for  s4_t_lp_i++ 
+[69] MAINPROCESS(3) for  ) 
+[70] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[71] SUBPROCESS(1) equal ast_a_normal[s4_t_count2 + s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
+[72] MAINPROCESS(4) return return; 
+----------------- Total Codes : 72 lines
 --------------------------
 [Function Name] : fn_sort_normal_by_power 
 -Return type : VD 
@@ -322,43 +321,42 @@ Total functions : 23
 [35] SUBSUBSUBSUBPROCESS(1) if ) 
 [36] SUBSUBSUBSUBPROCESS(1) if < (tmp_normal_buff[j].fl_power_up + tmp_normal_buff[j].fl_power_dn 
 [37] SUBSUBSUBSUBPROCESS(1) if ) 
-[38] SUBSUBSUBSUBPROCESS(1) if  
-[39] SUBSUBSUBSUBPROCESS(1) if ) 
-[40] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[41] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_normal_buff[i] ast_a_normal[j];
-[42] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_normal_buff[j] ast_a_normal[i];
-[43] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_normal[i] tmp_normal_buff[i];
-[44] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_normal[j] tmp_normal_buff[j];
-[45] MAINPROCESS(2) func<start> fn_init( 
-[46] MAINPROCESS(2) func tmp_normal_buff, NORMAL_BUFFSIZE 
-[47] MAINPROCESS(2) func<end> ); 
-[48] MAINPROCESS(2) equal tmp_count1 0;
-[49] MAINPROCESS(2) for for( 
-[50] MAINPROCESS(2) for i = 0; 
-[51] MAINPROCESS(2) for i < NORMAL_BUFFSIZE; 
-[52] MAINPROCESS(2) for i++  
-[53] MAINPROCESS(2) for ) 
-[54] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[55] SUBPROCESS(1) if if( 
-[56] SUBPROCESS(1) if ast_a_normal[i].s4_flg_dc >= OBJECT_TYPE_2F 
-[57] SUBPROCESS(1) if ) 
-[58] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[59] SUBSUBPROCESS(1) equal tmp_normal_buff[tmp_count1] ast_a_normal[i];
-[60] SUBSUBPROCESS(1) func<start> fn_init( 
-[61] SUBSUBPROCESS(1) func &ast_a_normal[i], 1 
-[62] SUBSUBPROCESS(1) func<end> ); 
-[63] SUBSUBPROCESS(1) proc tmp_count1++; 
-[64] MAINPROCESS(3) func<start> tmp_count2 = s4_trim_normal( 
-[65] MAINPROCESS(3) func ast_a_normal 
-[66] MAINPROCESS(3) func<end> ); 
-[67] MAINPROCESS(3) for for( 
-[68] MAINPROCESS(3) for i = 0; 
-[69] MAINPROCESS(3) for i < tmp_count1; 
-[70] MAINPROCESS(3) for i++  
-[71] MAINPROCESS(3) for ) 
-[72] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[73] SUBPROCESS(1) equal ast_a_normal[tmp_count2+i] tmp_normal_buff[i];
------------------ Total Codes : 73 lines
+[38] SUBSUBSUBSUBPROCESS(1) if ) 
+[39] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[40] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_normal_buff[i] ast_a_normal[j];
+[41] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_normal_buff[j] ast_a_normal[i];
+[42] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_normal[i] tmp_normal_buff[i];
+[43] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_normal[j] tmp_normal_buff[j];
+[44] MAINPROCESS(2) func<start> fn_init( 
+[45] MAINPROCESS(2) func tmp_normal_buff, NORMAL_BUFFSIZE 
+[46] MAINPROCESS(2) func<end> ); 
+[47] MAINPROCESS(2) equal tmp_count1 0;
+[48] MAINPROCESS(2) for for( 
+[49] MAINPROCESS(2) for i = 0; 
+[50] MAINPROCESS(2) for i < NORMAL_BUFFSIZE; 
+[51] MAINPROCESS(2) for i++  
+[52] MAINPROCESS(2) for ) 
+[53] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[54] SUBPROCESS(1) if if( 
+[55] SUBPROCESS(1) if ast_a_normal[i].s4_flg_dc >= OBJECT_TYPE_2F 
+[56] SUBPROCESS(1) if ) 
+[57] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[58] SUBSUBPROCESS(1) equal tmp_normal_buff[tmp_count1] ast_a_normal[i];
+[59] SUBSUBPROCESS(1) func<start> fn_init( 
+[60] SUBSUBPROCESS(1) func &ast_a_normal[i], 1 
+[61] SUBSUBPROCESS(1) func<end> ); 
+[62] SUBSUBPROCESS(1) proc tmp_count1++; 
+[63] MAINPROCESS(3) func<start> tmp_count2 = s4_trim_normal( 
+[64] MAINPROCESS(3) func ast_a_normal 
+[65] MAINPROCESS(3) func<end> ); 
+[66] MAINPROCESS(3) for for( 
+[67] MAINPROCESS(3) for i = 0; 
+[68] MAINPROCESS(3) for i < tmp_count1; 
+[69] MAINPROCESS(3) for i++  
+[70] MAINPROCESS(3) for ) 
+[71] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[72] SUBPROCESS(1) equal ast_a_normal[tmp_count2+i] tmp_normal_buff[i];
+----------------- Total Codes : 72 lines
 --------------------------
 [Function Name] : fn_sort_peak_by_power 
 -Return type : VD 
@@ -543,48 +541,47 @@ Total functions : 23
 [30] SUBSUBSUBPROCESS(1) if  ) 
 [31] SUBSUBSUBPROCESS(1) if  && (ast_a_target[s4_t_lp_j].fl_Robs != CFL_UNKNOWN_VALUE 
 [32] SUBSUBSUBPROCESS(1) if  ) 
-[33] SUBSUBSUBPROCESS(1) if   
-[34] SUBSUBSUBPROCESS(1) if  ) 
-[35] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[36] SUBSUBSUBSUBPROCESS(1) if  if ( 
-[37] SUBSUBSUBSUBPROCESS(1) if  ast_t_buf_normal[s4_t_lp_i].fl_Ryfil < ast_t_buf_normal[s4_t_lp_j].fl_Ryfil 
-[38] SUBSUBSUBSUBPROCESS(1) if  ) 
-[39] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[40] SUBSUBSUBSUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_lp_i] ast_a_target[s4_t_lp_j];
-[41] SUBSUBSUBSUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_lp_j] ast_a_target[s4_t_lp_i];
-[42] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_target[s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
-[43] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_target[s4_t_lp_j] ast_t_buf_normal[s4_t_lp_j];
-[44] MAINPROCESS(2) func<start> fn_init( 
-[45] MAINPROCESS(2) func ast_t_buf_normal, TARGET_BUFFSIZE 
-[46] MAINPROCESS(2) func<end> ); 
-[47] MAINPROCESS(2) equal s4_t_count1 0;
-[48] MAINPROCESS(2) for  for ( 
-[49] MAINPROCESS(2) for  s4_t_lp_i = 0; 
-[50] MAINPROCESS(2) for  s4_t_lp_i < TARGET_BUFFSIZE; 
-[51] MAINPROCESS(2) for  s4_t_lp_i++ 
-[52] MAINPROCESS(2) for  ) 
-[53] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[54] SUBPROCESS(1) if  if ( 
-[55] SUBPROCESS(1) if  ast_a_target[s4_t_lp_i].s4_flg_dc >= OBJECT_TYPE_2F 
-[56] SUBPROCESS(1) if  ) 
-[57] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[58] SUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_count1] ast_a_target[s4_t_lp_i];
-[59] SUBSUBPROCESS(1) func<start> fn_init( 
-[60] SUBSUBPROCESS(1) func &ast_a_target[s4_t_lp_i], 1 
-[61] SUBSUBPROCESS(1) func<end> ); 
-[62] SUBSUBPROCESS(1) proc s4_t_count1++; 
-[63] MAINPROCESS(3) func<start> s4_t_count2 = s4_trim_target( 
-[64] MAINPROCESS(3) func ast_a_target 
-[65] MAINPROCESS(3) func<end> ); 
-[66] MAINPROCESS(3) for  for ( 
-[67] MAINPROCESS(3) for  s4_t_lp_i = 0; 
-[68] MAINPROCESS(3) for  s4_t_lp_i < s4_t_count1; 
-[69] MAINPROCESS(3) for  s4_t_lp_i++ 
-[70] MAINPROCESS(3) for  ) 
-[71] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[72] SUBPROCESS(1) equal ast_a_target[s4_t_count2 + s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
-[73] MAINPROCESS(4) return return; 
------------------ Total Codes : 73 lines
+[33] SUBSUBSUBPROCESS(1) if  ) 
+[34] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[35] SUBSUBSUBSUBPROCESS(1) if  if ( 
+[36] SUBSUBSUBSUBPROCESS(1) if  ast_t_buf_normal[s4_t_lp_i].fl_Ryfil < ast_t_buf_normal[s4_t_lp_j].fl_Ryfil 
+[37] SUBSUBSUBSUBPROCESS(1) if  ) 
+[38] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[39] SUBSUBSUBSUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_lp_i] ast_a_target[s4_t_lp_j];
+[40] SUBSUBSUBSUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_lp_j] ast_a_target[s4_t_lp_i];
+[41] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_target[s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
+[42] SUBSUBSUBSUBSUBPROCESS(1) equal ast_a_target[s4_t_lp_j] ast_t_buf_normal[s4_t_lp_j];
+[43] MAINPROCESS(2) func<start> fn_init( 
+[44] MAINPROCESS(2) func ast_t_buf_normal, TARGET_BUFFSIZE 
+[45] MAINPROCESS(2) func<end> ); 
+[46] MAINPROCESS(2) equal s4_t_count1 0;
+[47] MAINPROCESS(2) for  for ( 
+[48] MAINPROCESS(2) for  s4_t_lp_i = 0; 
+[49] MAINPROCESS(2) for  s4_t_lp_i < TARGET_BUFFSIZE; 
+[50] MAINPROCESS(2) for  s4_t_lp_i++ 
+[51] MAINPROCESS(2) for  ) 
+[52] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[53] SUBPROCESS(1) if  if ( 
+[54] SUBPROCESS(1) if  ast_a_target[s4_t_lp_i].s4_flg_dc >= OBJECT_TYPE_2F 
+[55] SUBPROCESS(1) if  ) 
+[56] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[57] SUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_count1] ast_a_target[s4_t_lp_i];
+[58] SUBSUBPROCESS(1) func<start> fn_init( 
+[59] SUBSUBPROCESS(1) func &ast_a_target[s4_t_lp_i], 1 
+[60] SUBSUBPROCESS(1) func<end> ); 
+[61] SUBSUBPROCESS(1) proc s4_t_count1++; 
+[62] MAINPROCESS(3) func<start> s4_t_count2 = s4_trim_target( 
+[63] MAINPROCESS(3) func ast_a_target 
+[64] MAINPROCESS(3) func<end> ); 
+[65] MAINPROCESS(3) for  for ( 
+[66] MAINPROCESS(3) for  s4_t_lp_i = 0; 
+[67] MAINPROCESS(3) for  s4_t_lp_i < s4_t_count1; 
+[68] MAINPROCESS(3) for  s4_t_lp_i++ 
+[69] MAINPROCESS(3) for  ) 
+[70] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[71] SUBPROCESS(1) equal ast_a_target[s4_t_count2 + s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
+[72] MAINPROCESS(4) return return; 
+----------------- Total Codes : 72 lines
 --------------------------
 [Function Name] : s4_trim_normal 
 -Return type : S4 
@@ -963,22 +960,22 @@ Total functions : 23
      [9] : S4   s4_a_stationary_flg 
      [10] : S4   s4_a_single_peak_flg 
 ----- Codes -----
-[1] MAINPROCESS(1) func<start> pst_a_normal_current->s4_bin_up = ( 
-[2] MAINPROCESS(1) func S4)(fl_a_peak_bin_intpl_up + (FL)0.5F 
-[3] MAINPROCESS(1) func<end> ); 
-[4] MAINPROCESS(1) func<start> pst_a_normal_current->s4_bin_dn = ( 
-[5] MAINPROCESS(1) func S4)(fl_a_peak_bin_intpl_dn + (FL)0.5F 
-[6] MAINPROCESS(1) func<end> ); 
+[1] MAINPROCESS(1) equal<start> pst_a_normal_current->s4_bin_up = ( 
+[2] MAINPROCESS(1) equal S4)(fl_a_peak_bin_intpl_up + (FL)0.5F 
+[3] MAINPROCESS(1) equal<end> ); 
+[4] MAINPROCESS(1) equal<start> pst_a_normal_current->s4_bin_dn = ( 
+[5] MAINPROCESS(1) equal S4)(fl_a_peak_bin_intpl_dn + (FL)0.5F 
+[6] MAINPROCESS(1) equal<end> ); 
 [7] MAINPROCESS(1) equal pst_a_normal_current->fl_bin_up_interpolate fl_a_peak_bin_intpl_up;
 [8] MAINPROCESS(1) equal pst_a_normal_current->fl_bin_dn_interpolate fl_a_peak_bin_intpl_dn;
 [9] MAINPROCESS(1) equal pst_a_normal_current->fl_power_up fl_a_peak_freq_power_up;
 [10] MAINPROCESS(1) equal pst_a_normal_current->fl_power_dn fl_a_peak_freq_power_dn;
-[11] MAINPROCESS(1) func<start> pst_a_normal_current->s4_bin_up_music = ( 
-[12] MAINPROCESS(1) func S4)(fl_a_peak_doa_bin_intpl_up + (FL)0.5F 
-[13] MAINPROCESS(1) func<end> ); 
-[14] MAINPROCESS(1) func<start> pst_a_normal_current->s4_bin_dn_music = ( 
-[15] MAINPROCESS(1) func S4)(fl_a_peak_doa_bin_intpl_dn + (FL)0.5F 
-[16] MAINPROCESS(1) func<end> ); 
+[11] MAINPROCESS(1) equal<start> pst_a_normal_current->s4_bin_up_music = ( 
+[12] MAINPROCESS(1) equal S4)(fl_a_peak_doa_bin_intpl_up + (FL)0.5F 
+[13] MAINPROCESS(1) equal<end> ); 
+[14] MAINPROCESS(1) equal<start> pst_a_normal_current->s4_bin_dn_music = ( 
+[15] MAINPROCESS(1) equal S4)(fl_a_peak_doa_bin_intpl_dn + (FL)0.5F 
+[16] MAINPROCESS(1) equal<end> ); 
 [17] MAINPROCESS(1) equal pst_a_normal_current->fl_doa_up_interpolate fl_a_peak_doa_bin_intpl_up;
 [18] MAINPROCESS(1) equal pst_a_normal_current->fl_doa_dn_interpolate fl_a_peak_doa_bin_intpl_dn;
 [19] MAINPROCESS(1) equal pst_a_normal_current->fl_power_up_music fl_a_peak_doa_power_up;
@@ -1020,9 +1017,9 @@ Total functions : 23
      [1] : S4   s4_a_flg_updn 
 ----- Codes -----
 [1] MAINPROCESS(1) proc FL fl_t_degree; 
-[2] MAINPROCESS(1) func<start> fl_t_degree = ( 
-[3] MAINPROCESS(1) func FL)(st_g_bsm_loop_data.afl_installed_angle[0] + (DOA_ANG_PER_BIN * (FL)s4_a_angle_bin) + DOA_BIN_START_ANG 
-[4] MAINPROCESS(1) func<end> ); 
+[2] MAINPROCESS(1) equal<start> fl_t_degree = ( 
+[3] MAINPROCESS(1) equal FL)(st_g_bsm_loop_data.afl_installed_angle[0] + (DOA_ANG_PER_BIN * (FL)s4_a_angle_bin) + DOA_BIN_START_ANG 
+[4] MAINPROCESS(1) equal<end> ); 
 [5] MAINPROCESS(1) func<start> return ( 
 [6] MAINPROCESS(1) func -fl_t_degree * PI / 180.0F 
 [7] MAINPROCESS(1) func<end> ); 
@@ -1063,27 +1060,26 @@ Total functions : 23
 [12] MAINPROCESS(1) if  ) 
 [13] MAINPROCESS(1) if  &&  (fl_a_cos_theta != (FL)0.0F 
 [14] MAINPROCESS(1) if  ) 
-[15] MAINPROCESS(1) if   
-[16] MAINPROCESS(1) if  ) 
-[17] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[18] SUBPROCESS(1) equal fl_t_Vy fl_a_Vobs / fl_a_cos_theta;
-[19] MAINPROCESS(2) else else 
-[20] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[21] SUBPROCESS(1) equal fl_t_Vy fl_a_Vobs;
-[22] MAINPROCESS(3) if  if ( 
-[23] MAINPROCESS(3) if  fl_t_Vy == 0.0F 
-[24] MAINPROCESS(3) if  ) 
-[25] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[26] SUBPROCESS(1) equal fl_t_Vy 0.1F;
-[27] MAINPROCESS(4) if  if ( 
-[28] MAINPROCESS(4) if  fl_a_Ry > 0.0F 
-[29] MAINPROCESS(4) if  ) 
-[30] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[31] SUBPROCESS(1) equal fl_t_Vy - fl_t_Vy;
-[32] MAINPROCESS(5) func<start> return ( 
-[33] MAINPROCESS(5) func fl_t_Vy 
-[34] MAINPROCESS(5) func<end> ); 
------------------ Total Codes : 34 lines
+[15] MAINPROCESS(1) if  ) 
+[16] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[17] SUBPROCESS(1) equal fl_t_Vy fl_a_Vobs / fl_a_cos_theta;
+[18] MAINPROCESS(2) else else 
+[19] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[20] SUBPROCESS(1) equal fl_t_Vy fl_a_Vobs;
+[21] MAINPROCESS(3) if  if ( 
+[22] MAINPROCESS(3) if  fl_t_Vy == 0.0F 
+[23] MAINPROCESS(3) if  ) 
+[24] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[25] SUBPROCESS(1) equal fl_t_Vy 0.1F;
+[26] MAINPROCESS(4) if  if ( 
+[27] MAINPROCESS(4) if  fl_a_Ry > 0.0F 
+[28] MAINPROCESS(4) if  ) 
+[29] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[30] SUBPROCESS(1) equal fl_t_Vy - fl_t_Vy;
+[31] MAINPROCESS(5) func<start> return ( 
+[32] MAINPROCESS(5) func fl_t_Vy 
+[33] MAINPROCESS(5) func<end> ); 
+----------------- Total Codes : 33 lines
 --------------------------
 [Function Name] : u1_get_vy_c2 
 -Return type : static U1 
