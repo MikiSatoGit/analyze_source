@@ -1106,9 +1106,9 @@ Total functions : 64
 [21] SUBSUBPROCESS(1) if  fl_t_diff_x < (FL)0.5F 
 [22] SUBSUBPROCESS(1) if  ) 
 [23] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[24] SUBSUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_fm_object_stable_count = ( 
-[25] SUBSUBSUBPROCESS(1) func U1)u2_data_add((U2)st_g_bsm_loop_data.u1_fm_object_stable_count, (S2)1, (U2)100, (U2)0 
-[26] SUBSUBSUBPROCESS(1) func<end> ); 
+[24] SUBSUBSUBPROCESS(1) equal<start> st_g_bsm_loop_data.u1_fm_object_stable_count = ( 
+[25] SUBSUBSUBPROCESS(1) equal U1)u2_data_add((U2)st_g_bsm_loop_data.u1_fm_object_stable_count, (S2)1, (U2)100, (U2)0 
+[26] SUBSUBSUBPROCESS(1) equal<end> ); 
 [27] SUBSUBPROCESS(2) else else 
 [28] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
 [29] SUBSUBSUBPROCESS(1) equal st_g_bsm_loop_data.u1_fm_object_stable_count (U1)0;
@@ -1223,12 +1223,12 @@ Total functions : 64
 [79] SUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_Q, 
 [80] SUBPROCESS(1) func afl_t_sot_check_object_q 
 [81] SUBPROCESS(1) func<end> ); 
-[82] MAINPROCESS(6) func<start> v0_doa_def = ( 
-[83] MAINPROCESS(6) func S4)(180.0 - st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_sot_detect_param[2] 
-[84] MAINPROCESS(6) func<end> ); 
-[85] MAINPROCESS(6) func<start> v0_doa     = ( 
-[86] MAINPROCESS(6) func S4)(180.0 - st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_sot_detect_param[2] 
-[87] MAINPROCESS(6) func<end> ); 
+[82] MAINPROCESS(6) equal<start> v0_doa_def = ( 
+[83] MAINPROCESS(6) equal S4)(180.0 - st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_sot_detect_param[2] 
+[84] MAINPROCESS(6) equal<end> ); 
+[85] MAINPROCESS(6) equal<start> v0_doa     = ( 
+[86] MAINPROCESS(6) equal S4)(180.0 - st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_sot_detect_param[2] 
+[87] MAINPROCESS(6) equal<end> ); 
 [88] MAINPROCESS(6) func<start> set_stationary_doa_line_2f( 
 [89] MAINPROCESS(6) func stationary_doa_line, 
 [90] MAINPROCESS(6) func v0_doa_def, 
@@ -1340,37 +1340,36 @@ Total functions : 64
 [3] MAINPROCESS(1) equal afl_a_buf_dev[1] 999.9F;
 [4] MAINPROCESS(1) if if( 
 [5] MAINPROCESS(1) if fl_g_v_self_bsm_for_base>5.0F 
-[6] MAINPROCESS(1) if  
-[7] MAINPROCESS(1) if ) 
-[8] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[9] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[10] SUBSUBPROCESS(1) func<start> afl_a_buf_dev[0] = calc_deviation_of_doa_freq_line_stationary_2( 
-[11] SUBSUBPROCESS(1) func (const S4 (*)[1])as4_a_nearfield_doa_i, 
-[12] SUBSUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_I, 
-[13] SUBSUBPROCESS(1) func (const S4 *)as4_stationary_doa_line, 
-[14] SUBSUBPROCESS(1) func 0 
-[15] SUBSUBPROCESS(1) func ,ps4_a_backward_priod 
-[16] SUBSUBPROCESS(1) func ,s4_a_v0_doa 
-[17] SUBSUBPROCESS(1) func ,ps4_a_fast_sot_num 
-[18] SUBSUBPROCESS(1) func ,ps4_a_not_fast_sot_num 
-[19] SUBSUBPROCESS(1) func ,fast_sot_limit_line 
-[20] SUBSUBPROCESS(1) func ,(const FL (*)[4])afl_a_sot_check_object_i 
-[21] SUBSUBPROCESS(1) func<end> ); 
-[22] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[23] SUBSUBPROCESS(1) func<start> afl_a_buf_dev[1] = calc_deviation_of_doa_freq_line_stationary_2( 
-[24] SUBSUBPROCESS(1) func (const S4 (*)[1])as4_a_nearfield_doa_q, 
-[25] SUBSUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_Q-SLOW_SOT_FREQ_BIN_RANGE, 
-[26] SUBSUBPROCESS(1) func (const S4 *)as4_stationary_doa_line, 
-[27] SUBSUBPROCESS(1) func 1 
-[28] SUBSUBPROCESS(1) func ,ps4_a_backward_priod 
-[29] SUBSUBPROCESS(1) func ,s4_a_v0_doa 
-[30] SUBSUBPROCESS(1) func ,ps4_a_fast_sot_num 
-[31] SUBSUBPROCESS(1) func ,ps4_a_not_fast_sot_num 
-[32] SUBSUBPROCESS(1) func ,fast_sot_limit_line 
-[33] SUBSUBPROCESS(1) func ,(const FL (*)[4])afl_a_sot_check_object_q 
-[34] SUBSUBPROCESS(1) func<end> ); 
-[35] MAINPROCESS(2) return return; 
------------------ Total Codes : 35 lines
+[6] MAINPROCESS(1) if ) 
+[7] MAINPROCESS(1) subproc SUBPROCESS(1) 
+[8] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[9] SUBSUBPROCESS(1) func<start> afl_a_buf_dev[0] = calc_deviation_of_doa_freq_line_stationary_2( 
+[10] SUBSUBPROCESS(1) func (const S4 (*)[1])as4_a_nearfield_doa_i, 
+[11] SUBSUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_I, 
+[12] SUBSUBPROCESS(1) func (const S4 *)as4_stationary_doa_line, 
+[13] SUBSUBPROCESS(1) func 0 
+[14] SUBSUBPROCESS(1) func ,ps4_a_backward_priod 
+[15] SUBSUBPROCESS(1) func ,s4_a_v0_doa 
+[16] SUBSUBPROCESS(1) func ,ps4_a_fast_sot_num 
+[17] SUBSUBPROCESS(1) func ,ps4_a_not_fast_sot_num 
+[18] SUBSUBPROCESS(1) func ,fast_sot_limit_line 
+[19] SUBSUBPROCESS(1) func ,(const FL (*)[4])afl_a_sot_check_object_i 
+[20] SUBSUBPROCESS(1) func<end> ); 
+[21] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[22] SUBSUBPROCESS(1) func<start> afl_a_buf_dev[1] = calc_deviation_of_doa_freq_line_stationary_2( 
+[23] SUBSUBPROCESS(1) func (const S4 (*)[1])as4_a_nearfield_doa_q, 
+[24] SUBSUBPROCESS(1) func SLOW_SOT_FREQ_BIN_START_Q-SLOW_SOT_FREQ_BIN_RANGE, 
+[25] SUBSUBPROCESS(1) func (const S4 *)as4_stationary_doa_line, 
+[26] SUBSUBPROCESS(1) func 1 
+[27] SUBSUBPROCESS(1) func ,ps4_a_backward_priod 
+[28] SUBSUBPROCESS(1) func ,s4_a_v0_doa 
+[29] SUBSUBPROCESS(1) func ,ps4_a_fast_sot_num 
+[30] SUBSUBPROCESS(1) func ,ps4_a_not_fast_sot_num 
+[31] SUBSUBPROCESS(1) func ,fast_sot_limit_line 
+[32] SUBSUBPROCESS(1) func ,(const FL (*)[4])afl_a_sot_check_object_q 
+[33] SUBSUBPROCESS(1) func<end> ); 
+[34] MAINPROCESS(2) return return; 
+----------------- Total Codes : 34 lines
 --------------------------
 [Function Name] : fn_bsm_low_judge_sot 
 -Return type : static VD 
@@ -1451,14 +1450,14 @@ Total functions : 64
 [54] MAINPROCESS(6) if  u1_t_flg_exist_object == CU1_DF_ON 
 [55] MAINPROCESS(6) if  ) 
 [56] MAINPROCESS(6) subproc SUBPROCESS(1) 
-[57] SUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_count_adjacent_lane_exist = ( 
-[58] SUBPROCESS(1) func U1)u2_data_add((U2)st_g_bsm_loop_data.u1_count_adjacent_lane_exist, (S2)1, (U2)20, (U2)0 
-[59] SUBPROCESS(1) func<end> ); 
+[57] SUBPROCESS(1) equal<start> st_g_bsm_loop_data.u1_count_adjacent_lane_exist = ( 
+[58] SUBPROCESS(1) equal U1)u2_data_add((U2)st_g_bsm_loop_data.u1_count_adjacent_lane_exist, (S2)1, (U2)20, (U2)0 
+[59] SUBPROCESS(1) equal<end> ); 
 [60] MAINPROCESS(7) else else 
 [61] MAINPROCESS(7) subproc SUBPROCESS(1) 
-[62] SUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_count_adjacent_lane_exist = ( 
-[63] SUBPROCESS(1) func U1)u2_data_add((U2)st_g_bsm_loop_data.u1_count_adjacent_lane_exist, (S2)-1, (U2)20, (U2)0 
-[64] SUBPROCESS(1) func<end> ); 
+[62] SUBPROCESS(1) equal<start> st_g_bsm_loop_data.u1_count_adjacent_lane_exist = ( 
+[63] SUBPROCESS(1) equal U1)u2_data_add((U2)st_g_bsm_loop_data.u1_count_adjacent_lane_exist, (S2)-1, (U2)20, (U2)0 
+[64] SUBPROCESS(1) equal<end> ); 
 [65] MAINPROCESS(8) for  for ( 
 [66] MAINPROCESS(8) for  u1_t_lp_front_back = (U1)0; 
 [67] MAINPROCESS(8) for  u1_t_lp_front_back < (U1)2; 
@@ -1848,9 +1847,9 @@ Total functions : 64
 [37] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
 [38] SUBSUBSUBPROCESS(1) proc u1_t_n_i++; 
 [39] SUBSUBSUBPROCESS(1) equal fl_t_sum_i_y + afl_a_sot_check_object_i[u1_t_lp_bin_range][1];
-[40] SUBSUBSUBPROCESS(1) func<start> fl_t_sum_i_y2 += ( 
-[41] SUBSUBSUBPROCESS(1) func afl_a_sot_check_object_i[u1_t_lp_bin_range][1] * afl_a_sot_check_object_i[u1_t_lp_bin_range][1] 
-[42] SUBSUBSUBPROCESS(1) func<end> ); 
+[40] SUBSUBSUBPROCESS(1) equal<start> fl_t_sum_i_y2 += ( 
+[41] SUBSUBSUBPROCESS(1) equal afl_a_sot_check_object_i[u1_t_lp_bin_range][1] * afl_a_sot_check_object_i[u1_t_lp_bin_range][1] 
+[42] SUBSUBSUBPROCESS(1) equal<end> ); 
 [43] SUBSUBPROCESS(2) else else 
 [44] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
 [45] SUBSUBSUBPROCESS(1) proc break; 
@@ -1859,9 +1858,9 @@ Total functions : 64
 [48] SUBPROCESS(2) if  ) 
 [49] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
 [50] SUBSUBPROCESS(1) equal fl_t_ave_i_y fl_t_sum_i_y / (FL)u1_t_n_i;
-[51] SUBSUBPROCESS(1) func<start> fl_t_var_i_y = ( 
-[52] SUBSUBPROCESS(1) func fl_t_sum_i_y2 / (FL)u1_t_n_i) - (fl_t_ave_i_y * fl_t_ave_i_y 
-[53] SUBSUBPROCESS(1) func<end> ); 
+[51] SUBSUBPROCESS(1) equal<start> fl_t_var_i_y = ( 
+[52] SUBSUBPROCESS(1) equal fl_t_sum_i_y2 / (FL)u1_t_n_i) - (fl_t_ave_i_y * fl_t_ave_i_y 
+[53] SUBSUBPROCESS(1) equal<end> ); 
 [54] SUBPROCESS(3) if  if ( 
 [55] SUBPROCESS(3) if  (afl_a_buf_dev[0] > (FL)WALL_DEV_TH7 
 [56] SUBPROCESS(3) if  ) 
@@ -2669,17 +2668,17 @@ Total functions : 64
 [58] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
 [59] SUBSUBSUBSUBPROCESS(1) proc u1_t_N++; 
 [60] SUBSUBSUBSUBPROCESS(1) equal s4_t_ave_theta_sum + as4_a_nearfield_doa[u1_t_lp_freq_bin_range][0];
-[61] SUBSUBSUBSUBPROCESS(1) func<start> s4_t_var_theta_sum += ( 
-[62] SUBSUBSUBSUBPROCESS(1) func as4_a_nearfield_doa[u1_t_lp_freq_bin_range][0] * as4_a_nearfield_doa[u1_t_lp_freq_bin_range][0] 
-[63] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[61] SUBSUBSUBSUBPROCESS(1) equal<start> s4_t_var_theta_sum += ( 
+[62] SUBSUBSUBSUBPROCESS(1) equal as4_a_nearfield_doa[u1_t_lp_freq_bin_range][0] * as4_a_nearfield_doa[u1_t_lp_freq_bin_range][0] 
+[63] SUBSUBSUBSUBPROCESS(1) equal<end> ); 
 [64] MAINPROCESS(3) if  if ( 
 [65] MAINPROCESS(3) if  u1_t_N != (U1)0 
 [66] MAINPROCESS(3) if  ) 
 [67] MAINPROCESS(3) subproc SUBPROCESS(1) 
 [68] SUBPROCESS(1) equal fl_t_ave_theta (FL)s4_t_ave_theta_sum / (FL)u1_t_N;
-[69] SUBPROCESS(1) func<start> fl_t_var_theta = ( 
-[70] SUBPROCESS(1) func (FL)s4_t_var_theta_sum / (FL)u1_t_N) - (fl_t_ave_theta * fl_t_ave_theta 
-[71] SUBPROCESS(1) func<end> ); 
+[69] SUBPROCESS(1) equal<start> fl_t_var_theta = ( 
+[70] SUBPROCESS(1) equal (FL)s4_t_var_theta_sum / (FL)u1_t_N) - (fl_t_ave_theta * fl_t_ave_theta 
+[71] SUBPROCESS(1) equal<end> ); 
 [72] MAINPROCESS(4) else else 
 [73] MAINPROCESS(4) subproc SUBPROCESS(1) 
 [74] SUBPROCESS(1) equal fl_t_ave_theta (FL)10000.0F;
@@ -3119,17 +3118,17 @@ Total functions : 64
 [257] SUBSUBPROCESS(1) if tmp_doa_peak_bin_dn[i][0] != -1 
 [258] SUBSUBPROCESS(1) if ) 
 [259] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[260] SUBSUBSUBPROCESS(1) func<start> tmp_doa_dev_dn += ( 
-[261] SUBSUBSUBPROCESS(1) func (FL)tmp_doa_peak_bin_dn[i][0] - tmp_doa_ave_dn) * ((FL)tmp_doa_peak_bin_dn[i][0] - tmp_doa_ave_dn 
-[262] SUBSUBSUBPROCESS(1) func<end> ); 
+[260] SUBSUBSUBPROCESS(1) equal<start> tmp_doa_dev_dn += ( 
+[261] SUBSUBSUBPROCESS(1) equal (FL)tmp_doa_peak_bin_dn[i][0] - tmp_doa_ave_dn) * ((FL)tmp_doa_peak_bin_dn[i][0] - tmp_doa_ave_dn 
+[262] SUBSUBSUBPROCESS(1) equal<end> ); 
 [263] SUBSUBSUBPROCESS(1) proc s4_t_sample_num_dn_for_dev++; 
 [264] SUBSUBPROCESS(2) if if( 
 [265] SUBSUBPROCESS(2) if tmp_doa_peak_bin_up[i][0] != -1 
 [266] SUBSUBPROCESS(2) if ) 
 [267] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[268] SUBSUBSUBPROCESS(1) func<start> tmp_doa_dev_up += ( 
-[269] SUBSUBSUBPROCESS(1) func (FL)tmp_doa_peak_bin_up[i][0] - tmp_doa_ave_up) * ((FL)tmp_doa_peak_bin_up[i][0] - tmp_doa_ave_up 
-[270] SUBSUBSUBPROCESS(1) func<end> ); 
+[268] SUBSUBSUBPROCESS(1) equal<start> tmp_doa_dev_up += ( 
+[269] SUBSUBSUBPROCESS(1) equal (FL)tmp_doa_peak_bin_up[i][0] - tmp_doa_ave_up) * ((FL)tmp_doa_peak_bin_up[i][0] - tmp_doa_ave_up 
+[270] SUBSUBSUBPROCESS(1) equal<end> ); 
 [271] SUBSUBSUBPROCESS(1) proc s4_t_sample_num_up_for_dev++; 
 [272] SUBPROCESS(9) if  if ( 
 [273] SUBPROCESS(9) if  s4_t_sample_num_dn_for_dev != (S4)0 
@@ -3147,12 +3146,12 @@ Total functions : 64
 [285] SUBPROCESS(12) else else 
 [286] SUBPROCESS(12) subproc SUBSUBPROCESS(1) 
 [287] SUBSUBPROCESS(1) equal tmp_doa_dev_up (FL)999.9F;
-[288] MAINPROCESS(8) func<start> tmp_angle_ave_dn = -( 
-[289] MAINPROCESS(8) func st_g_bsm_loop_data.afl_installed_angle[0] + DOA_ANG_PER_BIN*tmp_doa_ave_dn + DOA_BIN_START_ANG 
-[290] MAINPROCESS(8) func<end> ); 
-[291] MAINPROCESS(8) func<start> tmp_angle_ave_up = -( 
-[292] MAINPROCESS(8) func st_g_bsm_loop_data.afl_installed_angle[0] + DOA_ANG_PER_BIN*tmp_doa_ave_up + DOA_BIN_START_ANG 
-[293] MAINPROCESS(8) func<end> ); 
+[288] MAINPROCESS(8) equal<start> tmp_angle_ave_dn = -( 
+[289] MAINPROCESS(8) equal st_g_bsm_loop_data.afl_installed_angle[0] + DOA_ANG_PER_BIN*tmp_doa_ave_dn + DOA_BIN_START_ANG 
+[290] MAINPROCESS(8) equal<end> ); 
+[291] MAINPROCESS(8) equal<start> tmp_angle_ave_up = -( 
+[292] MAINPROCESS(8) equal st_g_bsm_loop_data.afl_installed_angle[0] + DOA_ANG_PER_BIN*tmp_doa_ave_up + DOA_BIN_START_ANG 
+[293] MAINPROCESS(8) equal<end> ); 
 [294] MAINPROCESS(8) equal tmp_fm_obj_flg 0;
 [295] MAINPROCESS(8) if  if ( 
 [296] MAINPROCESS(8) if  (tmp_peak_index_dn != -1 
@@ -3251,12 +3250,12 @@ Total functions : 64
 [389] SUBPROCESS(1) func<start> ast_a_normal_sot[0].fl_Robs	=  -RCOF * ( 
 [390] SUBPROCESS(1) func FL)(ast_a_normal_sot[0].s4_bin_up + ast_a_normal_sot[0].s4_bin_dn - NB_FFT_PT 
 [391] SUBPROCESS(1) func<end> ); 
-[392] SUBPROCESS(1) func<start> ast_a_normal_sot[0].fl_Rxobs = ( 
-[393] SUBPROCESS(1) func FL)(ast_a_normal_sot[0].fl_Robs*(FL)fl_sin( DOA_ANG_PER_BIN*0.5F*(ast_a_normal_sot[0].fl_theta_up+ast_a_normal_sot[0].fl_theta_dn) )+ st_g_bsm_loop_data.afl_installed_angle[1] 
-[394] SUBPROCESS(1) func<end> ); 
-[395] SUBPROCESS(1) func<start> ast_a_normal_sot[0].fl_Ryobs = ( 
-[396] SUBPROCESS(1) func FL)(ast_a_normal_sot[0].fl_Robs*(FL)fl_cos( DOA_ANG_PER_BIN*0.5F*(ast_a_normal_sot[0].fl_theta_up+ast_a_normal_sot[0].fl_theta_dn) ) 
-[397] SUBPROCESS(1) func<end> ); 
+[392] SUBPROCESS(1) equal<start> ast_a_normal_sot[0].fl_Rxobs = ( 
+[393] SUBPROCESS(1) equal FL)(ast_a_normal_sot[0].fl_Robs*(FL)fl_sin( DOA_ANG_PER_BIN*0.5F*(ast_a_normal_sot[0].fl_theta_up+ast_a_normal_sot[0].fl_theta_dn) )+ st_g_bsm_loop_data.afl_installed_angle[1] 
+[394] SUBPROCESS(1) equal<end> ); 
+[395] SUBPROCESS(1) equal<start> ast_a_normal_sot[0].fl_Ryobs = ( 
+[396] SUBPROCESS(1) equal FL)(ast_a_normal_sot[0].fl_Robs*(FL)fl_cos( DOA_ANG_PER_BIN*0.5F*(ast_a_normal_sot[0].fl_theta_up+ast_a_normal_sot[0].fl_theta_dn) ) 
+[397] SUBPROCESS(1) equal<end> ); 
 [398] SUBPROCESS(1) equal tmp_fm_theta 0.0F;
 [399] SUBPROCESS(1) equal tmp_fm_v 0.0F;
 [400] SUBPROCESS(1) equal tmp_fm_vx 0.0F;
@@ -3583,9 +3582,9 @@ Total functions : 64
 [124] SUBSUBPROCESS(1) for  ) 
 [125] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
 [126] SUBSUBSUBPROCESS(1) equal afl_t_tmp_Ryy[u2_t_lp_martrix_2f] afl_g_cvw_fcw_ryy_matrix_2f[SLOW_SOT_FREQ_BIN_START_I + i][u2_t_lp_martrix_2f];
-[127] SUBSUBPROCESS(2) func<start> fl_t_tmp_theta = -( 
-[128] SUBSUBPROCESS(2) func PI / (FL)180.0F * (st_g_bsm_loop_data.afl_installed_angle[0] + (FL)nearfield_doa[i][0] + (FL)DOA_BIN_START_ANG) 
-[129] SUBSUBPROCESS(2) func<end> ); 
+[127] SUBSUBPROCESS(2) equal<start> fl_t_tmp_theta = -( 
+[128] SUBSUBPROCESS(2) equal PI / (FL)180.0F * (st_g_bsm_loop_data.afl_installed_angle[0] + (FL)nearfield_doa[i][0] + (FL)DOA_BIN_START_ANG) 
+[129] SUBSUBPROCESS(2) equal<end> ); 
 [130] SUBSUBPROCESS(2) func<start> fl_t_tmp_Robs = fl_cal_r_fsk( 
 [131] SUBSUBPROCESS(2) func (const FL *)afl_t_tmp_Ryy 
 [132] SUBSUBPROCESS(2) func<end> ); 
@@ -3758,9 +3757,9 @@ Total functions : 64
 [124] SUBSUBPROCESS(1) for  ) 
 [125] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
 [126] SUBSUBSUBPROCESS(1) equal afl_t_tmp_Ryy[u2_t_lp_martrix_2f] afl_g_cvw_fcw_ryy_matrix_2f[SLOW_SOT_FREQ_BIN_START_Q - i][u2_t_lp_martrix_2f];
-[127] SUBSUBPROCESS(2) func<start> fl_t_tmp_theta = -( 
-[128] SUBSUBPROCESS(2) func PI / (FL)180.0F * (st_g_bsm_loop_data.afl_installed_angle[0] + (FL)nearfield_doa[i][0] + (FL)DOA_BIN_START_ANG) 
-[129] SUBSUBPROCESS(2) func<end> ); 
+[127] SUBSUBPROCESS(2) equal<start> fl_t_tmp_theta = -( 
+[128] SUBSUBPROCESS(2) equal PI / (FL)180.0F * (st_g_bsm_loop_data.afl_installed_angle[0] + (FL)nearfield_doa[i][0] + (FL)DOA_BIN_START_ANG) 
+[129] SUBSUBPROCESS(2) equal<end> ); 
 [130] SUBSUBPROCESS(2) func<start> fl_t_tmp_Robs = fl_cal_r_fsk( 
 [131] SUBSUBPROCESS(2) func (const FL *)afl_t_tmp_Ryy 
 [132] SUBSUBPROCESS(2) func<end> ); 
@@ -3921,9 +3920,9 @@ Total functions : 64
 [111] SUBSUBSUBSUBPROCESS(3) if  doa_nearfield < (FL)end_doa 
 [112] SUBSUBSUBSUBPROCESS(3) if  ) 
 [113] SUBSUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[114] SUBSUBSUBSUBSUBPROCESS(1) func<start> doa_dif_sotlimit_forward = ( 
-[115] SUBSUBSUBSUBSUBPROCESS(1) func S4)(doa_stationary - doa_nearfield 
-[116] SUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[114] SUBSUBSUBSUBSUBPROCESS(1) equal<start> doa_dif_sotlimit_forward = ( 
+[115] SUBSUBSUBSUBSUBPROCESS(1) equal S4)(doa_stationary - doa_nearfield 
+[116] SUBSUBSUBSUBSUBPROCESS(1) equal<end> ); 
 [117] SUBSUBSUBSUBSUBPROCESS(1) if  if ( 
 [118] SUBSUBSUBSUBSUBPROCESS(1) if  doa_dif_sotlimit_forward < (S4)0 
 [119] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
@@ -3933,9 +3932,9 @@ Total functions : 64
 [123] SUBSUBSUBSUBSUBSUBPROCESS(1) if  doa_dif_sotlimit_forward < SoT_DIFF_TH3 
 [124] SUBSUBSUBSUBSUBSUBPROCESS(1) if  ) 
 [125] SUBSUBSUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBSUBSUBPROCESS(1) 
-[126] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.as4_sot_check_sum[0][0][0] += ( 
-[127] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) func -doa_dif_sotlimit_forward 
-[128] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) func<end> ); 
+[126] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) equal<start> st_g_bsm_loop_data.as4_sot_check_sum[0][0][0] += ( 
+[127] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) equal -doa_dif_sotlimit_forward 
+[128] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) equal<end> ); 
 [129] SUBSUBSUBSUBSUBSUBPROCESS(2) if  if ( 
 [130] SUBSUBSUBSUBSUBSUBPROCESS(2) if  doa_dif_sotlimit_forward < SoT_DIFF_TH1 
 [131] SUBSUBSUBSUBSUBSUBPROCESS(2) if  ) 
@@ -4107,9 +4106,9 @@ Total functions : 64
 [130] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) equal tmp_vsin -1.0F;
 [131] SUBSUBSUBSUBSUBSUBPROCESS(3) equal doa_sot_limit (FL)v0_doa - (FL)fl_cal_asin(tmp_vsin) * (FL)180.0F / PI;
 [132] SUBSUBSUBSUBSUBSUBPROCESS(3) proc u1_t_num_backward++; 
-[133] SUBSUBSUBSUBSUBSUBPROCESS(3) func<start> doa_dif_sotlimit_backward = ( 
-[134] SUBSUBSUBSUBSUBSUBPROCESS(3) func S4)(doa_sot_limit - doa_nearfield 
-[135] SUBSUBSUBSUBSUBSUBPROCESS(3) func<end> ); 
+[133] SUBSUBSUBSUBSUBSUBPROCESS(3) equal<start> doa_dif_sotlimit_backward = ( 
+[134] SUBSUBSUBSUBSUBSUBPROCESS(3) equal S4)(doa_sot_limit - doa_nearfield 
+[135] SUBSUBSUBSUBSUBSUBPROCESS(3) equal<end> ); 
 [136] SUBSUBSUBSUBSUBPROCESS(2) else else 
 [137] SUBSUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBSUBPROCESS(1) 
 [138] SUBSUBSUBSUBSUBSUBPROCESS(1) equal tmp_vsin (FL)(-(SLOW_SOT_FREQ_BIN_START_Q - k - (NB_FFT_PT_2F / (S4)2))) * (FL)3.6F * VCOF_2F / fl_g_v_self_bsm_for_base;
@@ -4125,9 +4124,9 @@ Total functions : 64
 [148] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) equal tmp_vsin -1.0F;
 [149] SUBSUBSUBSUBSUBSUBPROCESS(3) equal doa_sot_limit (FL)v0_doa - (FL)fl_cal_asin(tmp_vsin) * (FL)180.0F / PI;
 [150] SUBSUBSUBSUBSUBSUBPROCESS(3) proc u1_t_num_forward++; 
-[151] SUBSUBSUBSUBSUBSUBPROCESS(3) func<start> s4_t_doa_dif_sotlimit_forward = ( 
-[152] SUBSUBSUBSUBSUBSUBPROCESS(3) func S4)(doa_sot_limit - doa_nearfield 
-[153] SUBSUBSUBSUBSUBSUBPROCESS(3) func<end> ); 
+[151] SUBSUBSUBSUBSUBSUBPROCESS(3) equal<start> s4_t_doa_dif_sotlimit_forward = ( 
+[152] SUBSUBSUBSUBSUBSUBPROCESS(3) equal S4)(doa_sot_limit - doa_nearfield 
+[153] SUBSUBSUBSUBSUBSUBPROCESS(3) equal<end> ); 
 [154] SUBSUBSUBSUBSUBPROCESS(3) equal diff_th CS4_SoT_DIFF_TH;
 [155] SUBSUBSUBSUBPROCESS(2) else if  else if ( 
 [156] SUBSUBSUBSUBPROCESS(2) else if  fl_g_v_self_bsm_for_base > (FL)5.0F 
@@ -4162,9 +4161,9 @@ Total functions : 64
 [185] SUBSUBSUBSUBSUBSUBSUBPROCESS(1) equal fl_t_vsin2 -1.0F;
 [186] SUBSUBSUBSUBSUBSUBPROCESS(5) equal doa_sot_limit (FL)v0_doa - fl_cal_asin(tmp_vsin) * (FL)180.0F / PI;
 [187] SUBSUBSUBSUBSUBSUBPROCESS(5) equal fl_t_doa_sot_limit2 (FL)v0_doa - fl_cal_asin(fl_t_vsin2) * (FL)180.0F / PI;
-[188] SUBSUBSUBSUBSUBSUBPROCESS(5) func<start> doa_dif_sotlimit_backward = ( 
-[189] SUBSUBSUBSUBSUBSUBPROCESS(5) func S4)(doa_sot_limit - doa_nearfield 
-[190] SUBSUBSUBSUBSUBSUBPROCESS(5) func<end> ); 
+[188] SUBSUBSUBSUBSUBSUBPROCESS(5) equal<start> doa_dif_sotlimit_backward = ( 
+[189] SUBSUBSUBSUBSUBSUBPROCESS(5) equal S4)(doa_sot_limit - doa_nearfield 
+[190] SUBSUBSUBSUBSUBSUBPROCESS(5) equal<end> ); 
 [191] SUBSUBSUBSUBSUBSUBPROCESS(5) if  if ( 
 [192] SUBSUBSUBSUBSUBSUBPROCESS(5) if  (FL)doa_dif_sotlimit_backward < (doa_sot_limit - fl_t_doa_sot_limit2) 
 [193] SUBSUBSUBSUBSUBSUBPROCESS(5) if  ) 
@@ -4588,9 +4587,9 @@ Total functions : 64
 [156] MAINPROCESS(8) for  u1_t_lp_data++ 
 [157] MAINPROCESS(8) for  ) 
 [158] MAINPROCESS(8) subproc SUBPROCESS(1) 
-[159] SUBPROCESS(1) func<start> s4_t_fwd_point_sum += ( 
-[160] SUBPROCESS(1) func st_g_bsm_loop_data.as4_sot_check_points[0][0][u1_t_lp_data] + st_g_bsm_loop_data.as4_sot_check_points[0][1][u1_t_lp_data] 
-[161] SUBPROCESS(1) func<end> ); 
+[159] SUBPROCESS(1) equal<start> s4_t_fwd_point_sum += ( 
+[160] SUBPROCESS(1) equal st_g_bsm_loop_data.as4_sot_check_points[0][0][u1_t_lp_data] + st_g_bsm_loop_data.as4_sot_check_points[0][1][u1_t_lp_data] 
+[161] SUBPROCESS(1) equal<end> ); 
 [162] MAINPROCESS(9) if  if ( 
 [163] MAINPROCESS(9) if  s4_t_fwd_point_sum < s4_t_th_point_sum 
 [164] MAINPROCESS(9) if  ) 
@@ -4793,14 +4792,14 @@ Total functions : 64
 [13] MAINPROCESS(1) proc S4 tmptmp_min; 
 [14] MAINPROCESS(1) proc S4 freq; 
 [15] MAINPROCESS(1) proc FL v_limit; 
-[16] MAINPROCESS(1) func<start> FL tmp = ( 
-[17] MAINPROCESS(1) func FL)(NB_FFT_PT_2F / 2 - (S4)(CFL_SoT_V_TH_BWD / 3.6F / VCOF_2F) 
-[18] MAINPROCESS(1) func<end> ); 
+[16] MAINPROCESS(1) equal<start> FL tmp = ( 
+[17] MAINPROCESS(1) equal FL)(NB_FFT_PT_2F / 2 - (S4)(CFL_SoT_V_TH_BWD / 3.6F / VCOF_2F) 
+[18] MAINPROCESS(1) equal<end> ); 
 [19] MAINPROCESS(1) proc FL doa_limit; 
 [20] MAINPROCESS(1) proc FL diff1, diff2; 
-[21] MAINPROCESS(1) func<start> S4 num_th = ( 
-[22] MAINPROCESS(1) func S4)(SLOW_SOT_FREQ_BIN_RANGE*0.6F 
-[23] MAINPROCESS(1) func<end> ); 
+[21] MAINPROCESS(1) equal<start> S4 num_th = ( 
+[22] MAINPROCESS(1) equal S4)(SLOW_SOT_FREQ_BIN_RANGE*0.6F 
+[23] MAINPROCESS(1) equal<end> ); 
 [24] MAINPROCESS(1) equal *backward_priod 0;
 [25] MAINPROCESS(1) if  if ( 
 [26] MAINPROCESS(1) if  fl_g_v_self_bsm_for_base == 0.0F 
@@ -4935,9 +4934,9 @@ Total functions : 64
 [155] MAINPROCESS(15) else else 
 [156] MAINPROCESS(15) subproc SUBPROCESS(1) 
 [157] SUBPROCESS(1) equal tmptmp_min start_freq_bin;
-[158] MAINPROCESS(16) func<start> num_th = ( 
-[159] MAINPROCESS(16) func S4)( (FL)(tmptmp_max - tmptmp_min + 1)*0.6F 
-[160] MAINPROCESS(16) func<end> ); 
+[158] MAINPROCESS(16) equal<start> num_th = ( 
+[159] MAINPROCESS(16) equal S4)( (FL)(tmptmp_max - tmptmp_min + 1)*0.6F 
+[160] MAINPROCESS(16) equal<end> ); 
 [161] MAINPROCESS(16) func<start> memset( 
 [162] MAINPROCESS(16) func as4_g_fast_sot_limit_line_diam, 0, sizeof(as4_g_fast_sot_limit_line_diam) 
 [163] MAINPROCESS(16) func<end> ); 

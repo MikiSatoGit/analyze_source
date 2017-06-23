@@ -960,9 +960,9 @@ Total functions : 49
 [88] SUBSUBPROCESS(1) func &st_g_bsm_loop_data.ast_normal_sot[0], (S4)1 
 [89] SUBSUBPROCESS(1) func<end> ); 
 [90] SUBPROCESS(5) equal st_g_bsm_loop_data.u1_fa_delete_count (U1)10 + (U1)1;
-[91] MAINPROCESS(8) func<start> st_g_bsm_loop_data.u1_fa_delete_count = ( 
-[92] MAINPROCESS(8) func U1)u2_data_add((U2)st_g_bsm_loop_data.u1_fa_delete_count, (S2)-1, (U2)CU1_U1MAX, (U2)0 
-[93] MAINPROCESS(8) func<end> ); 
+[91] MAINPROCESS(8) equal<start> st_g_bsm_loop_data.u1_fa_delete_count = ( 
+[92] MAINPROCESS(8) equal U1)u2_data_add((U2)st_g_bsm_loop_data.u1_fa_delete_count, (S2)-1, (U2)CU1_U1MAX, (U2)0 
+[93] MAINPROCESS(8) equal<end> ); 
 [94] MAINPROCESS(8) return return; 
 ----------------- Total Codes : 94 lines
 --------------------------
@@ -1053,9 +1053,9 @@ Total functions : 49
 [7] SUBPROCESS(1) equal st_g_bsm_loop_data.u1_reliable_jdg_mask_count (U1)12;
 [8] MAINPROCESS(2) else else 
 [9] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[10] SUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_reliable_jdg_mask_count = ( 
-[11] SUBPROCESS(1) func U1)u2_data_add(st_g_bsm_loop_data.u1_reliable_jdg_mask_count, (S2)-1, (U2)CU1_U1MAX, (U2)0 
-[12] SUBPROCESS(1) func<end> ); 
+[10] SUBPROCESS(1) equal<start> st_g_bsm_loop_data.u1_reliable_jdg_mask_count = ( 
+[11] SUBPROCESS(1) equal U1)u2_data_add(st_g_bsm_loop_data.u1_reliable_jdg_mask_count, (S2)-1, (U2)CU1_U1MAX, (U2)0 
+[12] SUBPROCESS(1) equal<end> ); 
 [13] MAINPROCESS(3) return return; 
 ----------------- Total Codes : 13 lines
 --------------------------
@@ -1075,9 +1075,9 @@ Total functions : 49
 [9] MAINPROCESS(1) if  &&   (s2_g_curvr_for_base < (S4)30)) 
 [10] MAINPROCESS(1) if  ) 
 [11] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[12] SUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_shrink_on_count = ( 
-[13] SUBPROCESS(1) func U1)u2_data_add((U2)st_g_bsm_loop_data.u1_shrink_on_count, (S2)1, (U2)12, (U2)0 
-[14] SUBPROCESS(1) func<end> ); 
+[12] SUBPROCESS(1) equal<start> st_g_bsm_loop_data.u1_shrink_on_count = ( 
+[13] SUBPROCESS(1) equal U1)u2_data_add((U2)st_g_bsm_loop_data.u1_shrink_on_count, (S2)1, (U2)12, (U2)0 
+[14] SUBPROCESS(1) equal<end> ); 
 [15] MAINPROCESS(2) else else 
 [16] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [17] SUBPROCESS(1) equal st_g_bsm_loop_data.u1_shrink_on_count (U1)0;
@@ -1116,9 +1116,9 @@ Total functions : 49
 [50] SUBPROCESS(1) if  ) 
 [51] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [52] SUBSUBPROCESS(1) equal fl_t_alarm_area_y_min (FL)-4.0F;
-[53] SUBSUBPROCESS(1) func<start> st_g_bsm_loop_data.u1_shrink_keep_count = ( 
-[54] SUBSUBPROCESS(1) func U1)u2_data_add((U2)st_g_bsm_loop_data.u1_shrink_keep_count, (S2)-1, (U2)31, (U2)0 
-[55] SUBSUBPROCESS(1) func<end> ); 
+[53] SUBSUBPROCESS(1) equal<start> st_g_bsm_loop_data.u1_shrink_keep_count = ( 
+[54] SUBSUBPROCESS(1) equal U1)u2_data_add((U2)st_g_bsm_loop_data.u1_shrink_keep_count, (S2)-1, (U2)31, (U2)0 
+[55] SUBSUBPROCESS(1) equal<end> ); 
 [56] SUBPROCESS(2) else else 
 [57] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
 [58] MAINPROCESS(8) return return; 
@@ -1723,9 +1723,9 @@ Total functions : 49
 [12] MAINPROCESS(1) equal afl_a_alarmed_target_current[0][4] afl_a_alarmed_target[0][4];
 [13] MAINPROCESS(1) equal afl_a_alarmed_target_current[0][5] afl_a_alarmed_target[0][5] + 1.0F;
 [14] MAINPROCESS(1) equal afl_a_alarmed_target_current[0][6] afl_a_alarmed_target[0][6];
-[15] MAINPROCESS(1) func<start> tmp_peak_bin = ( 
-[16] MAINPROCESS(1) func S4)( fl_abs(fl_sqrt(afl_a_alarmed_target[0][0]*afl_a_alarmed_target[0][0]+afl_a_alarmed_target[0][1]*afl_a_alarmed_target[0][1]))/RCOF*0.5F + NB_FFT_PT*0.5F 
-[17] MAINPROCESS(1) func<end> ); 
+[15] MAINPROCESS(1) equal<start> tmp_peak_bin = ( 
+[16] MAINPROCESS(1) equal S4)( fl_abs(fl_sqrt(afl_a_alarmed_target[0][0]*afl_a_alarmed_target[0][0]+afl_a_alarmed_target[0][1]*afl_a_alarmed_target[0][1]))/RCOF*0.5F + NB_FFT_PT*0.5F 
+[17] MAINPROCESS(1) equal<end> ); 
 [18] MAINPROCESS(1) func<start> tmp_peak_bin_up = tmp_peak_bin + ( 
 [19] MAINPROCESS(1) func S4)( 0.5*(-afl_a_alarmed_target[0][9])/VCOF 
 [20] MAINPROCESS(1) func<end> ); 

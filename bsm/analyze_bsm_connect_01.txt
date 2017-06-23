@@ -391,18 +391,17 @@ Total functions : 78
 [18] SUBPROCESS(1) if  ) 
 [19] SUBPROCESS(1) if  &&   (ast_a_target_prev[i].fl_Ryfil > (CFL_ALARM_Y_BACKWARD - ALARM_Y_OFFSET)) 
 [20] SUBPROCESS(1) if  ) 
-[21] SUBPROCESS(1) if   
-[22] SUBPROCESS(1) if  ) 
-[23] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[24] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_passing[0] + (S4)1;
-[25] MAINPROCESS(2) if  if ( 
-[26] MAINPROCESS(2) if  (fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN 
-[27] MAINPROCESS(2) if  ) 
-[28] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.s4_flg_alarm == (S4)0) 
-[29] MAINPROCESS(2) if  ) 
-[30] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[31] SUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_passing[0] 0;
------------------ Total Codes : 31 lines
+[21] SUBPROCESS(1) if  ) 
+[22] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[23] SUBSUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_passing[0] + (S4)1;
+[24] MAINPROCESS(2) if  if ( 
+[25] MAINPROCESS(2) if  (fl_g_v_self_bsm_for_base < CFL_CANOUT_VSELF_MIN 
+[26] MAINPROCESS(2) if  ) 
+[27] MAINPROCESS(2) if  &&  (st_g_bsm_loop_data.s4_flg_alarm == (S4)0) 
+[28] MAINPROCESS(2) if  ) 
+[29] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[30] SUBPROCESS(1) equal st_g_bsm_loop_data.as4_flg_passing[0] 0;
+----------------- Total Codes : 30 lines
 --------------------------
 [Function Name] : fn_bsm_con_integ_object 
 -Return type : static VD 
@@ -632,9 +631,9 @@ Total functions : 78
 [26] MAINPROCESS(2) else else 
 [27] MAINPROCESS(2) subproc SUBPROCESS(1) 
 [28] SUBPROCESS(1) equal ast_a_normal_sot[0].s4_flg_new 1;
-[29] SUBPROCESS(1) func<start> ast_a_normal_sot[0].s4_flg_track = ( 
-[30] SUBPROCESS(1) func S4)(PRIOR_TRK_NUM+1 
-[31] SUBPROCESS(1) func<end> ); 
+[29] SUBPROCESS(1) equal<start> ast_a_normal_sot[0].s4_flg_track = ( 
+[30] SUBPROCESS(1) equal S4)(PRIOR_TRK_NUM+1 
+[31] SUBPROCESS(1) equal<end> ); 
 [32] MAINPROCESS(3) func<start> s4_copy_prediction_to_filtered_data( 
 [33] MAINPROCESS(3) func ast_a_normal_sot, 
 [34] MAINPROCESS(3) func 1 
@@ -810,36 +809,35 @@ Total functions : 78
 [10] MAINPROCESS(1) subproc SUBPROCESS(1) 
 [11] SUBPROCESS(1) if  if ( 
 [12] SUBPROCESS(1) if  pst_a_normal2[s2_t_loop].fl_Robs != CFL_UNKNOWN_VALUE 
-[13] SUBPROCESS(1) if   
-[14] SUBPROCESS(1) if  ) 
-[15] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[16] SUBSUBPROCESS(1) equal s2_t_in[s2_t_num] s2_t_loop;
-[17] SUBSUBPROCESS(1) proc s2_t_num++; 
-[18] MAINPROCESS(2) if  if ( 
-[19] MAINPROCESS(2) if  s2_t_num > 0 
-[20] MAINPROCESS(2) if  ) 
-[21] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[22] SUBPROCESS(1) for  for ( 
-[23] SUBPROCESS(1) for  s2_t_loop = 0; 
-[24] SUBPROCESS(1) for  s2_t_loop < s2_t_num; 
-[25] SUBPROCESS(1) for  s2_t_loop++ 
-[26] SUBPROCESS(1) for  ) 
-[27] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[28] SUBSUBPROCESS(1) equal pst_a_normal2[s2_t_loop] pst_a_normal2[s2_t_in[s2_t_loop]];
-[29] SUBPROCESS(2) for  for ( 
-[30] SUBPROCESS(2) for  s2_t_loop = s2_t_num; 
-[31] SUBPROCESS(2) for  s2_t_loop < NORMAL_BUFFSIZE; 
-[32] SUBPROCESS(2) for  s2_t_loop++ 
-[33] SUBPROCESS(2) for  ) 
-[34] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[35] SUBSUBPROCESS(1) func<start> fn_init( 
-[36] SUBSUBPROCESS(1) func &pst_a_normal2[s2_t_loop], 1 
-[37] SUBSUBPROCESS(1) func<end> ); 
-[38] MAINPROCESS(3) func pst_a_normal2, 
-[39] MAINPROCESS(3) func NORMAL_BUFFSIZE 
-[40] MAINPROCESS(3) func<end> ); 
-[41] MAINPROCESS(3) return return; 
------------------ Total Codes : 41 lines
+[13] SUBPROCESS(1) if  ) 
+[14] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[15] SUBSUBPROCESS(1) equal s2_t_in[s2_t_num] s2_t_loop;
+[16] SUBSUBPROCESS(1) proc s2_t_num++; 
+[17] MAINPROCESS(2) if  if ( 
+[18] MAINPROCESS(2) if  s2_t_num > 0 
+[19] MAINPROCESS(2) if  ) 
+[20] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[21] SUBPROCESS(1) for  for ( 
+[22] SUBPROCESS(1) for  s2_t_loop = 0; 
+[23] SUBPROCESS(1) for  s2_t_loop < s2_t_num; 
+[24] SUBPROCESS(1) for  s2_t_loop++ 
+[25] SUBPROCESS(1) for  ) 
+[26] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[27] SUBSUBPROCESS(1) equal pst_a_normal2[s2_t_loop] pst_a_normal2[s2_t_in[s2_t_loop]];
+[28] SUBPROCESS(2) for  for ( 
+[29] SUBPROCESS(2) for  s2_t_loop = s2_t_num; 
+[30] SUBPROCESS(2) for  s2_t_loop < NORMAL_BUFFSIZE; 
+[31] SUBPROCESS(2) for  s2_t_loop++ 
+[32] SUBPROCESS(2) for  ) 
+[33] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[34] SUBSUBPROCESS(1) func<start> fn_init( 
+[35] SUBSUBPROCESS(1) func &pst_a_normal2[s2_t_loop], 1 
+[36] SUBSUBPROCESS(1) func<end> ); 
+[37] MAINPROCESS(3) func pst_a_normal2, 
+[38] MAINPROCESS(3) func NORMAL_BUFFSIZE 
+[39] MAINPROCESS(3) func<end> ); 
+[40] MAINPROCESS(3) return return; 
+----------------- Total Codes : 40 lines
 --------------------------
 [Function Name] : fn_bsm_con_jdg_object_probability 
 -Return type : VD 
@@ -874,12 +872,12 @@ Total functions : 78
 [26] SUBSUBPROCESS(1) if  &&	(past_a_normal2[u1_t_lp_num_normal].s4_flg_dc != OBJECT_TYPE_SOT) 
 [27] SUBSUBPROCESS(1) if  ) 
 [28] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[29] SUBSUBSUBPROCESS(1) func<start> fl_t_power_bin = ( 
-[30] SUBSUBSUBPROCESS(1) func FL)0.5F * (past_a_normal2[u1_t_lp_num_normal].fl_power_up + past_a_normal2[u1_t_lp_num_normal].fl_power_dn 
-[31] SUBSUBSUBPROCESS(1) func<end> ); 
-[32] SUBSUBSUBPROCESS(1) func<start> fl_t_power_doa = ( 
-[33] SUBSUBSUBPROCESS(1) func FL)0.5F * (past_a_normal2[u1_t_lp_num_normal].fl_power_up_music + past_a_normal2[u1_t_lp_num_normal].fl_power_dn_music 
-[34] SUBSUBSUBPROCESS(1) func<end> ); 
+[29] SUBSUBSUBPROCESS(1) equal<start> fl_t_power_bin = ( 
+[30] SUBSUBSUBPROCESS(1) equal FL)0.5F * (past_a_normal2[u1_t_lp_num_normal].fl_power_up + past_a_normal2[u1_t_lp_num_normal].fl_power_dn 
+[31] SUBSUBSUBPROCESS(1) equal<end> ); 
+[32] SUBSUBSUBPROCESS(1) equal<start> fl_t_power_doa = ( 
+[33] SUBSUBSUBPROCESS(1) equal FL)0.5F * (past_a_normal2[u1_t_lp_num_normal].fl_power_up_music + past_a_normal2[u1_t_lp_num_normal].fl_power_dn_music 
+[34] SUBSUBSUBPROCESS(1) equal<end> ); 
 [35] SUBSUBSUBPROCESS(1) func<start> u1_t_jdg_m8_flg = u1_bsm_con_jdg_obj_probability_m8( 
 [36] SUBSUBSUBPROCESS(1) func fl_t_power_doa 
 [37] SUBSUBSUBPROCESS(1) func<end> ); 
@@ -1330,9 +1328,9 @@ Total functions : 78
 [21] SUBSUBPROCESS(1) if  ast_a_normal_current[i].fl_Ryfil > RY_WALL_LIMIT_TT 
 [22] SUBSUBPROCESS(1) if  ) 
 [23] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[24] SUBSUBSUBPROCESS(1) func<start> tmp_Rx_i = ( 
-[25] SUBSUBSUBPROCESS(1) func S4)(-ast_a_normal_current[i].fl_Ryfil 
-[26] SUBSUBSUBPROCESS(1) func<end> ); 
+[24] SUBSUBSUBPROCESS(1) equal<start> tmp_Rx_i = ( 
+[25] SUBSUBSUBPROCESS(1) equal S4)(-ast_a_normal_current[i].fl_Ryfil 
+[26] SUBSUBSUBPROCESS(1) equal<end> ); 
 [27] SUBSUBSUBPROCESS(1) if if( 
 [28] SUBSUBSUBPROCESS(1) if tmp_Rx_i < 0 
 [29] SUBSUBSUBPROCESS(1) if ) 
@@ -1361,9 +1359,9 @@ Total functions : 78
 [52] SUBSUBPROCESS(1) if  ast_a_normal_current[i].fl_Ryfil > RY_WALL_LIMIT_TT 
 [53] SUBSUBPROCESS(1) if  ) 
 [54] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[55] SUBSUBSUBPROCESS(1) func<start> tmp_Rx_i = ( 
-[56] SUBSUBSUBPROCESS(1) func S4)(-ast_a_normal_current[i].fl_Ryfil 
-[57] SUBSUBSUBPROCESS(1) func<end> ); 
+[55] SUBSUBSUBPROCESS(1) equal<start> tmp_Rx_i = ( 
+[56] SUBSUBSUBPROCESS(1) equal S4)(-ast_a_normal_current[i].fl_Ryfil 
+[57] SUBSUBSUBPROCESS(1) equal<end> ); 
 [58] SUBSUBSUBPROCESS(1) if if( 
 [59] SUBSUBSUBPROCESS(1) if tmp_Rx_i < 0 
 [60] SUBSUBSUBPROCESS(1) if ) 
@@ -1603,9 +1601,9 @@ Total functions : 78
 [11] SUBPROCESS(1) if  ast_a_normal_current[i].fl_Robs != CFL_UNKNOWN_VALUE 
 [12] SUBPROCESS(1) if  ) 
 [13] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[14] SUBSUBPROCESS(1) func<start> tmp_Rx_i = ( 
-[15] SUBSUBPROCESS(1) func S4)(-ast_a_normal_current[i].fl_Ryfil 
-[16] SUBSUBPROCESS(1) func<end> ); 
+[14] SUBSUBPROCESS(1) equal<start> tmp_Rx_i = ( 
+[15] SUBSUBPROCESS(1) equal S4)(-ast_a_normal_current[i].fl_Ryfil 
+[16] SUBSUBPROCESS(1) equal<end> ); 
 [17] SUBSUBPROCESS(1) if if( 
 [18] SUBSUBPROCESS(1) if tmp_Rx_i < 0 
 [19] SUBSUBPROCESS(1) if ) 
@@ -2010,12 +2008,12 @@ Total functions : 78
 [17] SUBPROCESS(1) for ) 
 [18] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
 [19] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[20] SUBSUBSUBPROCESS(1) func<start> fl_t_diff_x = ( 
-[21] SUBSUBSUBPROCESS(1) func FL) (fl_abs(ast_a_normal_current[as4_a_sample_indexs[k]].fl_Rxfil - ast_a_target_prev[as4_a_sample_indexs_prev[k]].fl_Rxpred) 
-[22] SUBSUBSUBPROCESS(1) func<end> ); 
-[23] SUBSUBSUBPROCESS(1) func<start> fl_t_diff_y = ( 
-[24] SUBSUBSUBPROCESS(1) func FL) (fl_abs(ast_a_normal_current[as4_a_sample_indexs[k]].fl_Ryfil - ast_a_target_prev[as4_a_sample_indexs_prev[k]].fl_Rypred) 
-[25] SUBSUBSUBPROCESS(1) func<end> ); 
+[20] SUBSUBSUBPROCESS(1) equal<start> fl_t_diff_x = ( 
+[21] SUBSUBSUBPROCESS(1) equal FL) (fl_abs(ast_a_normal_current[as4_a_sample_indexs[k]].fl_Rxfil - ast_a_target_prev[as4_a_sample_indexs_prev[k]].fl_Rxpred) 
+[22] SUBSUBSUBPROCESS(1) equal<end> ); 
+[23] SUBSUBSUBPROCESS(1) equal<start> fl_t_diff_y = ( 
+[24] SUBSUBSUBPROCESS(1) equal FL) (fl_abs(ast_a_normal_current[as4_a_sample_indexs[k]].fl_Ryfil - ast_a_target_prev[as4_a_sample_indexs_prev[k]].fl_Rypred) 
+[25] SUBSUBSUBPROCESS(1) equal<end> ); 
 [26] SUBSUBPROCESS(2) equal fl_t_diff fl_t_diff_x + fl_t_diff_y;
 [27] SUBSUBPROCESS(2) if if( 
 [28] SUBSUBPROCESS(2) if fl_t_diff < fl_t_min 
@@ -3101,61 +3099,60 @@ Total functions : 78
 [67] SUBSUBSUBPROCESS(2) else if  ) 
 [68] SUBSUBSUBPROCESS(2) else if  &&  (fl_abs(tmp_target_buf[i].fl_Ryfil - tmp_target_buf[j].fl_Ryfil) < RY_TH_TT - (FL)1.3F 
 [69] SUBSUBSUBPROCESS(2) else if  ) 
-[70] SUBSUBSUBPROCESS(2) else if   
-[71] SUBSUBSUBPROCESS(2) else if  ) 
-[72] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[73] SUBSUBSUBSUBPROCESS(1) if  if ( 
-[74] SUBSUBSUBSUBPROCESS(1) if  tmp_target_buf[i].s4_flg_track < tmp_target_buf[j].s4_flg_track 
-[75] SUBSUBSUBSUBPROCESS(1) if  ) 
-[76] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[77] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_index_valid j;
-[78] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_index_invalid i;
-[79] SUBSUBSUBSUBPROCESS(2) else else 
-[80] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[81] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_index_valid i;
-[82] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_index_invalid j;
-[83] SUBSUBSUBSUBPROCESS(3) equal used_ID[tmp_target_buf[tmp_index_invalid].s4_ID_num-1] 0;
-[84] SUBSUBSUBPROCESS(3) else else 
-[85] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
-[86] SUBSUBSUBPROCESS(4) if  if ( 
-[87] SUBSUBSUBPROCESS(4) if  (tmp_index_valid != -1 
-[88] SUBSUBSUBPROCESS(4) if  ) 
-[89] SUBSUBSUBPROCESS(4) if  &&  (tmp_index_invalid != -1) 
-[90] SUBSUBSUBPROCESS(4) if  ) 
-[91] SUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBPROCESS(1) 
-[92] SUBSUBSUBSUBPROCESS(1) if  if ( 
-[93] SUBSUBSUBSUBPROCESS(1) if  tmp_target_buf[tmp_index_invalid].s4_flg_lost < tmp_target_buf[tmp_index_valid].s4_flg_lost 
-[94] SUBSUBSUBSUBPROCESS(1) if  ) 
-[95] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[96] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_target_buf[tmp_index_valid].s4_flg_lost tmp_target_buf[tmp_index_invalid].s4_flg_lost;
-[97] SUBSUBSUBSUBPROCESS(2) if  if ( 
-[98] SUBSUBSUBSUBPROCESS(2) if  (tmp_target_buf[i].s4_flg_heiso_up == 1 
-[99] SUBSUBSUBSUBPROCESS(2) if  ) 
-[100] SUBSUBSUBSUBPROCESS(2) if  ||  (tmp_target_buf[j].s4_flg_heiso_up == 1) 
-[101] SUBSUBSUBSUBPROCESS(2) if  ) 
-[102] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[103] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_target_buf[tmp_index_valid].s4_flg_heiso_up 1;
-[104] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_target_buf[tmp_index_valid].s4_flg_heiso_dn 1;
-[105] SUBSUBSUBSUBPROCESS(3) func<start> fn_init( 
-[106] SUBSUBSUBSUBPROCESS(3) func  &tmp_target_buf[tmp_index_invalid], 1 
-[107] SUBSUBSUBSUBPROCESS(3) func<end> ); 
-[108] MAINPROCESS(4) for for( 
-[109] MAINPROCESS(4) for i=0; 
-[110] MAINPROCESS(4) for i<TARGET_BUFFSIZE; 
-[111] MAINPROCESS(4) for i++ 
-[112] MAINPROCESS(4) for ) 
-[113] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[114] SUBPROCESS(1) func<start> fn_init( 
-[115] SUBPROCESS(1) func &target[i], 1 
-[116] SUBPROCESS(1) func<end> ); 
-[117] SUBPROCESS(1) if if( 
-[118] SUBPROCESS(1) if tmp_target_buf[i].fl_Robs != CFL_UNKNOWN_VALUE 
-[119] SUBPROCESS(1) if ) 
-[120] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[121] SUBSUBPROCESS(1) equal target[iret] tmp_target_buf[i];
-[122] SUBSUBPROCESS(1) proc iret++; 
-[123] MAINPROCESS(5) proc return iret; 
------------------ Total Codes : 123 lines
+[70] SUBSUBSUBPROCESS(2) else if  ) 
+[71] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[72] SUBSUBSUBSUBPROCESS(1) if  if ( 
+[73] SUBSUBSUBSUBPROCESS(1) if  tmp_target_buf[i].s4_flg_track < tmp_target_buf[j].s4_flg_track 
+[74] SUBSUBSUBSUBPROCESS(1) if  ) 
+[75] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[76] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_index_valid j;
+[77] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_index_invalid i;
+[78] SUBSUBSUBSUBPROCESS(2) else else 
+[79] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[80] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_index_valid i;
+[81] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_index_invalid j;
+[82] SUBSUBSUBSUBPROCESS(3) equal used_ID[tmp_target_buf[tmp_index_invalid].s4_ID_num-1] 0;
+[83] SUBSUBSUBPROCESS(3) else else 
+[84] SUBSUBSUBPROCESS(3) subproc SUBSUBSUBSUBPROCESS(1) 
+[85] SUBSUBSUBPROCESS(4) if  if ( 
+[86] SUBSUBSUBPROCESS(4) if  (tmp_index_valid != -1 
+[87] SUBSUBSUBPROCESS(4) if  ) 
+[88] SUBSUBSUBPROCESS(4) if  &&  (tmp_index_invalid != -1) 
+[89] SUBSUBSUBPROCESS(4) if  ) 
+[90] SUBSUBSUBPROCESS(4) subproc SUBSUBSUBSUBPROCESS(1) 
+[91] SUBSUBSUBSUBPROCESS(1) if  if ( 
+[92] SUBSUBSUBSUBPROCESS(1) if  tmp_target_buf[tmp_index_invalid].s4_flg_lost < tmp_target_buf[tmp_index_valid].s4_flg_lost 
+[93] SUBSUBSUBSUBPROCESS(1) if  ) 
+[94] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[95] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_target_buf[tmp_index_valid].s4_flg_lost tmp_target_buf[tmp_index_invalid].s4_flg_lost;
+[96] SUBSUBSUBSUBPROCESS(2) if  if ( 
+[97] SUBSUBSUBSUBPROCESS(2) if  (tmp_target_buf[i].s4_flg_heiso_up == 1 
+[98] SUBSUBSUBSUBPROCESS(2) if  ) 
+[99] SUBSUBSUBSUBPROCESS(2) if  ||  (tmp_target_buf[j].s4_flg_heiso_up == 1) 
+[100] SUBSUBSUBSUBPROCESS(2) if  ) 
+[101] SUBSUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[102] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_target_buf[tmp_index_valid].s4_flg_heiso_up 1;
+[103] SUBSUBSUBSUBSUBPROCESS(1) equal tmp_target_buf[tmp_index_valid].s4_flg_heiso_dn 1;
+[104] SUBSUBSUBSUBPROCESS(3) func<start> fn_init( 
+[105] SUBSUBSUBSUBPROCESS(3) func  &tmp_target_buf[tmp_index_invalid], 1 
+[106] SUBSUBSUBSUBPROCESS(3) func<end> ); 
+[107] MAINPROCESS(4) for for( 
+[108] MAINPROCESS(4) for i=0; 
+[109] MAINPROCESS(4) for i<TARGET_BUFFSIZE; 
+[110] MAINPROCESS(4) for i++ 
+[111] MAINPROCESS(4) for ) 
+[112] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[113] SUBPROCESS(1) func<start> fn_init( 
+[114] SUBPROCESS(1) func &target[i], 1 
+[115] SUBPROCESS(1) func<end> ); 
+[116] SUBPROCESS(1) if if( 
+[117] SUBPROCESS(1) if tmp_target_buf[i].fl_Robs != CFL_UNKNOWN_VALUE 
+[118] SUBPROCESS(1) if ) 
+[119] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[120] SUBSUBPROCESS(1) equal target[iret] tmp_target_buf[i];
+[121] SUBSUBPROCESS(1) proc iret++; 
+[122] MAINPROCESS(5) proc return iret; 
+----------------- Total Codes : 122 lines
 --------------------------
 [Function Name] : s4_start_prediction 
 -Return type : S4 
@@ -3194,151 +3191,146 @@ Total functions : 78
 [26] SUBPROCESS(1) if  ) 
 [27] SUBPROCESS(1) if  && (pst_a_normal_current[s4_t_lp_i].s4_flg_track == 0 
 [28] SUBPROCESS(1) if  ) 
-[29] SUBPROCESS(1) if   
-[30] SUBPROCESS(1) if  ) 
-[31] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[32] SUBSUBPROCESS(1) if  if ( 
-[33] SUBSUBPROCESS(1) if  pst_a_normal_current[s4_t_lp_i].fl_Rxobs < (st_g_bsm_loop_data.afl_installed_angle[1] + RX_LIMIT_INSIDE) 
-[34] SUBSUBPROCESS(1) if  ) 
-[35] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[36] SUBSUBSUBPROCESS(1) equal s4_t_erased 1;
-[37] SUBSUBPROCESS(2) if  if ( 
-[38] SUBSUBPROCESS(2) if  (pst_a_normal_current[s4_t_lp_i].fl_Rxobs < ROAD_NOISE_X_MAX 
-[39] SUBSUBPROCESS(2) if  ) 
-[40] SUBSUBPROCESS(2) if  && (pst_a_normal_current[s4_t_lp_i].fl_Ryobs > ROAD_NOISE_Y_MIN 
-[41] SUBSUBPROCESS(2) if  ) 
-[42] SUBSUBPROCESS(2) if  && (pst_a_normal_current[s4_t_lp_i].fl_Ryobs < ROAD_NOISE_Y_MAX 
+[29] SUBPROCESS(1) if  ) 
+[30] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[31] SUBSUBPROCESS(1) if  if ( 
+[32] SUBSUBPROCESS(1) if  pst_a_normal_current[s4_t_lp_i].fl_Rxobs < (st_g_bsm_loop_data.afl_installed_angle[1] + RX_LIMIT_INSIDE) 
+[33] SUBSUBPROCESS(1) if  ) 
+[34] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[35] SUBSUBSUBPROCESS(1) equal s4_t_erased 1;
+[36] SUBSUBPROCESS(2) if  if ( 
+[37] SUBSUBPROCESS(2) if  (pst_a_normal_current[s4_t_lp_i].fl_Rxobs < ROAD_NOISE_X_MAX 
+[38] SUBSUBPROCESS(2) if  ) 
+[39] SUBSUBPROCESS(2) if  && (pst_a_normal_current[s4_t_lp_i].fl_Ryobs > ROAD_NOISE_Y_MIN 
+[40] SUBSUBPROCESS(2) if  ) 
+[41] SUBSUBPROCESS(2) if  && (pst_a_normal_current[s4_t_lp_i].fl_Ryobs < ROAD_NOISE_Y_MAX 
+[42] SUBSUBPROCESS(2) if  ) 
 [43] SUBSUBPROCESS(2) if  ) 
-[44] SUBSUBPROCESS(2) if   
-[45] SUBSUBPROCESS(2) if  ) 
-[46] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[47] SUBSUBSUBPROCESS(1) equal s4_t_erased 1;
-[48] SUBSUBPROCESS(3) func<start> s4_t_tmp_Rx_index = ( 
-[49] SUBSUBPROCESS(3) func S4)(-pst_a_normal_current[s4_t_lp_i].fl_Ryobs 
-[50] SUBSUBPROCESS(3) func<end> ); 
-[51] SUBSUBPROCESS(3) if  if ( 
-[52] SUBSUBPROCESS(3) if  s4_t_tmp_Rx_index < 0 
-[53] SUBSUBPROCESS(3) if  ) 
-[54] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
-[55] SUBSUBSUBPROCESS(1) equal s4_t_tmp_Rx_index 0;
-[56] SUBSUBPROCESS(4) if  if ( 
-[57] SUBSUBPROCESS(4) if  s4_t_tmp_Rx_index > 69 
-[58] SUBSUBPROCESS(4) if  ) 
-[59] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
-[60] SUBSUBSUBPROCESS(1) equal s4_t_tmp_Rx_index 69;
-[61] SUBSUBPROCESS(5) if  if ( 
-[62] SUBSUBPROCESS(5) if  (pst_a_normal_current[s4_t_lp_i].fl_Ryobs > RY_WALL_LIMIT 
+[44] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
+[45] SUBSUBSUBPROCESS(1) equal s4_t_erased 1;
+[46] SUBSUBPROCESS(3) equal<start> s4_t_tmp_Rx_index = ( 
+[47] SUBSUBPROCESS(3) equal S4)(-pst_a_normal_current[s4_t_lp_i].fl_Ryobs 
+[48] SUBSUBPROCESS(3) equal<end> ); 
+[49] SUBSUBPROCESS(3) if  if ( 
+[50] SUBSUBPROCESS(3) if  s4_t_tmp_Rx_index < 0 
+[51] SUBSUBPROCESS(3) if  ) 
+[52] SUBSUBPROCESS(3) subproc SUBSUBSUBPROCESS(1) 
+[53] SUBSUBSUBPROCESS(1) equal s4_t_tmp_Rx_index 0;
+[54] SUBSUBPROCESS(4) if  if ( 
+[55] SUBSUBPROCESS(4) if  s4_t_tmp_Rx_index > 69 
+[56] SUBSUBPROCESS(4) if  ) 
+[57] SUBSUBPROCESS(4) subproc SUBSUBSUBPROCESS(1) 
+[58] SUBSUBSUBPROCESS(1) equal s4_t_tmp_Rx_index 69;
+[59] SUBSUBPROCESS(5) if  if ( 
+[60] SUBSUBPROCESS(5) if  (pst_a_normal_current[s4_t_lp_i].fl_Ryobs > RY_WALL_LIMIT 
+[61] SUBSUBPROCESS(5) if  ) 
+[62] SUBSUBPROCESS(5) if  && (st_g_bsm_loop_data.as4_slow_sot_find[0] == 0 
 [63] SUBSUBPROCESS(5) if  ) 
-[64] SUBSUBPROCESS(5) if  && (st_g_bsm_loop_data.as4_slow_sot_find[0] == 0 
-[65] SUBSUBPROCESS(5) if  ) 
-[66] SUBSUBPROCESS(5) if   
-[67] SUBSUBPROCESS(5) if  ) 
-[68] SUBSUBPROCESS(5) subproc SUBSUBSUBPROCESS(1) 
-[69] SUBSUBSUBPROCESS(1) if  if ( 
-[70] SUBSUBSUBPROCESS(1) if  pst_a_normal_current[s4_t_lp_i].fl_Rxobs > (st_g_bsm_loop_data.afl_Rx_right[s4_t_tmp_Rx_index] - RXTH_FROM_WALL) 
-[71] SUBSUBSUBPROCESS(1) if  ) 
-[72] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[73] SUBSUBSUBSUBPROCESS(1) equal s4_t_erased 1;
-[74] SUBSUBSUBPROCESS(2) else else 
-[75] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[76] SUBSUBSUBSUBPROCESS(1) if  if ( 
-[77] SUBSUBSUBSUBPROCESS(1) if  (as4_a_flg_leading[0] == 0 
-[78] SUBSUBSUBSUBPROCESS(1) if  ) 
-[79] SUBSUBSUBSUBPROCESS(1) if  &&  (as4_a_flg_passing[0] == 0) 
-[80] SUBSUBSUBSUBPROCESS(1) if  ) 
-[81] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
-[82] SUBSUBSUBSUBSUBPROCESS(1) if  if ( 
-[83] SUBSUBSUBSUBSUBPROCESS(1) if  ( 
-[84] SUBSUBSUBSUBSUBPROCESS(1) if  (pst_a_normal_current[s4_t_lp_i].s4_flg_heiso_up == 0 
+[64] SUBSUBPROCESS(5) if  ) 
+[65] SUBSUBPROCESS(5) subproc SUBSUBSUBPROCESS(1) 
+[66] SUBSUBSUBPROCESS(1) if  if ( 
+[67] SUBSUBSUBPROCESS(1) if  pst_a_normal_current[s4_t_lp_i].fl_Rxobs > (st_g_bsm_loop_data.afl_Rx_right[s4_t_tmp_Rx_index] - RXTH_FROM_WALL) 
+[68] SUBSUBSUBPROCESS(1) if  ) 
+[69] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
+[70] SUBSUBSUBSUBPROCESS(1) equal s4_t_erased 1;
+[71] SUBSUBSUBPROCESS(2) else else 
+[72] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
+[73] SUBSUBSUBSUBPROCESS(1) if  if ( 
+[74] SUBSUBSUBSUBPROCESS(1) if  (as4_a_flg_leading[0] == 0 
+[75] SUBSUBSUBSUBPROCESS(1) if  ) 
+[76] SUBSUBSUBSUBPROCESS(1) if  &&  (as4_a_flg_passing[0] == 0) 
+[77] SUBSUBSUBSUBPROCESS(1) if  ) 
+[78] SUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBPROCESS(1) 
+[79] SUBSUBSUBSUBSUBPROCESS(1) if  if ( 
+[80] SUBSUBSUBSUBSUBPROCESS(1) if  ( 
+[81] SUBSUBSUBSUBSUBPROCESS(1) if  (pst_a_normal_current[s4_t_lp_i].s4_flg_heiso_up == 0 
+[82] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
+[83] SUBSUBSUBSUBSUBPROCESS(1) if  && (pst_a_normal_current[s4_t_lp_i].s4_flg_heiso_dn == 0 
+[84] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
 [85] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
-[86] SUBSUBSUBSUBSUBPROCESS(1) if  && (pst_a_normal_current[s4_t_lp_i].s4_flg_heiso_dn == 0 
-[87] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
-[88] SUBSUBSUBSUBSUBPROCESS(1) if   
+[86] SUBSUBSUBSUBSUBPROCESS(1) if  || 
+[87] SUBSUBSUBSUBSUBPROCESS(1) if  (fl_abs(st_g_bsm_loop_data.afl_Rx_right[s4_t_tmp_Rx_index] - pst_a_normal_current[s4_t_lp_i].fl_Rxobs) < 2.0F 
+[88] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
 [89] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
-[90] SUBSUBSUBSUBSUBPROCESS(1) if  || 
-[91] SUBSUBSUBSUBSUBPROCESS(1) if  (fl_abs(st_g_bsm_loop_data.afl_Rx_right[s4_t_tmp_Rx_index] - pst_a_normal_current[s4_t_lp_i].fl_Rxobs) < 2.0F 
-[92] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
-[93] SUBSUBSUBSUBSUBPROCESS(1) if   
-[94] SUBSUBSUBSUBSUBPROCESS(1) if  ) 
-[95] SUBSUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBSUBPROCESS(1) 
-[96] SUBSUBSUBSUBSUBSUBPROCESS(1) equal s4_t_erased 1;
-[97] SUBSUBPROCESS(6) func<start> u1_t_jdg_c5_flg = u1_start_prediction_c5( 
-[98] SUBSUBPROCESS(6) func st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[4] 
-[99] SUBSUBPROCESS(6) func<end> ); 
-[100] SUBSUBPROCESS(6) func<start> u1_t_jdg_c6_flg = u1_start_prediction_c6( 
-[101] SUBSUBPROCESS(6) func st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[5] 
-[102] SUBSUBPROCESS(6) func<end> ); 
-[103] SUBSUBPROCESS(6) func<start> fl_t_Ryobs_abs = fl_abs( 
-[104] SUBSUBPROCESS(6) func pst_a_normal_current[s4_t_lp_i].fl_Ryobs 
-[105] SUBSUBPROCESS(6) func<end> ); 
-[106] SUBSUBPROCESS(6) if  if ( 
-[107] SUBSUBPROCESS(6) if  (u1_t_jdg_c5_flg == CU1_TRUE 
-[108] SUBSUBPROCESS(6) if  ) 
-[109] SUBSUBPROCESS(6) if  &&  (u1_t_jdg_c6_flg == CU1_TRUE 
-[110] SUBSUBPROCESS(6) if  ) 
-[111] SUBSUBPROCESS(6) if  &&  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)0 
-[112] SUBSUBPROCESS(6) if  ) 
-[113] SUBSUBPROCESS(6) if  &&  (fl_t_Ryobs_abs < (FL)EKF_RY_SIDE) 
-[114] SUBSUBPROCESS(6) if  ) 
-[115] SUBSUBPROCESS(6) subproc SUBSUBSUBPROCESS(1) 
-[116] SUBSUBSUBPROCESS(1) equal s4_t_erased (S4)1;
-[117] SUBSUBPROCESS(7) if  if ( 
-[118] SUBSUBPROCESS(7) if  s4_t_erased == 1 
-[119] SUBSUBPROCESS(7) if  ) 
-[120] SUBSUBPROCESS(7) subproc SUBSUBSUBPROCESS(1) 
-[121] SUBSUBSUBPROCESS(1) proc s4_t_tmp_erased_num++; 
-[122] SUBSUBSUBPROCESS(1) func<start> fn_init( 
-[123] SUBSUBSUBPROCESS(1) func &pst_a_normal_current[s4_t_lp_i], 1 
-[124] SUBSUBSUBPROCESS(1) func<end> ); 
-[125] SUBSUBPROCESS(8) else else 
-[126] SUBSUBPROCESS(8) subproc SUBSUBSUBPROCESS(1) 
-[127] SUBSUBSUBPROCESS(1) func<start> predict_object_trajectory_simple( 
-[128] SUBSUBSUBPROCESS(1) func &pst_a_normal_current[s4_t_lp_i], 
-[129] SUBSUBSUBPROCESS(1) func 1 
-[130] SUBSUBSUBPROCESS(1) func<end> ); 
-[131] SUBSUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_lp_i].s4_tracked 1;
-[132] SUBSUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_lp_i].s4_flg_track 1;
-[133] SUBSUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_lp_i].s4_flg_lost 0;
-[134] SUBSUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_lp_i].s4_flg_new 1;
-[135] SUBSUBSUBPROCESS(1) proc s4_t_new_num++; 
-[136] MAINPROCESS(2) equal s4_t_num 0;
-[137] MAINPROCESS(2) for  for ( 
-[138] MAINPROCESS(2) for  s4_t_loop = 0; 
-[139] MAINPROCESS(2) for  s4_t_loop < s4_a_size; 
-[140] MAINPROCESS(2) for  s4_t_loop++ 
-[141] MAINPROCESS(2) for  ) 
-[142] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[143] SUBPROCESS(1) if  if ( 
-[144] SUBPROCESS(1) if  pst_a_normal_current[s4_t_loop].fl_Robs != CFL_UNKNOWN_VALUE 
-[145] SUBPROCESS(1) if  ) 
-[146] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[147] SUBSUBPROCESS(1) equal as4_t_in[s4_t_num] s4_t_loop;
-[148] SUBSUBPROCESS(1) proc s4_t_num++; 
-[149] MAINPROCESS(3) if  if ( 
-[150] MAINPROCESS(3) if  s4_t_num > 0 
-[151] MAINPROCESS(3) if  ) 
-[152] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[153] SUBPROCESS(1) for  for ( 
-[154] SUBPROCESS(1) for  s4_t_loop = 0; 
-[155] SUBPROCESS(1) for  s4_t_loop < s4_t_num; 
-[156] SUBPROCESS(1) for  s4_t_loop++ 
-[157] SUBPROCESS(1) for  ) 
-[158] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[159] SUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_loop] pst_a_normal_current[as4_t_in[s4_t_loop]];
-[160] SUBPROCESS(2) for  for ( 
-[161] SUBPROCESS(2) for  s4_t_loop = s4_t_num; 
-[162] SUBPROCESS(2) for  s4_t_loop < s4_a_size; 
-[163] SUBPROCESS(2) for  s4_t_loop++ 
-[164] SUBPROCESS(2) for  ) 
-[165] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[166] SUBSUBPROCESS(1) func<start> fn_init( 
-[167] SUBSUBPROCESS(1) func &pst_a_normal_current[s4_t_loop], 1 
-[168] SUBSUBPROCESS(1) func<end> ); 
-[169] MAINPROCESS(4) equal s4_t_iRet s4_t_tmp_erased_num;
-[170] MAINPROCESS(4) func<start> return ( 
-[171] MAINPROCESS(4) func s4_t_iRet 
-[172] MAINPROCESS(4) func<end> ); 
------------------ Total Codes : 172 lines
+[90] SUBSUBSUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBSUBSUBPROCESS(1) 
+[91] SUBSUBSUBSUBSUBSUBPROCESS(1) equal s4_t_erased 1;
+[92] SUBSUBPROCESS(6) func<start> u1_t_jdg_c5_flg = u1_start_prediction_c5( 
+[93] SUBSUBPROCESS(6) func st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[4] 
+[94] SUBSUBPROCESS(6) func<end> ); 
+[95] SUBSUBPROCESS(6) func<start> u1_t_jdg_c6_flg = u1_start_prediction_c6( 
+[96] SUBSUBPROCESS(6) func st_g_bsm_loop_data.as4_slow_sot_doa_diff_sum[5] 
+[97] SUBSUBPROCESS(6) func<end> ); 
+[98] SUBSUBPROCESS(6) func<start> fl_t_Ryobs_abs = fl_abs( 
+[99] SUBSUBPROCESS(6) func pst_a_normal_current[s4_t_lp_i].fl_Ryobs 
+[100] SUBSUBPROCESS(6) func<end> ); 
+[101] SUBSUBPROCESS(6) if  if ( 
+[102] SUBSUBPROCESS(6) if  (u1_t_jdg_c5_flg == CU1_TRUE 
+[103] SUBSUBPROCESS(6) if  ) 
+[104] SUBSUBPROCESS(6) if  &&  (u1_t_jdg_c6_flg == CU1_TRUE 
+[105] SUBSUBPROCESS(6) if  ) 
+[106] SUBSUBPROCESS(6) if  &&  (st_g_bsm_loop_data.u1_flg_heisou_car == (U1)0 
+[107] SUBSUBPROCESS(6) if  ) 
+[108] SUBSUBPROCESS(6) if  &&  (fl_t_Ryobs_abs < (FL)EKF_RY_SIDE) 
+[109] SUBSUBPROCESS(6) if  ) 
+[110] SUBSUBPROCESS(6) subproc SUBSUBSUBPROCESS(1) 
+[111] SUBSUBSUBPROCESS(1) equal s4_t_erased (S4)1;
+[112] SUBSUBPROCESS(7) if  if ( 
+[113] SUBSUBPROCESS(7) if  s4_t_erased == 1 
+[114] SUBSUBPROCESS(7) if  ) 
+[115] SUBSUBPROCESS(7) subproc SUBSUBSUBPROCESS(1) 
+[116] SUBSUBSUBPROCESS(1) proc s4_t_tmp_erased_num++; 
+[117] SUBSUBSUBPROCESS(1) func<start> fn_init( 
+[118] SUBSUBSUBPROCESS(1) func &pst_a_normal_current[s4_t_lp_i], 1 
+[119] SUBSUBSUBPROCESS(1) func<end> ); 
+[120] SUBSUBPROCESS(8) else else 
+[121] SUBSUBPROCESS(8) subproc SUBSUBSUBPROCESS(1) 
+[122] SUBSUBSUBPROCESS(1) func<start> predict_object_trajectory_simple( 
+[123] SUBSUBSUBPROCESS(1) func &pst_a_normal_current[s4_t_lp_i], 
+[124] SUBSUBSUBPROCESS(1) func 1 
+[125] SUBSUBSUBPROCESS(1) func<end> ); 
+[126] SUBSUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_lp_i].s4_tracked 1;
+[127] SUBSUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_lp_i].s4_flg_track 1;
+[128] SUBSUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_lp_i].s4_flg_lost 0;
+[129] SUBSUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_lp_i].s4_flg_new 1;
+[130] SUBSUBSUBPROCESS(1) proc s4_t_new_num++; 
+[131] MAINPROCESS(2) equal s4_t_num 0;
+[132] MAINPROCESS(2) for  for ( 
+[133] MAINPROCESS(2) for  s4_t_loop = 0; 
+[134] MAINPROCESS(2) for  s4_t_loop < s4_a_size; 
+[135] MAINPROCESS(2) for  s4_t_loop++ 
+[136] MAINPROCESS(2) for  ) 
+[137] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[138] SUBPROCESS(1) if  if ( 
+[139] SUBPROCESS(1) if  pst_a_normal_current[s4_t_loop].fl_Robs != CFL_UNKNOWN_VALUE 
+[140] SUBPROCESS(1) if  ) 
+[141] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[142] SUBSUBPROCESS(1) equal as4_t_in[s4_t_num] s4_t_loop;
+[143] SUBSUBPROCESS(1) proc s4_t_num++; 
+[144] MAINPROCESS(3) if  if ( 
+[145] MAINPROCESS(3) if  s4_t_num > 0 
+[146] MAINPROCESS(3) if  ) 
+[147] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[148] SUBPROCESS(1) for  for ( 
+[149] SUBPROCESS(1) for  s4_t_loop = 0; 
+[150] SUBPROCESS(1) for  s4_t_loop < s4_t_num; 
+[151] SUBPROCESS(1) for  s4_t_loop++ 
+[152] SUBPROCESS(1) for  ) 
+[153] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[154] SUBSUBPROCESS(1) equal pst_a_normal_current[s4_t_loop] pst_a_normal_current[as4_t_in[s4_t_loop]];
+[155] SUBPROCESS(2) for  for ( 
+[156] SUBPROCESS(2) for  s4_t_loop = s4_t_num; 
+[157] SUBPROCESS(2) for  s4_t_loop < s4_a_size; 
+[158] SUBPROCESS(2) for  s4_t_loop++ 
+[159] SUBPROCESS(2) for  ) 
+[160] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[161] SUBSUBPROCESS(1) func<start> fn_init( 
+[162] SUBSUBPROCESS(1) func &pst_a_normal_current[s4_t_loop], 1 
+[163] SUBSUBPROCESS(1) func<end> ); 
+[164] MAINPROCESS(4) equal s4_t_iRet s4_t_tmp_erased_num;
+[165] MAINPROCESS(4) func<start> return ( 
+[166] MAINPROCESS(4) func s4_t_iRet 
+[167] MAINPROCESS(4) func<end> ); 
+----------------- Total Codes : 167 lines
 --------------------------
 [Function Name] : u1_start_prediction_c5 
 -Return type : static U1 
@@ -3403,42 +3395,41 @@ Total functions : 78
 [19] SUBPROCESS(1) if  ) 
 [20] SUBPROCESS(1) if  && (pst_a_normal[s4_t_lp_i].fl_Rypred != CFL_UNKNOWN_VALUE 
 [21] SUBPROCESS(1) if  ) 
-[22] SUBPROCESS(1) if   
-[23] SUBPROCESS(1) if  ) 
-[24] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[25] SUBPROCESS(2) else else 
-[26] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[27] SUBSUBPROCESS(1) func<start> fn_init( 
-[28] SUBSUBPROCESS(1) func &pst_a_normal[s4_t_lp_i], 1 
-[29] SUBSUBPROCESS(1) func<end> ); 
-[30] MAINPROCESS(2) equal s4_t_object_num 0;
-[31] MAINPROCESS(2) for  for ( 
-[32] MAINPROCESS(2) for  s4_t_lp_i = 0; 
-[33] MAINPROCESS(2) for  s4_t_lp_i < s4_a_size; 
-[34] MAINPROCESS(2) for  s4_t_lp_i++ 
-[35] MAINPROCESS(2) for  ) 
-[36] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[37] SUBPROCESS(1) if  if ( 
-[38] SUBPROCESS(1) if  pst_a_normal[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE 
-[39] SUBPROCESS(1) if  ) 
-[40] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[41] SUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_object_num] pst_a_normal[s4_t_lp_i];
-[42] SUBSUBPROCESS(1) proc s4_t_object_num++; 
-[43] MAINPROCESS(3) if  if ( 
-[44] MAINPROCESS(3) if  s4_t_object_num > 0 
-[45] MAINPROCESS(3) if  ) 
-[46] MAINPROCESS(3) subproc SUBPROCESS(1) 
-[47] SUBPROCESS(1) for  for ( 
-[48] SUBPROCESS(1) for  s4_t_lp_i = 0; 
-[49] SUBPROCESS(1) for  s4_t_lp_i < s4_a_size; 
-[50] SUBPROCESS(1) for  s4_t_lp_i++ 
-[51] SUBPROCESS(1) for  ) 
-[52] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[53] SUBSUBPROCESS(1) equal pst_a_normal[s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
-[54] MAINPROCESS(4) func<start> return ( 
-[55] MAINPROCESS(4) func s4_t_object_num 
-[56] MAINPROCESS(4) func<end> ); 
------------------ Total Codes : 56 lines
+[22] SUBPROCESS(1) if  ) 
+[23] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[24] SUBPROCESS(2) else else 
+[25] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[26] SUBSUBPROCESS(1) func<start> fn_init( 
+[27] SUBSUBPROCESS(1) func &pst_a_normal[s4_t_lp_i], 1 
+[28] SUBSUBPROCESS(1) func<end> ); 
+[29] MAINPROCESS(2) equal s4_t_object_num 0;
+[30] MAINPROCESS(2) for  for ( 
+[31] MAINPROCESS(2) for  s4_t_lp_i = 0; 
+[32] MAINPROCESS(2) for  s4_t_lp_i < s4_a_size; 
+[33] MAINPROCESS(2) for  s4_t_lp_i++ 
+[34] MAINPROCESS(2) for  ) 
+[35] MAINPROCESS(2) subproc SUBPROCESS(1) 
+[36] SUBPROCESS(1) if  if ( 
+[37] SUBPROCESS(1) if  pst_a_normal[s4_t_lp_i].fl_Robs != CFL_UNKNOWN_VALUE 
+[38] SUBPROCESS(1) if  ) 
+[39] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[40] SUBSUBPROCESS(1) equal ast_t_buf_normal[s4_t_object_num] pst_a_normal[s4_t_lp_i];
+[41] SUBSUBPROCESS(1) proc s4_t_object_num++; 
+[42] MAINPROCESS(3) if  if ( 
+[43] MAINPROCESS(3) if  s4_t_object_num > 0 
+[44] MAINPROCESS(3) if  ) 
+[45] MAINPROCESS(3) subproc SUBPROCESS(1) 
+[46] SUBPROCESS(1) for  for ( 
+[47] SUBPROCESS(1) for  s4_t_lp_i = 0; 
+[48] SUBPROCESS(1) for  s4_t_lp_i < s4_a_size; 
+[49] SUBPROCESS(1) for  s4_t_lp_i++ 
+[50] SUBPROCESS(1) for  ) 
+[51] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[52] SUBSUBPROCESS(1) equal pst_a_normal[s4_t_lp_i] ast_t_buf_normal[s4_t_lp_i];
+[53] MAINPROCESS(4) func<start> return ( 
+[54] MAINPROCESS(4) func s4_t_object_num 
+[55] MAINPROCESS(4) func<end> ); 
+----------------- Total Codes : 55 lines
 --------------------------
 [Function Name] : fn_calc_prediction_of_normaldata 
 -Return type : VD 
@@ -3615,14 +3606,14 @@ Total functions : 78
 [70] SUBSUBSUBPROCESS(1) if  ||  (fl_abs(normal_prev[j].fl_Rypred) < EKF_RY_SIDE) 
 [71] SUBSUBSUBPROCESS(1) if  ) 
 [72] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[73] SUBSUBSUBSUBPROCESS(1) func<start> compare[i][j] = ( 
-[74] SUBSUBSUBSUBPROCESS(1) func FL)fl_abs( normal_current[i].fl_Rxobs - normal_prev[j].fl_Rxpred ) + (FL)fl_abs( normal_current[i].fl_Ryobs - normal_prev[j].fl_Rypred 
-[75] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[73] SUBSUBSUBSUBPROCESS(1) equal<start> compare[i][j] = ( 
+[74] SUBSUBSUBSUBPROCESS(1) equal FL)fl_abs( normal_current[i].fl_Rxobs - normal_prev[j].fl_Rxpred ) + (FL)fl_abs( normal_current[i].fl_Ryobs - normal_prev[j].fl_Rypred 
+[75] SUBSUBSUBSUBPROCESS(1) equal<end> ); 
 [76] SUBSUBSUBPROCESS(2) else else 
 [77] SUBSUBSUBPROCESS(2) subproc SUBSUBSUBSUBPROCESS(1) 
-[78] SUBSUBSUBSUBPROCESS(1) func<start> compare[i][j] = ( 
-[79] SUBSUBSUBSUBPROCESS(1) func FL)fl_abs( normal_current[i].fl_Rxobs - normal_prev[j].fl_Rxpred ) + (FL)fl_abs( normal_current[i].fl_Ryobs - normal_prev[j].fl_Rypred ) + (FL)fl_abs( normal_current[i].fl_Vxobs - normal_prev[j].fl_Vxpred ) + (FL)fl_abs( normal_current[i].fl_Vyobs - normal_prev[j].fl_Vypred 
-[80] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[78] SUBSUBSUBSUBPROCESS(1) equal<start> compare[i][j] = ( 
+[79] SUBSUBSUBSUBPROCESS(1) equal FL)fl_abs( normal_current[i].fl_Rxobs - normal_prev[j].fl_Rxpred ) + (FL)fl_abs( normal_current[i].fl_Ryobs - normal_prev[j].fl_Rypred ) + (FL)fl_abs( normal_current[i].fl_Vxobs - normal_prev[j].fl_Vxpred ) + (FL)fl_abs( normal_current[i].fl_Vyobs - normal_prev[j].fl_Vypred 
+[80] SUBSUBSUBSUBPROCESS(1) equal<end> ); 
 [81] MAINPROCESS(4) equal iRet 0;
 [82] MAINPROCESS(4) for  for ( 
 [83] MAINPROCESS(4) for  k = 0; 
@@ -4148,26 +4139,26 @@ Total functions : 78
 [3] MAINPROCESS(1) if y<0.0 
 [4] MAINPROCESS(1) if ) 
 [5] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[6] SUBPROCESS(1) func<start> *r = -( 
-[7] SUBPROCESS(1) func FL)fl_sqrt( (x - sensor_pos_x)*(x - sensor_pos_x) + y*y 
-[8] SUBPROCESS(1) func<end> ); 
-[9] SUBPROCESS(1) func<start> *theta = ( 
-[10] SUBPROCESS(1) func FL)fl_atan( (x-sensor_pos_x) / y ,(FL)1.0F 
-[11] SUBPROCESS(1) func<end> ); 
+[6] SUBPROCESS(1) equal<start> *r = -( 
+[7] SUBPROCESS(1) equal FL)fl_sqrt( (x - sensor_pos_x)*(x - sensor_pos_x) + y*y 
+[8] SUBPROCESS(1) equal<end> ); 
+[9] SUBPROCESS(1) equal<start> *theta = ( 
+[10] SUBPROCESS(1) equal FL)fl_atan( (x-sensor_pos_x) / y ,(FL)1.0F 
+[11] SUBPROCESS(1) equal<end> ); 
 [12] MAINPROCESS(2) else if else if( 
 [13] MAINPROCESS(2) else if y>0.0 
 [14] MAINPROCESS(2) else if ) 
 [15] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[16] SUBPROCESS(1) func<start> *r = ( 
-[17] SUBPROCESS(1) func FL)fl_sqrt( (x - sensor_pos_x)*(x - sensor_pos_x) + y*y 
-[18] SUBPROCESS(1) func<end> ); 
+[16] SUBPROCESS(1) equal<start> *r = ( 
+[17] SUBPROCESS(1) equal FL)fl_sqrt( (x - sensor_pos_x)*(x - sensor_pos_x) + y*y 
+[18] SUBPROCESS(1) equal<end> ); 
 [19] SUBPROCESS(1) if  if ( 
 [20] SUBPROCESS(1) if  fl_abs(x - sensor_pos_x) > (FL)0.0F 
 [21] SUBPROCESS(1) if  ) 
 [22] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[23] SUBSUBPROCESS(1) func<start> *theta = -( 
-[24] SUBSUBPROCESS(1) func FL)(0.5F*PI + fl_atan( y / (x-sensor_pos_x) ,(FL)1.0F) 
-[25] SUBSUBPROCESS(1) func<end> ); 
+[23] SUBSUBPROCESS(1) equal<start> *theta = -( 
+[24] SUBSUBPROCESS(1) equal FL)(0.5F*PI + fl_atan( y / (x-sensor_pos_x) ,(FL)1.0F) 
+[25] SUBSUBPROCESS(1) equal<end> ); 
 [26] SUBPROCESS(2) else else 
 [27] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
 [28] SUBSUBPROCESS(1) equal *theta (FL)0.0F;
@@ -4184,9 +4175,9 @@ Total functions : 78
      [1] : S4*   doa_bin 
 ----- Codes -----
 [1] MAINPROCESS(1) proc S4 tmp_doabin; 
-[2] MAINPROCESS(1) func<start> tmp_doabin = ( 
-[3] MAINPROCESS(1) func S4)( ((-180.0F/PI*angle - DOA_BIN_START_ANG - st_g_bsm_loop_data.afl_installed_angle[0]) / DOA_ANG_PER_BIN) + (FL)0.5F 
-[4] MAINPROCESS(1) func<end> ); 
+[2] MAINPROCESS(1) equal<start> tmp_doabin = ( 
+[3] MAINPROCESS(1) equal S4)( ((-180.0F/PI*angle - DOA_BIN_START_ANG - st_g_bsm_loop_data.afl_installed_angle[0]) / DOA_ANG_PER_BIN) + (FL)0.5F 
+[4] MAINPROCESS(1) equal<end> ); 
 [5] MAINPROCESS(1) if  if ( 
 [6] MAINPROCESS(1) if  tmp_doabin < 0 
 [7] MAINPROCESS(1) if  ) 
@@ -4336,9 +4327,9 @@ Total functions : 78
 [3] MAINPROCESS(1) if  vy > 0.0 
 [4] MAINPROCESS(1) if  ) 
 [5] MAINPROCESS(1) subproc SUBPROCESS(1) 
-[6] SUBPROCESS(1) func<start> tmp_vr = ( 
-[7] SUBPROCESS(1) func FL)fl_sqrt( vx*vx + vy*vy 
-[8] SUBPROCESS(1) func<end> ); 
+[6] SUBPROCESS(1) equal<start> tmp_vr = ( 
+[7] SUBPROCESS(1) equal FL)fl_sqrt( vx*vx + vy*vy 
+[8] SUBPROCESS(1) equal<end> ); 
 [9] SUBPROCESS(1) if  if ( 
 [10] SUBPROCESS(1) if  tmp_vr > V_PREDICT_MAX 
 [11] SUBPROCESS(1) if  ) 
@@ -4348,9 +4339,9 @@ Total functions : 78
 [15] MAINPROCESS(2) else if  vy < 0.0 
 [16] MAINPROCESS(2) else if  ) 
 [17] MAINPROCESS(2) subproc SUBPROCESS(1) 
-[18] SUBPROCESS(1) func<start> tmp_vr = -( 
-[19] SUBPROCESS(1) func FL)fl_sqrt( vx*vx + vy*vy 
-[20] SUBPROCESS(1) func<end> ); 
+[18] SUBPROCESS(1) equal<start> tmp_vr = -( 
+[19] SUBPROCESS(1) equal FL)fl_sqrt( vx*vx + vy*vy 
+[20] SUBPROCESS(1) equal<end> ); 
 [21] SUBPROCESS(1) if  if ( 
 [22] SUBPROCESS(1) if  tmp_vr < -(FL)V_PREDICT_MAX 
 [23] SUBPROCESS(1) if  ) 
@@ -4477,16 +4468,16 @@ Total functions : 78
 [29] MAINPROCESS(3) equal st_a_normal_current->fl_Vypred 0.0F;
 [30] MAINPROCESS(3) equal st_a_normal_current->fl_Ryfil 0.0F;
 [31] MAINPROCESS(3) equal st_a_normal_current->fl_Rypred 0.0F;
-[32] MAINPROCESS(3) func<start> st_a_normal_current->fl_Robs_pred  = -( 
-[33] MAINPROCESS(3) func FL)fl_sqrt( 
-[34] MAINPROCESS(3) func ( st_a_normal_current->fl_Rxpred - sensor_pos_x )*( st_a_normal_current->fl_Rxpred - sensor_pos_x ) + st_a_normal_current->fl_Rypred*st_a_normal_current->fl_Rypred 
-[35] MAINPROCESS(3) func<end> ); 
+[32] MAINPROCESS(3) equal<start> st_a_normal_current->fl_Robs_pred  = -( 
+[33] MAINPROCESS(3) equal FL)fl_sqrt( 
+[34] MAINPROCESS(3) equal ( st_a_normal_current->fl_Rxpred - sensor_pos_x )*( st_a_normal_current->fl_Rxpred - sensor_pos_x ) + st_a_normal_current->fl_Rypred*st_a_normal_current->fl_Rypred 
+[35] MAINPROCESS(3) equal<end> ); 
 [36] MAINPROCESS(3) equal st_a_normal_current->fl_theta_up_pred PI / (FL)2.0F;
 [37] MAINPROCESS(3) equal st_a_normal_current->fl_theta_dn_pred st_a_normal_current->fl_theta_up_pred;
-[38] MAINPROCESS(3) func<start> st_a_normal_current->fl_Vobs_pred = ( 
-[39] MAINPROCESS(3) func FL)( 
-[40] MAINPROCESS(3) func st_a_normal_current->fl_Vxpred*fl_sin( 0.5F*(st_a_normal_current->fl_theta_up_pred + st_a_normal_current->fl_theta_up_pred) ) + st_a_normal_current->fl_Vypred*fl_cos( 0.5F*(st_a_normal_current->fl_theta_up_pred + st_a_normal_current->fl_theta_up_pred) ) 
-[41] MAINPROCESS(3) func<end> ); 
+[38] MAINPROCESS(3) equal<start> st_a_normal_current->fl_Vobs_pred = ( 
+[39] MAINPROCESS(3) equal FL)( 
+[40] MAINPROCESS(3) equal st_a_normal_current->fl_Vxpred*fl_sin( 0.5F*(st_a_normal_current->fl_theta_up_pred + st_a_normal_current->fl_theta_up_pred) ) + st_a_normal_current->fl_Vypred*fl_cos( 0.5F*(st_a_normal_current->fl_theta_up_pred + st_a_normal_current->fl_theta_up_pred) ) 
+[41] MAINPROCESS(3) equal<end> ); 
 [42] MAINPROCESS(3) return return; 
 ----------------- Total Codes : 42 lines
 --------------------------

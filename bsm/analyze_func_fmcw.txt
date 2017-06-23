@@ -359,38 +359,37 @@ Total functions : 25
 [54] SUBSUBPROCESS(1) if  ) 
 [55] SUBSUBPROCESS(1) if  && (afl_t_power_music[s4_t_lp_i] > fl_t_pow_max 
 [56] SUBSUBPROCESS(1) if  ) 
-[57] SUBSUBPROCESS(1) if   
-[58] SUBSUBPROCESS(1) if  ) 
-[59] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
-[60] SUBSUBSUBPROCESS(1) equal fl_t_pow_max afl_t_power_music[s4_t_lp_i];
-[61] SUBSUBSUBPROCESS(1) equal s4_t_wave_index s4_t_lp_i;
-[62] SUBSUBSUBPROCESS(1) equal s4_t_iret 1;
-[63] SUBPROCESS(2) if  if ( 
-[64] SUBPROCESS(2) if  s4_t_iret != 0 
-[65] SUBPROCESS(2) if  ) 
-[66] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
-[67] SUBSUBPROCESS(1) equal as4_a_bin_music[0] as4_t_bin_music[s4_t_wave_index];
-[68] SUBSUBPROCESS(1) equal afl_a_power_music[0] afl_t_power_music[s4_t_wave_index];
-[69] SUBPROCESS(3) else else 
-[70] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
-[71] SUBSUBPROCESS(1) equal as4_a_bin_music[0] 0;
-[72] SUBSUBPROCESS(1) equal afl_a_power_music[0] 0.0F;
-[73] SUBSUBPROCESS(1) equal s4_t_iret 0;
-[74] MAINPROCESS(4) else else 
-[75] MAINPROCESS(4) subproc SUBPROCESS(1) 
-[76] SUBPROCESS(1) for  for ( 
-[77] SUBPROCESS(1) for  s4_t_lp_i = 0; 
-[78] SUBPROCESS(1) for  s4_t_lp_i < 2; 
-[79] SUBPROCESS(1) for  s4_t_lp_i++ 
-[80] SUBPROCESS(1) for  ) 
-[81] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[82] SUBSUBPROCESS(1) equal as4_a_bin_music[s4_t_lp_i] as4_t_bin_music[s4_t_lp_i];
-[83] SUBSUBPROCESS(1) equal afl_a_power_music[s4_t_lp_i] afl_t_power_music[s4_t_lp_i];
-[84] SUBSUBPROCESS(1) equal s4_t_iret s4_t_peak_num;
-[85] MAINPROCESS(5) func<start> return ( 
-[86] MAINPROCESS(5) func s4_t_iret 
-[87] MAINPROCESS(5) func<end> ); 
------------------ Total Codes : 87 lines
+[57] SUBSUBPROCESS(1) if  ) 
+[58] SUBSUBPROCESS(1) subproc SUBSUBSUBPROCESS(1) 
+[59] SUBSUBSUBPROCESS(1) equal fl_t_pow_max afl_t_power_music[s4_t_lp_i];
+[60] SUBSUBSUBPROCESS(1) equal s4_t_wave_index s4_t_lp_i;
+[61] SUBSUBSUBPROCESS(1) equal s4_t_iret 1;
+[62] SUBPROCESS(2) if  if ( 
+[63] SUBPROCESS(2) if  s4_t_iret != 0 
+[64] SUBPROCESS(2) if  ) 
+[65] SUBPROCESS(2) subproc SUBSUBPROCESS(1) 
+[66] SUBSUBPROCESS(1) equal as4_a_bin_music[0] as4_t_bin_music[s4_t_wave_index];
+[67] SUBSUBPROCESS(1) equal afl_a_power_music[0] afl_t_power_music[s4_t_wave_index];
+[68] SUBPROCESS(3) else else 
+[69] SUBPROCESS(3) subproc SUBSUBPROCESS(1) 
+[70] SUBSUBPROCESS(1) equal as4_a_bin_music[0] 0;
+[71] SUBSUBPROCESS(1) equal afl_a_power_music[0] 0.0F;
+[72] SUBSUBPROCESS(1) equal s4_t_iret 0;
+[73] MAINPROCESS(4) else else 
+[74] MAINPROCESS(4) subproc SUBPROCESS(1) 
+[75] SUBPROCESS(1) for  for ( 
+[76] SUBPROCESS(1) for  s4_t_lp_i = 0; 
+[77] SUBPROCESS(1) for  s4_t_lp_i < 2; 
+[78] SUBPROCESS(1) for  s4_t_lp_i++ 
+[79] SUBPROCESS(1) for  ) 
+[80] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[81] SUBSUBPROCESS(1) equal as4_a_bin_music[s4_t_lp_i] as4_t_bin_music[s4_t_lp_i];
+[82] SUBSUBPROCESS(1) equal afl_a_power_music[s4_t_lp_i] afl_t_power_music[s4_t_lp_i];
+[83] SUBSUBPROCESS(1) equal s4_t_iret s4_t_peak_num;
+[84] MAINPROCESS(5) func<start> return ( 
+[85] MAINPROCESS(5) func s4_t_iret 
+[86] MAINPROCESS(5) func<end> ); 
+----------------- Total Codes : 86 lines
 --------------------------
 [Function Name] : s4_search_peak_music_within_doa_range 
 -Return type : S4 
@@ -452,9 +451,9 @@ Total functions : 25
 [48] SUBSUBSUBPROCESS(1) if  &&  (afl_a_music_spec[s4_t_lp_i] > DOA_POW_THRESHOLD_MUSIC) 
 [49] SUBSUBSUBPROCESS(1) if  ) 
 [50] SUBSUBSUBPROCESS(1) subproc SUBSUBSUBSUBPROCESS(1) 
-[51] SUBSUBSUBSUBPROCESS(1) func<start> as4_t_bin_music[s4_t_peak_num] = ( 
-[52] SUBSUBSUBSUBPROCESS(1) func S4)((FL)(s4_t_begin+s4_t_lp_i+(S4)1)*0.5F 
-[53] SUBSUBSUBSUBPROCESS(1) func<end> ); 
+[51] SUBSUBSUBSUBPROCESS(1) equal<start> as4_t_bin_music[s4_t_peak_num] = ( 
+[52] SUBSUBSUBSUBPROCESS(1) equal S4)((FL)(s4_t_begin+s4_t_lp_i+(S4)1)*0.5F 
+[53] SUBSUBSUBSUBPROCESS(1) equal<end> ); 
 [54] SUBSUBSUBSUBPROCESS(1) equal afl_t_power_music[s4_t_peak_num] afl_a_music_spec[as4_t_bin_music[s4_t_peak_num]];
 [55] SUBSUBSUBSUBPROCESS(1) proc s4_t_peak_num++; 
 [56] SUBSUBSUBSUBPROCESS(1) equal s4_t_begin -1;
@@ -598,9 +597,9 @@ Total functions : 25
 [48] SUBSUBPROCESS(1) equal fl_t_doa afl_t_bin[2];
 [49] SUBPROCESS(4) else else 
 [50] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[51] SUBSUBPROCESS(1) func<start> fl_t_doa = ( 
-[52] SUBSUBPROCESS(1) func afl_t_pow_diff[1] * ((afl_t_bin[0] * afl_t_bin[0]) - (afl_t_bin[1] * afl_t_bin[1])) -  afl_t_pow_diff[0] * ((afl_t_bin[1] * afl_t_bin[1]) - (afl_t_bin[2] * afl_t_bin[2]))) / ((FL)2.0F * (FL)DOA_ANG_PER_BIN * (afl_t_pow_diff[0] - afl_t_pow_diff[1]) 
-[53] SUBSUBPROCESS(1) func<end> ); 
+[51] SUBSUBPROCESS(1) equal<start> fl_t_doa = ( 
+[52] SUBSUBPROCESS(1) equal afl_t_pow_diff[1] * ((afl_t_bin[0] * afl_t_bin[0]) - (afl_t_bin[1] * afl_t_bin[1])) -  afl_t_pow_diff[0] * ((afl_t_bin[1] * afl_t_bin[1]) - (afl_t_bin[2] * afl_t_bin[2]))) / ((FL)2.0F * (FL)DOA_ANG_PER_BIN * (afl_t_pow_diff[0] - afl_t_pow_diff[1]) 
+[53] SUBSUBPROCESS(1) equal<end> ); 
 [54] SUBPROCESS(5) func<start> fl_t_doa =  afl_a_yomikae_table[( 
 [55] SUBPROCESS(5) func S4)(fl_t_doa / (FL)3.0F)] + (afl_a_yomikae_table[(S4)(fl_t_doa / (FL)3.0F) + 1] - afl_a_yomikae_table[(S4)(fl_t_doa / (FL)3.0F)]) / (FL)3.0F * (fl_t_doa - (S4)(fl_t_doa / (FL)3.0F) * (FL)3.0F 
 [56] SUBPROCESS(5) func<end> ); 
@@ -662,17 +661,17 @@ Total functions : 25
 [33] SUBSUBSUBPROCESS(1) equal fl_t_power_sum afl_a_spec[s4_t_lp_i];
 [34] SUBSUBSUBPROCESS(1) equal s4_t_point_num 1;
 [35] SUBSUBSUBPROCESS(1) equal s4_t_begin s4_t_lp_i;
-[36] SUBSUBSUBPROCESS(1) func<start> s4_t_peak_bin_num = ( 
-[37] SUBSUBSUBPROCESS(1) func S4)((FL)(s4_t_begin+s4_t_lp_i+(S4)1)*0.5F 
-[38] SUBSUBSUBPROCESS(1) func<end> ); 
+[36] SUBSUBSUBPROCESS(1) equal<start> s4_t_peak_bin_num = ( 
+[37] SUBSUBSUBPROCESS(1) equal S4)((FL)(s4_t_begin+s4_t_lp_i+(S4)1)*0.5F 
+[38] SUBSUBSUBPROCESS(1) equal<end> ); 
 [39] SUBSUBSUBPROCESS(1) equal fl_t_peak_power fl_t_power_sum / (FL)s4_t_point_num;
 [40] SUBSUBPROCESS(2) else if else if( 
 [41] SUBSUBPROCESS(2) else if afl_a_spec[s4_t_lp_i] < fl_t_peak_power 
 [42] SUBSUBPROCESS(2) else if ) 
 [43] SUBSUBPROCESS(2) subproc SUBSUBSUBPROCESS(1) 
-[44] SUBSUBSUBPROCESS(1) func<start> s4_t_peak_bin_num = ( 
-[45] SUBSUBSUBPROCESS(1) func S4)((FL)(s4_t_begin+s4_t_lp_i)*0.5F 
-[46] SUBSUBSUBPROCESS(1) func<end> ); 
+[44] SUBSUBSUBPROCESS(1) equal<start> s4_t_peak_bin_num = ( 
+[45] SUBSUBSUBPROCESS(1) equal S4)((FL)(s4_t_begin+s4_t_lp_i)*0.5F 
+[46] SUBSUBSUBPROCESS(1) equal<end> ); 
 [47] SUBSUBSUBPROCESS(1) equal fl_t_peak_power fl_t_power_sum / (FL)s4_t_point_num;
 [48] SUBSUBSUBPROCESS(1) equal s4_t_begin -1;
 [49] SUBSUBSUBPROCESS(1) equal fl_t_power_sum 0.0F;
@@ -941,25 +940,24 @@ Total functions : 25
 [42] SUBPROCESS(1) if  ) 
 [43] SUBPROCESS(1) if  && (s4_t_buf_peak_num < s4_t_pieak_num_max 
 [44] SUBPROCESS(1) if  ) 
-[45] SUBPROCESS(1) if   
-[46] SUBPROCESS(1) if  ) 
-[47] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
-[48] SUBSUBPROCESS(1) equal as4_t_peak_bin[s4_t_buf_peak_num] s4_t_lp_i + (S4)1;
-[49] SUBSUBPROCESS(1) equal afl_t_peak_power[s4_t_buf_peak_num] afl_a_power[s4_t_lp_i + 1];
-[50] SUBSUBPROCESS(1) proc s4_t_buf_peak_num++; 
-[51] MAINPROCESS(5) for  for ( 
-[52] MAINPROCESS(5) for  s4_t_lp_i = 0; 
-[53] MAINPROCESS(5) for  s4_t_lp_i < s4_t_buf_peak_num; 
-[54] MAINPROCESS(5) for  s4_t_lp_i++ 
-[55] MAINPROCESS(5) for  ) 
-[56] MAINPROCESS(5) subproc SUBPROCESS(1) 
-[57] SUBPROCESS(1) equal as4_a_peak_bin[s4_t_peak_num] as4_t_peak_bin[s4_t_lp_i];
-[58] SUBPROCESS(1) equal afl_a_peak_power[s4_t_peak_num] afl_t_peak_power[s4_t_lp_i];
-[59] SUBPROCESS(1) proc s4_t_peak_num++; 
-[60] MAINPROCESS(6) func<start> return ( 
-[61] MAINPROCESS(6) func s4_t_peak_num 
-[62] MAINPROCESS(6) func<end> ); 
------------------ Total Codes : 62 lines
+[45] SUBPROCESS(1) if  ) 
+[46] SUBPROCESS(1) subproc SUBSUBPROCESS(1) 
+[47] SUBSUBPROCESS(1) equal as4_t_peak_bin[s4_t_buf_peak_num] s4_t_lp_i + (S4)1;
+[48] SUBSUBPROCESS(1) equal afl_t_peak_power[s4_t_buf_peak_num] afl_a_power[s4_t_lp_i + 1];
+[49] SUBSUBPROCESS(1) proc s4_t_buf_peak_num++; 
+[50] MAINPROCESS(5) for  for ( 
+[51] MAINPROCESS(5) for  s4_t_lp_i = 0; 
+[52] MAINPROCESS(5) for  s4_t_lp_i < s4_t_buf_peak_num; 
+[53] MAINPROCESS(5) for  s4_t_lp_i++ 
+[54] MAINPROCESS(5) for  ) 
+[55] MAINPROCESS(5) subproc SUBPROCESS(1) 
+[56] SUBPROCESS(1) equal as4_a_peak_bin[s4_t_peak_num] as4_t_peak_bin[s4_t_lp_i];
+[57] SUBPROCESS(1) equal afl_a_peak_power[s4_t_peak_num] afl_t_peak_power[s4_t_lp_i];
+[58] SUBPROCESS(1) proc s4_t_peak_num++; 
+[59] MAINPROCESS(6) func<start> return ( 
+[60] MAINPROCESS(6) func s4_t_peak_num 
+[61] MAINPROCESS(6) func<end> ); 
+----------------- Total Codes : 61 lines
 --------------------------
 [Function Name] : fl_interpolate_freq_peak 
 -Return type : FL 
@@ -1017,9 +1015,9 @@ Total functions : 25
 [48] SUBSUBPROCESS(1) equal bin_intpl bin[2];
 [49] SUBPROCESS(4) else else 
 [50] SUBPROCESS(4) subproc SUBSUBPROCESS(1) 
-[51] SUBSUBPROCESS(1) func<start> bin_intpl = ( 
-[52] SUBSUBPROCESS(1) func  pow_diff[1]*(bin[0]*bin[0] - bin[1]*bin[1]) -  pow_diff[0]*(bin[1]*bin[1] - bin[2]*bin[2]) ) / (2.0F*(pow_diff[0] - pow_diff[1]) 
-[53] SUBSUBPROCESS(1) func<end> ); 
+[51] SUBSUBPROCESS(1) equal<start> bin_intpl = ( 
+[52] SUBSUBPROCESS(1) equal  pow_diff[1]*(bin[0]*bin[0] - bin[1]*bin[1]) -  pow_diff[0]*(bin[1]*bin[1] - bin[2]*bin[2]) ) / (2.0F*(pow_diff[0] - pow_diff[1]) 
+[53] SUBSUBPROCESS(1) equal<end> ); 
 [54] SUBPROCESS(5) if  if ( 
 [55] SUBPROCESS(5) if  (bin_intpl > (FL)(NB_FFT_PT-1) 
 [56] SUBPROCESS(5) if  ) 
@@ -1043,9 +1041,9 @@ Total functions : 25
 [5] MAINPROCESS(1) proc FL afl_t_ave_power[NB_FFT_PT / AVE_BIN_WIDTH]; 
 [6] MAINPROCESS(1) equal FL fl_t_clearance AVE_POW_CLEARANCE;
 [7] MAINPROCESS(1) equal FL fl_t_max_power_th PEAK_POW_TH_MAX;
-[8] MAINPROCESS(1) func<start> S4 s4_t_center_bin = ( 
-[9] MAINPROCESS(1) func S4)(NB_FFT_PT / 2 
-[10] MAINPROCESS(1) func<end> ); 
+[8] MAINPROCESS(1) equal<start> S4 s4_t_center_bin = ( 
+[9] MAINPROCESS(1) equal S4)(NB_FFT_PT / 2 
+[10] MAINPROCESS(1) equal<end> ); 
 [11] MAINPROCESS(1) equal S4 s4_t_center_range CENTER_FREQ_RANGE;
 [12] MAINPROCESS(1) proc FL fl_t_peak_pow_th_min; 
 [13] MAINPROCESS(1) proc S4 s4_t_loop_max; 

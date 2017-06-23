@@ -205,7 +205,7 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Arguments
-		# replaced create_argument_code() to parse_main_flow_code to include blockdiag code in rst file 20160622
+		# replaced create_argument_code() to parse_arg_csv_to_listtable to include blockdiag code in rst file 20160622
 		#tmp_code, tmp_filelist = create_argument_code(tmp_filelist)
 		tmp_code, tmp_filelist = parse_arg_csv_to_listtable(tmp_filelist, doc_path)
 		code += tmp_code
@@ -222,7 +222,7 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Main process flow
-		# replaced create_main_flow_code() to parse_arg_csv_to_listtable() to include blockdiag code in rst file 20160622
+		# replaced create_main_flow_code() to parse_main_flow_code() to include blockdiag code in rst file 20160622
 		#tmp_code, tmp_filelist = create_main_flow_code('MAINPROCESS', tmp_filelist, funcname)
 		tmp_code, tmp_filelist = parse_main_flow_code('MAINPROCESS', tmp_filelist, funcname, doc_path)
 		code += tmp_code
@@ -244,7 +244,8 @@ def create_func_main(doc_path, func_list, fileList_list):
 		code += tmp_code
 
 		# Cond. table
-		# replaced create_cond_code() to parse_proc_csv_to_listtable() to include table code in rst file 20160622
+		# replaced create_cond_code() to parse_cond_csv_to_listtable() to include table code in rst file 20160622
+		#tmp_code, tmp_filelist = create_cond_code('MAINPROCESS', tmp_filelist, funcname)
 		tmp_code, tmp_filelist = parse_cond_csv_to_listtable('MAINPROCESS', tmp_filelist, funcname, doc_path)
 		code += tmp_code
 
@@ -315,7 +316,9 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 				code += tmp_code
 
 				# Main process flow
-				tmp_code, tmp_filelist = create_main_flow_code(level_title, tmp_filelist, sub_funcname)
+				# replaced create_main_flow_code() to parse_main_flow_code() to include blockdiag code in rst file 20160622
+				#tmp_code, tmp_filelist = create_main_flow_code(level_title, tmp_filelist, sub_funcname)
+				tmp_code, tmp_filelist = parse_main_flow_code(level_title, tmp_filelist, sub_funcname, doc_path)
 				code += tmp_code
 
 ##### PROCESS TABLE #####
@@ -323,7 +326,9 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 				code += tmp_code
 
 				# Proc. table
-				tmp_code, tmp_filelist = create_proc_code(level_title, tmp_filelist, sub_funcname)
+				# replaced create_proc_code() to parse_proc_csv_to_listtable() to include table code in rst file 20160622
+				#tmp_code, tmp_filelist = create_proc_code(level_title, tmp_filelist, sub_funcname)
+				tmp_code, tmp_filelist = parse_proc_csv_to_listtable(level_title, tmp_filelist, sub_funcname, doc_path)
 				code += tmp_code
 
 ##### CONDITION TABLE #####
@@ -331,7 +336,9 @@ def create_func_sub(doc_path, func_list, fileList_list, level_title):
 				code += tmp_code
 
 				# Cond. table
-				tmp_code, tmp_filelist = create_cond_code(level_title, tmp_filelist, sub_funcname)
+				# replaced create_cond_code() to parse_cond_csv_to_listtable() to include table code in rst file 20160622
+				#tmp_code, tmp_filelist = create_cond_code(level_title, tmp_filelist, sub_funcname)
+				tmp_code, tmp_filelist = parse_cond_csv_to_listtable(level_title, tmp_filelist, sub_funcname, doc_path)
 				code += tmp_code
 
 

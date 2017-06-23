@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # Functional Process Specification documentation build configuration file, created by
-# sphinx-quickstart on Thu Jun 01 17:48:48 2017.
+# sphinx-quickstart on Thu Jun 01 21:36:12 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -30,7 +30,14 @@
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = [
+    'sphinxcontrib.blockdiag',
+    'sphinxcontrib.seqdiag',
+    'sphinxcontrib.actdiag',
+    'sphinxcontrib.nwdiag',
+    'sphinxcontrib.rackdiag',
+    'sphinxcontrib.packetdiag',
+]
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -63,7 +70,8 @@ release = u'0.1'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+#language = None
+language = 'ja'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -83,41 +91,33 @@ todo_include_todos = False
 # a list of builtin themes.
 #
 html_theme = 'sphinx_rtd_theme'
+#html_theme = 'agogo'
+#html_theme = 'scrolls'
+#html_theme = 'alabaster'
+#html_theme = 'classic'
+#html_theme = 'sphinxdoc'
+#html_theme = 'traditional'
+#html_theme = 'nature'
+#html_theme = 'haiku'
+#html_theme = 'pyramid'
+#html_theme = 'bizstyle'
+
 
 # Theme options are theme-specific and customize the look and feel of a theme
 # further.  For a list of options available for each theme, see the
 # documentation.
 #
-
-#html_theme = 'alabaster'
-
-#html_theme = 'traditional'
-
-#html_theme = 'classic'
 #html_theme_options = {
-#    "rightsidebar": "True",
-#    "relbarbgcolor": "black"
+#    "pagewidth": "100",
+#    "documentwidth": "80",
+#    "sidebarwidth": "20"
 #}
-
-#html_theme = 'scrolls'
-#html_theme_options = {
-#    "headerbordercolor": ""
-#    "subheadlinecolor": ""
-#    "linkcolor": "blue"
-#    "visitedlinkcolor": ""
-#    "admonitioncolor": ""
-#}
-
-
-html_theme = 'sphinx_rtd_theme'
-
-
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
-
+html_style = 'css/my_theme.css'
 
 # -- Options for HTMLHelp output ------------------------------------------
 
@@ -126,15 +126,16 @@ htmlhelp_basename = 'FunctionalProcessSpecificationdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
+latex_docclass = {'manual': 'jsbook'}
 
 latex_elements = {
     # The paper size ('letterpaper' or 'a4paper').
     #
-    # 'papersize': 'letterpaper',
+    'papersize': 'letterpaper',
 
     # The font size ('10pt', '11pt' or '12pt').
     #
-    # 'pointsize': '10pt',
+    'pointsize': '10pt',
 
     # Additional stuff for the LaTeX preamble.
     #
@@ -143,7 +144,16 @@ latex_elements = {
     # Latex figure (float) alignment
     #
     # 'figure_align': 'htbp',
+
+    'transition': '',
+    'extraclassoptions': ',openany,oneside',
+    'classoptions': ',dvipdfmx',
+    'babel': '\usepackage[japanese]{babel}'
 }
+
+
+
+
 
 # Grouping the document tree into LaTeX files. List of tuples
 # (source start file, target name, title,
@@ -177,3 +187,10 @@ texinfo_documents = [
 
 
 
+# -- Options for bloackdiag -------------------------------------------
+blockdiag_html_image_format = 'SVG'
+seqdiag_html_image_format = 'SVG'
+actdiag_html_image_format = 'SVG'
+nwdiag_html_image_format = 'SVG'
+rackiag_html_image_format = 'SVG'
+packetdiag_html_image_format = 'SVG'
