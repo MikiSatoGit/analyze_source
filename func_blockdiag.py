@@ -930,6 +930,9 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 											tmp_right = tmp_right[:len(tmp_right)-1]
 											tmp_bracket_cnt -= 1
 
+									# replace ',' to '/' 20170624
+									tmp_right = tmp_right.replace(',', ' / ')
+
 									# extract condition data
 									tmp_code_item = devide_by_condition_symbol(tmp_code)
 									if isinstance(tmp_code_item,list):
@@ -937,6 +940,10 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 											tmp_left = tmp_code_item[0].strip()
 											while tmp_left.find('(')==0:
 												tmp_left = tmp_left[1:]
+
+											# replace ',' to '/' 20170624
+											tmp_left = tmp_left.replace(',', ' / ')
+
 											table += tmp_left + ', ' \
 												  + tmp_right \
 												  + '\n'
@@ -956,10 +963,8 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 										tmp_bracket_check = tmp_bracket_check[:len(tmp_bracket_check)-1]
 										tmp_cond_whole += ')'
 
-
 							tmp_cond_code = ''
 							cond_level = 0
-
 
 						if tmp_cond_whole!='':
 							table = \
@@ -999,9 +1004,9 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						arg_id = 0
 
 						# PROC output (FUNC)
-						# replace ',' to '/' 20170623
-						tmp_left = blockdata.procs[index2].left[index3].replace(',', ' &')
-						tmp_right = blockdata.procs[index2].right[index3].replace(',', ' &')
+						# replace ',' to '&' 20170623
+						tmp_left = blockdata.procs[index2].left[index3].replace(',', ' & ')
+						tmp_right = blockdata.procs[index2].right[index3].replace(',', ' & ')
 
 						table = \
 							'PROC.' + str(proc_id) + ', ' \
@@ -1073,9 +1078,9 @@ def output_proc_to_csv(csvfile_base, block_data_list):
 						fout_csv = open(csvfile,'a')
 					proc_id += 1
 
-					# replace ',' to '/' 20170623
-					tmp_left = blockdata.procs[index2].left[index3].replace(',', ' &')
-					tmp_right = blockdata.procs[index2].right[index3].replace(',', ' &')
+					# replace ',' to '&' 20170623
+					tmp_left = blockdata.procs[index2].left[index3].replace(',', ' & ')
+					tmp_right = blockdata.procs[index2].right[index3].replace(',', ' & ')
 
 					#write case in PROC# 20170619
 					if blockdata.procs[index2].type[index3].strip().find('???')!=-1:
@@ -1174,6 +1179,8 @@ def devide_by_condition_symbol(code):
 	if tmp_code.find('=')!=-1:
 		if tmp_code.find('==')!=-1:
 			tmp_code = tmp_code.replace('==', '$$==$$')
+		elif tmp_code.find('!=')!=-1:
+			tmp_code = tmp_code.replace('!=', '$$!=$$')
 		elif tmp_code.find('<=')!=-1:
 			tmp_code = tmp_code.replace('<=', '$$<=$$')
 		elif tmp_code.find('>=')!=-1:
