@@ -41,7 +41,7 @@ if argc==2 :
 	filename1 = argvs[1]
 else:
 	filename1 = raw_input("Please specify [source file path] -> ")
-print '...checking %s' % filename1
+print '...opening %s' % filename1
 if not os.path.exists(filename1):
 	print "ERROR:Could not start %s." % argvs[0]
 	quit()
@@ -67,11 +67,10 @@ fout = open(outfile,'w')
 #tmp_string = "<open output file: " + outfile + ">"
 #func_source_analyze.print_out(fout, tmp_string, 1)
 
-
-
 ##################################################
 # analyze source code
 ##################################################
+print '...analyzing %s' % filename1
 
 ###### call function (load_valid_source_code) ######
 cnt, lines = func_source_analyze.load_valid_source_code(sourcefile)
@@ -132,10 +131,11 @@ for index1 in range(0, func_list.func_num):
 	func_source_analyze.print_out(fout, "----------------- Total Codes : %d lines" % total_lines, 1)
 
 
-
 ##################################################
 # draw flow chart and output proc&cond to csv file
 ##################################################
+	print '...generating blockdiag code for %s' % func_list.function_data[index1].name
+
 ###### call function (draw_diag) ######
 ##### main
 	sub_proc_codes_list, sub_header_list = func_blockdiag.draw_diag( \
@@ -220,6 +220,8 @@ for index1 in range(0, func_list.func_num):
 ##################################################
 # create func definition to csv file
 ##################################################
+print '...generating csv files for table'
+
 func_blockdiag.output_func_def_to_csv(
 	str_filename1, \
 	func_list, \
@@ -234,6 +236,8 @@ func_blockdiag.output_func_def_to_csv(
 ##################################################
 # create rst file for Sphinx
 ##################################################
+print '...generating rst files for sphinx'
+
 # check csv / fig files
 fileList_list = func_sphinx.get_file_list( str_filename1, func_list )
 
@@ -339,3 +343,5 @@ sourcefile.close()
 #func_source_analyze.print_out(fout, tmp_string, 1)
 if fout != "":
 	fout.close()
+
+print '...done!'

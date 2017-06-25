@@ -40,14 +40,15 @@ VD fn_miki_test3(
 		miki4_2_3 = subsubsubsub_mode_default;
 		break;
 	}														/* SUBSUBSUBSUBPROCESS(2) Å™ */
-
-
+#ifdef _DIRECTIVITY_TEST	// for directivity check
+#else
+#if !defined( _291B_DEV_20161005_BTT_TEST) && !defined(_20161116_BTT_TRAILER_OBJ_FUNC_T)
 	if( hoge(a1, a2)!=0 )
 	{
 		miki5_1 =0;
 	}
-
-
+#endif
+#endif
 	fl_t_tmp_theta = -( 
 		PI / 180.0F * (
 			st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_peak_doa_bins_intpl_2f[s4_t_lp_i] +  (FL)DOA_BIN_START_ANG

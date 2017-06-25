@@ -245,6 +245,10 @@ valid_preprocessor_code = []
 valid_preprocessor_code.append('SIM_MODE')
 valid_preprocessor_code.append('TYPE_B')
 valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
+valid_preprocessor_code.append('_291B_DEV_20161005_BTT_TEST') #0625
+valid_preprocessor_code.append('CU1_DF_NBD_BSM_ONLY') #0625
+
+
 ##############################################################
 
 def print_out(file, output_string, breakline):
@@ -473,17 +477,24 @@ def remove_undefined_codes(lines):
 	max_level = 1
 
 	while max_level!=0:
+		if debug_out:
+			print '<remove_undefined_codes> lines:%d' % len(valid_lines)
+
 		max_level = 0
+		level = 0 #0625
 		cnt = 0
 		del tmp_lines[:]
 		for line_org in valid_lines :
 			line = line_org.strip()
+
 			if line.find('#if')==0:
 				level += 1
 			if line.find('#endif')==0:
 				level -= 1
 			if level > max_level:
 				max_level = level
+
+
 
 			if level==0:
 				if line.find('#endif')!= -1: #finish preprocessor for ifndef, ifdef, if, elif(valid)
@@ -493,13 +504,32 @@ def remove_undefined_codes(lines):
 				invalid_else = 0
 
 			elif level==1:
-				if line.find('#ifdef')!=-1:	#start preprocessor (invalid)
+#0625				if line.find('#ifdef')!=-1:	#start preprocessor (invalid)
+				if line.find('#ifdef')!=-1 or line.find('#if defined')!=-1:	#start preprocessor (invalid)
 					skipping = 1
+					invalid_else = 0 #0625
+
+					# check valid preprocessor 20170625
+					for index in range(0, len(valid_preprocessor_code)):
+						if line.find(valid_preprocessor_code[index])!=-1: #start preprocessor (valid)
+							skipping = 0
+							invalid_else = 1
+							break
+
 					continue
 
-				elif line.find('#ifndef')!=-1: #start preprocessor (valid)
+#0625				elif line.find('#ifndef')!=-1: #start preprocessor (valid)
+				elif line.find('#ifndef')!=-1 or line.find('#if !defined')!=-1: #start preprocessor (valid)
 					skipping = 0
 					invalid_else = 1
+
+					# check valid preprocessor 20170625
+					for index in range(0, len(valid_preprocessor_code)):
+						if line.find(valid_preprocessor_code[index])!=-1: #start preprocessor (valid)
+							skipping = 1
+							invalid_else = 0
+							break
+
 					continue
 
 				elif line.find('#else')!= -1: #else of #ifndef or #if(valid)?
@@ -513,7 +543,7 @@ def remove_undefined_codes(lines):
 					# dummy process for saving this line
 					skipping = skipping
 
-				elif line.find('#if ')!=-1 or line.find('#if(')!=-1: #start preprocessor (select)
+				elif line.find('#if')!=-1 or line.find('#if(')!=-1: #start preprocessor (select)
 					if line.find('#if 0')!=-1: #if (invalid)
 						skipping = 1
 					else:
@@ -536,12 +566,29 @@ def remove_undefined_codes(lines):
 							break
 					continue
 
+			if debug_out:
+				print '<remove_undefined_codes>[%d/%d](%d/%d)%s' % (level, max_level, skipping, invalid_else, line), #0625
+
 			if skipping == 0:
+				if debug_out:
+					print '(save)'
 				# save line
 				tmp_lines.append(line_org)
 				cnt += 1
+			else:
+				if debug_out:
+					print '(skip)'
 
 		valid_lines = copy.deepcopy(tmp_lines)
+
+
+
+
+
+
+
+
+
 
 	if debug_out:
 		for line in valid_lines:
@@ -557,6 +604,7 @@ def load_valid_source_code(source_file):
 	lines = source_file.readlines()
 
 	cnt, valid_lines = remove_undefined_codes(lines)
+
 	cnt, valid_lines = remove_comment_codes(valid_lines)
 
 	if debug_out:
