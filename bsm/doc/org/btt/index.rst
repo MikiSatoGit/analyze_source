@@ -11,6 +11,8 @@ BTT Logic Specification
 
    init_cvw/index
    func_fmcw/index
+   bsm_abst_00/index
+   bsm_main/index
    bsm_btt/index
    bsm_recog_01/index
    bsm_recog_02/index

@@ -12,8 +12,6 @@ import os
 import glob
 import copy
 import pandas
-import pickle
-import redis
 
 
 
@@ -902,7 +900,6 @@ def check_file_include_funcname(file_list, funcname, func_list):
 
 def read_csv_file(csvfile_path):
 	code = ''
-	print csvfile_path #0623
 	csv = pandas.read_csv(csvfile_path, header=None)
 	for index1 in range(0,len(csv.index)):
 		for index2 in range(0,len(csv.columns)):

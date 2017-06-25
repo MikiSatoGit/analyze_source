@@ -42,6 +42,12 @@ VD fn_miki_test3(
 	}														/* SUBSUBSUBSUBPROCESS(2) Å™ */
 
 
+	if( hoge(a1, a2)!=0 )
+	{
+		miki5_1 =0;
+	}
+
+
 	fl_t_tmp_theta = -( 
 		PI / 180.0F * (
 			st_g_bsm_loop_data.afl_installed_angle[0] + afl_a_peak_doa_bins_intpl_2f[s4_t_lp_i] +  (FL)DOA_BIN_START_ANG

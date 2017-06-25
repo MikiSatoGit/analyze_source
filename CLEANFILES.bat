@@ -1,5 +1,6 @@
 del /q *.pyc
 del /q log.txt
+del /q .\bsm\*.txt
 
 rd /s /q .\bsm\csv
 rd /s /q .\bsm\fig
