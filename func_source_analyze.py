@@ -245,8 +245,8 @@ valid_preprocessor_code = []
 valid_preprocessor_code.append('SIM_MODE')
 valid_preprocessor_code.append('TYPE_B')
 valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
-valid_preprocessor_code.append('_291B_DEV_20161005_BTT_TEST') #0625
-valid_preprocessor_code.append('CU1_DF_NBD_BSM_ONLY') #0625
+valid_preprocessor_code.append('_291B_DEV_20161005_BTT_TEST')
+valid_preprocessor_code.append('CU1_DF_NBD_BSM_ONLY')
 
 
 ##############################################################
@@ -481,7 +481,7 @@ def remove_undefined_codes(lines):
 			print '<remove_undefined_codes> lines:%d' % len(valid_lines)
 
 		max_level = 0
-		level = 0 #0625
+		level = 0
 		cnt = 0
 		del tmp_lines[:]
 		for line_org in valid_lines :
@@ -494,8 +494,6 @@ def remove_undefined_codes(lines):
 			if level > max_level:
 				max_level = level
 
-
-
 			if level==0:
 				if line.find('#endif')!= -1: #finish preprocessor for ifndef, ifdef, if, elif(valid)
 					skipping = 1
@@ -504,10 +502,9 @@ def remove_undefined_codes(lines):
 				invalid_else = 0
 
 			elif level==1:
-#0625				if line.find('#ifdef')!=-1:	#start preprocessor (invalid)
 				if line.find('#ifdef')!=-1 or line.find('#if defined')!=-1:	#start preprocessor (invalid)
 					skipping = 1
-					invalid_else = 0 #0625
+					invalid_else = 0
 
 					# check valid preprocessor 20170625
 					for index in range(0, len(valid_preprocessor_code)):
@@ -518,7 +515,6 @@ def remove_undefined_codes(lines):
 
 					continue
 
-#0625				elif line.find('#ifndef')!=-1: #start preprocessor (valid)
 				elif line.find('#ifndef')!=-1 or line.find('#if !defined')!=-1: #start preprocessor (valid)
 					skipping = 0
 					invalid_else = 1
@@ -567,7 +563,7 @@ def remove_undefined_codes(lines):
 					continue
 
 			if debug_out:
-				print '<remove_undefined_codes>[%d/%d](%d/%d)%s' % (level, max_level, skipping, invalid_else, line), #0625
+				print '<remove_undefined_codes>[%d/%d](%d/%d)%s' % (level, max_level, skipping, invalid_else, line),
 
 			if skipping == 0:
 				if debug_out:
@@ -580,14 +576,6 @@ def remove_undefined_codes(lines):
 					print '(skip)'
 
 		valid_lines = copy.deepcopy(tmp_lines)
-
-
-
-
-
-
-
-
 
 
 	if debug_out:

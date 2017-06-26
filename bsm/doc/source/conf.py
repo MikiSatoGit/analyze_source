@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
-# LCA Logic Specification documentation build configuration file, created by
-# sphinx-quickstart on Fri Jun 23 14:45:55 2017.
+# Sample Document documentation build configuration file, created by
+# sphinx-quickstart on Sun Jun 25 20:38:05 2017.
 #
 # This file is execfile()d with the current directory set to its
 # containing dir.
@@ -52,7 +52,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'LCA Logic Specification'
+project = u'Sample Document'
 copyright = u'2017, Miki Sato'
 author = u'Miki Sato'
 
@@ -70,7 +70,8 @@ release = u'0.1'
 #
 # This is also used if you do content translation via gettext catalogs.
 # Usually you set "language" from the command line for these cases.
-language = None
+#language = None
+language = 'ja'
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -121,7 +122,7 @@ html_style = 'css/my_theme.css'
 # -- Options for HTMLHelp output ------------------------------------------
 
 # Output file base name for HTML help builder.
-htmlhelp_basename = 'LCALogicSpecificationdoc'
+htmlhelp_basename = 'SampleDocumentdoc'
 
 
 # -- Options for LaTeX output ---------------------------------------------
@@ -158,7 +159,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'LCALogicSpecification.tex', u'LCA Logic Specification Documentation',
+    (master_doc, 'SampleDocument.tex', u'Sample Document Documentation',
      u'Miki Sato', 'manual'),
 ]
 
@@ -168,7 +169,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'lcalogicspecification', u'LCA Logic Specification Documentation',
+    (master_doc, 'sampledocument', u'Sample Document Documentation',
      [author], 1)
 ]
 
@@ -179,32 +180,11 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'LCALogicSpecification', u'LCA Logic Specification Documentation',
-     author, 'LCALogicSpecification', 'One line description of project.',
+    (master_doc, 'SampleDocument', u'Sample Document Documentation',
+     author, 'SampleDocument', 'One line description of project.',
      'Miscellaneous'),
 ]
 
-
-
-# -- Options for Epub output ----------------------------------------------
-
-# Bibliographic Dublin Core info.
-epub_title = project
-epub_author = author
-epub_publisher = author
-epub_copyright = copyright
-
-# The unique identifier of the text. This can be a ISBN number
-# or the project homepage.
-#
-# epub_identifier = ''
-
-# A unique identification for the text.
-#
-# epub_uid = ''
-
-# A list of files that should not be packed into the epub file.
-epub_exclude_files = ['search.html']
 
 
 # -- Options for bloackdiag -------------------------------------------

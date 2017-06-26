@@ -3,8 +3,8 @@
 
 # You can set these variables from the command line.
 SPHINXOPTS    =
-SPHINXBUILD   = sphinx-build
-SPHINXPROJ    = BTTLogicSpecification
+SPHINXBUILD   = python -msphinx
+SPHINXPROJ    = SampleDocument
 SOURCEDIR     = source
 BUILDDIR      = build
 
