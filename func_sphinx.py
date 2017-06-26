@@ -587,8 +587,13 @@ def parse_arg_csv_to_listtable(filelist, doc_path):
 	for item in filelist.arg:
 		arg_file =  item[item.rfind('\\')+1:]
 
-		csv_file_path = doc_path[:doc_path.find('\\')]
+		# \doc\source\(source file)
+		# \csv\
+		csv_file_path = doc_path
+		for tmp_cnt in range(0,4):
+			csv_file_path = csv_file_path[:csv_file_path.rfind('\\')]
 		csv_file_path += '/csv/' + arg_file
+
 		datalist = read_csv_file(csv_file_path)
 
 		code += '.. list-table:: '
@@ -635,8 +640,13 @@ def parse_ret_csv_to_listtable(filelist, doc_path):
 	for item in filelist.ret:
 		ret_file =  item[item.rfind('\\')+1:]
 
-		csv_file_path = doc_path[:doc_path.find('\\')]
+		# \doc\source\(source file)
+		# \csv\
+		csv_file_path = doc_path
+		for tmp_cnt in range(0,4):
+			csv_file_path = csv_file_path[:csv_file_path.rfind('\\')]
 		csv_file_path += '/csv/' + ret_file
+
 		datalist = read_csv_file(csv_file_path)
 
 		code += '.. list-table:: '
@@ -688,8 +698,17 @@ def parse_main_flow_code(level_title, filelist, funcname, doc_path):
 		fig_title = funcname + level_key
 		fig_file =  item[item.rfind('\\')+1:]
 		if fig_file.find(fig_title)!=-1:
+
 			diag_file_path = doc_path[:doc_path.find('\\')]
 			diag_file_path += '/fig/' + fig_file
+
+			# \doc\source\(source file)
+			# \fig\
+			diag_file_path = doc_path
+			for tmp_cnt in range(0,4):
+				diag_file_path = diag_file_path[:diag_file_path.rfind('\\')]
+			diag_file_path += '/fig/' + fig_file
+
 			f_diag = open(diag_file_path,'r')
 
 			code += '.. blockdiag::\n'
@@ -748,8 +767,13 @@ def parse_proc_csv_to_listtable(level_title, filelist, funcname, doc_path):
 		proc_sub_title = proc_sub_title.replace('_proc.csv','')
 		if proc_file.find(proc_title)!=-1:
 
-			csv_file_path = doc_path[:doc_path.find('\\')]
+			# \doc\source\(source file)
+			# \csv\
+			csv_file_path = doc_path
+			for tmp_cnt in range(0,4):
+				csv_file_path = csv_file_path[:csv_file_path.rfind('\\')]
 			csv_file_path += '/csv/' + proc_file
+
 			datalist = read_csv_file(csv_file_path)
 
 			code += '.. list-table:: '
@@ -810,8 +834,13 @@ def parse_cond_csv_to_listtable(level_title, filelist, funcname, doc_path):
 		cond_sub_title = cond_sub_title[:cond_sub_title.rfind('_')]
 		if cond_file.find(cond_title)!=-1:
 
-			csv_file_path = doc_path[:doc_path.find('\\')]
+			# \doc\source\(source file)
+			# \csv\
+			csv_file_path = doc_path
+			for tmp_cnt in range(0,4):
+				csv_file_path = csv_file_path[:csv_file_path.rfind('\\')]
 			csv_file_path += '/csv/' + cond_file
+
 			datalist = read_csv_file(csv_file_path)
 
 			code += '.. list-table:: '
@@ -900,6 +929,7 @@ def check_file_include_funcname(file_list, funcname, func_list):
 
 def read_csv_file(csvfile_path):
 	code = ''
+	print csvfile_path
 	csv = pandas.read_csv(csvfile_path, header=None)
 	for index1 in range(0,len(csv.index)):
 		for index2 in range(0,len(csv.columns)):

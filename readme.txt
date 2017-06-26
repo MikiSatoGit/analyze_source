@@ -1,5 +1,5 @@
 =================================================
-Install python packages
+Install python packages (pillow, blockdiag, sphinx, pandas)
 =================================================
 easy_install pillow
 easy_install blockdiag
@@ -10,109 +10,174 @@ easy_install pandas
 or (https://pypi.python.org/pypi/pandas/0.15.2/#downloads pandas-0.15.2.win32-py2.7.exe)
 
 
+=================================================
+Run analyze_source_c.py
+=================================================
+enter "python analyze_source_c.py [c source file path]" from the command line.
+
+[result]
+Three folders are created at the same path.
+- analyze_(source file name).txt -> can be erased
+- csv : Process and Condition table -> can be erased
+- fig : blockdiag source code -> can be erased
+- doc\source ★rst files (Sphinx source file )
+
+[note]
+※definition for #ifdef 
+Add Valid Preprocessor word to "valid_preprocessor_code"
+ valid_preprocessor_code.append('PREPROCESSOR WORD')
+in func_source_analyze.py
 
 =================================================
-SPHINX
+Create SPHINX file
 =================================================
--------------------------------
-Create sphinx project
-sphinx-quickstart
-> Separate source and build directories (y/n) [n]: y
-> Project name: Functional Process Specification
-> Author name(s): Miki Sato
-> Project version []: 0.1
+(1) move to the doc folder above.
+(enter "cd [c source folder path]\doc" )
 
+(2) create sphinx project
+enter "sphinx-quickstart"
+enter following options (Other option can be default (just push Enter))
+	> Separate source and build directories (y/n) [n]: y
+	> Project name: (PROJECT NAME)
+	> Author name(s): (AUTHOR NAME)
+	> Project version []: (VERSION)
 
+(3) edit config file (doc\source\conf.py)
+(i) add extentions for blockdiag
+	extensions = [
+	    'sphinxcontrib.blockdiag',
+	    'sphinxcontrib.seqdiag',
+	    'sphinxcontrib.actdiag',
+	    'sphinxcontrib.nwdiag',
+	    'sphinxcontrib.rackdiag',
+	    'sphinxcontrib.packetdiag',
+	]
 
-=================================================
-CONFIG
-=================================================
-Edit "conf.py"
------- Theme ------
-html_theme = 'sphinx_rtd_theme'
+(ii) add blockdiag setting
+	blockdiag_html_image_format = 'SVG'
+	seqdiag_html_image_format = 'SVG'
+	actdiag_html_image_format = 'SVG'
+	nwdiag_html_image_format = 'SVG'
+	rackiag_html_image_format = 'SVG'
+	packetdiag_html_image_format = 'SVG'
+※ change SVG -> PNG if you want to use PNG for Fig.
 
-#html_theme = 'classic'
-#html_theme_options = {
-#    "rightsidebar": "True",
-#    "relbarbgcolor": "black"
-#}
+(iii) set theme. (preferred theme is "sphinx_rtd_theme")
+	html_theme = 'sphinx_rtd_theme'
+	(default : html_theme = 'alabaster')
+※please see the following page about available theme
+	http://www.sphinx-doc.org/en/stable/theming.html
+※default available theme
+	#html_theme = 'agogo'
+	#html_theme = 'scrolls'
+	#html_theme = 'alabaster'
+	#html_theme = 'classic'
+	#html_theme = 'sphinxdoc'
+	#html_theme = 'traditional'
+	#html_theme = 'nature'
+	#html_theme = 'haiku'
+	#html_theme = 'pyramid'
+	#html_theme = 'bizstyle'
 
-#html_theme = 'scrolls'
-#html_theme_options = {
-#    "headerbordercolor": ""
-#    "subheadlinecolor": ""
-#    "linkcolor": "blue"
-#    "visitedlinkcolor": ""
-#    "admonitioncolor": ""
-#}
-
-html_static_path = ['_static']
-html_style = 'css/my_theme.css'
-
-
------- blockdiag ------
-extensions = [
-    'sphinxcontrib.blockdiag',
-    'sphinxcontrib.seqdiag',
-    'sphinxcontrib.actdiag',
-    'sphinxcontrib.nwdiag',
-    'sphinxcontrib.rackdiag',
-    'sphinxcontrib.packetdiag',
-]
-
-blockdiag_html_image_format = 'PNG'
-seqdiag_html_image_format = 'PNG'
-actdiag_html_image_format = 'PNG'
-nwdiag_html_image_format = 'PNG'
-rackiag_html_image_format = 'PNG'
-packetdiag_html_image_format = 'PNG'
-
-
------- latex ------
-latex_docclass = {'manual': 'jsbook'}
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-
-    'transition': '',
-    'extraclassoptions': ',openany,oneside',
-    'classoptions': ',dvipdfmx',
-    'babel': '\usepackage[japanese]{babel}'
+(iv)  set html style
+set html_style as below.
+	html_style = 'css/my_theme.css'
+create doc\source\_static\css\my_theme.css
+---------------------------------------------------------
+[my_theme.css]
+@import url("theme.css");
+ 
+.wy-nav-content {
+    max-width: none;
 }
 
+h1,h2,h3,h4,h5,h6 {
+    border-bottom: 1px solid #ccc;
+}
 
-=================================================
-INDEX
-=================================================
-Edit "index.rst"
+.wy-table-responsive table td, .wy-table-responsive table th {
+    white-space: normal;
+}
 
-ex)
-Functional Process Detail Specification
-=================================================
+colgroup {
+    display: none;
+}
+---------------------------------------------------------
 
-.. toctree::
-   :maxdepth: 1
+(v) add latex setting (TBD)
+	latex_docclass = {'manual': 'jsbook'}
+	latex_elements = {
+	    # The paper size ('letterpaper' or 'a4paper').
+	    #
+	    'papersize': 'letterpaper',
+	
+	    # The font size ('10pt', '11pt' or '12pt').
+	    #
+	    'pointsize': '10pt',
+	
+	    # Additional stuff for the LaTeX preamble.
+	    #
+	    # 'preamble': '',
+	
+	    # Latex figure (float) alignment
+	    #
+	    # 'figure_align': 'htbp',
+	
+	    'transition': '',
+	    'extraclassoptions': ',openany,oneside',
+	    'classoptions': ',dvipdfmx',
+	    'babel': '\usepackage[japanese]{babel}'
+	}
 
-   debug/index <- add index
--------------------------------
+(4) edit index file (doc\source\index.rst)
+(i) change title of top page
+	Welcome to Sample's documentation!
+	=================================================
+	↓
+	 (As you want)
+	ex)
+	Samplel Specification
+	=================================================
+
+(ii) change tree level
+	.. toctree::
+	   :maxdepth: 1 ← chnage level as you want (preferred level is 2)
+	※ Level defines table of contents shown in top page
+	1: filename
+	2: function name in each file
+	3: sub section of each function (Interface, Main Process Flow, Prcess Table, Condition Table, Subprocesses )
+	4: Subprocesses  of each function
+
+	(source file name)/index <- add index
+	ex)
+	sample.c
+	→"   sample/index"
+	※need to add 3 spaces before 
+
+
+※The following lines in the generated file can be erased.
+	:caption: Contents:
+
+	Indices and tables
+	==================
+	
+	* :ref:`genindex`
+	* :ref:`modindex`
+	* :ref:`search`
+
+(5) create html 
+enter "make html"
+
+[result]
+HTML files are created in "doc\build\html"
+Top page is
+	doc\build\html\index.html
 
 
 
-make html
+
+
+
 
 
 
@@ -135,10 +200,7 @@ make latexpdf
 cd build/latex
 pLatex ***.tex
 dvipdfmx ***.dvi
-
 (or Open tex file by TeXworks editor -> Run)
-
-If pdf is not vreated, try:
 
 
 
