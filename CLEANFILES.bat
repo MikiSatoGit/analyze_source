@@ -1,10 +1,10 @@
 del /q *.pyc
 del /q log.txt
-del /q .\bsm\*.txt
+del /q .\sample\*.txt
 
-rd /s /q .\bsm\csv
-rd /s /q .\bsm\fig
-rd /s /q .\bsm\doc\build\doctrees
-rd /s /q .\bsm\doc\build\html
-rd /s /q .\bsm\doc\build
+rd /s /q .\sample\csv
+rd /s /q .\sample\fig
+rd /s /q .\sample\doc\build\doctrees
+rd /s /q .\sample\doc\build\html
+rd /s /q .\sample\doc\build
 
