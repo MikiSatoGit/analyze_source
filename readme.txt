@@ -29,7 +29,7 @@ Three folders are created at the same path.
 - analyze_(source file name).txt -> can be erased
 - csv : Process and Condition table -> can be erased
 - fig : blockdiag source code -> can be erased
-- doc\source ★rst files (Sphinx source file )
+- doc\source : rst files (Sphinx source file )
 
 [note]
 ※definition for #ifdef 
