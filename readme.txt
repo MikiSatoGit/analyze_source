@@ -1,3 +1,12 @@
+Generate Sphinx document codes from C source file.
+- Create description page of  each function defined in the C source file.
+- Each page includes:
+    Interface (Arguments, Return Value)
+    Main Process Flowchart
+    Processes in process blocks of Flowchart
+    Processes in condition blocks of Flowchart
+    Link to Subprocess page
+
 =================================================
 Install python packages (pillow, blockdiag, sphinx, pandas)
 =================================================
