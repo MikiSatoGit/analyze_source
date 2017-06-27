@@ -244,9 +244,9 @@ debug_out = False
 valid_preprocessor_code = []
 valid_preprocessor_code.append('SIM_MODE')
 valid_preprocessor_code.append('TYPE_B')
-valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
-valid_preprocessor_code.append('_291B_DEV_20161005_BTT_TEST')
 valid_preprocessor_code.append('CU1_DF_NBD_BSM_ONLY')
+#valid_preprocessor_code.append('_291B_20161101_BTT_OUTPUT_T')
+#valid_preprocessor_code.append('_291B_DEV_20161005_BTT_TEST')
 
 
 ##############################################################
