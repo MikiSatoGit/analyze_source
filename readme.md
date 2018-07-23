@@ -72,7 +72,7 @@ valid_preprocessor_code.append('PREPROCESSOR WORD')
 	]
 ```
 
-##### (ii) add blockdiag setting
+##### (ii) add blockdiag setting at the end of conf.py
 
 ```
 	blockdiag_html_image_format = 'SVG'
@@ -117,8 +117,8 @@ valid_preprocessor_code.append('PREPROCESSOR WORD')
 
 - create doc\source\_static\css\my_theme.css
 
+_my_theme.css_
 ```
-[my_theme.css]
 @import url("theme.css");
  
 .wy-nav-content {
@@ -168,38 +168,51 @@ colgroup {
 
 #### (4) edit index file (doc\source\index.rst)
 ##### (i) change title of top page
-
+(default)
 ```
 	Welcome to Sample's documentation!
 	=================================================
-	↓
-	 (As you want)
-	ex)
+```
+↓
+(example) change title to "Sample Specification"
+```
 	Samplel Specification
 	=================================================
 ```
 
 ##### (ii) change tree level
 
+_index.rst_
 ```
-	.. toctree::
-	   :maxdepth: 1 ← chnage level as you want (preferred level is 2)
+BTT logic Specification
+=====================================
+.. toctree::
+   :maxdepth: 1 //← chnage level as you want (preferred level is 2)
+
+	(c source file name #1)/index
+	(c source file name #2)/index
+	.
+	.
+	.
 ```
 
 #### Note:    
+add index below ":maxdepth".
+(example) for sample1.c and sample2.c
+```
+.. toctree::
+   :maxdepth: 1 //← chnage level as you want (preferred level is 2)
+
+   sample/index
+   sample2/index
+```
+※need to add 3 spaces before 
 ※ Level defines table of contents shown in top page
 1: filename
 2: function name in each file
 3: sub section of each function (Interface, Main Process Flow, Prcess Table, Condition Table, Subprocesses )
 4: Subprocesses  of each function
 
-```
-	(source file name)/index <- add index
-	ex)
-	sample.c
-	→"   sample/index"
-	※need to add 3 spaces before 
-```
 
 #### Note:    
 ※The following lines in the generated file can be erased.
