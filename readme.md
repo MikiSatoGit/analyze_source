@@ -14,17 +14,21 @@ Generate Sphinx document codes from C source file.
 
 ---
 ### Install python packages (pillow, blockdiag, sphinx, pandas)
-- easy_install pillow
-- easy_install blockdiag
-- easy_install sphinx (pip install sphinx)
+Python 2.7
+- pip install pillow
+- pip install blockdiag
+- pip install sphinx
 - pip install sphinxcontrib-actdiag sphinxcontrib-blockdiag sphinxcontrib-nwdiag sphinxcontrib-seqdiag
 - pip install sphinx_rtd_theme
-- easy_install pandas    
+- pip install pandas    
 or (https://pypi.python.org/pypi/pandas/0.15.2/#downloads pandas-0.15.2.win32-py2.7.exe)
 
 
 ### Run analyze_source_c.py
-Enter "python analyze_source_c.py [c source file path]" from the command line.
+Enter the following command from the command line to create Sphinx sorce files (rst file).    
+```
+> python analyze_source_c.py [c source file path]
+```
 
 #### result
 Three folders are created at the same path.
@@ -45,12 +49,17 @@ valid_preprocessor_code.append('PREPROCESSOR WORD')
 ---
 ### Create SPHINX file
 #### (1) change working directory to the doc folder above.
-- enter "cd [c source folder path]\doc" )
-
+- enter the following comonad and change current dir.    
+```
+> cd [c source folder path]\doc" )
+```
 #### (2) create sphinx project
-- enter "sphinx-quickstart"
-- enter following options (Other option can be default (just push Enter))
+- enter the following command to create sphinx project.   
+```
+> sphinx-quickstart
+```
 
+- enter following options (Other option can be default (just push Enter))    
 ```
 > Separate source and build directories (y/n) [n]: y
 > Project name: (PROJECT NAME)
@@ -115,7 +124,7 @@ valid_preprocessor_code.append('PREPROCESSOR WORD')
 	html_style = 'css/my_theme.css'
 ```
 
-- create doc\source\_static\css\my_theme.css
+- create doc\source\\_static\css\my_theme.css
 
 _my_theme.css_
 ```
@@ -242,12 +251,12 @@ add index below ":maxdepth".
 ---
 ### TEXLIVE for PDF
 - Install texlive    
-	- https://www.tug.org/texlive/acquire-netinstall.html    
-	- https://medemanabu.net/latex/windows-tex-live-download-install/    
+	- Installer : https://www.tug.org/texlive/acquire-netinstall.html    
+	- Installation manual(Japanese): https://www.tug.org/texlive/acquire-netinstall.html
 
 - Set Environment Variables    
-	- TEXLIVE_ROOT : C:\miki\applications\texlive\2017\bin\win32    
-	- PATH : + %TEXLIVE_ROOT%
+	- TEXLIVE_ROOT : C:\texlive\2018\bin\win32 (your texlive install folder)    
+	- PATH : add %TEXLIVE_ROOT%    
 
 - Command
 
