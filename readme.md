@@ -1,6 +1,6 @@
 # Spec Document Generator
 
-last update:04/05/2018
+last update:07/25/2018
 
 ---
 Generate Sphinx document codes from C source file.
