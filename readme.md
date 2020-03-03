@@ -185,7 +185,7 @@ colgroup {
 ↓
 (example) change title to "Sample Specification"
 ```
-	Samplel Specification
+	Sample Specification
 	=================================================
 ```
 
@@ -193,7 +193,7 @@ colgroup {
 
 _index.rst_
 ```
-BTT logic Specification
+Sample logic Specification
 =====================================
 .. toctree::
    :maxdepth: 1 //← chnage level as you want (preferred level is 2)
